@@ -147,3 +147,9 @@ function goToChapter() {
     var chapter = document.getElementById('chapterSelect').value;
     window.location.href = book + chapter + '.html';
 }
+
+/* Lazy YouTube Embed — click thumbnail to load iframe */
+function loadYT(el, id) {
+    el.style.position = 'relative';
+    el.innerHTML = '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;" allow="autoplay;encrypted-media" allowfullscreen></iframe>';
+}
