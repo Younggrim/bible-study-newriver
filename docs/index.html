@@ -11,10 +11,7 @@
         body { background: #faf5ed !important; }
         .home-content { margin-top: 0; padding: 0; max-width: 100%; margin-left: auto; margin-right: auto; padding-bottom: 60px; background: #faf5ed; }
 
-        /* Section dividers — smooth gradient transitions between sections */
-        .section-fade { height: 40px; background: linear-gradient(180deg, transparent 0%, #f5ebe0 100%); }
-
-        /* Hero Section — extended with welcome overlay */
+        /* Main Hero Section */
         .hero-section { position: relative; width: 100%; min-height: 480px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
         .hero-section img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); }
         .hero-overlay { position: relative; z-index: 1; text-align: center; padding: 40px 28px; max-width: 760px; }
@@ -22,12 +19,11 @@
         .hero-overlay .hero-verse { font-family: "Cormorant Garamond", serif; font-size: 1.2rem; color: #f0c865; font-style: italic; text-shadow: 1px 1px 4px rgba(0,0,0,0.6); margin-bottom: 28px; }
         .hero-overlay .welcome-text { font-family: "Cormorant Garamond", serif; font-size: 1.2rem; line-height: 2; color: #f5ebe0; font-style: italic; text-shadow: 1px 1px 6px rgba(0,0,0,0.7); }
 
-        /* Prayer Section — smooth gradient transition from hero */
+        /* Prayer Section */
         .prayer-section { background: linear-gradient(180deg, #1a1410 0%, #2a1f14 15%, #3d2b1f 40%, #4a3828 60%, #6b5040 72%, #a08060 82%, #d4bea0 90%, #f5ebe0 96%, #faf5ed 100%); padding: 52px 32px 80px; text-align: center; }
         .prayer-text { font-family: "Cormorant Garamond", serif; font-size: 1.3rem; line-height: 2.1; color: #f0e4d4; font-style: italic; max-width: 720px; margin: 0 auto; font-weight: 500; }
         .prayer-label { font-family: "Cinzel", serif; font-size: 0.9rem; color: #c9a96e; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; }
-
-        /* Content Blocks — Translation Guide & Commentaries */
+        /* Content Blocks */
         .content-block { margin: 0 auto; max-width: 900px; background: #faf5ed; border: none; border-radius: 0; padding: 40px 48px; box-shadow: none; }
         .content-block h2 { font-family: "Cinzel", serif; font-size: 1.4rem; color: #8b3a2a; margin-bottom: 8px; text-align: center; }
         .content-block .block-desc { font-size: 0.9rem; color: #5a4e44; text-align: center; margin-bottom: 24px; line-height: 1.7; }
@@ -40,34 +36,29 @@
         .commentary-card h4 { font-family: "Cinzel", serif; font-size: 1.05rem; color: #8b3a2a; margin-bottom: 8px; }
         .commentary-card p { font-size: 0.88rem; line-height: 1.7; color: #5a4e44; margin: 0; }
 
-        /* Scroll Sections — realistic parchment texture */
-        .scroll-section { margin: 40px auto 0; max-width: 900px; padding: 0 32px; }
-        .scroll-banner { display: flex; align-items: center; cursor: pointer; user-select: none; }
-        .scroll-end { width: 44px; height: 110px; border-radius: 22px; background: radial-gradient(ellipse at center, #d4a96e 0%, #8b6914 40%, #5c4410 100%); box-shadow: inset 0 0 12px rgba(0,0,0,0.4), 3px 3px 8px rgba(0,0,0,0.25), -1px -1px 4px rgba(255,255,255,0.1); border: 1px solid #6b4c1e; }
-        .scroll-end.left { border-right: 3px solid #4a3010; }
-        .scroll-end.right { border-left: 3px solid #4a3010; }
-        .scroll-body { flex: 1; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"), linear-gradient(180deg, #f7edd4 0%, #f0e2c4 20%, #e8d6b4 50%, #f0e2c4 80%, #f7edd4 100%); border-top: 4px solid #a67c42; border-bottom: 4px solid #a67c42; padding: 24px 32px; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.12), inset 0 2px 8px rgba(0,0,0,0.04); transition: all 0.3s; }
-        .scroll-title { font-family: "Cinzel", serif; font-size: 1.8rem; color: #5c2a10; margin-bottom: 4px; letter-spacing: 2px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
-        .scroll-subtitle { font-family: "Merriweather", serif; font-size: 0.95rem; color: #6b4c3b; font-style: italic; }
-        .scroll-toggle { font-size: 0.8rem; color: #8b6914; margin-top: 6px; }
-        .scroll-banner:hover .scroll-body { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"), linear-gradient(180deg, #f0e2c4 0%, #e8d6b4 20%, #decca8 50%, #e8d6b4 80%, #f0e2c4 100%); }
-        .parchment-body { margin: 0 72px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' /%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E"), linear-gradient(180deg, #f5ebe0 0%, #faf5ed 5%, #fdf9f4 50%, #faf5ed 95%, #f0e4d4 100%); border-left: 3px solid #c9a96e; border-right: 3px solid #c9a96e; border-bottom: 4px solid #a67c42; border-radius: 0 0 8px 8px; padding: 36px 40px 48px; box-shadow: 4px 4px 16px rgba(0,0,0,0.1), -4px 0 16px rgba(0,0,0,0.06); display: none; }
-        .parchment-body.open { display: block; }
-        .scroll-usage { font-family: "Cormorant Garamond", serif; font-size: 1.1rem; line-height: 1.9; color: #3d2b1f; font-style: italic; text-align: center; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid #d4c4a8; font-weight: 500; }
-        .testament-section { margin-bottom: 36px; }
-        .testament-section:last-child { margin-bottom: 0; }
-        .testament-title { font-family: "Cinzel", serif; font-size: 1.3rem; margin-bottom: 16px; padding-bottom: 8px; font-weight: 700; }
-        .testament-title.ot { color: #6b4c3b; border-bottom: 2px solid #6b4c3b; }
-        .testament-title.nt { color: #2c5a6b; border-bottom: 2px solid #2c5a6b; }
+        /* Section Hero Banners */
+        .section-hero { position: relative; width: 100%; min-height: 280px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-top: 48px; }
+        .section-hero img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.35); }
+        .section-hero-overlay { position: relative; z-index: 1; text-align: center; padding: 40px 28px; max-width: 800px; }
+        .section-hero-overlay h2 { font-family: "Cinzel", serif; font-size: 2.4rem; color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); margin-bottom: 12px; letter-spacing: 2px; }
+        .section-hero-overlay .section-subtitle { font-family: "Merriweather", serif; font-size: 1rem; color: #f0c865; font-style: italic; text-shadow: 1px 1px 4px rgba(0,0,0,0.6); margin-bottom: 16px; }
+        .section-hero-overlay .section-desc { font-family: "Cormorant Garamond", serif; font-size: 1.1rem; line-height: 1.9; color: #f5ebe0; font-style: italic; text-shadow: 1px 1px 6px rgba(0,0,0,0.7); }
+
+        /* Cards Container */
+        .cards-container { max-width: 900px; margin: 0 auto; padding: 32px 32px 0; }
+        .testament-heading { font-family: "Cinzel", serif; font-size: 1.3rem; margin-bottom: 16px; padding-bottom: 8px; font-weight: 700; margin-top: 32px; }
+        .testament-heading:first-child { margin-top: 0; }
+        .testament-heading.ot { color: #6b4c3b; border-bottom: 2px solid #6b4c3b; }
+        .testament-heading.nt { color: #2c5a6b; border-bottom: 2px solid #2c5a6b; }
         .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
-        .book-link { display: block; padding: 12px 16px; background: #fdf9f4; border: 1px solid #e0d6c8; border-left: 4px solid #6b4c3b; border-radius: 10px; text-decoration: none; font-size: 0.85rem; font-weight: 600; color: #6b4c3b; transition: box-shadow 0.2s, transform 0.15s, background 0.2s, color 0.2s; }
-        .book-link:hover { box-shadow: 0 6px 16px rgba(0,0,0,0.12); transform: translateY(-3px); background: #6b4c3b; color: #fff; border-left-color: #6b4c3b; }
-        .nt-link { border-left-color: #2c5a6b !important; color: #2c5a6b !important; }
-        .nt-link:hover { background: #2c5a6b !important; border-left-color: #2c5a6b !important; color: #fff !important; }
-        .topic-link { border-left-color: #5c3d6e !important; }
-        .topic-link:hover { background: #5c3d6e !important; border-left-color: #5c3d6e !important; }
-        .struggle-link { border-left-color: #2a6b6b !important; }
-        .struggle-link:hover { background: #2a6b6b !important; border-left-color: #2a6b6b !important; }
+        .book-card { display: block; padding: 14px 18px; background: #fff; border: 1px solid #e0d6c8; border-left: 4px solid #6b4c3b; border-radius: 10px; text-decoration: none; font-size: 0.85rem; font-weight: 600; color: #6b4c3b; transition: box-shadow 0.2s, transform 0.15s, background 0.2s, color 0.2s; }
+        .book-card:hover { box-shadow: 0 6px 16px rgba(0,0,0,0.12); transform: translateY(-3px); background: #6b4c3b; color: #fff; border-left-color: #6b4c3b; }
+        .book-card.nt { border-left-color: #2c5a6b; color: #2c5a6b; }
+        .book-card.nt:hover { background: #2c5a6b; border-left-color: #2c5a6b; color: #fff; }
+        .book-card.topic { border-left-color: #5c3d6e; color: #5c3d6e; }
+        .book-card.topic:hover { background: #5c3d6e; border-left-color: #5c3d6e; color: #fff; }
+        .book-card.struggle { border-left-color: #2a6b6b; color: #2a6b6b; }
+        .book-card.struggle:hover { background: #2a6b6b; border-left-color: #2a6b6b; color: #fff; }
 
         /* Footer */
         .site-footer { text-align: center; padding: 32px; font-size: 0.72rem; color: #8a7e74; line-height: 1.8; border-top: 1px solid #e0d6c8; margin: 40px 32px 0; }
@@ -78,15 +69,11 @@
             .hero-overlay .welcome-text { font-size: 1.05rem; }
             .prayer-section { padding: 32px 20px; }
             .prayer-text { font-size: 1.15rem; }
-            .content-block { margin: 0; padding: 32px 18px; }
-            .scroll-title { font-size: 1.4rem; }
-            .scroll-subtitle { font-size: 0.85rem; }
-            .scroll-end { width: 28px; height: 90px; }
-            .scroll-body { padding: 18px 14px; }
-            .parchment-body { margin: 0 16px; padding: 24px 16px; }
-            .scroll-section { margin: 28px 16px 0; }
+            .content-block { padding: 32px 18px; }
+            .section-hero { min-height: 220px; }
+            .section-hero-overlay h2 { font-size: 1.6rem; }
+            .cards-container { padding: 24px 16px 0; }
             .book-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
-            .trans-guide-item { padding: 14px; }
         }
     </style>
 </head>
@@ -104,7 +91,7 @@
             </div>
         </div>
 
-        <!-- Prayer Section — bold dark background -->
+        <!-- Prayer Section -->
         <div class="prayer-section">
             <p class="prayer-label">A Prayer for You</p>
             <p class="prayer-text">Lord, we pray that this resource brings glory to Your name. Use it as a tool to draw hearts closer to You and to reveal Your plan and purpose for each person who visits these pages. May Your Word not return void, but accomplish everything You desire. Open eyes, soften hearts, and let the truth of Scripture transform lives for Your kingdom. In Jesus' name, Amen.</p>
@@ -132,157 +119,145 @@
             </div>
         </div>
 
-        <!-- Bible Scroll -->
-        <div class="scroll-section">
-            <div class="scroll-banner" onclick="toggleScroll('bible')">
-                <div class="scroll-end left"></div>
-                <div class="scroll-body">
-                    <h1 class="scroll-title">Bible</h1>
-                    <p class="scroll-subtitle">Select a book to begin studying</p>
-                    <div class="scroll-toggle"><i class="fas fa-chevron-down"></i></div>
-                </div>
-                <div class="scroll-end right"></div>
-            </div>
-            <div class="parchment-body" id="scroll-bible">
-                <p class="scroll-usage">Select any book of the Bible below to begin reading. Each chapter includes the full text in five translations you can switch between, along with study notes, commentary references, map and geography notes, and reflection questions to guide your time in the Word.</p>
-                <div class="testament-section">
-                    <h2 class="testament-title ot">Old Testament</h2>
-                    <div class="book-grid">
-                        <a class="book-link" href="genesis1.html">Genesis</a>
-                        <a class="book-link" href="exodus1.html">Exodus</a>
-                        <a class="book-link" href="leviticus1.html">Leviticus</a>
-                        <a class="book-link" href="numbers1.html">Numbers</a>
-                        <a class="book-link" href="deuteronomy1.html">Deuteronomy</a>
-                        <a class="book-link" href="joshua1.html">Joshua</a>
-                        <a class="book-link" href="judges1.html">Judges</a>
-                        <a class="book-link" href="ruth1.html">Ruth</a>
-                        <a class="book-link" href="1samuel1.html">1 Samuel</a>
-                        <a class="book-link" href="2samuel1.html">2 Samuel</a>
-                        <a class="book-link" href="1kings1.html">1 Kings</a>
-                        <a class="book-link" href="2kings1.html">2 Kings</a>
-                        <a class="book-link" href="1chronicles1.html">1 Chronicles</a>
-                        <a class="book-link" href="2chronicles1.html">2 Chronicles</a>
-                        <a class="book-link" href="ezra1.html">Ezra</a>
-                        <a class="book-link" href="nehemiah1.html">Nehemiah</a>
-                        <a class="book-link" href="esther1.html">Esther</a>
-                        <a class="book-link" href="job1.html">Job</a>
-                        <a class="book-link" href="psalms1.html">Psalms</a>
-                        <a class="book-link" href="proverbs1.html">Proverbs</a>
-                        <a class="book-link" href="ecclesiastes1.html">Ecclesiastes</a>
-                        <a class="book-link" href="songofsolomon1.html">Song of Solomon</a>
-                        <a class="book-link" href="isaiah1.html">Isaiah</a>
-                        <a class="book-link" href="jeremiah1.html">Jeremiah</a>
-                        <a class="book-link" href="lamentations1.html">Lamentations</a>
-                        <a class="book-link" href="ezekiel1.html">Ezekiel</a>
-                        <a class="book-link" href="daniel1.html">Daniel</a>
-                        <a class="book-link" href="hosea1.html">Hosea</a>
-                        <a class="book-link" href="joel1.html">Joel</a>
-                        <a class="book-link" href="amos1.html">Amos</a>
-                        <a class="book-link" href="obadiah1.html">Obadiah</a>
-                        <a class="book-link" href="jonah1.html">Jonah</a>
-                        <a class="book-link" href="micah1.html">Micah</a>
-                        <a class="book-link" href="nahum1.html">Nahum</a>
-                        <a class="book-link" href="habakkuk1.html">Habakkuk</a>
-                        <a class="book-link" href="zephaniah1.html">Zephaniah</a>
-                        <a class="book-link" href="haggai1.html">Haggai</a>
-                        <a class="book-link" href="zechariah1.html">Zechariah</a>
-                        <a class="book-link" href="malachi1.html">Malachi</a>
-                    </div>
-                </div>
-                <div class="testament-section">
-                    <h2 class="testament-title nt">New Testament</h2>
-                    <div class="book-grid">
-                        <a class="book-link nt-link" href="matthew1.html">Matthew</a>
-                        <a class="book-link nt-link" href="mark1.html">Mark</a>
-                        <a class="book-link nt-link" href="luke1.html">Luke</a>
-                        <a class="book-link nt-link" href="john1.html">John</a>
-                        <a class="book-link nt-link" href="acts1.html">Acts</a>
-                        <a class="book-link nt-link" href="romans1.html">Romans</a>
-                        <a class="book-link nt-link" href="1corinthians1.html">1 Corinthians</a>
-                        <a class="book-link nt-link" href="2corinthians1.html">2 Corinthians</a>
-                        <a class="book-link nt-link" href="galatians1.html">Galatians</a>
-                        <a class="book-link nt-link" href="ephesians1.html">Ephesians</a>
-                        <a class="book-link nt-link" href="philippians1.html">Philippians</a>
-                        <a class="book-link nt-link" href="colossians1.html">Colossians</a>
-                        <a class="book-link nt-link" href="1thessalonians1.html">1 Thessalonians</a>
-                        <a class="book-link nt-link" href="2thessalonians1.html">2 Thessalonians</a>
-                        <a class="book-link nt-link" href="1timothy1.html">1 Timothy</a>
-                        <a class="book-link nt-link" href="2timothy1.html">2 Timothy</a>
-                        <a class="book-link nt-link" href="titus1.html">Titus</a>
-                        <a class="book-link nt-link" href="philemon1.html">Philemon</a>
-                        <a class="book-link nt-link" href="hebrews1.html">Hebrews</a>
-                        <a class="book-link nt-link" href="james1.html">James</a>
-                        <a class="book-link nt-link" href="1peter1.html">1 Peter</a>
-                        <a class="book-link nt-link" href="2peter1.html">2 Peter</a>
-                        <a class="book-link nt-link" href="1john1.html">1 John</a>
-                        <a class="book-link nt-link" href="2john1.html">2 John</a>
-                        <a class="book-link nt-link" href="3john1.html">3 John</a>
-                        <a class="book-link nt-link" href="jude1.html">Jude</a>
-                        <a class="book-link nt-link" href="revelation1.html">Revelation</a>
-                    </div>
-                </div>
+        <!-- Bible Section — Hero Image + Cards -->
+        <div class="section-hero">
+            <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1400&q=80" alt="Ancient library of books">
+            <div class="section-hero-overlay">
+                <h2>Bible</h2>
+                <p class="section-subtitle">Select a book to begin studying</p>
+                <p class="section-desc">Select any book of the Bible below to begin reading. Each chapter includes the full text in five translations you can switch between, along with study notes, commentary references, map and geography notes, and reflection questions to guide your time in the Word.</p>
             </div>
         </div>
 
-        <!-- Topical Studies Scroll -->
-        <div class="scroll-section">
-            <div class="scroll-banner" onclick="toggleScroll('topical')">
-                <div class="scroll-end left"></div>
-                <div class="scroll-body">
-                    <h1 class="scroll-title">Topical Studies</h1>
-                    <p class="scroll-subtitle">Explore themes across Scripture</p>
-                    <div class="scroll-toggle"><i class="fas fa-chevron-down"></i></div>
-                </div>
-                <div class="scroll-end right"></div>
+        <div class="cards-container">
+            <h3 class="testament-heading ot">Old Testament</h3>
+            <div class="book-grid">
+                <a class="book-card" href="genesis1.html">Genesis</a>
+                <a class="book-card" href="exodus1.html">Exodus</a>
+                <a class="book-card" href="leviticus1.html">Leviticus</a>
+                <a class="book-card" href="numbers1.html">Numbers</a>
+                <a class="book-card" href="deuteronomy1.html">Deuteronomy</a>
+                <a class="book-card" href="joshua1.html">Joshua</a>
+                <a class="book-card" href="judges1.html">Judges</a>
+                <a class="book-card" href="ruth1.html">Ruth</a>
+                <a class="book-card" href="1samuel1.html">1 Samuel</a>
+                <a class="book-card" href="2samuel1.html">2 Samuel</a>
+                <a class="book-card" href="1kings1.html">1 Kings</a>
+                <a class="book-card" href="2kings1.html">2 Kings</a>
+                <a class="book-card" href="1chronicles1.html">1 Chronicles</a>
+                <a class="book-card" href="2chronicles1.html">2 Chronicles</a>
+                <a class="book-card" href="ezra1.html">Ezra</a>
+                <a class="book-card" href="nehemiah1.html">Nehemiah</a>
+                <a class="book-card" href="esther1.html">Esther</a>
+                <a class="book-card" href="job1.html">Job</a>
+                <a class="book-card" href="psalms1.html">Psalms</a>
+                <a class="book-card" href="proverbs1.html">Proverbs</a>
+                <a class="book-card" href="ecclesiastes1.html">Ecclesiastes</a>
+                <a class="book-card" href="songofsolomon1.html">Song of Solomon</a>
+                <a class="book-card" href="isaiah1.html">Isaiah</a>
+                <a class="book-card" href="jeremiah1.html">Jeremiah</a>
+                <a class="book-card" href="lamentations1.html">Lamentations</a>
+                <a class="book-card" href="ezekiel1.html">Ezekiel</a>
+                <a class="book-card" href="daniel1.html">Daniel</a>
+                <a class="book-card" href="hosea1.html">Hosea</a>
+                <a class="book-card" href="joel1.html">Joel</a>
+                <a class="book-card" href="amos1.html">Amos</a>
+                <a class="book-card" href="obadiah1.html">Obadiah</a>
+                <a class="book-card" href="jonah1.html">Jonah</a>
+                <a class="book-card" href="micah1.html">Micah</a>
+                <a class="book-card" href="nahum1.html">Nahum</a>
+                <a class="book-card" href="habakkuk1.html">Habakkuk</a>
+                <a class="book-card" href="zephaniah1.html">Zephaniah</a>
+                <a class="book-card" href="haggai1.html">Haggai</a>
+                <a class="book-card" href="zechariah1.html">Zechariah</a>
+                <a class="book-card" href="malachi1.html">Malachi</a>
             </div>
-            <div class="parchment-body" id="scroll-topical">
-                <p class="scroll-usage">Topical studies gather what the entire Bible teaches on a single subject. Each study presents key passages, context, and cross-references organized into cards. These are great for personal study, small group discussion, or when you want to understand what God's Word says about a specific theme.</p>
-                <div class="book-grid">
-                    <a class="book-link topic-link" href="fruits-of-the-spirit.html">Fruits of the Spirit</a>
-                    <a class="book-link topic-link" href="the-12-apostles.html">The 12 Apostles</a>
-                    <a class="book-link topic-link" href="names-of-god.html">Names of God</a>
-                    <a class="book-link topic-link" href="armor-of-god.html">Armor of God</a>
-                    <a class="book-link topic-link" href="parables-of-jesus.html">Parables of Jesus</a>
-                    <a class="book-link topic-link" href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a>
-                    <a class="book-link topic-link" href="prayers-in-the-bible.html">Prayers in the Bible</a>
-                    <a class="book-link topic-link" href="i-am-statements.html">I AM Statements of Jesus</a>
-                    <a class="book-link topic-link" href="beatitudes.html">The Beatitudes</a>
-                    <a class="book-link topic-link" href="men-of-the-bible.html">Men of the Bible</a>
-                    <a class="book-link topic-link" href="women-of-the-bible.html">Women of the Bible</a>
-                    <a class="book-link topic-link" href="kings-of-israel.html">Kings of Israel &amp; Judah</a>
-                    <a class="book-link topic-link" href="promises-of-god.html">Promises of God</a>
-                    <a class="book-link topic-link" href="spiritual-disciplines.html">Spiritual Disciplines</a>
-                    <a class="book-link topic-link" href="the-trinity.html">The Trinity</a>
-                    <a class="book-link topic-link" href="miracles-of-jesus.html">Miracles of Jesus</a>
-                </div>
+
+            <h3 class="testament-heading nt">New Testament</h3>
+            <div class="book-grid">
+                <a class="book-card nt" href="matthew1.html">Matthew</a>
+                <a class="book-card nt" href="mark1.html">Mark</a>
+                <a class="book-card nt" href="luke1.html">Luke</a>
+                <a class="book-card nt" href="john1.html">John</a>
+                <a class="book-card nt" href="acts1.html">Acts</a>
+                <a class="book-card nt" href="romans1.html">Romans</a>
+                <a class="book-card nt" href="1corinthians1.html">1 Corinthians</a>
+                <a class="book-card nt" href="2corinthians1.html">2 Corinthians</a>
+                <a class="book-card nt" href="galatians1.html">Galatians</a>
+                <a class="book-card nt" href="ephesians1.html">Ephesians</a>
+                <a class="book-card nt" href="philippians1.html">Philippians</a>
+                <a class="book-card nt" href="colossians1.html">Colossians</a>
+                <a class="book-card nt" href="1thessalonians1.html">1 Thessalonians</a>
+                <a class="book-card nt" href="2thessalonians1.html">2 Thessalonians</a>
+                <a class="book-card nt" href="1timothy1.html">1 Timothy</a>
+                <a class="book-card nt" href="2timothy1.html">2 Timothy</a>
+                <a class="book-card nt" href="titus1.html">Titus</a>
+                <a class="book-card nt" href="philemon1.html">Philemon</a>
+                <a class="book-card nt" href="hebrews1.html">Hebrews</a>
+                <a class="book-card nt" href="james1.html">James</a>
+                <a class="book-card nt" href="1peter1.html">1 Peter</a>
+                <a class="book-card nt" href="2peter1.html">2 Peter</a>
+                <a class="book-card nt" href="1john1.html">1 John</a>
+                <a class="book-card nt" href="2john1.html">2 John</a>
+                <a class="book-card nt" href="3john1.html">3 John</a>
+                <a class="book-card nt" href="jude1.html">Jude</a>
+                <a class="book-card nt" href="revelation1.html">Revelation</a>
             </div>
         </div>
 
-        <!-- What the Bible Says About Scroll -->
-        <div class="scroll-section">
-            <div class="scroll-banner" onclick="toggleScroll('struggles')">
-                <div class="scroll-end left"></div>
-                <div class="scroll-body">
-                    <h1 class="scroll-title">What the Bible Says About...</h1>
-                    <p class="scroll-subtitle">God's Word speaks to every struggle</p>
-                    <div class="scroll-toggle"><i class="fas fa-chevron-down"></i></div>
-                </div>
-                <div class="scroll-end right"></div>
+        <!-- Topical Studies Section — Hero Image + Cards -->
+        <div class="section-hero">
+            <img src="https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=1400&q=80" alt="Sunrise over mountains">
+            <div class="section-hero-overlay">
+                <h2>Topical Studies</h2>
+                <p class="section-subtitle">Explore themes across Scripture</p>
+                <p class="section-desc">Topical studies gather what the entire Bible teaches on a single subject. Each study presents key passages, context, and cross-references organized into cards. These are great for personal study, small group discussion, or when you want to understand what God's Word says about a specific theme.</p>
             </div>
-            <div class="parchment-body" id="scroll-struggles">
-                <p class="scroll-usage">Life brings struggles that can feel overwhelming — fear, anger, grief, doubt, and more. But God's Word speaks directly into every one of them. Each topic below gathers the Scriptures, wisdom, and truth that God has given us for that specific battle. You are not alone, and His Word has an answer.</p>
-                <div class="book-grid">
-                    <a class="book-link struggle-link" href="anxiety-and-fear.html">Anxiety &amp; Fear</a>
-                    <a class="book-link struggle-link" href="anger.html">Anger</a>
-                    <a class="book-link struggle-link" href="depression-and-hopelessness.html">Depression &amp; Hopelessness</a>
-                    <a class="book-link struggle-link" href="doubt-and-unbelief.html">Doubt &amp; Unbelief</a>
-                    <a class="book-link struggle-link" href="grief-and-loss.html">Grief &amp; Loss</a>
-                    <a class="book-link struggle-link" href="loneliness.html">Loneliness</a>
-                    <a class="book-link struggle-link" href="pride.html">Pride</a>
-                    <a class="book-link struggle-link" href="suffering.html">Suffering</a>
-                    <a class="book-link struggle-link" href="temptation.html">Temptation</a>
-                    <a class="book-link struggle-link" href="unforgiveness-and-bitterness.html">Unforgiveness &amp; Bitterness</a>
-                </div>
+        </div>
+
+        <div class="cards-container">
+            <div class="book-grid">
+                <a class="book-card topic" href="fruits-of-the-spirit.html">Fruits of the Spirit</a>
+                <a class="book-card topic" href="the-12-apostles.html">The 12 Apostles</a>
+                <a class="book-card topic" href="names-of-god.html">Names of God</a>
+                <a class="book-card topic" href="armor-of-god.html">Armor of God</a>
+                <a class="book-card topic" href="parables-of-jesus.html">Parables of Jesus</a>
+                <a class="book-card topic" href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a>
+                <a class="book-card topic" href="prayers-in-the-bible.html">Prayers in the Bible</a>
+                <a class="book-card topic" href="i-am-statements.html">I AM Statements of Jesus</a>
+                <a class="book-card topic" href="beatitudes.html">The Beatitudes</a>
+                <a class="book-card topic" href="men-of-the-bible.html">Men of the Bible</a>
+                <a class="book-card topic" href="women-of-the-bible.html">Women of the Bible</a>
+                <a class="book-card topic" href="kings-of-israel.html">Kings of Israel &amp; Judah</a>
+                <a class="book-card topic" href="promises-of-god.html">Promises of God</a>
+                <a class="book-card topic" href="spiritual-disciplines.html">Spiritual Disciplines</a>
+                <a class="book-card topic" href="the-trinity.html">The Trinity</a>
+                <a class="book-card topic" href="miracles-of-jesus.html">Miracles of Jesus</a>
+            </div>
+        </div>
+
+        <!-- What the Bible Says About Section — Hero Image + Cards -->
+        <div class="section-hero">
+            <img src="https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=1400&q=80" alt="Light breaking through clouds">
+            <div class="section-hero-overlay">
+                <h2>What the Bible Says About...</h2>
+                <p class="section-subtitle">God's Word speaks to every struggle</p>
+                <p class="section-desc">Life brings struggles that can feel overwhelming — fear, anger, grief, doubt, and more. But God's Word speaks directly into every one of them. Each topic below gathers the Scriptures, wisdom, and truth that God has given us for that specific battle. You are not alone, and His Word has an answer.</p>
+            </div>
+        </div>
+
+        <div class="cards-container">
+            <div class="book-grid">
+                <a class="book-card struggle" href="anxiety-and-fear.html">Anxiety &amp; Fear</a>
+                <a class="book-card struggle" href="anger.html">Anger</a>
+                <a class="book-card struggle" href="depression-and-hopelessness.html">Depression &amp; Hopelessness</a>
+                <a class="book-card struggle" href="doubt-and-unbelief.html">Doubt &amp; Unbelief</a>
+                <a class="book-card struggle" href="grief-and-loss.html">Grief &amp; Loss</a>
+                <a class="book-card struggle" href="loneliness.html">Loneliness</a>
+                <a class="book-card struggle" href="pride.html">Pride</a>
+                <a class="book-card struggle" href="suffering.html">Suffering</a>
+                <a class="book-card struggle" href="temptation.html">Temptation</a>
+                <a class="book-card struggle" href="unforgiveness-and-bitterness.html">Unforgiveness &amp; Bitterness</a>
             </div>
         </div>
 
@@ -294,11 +269,5 @@
         </div>
 
     </main>
-    <script>
-    function toggleScroll(id) {
-        var el = document.getElementById('scroll-' + id);
-        el.classList.toggle('open');
-    }
-    </script>
 </body>
 </html>
