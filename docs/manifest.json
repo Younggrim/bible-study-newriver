@@ -1,0 +1,22 @@
+{
+  "name": "Bible Study",
+  "short_name": "Bible Study",
+  "description": "Chapter-by-chapter Bible study with topical studies, verse popups, and video resources.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#faf3e0",
+  "theme_color": "#3d2b1f",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "site/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "site/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
