@@ -47,6 +47,18 @@
         .topic-dropdown-menu.open { display: block; }
         .topic-dropdown-menu a { display: block; padding: 8px 18px; font-size: 0.83rem; color: #3d2b1f; text-decoration: none; font-weight: 500; transition: background 0.15s; }
         .topic-dropdown-menu a:hover { background: #f5ebe0; color: #8b3a2a; }
+
+        /* Verse Popup */
+        .verse-ref { color: #8b3a2a; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #2c6b4f; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#8b3a2a; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
         .fruit-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -237,6 +249,15 @@
     </main>
 
     <script src="site/script.js"></script>
+
+    <!-- Verse Popup Elements -->
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+
     <script>
     function toggleTopicDropdown() {
         document.getElementById('topicDropdown').classList.toggle('open');
@@ -246,6 +267,32 @@
             document.getElementById('topicDropdown').classList.remove('open');
         }
     });
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) {
+                textEl.innerHTML = data.passages[0];
+            } else {
+                textEl.innerHTML = '<em>Could not load this passage.</em>';
+            }
+        })
+        .catch(function() {
+            textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>';
+        });
+    }
+    function closeVerse() {
+        document.getElementById('verseOverlay').classList.remove('show');
+        document.getElementById('versePopup').classList.remove('show');
+    }
     </script>
 </body>
 </html>
