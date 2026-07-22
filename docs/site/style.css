@@ -526,3 +526,70 @@ body {
     position: absolute;
     left: -4px;
 }
+
+
+/* ===== PWA APP MODE — Bottom Navigation (standalone only) ===== */
+@media all and (display-mode: standalone) {
+    .pwa-bottom-nav {
+        display: flex !important;
+    }
+    body {
+        padding-bottom: 64px;
+    }
+    /* Hide top nav hamburger/sidebar in app mode — use bottom nav instead */
+    .hamburger { display: none !important; }
+}
+
+.pwa-bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background: #fff;
+    border-top: 1px solid #e0d6c8;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
+    z-index: 9999;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 8px;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.pwa-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: background 0.15s, color 0.15s;
+    min-width: 60px;
+}
+
+.pwa-nav-item i {
+    font-size: 1.2rem;
+    color: #8a7e74;
+    margin-bottom: 3px;
+    transition: color 0.15s;
+}
+
+.pwa-nav-item span {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #8a7e74;
+    transition: color 0.15s;
+}
+
+.pwa-nav-item.active i,
+.pwa-nav-item.active span {
+    color: #8b3a2a;
+}
+
+.pwa-nav-item:hover i,
+.pwa-nav-item:hover span {
+    color: #6b4c3b;
+}

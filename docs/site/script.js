@@ -153,3 +153,49 @@ function loadYT(el, id) {
     el.style.position = 'relative';
     el.innerHTML = '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;" allow="autoplay;encrypted-media" allowfullscreen></iframe>';
 }
+
+
+/* ===== PWA Bottom Navigation — Only in standalone (app) mode ===== */
+(function() {
+    var isStandalone = window.matchMedia('(display-mode: standalone)').matches
+        || window.navigator.standalone === true;
+    if (!isStandalone) return;
+
+    // Determine active section from current URL
+    var path = window.location.pathname.split('/').pop() || 'index.html';
+    var section = 'home';
+    var topicPages = ['fruits-of-the-spirit','the-12-apostles','names-of-god','armor-of-god',
+        'parables-of-jesus','prophecy-and-fulfillment','prayers-in-the-bible','i-am-statements',
+        'beatitudes','men-of-the-bible','women-of-the-bible','kings-of-israel','promises-of-god',
+        'spiritual-disciplines','the-trinity','miracles-of-jesus','ten-commandments','the-gospel',
+        'covenants','marriage-and-family'];
+    var strugglePages = ['addiction','anger','anxiety-and-fear','depression-and-hopelessness',
+        'doubt-and-unbelief','greed-and-materialism','grief-and-loss','identity-and-self-worth',
+        'loneliness','lust-and-sexual-sin','pride','suffering','temptation',
+        'unforgiveness-and-bitterness'];
+
+    var baseName = path.replace('.html','');
+    if (path === 'index.html' || path === '') {
+        section = 'home';
+    } else if (topicPages.indexOf(baseName) !== -1) {
+        section = 'topics';
+    } else if (strugglePages.indexOf(baseName) !== -1) {
+        section = 'struggles';
+    } else {
+        section = 'bible';
+    }
+
+    // Inject bottom nav
+    var nav = document.createElement('nav');
+    nav.className = 'pwa-bottom-nav';
+    nav.innerHTML = ''
+        + '<a class="pwa-nav-item' + (section==='home'?' active':'') + '" href="index.html">'
+        + '<i class="fas fa-home"></i><span>Home</span></a>'
+        + '<a class="pwa-nav-item' + (section==='bible'?' active':'') + '" href="genesis1.html">'
+        + '<i class="fas fa-book-bible"></i><span>Bible</span></a>'
+        + '<a class="pwa-nav-item' + (section==='topics'?' active':'') + '" href="fruits-of-the-spirit.html">'
+        + '<i class="fas fa-lightbulb"></i><span>Topics</span></a>'
+        + '<a class="pwa-nav-item' + (section==='struggles'?' active':'') + '" href="anxiety-and-fear.html">'
+        + '<i class="fas fa-heart"></i><span>Life</span></a>';
+    document.body.appendChild(nav);
+})();
