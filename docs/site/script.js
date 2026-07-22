@@ -161,6 +161,10 @@ function loadYT(el, id) {
         || window.navigator.standalone === true;
     if (!isStandalone) return;
 
+    // Mark body so CSS can respond
+    document.documentElement.classList.add('pwa-standalone');
+    document.body.classList.add('pwa-standalone');
+
     // Determine active section from current URL
     var path = window.location.pathname.split('/').pop() || 'index.html';
     var section = 'home';

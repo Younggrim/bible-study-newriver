@@ -530,15 +530,17 @@ body {
 
 /* ===== PWA APP MODE — Bottom Navigation (standalone only) ===== */
 @media all and (display-mode: standalone) {
-    .pwa-bottom-nav {
-        display: flex !important;
-    }
     body {
         padding-bottom: 64px;
     }
-    /* Hide top nav hamburger/sidebar in app mode — use bottom nav instead */
     .hamburger { display: none !important; }
 }
+
+/* Also support JS-detected standalone via body class */
+body.pwa-standalone {
+    padding-bottom: 64px;
+}
+body.pwa-standalone .hamburger { display: none !important; }
 
 .pwa-bottom-nav {
     display: none;
@@ -555,6 +557,10 @@ body {
     justify-content: space-around;
     padding: 0 8px;
     padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+body.pwa-standalone .pwa-bottom-nav {
+    display: flex;
 }
 
 .pwa-nav-item {
