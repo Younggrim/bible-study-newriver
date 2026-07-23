@@ -188,32 +188,27 @@ function loadYT(el, id) {
     }
 
     // Inject splash screen (only on index/first load)
-    if (path === 'index.html' || path === '' || path === '/') {
-        var splashShown = false;
-        try { splashShown = sessionStorage.getItem('pwa-splash-shown') === 'true'; } catch(e) {}
-        if (!splashShown) {
-            var splash = document.createElement('div');
-            splash.className = 'pwa-splash';
-            splash.innerHTML = ''
-                + '<div class="splash-icon"><i class="fas fa-cross"></i></div>'
-                + '<p class="splash-label">A Prayer for You</p>'
-                + '<p class="splash-prayer">Lord, we pray that this resource brings glory to Your name. Use it as a tool to draw hearts closer to You and to reveal Your plan and purpose for each person who visits these pages. May Your Word not return void, but accomplish everything You desire. Open eyes, soften hearts, and let the truth of Scripture transform lives for Your kingdom. In Jesus\' name, Amen.</p>'
-                + '<p class="splash-tap">Tap anywhere to continue</p>';
-            document.body.appendChild(splash);
-            splash.addEventListener('click', function() {
+    var isIndex = (path === 'index.html' || path === '' || path === '/' || path === 'index');
+    if (isIndex) {
+        var splash = document.createElement('div');
+        splash.className = 'pwa-splash';
+        splash.innerHTML = ''
+            + '<div class="splash-icon"><i class="fas fa-cross"></i></div>'
+            + '<p class="splash-label">A Prayer for You</p>'
+            + '<p class="splash-prayer">Lord, we pray that this resource brings glory to Your name. Use it as a tool to draw hearts closer to You and to reveal Your plan and purpose for each person who visits these pages. May Your Word not return void, but accomplish everything You desire. Open eyes, soften hearts, and let the truth of Scripture transform lives for Your kingdom. In Jesus\' name, Amen.</p>'
+            + '<p class="splash-tap">Tap anywhere to continue</p>';
+        document.body.appendChild(splash);
+        splash.addEventListener('click', function() {
+            splash.classList.add('fade-out');
+            setTimeout(function() { splash.remove(); }, 700);
+        });
+        // Auto-dismiss after 8 seconds
+        setTimeout(function() {
+            if (!splash.classList.contains('fade-out')) {
                 splash.classList.add('fade-out');
                 setTimeout(function() { splash.remove(); }, 700);
-                try { sessionStorage.setItem('pwa-splash-shown', 'true'); } catch(e) {}
-            });
-            // Auto-dismiss after 8 seconds
-            setTimeout(function() {
-                if (!splash.classList.contains('fade-out')) {
-                    splash.classList.add('fade-out');
-                    setTimeout(function() { splash.remove(); }, 700);
-                    try { sessionStorage.setItem('pwa-splash-shown', 'true'); } catch(e) {}
-                }
-            }, 8000);
-        }
+            }
+        }, 8000);
     }
 
     // Inject bottom nav (4 tabs: Bible, Topical, Life, Devotional)
