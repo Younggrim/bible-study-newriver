@@ -507,11 +507,11 @@ document.addEventListener('DOMContentLoaded', function() {
             var book = chapterMatch[1];
             var chapter = parseInt(chapterMatch[2]);
             if (diff > 0) {
-                // Swipe left = next chapter
-                window.location.href = book + (chapter + 1) + '.html';
-            } else {
-                // Swipe right = previous chapter
+                // Swipe left = previous chapter
                 if (chapter > 1) window.location.href = book + (chapter - 1) + '.html';
+            } else {
+                // Swipe right = next chapter
+                window.location.href = book + (chapter + 1) + '.html';
             }
             return;
         }
@@ -532,10 +532,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 var items = studyGroups[prefix];
                 var idx = items.indexOf(itemName);
                 if (idx === -1) break;
-                if (diff > 0 && idx < items.length - 1) {
-                    window.location.href = prefix + '-' + items[idx + 1] + '.html';
-                } else if (diff < 0 && idx > 0) {
+                if (diff > 0 && idx > 0) {
                     window.location.href = prefix + '-' + items[idx - 1] + '.html';
+                } else if (diff < 0 && idx < items.length - 1) {
+                    window.location.href = prefix + '-' + items[idx + 1] + '.html';
                 }
                 return;
             }
