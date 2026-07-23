@@ -167,7 +167,7 @@ function loadYT(el, id) {
 
     // Determine active section from current URL
     var path = window.location.pathname.split('/').pop() || 'index.html';
-    var section = 'home';
+    var section = 'bible';
     var topicPages = ['fruits-of-the-spirit','the-12-apostles','names-of-god','armor-of-god',
         'parables-of-jesus','prophecy-and-fulfillment','prayers-in-the-bible','i-am-statements',
         'beatitudes','men-of-the-bible','women-of-the-bible','kings-of-israel','promises-of-god',
@@ -179,27 +179,75 @@ function loadYT(el, id) {
         'unforgiveness-and-bitterness'];
 
     var baseName = path.replace('.html','');
-    if (path === 'index.html' || path === '') {
-        section = 'home';
-    } else if (topicPages.indexOf(baseName) !== -1) {
-        section = 'topics';
+    if (topicPages.indexOf(baseName) !== -1) {
+        section = 'topical';
     } else if (strugglePages.indexOf(baseName) !== -1) {
-        section = 'struggles';
+        section = 'life';
     } else {
         section = 'bible';
     }
 
-    // Inject bottom nav
+    // Inject splash screen (only on index/first load)
+    if (path === 'index.html' || path === '' || path === '/') {
+        var splashShown = false;
+        try { splashShown = sessionStorage.getItem('pwa-splash-shown') === 'true'; } catch(e) {}
+        if (!splashShown) {
+            var splash = document.createElement('div');
+            splash.className = 'pwa-splash';
+            splash.innerHTML = ''
+                + '<div class="splash-icon"><i class="fas fa-cross"></i></div>'
+                + '<p class="splash-label">A Prayer for You</p>'
+                + '<p class="splash-prayer">Lord, we pray that this resource brings glory to Your name. Use it as a tool to draw hearts closer to You and to reveal Your plan and purpose for each person who visits these pages. May Your Word not return void, but accomplish everything You desire. Open eyes, soften hearts, and let the truth of Scripture transform lives for Your kingdom. In Jesus\' name, Amen.</p>'
+                + '<p class="splash-tap">Tap anywhere to continue</p>';
+            document.body.appendChild(splash);
+            splash.addEventListener('click', function() {
+                splash.classList.add('fade-out');
+                setTimeout(function() { splash.remove(); }, 700);
+                try { sessionStorage.setItem('pwa-splash-shown', 'true'); } catch(e) {}
+            });
+            // Auto-dismiss after 8 seconds
+            setTimeout(function() {
+                if (!splash.classList.contains('fade-out')) {
+                    splash.classList.add('fade-out');
+                    setTimeout(function() { splash.remove(); }, 700);
+                    try { sessionStorage.setItem('pwa-splash-shown', 'true'); } catch(e) {}
+                }
+            }, 8000);
+        }
+    }
+
+    // Inject bottom nav (4 tabs: Bible, Topical, Life, Devotional)
     var nav = document.createElement('nav');
     nav.className = 'pwa-bottom-nav';
     nav.innerHTML = ''
-        + '<a class="pwa-nav-item' + (section==='home'?' active':'') + '" href="index.html">'
-        + '<i class="fas fa-home"></i><span>Home</span></a>'
-        + '<a class="pwa-nav-item' + (section==='bible'?' active':'') + '" href="genesis1.html">'
+        + '<a class="pwa-nav-item' + (section==='bible'?' active':'') + '" href="index.html">'
         + '<i class="fas fa-book-bible"></i><span>Bible</span></a>'
-        + '<a class="pwa-nav-item' + (section==='topics'?' active':'') + '" href="fruits-of-the-spirit.html">'
-        + '<i class="fas fa-lightbulb"></i><span>Topics</span></a>'
-        + '<a class="pwa-nav-item' + (section==='struggles'?' active':'') + '" href="anxiety-and-fear.html">'
-        + '<i class="fas fa-heart"></i><span>Life</span></a>';
+        + '<a class="pwa-nav-item' + (section==='topical'?' active':'') + '" href="fruits-of-the-spirit.html">'
+        + '<i class="fas fa-lightbulb"></i><span>Topical</span></a>'
+        + '<a class="pwa-nav-item' + (section==='life'?' active':'') + '" href="anxiety-and-fear.html">'
+        + '<i class="fas fa-heart"></i><span>Life</span></a>'
+        + '<a class="pwa-nav-item" id="pwa-devotional-btn" href="#">'
+        + '<i class="fas fa-hands-praying"></i><span>Devotional</span></a>';
     document.body.appendChild(nav);
+
+    // Devotional "Coming Soon" overlay
+    var devBtn = document.getElementById('pwa-devotional-btn');
+    if (devBtn) {
+        var devOverlay = document.createElement('div');
+        devOverlay.className = 'pwa-coming-soon';
+        devOverlay.innerHTML = ''
+            + '<i class="fas fa-hands-praying"></i>'
+            + '<h2>Devotional</h2>'
+            + '<p>Daily devotionals are coming soon. This space will offer guided daily readings, reflections, and prayers to walk with you through each day in God\'s Word.</p>';
+        document.body.appendChild(devOverlay);
+
+        devBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            var isShowing = devOverlay.classList.contains('show');
+            devOverlay.classList.toggle('show');
+            // Update active state
+            nav.querySelectorAll('.pwa-nav-item').forEach(function(item) { item.classList.remove('active'); });
+            if (!isShowing) devBtn.classList.add('active');
+        });
+    }
 })();

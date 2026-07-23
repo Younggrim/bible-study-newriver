@@ -599,3 +599,90 @@ body.pwa-standalone .pwa-bottom-nav {
 .pwa-nav-item:hover span {
     color: #6b4c3b;
 }
+
+
+/* ===== PWA Splash Screen ===== */
+.pwa-splash {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #1a1410 0%, #2a1f14 20%, #3d2b1f 50%, #6b5040 75%, #d4bea0 92%, #faf5ed 100%);
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px 32px;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+body.pwa-standalone .pwa-splash {
+    display: flex;
+}
+.pwa-splash.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+.pwa-splash .splash-icon {
+    font-size: 2.4rem;
+    color: #f0c865;
+    margin-bottom: 20px;
+}
+.pwa-splash .splash-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: #c9a96e;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+.pwa-splash .splash-prayer {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    line-height: 2;
+    color: #f0e4d4;
+    font-style: italic;
+    max-width: 600px;
+    font-weight: 500;
+}
+.pwa-splash .splash-tap {
+    margin-top: 32px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    color: #8a7e74;
+    letter-spacing: 1px;
+}
+
+/* ===== PWA Devotional Coming Soon ===== */
+.pwa-coming-soon {
+    display: none;
+    position: fixed;
+    top: 56px; left: 0; right: 0; bottom: 64px;
+    background: #faf5ed;
+    z-index: 9998;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px;
+    text-align: center;
+}
+.pwa-coming-soon.show {
+    display: flex;
+}
+.pwa-coming-soon i {
+    font-size: 3rem;
+    color: #c9a96e;
+    margin-bottom: 20px;
+}
+.pwa-coming-soon h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    color: #6b4c3b;
+    margin-bottom: 12px;
+}
+.pwa-coming-soon p {
+    font-size: 0.9rem;
+    color: #5a4e44;
+    line-height: 1.7;
+    max-width: 400px;
+}
