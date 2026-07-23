@@ -154,6 +154,39 @@ function loadYT(el, id) {
     el.innerHTML = '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;" allow="autoplay;encrypted-media" allowfullscreen></iframe>';
 }
 
+/* Collapsible Video Sections */
+document.addEventListener('DOMContentLoaded', function() {
+    // Find all video containers in topical cards (divs containing yt-facade with border-top style)
+    document.querySelectorAll('.fruit-card > div[style*="border-top"]').forEach(function(container) {
+        var videos = container.querySelectorAll('.yt-facade');
+        if (videos.length === 0) return;
+
+        // Collapse the videos
+        container.style.display = 'none';
+
+        // Create toggle button
+        var btn = document.createElement('button');
+        btn.className = 'video-toggle-btn';
+        btn.innerHTML = '<i class="fas fa-play-circle"></i> Videos (' + videos.length + ')';
+        btn.addEventListener('click', function() {
+            var isHidden = container.style.display === 'none';
+            container.style.display = isHidden ? '' : 'none';
+            btn.classList.toggle('open', isHidden);
+        });
+        container.parentNode.insertBefore(btn, container);
+    });
+
+    // Find video tab content in chapter pages
+    var videoTab = document.getElementById('tab-videos');
+    if (videoTab) {
+        var videos = videoTab.querySelectorAll('.yt-facade');
+        if (videos.length > 0) {
+            var h3 = videoTab.querySelector('h3');
+            if (h3) h3.innerHTML = 'Videos (' + videos.length + ') <span style="font-size:0.75rem;color:#8a7e74;font-weight:400;"> — tap thumbnails to play</span>';
+        }
+    }
+});
+
 
 /* ===== PWA Bottom Navigation — Only in standalone (app) mode ===== */
 (function() {
