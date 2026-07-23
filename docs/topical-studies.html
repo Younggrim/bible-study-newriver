@@ -857,6 +857,24 @@
         </div>
     </main>
     <script src="site/script.js"></script>
-    <script>function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});</script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    // Auto-open section from hash
+    (function(){
+        var hash = window.location.hash.replace('#','');
+        if (hash) {
+            var section = document.getElementById(hash);
+            if (section) {
+                var header = section.querySelector('.study-header');
+                var grid = section.querySelector('.item-grid');
+                if (header && grid) {
+                    header.classList.add('open');
+                    grid.classList.add('open');
+                }
+                setTimeout(function(){ section.scrollIntoView({behavior:'smooth',block:'start'}); }, 100);
+            }
+        }
+    })();
+    </script>
 </body>
 </html>

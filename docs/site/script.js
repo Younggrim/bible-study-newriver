@@ -479,74 +479,41 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 
 
-/* ===== Swipe Navigation ===== */
+/* ===== Chapter Navigation Arrows ===== */
 (function() {
-    var touchStartX = 0;
-    var touchEndX = 0;
-    var touchStartY = 0;
-    var touchEndY = 0;
-    var minSwipe = 60;
+    var path = window.location.pathname.split('/').pop() || '';
+    var baseName = path.replace('.html', '');
 
-    document.addEventListener('touchstart', function(e) {
-        touchStartX = e.changedTouches[0].screenX;
-        touchStartY = e.changedTouches[0].screenY;
-    }, { passive: true });
+    // Bible chapter pages: add prev/next arrows
+    var chapterMatch = baseName.match(/^(\d*[a-z]+?)(\d+)$/i);
+    if (chapterMatch) {
+        var book = chapterMatch[1];
+        var chapter = parseInt(chapterMatch[2]);
 
-    document.addEventListener('touchend', function(e) {
-        touchEndX = e.changedTouches[0].screenX;
-        touchEndY = e.changedTouches[0].screenY;
-        handleSwipe();
-    }, { passive: true });
+        // Find the study-tabs or tab bar to place arrows after
+        var insertAfter = document.querySelector('.study-tabs') || document.querySelector('.tab-bar');
+        if (!insertAfter) {
+            // Fallback: insert before main content
+            var mainContent = document.querySelector('.main-content') || document.querySelector('main');
+            if (mainContent) insertAfter = mainContent.firstElementChild;
+        }
+        if (!insertAfter) return;
 
-    function handleSwipe() {
-        var diffX = touchStartX - touchEndX;
-        var diffY = touchStartY - touchEndY;
+        var navDiv = document.createElement('div');
+        navDiv.className = 'chapter-nav-arrows';
+        navDiv.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:12px 20px;margin:0 0 16px;';
 
-        // Only trigger if horizontal movement > vertical (not a scroll)
-        if (Math.abs(diffX) < minSwipe) return;
-        if (Math.abs(diffY) > Math.abs(diffX)) return;
-
-        var path = window.location.pathname.split('/').pop() || '';
-        var baseName = path.replace('.html', '');
-
-        // Bible chapter pages: swipe between chapters
-        var chapterMatch = baseName.match(/^(\d*[a-z]+?)(\d+)$/i);
-        if (chapterMatch) {
-            var book = chapterMatch[1];
-            var chapter = parseInt(chapterMatch[2]);
-            if (diffX > 0) {
-                // Swipe left = previous chapter
-                if (chapter > 1) window.location.href = book + (chapter - 1) + '.html';
-            } else {
-                // Swipe right = next chapter
-                window.location.href = book + (chapter + 1) + '.html';
-            }
-            return;
+        var prevBtn = '';
+        if (chapter > 1) {
+            prevBtn = '<a href="' + book + (chapter - 1) + '.html" class="chapter-arrow-btn" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#f5ebe0;border:1px solid #e8e0d6;border-radius:8px;text-decoration:none;color:#3d2b1f;font-size:0.85rem;font-weight:600;transition:background 0.2s;"><i class="fas fa-chevron-left" style="font-size:0.75rem;color:#8b3a2a;"></i> Ch ' + (chapter - 1) + '</a>';
+        } else {
+            prevBtn = '<span></span>';
         }
 
-        // Topical individual pages: swipe between items in same study
-        var studyGroups = {
-            'fruits': ['love','joy','peace','patience','kindness','goodness','faithfulness','gentleness','self-control'],
-            'apostles': ['simon-peter','andrew','james','john','philip','bartholomew','matthew','thomas','james-son-of-alphaeus','thaddaeus','simon-the-zealot','judas-iscariot'],
-            'iam': ['bread-of-life','light-of-the-world','the-door','good-shepherd','resurrection-and-life','way-truth-life','true-vine'],
-            'beatitudes': ['poor-in-spirit','those-who-mourn','the-meek','hunger-for-righteousness','the-merciful','pure-in-heart','the-peacemakers','the-persecuted'],
-            'armor': ['belt-of-truth','breastplate-of-righteousness','shoes-of-the-gospel','shield-of-faith','helmet-of-salvation','sword-of-the-spirit'],
-            'commandments': ['no-other-gods','no-idols','gods-name','sabbath','honor-parents','not-murder','not-adultery','not-steal','not-false-witness','not-covet'],
-        };
+        var nextBtn = '<a href="' + book + (chapter + 1) + '.html" class="chapter-arrow-btn" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#f5ebe0;border:1px solid #e8e0d6;border-radius:8px;text-decoration:none;color:#3d2b1f;font-size:0.85rem;font-weight:600;transition:background 0.2s;">Ch ' + (chapter + 1) + ' <i class="fas fa-chevron-right" style="font-size:0.75rem;color:#8b3a2a;"></i></a>';
 
-        for (var prefix in studyGroups) {
-            if (baseName.indexOf(prefix + '-') === 0) {
-                var itemName = baseName.replace(prefix + '-', '');
-                var items = studyGroups[prefix];
-                var idx = items.indexOf(itemName);
-                if (idx === -1) break;
-                if (diffX > 0 && idx > 0) {
-                    window.location.href = prefix + '-' + items[idx - 1] + '.html';
-                } else if (diffX < 0 && idx < items.length - 1) {
-                    window.location.href = prefix + '-' + items[idx + 1] + '.html';
-                }
-                return;
-            }
-        }
+        navDiv.innerHTML = prevBtn + '<span style="font-size:0.8rem;color:#8a7e74;font-weight:500;">' + book.replace(/^\d/, function(m){return m+' ';}).replace(/([a-z])([A-Z])/g,'$1 $2').replace(/^./, function(m){return m.toUpperCase();}) + ' ' + chapter + '</span>' + nextBtn;
+
+        insertAfter.parentNode.insertBefore(navDiv, insertAfter.nextSibling);
     }
 })();
