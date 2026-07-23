@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <title>I Am the Resurrection and the Life | I AM Statements of Jesus — Bible Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="site/style.css">
+    <style>
+        .topic-hero { background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80") center/cover no-repeat; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 32px; box-shadow: var(--shadow-sm); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #f0d080; letter-spacing: 0.5px; }
+
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #8b6914; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #5a440d; }
+        .back-link i { margin-right: 6px; }
+
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #8b6914; margin-bottom: 16px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .reflection-list { list-style: none; padding: 0; margin: 0; }
+        .reflection-list li { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 10px; padding-left: 22px; position: relative; }
+        .reflection-list li::before { content: "\f059"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: #8b6914; font-size: 0.8rem; top: 3px; }
+
+        .video-toggle-btn { background: #8b6914; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 16px; }
+        .video-toggle-btn:hover { background: #5a440d; }
+        .video-section { display: none; } .video-section.open { display: block; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+
+        .topic-dropdown { position: relative; display: inline-block; } .topic-dropdown-btn { background: rgba(255,255,255,0.9); border: 1px solid #8b6914; border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; color: #3d2b1f; cursor: pointer; transition: background 0.2s; } .topic-dropdown-btn:hover { background: var(--bg-card); } .topic-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid var(--border-light); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; min-width: 240px; z-index: 1000; margin-top: 6px; max-height: 400px; overflow-y: auto; } .topic-dropdown-menu.open { display: block; } .topic-dropdown-menu a { display: block; padding: 8px 18px; font-size: 0.83rem; color: #3d2b1f; text-decoration: none; font-weight: 500; transition: background 0.15s; } .topic-dropdown-menu a:hover { background: #f5ebe0; color: #8b6914; }
+
+        .verse-ref { color: #8b6914; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #5a440d; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#8b6914; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="index.html" class="nav-home-btn"><i class="fas fa-home"></i></a>
+        <a href="index.html" class="nav-brand">Bible Study</a>
+        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html">Names of God</a><a href="i-am-statements.html"><strong>I AM Statements</strong></a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html">Parables of Jesus</a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
+    </nav>
+    <main class="main-content" style="margin-left:0; max-width:960px; margin-left:auto; margin-right:auto;">
+        <a href="topical-studies.html#iam" class="back-link"><i class="fas fa-arrow-left"></i> Back to I AM Statements of Jesus</a>
+
+        <div class="topic-hero">
+            <p class="subtitle">I AM Statements of Jesus</p>
+            <h1>I Am the Resurrection and the Life</h1>
+        </div>
+
+        <div class="section-block">
+            <h2>The Statement</h2>
+            <p>Standing before a grieving Martha, whose brother Lazarus had been dead for four days, Jesus made one of His most stunning declarations: "I am the resurrection and the life. Whoever believes in me, though he die, yet shall he live, and everyone who lives and believes in me shall never die" (John 11:25-26). Martha believed in a future resurrection — "I know that he will rise again in the resurrection on the last day" (v. 24). Jesus redirected her faith from a distant theological event to His own person: the resurrection is not merely something that will happen — it is Someone standing in front of you.</p>
+            <p>The "I AM" claim here reaches perhaps its highest point. In Exodus 3:14, God revealed Himself as the eternal, self-existent One. Now Jesus claims that this same self-existent life resides in Him — and that He has the authority to impart it to others. He is not saying He will perform resurrections (though He did, moments later). He is saying He is resurrection itself. Death has no independent power; it exists only as the absence of the life that Jesus is. Where He is present, death cannot maintain its grip.</p>
+            <p>The timing of this statement is profoundly pastoral. Jesus said these words not in a theological lecture but at a graveside, to a woman weeping over her brother. He wept with her (John 11:35). The One who is the resurrection and the life is not indifferent to death's pain — He entered into it, felt its weight, and then shattered it. He proved His claim minutes later by calling Lazarus from the tomb with a shout. But the ultimate proof would come at His own resurrection, when He walked out of death permanently, never to die again.</p>
+        </div>
+
+        <div class="section-block">
+            <h2>Key Scriptures</h2>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('John 11:25-26')">John 11:25-26</span> — "I am the resurrection and the life. Whoever believes in me, though he die, yet shall he live."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 6:5')">Romans 6:5</span> — "If we have been united with him in a death like his, we shall certainly be united with him in a resurrection like his."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 15:20-22')">1 Corinthians 15:20-22</span> — "Christ has been raised from the dead, the firstfruits of those who have fallen asleep... in Christ shall all be made alive."</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 3:10-11')">Philippians 3:10-11</span> — "That I may know him and the power of his resurrection... that by any means possible I may attain the resurrection from the dead."</li>
+                <li><span class="verse-ref" onclick="showVerse('Revelation 1:18')">Revelation 1:18</span> — "I died, and behold I am alive forevermore, and I have the keys of Death and Hades."</li>
+            </ul>
+        </div>
+
+        <div class="section-block">
+            <h2>What Jesus Was Declaring</h2>
+            <p>Jesus was declaring His absolute authority over death — humanity's final and most feared enemy. Every other religious leader, philosopher, and teacher in history has been conquered by death. Jesus alone conquered death by passing through it and emerging alive on the other side. His resurrection is not a resuscitation (like Lazarus, who would die again) but a transformation into indestructible life. And He promises to share this victory with everyone who believes in Him. Physical death becomes a doorway, not a destination — a brief sleep from which His voice will awaken us.</p>
+            <p>But this declaration is not only about the future. "Everyone who lives and believes in me shall never die" speaks to a present reality. Eternal life begins now for the believer — not just in duration but in quality. The resurrection life of Christ is already at work in those who trust Him: transforming character, renewing minds, producing hope in suffering, and giving purpose beyond the grave. The Christian does not merely wait for life after death; the Christian already possesses life that death cannot interrupt. This is why Paul could say, "To live is Christ, and to die is gain" (Philippians 1:21) — because death is not the end of life but its fuller beginning.</p>
+        </div>
+
+        <div class="section-block">
+            <h2>Reflection Questions</h2>
+            <ul class="reflection-list">
+                <li>Do you fear death — and if so, how does Jesus' claim to be the resurrection and the life address that fear?</li>
+                <li>Is your faith in a future event or in a present Person? How would relating to Jesus as your resurrection change your daily life?</li>
+                <li>How does the reality of resurrection hope affect the way you grieve when you lose someone you love?</li>
+                <li>Are you experiencing the "resurrection power" of Christ now — His transforming work in your character, relationships, and purpose?</li>
+            </ul>
+        </div>
+
+        <div class="section-block">
+            <h2 style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;" onclick="var s=this.parentElement.querySelector('#videoSection');if(s){s.style.display=s.style.display==='none'?'block':'none';this.querySelector('.chevron').style.transform=s.style.display==='none'?'':'rotate(90deg)';}"><span>Video Resources</span><i class="fas fa-chevron-right chevron" style="font-size:0.8rem;transition:transform 0.2s;"></i></h2>
+            <div id="videoSection" style="display:none;">
+                <p style="font-size:0.9rem;color:#8a7e74;font-style:italic;">Videos coming soon.</p>
+            </div>
+        </div>
+    </main>
+    <script src="site/script.js"></script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) {
+                textEl.innerHTML = data.passages[0];
+            } else {
+                textEl.innerHTML = '<em>Could not load this passage.</em>';
+            }
+        })
+        .catch(function() {
+            textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>';
+        });
+    }
+    function closeVerse() {
+        document.getElementById('verseOverlay').classList.remove('show');
+        document.getElementById('versePopup').classList.remove('show');
+    }
+    </script>
+</body>
+</html>
