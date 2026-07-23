@@ -191,26 +191,36 @@ function loadYT(el, id) {
         section = 'bible';
     }
 
-    // Inject splash screen on app open
-    var splash = document.createElement('div');
-    splash.className = 'pwa-splash';
-    splash.innerHTML = ''
-        + '<div class="splash-icon"><i class="fas fa-cross"></i></div>'
-        + '<p class="splash-label">A Prayer for You</p>'
-        + '<p class="splash-prayer">Lord, we pray that this resource brings glory to Your name. Use it as a tool to draw hearts closer to You and to reveal Your plan and purpose for each person who visits these pages. May Your Word not return void, but accomplish everything You desire. Open eyes, soften hearts, and let the truth of Scripture transform lives for Your kingdom. In Jesus\' name, Amen.</p>'
-        + '<p class="splash-tap">Tap anywhere to continue</p>';
-    document.body.appendChild(splash);
-    splash.addEventListener('click', function() {
-        splash.classList.add('fade-out');
-        setTimeout(function() { splash.remove(); }, 700);
-    });
-    // Auto-dismiss after 8 seconds
-    setTimeout(function() {
-        if (!splash.classList.contains('fade-out')) {
+    // Check hash for tab highlighting on index
+    var hash = window.location.hash;
+    if (hash === '#topical') section = 'topical';
+    if (hash === '#life') section = 'life';
+
+    // Inject splash screen on app open (once per session)
+    var splashShown = false;
+    try { splashShown = sessionStorage.getItem('pwa-splash-done') === '1'; } catch(e) {}
+    if (!splashShown) {
+        var splash = document.createElement('div');
+        splash.className = 'pwa-splash';
+        splash.innerHTML = ''
+            + '<div class="splash-icon"><i class="fas fa-cross"></i></div>'
+            + '<p class="splash-label">A Prayer for You</p>'
+            + '<p class="splash-prayer">Lord, we pray that this resource brings glory to Your name. Use it as a tool to draw hearts closer to You and to reveal Your plan and purpose for each person who visits these pages. May Your Word not return void, but accomplish everything You desire. Open eyes, soften hearts, and let the truth of Scripture transform lives for Your kingdom. In Jesus\' name, Amen.</p>'
+            + '<p class="splash-tap">Tap anywhere to continue</p>';
+        document.body.appendChild(splash);
+        try { sessionStorage.setItem('pwa-splash-done', '1'); } catch(e) {}
+        splash.addEventListener('click', function() {
             splash.classList.add('fade-out');
             setTimeout(function() { splash.remove(); }, 700);
-        }
-    }, 8000);
+        });
+        // Auto-dismiss after 8 seconds
+        setTimeout(function() {
+            if (!splash.classList.contains('fade-out')) {
+                splash.classList.add('fade-out');
+                setTimeout(function() { splash.remove(); }, 700);
+            }
+        }, 8000);
+    }
 
     // Inject bottom nav (4 tabs: Bible, Topical, Life, Devotional)
     var nav = document.createElement('nav');
@@ -218,9 +228,9 @@ function loadYT(el, id) {
     nav.innerHTML = ''
         + '<a class="pwa-nav-item' + (section==='bible'?' active':'') + '" href="index.html">'
         + '<i class="fas fa-book-bible"></i><span>Bible</span></a>'
-        + '<a class="pwa-nav-item' + (section==='topical'?' active':'') + '" href="fruits-of-the-spirit.html">'
+        + '<a class="pwa-nav-item' + (section==='topical'?' active':'') + '" href="index.html#topical">'
         + '<i class="fas fa-lightbulb"></i><span>Topical</span></a>'
-        + '<a class="pwa-nav-item' + (section==='life'?' active':'') + '" href="anxiety-and-fear.html">'
+        + '<a class="pwa-nav-item' + (section==='life'?' active':'') + '" href="index.html#life">'
         + '<i class="fas fa-heart"></i><span>Life</span></a>'
         + '<a class="pwa-nav-item" id="pwa-devotional-btn" href="#">'
         + '<i class="fas fa-hands-praying"></i><span>Devotional</span></a>';
