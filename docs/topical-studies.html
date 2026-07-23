@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <title>Topical Studies — Bible Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="site/style.css">
+    <style>
+        body { background: #faf5ed; }
+        .page-content { margin: 0 auto; max-width: 960px; padding: 24px 24px 80px; }
+        .study-section { margin-bottom: 40px; }
+        .study-header { font-family: 'Cinzel', serif; font-size: 1.4rem; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid; }
+        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+        .item-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid; border-radius: 10px; text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
+        .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
+        .item-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 2px; }
+        .item-card .subtitle { font-size: 0.75rem; font-style: italic; color: #8a7e74; margin-bottom: 6px; }
+        .item-card .desc { font-size: 0.82rem; color: #5a4e44; line-height: 1.5; }
+        .topic-dropdown { position: relative; display: inline-block; }
+        .topic-dropdown-btn { background: rgba(255,255,255,0.9); border: 1px solid #8b3a2a; border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; color: #3d2b1f; cursor: pointer; }
+        .topic-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #e8e0d6; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; min-width: 240px; z-index: 1000; margin-top: 6px; max-height: 400px; overflow-y: auto; }
+        .topic-dropdown-menu.open { display: block; }
+        .topic-dropdown-menu a { display: block; padding: 8px 18px; font-size: 0.83rem; color: #3d2b1f; text-decoration: none; font-weight: 500; }
+        .topic-dropdown-menu a:hover { background: #f5ebe0; }
+        @media (max-width: 768px) { .item-grid { grid-template-columns: 1fr; } .study-header { font-size: 1.2rem; } }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="index.html" class="nav-home-btn"><i class="fas fa-home"></i></a>
+        <a href="index.html" class="nav-brand">Bible Study</a>
+        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="#fruits">Fruits of the Spirit</a><a href="#apostles">The 12 Apostles</a><a href="#names">Names of God</a><a href="#armor">Armor of God</a><a href="#parables">Parables of Jesus</a><a href="#iam">I AM Statements of Jesus</a><a href="#beatitudes">The Beatitudes</a><a href="#commandments">Ten Commandments</a><a href="#miracles">Miracles of Jesus</a><a href="#men">Men of the Bible</a><a href="#women">Women of the Bible</a><a href="#kings">Kings of Israel &amp; Judah</a><a href="#promises">Promises of God</a><a href="#prayers">Prayers in the Bible</a><a href="#prophecy">Prophecy &amp; Fulfillment</a><a href="#disciplines">Spiritual Disciplines</a><a href="#trinity">The Trinity</a><a href="#gospel">The Gospel</a></div></div></div>
+    </nav>
+    <main class="page-content" style="margin-top:56px;">
+
+        <div class="study-section" id="fruits">
+            <h2 class="study-header" style="color:#2c6b4f;border-color:#2c6b4f;">Fruits of the Spirit</h2>
+            <div class="item-grid">
+                <a href="fruits-love.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Love</h4>
+                    <p class="subtitle">agape (ἀγάπη)</p>
+                    <p class="desc">Unconditional, sacrificial love that mirrors God's love.</p>
+                </a>
+                <a href="fruits-joy.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Joy</h4>
+                    <p class="subtitle">chara (χαρά)</p>
+                    <p class="desc">Deep gladness anchored in God, not circumstances.</p>
+                </a>
+                <a href="fruits-peace.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Peace</h4>
+                    <p class="subtitle">eirene (εἰρήνη)</p>
+                    <p class="desc">Wholeness and tranquility from being reconciled to God.</p>
+                </a>
+                <a href="fruits-patience.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Patience</h4>
+                    <p class="subtitle">makrothumia (μακροθυμία)</p>
+                    <p class="desc">Long-suffering endurance that bears with others.</p>
+                </a>
+                <a href="fruits-kindness.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Kindness</h4>
+                    <p class="subtitle">chrestotes (χρηστότης)</p>
+                    <p class="desc">A gracious disposition that seeks to bless others.</p>
+                </a>
+                <a href="fruits-goodness.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Goodness</h4>
+                    <p class="subtitle">agathosune (ἀγαθωσύνη)</p>
+                    <p class="desc">Moral excellence expressed through righteous action.</p>
+                </a>
+                <a href="fruits-faithfulness.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Faithfulness</h4>
+                    <p class="subtitle">pistis (πίστις)</p>
+                    <p class="desc">Trustworthiness reflecting God's covenant loyalty.</p>
+                </a>
+                <a href="fruits-gentleness.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Gentleness</h4>
+                    <p class="subtitle">prautes (πραΰτης)</p>
+                    <p class="desc">Strength under control — meekness yielded to God.</p>
+                </a>
+                <a href="fruits-self-control.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Self-Control</h4>
+                    <p class="subtitle">egkrateia (ἐγκράτεια)</p>
+                    <p class="desc">Mastery over desires through the Holy Spirit.</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="study-section" id="apostles">
+            <h2 class="study-header" style="color:#8b3a2a;border-color:#8b3a2a;">The 12 Apostles</h2>
+            <div class="item-grid">
+                <a href="apostles-simon-peter.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Simon Peter</h4>
+                    <p class="desc">The rock — bold leader of the early church.</p>
+                </a>
+                <a href="apostles-andrew.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Andrew</h4>
+                    <p class="desc">Peter's brother — the first to follow Jesus.</p>
+                </a>
+                <a href="apostles-james.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">James</h4>
+                    <p class="desc">Son of Zebedee — first apostle martyred.</p>
+                </a>
+                <a href="apostles-john.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">John</h4>
+                    <p class="desc">The beloved disciple — author of the Gospel of John.</p>
+                </a>
+                <a href="apostles-philip.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Philip</h4>
+                    <p class="desc">From Bethsaida — brought Nathanael to Jesus.</p>
+                </a>
+                <a href="apostles-bartholomew.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Bartholomew</h4>
+                    <p class="desc">Also Nathanael — 'an Israelite without guile.'</p>
+                </a>
+                <a href="apostles-matthew.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Matthew</h4>
+                    <p class="desc">Tax collector turned Gospel writer.</p>
+                </a>
+                <a href="apostles-thomas.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Thomas</h4>
+                    <p class="desc">The doubter who became a bold confessor.</p>
+                </a>
+                <a href="apostles-james-son-of-alphaeus.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">James son of Alphaeus</h4>
+                    <p class="desc">The lesser-known James — faithful servant.</p>
+                </a>
+                <a href="apostles-thaddaeus.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Thaddaeus</h4>
+                    <p class="desc">Also Judas son of James — asked about revelation.</p>
+                </a>
+                <a href="apostles-simon-the-zealot.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Simon the Zealot</h4>
+                    <p class="desc">Former political revolutionary turned disciple.</p>
+                </a>
+                <a href="apostles-judas-iscariot.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Judas Iscariot</h4>
+                    <p class="desc">The betrayer — replaced by Matthias.</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="study-section" id="names">
+            <h2 class="study-header" style="color:#6b4c3b;border-color:#6b4c3b;">Names of God</h2>
+            <div class="item-grid">
+                <a href="names-elohim.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">Elohim</h4>
+                    <p class="desc">God the Creator — mighty and powerful.</p>
+                </a>
+                <a href="names-yahweh.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">Yahweh</h4>
+                    <p class="desc">The LORD — 'I AM WHO I AM.'</p>
+                </a>
+                <a href="names-adonai.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">Adonai</h4>
+                    <p class="desc">Lord, Master — sovereign ruler over all.</p>
+                </a>
+                <a href="names-el-shaddai.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">El Shaddai</h4>
+                    <p class="desc">God Almighty — all-sufficient one.</p>
+                </a>
+                <a href="names-el-elyon.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">El Elyon</h4>
+                    <p class="desc">God Most High — supreme over all.</p>
+                </a>
+                <a href="names-jehovah-jireh.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">Jehovah Jireh</h4>
+                    <p class="desc">The LORD will provide.</p>
+                </a>
+                <a href="names-jehovah-rapha.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">Jehovah Rapha</h4>
+                    <p class="desc">The LORD who heals.</p>
+                </a>
+                <a href="names-jehovah-nissi.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">Jehovah Nissi</h4>
+                    <p class="desc">The LORD our banner.</p>
+                </a>
+                <a href="names-jehovah-shalom.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">Jehovah Shalom</h4>
+                    <p class="desc">The LORD is peace.</p>
+                </a>
+                <a href="names-el-roi.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">El Roi</h4>
+                    <p class="desc">The God who sees me.</p>
+                </a>
+                <a href="names-yahweh-sabaoth.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">Yahweh Sabaoth</h4>
+                    <p class="desc">LORD of hosts — commander of armies.</p>
+                </a>
+                <a href="names-abba.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">Abba</h4>
+                    <p class="desc">Father — intimate, personal relationship.</p>
+                </a>
+                <a href="names-jehovah-rohi.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">Jehovah Rohi</h4>
+                    <p class="desc">The LORD my shepherd.</p>
+                </a>
+                <a href="names-jehovah-tsidkenu.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">Jehovah Tsidkenu</h4>
+                    <p class="desc">The LORD our righteousness.</p>
+                </a>
+                <a href="names-el-olam.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">El Olam</h4>
+                    <p class="desc">The Everlasting God.</p>
+                </a>
+                <a href="names-immanuel.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">Immanuel</h4>
+                    <p class="desc">God with us.</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="study-section" id="armor">
+            <h2 class="study-header" style="color:#4a5a8a;border-color:#4a5a8a;">Armor of God</h2>
+            <div class="item-grid">
+                <a href="armor-belt-of-truth.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Belt of Truth</h4>
+                    <p class="desc">Foundation of the Christian life — God's truth.</p>
+                </a>
+                <a href="armor-breastplate-of-righteousness.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Breastplate of Righteousness</h4>
+                    <p class="desc">Protection for the heart through Christ's righteousness.</p>
+                </a>
+                <a href="armor-shoes-of-the-gospel.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Shoes of the Gospel</h4>
+                    <p class="desc">Readiness to share and stand firm in peace.</p>
+                </a>
+                <a href="armor-shield-of-faith.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Shield of Faith</h4>
+                    <p class="desc">Extinguishes the fiery darts of the enemy.</p>
+                </a>
+                <a href="armor-helmet-of-salvation.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Helmet of Salvation</h4>
+                    <p class="desc">Protects the mind with assurance of salvation.</p>
+                </a>
+                <a href="armor-sword-of-the-spirit.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Sword of the Spirit</h4>
+                    <p class="desc">The Word of God — our offensive weapon.</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="study-section" id="parables">
+            <h2 class="study-header" style="color:#5c3d6e;border-color:#5c3d6e;">Parables of Jesus</h2>
+            <div class="item-grid">
+                <a href="parables-the-sower.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">The Sower</h4>
+                    <p class="desc">Four soils — four responses to God's Word.</p>
+                </a>
+                <a href="parables-the-mustard-seed.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">The Mustard Seed</h4>
+                    <p class="desc">The Kingdom starts small but grows immensely.</p>
+                </a>
+                <a href="parables-the-prodigal-son.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">The Prodigal Son</h4>
+                    <p class="desc">A father's lavish grace for returning sinners.</p>
+                </a>
+                <a href="parables-the-good-samaritan.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">The Good Samaritan</h4>
+                    <p class="desc">True neighborly love crosses every boundary.</p>
+                </a>
+                <a href="parables-the-lost-sheep.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">The Lost Sheep</h4>
+                    <p class="desc">God pursues the one who wanders.</p>
+                </a>
+                <a href="parables-the-talents.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">The Talents</h4>
+                    <p class="desc">Faithful stewardship of what God entrusts.</p>
+                </a>
+                <a href="parables-the-wedding-banquet.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">The Wedding Banquet</h4>
+                    <p class="desc">An invitation to the Kingdom — accept or refuse.</p>
+                </a>
+                <a href="parables-the-rich-fool.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">The Rich Fool</h4>
+                    <p class="desc">Earthly wealth without God is worthless.</p>
+                </a>
+                <a href="parables-the-pharisee-and-tax-collector.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">The Pharisee and Tax Collector</h4>
+                    <p class="desc">Humility, not self-righteousness, before God.</p>
+                </a>
+                <a href="parables-the-ten-virgins.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">The Ten Virgins</h4>
+                    <p class="desc">Be ready — the Bridegroom is coming.</p>
+                </a>
+                <a href="parables-the-unforgiving-servant.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">The Unforgiving Servant</h4>
+                    <p class="desc">Forgive as you have been forgiven.</p>
+                </a>
+                <a href="parables-the-pearl-of-great-price.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">The Pearl of Great Price</h4>
+                    <p class="desc">The Kingdom is worth everything.</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="study-section" id="iam">
+            <h2 class="study-header" style="color:#8b6914;border-color:#8b6914;">I AM Statements of Jesus</h2>
+            <div class="item-grid">
+                <a href="iam-i-am-the-bread-of-life.html" class="item-card" style="border-left-color:#8b6914;">
+                    <h4 style="color:#8b6914;">I Am the Bread of Life</h4>
+                    <p class="desc">Jesus satisfies our deepest spiritual hunger.</p>
+                </a>
+                <a href="iam-i-am-the-light-of-the-world.html" class="item-card" style="border-left-color:#8b6914;">
+                    <h4 style="color:#8b6914;">I Am the Light of the World</h4>
+                    <p class="desc">Jesus dispels darkness and reveals truth.</p>
+                </a>
+                <a href="iam-i-am-the-door.html" class="item-card" style="border-left-color:#8b6914;">
+                    <h4 style="color:#8b6914;">I Am the Door</h4>
+                    <p class="desc">Jesus is the only entrance to salvation.</p>
+                </a>
+                <a href="iam-i-am-the-good-shepherd.html" class="item-card" style="border-left-color:#8b6914;">
+                    <h4 style="color:#8b6914;">I Am the Good Shepherd</h4>
+                    <p class="desc">Jesus protects, guides, and lays down His life.</p>
+                </a>
+                <a href="iam-i-am-the-resurrection-and-the-life.html" class="item-card" style="border-left-color:#8b6914;">
+                    <h4 style="color:#8b6914;">I Am the Resurrection and the Life</h4>
+                    <p class="desc">Jesus conquers death itself.</p>
+                </a>
+                <a href="iam-i-am-the-way-the-truth-and-the-life.html" class="item-card" style="border-left-color:#8b6914;">
+                    <h4 style="color:#8b6914;">I Am the Way, the Truth, and the Life</h4>
+                    <p class="desc">No one comes to the Father except through Him.</p>
+                </a>
+                <a href="iam-i-am-the-true-vine.html" class="item-card" style="border-left-color:#8b6914;">
+                    <h4 style="color:#8b6914;">I Am the True Vine</h4>
+                    <p class="desc">Abiding in Christ produces spiritual fruit.</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="study-section" id="beatitudes">
+            <h2 class="study-header" style="color:#2c5a6b;border-color:#2c5a6b;">The Beatitudes</h2>
+            <div class="item-grid">
+                <a href="beatitudes-blessed-are-the-poor-in-spirit.html" class="item-card" style="border-left-color:#2c5a6b;">
+                    <h4 style="color:#2c5a6b;">Blessed Are the Poor in Spirit</h4>
+                    <p class="desc">Recognizing spiritual bankruptcy before God.</p>
+                </a>
+                <a href="beatitudes-blessed-are-those-who-mourn.html" class="item-card" style="border-left-color:#2c5a6b;">
+                    <h4 style="color:#2c5a6b;">Blessed Are Those Who Mourn</h4>
+                    <p class="desc">Grieving over sin leads to divine comfort.</p>
+                </a>
+                <a href="beatitudes-blessed-are-the-meek.html" class="item-card" style="border-left-color:#2c5a6b;">
+                    <h4 style="color:#2c5a6b;">Blessed Are the Meek</h4>
+                    <p class="desc">Power surrendered to God — inheriting the earth.</p>
+                </a>
+                <a href="beatitudes-blessed-are-those-who-hunger-for-righteousness.html" class="item-card" style="border-left-color:#2c5a6b;">
+                    <h4 style="color:#2c5a6b;">Blessed Are Those Who Hunger for Righteousness</h4>
+                    <p class="desc">A consuming desire for God's ways.</p>
+                </a>
+                <a href="beatitudes-blessed-are-the-merciful.html" class="item-card" style="border-left-color:#2c5a6b;">
+                    <h4 style="color:#2c5a6b;">Blessed Are the Merciful</h4>
+                    <p class="desc">Showing mercy as we have received mercy.</p>
+                </a>
+                <a href="beatitudes-blessed-are-the-pure-in-heart.html" class="item-card" style="border-left-color:#2c5a6b;">
+                    <h4 style="color:#2c5a6b;">Blessed Are the Pure in Heart</h4>
+                    <p class="desc">Single-minded devotion — seeing God.</p>
+                </a>
+                <a href="beatitudes-blessed-are-the-peacemakers.html" class="item-card" style="border-left-color:#2c5a6b;">
+                    <h4 style="color:#2c5a6b;">Blessed Are the Peacemakers</h4>
+                    <p class="desc">Reconciling others as children of God.</p>
+                </a>
+                <a href="beatitudes-blessed-are-the-persecuted.html" class="item-card" style="border-left-color:#2c5a6b;">
+                    <h4 style="color:#2c5a6b;">Blessed Are the Persecuted</h4>
+                    <p class="desc">Suffering for righteousness' sake — great reward.</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="study-section" id="commandments">
+            <h2 class="study-header" style="color:#6b4c3b;border-color:#6b4c3b;">Ten Commandments</h2>
+            <div class="item-grid">
+                <a href="commandments-no-other-gods.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">No Other Gods</h4>
+                    <p class="desc">Exclusive loyalty to the one true God.</p>
+                </a>
+                <a href="commandments-no-idols.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">No Idols</h4>
+                    <p class="desc">Worship God alone — no created images.</p>
+                </a>
+                <a href="commandments-do-not-take-gods-name-in-vain.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">Do Not Take God's Name in Vain</h4>
+                    <p class="desc">Revere God's name and character.</p>
+                </a>
+                <a href="commandments-remember-the-sabbath.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">Remember the Sabbath</h4>
+                    <p class="desc">Rest in God's finished work.</p>
+                </a>
+                <a href="commandments-honor-your-father-and-mother.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">Honor Your Father and Mother</h4>
+                    <p class="desc">Respect authority structures God established.</p>
+                </a>
+                <a href="commandments-you-shall-not-murder.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">You Shall Not Murder</h4>
+                    <p class="desc">Guard the heart against hatred.</p>
+                </a>
+                <a href="commandments-you-shall-not-commit-adultery.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">You Shall Not Commit Adultery</h4>
+                    <p class="desc">Faithfulness in marriage and purity of heart.</p>
+                </a>
+                <a href="commandments-you-shall-not-steal.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">You Shall Not Steal</h4>
+                    <p class="desc">Honest labor and generous giving.</p>
+                </a>
+                <a href="commandments-you-shall-not-bear-false-witness.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">You Shall Not Bear False Witness</h4>
+                    <p class="desc">Integrity in speech — no deception.</p>
+                </a>
+                <a href="commandments-you-shall-not-covet.html" class="item-card" style="border-left-color:#6b4c3b;">
+                    <h4 style="color:#6b4c3b;">You Shall Not Covet</h4>
+                    <p class="desc">Contentment in God's provision.</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="study-section" id="miracles">
+            <h2 class="study-header" style="color:#8b3a2a;border-color:#8b3a2a;">Miracles of Jesus</h2>
+            <div class="item-grid">
+                <a href="miracles-water-to-wine.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Water to Wine</h4>
+                    <p class="desc">Jesus transforms the ordinary — His first sign.</p>
+                </a>
+                <a href="miracles-feeding-the-5000.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Feeding the 5,000</h4>
+                    <p class="desc">Jesus provides abundantly from nothing.</p>
+                </a>
+                <a href="miracles-walking-on-water.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Walking on Water</h4>
+                    <p class="desc">Jesus has power over nature — 'Do not be afraid.'</p>
+                </a>
+                <a href="miracles-calming-the-storm.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Calming the Storm</h4>
+                    <p class="desc">Even wind and waves obey His voice.</p>
+                </a>
+                <a href="miracles-healing-the-blind-man.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Healing the Blind Man</h4>
+                    <p class="desc">Jesus is the Light who opens blind eyes.</p>
+                </a>
+                <a href="miracles-raising-lazarus.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Raising Lazarus</h4>
+                    <p class="desc">Jesus has authority over death itself.</p>
+                </a>
+                <a href="miracles-healing-the-leper.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Healing the Leper</h4>
+                    <p class="desc">Jesus touches the untouchable.</p>
+                </a>
+                <a href="miracles-healing-the-paralytic.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Healing the Paralytic</h4>
+                    <p class="desc">Authority to forgive sins — confirmed by healing.</p>
+                </a>
+                <a href="miracles-casting-out-legion.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Casting Out Legion</h4>
+                    <p class="desc">Absolute authority over the spiritual realm.</p>
+                </a>
+                <a href="miracles-healing-jairus-daughter.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Healing Jairus' Daughter</h4>
+                    <p class="desc">It is never too late for Jesus to act.</p>
+                </a>
+                <a href="miracles-the-great-catch-of-fish.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">The Great Catch of Fish</h4>
+                    <p class="desc">Obedience to His word brings abundance.</p>
+                </a>
+                <a href="miracles-woman-with-issue-of-blood.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Woman with Issue of Blood</h4>
+                    <p class="desc">Faith directed at Jesus brings healing.</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="study-section" id="men">
+            <h2 class="study-header" style="color:#5a4030;border-color:#5a4030;">Men of the Bible</h2>
+            <div class="item-grid">
+                <a href="men-abraham.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">Abraham</h4>
+                    <p class="desc">Father of faith — believed God against all odds.</p>
+                </a>
+                <a href="men-moses.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">Moses</h4>
+                    <p class="desc">Deliverer of Israel — spoke with God face to face.</p>
+                </a>
+                <a href="men-david.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">David</h4>
+                    <p class="desc">A man after God's own heart — king and psalmist.</p>
+                </a>
+                <a href="men-joseph.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">Joseph</h4>
+                    <p class="desc">Faithful in suffering — God meant it for good.</p>
+                </a>
+                <a href="men-daniel.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">Daniel</h4>
+                    <p class="desc">Unwavering faithfulness in a hostile culture.</p>
+                </a>
+                <a href="men-elijah.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">Elijah</h4>
+                    <p class="desc">Prophet of fire — stood alone for God.</p>
+                </a>
+                <a href="men-paul.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">Paul</h4>
+                    <p class="desc">Persecutor turned apostle — transformed by grace.</p>
+                </a>
+                <a href="men-peter.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">Peter</h4>
+                    <p class="desc">Impulsive fisherman who became the rock.</p>
+                </a>
+                <a href="men-joshua.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">Joshua</h4>
+                    <p class="desc">Courageous leader — 'Be strong and courageous.'</p>
+                </a>
+                <a href="men-gideon.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">Gideon</h4>
+                    <p class="desc">Weak man made mighty by God's power.</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="study-section" id="women">
+            <h2 class="study-header" style="color:#6b3a5a;border-color:#6b3a5a;">Women of the Bible</h2>
+            <div class="item-grid">
+                <a href="women-ruth.html" class="item-card" style="border-left-color:#6b3a5a;">
+                    <h4 style="color:#6b3a5a;">Ruth</h4>
+                    <p class="desc">Loyalty and redemption — a Moabite in the line of Christ.</p>
+                </a>
+                <a href="women-esther.html" class="item-card" style="border-left-color:#6b3a5a;">
+                    <h4 style="color:#6b3a5a;">Esther</h4>
+                    <p class="desc">'For such a time as this' — courage before a king.</p>
+                </a>
+                <a href="women-mary-mother-of-jesus.html" class="item-card" style="border-left-color:#6b3a5a;">
+                    <h4 style="color:#6b3a5a;">Mary, Mother of Jesus</h4>
+                    <p class="desc">Humble handmaiden — 'Let it be according to your word.'</p>
+                </a>
+                <a href="women-sarah.html" class="item-card" style="border-left-color:#6b3a5a;">
+                    <h4 style="color:#6b3a5a;">Sarah</h4>
+                    <p class="desc">Mother of nations — faith tested and rewarded.</p>
+                </a>
+                <a href="women-deborah.html" class="item-card" style="border-left-color:#6b3a5a;">
+                    <h4 style="color:#6b3a5a;">Deborah</h4>
+                    <p class="desc">Judge and prophetess — led Israel with wisdom.</p>
+                </a>
+                <a href="women-hannah.html" class="item-card" style="border-left-color:#6b3a5a;">
+                    <h4 style="color:#6b3a5a;">Hannah</h4>
+                    <p class="desc">Prayed in desperation — gave her son to God.</p>
+                </a>
+                <a href="women-rahab.html" class="item-card" style="border-left-color:#6b3a5a;">
+                    <h4 style="color:#6b3a5a;">Rahab</h4>
+                    <p class="desc">A prostitute redeemed by faith — in Christ's lineage.</p>
+                </a>
+                <a href="women-mary-magdalene.html" class="item-card" style="border-left-color:#6b3a5a;">
+                    <h4 style="color:#6b3a5a;">Mary Magdalene</h4>
+                    <p class="desc">Delivered from demons — first witness of resurrection.</p>
+                </a>
+                <a href="women-abigail.html" class="item-card" style="border-left-color:#6b3a5a;">
+                    <h4 style="color:#6b3a5a;">Abigail</h4>
+                    <p class="desc">Wisdom and courage in the face of a fool.</p>
+                </a>
+                <a href="women-priscilla.html" class="item-card" style="border-left-color:#6b3a5a;">
+                    <h4 style="color:#6b3a5a;">Priscilla</h4>
+                    <p class="desc">Co-laborer with Paul — taught Apollos the Way.</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="study-section" id="kings">
+            <h2 class="study-header" style="color:#8b6914;border-color:#8b6914;">Kings of Israel &amp; Judah</h2>
+            <div class="item-grid">
+                <a href="kings-saul.html" class="item-card" style="border-left-color:#8b6914;">
+                    <h4 style="color:#8b6914;">Saul</h4>
+                    <p class="desc">Israel's first king — started well, ended in ruin.</p>
+                </a>
+                <a href="kings-david.html" class="item-card" style="border-left-color:#8b6914;">
+                    <h4 style="color:#8b6914;">David</h4>
+                    <p class="desc">The greatest king — established God's throne forever.</p>
+                </a>
+                <a href="kings-solomon.html" class="item-card" style="border-left-color:#8b6914;">
+                    <h4 style="color:#8b6914;">Solomon</h4>
+                    <p class="desc">Wisest man alive — undone by divided loyalty.</p>
+                </a>
+                <a href="kings-rehoboam.html" class="item-card" style="border-left-color:#8b6914;">
+                    <h4 style="color:#8b6914;">Rehoboam</h4>
+                    <p class="desc">Arrogance that split a kingdom in two.</p>
+                </a>
+                <a href="kings-jeroboam.html" class="item-card" style="border-left-color:#8b6914;">
+                    <h4 style="color:#8b6914;">Jeroboam</h4>
+                    <p class="desc">Led Israel into idolatry — 'the sin of Jeroboam.'</p>
+                </a>
+                <a href="kings-ahab.html" class="item-card" style="border-left-color:#8b6914;">
+                    <h4 style="color:#8b6914;">Ahab</h4>
+                    <p class="desc">Most wicked king — married Jezebel, worshiped Baal.</p>
+                </a>
+                <a href="kings-jehoshaphat.html" class="item-card" style="border-left-color:#8b6914;">
+                    <h4 style="color:#8b6914;">Jehoshaphat</h4>
+                    <p class="desc">Good king who sought God — but made bad alliances.</p>
+                </a>
+                <a href="kings-hezekiah.html" class="item-card" style="border-left-color:#8b6914;">
+                    <h4 style="color:#8b6914;">Hezekiah</h4>
+                    <p class="desc">Revival king — trusted God against Assyria.</p>
+                </a>
+                <a href="kings-josiah.html" class="item-card" style="border-left-color:#8b6914;">
+                    <h4 style="color:#8b6914;">Josiah</h4>
+                    <p class="desc">The boy king who found the lost Book of the Law.</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="study-section" id="promises">
+            <h2 class="study-header" style="color:#2c6b4f;border-color:#2c6b4f;">Promises of God</h2>
+            <div class="item-grid">
+                <a href="promises-provision.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Provision</h4>
+                    <p class="desc">God will supply every need according to His riches.</p>
+                </a>
+                <a href="promises-protection.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Protection</h4>
+                    <p class="desc">He is our refuge, fortress, and shield.</p>
+                </a>
+                <a href="promises-presence.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Presence</h4>
+                    <p class="desc">'I will never leave you nor forsake you.'</p>
+                </a>
+                <a href="promises-peace.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Peace</h4>
+                    <p class="desc">Peace that passes all understanding guards your heart.</p>
+                </a>
+                <a href="promises-purpose.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Purpose</h4>
+                    <p class="desc">He works all things together for good.</p>
+                </a>
+                <a href="promises-forgiveness.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Forgiveness</h4>
+                    <p class="desc">As far as east is from west — sins removed.</p>
+                </a>
+                <a href="promises-strength.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Strength</h4>
+                    <p class="desc">'My grace is sufficient — power made perfect in weakness.'</p>
+                </a>
+                <a href="promises-guidance.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Guidance</h4>
+                    <p class="desc">'I will instruct you and teach you the way.'</p>
+                </a>
+                <a href="promises-eternal-life.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Eternal Life</h4>
+                    <p class="desc">Whoever believes in Him shall not perish.</p>
+                </a>
+                <a href="promises-answered-prayer.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Answered Prayer</h4>
+                    <p class="desc">'Ask and it will be given to you.'</p>
+                </a>
+                <a href="promises-comfort.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Comfort</h4>
+                    <p class="desc">The God of all comfort comforts us in affliction.</p>
+                </a>
+                <a href="promises-victory.html" class="item-card" style="border-left-color:#2c6b4f;">
+                    <h4 style="color:#2c6b4f;">Victory</h4>
+                    <p class="desc">In all things we are more than conquerors.</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="study-section" id="prayers">
+            <h2 class="study-header" style="color:#4a5a8a;border-color:#4a5a8a;">Prayers in the Bible</h2>
+            <div class="item-grid">
+                <a href="prayers-the-lords-prayer.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">The Lord's Prayer</h4>
+                    <p class="desc">Jesus' model for how to pray — Matthew 6:9-13.</p>
+                </a>
+                <a href="prayers-solomons-prayer-for-wisdom.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Solomon's Prayer for Wisdom</h4>
+                    <p class="desc">Asked for wisdom over wealth — God gave both.</p>
+                </a>
+                <a href="prayers-hannahs-prayer.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Hannah's Prayer</h4>
+                    <p class="desc">A barren woman's desperate cry — answered with Samuel.</p>
+                </a>
+                <a href="prayers-jabezs-prayer.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Jabez's Prayer</h4>
+                    <p class="desc">'Bless me and enlarge my territory.'</p>
+                </a>
+                <a href="prayers-davids-prayer-of-repentance.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">David's Prayer of Repentance</h4>
+                    <p class="desc">Psalm 51 — 'Create in me a clean heart.'</p>
+                </a>
+                <a href="prayers-jesus-in-gethsemane.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Jesus in Gethsemane</h4>
+                    <p class="desc">'Not my will, but yours be done.'</p>
+                </a>
+                <a href="prayers-stephens-prayer.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Stephen's Prayer</h4>
+                    <p class="desc">Forgiveness for his killers — like Jesus on the cross.</p>
+                </a>
+                <a href="prayers-pauls-prayer-for-the-ephesians.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Paul's Prayer for the Ephesians</h4>
+                    <p class="desc">That they may know the fullness of God.</p>
+                </a>
+                <a href="prayers-moses-intercession.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Moses' Intercession</h4>
+                    <p class="desc">Standing in the gap — 'Spare your people.'</p>
+                </a>
+                <a href="prayers-daniels-prayer.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Daniel's Prayer</h4>
+                    <p class="desc">Confession and petition — God answers with revelation.</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="study-section" id="prophecy">
+            <h2 class="study-header" style="color:#5c3d6e;border-color:#5c3d6e;">Prophecy &amp; Fulfillment</h2>
+            <div class="item-grid">
+                <a href="prophecy-born-of-a-virgin.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">Born of a Virgin</h4>
+                    <p class="desc">Isaiah 7:14 → Matthew 1:22-23.</p>
+                </a>
+                <a href="prophecy-born-in-bethlehem.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">Born in Bethlehem</h4>
+                    <p class="desc">Micah 5:2 → Matthew 2:1.</p>
+                </a>
+                <a href="prophecy-triumphal-entry.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">Triumphal Entry</h4>
+                    <p class="desc">Zechariah 9:9 → Matthew 21:5.</p>
+                </a>
+                <a href="prophecy-betrayed-for-30-silver.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">Betrayed for 30 Silver</h4>
+                    <p class="desc">Zechariah 11:12 → Matthew 26:15.</p>
+                </a>
+                <a href="prophecy-crucifixion-details.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">Crucifixion Details</h4>
+                    <p class="desc">Psalm 22 → The Gospels.</p>
+                </a>
+                <a href="prophecy-pierced.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">Pierced</h4>
+                    <p class="desc">Zechariah 12:10 → John 19:34.</p>
+                </a>
+                <a href="prophecy-resurrection.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">Resurrection</h4>
+                    <p class="desc">Psalm 16:10 → Acts 2:31.</p>
+                </a>
+                <a href="prophecy-the-suffering-servant.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">The Suffering Servant</h4>
+                    <p class="desc">Isaiah 53 → The passion of Christ.</p>
+                </a>
+                <a href="prophecy-light-to-the-gentiles.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">Light to the Gentiles</h4>
+                    <p class="desc">Isaiah 49:6 → Luke 2:32.</p>
+                </a>
+                <a href="prophecy-new-covenant.html" class="item-card" style="border-left-color:#5c3d6e;">
+                    <h4 style="color:#5c3d6e;">New Covenant</h4>
+                    <p class="desc">Jeremiah 31:31 → Hebrews 8:8-12.</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="study-section" id="disciplines">
+            <h2 class="study-header" style="color:#2a6b6b;border-color:#2a6b6b;">Spiritual Disciplines</h2>
+            <div class="item-grid">
+                <a href="disciplines-prayer.html" class="item-card" style="border-left-color:#2a6b6b;">
+                    <h4 style="color:#2a6b6b;">Prayer</h4>
+                    <p class="desc">Communion with God — speaking and listening.</p>
+                </a>
+                <a href="disciplines-bible-study-and-meditation.html" class="item-card" style="border-left-color:#2a6b6b;">
+                    <h4 style="color:#2a6b6b;">Bible Study & Meditation</h4>
+                    <p class="desc">Knowing God through His Word.</p>
+                </a>
+                <a href="disciplines-fasting.html" class="item-card" style="border-left-color:#2a6b6b;">
+                    <h4 style="color:#2a6b6b;">Fasting</h4>
+                    <p class="desc">Denying the flesh to sharpen the spirit.</p>
+                </a>
+                <a href="disciplines-worship.html" class="item-card" style="border-left-color:#2a6b6b;">
+                    <h4 style="color:#2a6b6b;">Worship</h4>
+                    <p class="desc">Declaring God's worth with all we are.</p>
+                </a>
+                <a href="disciplines-fellowship.html" class="item-card" style="border-left-color:#2a6b6b;">
+                    <h4 style="color:#2a6b6b;">Fellowship</h4>
+                    <p class="desc">Iron sharpens iron — community of believers.</p>
+                </a>
+                <a href="disciplines-giving-and-generosity.html" class="item-card" style="border-left-color:#2a6b6b;">
+                    <h4 style="color:#2a6b6b;">Giving & Generosity</h4>
+                    <p class="desc">Stewardship that reflects God's generous heart.</p>
+                </a>
+                <a href="disciplines-sabbath-rest.html" class="item-card" style="border-left-color:#2a6b6b;">
+                    <h4 style="color:#2a6b6b;">Sabbath Rest</h4>
+                    <p class="desc">Trusting God enough to stop striving.</p>
+                </a>
+                <a href="disciplines-scripture-memory.html" class="item-card" style="border-left-color:#2a6b6b;">
+                    <h4 style="color:#2a6b6b;">Scripture Memory</h4>
+                    <p class="desc">Hiding God's Word in your heart.</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="study-section" id="trinity">
+            <h2 class="study-header" style="color:#4a3a6b;border-color:#4a3a6b;">The Trinity</h2>
+            <div class="item-grid">
+                <a href="trinity-god-the-father.html" class="item-card" style="border-left-color:#4a3a6b;">
+                    <h4 style="color:#4a3a6b;">God the Father</h4>
+                    <p class="desc">Creator, sustainer, sovereign ruler of all.</p>
+                </a>
+                <a href="trinity-god-the-son.html" class="item-card" style="border-left-color:#4a3a6b;">
+                    <h4 style="color:#4a3a6b;">God the Son</h4>
+                    <p class="desc">Jesus Christ — fully God, fully man, our redeemer.</p>
+                </a>
+                <a href="trinity-god-the-holy-spirit.html" class="item-card" style="border-left-color:#4a3a6b;">
+                    <h4 style="color:#4a3a6b;">God the Holy Spirit</h4>
+                    <p class="desc">Counselor, comforter, sanctifier — God in us.</p>
+                </a>
+                <a href="trinity-trinity-in-the-old-testament.html" class="item-card" style="border-left-color:#4a3a6b;">
+                    <h4 style="color:#4a3a6b;">Trinity in the Old Testament</h4>
+                    <p class="desc">Hints and shadows of the triune God.</p>
+                </a>
+                <a href="trinity-trinity-in-the-new-testament.html" class="item-card" style="border-left-color:#4a3a6b;">
+                    <h4 style="color:#4a3a6b;">Trinity in the New Testament</h4>
+                    <p class="desc">Full revelation of three persons, one God.</p>
+                </a>
+                <a href="trinity-how-they-work-together.html" class="item-card" style="border-left-color:#4a3a6b;">
+                    <h4 style="color:#4a3a6b;">How They Work Together</h4>
+                    <p class="desc">Unity in diversity — distinct roles, one purpose.</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="study-section" id="gospel">
+            <h2 class="study-header" style="color:#8b3a2a;border-color:#8b3a2a;">The Gospel</h2>
+            <div class="item-grid">
+                <a href="gospel-gods-holiness.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">God's Holiness</h4>
+                    <p class="desc">God is perfectly righteous — the standard of all good.</p>
+                </a>
+                <a href="gospel-mans-sin.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Man's Sin</h4>
+                    <p class="desc">All have sinned and fall short of God's glory.</p>
+                </a>
+                <a href="gospel-sins-penalty.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Sin's Penalty</h4>
+                    <p class="desc">The wages of sin is death — eternal separation.</p>
+                </a>
+                <a href="gospel-gods-love.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">God's Love</h4>
+                    <p class="desc">But God demonstrates His love toward us.</p>
+                </a>
+                <a href="gospel-christs-death.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Christ's Death</h4>
+                    <p class="desc">He died in our place — the just for the unjust.</p>
+                </a>
+                <a href="gospel-faith-alone.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Faith Alone</h4>
+                    <p class="desc">Saved by grace through faith — not works.</p>
+                </a>
+                <a href="gospel-repentance.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">Repentance</h4>
+                    <p class="desc">Turning from sin and self — toward God.</p>
+                </a>
+                <a href="gospel-new-life.html" class="item-card" style="border-left-color:#8b3a2a;">
+                    <h4 style="color:#8b3a2a;">New Life</h4>
+                    <p class="desc">Anyone in Christ is a new creation.</p>
+                </a>
+            </div>
+        </div>
+    </main>
+    <script src="site/script.js"></script>
+    <script>function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});</script>
+</body>
+</html>
