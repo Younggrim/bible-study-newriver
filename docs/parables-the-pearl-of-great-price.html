@@ -32,13 +32,11 @@
 
         .video-toggle-btn { background: #5c3d6e; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 16px; }
         .video-toggle-btn:hover { background: #3a2548; }
-        .video-section { display: none; }
-        .video-section.open { display: block; }
+        .video-section { display: none; } .video-section.open { display: block; }
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
 
         .topic-dropdown { position: relative; display: inline-block; } .topic-dropdown-btn { background: rgba(255,255,255,0.9); border: 1px solid #5c3d6e; border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; color: #3d2b1f; cursor: pointer; transition: background 0.2s; } .topic-dropdown-btn:hover { background: var(--bg-card); } .topic-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid var(--border-light); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; min-width: 240px; z-index: 1000; margin-top: 6px; max-height: 400px; overflow-y: auto; } .topic-dropdown-menu.open { display: block; } .topic-dropdown-menu a { display: block; padding: 8px 18px; font-size: 0.83rem; color: #3d2b1f; text-decoration: none; font-weight: 500; transition: background 0.15s; } .topic-dropdown-menu a:hover { background: #f5ebe0; color: #5c3d6e; }
 
-        /* Verse Popup */
         .verse-ref { color: #5c3d6e; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
         .verse-ref:hover { color: #3a2548; }
         .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
@@ -57,7 +55,7 @@
     <nav class="top-nav">
         <a href="index.html" class="nav-home-btn"><i class="fas fa-home"></i></a>
         <a href="index.html" class="nav-brand">Bible Study</a>
-        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html">Names of God</a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html">Parables of Jesus</a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
+        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html">Names of God</a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html"><strong>Parables of Jesus</strong></a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
     </nav>
     <main class="main-content" style="margin-left:0; max-width:960px; margin-left:auto; margin-right:auto;">
         <a href="topical-studies.html#parables" class="back-link"><i class="fas fa-arrow-left"></i> Back to Parables of Jesus</a>
@@ -67,35 +65,40 @@
             <h1>The Pearl of Great Price</h1>
         </div>
 
-        <!-- Section 1: The Parable -->
         <div class="section-block">
             <h2>The Parable</h2>
-            <p>Jesus told this parable as part of a series of short kingdom parables in Matthew 13, spoken to His disciples after the crowds had departed. "Again, the kingdom of heaven is like a merchant in search of fine pearls, who, on finding one pearl of great value, went and sold all that he had and bought it." In just two verses, Jesus captures the supreme worth of the kingdom of God.</p><p>The merchant in the story is not a casual shopper — he is a professional dealer in pearls, someone who has spent his life evaluating, comparing, and trading fine gems. He knows quality when he sees it. When he discovers this one pearl, he recognizes instantly that it surpasses everything else he owns combined. His response is total: he liquidates his entire portfolio — every other pearl, every asset, everything — to possess this single treasure. And he does it with joy, not reluctance.</p><p>The brevity of this parable is part of its power. There is no hesitation in the story, no cost-benefit analysis, no regret. The merchant sees the pearl's value clearly, and everything else becomes secondary. Jesus is saying: the kingdom of God is like that. When you truly see it for what it is, surrender isn't sacrifice — it's the smartest trade you'll ever make.</p>
+            <p>Jesus said, "Again, the kingdom of heaven is like a merchant in search of fine pearls, who, on finding one pearl of great value, went and sold all that he had and bought it." The parable is startlingly brief — just two verses — yet its implications are vast. This merchant was not a casual shopper; he was a professional dealer who had spent his life evaluating pearls. He knew quality. He had seen many fine pearls. But when he found this one, everything else became worthless by comparison.</p>
+            <p>In the ancient world, pearls were the most valued of all gems — more precious than gold or diamonds. They could not be cut or improved; their beauty was entirely natural, formed in hiddenness over years. A pearl of supreme quality was the ultimate treasure. The merchant's decision to sell everything was not reckless — it was the most rational act of his life. He recognized that possessing this one pearl was worth more than his entire accumulated collection.</p>
+            <p>Jesus paired this parable with the treasure hidden in a field (Matthew 13:44), creating a double image: whether you stumble upon the Kingdom by accident or search for it deliberately, the response is the same — joyful, total surrender of everything else to possess it. The Kingdom is not one valuable thing among many; it is the one thing that makes everything else secondary.</p>
         </div>
 
-        <!-- Section 2: Key Scriptures -->
         <div class="section-block">
             <h2>Key Scriptures</h2>
             <ul class="verse-list">
-                <li><span class="verse-ref" onclick="showVerse('Matthew 13:45-46')">Matthew 13:45-46</span> — The merchant finds one pearl of great value and sells everything to buy it.</li><li><span class="verse-ref" onclick="showVerse('Philippians 3:7-8')">Philippians 3:7-8</span> — Paul counts everything as loss compared to the surpassing worth of knowing Christ Jesus.</li><li><span class="verse-ref" onclick="showVerse('Matthew 6:33')">Matthew 6:33</span> — "Seek first the kingdom of God and his righteousness, and all these things will be added to you."</li><li><span class="verse-ref" onclick="showVerse('Luke 14:33')">Luke 14:33</span> — "Any one of you who does not renounce all that he has cannot be my disciple."</li><li><span class="verse-ref" onclick="showVerse('Colossians 2:3')">Colossians 2:3</span> — In Christ "are hidden all the treasures of wisdom and knowledge."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 13:45-46')">Matthew 13:45-46</span> — The merchant sells everything for one pearl — the Kingdom demands and deserves total investment.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 13:44')">Matthew 13:44</span> — The treasure hidden in a field — "in his joy he goes and sells all that he has and buys that field."</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 3:7-8')">Philippians 3:7-8</span> — "I count everything as loss because of the surpassing worth of knowing Christ Jesus my Lord."</li>
+                <li><span class="verse-ref" onclick="showVerse('Colossians 2:3')">Colossians 2:3</span> — "In Christ are hidden all the treasures of wisdom and knowledge" — He is the pearl that contains everything.</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 2:3-5')">Proverbs 2:3-5</span> — "If you seek it like silver and search for it as for hidden treasures, then you will understand the fear of the LORD."</li>
             </ul>
         </div>
 
-        <!-- Section 3: What Jesus Is Teaching -->
         <div class="section-block">
-            <h2>What Jesus Is Teaching</h2>
-            <p>Jesus is teaching that the kingdom of God — knowing Him, belonging to Him, living under His reign — is worth more than everything else in existence combined. This isn't a parable about earning salvation (we can't "buy" the kingdom). It's a parable about value perception. The merchant doesn't grudgingly surrender his possessions; he eagerly trades lesser things for the greatest thing. When we truly see Christ for who He is, everything else recalibrates. Career, reputation, comfort, relationships, possessions — they're not worthless, but they're incomparably less valuable than Christ Himself.</p><p>This parable also carries a beautiful double meaning. While we are the merchant who finds Christ, there's a deeper reading: Christ is the merchant who gave up everything — His glory, His throne, His very life — to purchase us, His pearl of great price. The cross is where God sold everything to redeem His people. Both readings lead to the same conclusion: the kingdom of God demands and deserves our all — not because God is greedy, but because He is infinitely valuable, and giving everything for Him is the only response that matches reality.</p>
+            <h2>What Jesus Was Teaching</h2>
+            <p>Jesus was teaching that the Kingdom of God is not an addition to life but a replacement for life's center. The merchant didn't add the pearl to his collection — he liquidated his collection for the pearl. Following Christ is not about adding religious activity to an otherwise unchanged existence; it is about a fundamental revaluation of everything. Career, comfort, reputation, relationships, plans — all are repositioned around the one treasure that surpasses them all. This is not loss but gain, as Paul discovered: "For his sake I have suffered the loss of all things and count them as rubbish, in order that I may gain Christ" (Philippians 3:8).</p>
+            <p>Notice also the joy in both twin parables — the man who found the treasure hid it "in his joy." The selling of everything was not grim sacrifice but glad exchange. When you truly see the worth of Christ, giving up lesser things is not painful — it is obvious. The problem is never that the cost is too high; it is that we have not yet truly seen the pearl. Jesus is calling His hearers to open their eyes: if you could see what the Kingdom really is — the presence of God, forgiveness of sin, eternal life, adoption as sons and daughters — you would gladly trade everything else without a moment's regret.</p>
         </div>
 
-        <!-- Section 4: Reflection Questions -->
         <div class="section-block">
             <h2>Reflection Questions</h2>
             <ul class="reflection-list">
-                <li>Have you truly seen Christ as the "pearl of great price" — more valuable than everything else? Or are you still trying to add Him to your collection alongside other treasures?</li><li>What are you still holding back from God — afraid to "sell" because it feels too costly? How does this parable reframe that cost?</li><li>How does Paul's testimony in Philippians 3:7-8 (counting all things as loss for Christ) challenge or encourage you in your current season?</li><li>If Christ is the merchant who gave everything to purchase you, how does that change how you see your own worth and identity?</li>
+                <li>Have you truly seen the surpassing worth of Christ — or is He one pearl among many in your collection?</li>
+                <li>What are you holding onto that you would need to "sell" to pursue the Kingdom wholeheartedly?</li>
+                <li>Is your relationship with Jesus characterized by the joy of the merchant — or does following Him feel like grim duty?</li>
+                <li>How would your daily decisions change if you genuinely believed that knowing Christ is worth more than everything else combined?</li>
             </ul>
         </div>
 
-        <!-- Section 5: Video Resources -->
         <div class="section-block">
             <h2 style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;" onclick="var s=this.parentElement.querySelector('#videoSection');if(s){s.style.display=s.style.display==='none'?'block':'none';this.querySelector('.chevron').style.transform=s.style.display==='none'?'':'rotate(90deg)';}"><span>Video Resources</span><i class="fas fa-chevron-right chevron" style="font-size:0.8rem;transition:transform 0.2s;"></i></h2>
             <div id="videoSection" style="display:none;">
@@ -108,8 +111,6 @@
     function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
     function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
     </script>
-
-    <!-- Verse Popup Elements -->
     <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
     <div class="verse-popup" id="versePopup">
         <button class="popup-close" onclick="closeVerse()">&times;</button>

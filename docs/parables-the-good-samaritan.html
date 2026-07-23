@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="site/style.css">
     <style>
-        .topic-hero { background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80") center/cover no-repeat; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 32px; box-shadow: var(--shadow-sm); }
+        .topic-hero { background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80") center/cover no-repeat; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 32px; box-shadow: var(--shadow-sm); }
         .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
         .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #d4a0e8; letter-spacing: 0.5px; }
 
@@ -38,7 +38,6 @@
 
         .topic-dropdown { position: relative; display: inline-block; } .topic-dropdown-btn { background: rgba(255,255,255,0.9); border: 1px solid #5c3d6e; border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; color: #3d2b1f; cursor: pointer; transition: background 0.2s; } .topic-dropdown-btn:hover { background: var(--bg-card); } .topic-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid var(--border-light); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; min-width: 240px; z-index: 1000; margin-top: 6px; max-height: 400px; overflow-y: auto; } .topic-dropdown-menu.open { display: block; } .topic-dropdown-menu a { display: block; padding: 8px 18px; font-size: 0.83rem; color: #3d2b1f; text-decoration: none; font-weight: 500; transition: background 0.15s; } .topic-dropdown-menu a:hover { background: #f5ebe0; color: #5c3d6e; }
 
-        /* Verse Popup */
         .verse-ref { color: #5c3d6e; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
         .verse-ref:hover { color: #3a2548; }
         .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
@@ -57,7 +56,7 @@
     <nav class="top-nav">
         <a href="index.html" class="nav-home-btn"><i class="fas fa-home"></i></a>
         <a href="index.html" class="nav-brand">Bible Study</a>
-        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html">Names of God</a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html">Parables of Jesus</a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
+        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html">Names of God</a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html"><strong>Parables of Jesus</strong></a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
     </nav>
     <main class="main-content" style="margin-left:0; max-width:960px; margin-left:auto; margin-right:auto;">
         <a href="topical-studies.html#parables" class="back-link"><i class="fas fa-arrow-left"></i> Back to Parables of Jesus</a>
@@ -70,28 +69,38 @@
         <!-- Section 1: The Parable -->
         <div class="section-block">
             <h2>The Parable</h2>
-            <p>A lawyer stood up to test Jesus, asking, "What must I do to inherit eternal life?" Jesus turned the question back to him: "What does the Law say?" The man answered correctly — love God with all your heart, and love your neighbor as yourself. But wanting to justify himself, the lawyer pressed further: "And who is my neighbor?"</p><p>Jesus replied with a story. A man traveling from Jerusalem to Jericho fell among robbers who stripped him, beat him, and left him half dead. A priest came along and passed by on the other side. A Levite likewise saw him and passed by. But a Samaritan — despised by Jews — stopped, was moved with compassion, bandaged his wounds, put him on his own animal, brought him to an inn, and paid for his care, promising to cover any additional expense on his return.</p><p>Jesus asked: "Which of these three proved to be a neighbor?" The lawyer answered, "The one who showed mercy." Jesus said, "Go and do likewise." The parable shattered every ethnic and social boundary the lawyer had built around the word "neighbor."</p>
+            <p>A lawyer stood up to test Jesus, asking, "Teacher, what shall I do to inherit eternal life?" Jesus turned the question back: "What is written in the Law?" The man answered perfectly — love God with all your heart, and love your neighbor as yourself. But wanting to justify himself, he pressed further: "And who is my neighbor?" This question was not innocent; it was an attempt to draw boundaries around obligation, to define who could be safely excluded from love.</p>
+            <p>Jesus responded with a story. A man traveling from Jerusalem to Jericho — a notoriously dangerous seventeen-mile descent through barren wilderness — fell among robbers who stripped him, beat him, and left him half dead. A priest came down that road, saw him, and passed by on the other side. A Levite did the same. Both had religious excuses — touching a possibly dead body would render them ceremonially unclean. They chose ritual purity over compassion.</p>
+            <p>Then a Samaritan came — a man despised by the Jewish audience, considered a half-breed heretic. Yet he was moved with compassion, bandaged the man's wounds with oil and wine, placed him on his own animal, brought him to an inn, and paid for his care with his own money. Jesus asked, "Which of these three proved to be a neighbor?" The lawyer could barely bring himself to say it: "The one who showed him mercy." Jesus said, "Go and do likewise."</p>
         </div>
 
         <!-- Section 2: Key Scriptures -->
         <div class="section-block">
             <h2>Key Scriptures</h2>
             <ul class="verse-list">
-                <li><span class="verse-ref" onclick="showVerse('Luke 10:30-37')">Luke 10:30-37</span> — The full parable of the Good Samaritan as Jesus told it.</li><li><span class="verse-ref" onclick="showVerse('Matthew 22:39')">Matthew 22:39</span> — "Love your neighbor as yourself" — the second greatest commandment.</li><li><span class="verse-ref" onclick="showVerse('James 2:15-17')">James 2:15-17</span> — Faith without works is dead; true faith meets tangible needs.</li><li><span class="verse-ref" onclick="showVerse('1 John 3:17-18')">1 John 3:17-18</span> — If we have material possessions and see a brother in need but close our hearts, how can God's love be in us?</li><li><span class="verse-ref" onclick="showVerse('Micah 6:8')">Micah 6:8</span> — What does the Lord require? To act justly, love mercy, and walk humbly with God.</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 10:25-37')">Luke 10:25-37</span> — The full parable: a question about eternal life becomes a lesson about boundary-breaking love.</li>
+                <li><span class="verse-ref" onclick="showVerse('Micah 6:8')">Micah 6:8</span> — "What does the LORD require of you but to do justice, love kindness, and walk humbly with your God?"</li>
+                <li><span class="verse-ref" onclick="showVerse('James 2:15-17')">James 2:15-17</span> — "If a brother or sister is poorly clothed and lacking daily food... faith by itself, if it does not have works, is dead."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 25:40')">Matthew 25:40</span> — "As you did it to one of the least of these my brothers, you did it to me."</li>
+                <li><span class="verse-ref" onclick="showVerse('Galatians 6:2')">Galatians 6:2</span> — "Bear one another's burdens, and so fulfill the law of Christ."</li>
             </ul>
         </div>
 
-        <!-- Section 3: What Jesus Is Teaching -->
+        <!-- Section 3: What Jesus Was Teaching -->
         <div class="section-block">
-            <h2>What Jesus Is Teaching</h2>
-            <p>Jesus redefines "neighbor" by demolishing every comfortable boundary we build. The lawyer wanted a limited definition — a checklist that would excuse him from loving certain people. Jesus responds with a Samaritan hero, the last person a Jewish audience would expect to be the model of righteousness. The priest and Levite — religious professionals — fail the test. The outsider passes it. Love, Jesus insists, is not defined by who deserves it but by who needs it.</p><p>This parable also reveals something deeper: we are the man in the ditch. Broken, helpless, unable to save ourselves. And Jesus is the true Good Samaritan — the one rejected by the religious establishment, yet the only one who stops, bears our wounds, pays our debt, and promises to return. When we grasp that we have been rescued at great cost, we are freed to extend the same costly compassion to anyone God places in our path — regardless of race, status, or whether they "deserve" our help.</p>
+            <h2>What Jesus Was Teaching</h2>
+            <p>Jesus reversed the lawyer's question entirely. The man asked "Who is my neighbor?" — seeking to limit his responsibility. Jesus reframed it as "To whom can I be a neighbor?" — expanding responsibility to anyone in need, regardless of ethnicity, religion, or social status. The command to love has no boundary conditions. The priest and Levite represent religion that knows the right answers but fails to act; the Samaritan represents love that crosses every human-made barrier to meet real need with real sacrifice.</p>
+            <p>There is also a deeper layer: many early church fathers saw the Good Samaritan as a picture of Christ Himself. We are the man left half-dead by sin. The religious law passes by — it diagnoses but cannot heal. Christ, the ultimate outsider who "had no form or majesty" (Isaiah 53:2), comes to us in our brokenness, binds our wounds, bears our weight, and pays a debt we cannot repay. The parable is both an ethical command and a gospel portrait — we love others this way because we have first been loved this way.</p>
         </div>
 
         <!-- Section 4: Reflection Questions -->
         <div class="section-block">
             <h2>Reflection Questions</h2>
             <ul class="reflection-list">
-                <li>Who are the "Samaritans" in your life — the people you instinctively avoid or consider unworthy of your love?</li><li>When was the last time you were inconvenienced by compassion? Did you stop, or did you pass by on the other side?</li><li>How does seeing yourself as the man in the ditch — rescued by Christ — change your motivation to help others?</li><li>What practical step can you take this week to "go and do likewise" for someone in need?</li>
+                <li>Who are the "Samaritans" in your world — people you might be inclined to avoid or dismiss? How is God calling you to cross that boundary?</li>
+                <li>Have you ever been the man in the ditch, and someone unexpected showed you mercy? How did that change you?</li>
+                <li>Are there ways you resemble the priest or Levite — knowing the right thing but choosing comfort or reputation over compassion?</li>
+                <li>What would it look like this week to actively seek out someone in need and show up with tangible help?</li>
             </ul>
         </div>
 
@@ -108,8 +117,6 @@
     function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
     function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
     </script>
-
-    <!-- Verse Popup Elements -->
     <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
     <div class="verse-popup" id="versePopup">
         <button class="popup-close" onclick="closeVerse()">&times;</button>

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="site/style.css">
     <style>
-        .topic-hero { background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80") center/cover no-repeat; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 32px; box-shadow: var(--shadow-sm); }
+        .topic-hero { background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=1200&q=80") center/cover no-repeat; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 32px; box-shadow: var(--shadow-sm); }
         .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
         .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #d4a0e8; letter-spacing: 0.5px; }
 
@@ -32,13 +32,11 @@
 
         .video-toggle-btn { background: #5c3d6e; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 16px; }
         .video-toggle-btn:hover { background: #3a2548; }
-        .video-section { display: none; }
-        .video-section.open { display: block; }
+        .video-section { display: none; } .video-section.open { display: block; }
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
 
         .topic-dropdown { position: relative; display: inline-block; } .topic-dropdown-btn { background: rgba(255,255,255,0.9); border: 1px solid #5c3d6e; border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; color: #3d2b1f; cursor: pointer; transition: background 0.2s; } .topic-dropdown-btn:hover { background: var(--bg-card); } .topic-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid var(--border-light); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; min-width: 240px; z-index: 1000; margin-top: 6px; max-height: 400px; overflow-y: auto; } .topic-dropdown-menu.open { display: block; } .topic-dropdown-menu a { display: block; padding: 8px 18px; font-size: 0.83rem; color: #3d2b1f; text-decoration: none; font-weight: 500; transition: background 0.15s; } .topic-dropdown-menu a:hover { background: #f5ebe0; color: #5c3d6e; }
 
-        /* Verse Popup */
         .verse-ref { color: #5c3d6e; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
         .verse-ref:hover { color: #3a2548; }
         .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
@@ -57,7 +55,7 @@
     <nav class="top-nav">
         <a href="index.html" class="nav-home-btn"><i class="fas fa-home"></i></a>
         <a href="index.html" class="nav-brand">Bible Study</a>
-        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html">Names of God</a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html">Parables of Jesus</a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
+        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html">Names of God</a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html"><strong>Parables of Jesus</strong></a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
     </nav>
     <main class="main-content" style="margin-left:0; max-width:960px; margin-left:auto; margin-right:auto;">
         <a href="topical-studies.html#parables" class="back-link"><i class="fas fa-arrow-left"></i> Back to Parables of Jesus</a>
@@ -67,35 +65,40 @@
             <h1>The Wedding Banquet</h1>
         </div>
 
-        <!-- Section 1: The Parable -->
         <div class="section-block">
             <h2>The Parable</h2>
-            <p>Jesus compared the kingdom of heaven to a king who prepared a wedding banquet for his son. He sent his servants to call those who had been invited, but they refused to come. He sent other servants with an urgent message: "Tell those who have been invited that I have prepared my dinner… everything is ready. Come to the wedding banquet." But they paid no attention — one went to his field, another to his business. Others seized the king's servants, mistreated them, and killed them.</p><p>The king was enraged. He destroyed those murderers and burned their city. Then he told his servants: "The wedding banquet is ready, but those I invited did not deserve to come. Go to the street corners and invite anyone you find." The servants gathered everyone they could find — both good and bad — and the wedding hall was filled with guests.</p><p>But when the king came in to see the guests, he noticed a man not wearing wedding clothes. "Friend, how did you get in here without wedding clothes?" The man was speechless. The king had him bound and thrown into outer darkness. Jesus concludes: "For many are invited, but few are chosen." The wedding garment represents the righteousness of Christ — freely offered but must be received.</p>
+            <p>A king prepared a wedding feast for his son and sent his servants to call those who were invited. But they refused to come. He sent other servants saying, "Tell those who are invited, 'See, I have prepared my dinner, my oxen and my fat calves have been slaughtered, and everything is ready. Come to the wedding feast.'" But they paid no attention — one went to his farm, another to his business — and some even seized the servants, treated them shamefully, and killed them.</p>
+            <p>The king was angry. He destroyed those murderers and burned their city. Then he said to his servants, "The wedding feast is ready, but those invited were not worthy. Go therefore to the main roads and invite to the wedding feast as many as you find." The servants went out into the streets and gathered all whom they found, both bad and good, and the wedding hall was filled with guests. The invitation that the privileged refused was extended to everyone without distinction.</p>
+            <p>But there is a final scene: the king came in to look at the guests and saw a man with no wedding garment. "Friend, how did you get in here without a wedding garment?" The man was speechless. The king had him cast out. In ancient custom, the host often provided garments for guests — this man had refused the king's provision, attempting to come on his own terms. Entry to the feast requires accepting what the king provides.</p>
         </div>
 
-        <!-- Section 2: Key Scriptures -->
         <div class="section-block">
             <h2>Key Scriptures</h2>
             <ul class="verse-list">
-                <li><span class="verse-ref" onclick="showVerse('Matthew 22:2-4')">Matthew 22:2-4</span> — The king sends servants to invite guests to the wedding feast, but they refuse.</li><li><span class="verse-ref" onclick="showVerse('Matthew 22:11-14')">Matthew 22:11-14</span> — The man without wedding clothes is cast out; many are called but few are chosen.</li><li><span class="verse-ref" onclick="showVerse('Revelation 19:7-9')">Revelation 19:7-9</span> — The wedding supper of the Lamb and the bride clothed in fine linen (righteous deeds).</li><li><span class="verse-ref" onclick="showVerse('Isaiah 25:6')">Isaiah 25:6</span> — The Lord will prepare a feast of rich food for all peoples on His holy mountain.</li><li><span class="verse-ref" onclick="showVerse('Romans 13:14')">Romans 13:14</span> — "Put on the Lord Jesus Christ" — clothe yourself in His righteousness.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 22:1-14')">Matthew 22:1-14</span> — The full parable: rejected invitation, open call, and the necessity of the wedding garment.</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 14:15-24')">Luke 14:15-24</span> — Luke's parallel: "Go out to the highways and hedges and compel people to come in, that my house may be filled."</li>
+                <li><span class="verse-ref" onclick="showVerse('Revelation 19:7-9')">Revelation 19:7-9</span> — "Blessed are those who are invited to the marriage supper of the Lamb" — the ultimate wedding feast.</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 25:6-8')">Isaiah 25:6-8</span> — "On this mountain the LORD of hosts will make for all peoples a feast of rich food" — God's banquet promise.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 7:21-23')">Matthew 7:21-23</span> — "Not everyone who says to me, 'Lord, Lord,' will enter the kingdom" — presence without transformation is not enough.</li>
             </ul>
         </div>
 
-        <!-- Section 3: What Jesus Is Teaching -->
         <div class="section-block">
-            <h2>What Jesus Is Teaching</h2>
-            <p>This parable operates on multiple levels. Historically, the original invited guests represent Israel's religious leaders who rejected God's messengers and ultimately His Son. The invitation extended to "anyone you find" represents the gospel going out to Gentiles and sinners — all are welcome. The destruction of the city foreshadows the fall of Jerusalem in AD 70. But the parable's reach extends far beyond history: it addresses everyone who hears the gospel invitation and treats it as unimportant.</p><p>The wedding garment is the crux of the parable's final warning. In ancient Near Eastern custom, a king would provide garments for his guests. To refuse the garment was to insult the host. The garment represents Christ's righteousness — freely provided, but it must be put on by faith. Coming to the banquet on your own terms, in your own righteousness, is not enough. God's grace invites all, but it requires a response: receiving Christ's righteousness as your covering. The invitation is free; the garment is free; but you must wear it.</p>
+            <h2>What Jesus Was Teaching</h2>
+            <p>Jesus was warning the religious leaders of Israel that their privileged position as God's covenant people did not guarantee entrance into the Kingdom. The original guests represent Israel's leaders who rejected the prophets and would soon reject the Messiah Himself. The open invitation to the streets represents the gospel going to Gentiles, sinners, and outsiders — anyone willing to come. God's grace is not exclusive to the religiously pedigreed; it is available to all who respond.</p>
+            <p>The wedding garment adds a crucial nuance: the invitation is free and open, but it is not without expectation. Coming to the feast requires accepting the garment the King provides — which represents the righteousness of Christ given to those who believe (Isaiah 61:10, Galatians 3:27). We cannot come to God on our own terms, in our own righteousness. Salvation is free but not cheap; it requires surrender to the King's provision rather than insistence on our own adequacy. Many are called, but few are chosen — because few are willing to come on God's terms rather than their own.</p>
         </div>
 
-        <!-- Section 4: Reflection Questions -->
         <div class="section-block">
             <h2>Reflection Questions</h2>
             <ul class="reflection-list">
-                <li>Have you ever treated God's invitation casually — choosing work, business, or daily life over responding to His call?</li><li>What does it mean practically to "put on" Christ's righteousness rather than trying to approach God in your own merit?</li><li>How does the open invitation to "anyone you find" shape how you view evangelism and who the gospel is for?</li><li>Are you resting in the wedding garment Christ provides, or are you still trying to manufacture your own righteousness?</li>
+                <li>Have you ever been "too busy" for God's invitation — letting work, comfort, or distraction take priority over His call?</li>
+                <li>How does it change your evangelism to know that God's invitation extends to "both bad and good" on the highways and hedges?</li>
+                <li>Are you wearing the King's garment — resting in Christ's righteousness — or trying to come to God in your own self-made covering?</li>
+                <li>Is there someone in your life who has repeatedly refused God's invitation? How can you continue to extend it with grace and urgency?</li>
             </ul>
         </div>
 
-        <!-- Section 5: Video Resources -->
         <div class="section-block">
             <h2 style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;" onclick="var s=this.parentElement.querySelector('#videoSection');if(s){s.style.display=s.style.display==='none'?'block':'none';this.querySelector('.chevron').style.transform=s.style.display==='none'?'':'rotate(90deg)';}"><span>Video Resources</span><i class="fas fa-chevron-right chevron" style="font-size:0.8rem;transition:transform 0.2s;"></i></h2>
             <div id="videoSection" style="display:none;">
@@ -108,8 +111,6 @@
     function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
     function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
     </script>
-
-    <!-- Verse Popup Elements -->
     <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
     <div class="verse-popup" id="versePopup">
         <button class="popup-close" onclick="closeVerse()">&times;</button>

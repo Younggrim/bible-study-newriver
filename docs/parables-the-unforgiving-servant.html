@@ -32,13 +32,11 @@
 
         .video-toggle-btn { background: #5c3d6e; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 16px; }
         .video-toggle-btn:hover { background: #3a2548; }
-        .video-section { display: none; }
-        .video-section.open { display: block; }
+        .video-section { display: none; } .video-section.open { display: block; }
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
 
         .topic-dropdown { position: relative; display: inline-block; } .topic-dropdown-btn { background: rgba(255,255,255,0.9); border: 1px solid #5c3d6e; border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; color: #3d2b1f; cursor: pointer; transition: background 0.2s; } .topic-dropdown-btn:hover { background: var(--bg-card); } .topic-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid var(--border-light); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; min-width: 240px; z-index: 1000; margin-top: 6px; max-height: 400px; overflow-y: auto; } .topic-dropdown-menu.open { display: block; } .topic-dropdown-menu a { display: block; padding: 8px 18px; font-size: 0.83rem; color: #3d2b1f; text-decoration: none; font-weight: 500; transition: background 0.15s; } .topic-dropdown-menu a:hover { background: #f5ebe0; color: #5c3d6e; }
 
-        /* Verse Popup */
         .verse-ref { color: #5c3d6e; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
         .verse-ref:hover { color: #3a2548; }
         .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
@@ -57,7 +55,7 @@
     <nav class="top-nav">
         <a href="index.html" class="nav-home-btn"><i class="fas fa-home"></i></a>
         <a href="index.html" class="nav-brand">Bible Study</a>
-        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html">Names of God</a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html">Parables of Jesus</a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
+        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html">Names of God</a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html"><strong>Parables of Jesus</strong></a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
     </nav>
     <main class="main-content" style="margin-left:0; max-width:960px; margin-left:auto; margin-right:auto;">
         <a href="topical-studies.html#parables" class="back-link"><i class="fas fa-arrow-left"></i> Back to Parables of Jesus</a>
@@ -67,35 +65,40 @@
             <h1>The Unforgiving Servant</h1>
         </div>
 
-        <!-- Section 1: The Parable -->
         <div class="section-block">
             <h2>The Parable</h2>
-            <p>Peter came to Jesus and asked: "Lord, how often will my brother sin against me, and I forgive him? As many as seven times?" Peter thought he was being generous — the rabbis taught three times was sufficient. Jesus answered: "I do not say to you seven times, but seventy-seven times." Then He told this parable to illustrate what unlimited forgiveness looks like — and what happens when we refuse it.</p><p>A king settled accounts with his servants. One owed him ten thousand talents — an absurdly impossible debt, equivalent to roughly 200,000 years of wages. The servant couldn't pay, so the king ordered him sold along with his family. The servant fell on his knees and begged: "Have patience with me, and I will pay you everything." Out of pity, the master released him and forgave the entire debt — every last coin, wiped clean.</p><p>But that same servant went out and found a fellow servant who owed him a hundred denarii — about three months' wages. He seized him by the throat and demanded: "Pay what you owe!" His fellow servant begged with the exact same words. But he refused, and threw him into prison. When the king heard, he was furious: "You wicked servant! I forgave you all that debt because you pleaded with me. Should you not have had mercy on your fellow servant, as I had mercy on you?" He delivered him to the jailers until he should pay all his debt.</p>
+            <p>Peter came to Jesus and asked, "Lord, how often will my brother sin against me, and I forgive him? As many as seven times?" Peter thought he was being generous — the rabbis taught forgiving three times. Jesus answered, "I do not say to you seven times, but seventy-seven times" — not a literal count but an infinite principle. Then He told a parable to show why.</p>
+            <p>A king wished to settle accounts with his servants. One servant owed ten thousand talents — an absurd, unpayable sum, roughly 200,000 years of wages. The king ordered him sold along with his wife, children, and everything he had. The servant fell on his knees, begging for patience. And the king, moved with compassion, released him and forgave the entire debt. Completely. Irrevocably. The slate was wiped clean.</p>
+            <p>But that same servant went out and found a fellow servant who owed him a hundred denarii — about three months' wages. He seized him by the throat, demanding payment. When his fellow servant begged for patience with nearly the same words he himself had used, the forgiven servant refused. He threw the man into prison. When the king heard, he was furious: "You wicked servant! I forgave you all that debt because you pleaded with me. Should you not have had mercy on your fellow servant, as I had mercy on you?" The king delivered him to the jailers until he should pay all his debt.</p>
         </div>
 
-        <!-- Section 2: Key Scriptures -->
         <div class="section-block">
             <h2>Key Scriptures</h2>
             <ul class="verse-list">
-                <li><span class="verse-ref" onclick="showVerse('Matthew 18:32-35')">Matthew 18:32-35</span> — The master's rebuke and Jesus' warning: "So also my heavenly Father will do to every one of you, if you do not forgive your brother from your heart."</li><li><span class="verse-ref" onclick="showVerse('Ephesians 4:32')">Ephesians 4:32</span> — "Be kind to one another, tenderhearted, forgiving one another, as God in Christ forgave you."</li><li><span class="verse-ref" onclick="showVerse('Colossians 3:13')">Colossians 3:13</span> — "Bearing with one another… forgiving each other; as the Lord has forgiven you, so you also must forgive."</li><li><span class="verse-ref" onclick="showVerse('Mark 11:25')">Mark 11:25</span> — "Whenever you stand praying, forgive, if you have anything against anyone, so that your Father also may forgive you."</li><li><span class="verse-ref" onclick="showVerse('Matthew 6:14-15')">Matthew 6:14-15</span> — "If you forgive others their trespasses, your heavenly Father will also forgive you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 18:21-35')">Matthew 18:21-35</span> — The full parable: an impossible debt forgiven, a small debt refused — mercy demands mercy.</li>
+                <li><span class="verse-ref" onclick="showVerse('Colossians 3:13')">Colossians 3:13</span> — "Forgiving each other; as the Lord has forgiven you, so you also must forgive."</li>
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 4:32')">Ephesians 4:32</span> — "Be kind to one another, tenderhearted, forgiving one another, as God in Christ forgave you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Mark 11:25')">Mark 11:25</span> — "Whenever you stand praying, forgive, if you have anything against anyone, so that your Father also may forgive you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 6:14-15')">Matthew 6:14-15</span> — "If you forgive others their trespasses, your heavenly Father will also forgive you."</li>
             </ul>
         </div>
 
-        <!-- Section 3: What Jesus Is Teaching -->
         <div class="section-block">
-            <h2>What Jesus Is Teaching</h2>
-            <p>Jesus is teaching that forgiven people must become forgiving people — and that a refusal to forgive reveals we haven't truly grasped the magnitude of what we've been forgiven. The math is intentionally extreme: ten thousand talents versus a hundred denarii is a ratio of roughly 600,000 to 1. Our sin against God is an infinite debt — cosmic treason against the Creator of the universe. The offenses others commit against us, however painful, are comparatively tiny. This doesn't minimize our hurt; it magnifies God's grace and puts our grievances in proper perspective.</p><p>The parable also warns that unforgiveness has consequences. The unforgiving servant didn't lose his salvation in the story — but he lost his freedom and his peace. He was "delivered to the jailers." Bitterness is its own prison. When we refuse to forgive, we chain ourselves to the person who hurt us. Jesus isn't teaching that forgiveness is easy or that it means pretending nothing happened. He's teaching that because we've been forgiven an unpayable debt, we have both the obligation and the supernatural power (through the Spirit) to release others from what they owe us. Forgiveness isn't optional for the forgiven.</p>
+            <h2>What Jesus Was Teaching</h2>
+            <p>Jesus was teaching that forgiveness is not optional for those who have been forgiven. The parable makes the math unmistakable: ten thousand talents versus a hundred denarii — the ratio is roughly 600,000 to 1. Whatever anyone has done to us is infinitesimally small compared to what we have done against a holy God. If the infinite debt of our sin has been cancelled by Christ's blood, we have no standing to withhold forgiveness from anyone for any offense. Unforgiveness in a forgiven person is not merely unkind — it is a fundamental contradiction of the gospel we claim to believe.</p>
+            <p>This does not mean forgiveness is easy or that it minimizes real pain. But Jesus is revealing that unforgiveness is ultimately a failure to comprehend grace. The servant who grabbed his fellow by the throat had already forgotten the magnitude of what he'd been given. When we refuse to forgive, we are saying, "What was done to me is bigger than what God did for me." Jesus warns that this posture puts us in spiritual danger — not because God is vindictive, but because a heart that hoards bitterness has never truly received the mercy it claims.</p>
         </div>
 
-        <!-- Section 4: Reflection Questions -->
         <div class="section-block">
             <h2>Reflection Questions</h2>
             <ul class="reflection-list">
-                <li>Is there someone you're currently refusing to forgive? How does comparing their offense to God's forgiveness of your "ten thousand talents" change your perspective?</li><li>Have you fully grasped the enormity of your own debt before God — and the completeness of His forgiveness through Christ?</li><li>In what ways might unforgiveness be acting as a "prison" in your life — stealing your peace, poisoning relationships, or hindering your prayers?</li><li>What practical step can you take this week toward forgiving someone who has wronged you — even if the feelings haven't fully caught up yet?</li>
+                <li>Is there someone you are refusing to forgive? How does the ten-thousand-talent debt you've been forgiven put their offense in perspective?</li>
+                <li>Do you find yourself "grabbing by the throat" — demanding justice from others while depending on mercy from God?</li>
+                <li>What practical step can you take this week toward releasing bitterness and extending the forgiveness you've received?</li>
+                <li>How does remembering the cross — the cost of your own forgiveness — fuel your ability to forgive others?</li>
             </ul>
         </div>
 
-        <!-- Section 5: Video Resources -->
         <div class="section-block">
             <h2 style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;" onclick="var s=this.parentElement.querySelector('#videoSection');if(s){s.style.display=s.style.display==='none'?'block':'none';this.querySelector('.chevron').style.transform=s.style.display==='none'?'':'rotate(90deg)';}"><span>Video Resources</span><i class="fas fa-chevron-right chevron" style="font-size:0.8rem;transition:transform 0.2s;"></i></h2>
             <div id="videoSection" style="display:none;">
@@ -108,8 +111,6 @@
     function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
     function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
     </script>
-
-    <!-- Verse Popup Elements -->
     <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
     <div class="verse-popup" id="versePopup">
         <button class="popup-close" onclick="closeVerse()">&times;</button>

@@ -32,13 +32,11 @@
 
         .video-toggle-btn { background: #5c3d6e; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 16px; }
         .video-toggle-btn:hover { background: #3a2548; }
-        .video-section { display: none; }
-        .video-section.open { display: block; }
+        .video-section { display: none; } .video-section.open { display: block; }
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
 
         .topic-dropdown { position: relative; display: inline-block; } .topic-dropdown-btn { background: rgba(255,255,255,0.9); border: 1px solid #5c3d6e; border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; color: #3d2b1f; cursor: pointer; transition: background 0.2s; } .topic-dropdown-btn:hover { background: var(--bg-card); } .topic-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid var(--border-light); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; min-width: 240px; z-index: 1000; margin-top: 6px; max-height: 400px; overflow-y: auto; } .topic-dropdown-menu.open { display: block; } .topic-dropdown-menu a { display: block; padding: 8px 18px; font-size: 0.83rem; color: #3d2b1f; text-decoration: none; font-weight: 500; transition: background 0.15s; } .topic-dropdown-menu a:hover { background: #f5ebe0; color: #5c3d6e; }
 
-        /* Verse Popup */
         .verse-ref { color: #5c3d6e; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
         .verse-ref:hover { color: #3a2548; }
         .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
@@ -57,7 +55,7 @@
     <nav class="top-nav">
         <a href="index.html" class="nav-home-btn"><i class="fas fa-home"></i></a>
         <a href="index.html" class="nav-brand">Bible Study</a>
-        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html">Names of God</a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html">Parables of Jesus</a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
+        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html">Names of God</a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html"><strong>Parables of Jesus</strong></a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
     </nav>
     <main class="main-content" style="margin-left:0; max-width:960px; margin-left:auto; margin-right:auto;">
         <a href="topical-studies.html#parables" class="back-link"><i class="fas fa-arrow-left"></i> Back to Parables of Jesus</a>
@@ -67,35 +65,40 @@
             <h1>The Pharisee and Tax Collector</h1>
         </div>
 
-        <!-- Section 1: The Parable -->
         <div class="section-block">
             <h2>The Parable</h2>
-            <p>Jesus told this parable "to some who trusted in themselves that they were righteous, and treated others with contempt." Two men went up to the temple to pray. The Pharisee stood by himself and prayed: "God, I thank you that I am not like other men — extortioners, unjust, adulterers, or even like this tax collector. I fast twice a week; I give tithes of all that I get." His prayer was not really addressed to God; it was a recital of his own achievements addressed to himself.</p><p>The tax collector, standing far off, would not even lift his eyes to heaven. He beat his breast and said: "God, be merciful to me, a sinner!" That was his entire prayer — seven words in the original Greek. No list of accomplishments, no comparison with others, no self-justification. Just raw, honest desperation before a holy God.</p><p>Jesus delivered the shocking verdict: "I tell you, this man went down to his house justified, rather than the other. For everyone who exalts himself will be humbled, but the one who humbles himself will be exalted." The religious expert left unjustified; the despised sinner left right with God. The difference was not performance — it was posture before God.</p>
+            <p>Jesus told this parable to those who "trusted in themselves that they were righteous, and treated others with contempt." Two men went up into the temple to pray — one a Pharisee and the other a tax collector. The Pharisee stood by himself and prayed: "God, I thank you that I am not like other men, extortioners, unjust, adulterers, or even like this tax collector. I fast twice a week; I give tithes of all that I get." His prayer was technically addressed to God but was really a performance review delivered to himself.</p>
+            <p>The tax collector, by contrast, stood far off. He would not even lift his eyes to heaven but beat his breast and said, "God, be merciful to me, a sinner!" In the original Greek, the phrase is even more pointed: "God, be propitiated toward me, the sinner" — as though he were the worst one in the room. He made no comparison, offered no resume, claimed no merit. He came empty-handed and broken.</p>
+            <p>Jesus delivered the verdict that shocked His audience: "I tell you, this man went down to his house justified, rather than the other. For everyone who exalts himself will be humbled, but the one who humbles himself will be exalted." The most religious man in the room left unjustified; the most despised man left right with God. The difference was not behavior but posture — self-reliance versus God-dependence.</p>
         </div>
 
-        <!-- Section 2: Key Scriptures -->
         <div class="section-block">
             <h2>Key Scriptures</h2>
             <ul class="verse-list">
-                <li><span class="verse-ref" onclick="showVerse('Luke 18:13-14')">Luke 18:13-14</span> — The tax collector's prayer and Jesus' declaration that he went home justified.</li><li><span class="verse-ref" onclick="showVerse('James 4:6')">James 4:6</span> — "God opposes the proud but gives grace to the humble."</li><li><span class="verse-ref" onclick="showVerse('Proverbs 3:34')">Proverbs 3:34</span> — The Lord scorns the scornful but gives grace to the lowly.</li><li><span class="verse-ref" onclick="showVerse('Isaiah 66:2')">Isaiah 66:2</span> — "This is the one to whom I will look: he who is humble and contrite in spirit and trembles at my word."</li><li><span class="verse-ref" onclick="showVerse('Matthew 23:12')">Matthew 23:12</span> — "Whoever exalts himself will be humbled, and whoever humbles himself will be exalted."</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 18:9-14')">Luke 18:9-14</span> — The full parable: two prayers, two postures, two outcomes — humility is justified, pride is not.</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 66:2')">Isaiah 66:2</span> — "This is the one to whom I will look: he who is humble and contrite in spirit and trembles at my word."</li>
+                <li><span class="verse-ref" onclick="showVerse('James 4:6')">James 4:6</span> — "God opposes the proud but gives grace to the humble." Grace flows downhill to the lowest place.</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 16:18')">Proverbs 16:18</span> — "Pride goes before destruction, and a haughty spirit before a fall."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Peter 5:5')">1 Peter 5:5</span> — "Clothe yourselves, all of you, with humility toward one another" — humility is something we choose to put on.</li>
             </ul>
         </div>
 
-        <!-- Section 3: What Jesus Is Teaching -->
         <div class="section-block">
-            <h2>What Jesus Is Teaching</h2>
-            <p>Jesus is teaching that the door to God's grace swings open on the hinge of humility — and slams shut on self-righteousness. The Pharisee's prayer reveals a man who doesn't actually need God; he's already satisfied with himself. He comes to the temple not to receive but to perform. The tax collector, by contrast, comes with nothing to offer except his need. And that need is exactly what God honors. Justification — being declared righteous before God — is not earned by religious performance but received through humble confession.</p><p>This parable is devastating to anyone who measures their standing with God by comparison to others. The Pharisee's prayer was technically accurate — he did fast, he did tithe. But his righteousness was self-generated and self-congratulatory. It left no room for grace because he didn't believe he needed any. The tax collector's prayer echoes the heart of the gospel: I cannot save myself; I throw myself on God's mercy. And God, who resists the proud, rushed to justify him. This remains the only posture that receives grace: empty hands and an honest heart.</p>
+            <h2>What Jesus Was Teaching</h2>
+            <p>Jesus was demolishing the foundation of self-righteousness. The Pharisee's prayer reveals the anatomy of spiritual pride: comparison with others ("not like other men"), religious performance as currency ("I fast... I give tithes"), and blindness to his own need. He came to God as a creditor, not a debtor. His obedience, real as it may have been, became a wall between him and grace because he used it to justify himself rather than glorify God. Religious activity without humility is the most dangerous form of self-deception.</p>
+            <p>The tax collector's prayer is the model for all genuine encounter with God: honest about sin, desperate for mercy, making no excuses and offering no comparisons. He represents the posture Paul later described: "Not having a righteousness of my own that comes from the law, but that which comes through faith in Christ" (Philippians 3:9). Justification — being declared righteous before God — comes not to those who perform but to those who confess. The door to God's presence is always humility, never achievement.</p>
         </div>
 
-        <!-- Section 4: Reflection Questions -->
         <div class="section-block">
             <h2>Reflection Questions</h2>
             <ul class="reflection-list">
-                <li>When you pray, does your prayer sound more like the Pharisee's (recounting your achievements) or the tax collector's (acknowledging your need)?</li><li>Are there people you secretly look down on spiritually — thanking God you're "not like them"? What does that reveal about your heart?</li><li>How does the simplicity of the tax collector's prayer ("God, be merciful to me, a sinner") challenge the complexity we sometimes bring to approaching God?</li><li>In what areas of your life are you trusting your own righteousness instead of Christ's mercy?</li>
+                <li>When you pray, do your prayers sound more like the Pharisee's (self-congratulatory) or the tax collector's (dependent on mercy)?</li>
+                <li>Are there people you mentally compare yourself to in order to feel spiritually superior? What does this reveal?</li>
+                <li>How can you cultivate the tax collector's posture — honest, humble, and desperate for grace — as a daily spiritual practice?</li>
+                <li>Is there an area of obedience in your life that has subtly become a source of pride rather than gratitude?</li>
             </ul>
         </div>
 
-        <!-- Section 5: Video Resources -->
         <div class="section-block">
             <h2 style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;" onclick="var s=this.parentElement.querySelector('#videoSection');if(s){s.style.display=s.style.display==='none'?'block':'none';this.querySelector('.chevron').style.transform=s.style.display==='none'?'':'rotate(90deg)';}"><span>Video Resources</span><i class="fas fa-chevron-right chevron" style="font-size:0.8rem;transition:transform 0.2s;"></i></h2>
             <div id="videoSection" style="display:none;">
@@ -108,8 +111,6 @@
     function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
     function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
     </script>
-
-    <!-- Verse Popup Elements -->
     <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
     <div class="verse-popup" id="versePopup">
         <button class="popup-close" onclick="closeVerse()">&times;</button>

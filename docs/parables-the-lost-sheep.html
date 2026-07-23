@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="site/style.css">
     <style>
-        .topic-hero { background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80") center/cover no-repeat; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 32px; box-shadow: var(--shadow-sm); }
+        .topic-hero { background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=80") center/cover no-repeat; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 32px; box-shadow: var(--shadow-sm); }
         .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
         .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #d4a0e8; letter-spacing: 0.5px; }
 
@@ -32,13 +32,11 @@
 
         .video-toggle-btn { background: #5c3d6e; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 16px; }
         .video-toggle-btn:hover { background: #3a2548; }
-        .video-section { display: none; }
-        .video-section.open { display: block; }
+        .video-section { display: none; } .video-section.open { display: block; }
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
 
         .topic-dropdown { position: relative; display: inline-block; } .topic-dropdown-btn { background: rgba(255,255,255,0.9); border: 1px solid #5c3d6e; border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; color: #3d2b1f; cursor: pointer; transition: background 0.2s; } .topic-dropdown-btn:hover { background: var(--bg-card); } .topic-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid var(--border-light); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; min-width: 240px; z-index: 1000; margin-top: 6px; max-height: 400px; overflow-y: auto; } .topic-dropdown-menu.open { display: block; } .topic-dropdown-menu a { display: block; padding: 8px 18px; font-size: 0.83rem; color: #3d2b1f; text-decoration: none; font-weight: 500; transition: background 0.15s; } .topic-dropdown-menu a:hover { background: #f5ebe0; color: #5c3d6e; }
 
-        /* Verse Popup */
         .verse-ref { color: #5c3d6e; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
         .verse-ref:hover { color: #3a2548; }
         .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
@@ -57,7 +55,7 @@
     <nav class="top-nav">
         <a href="index.html" class="nav-home-btn"><i class="fas fa-home"></i></a>
         <a href="index.html" class="nav-brand">Bible Study</a>
-        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html">Names of God</a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html">Parables of Jesus</a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
+        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html">Names of God</a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html"><strong>Parables of Jesus</strong></a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
     </nav>
     <main class="main-content" style="margin-left:0; max-width:960px; margin-left:auto; margin-right:auto;">
         <a href="topical-studies.html#parables" class="back-link"><i class="fas fa-arrow-left"></i> Back to Parables of Jesus</a>
@@ -70,28 +68,38 @@
         <!-- Section 1: The Parable -->
         <div class="section-block">
             <h2>The Parable</h2>
-            <p>Tax collectors and sinners were drawing near to hear Jesus, and the Pharisees and scribes grumbled: "This man receives sinners and eats with them." In response, Jesus told three parables of lost things — and the Lost Sheep is the first. He asked: "What man of you, having a hundred sheep, if he has lost one of them, does not leave the ninety-nine in the open country, and go after the one that is lost, until he finds it?"</p><p>When the shepherd finds the lost sheep, he doesn't scold it or drive it back with a stick. He lays it on his shoulders, rejoicing. He carries it home and calls together friends and neighbors, saying, "Rejoice with me, for I have found my sheep that was lost." Jesus concludes: "There will be more joy in heaven over one sinner who repents than over ninety-nine righteous persons who need no repentance."</p><p>The parable reveals a God who doesn't simply wait for wanderers to return — He actively pursues them. The shepherd bears the full cost of the search: the danger, the distance, the effort. And the result is not punishment but celebration. This is the heart of the gospel: God seeks and saves the lost.</p>
+            <p>Jesus asked the Pharisees and scribes a question that seemed absurd on the surface: "What man of you, having a hundred sheep, if he has lost one of them, does not leave the ninety-nine in the open country, and go after the one that is lost, until he finds it?" In purely economic terms, risking ninety-nine sheep for one stray makes no business sense. A rational shepherd would cut his losses. But this shepherd is not driven by economics — he is driven by love for the individual.</p>
+            <p>The shepherd searches relentlessly — not casually glancing around, but actively pursuing "until he finds it." When he does, he doesn't scold the sheep or drag it home begrudgingly. He lays it on his shoulders, rejoicing. He comes home and calls together his friends and neighbors saying, "Rejoice with me, for I have found my sheep that was lost." The image is one of celebration, not obligation — of joy, not mere duty.</p>
+            <p>Jesus delivered the punchline: "Just so, I tell you, there will be more joy in heaven over one sinner who repents than over ninety-nine righteous persons who need no repentance." This was a direct challenge to the Pharisees, who saw sinners as contamination to avoid rather than people to pursue. Heaven's priorities are radically different from religious bookkeeping.</p>
         </div>
 
         <!-- Section 2: Key Scriptures -->
         <div class="section-block">
             <h2>Key Scriptures</h2>
             <ul class="verse-list">
-                <li><span class="verse-ref" onclick="showVerse('Luke 15:4-7')">Luke 15:4-7</span> — The shepherd leaves the ninety-nine to find the one, and heaven rejoices over one repentant sinner.</li><li><span class="verse-ref" onclick="showVerse('Matthew 18:12-14')">Matthew 18:12-14</span> — Matthew's version emphasizing God's will that none of "these little ones" should perish.</li><li><span class="verse-ref" onclick="showVerse('John 10:11')">John 10:11</span> — "I am the good shepherd. The good shepherd lays down his life for the sheep."</li><li><span class="verse-ref" onclick="showVerse('Ezekiel 34:11-12')">Ezekiel 34:11-12</span> — God Himself will search for His sheep and seek them out.</li><li><span class="verse-ref" onclick="showVerse('Isaiah 53:6')">Isaiah 53:6</span> — "All we like sheep have gone astray… and the Lord has laid on him the iniquity of us all."</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 15:3-7')">Luke 15:3-7</span> — The shepherd leaves the ninety-nine to find the one — heaven rejoices over one sinner who repents.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 18:12-14')">Matthew 18:12-14</span> — "It is not the will of my Father who is in heaven that one of these little ones should perish."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 10:11-14')">John 10:11-14</span> — "I am the good shepherd. The good shepherd lays down his life for the sheep." Jesus identifies Himself as this shepherd.</li>
+                <li><span class="verse-ref" onclick="showVerse('Ezekiel 34:11-12')">Ezekiel 34:11-12</span> — "I myself will search for my sheep and will seek them out... in a day of clouds and thick darkness."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 53:6')">Isaiah 53:6</span> — "All we like sheep have gone astray; we have turned — every one — to his own way; and the LORD has laid on him the iniquity of us all."</li>
             </ul>
         </div>
 
-        <!-- Section 3: What Jesus Is Teaching -->
+        <!-- Section 3: What Jesus Was Teaching -->
         <div class="section-block">
-            <h2>What Jesus Is Teaching</h2>
-            <p>Jesus is teaching that every single person matters to God — not just the group, not just the majority. The Pharisees measured success by the crowd; Jesus measures it by the one. This parable directly confronts religious leaders who were willing to write off sinners as beyond hope. God's response to wandering is not indifference or anger — it is relentless pursuit. The shepherd doesn't wait at the gate; he goes into the wilderness. He doesn't count the cost; he bears it gladly.</p><p>For believers, this parable offers both comfort and commission. It comforts us because we have all been that lost sheep — wandering, vulnerable, unable to find our way back. Christ came after us. But it also commissions us: if heaven throws a party over one repentant sinner, should we not share that same urgency to reach the lost? The heart of God is a seeking heart. If we share His heart, we will share His mission.</p>
+            <h2>What Jesus Was Teaching</h2>
+            <p>Jesus was revealing God's heart for the individual. In a world that values efficiency and percentages, God counts by ones. He doesn't manage populations — He pursues persons. The lost sheep didn't find its own way home; the shepherd went after it. This is the gospel in miniature: salvation is not primarily about human seeking but about divine pursuit. "We love because he first loved us" (1 John 4:19). Before we ever turned toward God, He was already coming for us through hill and valley.</p>
+            <p>Jesus was also rebuking the Pharisees' attitude toward sinners. They grumbled that He received tax collectors and ate with them. In their theology, holiness meant separation from unclean people. But Jesus demonstrated that true holiness moves toward brokenness, not away from it. A doctor goes to the sick, not the healthy. The shepherd goes to the wilderness, not the pen. The Kingdom of God advances through pursuit, compassion, and joy — not through walls, exclusion, and contempt.</p>
         </div>
 
         <!-- Section 4: Reflection Questions -->
         <div class="section-block">
             <h2>Reflection Questions</h2>
             <ul class="reflection-list">
-                <li>Can you recall a time when you were the "lost sheep" — wandering from God — and He pursued you back? How did He do it?</li><li>Do you value the one as much as God does, or do you tend to focus only on the ninety-nine who are already "safe"?</li><li>Is there someone in your life right now who is wandering? How might God be calling you to pursue them with His love?</li><li>How does knowing that heaven celebrates over your repentance change how you view your own failures and returns to God?</li>
+                <li>Have you experienced being the "lost sheep" — wandering from God and being pursued by His relentless grace? What did that look like?</li>
+                <li>Is there someone in your life who has wandered, and God might be calling you to go after them with patience and love?</li>
+                <li>How does the shepherd's joy at finding the lost sheep challenge any idea that God is reluctant or annoyed when we return to Him?</li>
+                <li>Do you tend to focus on the ninety-nine (those already "in") or the one (those still outside)? How might God be shifting your perspective?</li>
             </ul>
         </div>
 
@@ -108,8 +116,6 @@
     function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
     function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
     </script>
-
-    <!-- Verse Popup Elements -->
     <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
     <div class="verse-popup" id="versePopup">
         <button class="popup-close" onclick="closeVerse()">&times;</button>
