@@ -278,6 +278,16 @@ document.addEventListener('DOMContentLoaded', function() {
         section = 'topical';
     } else if (strugglePages.indexOf(baseName) !== -1) {
         section = 'life';
+    } else if (baseName.indexOf('fruits-') === 0 || baseName.indexOf('apostles-') === 0 ||
+               baseName.indexOf('names-') === 0 || baseName.indexOf('armor-') === 0 ||
+               baseName.indexOf('parables-') === 0 || baseName.indexOf('iam-') === 0 ||
+               baseName.indexOf('beatitudes-') === 0 || baseName.indexOf('commandments-') === 0 ||
+               baseName.indexOf('miracles-') === 0 || baseName.indexOf('men-') === 0 ||
+               baseName.indexOf('women-') === 0 || baseName.indexOf('kings-') === 0 ||
+               baseName.indexOf('promises-') === 0 || baseName.indexOf('prayers-') === 0 ||
+               baseName.indexOf('prophecy-') === 0 || baseName.indexOf('disciplines-') === 0 ||
+               baseName.indexOf('trinity-') === 0 || baseName.indexOf('gospel-') === 0) {
+        section = 'topical';
     } else {
         section = 'bible';
     }
@@ -437,12 +447,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 return;
             }
-            // If on index page, switch sections in place
+            if (sec === 'topical') {
+                window.location.href = 'topical-studies.html';
+                return;
+            }
+            if (sec === 'life') {
+                window.location.href = 'index.html#life';
+                return;
+            }
+            // Bible tab
             if (isIndexPage) {
                 pwaShowSection(sec);
             } else {
-                // Navigate to index with hash
-                window.location.href = 'index.html' + (sec !== 'bible' ? '#' + sec : '');
+                window.location.href = 'index.html';
             }
         });
     });
