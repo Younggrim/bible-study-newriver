@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#8b3a2a">
+    <title>Healing the Paralytic | Miracles of Jesus — Bible Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="site/style.css">
+    <style>
+        .topic-hero { background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80") center/cover no-repeat; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 32px; box-shadow: var(--shadow-sm); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #e8b4a0; letter-spacing: 0.5px; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #8b3a2a; text-decoration: none; font-weight: 600; transition: color 0.2s; } .back-link:hover { color: #5c2518; } .back-link i { margin-right: 6px; }
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #8b3a2a; margin-bottom: 16px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; } .section-block p:last-child { margin-bottom: 0; }
+        .verse-list { list-style: none; padding: 0; margin: 0; } .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; } .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .reflection-list { list-style: none; padding: 0; margin: 0; } .reflection-list li { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 10px; padding-left: 22px; position: relative; } .reflection-list li::before { content: "\f059"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: #8b3a2a; font-size: 0.8rem; top: 3px; }
+        .video-toggle-btn { background: #8b3a2a; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 16px; } .video-toggle-btn:hover { background: #5c2518; }
+        .video-section { display: none; } .video-section.open { display: block; } .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+        .topic-dropdown { position: relative; display: inline-block; } .topic-dropdown-btn { background: rgba(255,255,255,0.9); border: 1px solid #8b3a2a; border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; color: #3d2b1f; cursor: pointer; transition: background 0.2s; } .topic-dropdown-btn:hover { background: var(--bg-card); } .topic-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid var(--border-light); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; min-width: 240px; z-index: 1000; margin-top: 6px; max-height: 400px; overflow-y: auto; } .topic-dropdown-menu.open { display: block; } .topic-dropdown-menu a { display: block; padding: 8px 18px; font-size: 0.83rem; color: #3d2b1f; text-decoration: none; font-weight: 500; transition: background 0.15s; } .topic-dropdown-menu a:hover { background: #f5ebe0; color: #8b3a2a; }
+        .verse-ref { color: #8b3a2a; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; } .verse-ref:hover { color: #5c2518; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; } .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; } .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#8b3a2a; margin-bottom:12px; font-weight:700; } .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; } .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; } .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="index.html" class="nav-home-btn"><i class="fas fa-home"></i></a>
+        <a href="index.html" class="nav-brand">Bible Study</a>
+        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html">Names of God</a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html"><strong>Miracles of Jesus</strong></a><a href="parables-of-jesus.html">Parables of Jesus</a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
+    </nav>
+    <main class="main-content" style="margin-left:0; max-width:960px; margin-left:auto; margin-right:auto;">
+        <a href="topical-studies.html#miracles" class="back-link"><i class="fas fa-arrow-left"></i> Back to Miracles of Jesus</a>
+        <div class="topic-hero">
+            <p class="subtitle">Miracles of Jesus</p>
+            <h1>Healing the Paralytic</h1>
+        </div>
+        <div class="section-block">
+            <h2>The Miracle</h2>
+            <p>In Capernaum, four friends carried a paralyzed man to Jesus, determined to get him into His presence. Finding the house so packed that they could not enter through the door, they climbed the outside staircase, dug through the mud-and-thatch roof, and lowered their friend on his mat directly before Jesus. Mark records that "when Jesus saw their faith" — the collective, active, barrier-breaking faith of the friends — He spoke to the paralytic (Mark 2:5).</p>
+            <p>But His first words were shocking: "Son, your sins are forgiven." The scribes present immediately recognized the theological claim: only God can forgive sins. They were correct in their theology but blind to the identity of the One standing before them. Jesus, knowing their thoughts, posed a devastating question: "Which is easier, to say 'Your sins are forgiven,' or to say 'Rise, take up your bed and walk'?" Then He healed the man's body to prove His authority over the man's soul.</p>
+            <p>The paralytic rose immediately, picked up his mat, and walked out before them all. The crowd was amazed, glorifying God and saying, "We never saw anything like this!" This miracle functioned as a visible proof of an invisible reality — physical healing authenticating spiritual authority. Jesus demonstrated that He possesses the divine prerogative to forgive sins by doing the physically impossible before their eyes.</p>
+        </div>
+        <div class="section-block">
+            <h2>Key Scriptures</h2>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Mark 2:1-12')">Mark 2:1-12</span> — The full account of the paralytic lowered through the roof and forgiven by Jesus.</li>
+                <li><span class="verse-ref" onclick="showVerse('Mark 2:10-11')">Mark 2:10-11</span> — "But that you may know that the Son of Man has authority on earth to forgive sins — he said to the paralytic — 'Rise, pick up your bed, and go home.'"</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 43:25')">Isaiah 43:25</span> — "I, I am he who blots out your transgressions for my own sake, and I will not remember your sins."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 103:2-3')">Psalm 103:2-3</span> — "Bless the LORD, O my soul, and forget not all his benefits, who forgives all your iniquity, who heals all your diseases."</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 5:20')">Luke 5:20</span> — "And when he saw their faith, he said, 'Man, your sins are forgiven you.'"</li>
+            </ul>
+        </div>
+        <div class="section-block">
+            <h2>What It Reveals About Jesus</h2>
+            <p>This miracle reveals Jesus' authority to do what only God can do — forgive sins. It connects physical healing with spiritual restoration, showing that Jesus cares about the whole person. Significantly, He addressed the man's deepest need first (sin) before his most obvious need (paralysis). Jesus sees past our symptoms to our root condition and offers the greater healing we may not even know we need.</p>
+            <p>The faith of the four friends is also instructive. They refused to let obstacles — crowds, closed doors, even a solid roof — prevent them from bringing their friend to Jesus. Their determination, creativity, and willingness to break social norms for their friend's sake was itself an act of faith that Jesus honored. This miracle teaches us that intercessory faith — believing on behalf of others and doing whatever it takes to bring them before Jesus — moves the heart of God.</p>
+        </div>
+        <div class="section-block">
+            <h2>Reflection Questions</h2>
+            <ul class="reflection-list">
+                <li>Who in your life needs you to be like the four friends — persistent, creative, and willing to break through barriers to bring them to Jesus?</li>
+                <li>Are there ways you have focused on asking God for physical or circumstantial change while ignoring a deeper spiritual need He wants to address?</li>
+                <li>How does Jesus' authority to forgive sins give you confidence to bring your guilt and shame before Him today?</li>
+            </ul>
+        </div>
+        <div class="section-block">
+            <h2 style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;" onclick="var s=this.parentElement.querySelector('#videoSection');if(s){s.style.display=s.style.display==='none'?'block':'none';this.querySelector('.chevron').style.transform=s.style.display==='none'?'':'rotate(90deg)';}"><span>Video Resources</span><i class="fas fa-chevron-right chevron" style="font-size:0.8rem;transition:transform 0.2s;"></i></h2>
+            <div id="videoSection" style="display:none;">
+                <p style="font-size:0.9rem;color:#8a7e74;font-style:italic;">Videos coming soon.</p>
+            </div>
+        </div>
+    </main>
+    <script src="site/script.js"></script>
+    <script>function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}</script>
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup"><button class="popup-close" onclick="closeVerse()">&times;</button><div class="popup-ref" id="popupRef"></div><div class="popup-text" id="popupText"></div></div>
+    <script>function showVerse(passage){var overlay=document.getElementById('verseOverlay');var popup=document.getElementById('versePopup');var refEl=document.getElementById('popupRef');var textEl=document.getElementById('popupText');refEl.textContent=passage;textEl.innerHTML='<span class="popup-loading">Loading verse...</span>';overlay.classList.add('show');popup.classList.add('show');fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q='+encodeURIComponent(passage)).then(function(r){return r.json();}).then(function(data){if(data.passages&&data.passages[0]){textEl.innerHTML=data.passages[0];}else{textEl.innerHTML='<em>Could not load this passage.</em>';}}).catch(function(){textEl.innerHTML='<em>Unable to fetch verse. Try again later.</em>';});}function closeVerse(){document.getElementById('verseOverlay').classList.remove('show');document.getElementById('versePopup').classList.remove('show');}</script>
+</body>
+</html>
