@@ -155,6 +155,25 @@ function loadYT(el, id) {
 }
 
 /* Collapsible Video Sections */
+function extractVerseNum(title) {
+    // Extract starting verse number from video title
+    // Matches patterns like "Genesis 1:6", "John 3:16-18", "Mark 4:1-20", "1:1-10"
+    // Returns 0 for whole-chapter/overview videos (sort to top)
+    // Returns 9999 for no match (sort to bottom)
+    var lower = title.toLowerCase();
+    // Check if it's a summary/overview (no verse ref = whole chapter)
+    if (lower.indexOf('summary') !== -1 || lower.indexOf('overview') !== -1 || lower.indexOf('introduction') !== -1 || lower.indexOf('complete') !== -1) {
+        return 0;
+    }
+    // Look for chapter:verse pattern
+    var match = title.match(/(\d+):(\d+)/);
+    if (match) {
+        return parseInt(match[2], 10);
+    }
+    // No verse found — could be whole chapter video, put near top
+    return 5000;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Find all video containers in topical cards (divs containing yt-facade with border-top style)
     document.querySelectorAll('.fruit-card > div[style*="border-top"]').forEach(function(container) {
@@ -183,6 +202,19 @@ document.addEventListener('DOMContentLoaded', function() {
         if (videos.length > 0) {
             var h3 = videoTab.querySelector('h3');
             if (h3) h3.innerHTML = 'Videos (' + videos.length + ') <span style="font-size:0.75rem;color:#8a7e74;font-weight:400;"> — tap thumbnails to play</span>';
+
+            // Sort videos by verse reference in title
+            var videoArray = Array.from(videos);
+            videoArray.sort(function(a, b) {
+                var titleA = (a.querySelector('p') || {}).textContent || '';
+                var titleB = (b.querySelector('p') || {}).textContent || '';
+                var verseA = extractVerseNum(titleA);
+                var verseB = extractVerseNum(titleB);
+                return verseA - verseB;
+            });
+            // Re-append in sorted order
+            var parent = videos[0].parentNode;
+            videoArray.forEach(function(v) { parent.appendChild(v); });
         }
     }
 
