@@ -165,6 +165,10 @@ function loadYT(el, id) {
     document.documentElement.classList.add('pwa-standalone');
     document.body.classList.add('pwa-standalone');
 
+    // Hide the prayer section on index (splash already shows it)
+    var prayerSection = document.querySelector('.prayer-section');
+    if (prayerSection) prayerSection.style.display = 'none';
+
     // Determine active section from current URL
     var path = window.location.pathname.split('/').pop() || 'index.html';
     var section = 'bible';
