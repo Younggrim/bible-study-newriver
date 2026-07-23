@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bible-study-v4';
+const CACHE_NAME = 'bible-study-v5';
 
 // Install: cache the shell
 self.addEventListener('install', event => {
