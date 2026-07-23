@@ -657,7 +657,7 @@ body.pwa-standalone .pwa-splash {
 .pwa-coming-soon {
     display: none;
     position: fixed;
-    top: 56px; left: 0; right: 0; bottom: 64px;
+    top: 0; left: 0; right: 0; bottom: 64px;
     background: #faf5ed;
     z-index: 9998;
     align-items: center;

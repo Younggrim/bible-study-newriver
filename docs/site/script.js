@@ -191,56 +191,68 @@ function loadYT(el, id) {
         section = 'bible';
     }
 
-    // Check hash for tab highlighting on index
+    // Check hash for tab state on index
     var hash = window.location.hash;
     if (hash === '#topical') section = 'topical';
     if (hash === '#life') section = 'life';
 
     // On index page in app mode: show only the active section
     var isIndexPage = (path === 'index.html' || path === '' || path === '/' || path === 'index');
-    if (isIndexPage) {
-        // Hide hero section and welcome on index in app mode
-        var heroSection = document.querySelector('.hero-section');
-        if (heroSection) heroSection.style.display = 'none';
+    var allSectionHeroes, allCardsContainers, contentBlock, siteFooter, heroSection;
+    var bibleElements = [], topicalElements = [], lifeElements = [];
 
-        // Get all section heroes and their following cards containers
-        var allSectionHeroes = document.querySelectorAll('.section-hero');
-        var allCardsContainers = document.querySelectorAll('.cards-container');
-        var contentBlock = document.querySelector('.content-block');
-        var siteFooter = document.querySelector('.site-footer');
-
-        // Map sections: Bible = content-block + first section-hero + first 2 cards-containers
-        // Topical = second section-hero + third cards-container
-        // Life = third section-hero + fourth cards-container
-        var bibleElements = [];
-        var topicalElements = [];
-        var lifeElements = [];
-
-        if (contentBlock) bibleElements.push(contentBlock);
-        if (allSectionHeroes[0]) bibleElements.push(allSectionHeroes[0]);
-        if (allCardsContainers[0]) bibleElements.push(allCardsContainers[0]);
-
-        if (allSectionHeroes[1]) topicalElements.push(allSectionHeroes[1]);
-        if (allCardsContainers[1]) topicalElements.push(allCardsContainers[1]);
-
-        if (allSectionHeroes[2]) lifeElements.push(allSectionHeroes[2]);
-        if (allCardsContainers[2]) lifeElements.push(allCardsContainers[2]);
-
-        // Hide all first
+    function pwaShowSection(sec) {
+        if (!isIndexPage) return;
+        // Hide all
         bibleElements.concat(topicalElements).concat(lifeElements).forEach(function(el) {
             el.style.display = 'none';
         });
+        // Show active
+        var active = [];
+        if (sec === 'bible') active = bibleElements;
+        else if (sec === 'topical') active = topicalElements;
+        else if (sec === 'life') active = lifeElements;
+        active.forEach(function(el) { el.style.display = ''; });
+        // Update nav highlights
+        var navItems = document.querySelectorAll('.pwa-nav-item');
+        navItems.forEach(function(item) { item.classList.remove('active'); });
+        navItems.forEach(function(item) {
+            if (item.dataset.section === sec) item.classList.add('active');
+        });
+        // Hide devotional overlay if showing
+        var devOv = document.querySelector('.pwa-coming-soon');
+        if (devOv) devOv.classList.remove('show');
+        // Scroll to top
+        window.scrollTo(0, 0);
+    }
+
+    if (isIndexPage) {
+        heroSection = document.querySelector('.hero-section');
+        if (heroSection) heroSection.style.display = 'none';
+
+        allSectionHeroes = document.querySelectorAll('.section-hero');
+        allCardsContainers = document.querySelectorAll('.cards-container');
+        contentBlock = document.querySelector('.content-block');
+        siteFooter = document.querySelector('.site-footer');
+
+        // Bible = first section-hero (Bible) + first cards-container (books)
+        // Hide content-block (translation guide) — replaced by info icon
+        if (contentBlock) contentBlock.style.display = 'none';
+        if (allSectionHeroes[0]) bibleElements.push(allSectionHeroes[0]);
+        if (allCardsContainers[0]) bibleElements.push(allCardsContainers[0]);
+
+        // Topical = second section-hero + second cards-container
+        if (allSectionHeroes[1]) topicalElements.push(allSectionHeroes[1]);
+        if (allCardsContainers[1]) topicalElements.push(allCardsContainers[1]);
+
+        // Life = third section-hero + third cards-container
+        if (allSectionHeroes[2]) lifeElements.push(allSectionHeroes[2]);
+        if (allCardsContainers[2]) lifeElements.push(allCardsContainers[2]);
+
         if (siteFooter) siteFooter.style.display = 'none';
 
-        // Show only the active section
-        var activeElements = [];
-        if (section === 'bible') activeElements = bibleElements;
-        else if (section === 'topical') activeElements = topicalElements;
-        else if (section === 'life') activeElements = lifeElements;
-
-        activeElements.forEach(function(el) {
-            el.style.display = '';
-        });
+        // Show initial section
+        pwaShowSection(section);
     }
 
     // Inject splash screen on app open (once per session)
@@ -260,7 +272,6 @@ function loadYT(el, id) {
             splash.classList.add('fade-out');
             setTimeout(function() { splash.remove(); }, 700);
         });
-        // Auto-dismiss after 8 seconds
         setTimeout(function() {
             if (!splash.classList.contains('fade-out')) {
                 splash.classList.add('fade-out');
@@ -273,34 +284,48 @@ function loadYT(el, id) {
     var nav = document.createElement('nav');
     nav.className = 'pwa-bottom-nav';
     nav.innerHTML = ''
-        + '<a class="pwa-nav-item' + (section==='bible'?' active':'') + '" href="index.html">'
+        + '<a class="pwa-nav-item' + (section==='bible'?' active':'') + '" data-section="bible" href="#">'
         + '<i class="fas fa-book-bible"></i><span>Bible</span></a>'
-        + '<a class="pwa-nav-item' + (section==='topical'?' active':'') + '" href="index.html#topical">'
+        + '<a class="pwa-nav-item' + (section==='topical'?' active':'') + '" data-section="topical" href="#">'
         + '<i class="fas fa-lightbulb"></i><span>Topical</span></a>'
-        + '<a class="pwa-nav-item' + (section==='life'?' active':'') + '" href="index.html#life">'
+        + '<a class="pwa-nav-item' + (section==='life'?' active':'') + '" data-section="life" href="#">'
         + '<i class="fas fa-heart"></i><span>Life</span></a>'
-        + '<a class="pwa-nav-item" id="pwa-devotional-btn" href="#">'
+        + '<a class="pwa-nav-item" data-section="devotional" id="pwa-devotional-btn" href="#">'
         + '<i class="fas fa-hands-praying"></i><span>Devotional</span></a>';
     document.body.appendChild(nav);
 
-    // Devotional "Coming Soon" overlay
-    var devBtn = document.getElementById('pwa-devotional-btn');
-    if (devBtn) {
-        var devOverlay = document.createElement('div');
-        devOverlay.className = 'pwa-coming-soon';
-        devOverlay.innerHTML = ''
-            + '<i class="fas fa-hands-praying"></i>'
-            + '<h2>Devotional</h2>'
-            + '<p>Daily devotionals are coming soon. This space will offer guided daily readings, reflections, and prayers to walk with you through each day in God\'s Word.</p>';
-        document.body.appendChild(devOverlay);
-
-        devBtn.addEventListener('click', function(e) {
+    // Tab click handling
+    nav.querySelectorAll('.pwa-nav-item').forEach(function(item) {
+        item.addEventListener('click', function(e) {
             e.preventDefault();
-            var isShowing = devOverlay.classList.contains('show');
-            devOverlay.classList.toggle('show');
-            // Update active state
-            nav.querySelectorAll('.pwa-nav-item').forEach(function(item) { item.classList.remove('active'); });
-            if (!isShowing) devBtn.classList.add('active');
+            var sec = this.dataset.section;
+            if (sec === 'devotional') {
+                // Show coming soon overlay
+                var devOv = document.querySelector('.pwa-coming-soon');
+                if (devOv) {
+                    devOv.classList.add('show');
+                    nav.querySelectorAll('.pwa-nav-item').forEach(function(i) { i.classList.remove('active'); });
+                    this.classList.add('active');
+                }
+                return;
+            }
+            // If on index page, switch sections in place
+            if (isIndexPage) {
+                pwaShowSection(sec);
+            } else {
+                // Navigate to index with hash
+                window.location.href = 'index.html' + (sec !== 'bible' ? '#' + sec : '');
+            }
         });
-    }
+    });
+
+    // Devotional "Coming Soon" overlay
+    var devOverlay = document.createElement('div');
+    devOverlay.className = 'pwa-coming-soon';
+    devOverlay.innerHTML = ''
+        + '<i class="fas fa-hands-praying"></i>'
+        + '<h2>Devotional</h2>'
+        + '<p>Daily devotionals are coming soon. This space will offer guided daily readings, reflections, and prayers to walk with you through each day in God\'s Word.</p>'
+        + '<p style="margin-top:20px;font-size:0.8rem;color:#8a7e74;">Tap another tab to go back</p>';
+    document.body.appendChild(devOverlay);
 })();
