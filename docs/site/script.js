@@ -196,6 +196,53 @@ function loadYT(el, id) {
     if (hash === '#topical') section = 'topical';
     if (hash === '#life') section = 'life';
 
+    // On index page in app mode: show only the active section
+    var isIndexPage = (path === 'index.html' || path === '' || path === '/' || path === 'index');
+    if (isIndexPage) {
+        // Hide hero section and welcome on index in app mode
+        var heroSection = document.querySelector('.hero-section');
+        if (heroSection) heroSection.style.display = 'none';
+
+        // Get all section heroes and their following cards containers
+        var allSectionHeroes = document.querySelectorAll('.section-hero');
+        var allCardsContainers = document.querySelectorAll('.cards-container');
+        var contentBlock = document.querySelector('.content-block');
+        var siteFooter = document.querySelector('.site-footer');
+
+        // Map sections: Bible = content-block + first section-hero + first 2 cards-containers
+        // Topical = second section-hero + third cards-container
+        // Life = third section-hero + fourth cards-container
+        var bibleElements = [];
+        var topicalElements = [];
+        var lifeElements = [];
+
+        if (contentBlock) bibleElements.push(contentBlock);
+        if (allSectionHeroes[0]) bibleElements.push(allSectionHeroes[0]);
+        if (allCardsContainers[0]) bibleElements.push(allCardsContainers[0]);
+
+        if (allSectionHeroes[1]) topicalElements.push(allSectionHeroes[1]);
+        if (allCardsContainers[1]) topicalElements.push(allCardsContainers[1]);
+
+        if (allSectionHeroes[2]) lifeElements.push(allSectionHeroes[2]);
+        if (allCardsContainers[2]) lifeElements.push(allCardsContainers[2]);
+
+        // Hide all first
+        bibleElements.concat(topicalElements).concat(lifeElements).forEach(function(el) {
+            el.style.display = 'none';
+        });
+        if (siteFooter) siteFooter.style.display = 'none';
+
+        // Show only the active section
+        var activeElements = [];
+        if (section === 'bible') activeElements = bibleElements;
+        else if (section === 'topical') activeElements = topicalElements;
+        else if (section === 'life') activeElements = lifeElements;
+
+        activeElements.forEach(function(el) {
+            el.style.display = '';
+        });
+    }
+
     // Inject splash screen on app open (once per session)
     var splashShown = false;
     try { splashShown = sessionStorage.getItem('pwa-splash-done') === '1'; } catch(e) {}
