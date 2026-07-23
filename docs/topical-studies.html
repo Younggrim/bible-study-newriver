@@ -12,8 +12,12 @@
         body { background: #faf5ed; }
         .page-content { margin: 0 auto; max-width: 960px; padding: 24px 24px 80px; }
         .study-section { margin-bottom: 40px; }
-        .study-header { font-family: 'Cinzel', serif; font-size: 1.4rem; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid; }
-        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+        .study-header { font-family: 'Cinzel', serif; font-size: 1.4rem; margin-bottom: 0; padding: 14px 0; border-bottom: 2px solid; cursor: pointer; display: flex; align-items: center; justify-content: space-between; user-select: none; transition: color 0.2s; }
+        .study-header:hover { opacity: 0.8; }
+        .study-header .chevron { font-size: 0.8rem; transition: transform 0.2s; }
+        .study-header.open .chevron { transform: rotate(90deg); }
+        .item-grid { display: none; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; padding-top: 16px; padding-bottom: 8px; }
+        .item-grid.open { display: grid; }
         .item-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid; border-radius: 10px; text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
         .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
         .item-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 2px; }
@@ -41,7 +45,7 @@
             <p style="font-family:'Merriweather',serif; font-size:1rem; font-style:italic; color:#f0e4d4; max-width:600px; margin:0 auto; line-height:1.8;">Explore themes across Scripture — select a topic below to dive deeper.</p>
         </div>
         <div class="study-section" id="fruits">
-            <h2 class="study-header" style="color:#2c6b4f;border-color:#2c6b4f;">Fruits of the Spirit</h2>
+            <h2 class="study-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="color:#2c6b4f;border-color:#2c6b4f;">Fruits of the Spirit <i class="fas fa-chevron-right chevron"></i></h2>
             <div class="item-grid">
                 <a href="fruits-love.html" class="item-card" style="border-left-color:#2c6b4f;">
                     <h4 style="color:#2c6b4f;">Love</h4>
@@ -92,7 +96,7 @@
         </div>
 
         <div class="study-section" id="apostles">
-            <h2 class="study-header" style="color:#8b3a2a;border-color:#8b3a2a;">The 12 Apostles</h2>
+            <h2 class="study-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="color:#8b3a2a;border-color:#8b3a2a;">The 12 Apostles <i class="fas fa-chevron-right chevron"></i></h2>
             <div class="item-grid">
                 <a href="apostles-simon-peter.html" class="item-card" style="border-left-color:#8b3a2a;">
                     <h4 style="color:#8b3a2a;">Simon Peter</h4>
@@ -146,7 +150,7 @@
         </div>
 
         <div class="study-section" id="names">
-            <h2 class="study-header" style="color:#6b4c3b;border-color:#6b4c3b;">Names of God</h2>
+            <h2 class="study-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="color:#6b4c3b;border-color:#6b4c3b;">Names of God <i class="fas fa-chevron-right chevron"></i></h2>
             <div class="item-grid">
                 <a href="names-elohim.html" class="item-card" style="border-left-color:#6b4c3b;">
                     <h4 style="color:#6b4c3b;">Elohim</h4>
@@ -216,7 +220,7 @@
         </div>
 
         <div class="study-section" id="armor">
-            <h2 class="study-header" style="color:#4a5a8a;border-color:#4a5a8a;">Armor of God</h2>
+            <h2 class="study-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="color:#4a5a8a;border-color:#4a5a8a;">Armor of God <i class="fas fa-chevron-right chevron"></i></h2>
             <div class="item-grid">
                 <a href="armor-belt-of-truth.html" class="item-card" style="border-left-color:#4a5a8a;">
                     <h4 style="color:#4a5a8a;">Belt of Truth</h4>
@@ -246,7 +250,7 @@
         </div>
 
         <div class="study-section" id="parables">
-            <h2 class="study-header" style="color:#5c3d6e;border-color:#5c3d6e;">Parables of Jesus</h2>
+            <h2 class="study-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="color:#5c3d6e;border-color:#5c3d6e;">Parables of Jesus <i class="fas fa-chevron-right chevron"></i></h2>
             <div class="item-grid">
                 <a href="parables-the-sower.html" class="item-card" style="border-left-color:#5c3d6e;">
                     <h4 style="color:#5c3d6e;">The Sower</h4>
@@ -300,7 +304,7 @@
         </div>
 
         <div class="study-section" id="iam">
-            <h2 class="study-header" style="color:#8b6914;border-color:#8b6914;">I AM Statements of Jesus</h2>
+            <h2 class="study-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="color:#8b6914;border-color:#8b6914;">I AM Statements of Jesus <i class="fas fa-chevron-right chevron"></i></h2>
             <div class="item-grid">
                 <a href="iam-i-am-the-bread-of-life.html" class="item-card" style="border-left-color:#8b6914;">
                     <h4 style="color:#8b6914;">I Am the Bread of Life</h4>
@@ -334,7 +338,7 @@
         </div>
 
         <div class="study-section" id="beatitudes">
-            <h2 class="study-header" style="color:#2c5a6b;border-color:#2c5a6b;">The Beatitudes</h2>
+            <h2 class="study-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="color:#2c5a6b;border-color:#2c5a6b;">The Beatitudes <i class="fas fa-chevron-right chevron"></i></h2>
             <div class="item-grid">
                 <a href="beatitudes-blessed-are-the-poor-in-spirit.html" class="item-card" style="border-left-color:#2c5a6b;">
                     <h4 style="color:#2c5a6b;">Blessed Are the Poor in Spirit</h4>
@@ -372,7 +376,7 @@
         </div>
 
         <div class="study-section" id="commandments">
-            <h2 class="study-header" style="color:#6b4c3b;border-color:#6b4c3b;">Ten Commandments</h2>
+            <h2 class="study-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="color:#6b4c3b;border-color:#6b4c3b;">Ten Commandments <i class="fas fa-chevron-right chevron"></i></h2>
             <div class="item-grid">
                 <a href="commandments-no-other-gods.html" class="item-card" style="border-left-color:#6b4c3b;">
                     <h4 style="color:#6b4c3b;">No Other Gods</h4>
@@ -418,7 +422,7 @@
         </div>
 
         <div class="study-section" id="miracles">
-            <h2 class="study-header" style="color:#8b3a2a;border-color:#8b3a2a;">Miracles of Jesus</h2>
+            <h2 class="study-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="color:#8b3a2a;border-color:#8b3a2a;">Miracles of Jesus <i class="fas fa-chevron-right chevron"></i></h2>
             <div class="item-grid">
                 <a href="miracles-water-to-wine.html" class="item-card" style="border-left-color:#8b3a2a;">
                     <h4 style="color:#8b3a2a;">Water to Wine</h4>
@@ -472,7 +476,7 @@
         </div>
 
         <div class="study-section" id="men">
-            <h2 class="study-header" style="color:#5a4030;border-color:#5a4030;">Men of the Bible</h2>
+            <h2 class="study-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="color:#5a4030;border-color:#5a4030;">Men of the Bible <i class="fas fa-chevron-right chevron"></i></h2>
             <div class="item-grid">
                 <a href="men-abraham.html" class="item-card" style="border-left-color:#5a4030;">
                     <h4 style="color:#5a4030;">Abraham</h4>
@@ -518,7 +522,7 @@
         </div>
 
         <div class="study-section" id="women">
-            <h2 class="study-header" style="color:#6b3a5a;border-color:#6b3a5a;">Women of the Bible</h2>
+            <h2 class="study-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="color:#6b3a5a;border-color:#6b3a5a;">Women of the Bible <i class="fas fa-chevron-right chevron"></i></h2>
             <div class="item-grid">
                 <a href="women-ruth.html" class="item-card" style="border-left-color:#6b3a5a;">
                     <h4 style="color:#6b3a5a;">Ruth</h4>
@@ -564,7 +568,7 @@
         </div>
 
         <div class="study-section" id="kings">
-            <h2 class="study-header" style="color:#8b6914;border-color:#8b6914;">Kings of Israel &amp; Judah</h2>
+            <h2 class="study-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="color:#8b6914;border-color:#8b6914;">Kings of Israel &amp; Judah <i class="fas fa-chevron-right chevron"></i></h2>
             <div class="item-grid">
                 <a href="kings-saul.html" class="item-card" style="border-left-color:#8b6914;">
                     <h4 style="color:#8b6914;">Saul</h4>
@@ -606,7 +610,7 @@
         </div>
 
         <div class="study-section" id="promises">
-            <h2 class="study-header" style="color:#2c6b4f;border-color:#2c6b4f;">Promises of God</h2>
+            <h2 class="study-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="color:#2c6b4f;border-color:#2c6b4f;">Promises of God <i class="fas fa-chevron-right chevron"></i></h2>
             <div class="item-grid">
                 <a href="promises-provision.html" class="item-card" style="border-left-color:#2c6b4f;">
                     <h4 style="color:#2c6b4f;">Provision</h4>
@@ -660,7 +664,7 @@
         </div>
 
         <div class="study-section" id="prayers">
-            <h2 class="study-header" style="color:#4a5a8a;border-color:#4a5a8a;">Prayers in the Bible</h2>
+            <h2 class="study-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="color:#4a5a8a;border-color:#4a5a8a;">Prayers in the Bible <i class="fas fa-chevron-right chevron"></i></h2>
             <div class="item-grid">
                 <a href="prayers-the-lords-prayer.html" class="item-card" style="border-left-color:#4a5a8a;">
                     <h4 style="color:#4a5a8a;">The Lord's Prayer</h4>
@@ -706,7 +710,7 @@
         </div>
 
         <div class="study-section" id="prophecy">
-            <h2 class="study-header" style="color:#5c3d6e;border-color:#5c3d6e;">Prophecy &amp; Fulfillment</h2>
+            <h2 class="study-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="color:#5c3d6e;border-color:#5c3d6e;">Prophecy &amp; Fulfillment <i class="fas fa-chevron-right chevron"></i></h2>
             <div class="item-grid">
                 <a href="prophecy-born-of-a-virgin.html" class="item-card" style="border-left-color:#5c3d6e;">
                     <h4 style="color:#5c3d6e;">Born of a Virgin</h4>
@@ -752,7 +756,7 @@
         </div>
 
         <div class="study-section" id="disciplines">
-            <h2 class="study-header" style="color:#2a6b6b;border-color:#2a6b6b;">Spiritual Disciplines</h2>
+            <h2 class="study-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="color:#2a6b6b;border-color:#2a6b6b;">Spiritual Disciplines <i class="fas fa-chevron-right chevron"></i></h2>
             <div class="item-grid">
                 <a href="disciplines-prayer.html" class="item-card" style="border-left-color:#2a6b6b;">
                     <h4 style="color:#2a6b6b;">Prayer</h4>
@@ -790,7 +794,7 @@
         </div>
 
         <div class="study-section" id="trinity">
-            <h2 class="study-header" style="color:#4a3a6b;border-color:#4a3a6b;">The Trinity</h2>
+            <h2 class="study-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="color:#4a3a6b;border-color:#4a3a6b;">The Trinity <i class="fas fa-chevron-right chevron"></i></h2>
             <div class="item-grid">
                 <a href="trinity-god-the-father.html" class="item-card" style="border-left-color:#4a3a6b;">
                     <h4 style="color:#4a3a6b;">God the Father</h4>
@@ -820,7 +824,7 @@
         </div>
 
         <div class="study-section" id="gospel">
-            <h2 class="study-header" style="color:#8b3a2a;border-color:#8b3a2a;">The Gospel</h2>
+            <h2 class="study-header" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')" style="color:#8b3a2a;border-color:#8b3a2a;">The Gospel <i class="fas fa-chevron-right chevron"></i></h2>
             <div class="item-grid">
                 <a href="gospel-gods-holiness.html" class="item-card" style="border-left-color:#8b3a2a;">
                     <h4 style="color:#8b3a2a;">God's Holiness</h4>
