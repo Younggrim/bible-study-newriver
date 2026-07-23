@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <title>Jehovah Tsidkenu | Names of God — Bible Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="site/style.css">
+    <style>
+        .topic-hero { background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80") center/cover no-repeat; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 32px; box-shadow: var(--shadow-sm); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #c9a96e; letter-spacing: 0.5px; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #6b4c3b; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #4a3228; }
+        .back-link i { margin-right: 6px; }
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #6b4c3b; margin-bottom: 16px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .reflection-list { list-style: none; padding: 0; margin: 0; }
+        .reflection-list li { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 10px; padding-left: 22px; position: relative; }
+        .reflection-list li::before { content: "\f059"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: #6b4c3b; font-size: 0.8rem; top: 3px; }
+        .topic-dropdown { position: relative; display: inline-block; } .topic-dropdown-btn { background: rgba(255,255,255,0.9); border: 1px solid #6b4c3b; border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; color: #3d2b1f; cursor: pointer; transition: background 0.2s; } .topic-dropdown-btn:hover { background: var(--bg-card); } .topic-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid var(--border-light); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; min-width: 240px; z-index: 1000; margin-top: 6px; max-height: 400px; overflow-y: auto; } .topic-dropdown-menu.open { display: block; } .topic-dropdown-menu a { display: block; padding: 8px 18px; font-size: 0.83rem; color: #3d2b1f; text-decoration: none; font-weight: 500; transition: background 0.15s; } .topic-dropdown-menu a:hover { background: #f5ebe0; color: #6b4c3b; }
+        .verse-ref { color: #6b4c3b; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #4a3228; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#6b4c3b; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="index.html" class="nav-home-btn"><i class="fas fa-home"></i></a>
+        <a href="index.html" class="nav-brand">Bible Study</a>
+        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html"><strong>Names of God</strong></a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html">Parables of Jesus</a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
+    </nav>
+    <main class="main-content" style="margin-left:0; max-width:960px; margin-left:auto; margin-right:auto;">
+        <a href="topical-studies.html#names" class="back-link"><i class="fas fa-arrow-left"></i> Back to Names of God</a>
+        <div class="topic-hero">
+            <p class="subtitle">Names of God</p>
+            <h1>Jehovah Tsidkenu</h1>
+        </div>
+        <div class="section-block">
+            <h2>Understanding Jehovah Tsidkenu</h2>
+            <p>Jehovah Tsidkenu — "The LORD Our Righteousness" — is the prophetic name given to the coming Messiah in Jeremiah 23:6: "In his days Judah will be saved and Israel will live in safety. This is the name by which he will be called: The LORD Our Righteousness." The Hebrew word "tsidkenu" means "our righteousness," and it declares that the righteousness God's people need does not come from their own moral performance but from God Himself.</p>
+            <p>This name was given during one of Israel's darkest periods. The nation's kings were corrupt, the people had abandoned God's law, and judgment was imminent. Into this moral bankruptcy, God promised a righteous Branch — a King who would not only be righteous Himself but who would become righteousness for His people. It was a promise that God would solve the problem of human sin not by lowering His standard but by providing the righteousness we could never achieve on our own.</p>
+            <p>The New Testament reveals this promise fulfilled in Christ. Paul writes that God "made him who had no sin to be sin for us, so that in him we might become the righteousness of God" (2 Corinthians 5:21). This is the great exchange: Christ took our sin and gave us His righteousness. Jehovah Tsidkenu is not an abstract theological concept — it is the living reality that we stand before God clothed not in our own tattered moral performance but in the perfect righteousness of Christ.</p>
+        </div>
+        <div class="section-block">
+            <h2>Key Scriptures</h2>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Jeremiah 23:6')">Jeremiah 23:6</span> — "This is the name by which he will be called: The LORD Our Righteousness." The prophetic promise of a King who would be our righteousness.</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 3:21-22')">Romans 3:21-22</span> — "A righteousness from God, apart from law, has been made known... through faith in Jesus Christ to all who believe." Righteousness received, not achieved.</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 5:21')">2 Corinthians 5:21</span> — "God made him who had no sin to be sin for us, so that in him we might become the righteousness of God." The great exchange at the cross.</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 61:10')">Isaiah 61:10</span> — "He has clothed me with garments of salvation and arrayed me in a robe of his righteousness." The imagery of being dressed in God's own righteousness.</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 3:9')">Philippians 3:9</span> — "Not having a righteousness of my own... but that which is through faith in Christ." Paul's declaration of dependence on imputed righteousness.</li>
+            </ul>
+        </div>
+        <div class="section-block">
+            <h2>What This Name Means for Us</h2>
+            <p>Jehovah Tsidkenu frees us from the exhausting treadmill of trying to earn God's acceptance through our own moral effort. We cannot manufacture the righteousness God requires — it must be given. And it has been given, freely and fully, in Christ. When God looks at believers, He does not see our failures and shortcomings; He sees the perfect righteousness of His Son draped over us like a royal robe. This is not a legal fiction — it is a spiritual reality that transforms our standing before God from guilty to righteous.</p>
+            <p>This truth produces both humility and confidence. Humility, because we know our righteousness is entirely a gift — we have nothing to boast about. And confidence, because our standing before God does not fluctuate with our performance — it is as secure as Christ Himself is righteous. On our worst day, we are still clothed in His righteousness. This is the foundation of the gospel: not that we became good enough for God, but that God became our goodness.</p>
+        </div>
+        <div class="section-block">
+            <h2>Reflection Questions</h2>
+            <ul class="reflection-list">
+                <li>Do you tend to rely on your own moral performance for your standing before God, or do you rest in Christ's imputed righteousness?</li>
+                <li>How does understanding that righteousness is a gift (not an achievement) change how you respond to your own failures and sins?</li>
+                <li>In what ways does "The LORD Our Righteousness" free you from comparison, perfectionism, or religious performance?</li>
+                <li>How can you live out the confidence that comes from being clothed in Christ's righteousness without becoming complacent about personal holiness?</li>
+            </ul>
+        </div>
+        <div class="section-block">
+            <h2 style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;" onclick="var s=this.parentElement.querySelector('#videoSection');if(s){s.style.display=s.style.display==='none'?'block':'none';this.querySelector('.chevron').style.transform=s.style.display==='none'?'':'rotate(90deg)';}"><span>Video Resources</span><i class="fas fa-chevron-right chevron" style="font-size:0.8rem;transition:transform 0.2s;"></i></h2>
+            <div id="videoSection" style="display:none;">
+                <p style="font-size:0.9rem;color:#8a7e74;font-style:italic;">Videos coming soon.</p>
+            </div>
+        </div>
+    </main>
+    <script src="site/script.js"></script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) { textEl.innerHTML = data.passages[0]; } else { textEl.innerHTML = '<em>Could not load this passage.</em>'; }
+        }).catch(function() { textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>'; });
+    }
+    function closeVerse() { document.getElementById('verseOverlay').classList.remove('show'); document.getElementById('versePopup').classList.remove('show'); }
+    </script>
+</body>
+</html>

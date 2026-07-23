@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <title>Jehovah Rapha | Names of God — Bible Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="site/style.css">
+    <style>
+        .topic-hero { background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=1200&q=80") center/cover no-repeat; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 32px; box-shadow: var(--shadow-sm); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #c9a96e; letter-spacing: 0.5px; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #6b4c3b; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #4a3228; }
+        .back-link i { margin-right: 6px; }
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #6b4c3b; margin-bottom: 16px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .reflection-list { list-style: none; padding: 0; margin: 0; }
+        .reflection-list li { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 10px; padding-left: 22px; position: relative; }
+        .reflection-list li::before { content: "\f059"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: #6b4c3b; font-size: 0.8rem; top: 3px; }
+        .topic-dropdown { position: relative; display: inline-block; } .topic-dropdown-btn { background: rgba(255,255,255,0.9); border: 1px solid #6b4c3b; border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; color: #3d2b1f; cursor: pointer; transition: background 0.2s; } .topic-dropdown-btn:hover { background: var(--bg-card); } .topic-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid var(--border-light); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; min-width: 240px; z-index: 1000; margin-top: 6px; max-height: 400px; overflow-y: auto; } .topic-dropdown-menu.open { display: block; } .topic-dropdown-menu a { display: block; padding: 8px 18px; font-size: 0.83rem; color: #3d2b1f; text-decoration: none; font-weight: 500; transition: background 0.15s; } .topic-dropdown-menu a:hover { background: #f5ebe0; color: #6b4c3b; }
+        .verse-ref { color: #6b4c3b; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #4a3228; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#6b4c3b; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="index.html" class="nav-home-btn"><i class="fas fa-home"></i></a>
+        <a href="index.html" class="nav-brand">Bible Study</a>
+        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html"><strong>Names of God</strong></a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html">Parables of Jesus</a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
+    </nav>
+    <main class="main-content" style="margin-left:0; max-width:960px; margin-left:auto; margin-right:auto;">
+        <a href="topical-studies.html#names" class="back-link"><i class="fas fa-arrow-left"></i> Back to Names of God</a>
+        <div class="topic-hero">
+            <p class="subtitle">Names of God</p>
+            <h1>Jehovah Rapha</h1>
+        </div>
+        <div class="section-block">
+            <h2>Understanding Jehovah Rapha</h2>
+            <p>Jehovah Rapha — "The LORD Who Heals" — is revealed in Exodus 15:26, shortly after Israel crossed the Red Sea. At the waters of Marah, which were bitter and undrinkable, God made the waters sweet and declared: "I am the LORD who heals you." The Hebrew word "rapha" means to heal, cure, or restore to wholeness. It encompasses physical healing, emotional restoration, and spiritual renewal — a comprehensive mending of all that is broken.</p>
+            <p>This name appears in a context of testing and trust. Israel had just witnessed God's miraculous deliverance at the Red Sea, yet three days later they grumbled because the water was bitter. God's response was not anger but healing — He transformed the bitter into sweet and revealed Himself as the Healer. This pattern runs throughout Scripture: in our moments of bitterness, complaint, and brokenness, God meets us not with condemnation but with restoration.</p>
+            <p>Jehovah Rapha's healing extends far beyond physical ailments. He heals broken hearts (Psalm 147:3), restores wounded spirits, mends fractured relationships, and ultimately heals the deepest wound of all — our separation from God due to sin. Isaiah prophesied that the Messiah would be "pierced for our transgressions" and that "by his wounds we are healed" (Isaiah 53:5). In Jesus, Jehovah Rapha's healing ministry reaches its fullest expression.</p>
+        </div>
+        <div class="section-block">
+            <h2>Key Scriptures</h2>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Exodus 15:26')">Exodus 15:26</span> — "I am the LORD, who heals you." God's foundational self-revelation as Healer, given at the bitter waters of Marah.</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 103:2-3')">Psalm 103:2-3</span> — "Praise the LORD... who forgives all your sins and heals all your diseases." David connects forgiveness and healing as twin expressions of God's grace.</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 53:5')">Isaiah 53:5</span> — "By his wounds we are healed." The ultimate fulfillment of Jehovah Rapha through the suffering Servant, Jesus Christ.</li>
+                <li><span class="verse-ref" onclick="showVerse('James 5:14-15')">James 5:14-15</span> — "The prayer offered in faith will make the sick person well; the Lord will raise them up." The ongoing ministry of healing in the church.</li>
+                <li><span class="verse-ref" onclick="showVerse('Jeremiah 17:14')">Jeremiah 17:14</span> — "Heal me, LORD, and I will be healed; save me and I will be saved." A prayer of complete trust in Jehovah Rapha's power.</li>
+            </ul>
+        </div>
+        <div class="section-block">
+            <h2>What This Name Means for Us</h2>
+            <p>In a world full of brokenness — broken bodies, broken relationships, broken hearts — Jehovah Rapha offers hope that wholeness is possible. He does not always heal in the way or timing we expect, but He is always at work restoring what sin, suffering, and the fall have damaged. Sometimes His healing is instantaneous and miraculous; sometimes it comes through the slow, faithful process of sanctification and time. But His nature as Healer never changes.</p>
+            <p>Knowing God as Jehovah Rapha gives us permission to bring our wounds to Him honestly. We do not need to pretend we are not hurting or hide our brokenness behind religious performance. The God who turned bitter water sweet invites us to bring our bitterest experiences to Him — our grief, our trauma, our shame — and trust Him to bring healing. He is the divine Physician who treats the whole person: body, soul, and spirit.</p>
+        </div>
+        <div class="section-block">
+            <h2>Reflection Questions</h2>
+            <ul class="reflection-list">
+                <li>What areas of your life need the healing touch of Jehovah Rapha — physically, emotionally, or spiritually?</li>
+                <li>Have you experienced "bitter waters" in your life that God has transformed into something sweet? How did that process unfold?</li>
+                <li>How do you reconcile trusting in God as Healer when healing doesn't come in the way or timing you hoped for?</li>
+                <li>What does it look like to bring your deepest wounds honestly to God rather than hiding them or minimizing them?</li>
+            </ul>
+        </div>
+        <div class="section-block">
+            <h2 style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;" onclick="var s=this.parentElement.querySelector('#videoSection');if(s){s.style.display=s.style.display==='none'?'block':'none';this.querySelector('.chevron').style.transform=s.style.display==='none'?'':'rotate(90deg)';}"><span>Video Resources</span><i class="fas fa-chevron-right chevron" style="font-size:0.8rem;transition:transform 0.2s;"></i></h2>
+            <div id="videoSection" style="display:none;">
+                <p style="font-size:0.9rem;color:#8a7e74;font-style:italic;">Videos coming soon.</p>
+            </div>
+        </div>
+    </main>
+    <script src="site/script.js"></script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) { textEl.innerHTML = data.passages[0]; } else { textEl.innerHTML = '<em>Could not load this passage.</em>'; }
+        }).catch(function() { textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>'; });
+    }
+    function closeVerse() { document.getElementById('verseOverlay').classList.remove('show'); document.getElementById('versePopup').classList.remove('show'); }
+    </script>
+</body>
+</html>

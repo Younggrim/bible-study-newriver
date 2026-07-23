@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <title>Adonai | Names of God — Bible Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="site/style.css">
+    <style>
+        .topic-hero { background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80") center/cover no-repeat; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 32px; box-shadow: var(--shadow-sm); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #c9a96e; letter-spacing: 0.5px; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #6b4c3b; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #4a3228; }
+        .back-link i { margin-right: 6px; }
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #6b4c3b; margin-bottom: 16px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .reflection-list { list-style: none; padding: 0; margin: 0; }
+        .reflection-list li { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 10px; padding-left: 22px; position: relative; }
+        .reflection-list li::before { content: "\f059"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: #6b4c3b; font-size: 0.8rem; top: 3px; }
+        .video-toggle-btn { background: #6b4c3b; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 16px; }
+        .video-toggle-btn:hover { background: #4a3228; }
+        .video-section { display: none; } .video-section.open { display: block; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+        .topic-dropdown { position: relative; display: inline-block; } .topic-dropdown-btn { background: rgba(255,255,255,0.9); border: 1px solid #6b4c3b; border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; color: #3d2b1f; cursor: pointer; transition: background 0.2s; } .topic-dropdown-btn:hover { background: var(--bg-card); } .topic-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid var(--border-light); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; min-width: 240px; z-index: 1000; margin-top: 6px; max-height: 400px; overflow-y: auto; } .topic-dropdown-menu.open { display: block; } .topic-dropdown-menu a { display: block; padding: 8px 18px; font-size: 0.83rem; color: #3d2b1f; text-decoration: none; font-weight: 500; transition: background 0.15s; } .topic-dropdown-menu a:hover { background: #f5ebe0; color: #6b4c3b; }
+        .verse-ref { color: #6b4c3b; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #4a3228; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#6b4c3b; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="index.html" class="nav-home-btn"><i class="fas fa-home"></i></a>
+        <a href="index.html" class="nav-brand">Bible Study</a>
+        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html"><strong>Names of God</strong></a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html">Parables of Jesus</a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
+    </nav>
+    <main class="main-content" style="margin-left:0; max-width:960px; margin-left:auto; margin-right:auto;">
+        <a href="topical-studies.html#names" class="back-link"><i class="fas fa-arrow-left"></i> Back to Names of God</a>
+        <div class="topic-hero">
+            <p class="subtitle">Names of God</p>
+            <h1>Adonai</h1>
+        </div>
+        <div class="section-block">
+            <h2>Understanding Adonai</h2>
+            <p>Adonai is the Hebrew word meaning "Lord" or "Master," and it speaks of God's absolute sovereignty and authority over all things. It is the plural form of "Adon" (lord), intensified to express supreme lordship. In ancient Israel, this title acknowledged God as the ultimate ruler — the One who has the right to command, direct, and govern every aspect of creation and human life.</p>
+            <p>This name became especially significant because devout Jews would say "Adonai" whenever they encountered the tetragrammaton (YHWH) in Scripture, considering God's covenant name too holy to pronounce. Over time, Adonai became inseparably linked with the concept of divine authority. When Isaiah beheld the Lord "high and lifted up" in his temple vision (Isaiah 6:1), the word used is Adonai — the sovereign Master seated upon His throne in unapproachable majesty.</p>
+            <p>To call God "Adonai" is to acknowledge that He is not merely a helper or advisor — He is Lord. It implies total submission: a servant does not question the master's right to command. Yet unlike earthly masters, Adonai rules with perfect wisdom, boundless love, and infinite justice. His lordship is not oppressive but liberating, for to be under His authority is to be under His protection and care.</p>
+        </div>
+        <div class="section-block">
+            <h2>Key Scriptures</h2>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Psalm 8:1')">Psalm 8:1</span> — "LORD, our Lord, how majestic is your name in all the earth!" David marvels that the sovereign Master of the universe notices mankind.</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 6:1')">Isaiah 6:1</span> — "I saw the Lord, high and exalted, seated on a throne." Isaiah encounters Adonai in overwhelming holiness and sovereign glory.</li>
+                <li><span class="verse-ref" onclick="showVerse('Malachi 1:6')">Malachi 1:6</span> — "A son honors his father, and a slave his master. If I am a master, where is the respect due me?" Adonai demands the honor due His lordship.</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 110:1')">Psalm 110:1</span> — "The LORD says to my Lord: 'Sit at my right hand.'" A messianic psalm revealing the divine lordship of Christ.</li>
+                <li><span class="verse-ref" onclick="showVerse('Joshua 3:11')">Joshua 3:11</span> — "The ark of the covenant of the Lord of all the earth will go before you." Adonai goes before His people as sovereign over every nation.</li>
+            </ul>
+        </div>
+        <div class="section-block">
+            <h2>What This Name Means for Us</h2>
+            <p>Calling God "Adonai" is an act of surrender. It means acknowledging that our lives are not our own — that we have been bought with a price and belong to a Master who has every right to direct our steps. In a culture that celebrates autonomy and self-determination, this name challenges us to release the illusion of control and place our trust in the One whose plans are always higher and better than our own.</p>
+            <p>Yet surrendering to Adonai is not a loss — it is the truest freedom. When we submit to His lordship, we are freed from the tyranny of our own limited wisdom, the anxiety of carrying burdens too heavy for us, and the fear of an uncertain future. Adonai is the kind of Master who lays down His life for His servants, who calls us friends, and who works all things together for our good. His authority is perfect love in action.</p>
+        </div>
+        <div class="section-block">
+            <h2>Reflection Questions</h2>
+            <ul class="reflection-list">
+                <li>Are there areas of your life where you resist God's lordship — where you want to remain in control rather than surrendering to Adonai?</li>
+                <li>How does Isaiah's response to encountering Adonai ("Here am I, send me!") challenge your own posture of availability before God?</li>
+                <li>What is the difference between serving God out of duty and serving Him out of love? How does understanding His character change your motivation?</li>
+            </ul>
+        </div>
+        <div class="section-block">
+            <h2 style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;" onclick="var s=this.parentElement.querySelector('#videoSection');if(s){s.style.display=s.style.display==='none'?'block':'none';this.querySelector('.chevron').style.transform=s.style.display==='none'?'':'rotate(90deg)';}"><span>Video Resources</span><i class="fas fa-chevron-right chevron" style="font-size:0.8rem;transition:transform 0.2s;"></i></h2>
+            <div id="videoSection" style="display:none;">
+                <p style="font-size:0.9rem;color:#8a7e74;font-style:italic;">Videos coming soon.</p>
+            </div>
+        </div>
+    </main>
+    <script src="site/script.js"></script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) { textEl.innerHTML = data.passages[0]; } else { textEl.innerHTML = '<em>Could not load this passage.</em>'; }
+        }).catch(function() { textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>'; });
+    }
+    function closeVerse() { document.getElementById('verseOverlay').classList.remove('show'); document.getElementById('versePopup').classList.remove('show'); }
+    </script>
+</body>
+</html>

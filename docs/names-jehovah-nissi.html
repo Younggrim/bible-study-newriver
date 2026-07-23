@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <title>Jehovah Nissi | Names of God — Bible Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="site/style.css">
+    <style>
+        .topic-hero { background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=1200&q=80") center/cover no-repeat; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 32px; box-shadow: var(--shadow-sm); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #c9a96e; letter-spacing: 0.5px; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #6b4c3b; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #4a3228; }
+        .back-link i { margin-right: 6px; }
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #6b4c3b; margin-bottom: 16px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .reflection-list { list-style: none; padding: 0; margin: 0; }
+        .reflection-list li { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 10px; padding-left: 22px; position: relative; }
+        .reflection-list li::before { content: "\f059"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: #6b4c3b; font-size: 0.8rem; top: 3px; }
+        .topic-dropdown { position: relative; display: inline-block; } .topic-dropdown-btn { background: rgba(255,255,255,0.9); border: 1px solid #6b4c3b; border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; color: #3d2b1f; cursor: pointer; transition: background 0.2s; } .topic-dropdown-btn:hover { background: var(--bg-card); } .topic-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid var(--border-light); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; min-width: 240px; z-index: 1000; margin-top: 6px; max-height: 400px; overflow-y: auto; } .topic-dropdown-menu.open { display: block; } .topic-dropdown-menu a { display: block; padding: 8px 18px; font-size: 0.83rem; color: #3d2b1f; text-decoration: none; font-weight: 500; transition: background 0.15s; } .topic-dropdown-menu a:hover { background: #f5ebe0; color: #6b4c3b; }
+        .verse-ref { color: #6b4c3b; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #4a3228; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#6b4c3b; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="index.html" class="nav-home-btn"><i class="fas fa-home"></i></a>
+        <a href="index.html" class="nav-brand">Bible Study</a>
+        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html"><strong>Names of God</strong></a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html">Parables of Jesus</a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
+    </nav>
+    <main class="main-content" style="margin-left:0; max-width:960px; margin-left:auto; margin-right:auto;">
+        <a href="topical-studies.html#names" class="back-link"><i class="fas fa-arrow-left"></i> Back to Names of God</a>
+        <div class="topic-hero">
+            <p class="subtitle">Names of God</p>
+            <h1>Jehovah Nissi</h1>
+        </div>
+        <div class="section-block">
+            <h2>Understanding Jehovah Nissi</h2>
+            <p>Jehovah Nissi — "The LORD Is My Banner" — is the name Moses gave to the altar he built after Israel's victory over the Amalekites at Rephidim (Exodus 17:15). In ancient warfare, a banner (or standard) served as a rallying point for troops — a visible sign of identity, authority, and the cause for which they fought. By naming the altar Jehovah Nissi, Moses declared that God Himself was Israel's rallying point, their standard, and the source of their victory.</p>
+            <p>The battle at Rephidim was won not by military strategy but by divine power: as long as Moses held up his hands (with the staff of God), Israel prevailed; when his arms dropped, Amalek prevailed. Aaron and Hur held up Moses' hands until sunset, and Israel won. The victory belonged entirely to God — He was the banner under which they fought and conquered. The human role was simply to look up, to depend, and to persevere in faith.</p>
+            <p>A banner also signifies love and belonging. Song of Solomon 2:4 says, "His banner over me is love." Jehovah Nissi is not only the God who fights for us but the God who claims us as His own. We march under His banner — identified with Him, protected by Him, and fighting for His cause. In spiritual warfare, we do not fight alone or in our own strength; we fight under the victorious banner of our God.</p>
+        </div>
+        <div class="section-block">
+            <h2>Key Scriptures</h2>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Exodus 17:15')">Exodus 17:15</span> — "Moses built an altar and called it The LORD is my Banner." The foundational moment when God revealed Himself as our standard of victory.</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 20:5')">Psalm 20:5</span> — "May we shout for joy over your victory and lift up our banners in the name of our God." Victory celebrations belong to the One who fights for us.</li>
+                <li><span class="verse-ref" onclick="showVerse('Song of Solomon 2:4')">Song of Solomon 2:4</span> — "He brought me to the banqueting house, and his banner over me was love." God's banner is not only victory but intimate, protective love.</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 11:10')">Isaiah 11:10</span> — "The Root of Jesse will stand as a banner for the peoples." Christ Himself is the banner around whom all nations will rally.</li>
+                <li><span class="verse-ref" onclick="showVerse('Deuteronomy 20:3-4')">Deuteronomy 20:3-4</span> — "Do not be fainthearted... for the LORD your God is the one who goes with you to fight for you." God's personal presence in our battles.</li>
+            </ul>
+        </div>
+        <div class="section-block">
+            <h2>What This Name Means for Us</h2>
+            <p>Jehovah Nissi reminds us that the spiritual battles we face are not ours to win alone. Whether we struggle against temptation, opposition, discouragement, or spiritual attack, God is our banner — our rallying point and source of victory. We do not need to generate our own strength or devise our own strategies. We need only to lift our eyes to Him, to rally under His banner, and to trust that the battle belongs to the Lord.</p>
+            <p>This name also speaks to our identity. In a world that offers countless banners to march under — political ideologies, cultural movements, personal ambitions — Jehovah Nissi calls us to pledge our allegiance to Him alone. His banner over us is love, and when we march under His standard, we carry His identity into every arena of life. We represent Him, we are protected by Him, and we are assured that ultimate victory is certain because He has already overcome the world.</p>
+        </div>
+        <div class="section-block">
+            <h2>Reflection Questions</h2>
+            <ul class="reflection-list">
+                <li>What spiritual battles are you currently facing? How does knowing Jehovah Nissi fights for you change your approach to those battles?</li>
+                <li>Like Moses needed Aaron and Hur to hold up his arms, who in your life supports you in persevering through difficult seasons?</li>
+                <li>What "banners" are you tempted to rally under besides God? How can you realign your primary allegiance to Jehovah Nissi?</li>
+            </ul>
+        </div>
+        <div class="section-block">
+            <h2 style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;" onclick="var s=this.parentElement.querySelector('#videoSection');if(s){s.style.display=s.style.display==='none'?'block':'none';this.querySelector('.chevron').style.transform=s.style.display==='none'?'':'rotate(90deg)';}"><span>Video Resources</span><i class="fas fa-chevron-right chevron" style="font-size:0.8rem;transition:transform 0.2s;"></i></h2>
+            <div id="videoSection" style="display:none;">
+                <p style="font-size:0.9rem;color:#8a7e74;font-style:italic;">Videos coming soon.</p>
+            </div>
+        </div>
+    </main>
+    <script src="site/script.js"></script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) { textEl.innerHTML = data.passages[0]; } else { textEl.innerHTML = '<em>Could not load this passage.</em>'; }
+        }).catch(function() { textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>'; });
+    }
+    function closeVerse() { document.getElementById('verseOverlay').classList.remove('show'); document.getElementById('versePopup').classList.remove('show'); }
+    </script>
+</body>
+</html>

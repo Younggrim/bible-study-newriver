@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <title>Elohim | Names of God — Bible Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="site/style.css">
+    <style>
+        .topic-hero { background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80") center/cover no-repeat; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 32px; box-shadow: var(--shadow-sm); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #c9a96e; letter-spacing: 0.5px; }
+
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #6b4c3b; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #4a3228; }
+        .back-link i { margin-right: 6px; }
+
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #6b4c3b; margin-bottom: 16px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .reflection-list { list-style: none; padding: 0; margin: 0; }
+        .reflection-list li { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 10px; padding-left: 22px; position: relative; }
+        .reflection-list li::before { content: "\f059"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: #6b4c3b; font-size: 0.8rem; top: 3px; }
+
+        .video-toggle-btn { background: #6b4c3b; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 16px; }
+        .video-toggle-btn:hover { background: #4a3228; }
+        .video-section { display: none; }
+        .video-section.open { display: block; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+
+        .topic-dropdown { position: relative; display: inline-block; } .topic-dropdown-btn { background: rgba(255,255,255,0.9); border: 1px solid #6b4c3b; border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; color: #3d2b1f; cursor: pointer; transition: background 0.2s; } .topic-dropdown-btn:hover { background: var(--bg-card); } .topic-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid var(--border-light); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; min-width: 240px; z-index: 1000; margin-top: 6px; max-height: 400px; overflow-y: auto; } .topic-dropdown-menu.open { display: block; } .topic-dropdown-menu a { display: block; padding: 8px 18px; font-size: 0.83rem; color: #3d2b1f; text-decoration: none; font-weight: 500; transition: background 0.15s; } .topic-dropdown-menu a:hover { background: #f5ebe0; color: #6b4c3b; }
+
+        /* Verse Popup */
+        .verse-ref { color: #6b4c3b; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #4a3228; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#6b4c3b; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="index.html" class="nav-home-btn"><i class="fas fa-home"></i></a>
+        <a href="index.html" class="nav-brand">Bible Study</a>
+        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html"><strong>Names of God</strong></a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html">Parables of Jesus</a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
+    </nav>
+    <main class="main-content" style="margin-left:0; max-width:960px; margin-left:auto; margin-right:auto;">
+        <a href="topical-studies.html#names" class="back-link"><i class="fas fa-arrow-left"></i> Back to Names of God</a>
+
+        <div class="topic-hero">
+            <p class="subtitle">Names of God</p>
+            <h1>Elohim</h1>
+        </div>
+
+        <!-- Section 1: Understanding Elohim -->
+        <div class="section-block">
+            <h2>Understanding Elohim</h2>
+            <p>Elohim is the very first name for God that appears in Scripture, introduced in the opening verse of the Bible: "In the beginning, God (Elohim) created the heavens and the earth" (Genesis 1:1). The Hebrew word is grammatically plural, yet it is consistently used with singular verbs when referring to the one true God. This "plural of majesty" hints at the fullness and complexity of God's nature — a God so vast that no singular term can contain Him — and foreshadows the triune nature revealed more fully in the New Testament.</p>
+            <p>The root of Elohim is "El," meaning strength, might, or power. As Elohim, God is presented as the supreme Creator who spoke the universe into existence by the sheer authority of His word. He is not a distant clockmaker but an intimately involved architect who designed every star, every creature, and every human soul with intentionality and purpose. The name carries the weight of absolute power combined with infinite wisdom.</p>
+            <p>Throughout the Old Testament, Elohim appears over 2,500 times, making it the most frequently used name for God in the Hebrew Scriptures. It is the name associated with God's role as sovereign judge, mighty warrior, and faithful Creator. When the psalmist looks at the heavens and declares "the work of your fingers," he is addressing Elohim — the God whose creative power is matched only by His sustaining care for all that He has made.</p>
+        </div>
+
+        <!-- Section 2: Key Scriptures -->
+        <div class="section-block">
+            <h2>Key Scriptures</h2>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Genesis 1:1')">Genesis 1:1</span> — "In the beginning, God created the heavens and the earth." The opening declaration of God's creative power and sovereign authority over all existence.</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 19:1')">Psalm 19:1</span> — "The heavens declare the glory of God; the skies proclaim the work of his hands." Creation itself testifies to Elohim's magnificent handiwork.</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 40:28')">Isaiah 40:28</span> — "Do you not know? Have you not heard? The LORD is the everlasting God, the Creator of the ends of the earth." Elohim never grows weary or faint.</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 104:24')">Psalm 104:24</span> — "How many are your works, LORD! In wisdom you made them all; the earth is full of your creatures." The diversity of creation reflects Elohim's infinite creativity.</li>
+                <li><span class="verse-ref" onclick="showVerse('Nehemiah 9:6')">Nehemiah 9:6</span> — "You alone are the LORD. You made the heavens... the earth and all that is on it." A declaration of Elohim's unique and unshared creative power.</li>
+            </ul>
+        </div>
+
+        <!-- Section 3: What This Name Means for Us -->
+        <div class="section-block">
+            <h2>What This Name Means for Us</h2>
+            <p>Knowing God as Elohim means we serve a Creator who is infinitely powerful and purposeful. Nothing in our lives is accidental or beyond His ability to redeem. The same God who spoke galaxies into existence is the God who knit us together in our mother's womb. His creative power is not limited to the opening chapters of Genesis — He continues to create new hearts, new beginnings, and new possibilities in the lives of those who trust Him.</p>
+            <p>When we feel small or insignificant, the name Elohim reminds us that we were fashioned by the most powerful being in existence, and that He declared His creation — including us — "very good." When we face problems that seem insurmountable, we can remember that our God is Elohim: the God for whom nothing is too difficult, the God who creates ex nihilo — something out of nothing — and who specializes in bringing order out of chaos.</p>
+        </div>
+
+        <!-- Section 4: Reflection Questions -->
+        <div class="section-block">
+            <h2>Reflection Questions</h2>
+            <ul class="reflection-list">
+                <li>When you look at the natural world, what aspects of creation most powerfully reveal God's character to you?</li>
+                <li>In what areas of your life do you need to trust Elohim's creative power to bring something new out of what feels empty or chaotic?</li>
+                <li>How does knowing you were intentionally created by the all-powerful God change how you view your own worth and purpose?</li>
+                <li>What does it mean practically to worship God as Creator in your daily life — not just on Sundays but in how you steward His creation?</li>
+            </ul>
+        </div>
+
+        <!-- Section 5: Video Resources -->
+        <div class="section-block">
+            <h2 style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;" onclick="var s=this.parentElement.querySelector('#videoSection');if(s){s.style.display=s.style.display==='none'?'block':'none';this.querySelector('.chevron').style.transform=s.style.display==='none'?'':'rotate(90deg)';}"><span>Video Resources</span><i class="fas fa-chevron-right chevron" style="font-size:0.8rem;transition:transform 0.2s;"></i></h2>
+            <div id="videoSection" style="display:none;">
+                <p style="font-size:0.9rem;color:#8a7e74;font-style:italic;">Videos coming soon.</p>
+            </div>
+        </div>
+    </main>
+    <script src="site/script.js"></script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+
+    <!-- Verse Popup Elements -->
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) {
+                textEl.innerHTML = data.passages[0];
+            } else {
+                textEl.innerHTML = '<em>Could not load this passage.</em>';
+            }
+        })
+        .catch(function() {
+            textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>';
+        });
+    }
+    function closeVerse() {
+        document.getElementById('verseOverlay').classList.remove('show');
+        document.getElementById('versePopup').classList.remove('show');
+    }
+    </script>
+</body>
+</html>
