@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <title>Matthew (Levi) | The 12 Apostles — Bible Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="site/style.css">
+    <style>
+        .topic-hero { background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80") center/cover no-repeat; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 32px; box-shadow: var(--shadow-sm); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #e8b4a0; letter-spacing: 0.5px; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #8b3a2a; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #5c2518; }
+        .back-link i { margin-right: 6px; }
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #8b3a2a; margin-bottom: 16px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .reflection-list { list-style: none; padding: 0; margin: 0; }
+        .reflection-list li { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 10px; padding-left: 22px; position: relative; }
+        .reflection-list li::before { content: "\f059"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: #8b3a2a; font-size: 0.8rem; top: 3px; }
+        .video-toggle-btn { background: #8b3a2a; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 16px; }
+        .video-toggle-btn:hover { background: #5c2518; }
+        .video-section { display: none; }
+        .video-section.open { display: block; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+        .topic-dropdown { position: relative; display: inline-block; } .topic-dropdown-btn { background: rgba(255,255,255,0.9); border: 1px solid #8b3a2a; border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; color: #3d2b1f; cursor: pointer; transition: background 0.2s; } .topic-dropdown-btn:hover { background: var(--bg-card); } .topic-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid var(--border-light); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; min-width: 240px; z-index: 1000; margin-top: 6px; max-height: 400px; overflow-y: auto; } .topic-dropdown-menu.open { display: block; } .topic-dropdown-menu a { display: block; padding: 8px 18px; font-size: 0.83rem; color: #3d2b1f; text-decoration: none; font-weight: 500; transition: background 0.15s; } .topic-dropdown-menu a:hover { background: #f5ebe0; color: #8b3a2a; }
+        .verse-ref { color: #8b3a2a; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #5c2518; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#8b3a2a; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="index.html" class="nav-home-btn"><i class="fas fa-home"></i></a>
+        <a href="index.html" class="nav-brand">Bible Study</a>
+        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html">Names of God</a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html">Parables of Jesus</a><a href="the-12-apostles.html"><strong>The 12 Apostles</strong></a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
+    </nav>
+    <main class="main-content" style="margin-left:0; max-width:960px; margin-left:auto; margin-right:auto;">
+        <a href="topical-studies.html#apostles" class="back-link"><i class="fas fa-arrow-left"></i> Back to The 12 Apostles</a>
+
+        <div class="topic-hero">
+            <p class="subtitle">The 12 Apostles</p>
+            <h1>Matthew — Levi</h1>
+        </div>
+
+        <div class="section-block">
+            <h2>Who Was Matthew</h2>
+            <p>Matthew, also called Levi, was a tax collector in Capernaum before Jesus called him to be an apostle. In first-century Palestine, tax collectors were despised as traitors who collaborated with the Roman occupiers and often enriched themselves through extortion. They were socially ostracized, grouped with sinners and prostitutes, and barred from the synagogue. Matthew's profession made him one of the most unlikely candidates for apostleship — and that is precisely why Jesus chose him.</p>
+            <p>The call of Matthew is one of the most dramatic moments in the Gospels. Jesus simply walked up to his tax booth and said, "Follow me." Matthew immediately rose, left everything behind, and followed. There was no negotiation, no transition period, no request to settle his accounts. The decisiveness of his response suggests that Matthew may have already been listening to Jesus' teaching and was ready for a new life. His first act as a disciple was to throw a great feast at his home, inviting his fellow tax collectors and sinners to meet Jesus — earning criticism from the Pharisees but a powerful declaration from Christ: "I came not to call the righteous, but sinners."</p>
+            <p>Matthew is credited with writing the Gospel that bears his name — the first book of the New Testament. His Gospel is distinctly Jewish in character, written to demonstrate that Jesus is the promised Messiah, the fulfillment of Old Testament prophecy. Matthew's training as a tax collector — which required meticulous record-keeping and attention to detail — uniquely equipped him to compile and organize the teachings and events of Jesus' life. God redeemed his past and used the very skills that once served corruption to serve the gospel.</p>
+        </div>
+
+        <div class="section-block">
+            <h2>Key Scriptures</h2>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 9:9-13')">Matthew 9:9-13</span> — Jesus calls Matthew from the tax booth; Matthew follows immediately and hosts a feast where Jesus declares He came for sinners.</li>
+                <li><span class="verse-ref" onclick="showVerse('Mark 2:14')">Mark 2:14</span> — Mark's account of Jesus calling Levi the son of Alphaeus from his tax collection post to follow Him.</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 5:27-32')">Luke 5:27-32</span> — Luke records Levi leaving everything, the great banquet, and Jesus' response that the sick need a physician.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 10:3')">Matthew 10:3</span> — In his own Gospel, Matthew identifies himself as "Matthew the tax collector" — a humble acknowledgment of his past.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 1:1')">Matthew 1:1</span> — Matthew opens his Gospel declaring Jesus as the son of David, the son of Abraham — the promised King of Israel.</li>
+            </ul>
+        </div>
+
+        <div class="section-block">
+            <h2>Lessons from Matthew</h2>
+            <p>Matthew's life is a testament to the transforming power of grace. No one is too far gone, too compromised, or too stained by their past for Jesus to call and use. The religious establishment had written Matthew off as irredeemable — but Jesus saw a future apostle and Gospel writer sitting at that tax booth. Matthew teaches us that God's calling is not based on our past résumé but on His sovereign purpose. Whatever you have been or done, the voice of Jesus still says "Follow me" — and that invitation changes everything.</p>
+            <p>From Matthew we also learn that God redeems our skills and experiences — even those developed in ungodly contexts. Matthew's literacy, his facility with numbers, his habit of keeping detailed records — all developed in the service of Roman taxation — became the very tools God used to give the world the first written Gospel. Nothing in your past is wasted when surrendered to Christ. The abilities you developed, the connections you made, the knowledge you gained — even in seasons of rebellion — can all be repurposed for the kingdom when placed in God's hands.</p>
+        </div>
+
+        <div class="section-block">
+            <h2>Reflection Questions</h2>
+            <ul class="reflection-list">
+                <li>Is there a part of your past that you believe disqualifies you from being used by God? How does Matthew's story challenge that belief?</li>
+                <li>Matthew left everything immediately when Jesus called. Are there things you are clinging to that prevent you from fully following Christ?</li>
+                <li>Matthew's first response to meeting Jesus was to invite his friends to meet Him too. Who are the "sinners" in your life that you could bring to Jesus?</li>
+                <li>What skills or experiences from your past — even difficult seasons — might God be redeeming for His purposes today?</li>
+            </ul>
+        </div>
+
+        <div class="section-block">
+            <h2>Video Resources</h2>
+            <button class="video-toggle-btn" onclick="toggleVideos()"><i class="fas fa-play-circle" style="margin-right:6px;"></i>Show Videos</button>
+            <div class="video-section" id="videoSection">
+                <div class="video-grid">
+                    <p style="color:#8a7e74; font-style:italic;">Videos coming soon.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="site/script.js"></script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    function toggleVideos(){var s=document.getElementById("videoSection");s.classList.toggle("open");var btn=s.previousElementSibling;btn.innerHTML=s.classList.contains("open")?'<i class="fas fa-eye-slash" style="margin-right:6px;"></i>Hide Videos':'<i class="fas fa-play-circle" style="margin-right:6px;"></i>Show Videos';}
+    function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) {
+                textEl.innerHTML = data.passages[0];
+            } else {
+                textEl.innerHTML = '<em>Could not load this passage.</em>';
+            }
+        })
+        .catch(function() {
+            textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>';
+        });
+    }
+    function closeVerse() {
+        document.getElementById('verseOverlay').classList.remove('show');
+        document.getElementById('versePopup').classList.remove('show');
+    }
+    </script>
+</body>
+</html>
