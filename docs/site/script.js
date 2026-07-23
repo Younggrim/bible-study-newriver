@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var strugglePages = ['addiction','anger','anxiety-and-fear','depression-and-hopelessness',
         'doubt-and-unbelief','greed-and-materialism','grief-and-loss','identity-and-self-worth',
         'loneliness','lust-and-sexual-sin','pride','suffering','temptation',
-        'unforgiveness-and-bitterness'];
+        'unforgiveness-and-bitterness','life-studies'];
 
     var baseName = path.replace('.html','');
     if (topicPages.indexOf(baseName) !== -1) {
@@ -455,7 +455,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             if (sec === 'life') {
-                window.location.href = 'index.html#life';
+                window.location.href = 'life-studies.html';
                 return;
             }
             // Bible tab
@@ -476,4 +476,69 @@ document.addEventListener('DOMContentLoaded', function() {
         + '<p>Daily devotionals are coming soon. This space will offer guided daily readings, reflections, and prayers to walk with you through each day in God\'s Word.</p>'
         + '<p style="margin-top:20px;font-size:0.8rem;color:#8a7e74;">Tap another tab to go back</p>';
     document.body.appendChild(devOverlay);
+})();
+
+
+/* ===== Swipe Navigation ===== */
+(function() {
+    var touchStartX = 0;
+    var touchEndX = 0;
+    var minSwipe = 80;
+
+    document.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    document.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+        var diff = touchStartX - touchEndX;
+        if (Math.abs(diff) < minSwipe) return;
+
+        var path = window.location.pathname.split('/').pop() || '';
+        var baseName = path.replace('.html', '');
+
+        // Bible chapter pages: swipe between chapters
+        var chapterMatch = baseName.match(/^(\d*[a-z]+?)(\d+)$/i);
+        if (chapterMatch) {
+            var book = chapterMatch[1];
+            var chapter = parseInt(chapterMatch[2]);
+            if (diff > 0) {
+                // Swipe left = next chapter
+                window.location.href = book + (chapter + 1) + '.html';
+            } else {
+                // Swipe right = previous chapter
+                if (chapter > 1) window.location.href = book + (chapter - 1) + '.html';
+            }
+            return;
+        }
+
+        // Topical individual pages: swipe between items in same study
+        var studyGroups = {
+            'fruits': ['love','joy','peace','patience','kindness','goodness','faithfulness','gentleness','self-control'],
+            'apostles': ['simon-peter','andrew','james','john','philip','bartholomew','matthew','thomas','james-son-of-alphaeus','thaddaeus','simon-the-zealot','judas-iscariot'],
+            'iam': ['bread-of-life','light-of-the-world','the-door','good-shepherd','resurrection-and-life','way-truth-life','true-vine'],
+            'beatitudes': ['poor-in-spirit','those-who-mourn','the-meek','hunger-for-righteousness','the-merciful','pure-in-heart','the-peacemakers','the-persecuted'],
+            'armor': ['belt-of-truth','breastplate-of-righteousness','shoes-of-the-gospel','shield-of-faith','helmet-of-salvation','sword-of-the-spirit'],
+            'commandments': ['no-other-gods','no-idols','gods-name','sabbath','honor-parents','not-murder','not-adultery','not-steal','not-false-witness','not-covet'],
+        };
+
+        for (var prefix in studyGroups) {
+            if (baseName.indexOf(prefix + '-') === 0) {
+                var itemName = baseName.replace(prefix + '-', '');
+                var items = studyGroups[prefix];
+                var idx = items.indexOf(itemName);
+                if (idx === -1) break;
+                if (diff > 0 && idx < items.length - 1) {
+                    window.location.href = prefix + '-' + items[idx + 1] + '.html';
+                } else if (diff < 0 && idx > 0) {
+                    window.location.href = prefix + '-' + items[idx - 1] + '.html';
+                }
+                return;
+            }
+        }
+    }
 })();
