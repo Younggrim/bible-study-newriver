@@ -483,20 +483,28 @@ document.addEventListener('DOMContentLoaded', function() {
 (function() {
     var touchStartX = 0;
     var touchEndX = 0;
-    var minSwipe = 80;
+    var touchStartY = 0;
+    var touchEndY = 0;
+    var minSwipe = 60;
 
     document.addEventListener('touchstart', function(e) {
         touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
     }, { passive: true });
 
     document.addEventListener('touchend', function(e) {
         touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
         handleSwipe();
     }, { passive: true });
 
     function handleSwipe() {
-        var diff = touchStartX - touchEndX;
-        if (Math.abs(diff) < minSwipe) return;
+        var diffX = touchStartX - touchEndX;
+        var diffY = touchStartY - touchEndY;
+
+        // Only trigger if horizontal movement > vertical (not a scroll)
+        if (Math.abs(diffX) < minSwipe) return;
+        if (Math.abs(diffY) > Math.abs(diffX)) return;
 
         var path = window.location.pathname.split('/').pop() || '';
         var baseName = path.replace('.html', '');
@@ -506,7 +514,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (chapterMatch) {
             var book = chapterMatch[1];
             var chapter = parseInt(chapterMatch[2]);
-            if (diff > 0) {
+            if (diffX > 0) {
                 // Swipe left = previous chapter
                 if (chapter > 1) window.location.href = book + (chapter - 1) + '.html';
             } else {
@@ -532,9 +540,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 var items = studyGroups[prefix];
                 var idx = items.indexOf(itemName);
                 if (idx === -1) break;
-                if (diff > 0 && idx > 0) {
+                if (diffX > 0 && idx > 0) {
                     window.location.href = prefix + '-' + items[idx - 1] + '.html';
-                } else if (diff < 0 && idx < items.length - 1) {
+                } else if (diffX < 0 && idx < items.length - 1) {
                     window.location.href = prefix + '-' + items[idx + 1] + '.html';
                 }
                 return;
