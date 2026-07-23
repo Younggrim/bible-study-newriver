@@ -93,9 +93,8 @@
         </div>
 
         <div class="section-block">
-            <h2>Video Resources</h2>
-            <button class="video-toggle-btn" onclick="toggleVideos()"><i class="fas fa-play-circle" style="margin-right:6px;"></i>Show Videos</button>
-            <div class="video-section" id="videoSection">
+            <h2 style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;" onclick="var s=this.nextElementSibling||this.parentElement.querySelector('#videoSection');if(s){s.style.display=s.style.display==='none'?'block':'none';this.querySelector('.chevron').style.transform=s.style.display==='none'?'':' rotate(90deg)';}"><span>Videos (1)</span><i class="fas fa-chevron-right chevron" style="font-size:0.8rem;transition:transform 0.2s;"></i></h2>
+            <div id="videoSection" style="display:none;">
                 <div class="video-grid">
                                         <div class="yt-facade" onclick="loadYT(this,'w1_YL8sJtK0')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light,#e8e0d6);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/w1_YL8sJtK0/hqdefault.jpg') center/cover;margin-bottom:8px;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Nathanael: Face to Face with Jesus | R.C. Sproul</p></div>
                 </div>
@@ -105,7 +104,7 @@
     <script src="site/script.js"></script>
     <script>
     function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
-    function toggleVideos(){var s=document.getElementById("videoSection");s.classList.toggle("open");var btn=s.previousElementSibling;btn.innerHTML=s.classList.contains("open")?'<i class="fas fa-eye-slash" style="margin-right:6px;"></i>Hide Videos':'<i class="fas fa-play-circle" style="margin-right:6px;"></i>Show Videos';}
+    
     function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
     </script>
     <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
