@@ -315,10 +315,16 @@ body {
 
 .study-tabs {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 6px;
     margin-bottom: 24px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
 }
+
+.study-tabs::-webkit-scrollbar { display: none; }
 
 .study-tab {
     padding: 10px 16px;
@@ -330,6 +336,8 @@ body {
     background: var(--bg-primary);
     transition: color 0.2s, background 0.2s;
     border-radius: var(--radius-sm);
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .study-tab:hover { color: #3d2b1f; background: var(--bg-secondary); border-color: var(--border-medium); }
@@ -429,7 +437,7 @@ body {
     .verse { font-size: 0.95rem; line-height: 1.85; }
     .book-header h1 { font-size: 1.5rem; }
     .study-tabs { gap: 4px; }
-    .study-tab { padding: 7px 10px; font-size: 0.75rem; }
+    .study-tab { padding: 8px 12px; font-size: 0.78rem; }
     .tab-content { padding: 20px 18px; }
 }
 
