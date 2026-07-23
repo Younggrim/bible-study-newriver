@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <title>Faithfulness — Pistis | Fruits of the Spirit — Bible Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="site/style.css">
+    <style>
+        .topic-hero { background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80") center/cover no-repeat; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 32px; box-shadow: var(--shadow-sm); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #a8e6cf; letter-spacing: 0.5px; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #2c6b4f; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #1a4a35; }
+        .back-link i { margin-right: 6px; }
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #2c6b4f; margin-bottom: 16px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .reflection-list { list-style: none; padding: 0; margin: 0; }
+        .reflection-list li { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 10px; padding-left: 22px; position: relative; }
+        .reflection-list li::before { content: "\f059"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: #2c6b4f; font-size: 0.8rem; top: 3px; }
+        .video-toggle-btn { background: #2c6b4f; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 16px; }
+        .video-toggle-btn:hover { background: #1a4a35; }
+        .video-section { display: none; }
+        .video-section.open { display: block; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+        .topic-dropdown { position: relative; display: inline-block; } .topic-dropdown-btn { background: rgba(255,255,255,0.9); border: 1px solid #2c6b4f; border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; color: #3d2b1f; cursor: pointer; transition: background 0.2s; } .topic-dropdown-btn:hover { background: var(--bg-card); } .topic-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid var(--border-light); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; min-width: 240px; z-index: 1000; margin-top: 6px; max-height: 400px; overflow-y: auto; } .topic-dropdown-menu.open { display: block; } .topic-dropdown-menu a { display: block; padding: 8px 18px; font-size: 0.83rem; color: #3d2b1f; text-decoration: none; font-weight: 500; transition: background 0.15s; } .topic-dropdown-menu a:hover { background: #f5ebe0; color: #2c6b4f; }
+        .verse-ref { color: #2c6b4f; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #1a4a35; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#2c6b4f; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="index.html" class="nav-home-btn"><i class="fas fa-home"></i></a>
+        <a href="index.html" class="nav-brand">Bible Study</a>
+        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html"><strong>Fruits of the Spirit</strong></a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html">Beatitudes</a><a href="names-of-god.html">Names of God</a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html">Parables of Jesus</a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
+    </nav>
+    <main class="main-content" style="margin-left:0; max-width:960px; margin-left:auto; margin-right:auto;">
+        <a href="fruits-of-the-spirit.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Fruits of the Spirit</a>
+
+        <div class="topic-hero">
+            <p class="subtitle">Fruit of the Spirit</p>
+            <h1>Faithfulness — Pistis (πίστις)</h1>
+        </div>
+
+        <!-- Section 1: Understanding -->
+        <div class="section-block">
+            <h2>Understanding Faithfulness</h2>
+            <p>The Greek word <em>pistis</em> (πίστις) is most commonly translated as "faith" or "belief," but when listed among the fruit of the Spirit in Galatians 5:22, it carries the meaning of faithfulness — reliability, trustworthiness, and steadfast loyalty. It describes a person whose word can be trusted, whose commitments are kept, and whose character remains consistent over time. A faithful person is someone others can depend on because they reflect the unwavering dependability of God Himself.</p>
+            <p>Faithfulness is not glamorous. It does not make headlines or attract applause. It is the quiet, consistent showing up — day after day, year after year — in marriages, friendships, work, and ministry. It is the unglamorous discipline of keeping your promises when no one is watching, finishing what you started when motivation fades, and remaining loyal to people and principles when it would be easier to walk away. Yet Scripture reveals that God values faithfulness above talent, results, or spectacle.</p>
+            <p>God is the ultimate model of faithfulness. Lamentations 3:22-23 declares that "his mercies never come to an end; they are new every morning; great is your faithfulness." He keeps every promise, never abandons His people, and remains constant when everything else shifts. Even when we are faithless, He remains faithful, for He cannot deny Himself (2 Timothy 2:13). The Spirit cultivates this same rock-solid dependability in believers — making them people whose word is their bond and whose presence can always be counted on.</p>
+        </div>
+
+        <!-- Section 2: Key Scriptures -->
+        <div class="section-block">
+            <h2>Key Scriptures</h2>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Lamentations 3:22-23')">Lamentations 3:22-23</span> — God's mercies are new every morning; great is His faithfulness — the foundation of all human faithfulness.</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 3:3-4')">Proverbs 3:3-4</span> — Let steadfast love and faithfulness never leave you; bind them around your neck and write them on your heart.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 25:21')">Matthew 25:21</span> — "Well done, good and faithful servant. You have been faithful over a little; I will set you over much."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 4:2')">1 Corinthians 4:2</span> — It is required of stewards that they be found faithful — not successful, not popular, but faithful.</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Timothy 2:13')">2 Timothy 2:13</span> — If we are faithless, He remains faithful — for He cannot deny Himself. His faithfulness does not depend on ours.</li>
+            </ul>
+        </div>
+
+        <!-- Section 3: Living It Out -->
+        <div class="section-block">
+            <h2>Living It Out</h2>
+            <p>Faithfulness is built in the small, daily decisions that no one else sees. It is keeping your word even when it costs you. It is showing up to serve even when you don't feel like it. It is staying committed to your marriage, your church, your friendships, and your calling through the unglamorous middle chapters — not just the exciting beginnings. Ask yourself: "Am I the kind of person others can count on? Do I follow through on what I say I will do?" Begin with one area where you have been inconsistent, and commit to showing up faithfully for 30 days.</p>
+            <p>Remember that faithfulness is also about stewardship — managing well whatever God has entrusted to you, whether that is great or small. Jesus taught that the one who is faithful in little things will be given greater responsibility (Luke 16:10). This applies to your finances, your time, your gifts, your relationships, and your daily work. Do not despise small beginnings or mundane tasks. God is watching your faithfulness in the hidden places, and He rewards those who persevere. The goal is not perfection but persistence — getting back up when you stumble and continuing to show up with integrity.</p>
+        </div>
+
+        <!-- Section 4: Reflection Questions -->
+        <div class="section-block">
+            <h2>Reflection Questions</h2>
+            <ul class="reflection-list">
+                <li>If the people closest to me were asked whether I am reliable and trustworthy, what would they say? Where might there be a gap between my intentions and my follow-through?</li>
+                <li>Is there a commitment I have made — to God, to a person, to a role — that I have been slowly drifting away from? What would it look like to renew that commitment today?</li>
+                <li>How does God's faithfulness to me — even in my failures — motivate me to be faithful to others?</li>
+                <li>Am I being faithful with the "little things" God has given me right now, or am I waiting for something bigger before I engage fully?</li>
+            </ul>
+        </div>
+
+        <!-- Section 5: Video Resources -->
+        <div class="section-block">
+            <h2>Video Resources</h2>
+            <button class="video-toggle-btn" onclick="toggleVideos()"><i class="fas fa-play-circle" style="margin-right:6px;"></i>Show Videos</button>
+            <div class="video-section" id="videoSection">
+                <div class="video-grid">
+                    <p style="color:#8a7e74; font-style:italic; grid-column:1/-1; text-align:center; padding:20px 0;">Videos coming soon</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="site/script.js"></script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    function toggleVideos(){var s=document.getElementById("videoSection");s.classList.toggle("open");var btn=s.previousElementSibling;btn.innerHTML=s.classList.contains("open")?'<i class="fas fa-eye-slash" style="margin-right:6px;"></i>Hide Videos':'<i class="fas fa-play-circle" style="margin-right:6px;"></i>Show Videos';}
+    function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+
+    <!-- Verse Popup Elements -->
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) {
+                textEl.innerHTML = data.passages[0];
+            } else {
+                textEl.innerHTML = '<em>Could not load this passage.</em>';
+            }
+        })
+        .catch(function() {
+            textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>';
+        });
+    }
+    function closeVerse() {
+        document.getElementById('verseOverlay').classList.remove('show');
+        document.getElementById('versePopup').classList.remove('show');
+    }
+    </script>
+</body>
+</html>
