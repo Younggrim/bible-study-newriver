@@ -686,3 +686,73 @@ body.pwa-standalone .pwa-splash {
     line-height: 1.7;
     max-width: 400px;
 }
+
+
+/* ===== PWA Info Button & Popup ===== */
+.pwa-info-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #f0c865;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background 0.2s;
+}
+.pwa-info-btn:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.pwa-info-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px 24px 28px;
+    max-width: 360px;
+    width: 90%;
+    max-height: 75vh;
+    overflow-y: auto;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.25);
+    z-index: 10000;
+}
+.pwa-info-popup.show {
+    display: block;
+}
+.pwa-info-popup h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: #6b4c3b;
+    margin-bottom: 12px;
+}
+.pwa-info-item {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: #3d342e;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0e8e0;
+}
+.pwa-info-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.pwa-info-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    color: #8a7e74;
+    cursor: pointer;
+}

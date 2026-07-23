@@ -253,6 +253,43 @@ function loadYT(el, id) {
 
         // Show initial section
         pwaShowSection(section);
+
+        // Add info button to the Bible section hero
+        var bibleHero = allSectionHeroes[0];
+        if (bibleHero) {
+            var infoBtn = document.createElement('button');
+            infoBtn.className = 'pwa-info-btn';
+            infoBtn.innerHTML = '<i class="fas fa-circle-info"></i>';
+            infoBtn.title = 'Translation & Commentary Guide';
+            bibleHero.querySelector('.section-hero-overlay').appendChild(infoBtn);
+
+            // Info popup
+            var infoPopup = document.createElement('div');
+            infoPopup.className = 'pwa-info-popup';
+            infoPopup.innerHTML = ''
+                + '<button class="pwa-info-close" onclick="this.parentElement.classList.remove(\'show\')">&times;</button>'
+                + '<h3>Translation Guide</h3>'
+                + '<div class="pwa-info-item"><strong style="color:#8b3a2a;">ESV</strong> — English Standard Version (2001). Word-for-word accuracy with modern readability.</div>'
+                + '<div class="pwa-info-item"><strong style="color:#4a5a8a;">KJV</strong> — King James Version (1611). Majestic, poetic language. Most influential English Bible.</div>'
+                + '<div class="pwa-info-item"><strong style="color:#7a5c2e;">ASV</strong> — American Standard Version (1901). Extremely literal, great for word studies.</div>'
+                + '<div class="pwa-info-item"><strong style="color:#5c3d6e;">NET</strong> — New English Translation (2005). 60,000+ translator notes.</div>'
+                + '<div class="pwa-info-item"><strong style="color:#2c6b4f;">WEB</strong> — World English Bible (2000). Modern, public domain.</div>'
+                + '<h3 style="margin-top:18px;">Commentaries</h3>'
+                + '<div class="pwa-info-item"><strong>David Guzik</strong> — Enduring Word. Verse-by-verse commentary, freely available online.</div>'
+                + '<div class="pwa-info-item"><strong>C.H. Spurgeon</strong> — The Prince of Preachers. Christ-centered, doctrinally rich sermons (public domain).</div>';
+            document.body.appendChild(infoPopup);
+
+            infoBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                infoPopup.classList.toggle('show');
+            });
+            // Close on tap outside
+            document.addEventListener('click', function(e) {
+                if (!infoPopup.contains(e.target) && e.target !== infoBtn) {
+                    infoPopup.classList.remove('show');
+                }
+            });
+        }
     }
 
     // Inject splash screen on app open (once per session)
