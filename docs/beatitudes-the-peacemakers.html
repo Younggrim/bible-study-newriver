@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <title>Blessed Are the Peacemakers | The Beatitudes — Bible Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="site/style.css">
+    <style>
+        .topic-hero { background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80") center/cover no-repeat; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 32px; box-shadow: var(--shadow-sm); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #a0d8e8; letter-spacing: 0.5px; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #2c5a6b; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #1a3a45; }
+        .back-link i { margin-right: 6px; }
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #2c5a6b; margin-bottom: 16px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .reflection-list { list-style: none; padding: 0; margin: 0; }
+        .reflection-list li { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 10px; padding-left: 22px; position: relative; }
+        .reflection-list li::before { content: "\f059"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: #2c5a6b; font-size: 0.8rem; top: 3px; }
+        .video-toggle-btn { background: #2c5a6b; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 16px; }
+        .video-toggle-btn:hover { background: #1a3a45; }
+        .video-section { display: none; } .video-section.open { display: block; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+        .topic-dropdown { position: relative; display: inline-block; } .topic-dropdown-btn { background: rgba(255,255,255,0.9); border: 1px solid #2c5a6b; border-radius: 8px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; color: #3d2b1f; cursor: pointer; transition: background 0.2s; } .topic-dropdown-btn:hover { background: var(--bg-card); } .topic-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid var(--border-light); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 8px 0; min-width: 240px; z-index: 1000; margin-top: 6px; max-height: 400px; overflow-y: auto; } .topic-dropdown-menu.open { display: block; } .topic-dropdown-menu a { display: block; padding: 8px 18px; font-size: 0.83rem; color: #3d2b1f; text-decoration: none; font-weight: 500; transition: background 0.15s; } .topic-dropdown-menu a:hover { background: #f5ebe0; color: #2c5a6b; }
+        .verse-ref { color: #2c5a6b; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #1a3a45; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#2c5a6b; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="index.html" class="nav-home-btn"><i class="fas fa-home"></i></a>
+        <a href="index.html" class="nav-brand">Bible Study</a>
+        <div class="nav-center"><div class="topic-dropdown"><button class="topic-dropdown-btn" onclick="toggleTopicDropdown()">Topical Studies <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:4px;"></i></button><div class="topic-dropdown-menu" id="topicDropdown"><a href="fruits-of-the-spirit.html">Fruits of the Spirit</a><a href="armor-of-god.html">Armor of God</a><a href="beatitudes.html"><strong>Beatitudes</strong></a><a href="names-of-god.html">Names of God</a><a href="i-am-statements.html">I AM Statements</a><a href="miracles-of-jesus.html">Miracles of Jesus</a><a href="parables-of-jesus.html">Parables of Jesus</a><a href="the-12-apostles.html">The 12 Apostles</a><a href="kings-of-israel.html">Kings of Israel</a><a href="men-of-the-bible.html">Men of the Bible</a><a href="women-of-the-bible.html">Women of the Bible</a><a href="covenants.html">Covenants</a><a href="ten-commandments.html">Ten Commandments</a><a href="the-trinity.html">The Trinity</a><a href="the-gospel.html">The Gospel</a><a href="promises-of-god.html">Promises of God</a><a href="prayers-in-the-bible.html">Prayers in the Bible</a><a href="prophecy-and-fulfillment.html">Prophecy &amp; Fulfillment</a><a href="spiritual-disciplines.html">Spiritual Disciplines</a><a href="marriage-and-family.html">Marriage &amp; Family</a></div></div></div>
+    </nav>
+    <main class="main-content" style="margin-left:0; max-width:960px; margin-left:auto; margin-right:auto;">
+        <a href="topical-studies.html#beatitudes" class="back-link"><i class="fas fa-arrow-left"></i> Back to The Beatitudes</a>
+
+        <div class="topic-hero">
+            <p class="subtitle">The Beatitudes</p>
+            <h1>Blessed Are the Peacemakers</h1>
+        </div>
+
+        <div class="section-block">
+            <h2>The Blessing</h2>
+            <p>In Matthew 5:9, Jesus declares: "Blessed are the peacemakers, for they shall be called sons of God." Notice that Jesus does not say "peace-lovers" or "peace-keepers" but "peace-makers." This is an active word — it describes those who step into conflict, division, and brokenness to create reconciliation where none existed. Peacemaking is costly, creative work that requires courage, wisdom, and a willingness to absorb hostility rather than reflect it back.</p>
+            <p>The promise attached to this beatitude is extraordinary: peacemakers shall be called "sons of God." This is because peacemaking is the family business of God. The entire gospel is a story of God making peace between Himself and rebellious humanity through the cross of Christ. "For in him all the fullness of God was pleased to dwell, and through him to reconcile to himself all things, whether on earth or in heaven, making peace by the blood of his cross" (Colossians 1:19-20). When we make peace, we reveal our family resemblance — we show the world whose children we are.</p>
+            <p>Biblical peacemaking is not conflict avoidance or superficial harmony. It does not mean pretending everything is fine when it is not, or sacrificing truth for the sake of a comfortable silence. True peace — the Hebrew shalom — is wholeness, flourishing, and right relationship. It often requires honest confrontation, painful conversations, and the willingness to address root causes of division rather than papering over symptoms. The peacemaker pursues both truth and love, knowing that genuine peace cannot exist without both.</p>
+        </div>
+
+        <div class="section-block">
+            <h2>Key Scriptures</h2>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 5:9')">Matthew 5:9</span> — "Blessed are the peacemakers, for they shall be called sons of God."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 12:18')">Romans 12:18</span> — "If possible, so far as it depends on you, live peaceably with all."</li>
+                <li><span class="verse-ref" onclick="showVerse('James 3:17-18')">James 3:17-18</span> — "But the wisdom from above is first pure, then peaceable, gentle, open to reason... And a harvest of righteousness is sown in peace by those who make peace."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 5:18-19')">2 Corinthians 5:18-19</span> — "All this is from God, who through Christ reconciled us to himself and gave us the ministry of reconciliation."</li>
+                <li><span class="verse-ref" onclick="showVerse('Colossians 1:20')">Colossians 1:20</span> — "And through him to reconcile to himself all things... making peace by the blood of his cross."</li>
+            </ul>
+        </div>
+
+        <div class="section-block">
+            <h2>Living the Beatitude</h2>
+            <p>Living as peacemakers begins with being at peace with God ourselves through the gospel of Jesus Christ. We cannot export what we do not possess. From that foundation of peace with God, we are equipped to enter the conflicts around us — in our families, churches, workplaces, and communities — as agents of reconciliation. This means listening before speaking, seeking to understand before being understood, and looking for common ground without compromising truth. It means being willing to go first: to apologize first, to forgive first, to extend the olive branch when pride says the other person should come to us.</p>
+            <p>Peacemaking also involves the ministry of reconciliation Paul describes in 2 Corinthians 5 — pointing others toward peace with God through Christ. Every believer carries this ministry: the privilege of helping others find the peace that comes only through being reconciled to their Creator. Whether through a word of testimony, an act of compassion, or a life that demonstrates the shalom of God, peacemakers are ambassadors of the Kingdom, bringing heaven's reconciliation into earth's conflicts one relationship at a time.</p>
+        </div>
+
+        <div class="section-block">
+            <h2>Reflection Questions</h2>
+            <ul class="reflection-list">
+                <li>Are there relationships in your life where you are avoiding conflict rather than actively pursuing reconciliation? What would peacemaking look like there?</li>
+                <li>Do you tend toward peace-keeping (avoiding hard conversations) or peace-making (pursuing genuine resolution)? What holds you back from the latter?</li>
+                <li>How does your own peace with God through Christ fuel your ability to make peace with others?</li>
+                <li>Where is God calling you to step into a situation of conflict or division as a minister of reconciliation?</li>
+            </ul>
+        </div>
+
+        <div class="section-block">
+            <h2 style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;" onclick="var s=this.parentElement.querySelector('#videoSection');if(s){s.style.display=s.style.display==='none'?'block':'none';this.querySelector('.chevron').style.transform=s.style.display==='none'?'':'rotate(90deg)';}"><span>Video Resources</span><i class="fas fa-chevron-right chevron" style="font-size:0.8rem;transition:transform 0.2s;"></i></h2>
+            <div id="videoSection" style="display:none;">
+                <p style="font-size:0.9rem;color:#8a7e74;font-style:italic;">Videos coming soon.</p>
+            </div>
+        </div>
+    </main>
+    <script src="site/script.js"></script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) {
+                textEl.innerHTML = data.passages[0];
+            } else {
+                textEl.innerHTML = '<em>Could not load this passage.</em>';
+            }
+        })
+        .catch(function() {
+            textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>';
+        });
+    }
+    function closeVerse() {
+        document.getElementById('verseOverlay').classList.remove('show');
+        document.getElementById('versePopup').classList.remove('show');
+    }
+    </script>
+</body>
+</html>
