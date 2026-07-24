@@ -511,7 +511,10 @@ def build_page(testament, book_num, book_name, chapter_num, total_chapters):
         active = " active" if trans == "ESV" else ""
         if trans == "ESV":
             # ESV is loaded dynamically via API — render a placeholder with the passage reference
-            esv_passage = f"{book_name} {chapter_num}"
+            # Single-chapter books (Obadiah, Philemon, 2/3 John, Jude): the ESV API reads
+            # "Book 1" as verse 1, not chapter 1, so the book name alone must be used to
+            # get the full chapter.
+            esv_passage = book_name if total_chapters == 1 else f"{book_name} {chapter_num}"
             verses_html += f'        <div class="translation-block{active}" data-translation="ESV" data-passage="{esv_passage}">\n            <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>\n        </div>\n'
         else:
             verses_html += f'        <div class="translation-block{active}" data-translation="{trans}">\n{verses_html_blocks[trans]}\n        </div>\n'
