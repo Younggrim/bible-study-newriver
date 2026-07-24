@@ -123,7 +123,14 @@ export default {
         status: 200,
         headers: {
           'Content-Type': 'application/json',
-          'Cache-Control': 'public, max-age=3600',
+          // 'private', not 'public': this response is gated by the origin
+          // check above, so it must not be cacheable by Cloudflare's shared
+          // edge/CDN cache — that would let anyone fetch a cached passage
+          // without ever going through the check. The passage-level cache
+          // above (via caches.default with a synthetic key) already gives
+          // us the request-reduction benefit safely, since it's read only
+          // after the origin check runs on every request.
+          'Cache-Control': 'private, max-age=3600',
           ...getCorsHeaders(request)
         }
       });
