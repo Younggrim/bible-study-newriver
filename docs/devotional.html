@@ -25,11 +25,6 @@
         .icon-reflect { background: #4a5a8a; }
         .icon-prayer { background: #2c6b4f; }
         .icon-apply { background: #5c3d6e; }
-        .devo-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; }
-        .devo-nav-btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: #f5ebe0; border: 1px solid #e8e0d6; border-radius: 8px; text-decoration: none; color: #3d2b1f; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
-        .devo-nav-btn:hover { background: #e8e0d6; }
-        .devo-nav-btn i { font-size: 0.75rem; color: #8b3a2a; }
-        .devo-day-label { font-size: 0.8rem; color: #8a7e74; font-weight: 500; }
         @media (max-width: 768px) { .devo-hero { padding: 28px 18px; } .devo-hero h1 { font-size: 1.3rem; } .devo-card { padding: 22px 18px; } }
     </style>
 </head>
@@ -62,9 +57,6 @@
         </div>
 
         <div class="devo-nav">
-            <button class="devo-nav-btn" id="devoPrev"><i class="fas fa-chevron-left"></i> Previous</button>
-            <span class="devo-day-label" id="devoDayLabel"></span>
-            <button class="devo-nav-btn" id="devoNext">Next <i class="fas fa-chevron-right"></i></button>
         </div>
     </main>
     <script src="site/script.js"></script>
@@ -72,8 +64,8 @@
     (function() {
         var devotionals = [];
         var currentIndex = 0;
+        var ESV_PROXY = 'https://esv-proxy.cloudflare-dust598.workers.dev';
 
-        // Calculate today's index (day of year % total devotionals)
         function getDayOfYear() {
             var now = new Date();
             var start = new Date(now.getFullYear(), 0, 0);
@@ -92,15 +84,28 @@
             if (!d) return;
             document.getElementById('devoDate').textContent = formatDate();
             document.getElementById('devoRef').textContent = d.verse;
-            document.getElementById('devoText').textContent = d.text;
             document.getElementById('devoReflection').textContent = d.reflection;
             document.getElementById('devoPrayer').textContent = d.prayer;
             document.getElementById('devoApplication').textContent = d.application;
-            document.getElementById('devoDayLabel').textContent = 'Day ' + (index + 1) + ' of ' + devotionals.length;
             currentIndex = index;
+
+            // Fetch actual ESV text for the verse
+            var textEl = document.getElementById('devoText');
+            textEl.innerHTML = '<em style="color:#8a7e74;font-size:0.88rem;">Loading scripture...</em>';
+            fetch(ESV_PROXY + '/?q=' + encodeURIComponent(d.verse))
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (data.passages && data.passages[0]) {
+                        textEl.innerHTML = data.passages[0];
+                    } else {
+                        textEl.textContent = d.text;
+                    }
+                })
+                .catch(function() {
+                    textEl.textContent = d.text;
+                });
         }
 
-        // Load devotionals
         fetch('devotionals.json')
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -111,16 +116,6 @@
             .catch(function() {
                 document.getElementById('devoText').textContent = 'Unable to load devotional. Please try again.';
             });
-
-        // Nav buttons
-        document.getElementById('devoPrev').addEventListener('click', function() {
-            var prev = (currentIndex - 1 + devotionals.length) % devotionals.length;
-            render(prev);
-        });
-        document.getElementById('devoNext').addEventListener('click', function() {
-            var next = (currentIndex + 1) % devotionals.length;
-            render(next);
-        });
     })();
     </script>
 </body>
