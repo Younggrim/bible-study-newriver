@@ -441,13 +441,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             var sec = this.dataset.section;
             if (sec === 'devotional') {
-                // Show coming soon overlay
-                var devOv = document.querySelector('.pwa-coming-soon');
-                if (devOv) {
-                    devOv.classList.add('show');
-                    nav.querySelectorAll('.pwa-nav-item').forEach(function(i) { i.classList.remove('active'); });
-                    this.classList.add('active');
-                }
+                window.location.href = 'devotional.html';
                 return;
             }
             if (sec === 'topical') {

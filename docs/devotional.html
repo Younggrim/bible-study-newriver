@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <title>Daily Devotional — Bible Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="site/style.css">
+    <style>
+        body { background: #faf5ed; }
+        .page-content { margin: 0 auto; max-width: 720px; padding: 24px 20px 100px; }
+        .devo-date { font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; color: #8a7e74; text-transform: uppercase; letter-spacing: 1px; text-align: center; margin-bottom: 8px; }
+        .devo-hero { background: linear-gradient(135deg, #3d2b1f 0%, #5c3d6e 50%, #2c6b4f 100%); border-radius: 16px; padding: 40px 28px; text-align: center; margin-bottom: 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+        .devo-hero h1 { font-family: 'Cinzel', serif; font-size: 1.6rem; color: #fff; margin: 0 0 6px; text-shadow: 1px 1px 4px rgba(0,0,0,0.4); }
+        .devo-hero .devo-ref { font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; color: #f0c865; letter-spacing: 0.5px; }
+        .devo-card { background: #fff; border: 1px solid #e8e0d6; border-radius: 14px; padding: 28px 24px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+        .devo-card h2 { font-family: 'Cinzel', serif; font-size: 1rem; margin: 0 0 14px; display: flex; align-items: center; gap: 10px; }
+        .devo-card h2 i { font-size: 0.9rem; }
+        .devo-card p { font-size: 0.92rem; color: #3d342e; line-height: 1.85; margin: 0; }
+        .devo-verse-text { font-family: 'Merriweather', serif; font-style: italic; font-size: 1.05rem; color: #3d2b1f; line-height: 2; border-left: 3px solid #8b3a2a; padding-left: 18px; margin: 0; }
+        .devo-section-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: #fff; }
+        .icon-scripture { background: #8b3a2a; }
+        .icon-reflect { background: #4a5a8a; }
+        .icon-prayer { background: #2c6b4f; }
+        .icon-apply { background: #5c3d6e; }
+        .devo-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; }
+        .devo-nav-btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: #f5ebe0; border: 1px solid #e8e0d6; border-radius: 8px; text-decoration: none; color: #3d2b1f; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        .devo-nav-btn:hover { background: #e8e0d6; }
+        .devo-nav-btn i { font-size: 0.75rem; color: #8b3a2a; }
+        .devo-day-label { font-size: 0.8rem; color: #8a7e74; font-weight: 500; }
+        @media (max-width: 768px) { .devo-hero { padding: 28px 18px; } .devo-hero h1 { font-size: 1.3rem; } .devo-card { padding: 22px 18px; } }
+    </style>
+</head>
+<body>
+    <main class="page-content" style="margin-top:20px;">
+        <p class="devo-date" id="devoDate"></p>
+        <div class="devo-hero">
+            <h1>Daily Devotional</h1>
+            <p class="devo-ref" id="devoRef"></p>
+        </div>
+
+        <div class="devo-card">
+            <h2><span class="devo-section-icon icon-scripture"><i class="fas fa-book-open"></i></span> Today's Scripture</h2>
+            <p class="devo-verse-text" id="devoText"></p>
+        </div>
+
+        <div class="devo-card">
+            <h2><span class="devo-section-icon icon-reflect"><i class="fas fa-lightbulb"></i></span> Reflection</h2>
+            <p id="devoReflection"></p>
+        </div>
+
+        <div class="devo-card">
+            <h2><span class="devo-section-icon icon-prayer"><i class="fas fa-hands-praying"></i></span> Prayer Prompt</h2>
+            <p id="devoPrayer"></p>
+        </div>
+
+        <div class="devo-card">
+            <h2><span class="devo-section-icon icon-apply"><i class="fas fa-shoe-prints"></i></span> Apply It</h2>
+            <p id="devoApplication"></p>
+        </div>
+
+        <div class="devo-nav">
+            <button class="devo-nav-btn" id="devoPrev"><i class="fas fa-chevron-left"></i> Previous</button>
+            <span class="devo-day-label" id="devoDayLabel"></span>
+            <button class="devo-nav-btn" id="devoNext">Next <i class="fas fa-chevron-right"></i></button>
+        </div>
+    </main>
+    <script src="site/script.js"></script>
+    <script>
+    (function() {
+        var devotionals = [];
+        var currentIndex = 0;
+
+        // Calculate today's index (day of year % total devotionals)
+        function getDayOfYear() {
+            var now = new Date();
+            var start = new Date(now.getFullYear(), 0, 0);
+            var diff = now - start;
+            var oneDay = 1000 * 60 * 60 * 24;
+            return Math.floor(diff / oneDay);
+        }
+
+        function formatDate() {
+            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date().toLocaleDateString('en-US', options);
+        }
+
+        function render(index) {
+            var d = devotionals[index];
+            if (!d) return;
+            document.getElementById('devoDate').textContent = formatDate();
+            document.getElementById('devoRef').textContent = d.verse;
+            document.getElementById('devoText').textContent = d.text;
+            document.getElementById('devoReflection').textContent = d.reflection;
+            document.getElementById('devoPrayer').textContent = d.prayer;
+            document.getElementById('devoApplication').textContent = d.application;
+            document.getElementById('devoDayLabel').textContent = 'Day ' + (index + 1) + ' of ' + devotionals.length;
+            currentIndex = index;
+        }
+
+        // Load devotionals
+        fetch('devotionals.json')
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                devotionals = data;
+                var todayIndex = getDayOfYear() % devotionals.length;
+                render(todayIndex);
+            })
+            .catch(function() {
+                document.getElementById('devoText').textContent = 'Unable to load devotional. Please try again.';
+            });
+
+        // Nav buttons
+        document.getElementById('devoPrev').addEventListener('click', function() {
+            var prev = (currentIndex - 1 + devotionals.length) % devotionals.length;
+            render(prev);
+        });
+        document.getElementById('devoNext').addEventListener('click', function() {
+            var next = (currentIndex + 1) % devotionals.length;
+            render(next);
+        });
+    })();
+    </script>
+</body>
+</html>
