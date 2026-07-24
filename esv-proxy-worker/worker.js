@@ -15,6 +15,7 @@ const ESV_API_URL = 'https://api.esv.org/v3/passage/html/';
 // Allowed origins (add your domain here)
 const ALLOWED_ORIGINS = [
   'https://bible.macdwellings.com',
+  'https://bible.nrc.macdwellings.com',
   'http://localhost',
   'http://127.0.0.1'
 ];
