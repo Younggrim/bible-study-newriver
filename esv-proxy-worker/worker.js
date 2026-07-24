@@ -42,10 +42,14 @@ export default {
       return new Response('Method not allowed', { status: 405 });
     }
 
-    // Block non-browser requests (no Origin or Referer header)
+    // Only allow requests whose Origin (or, failing that, Referer) actually
+    // matches one of our allowed origins — a bare presence check doesn't
+    // stop anyone from spoofing an arbitrary header value with curl/script.
     const origin = request.headers.get('Origin') || '';
     const referer = request.headers.get('Referer') || '';
-    if (!origin && !referer) {
+    const originOk = origin && ALLOWED_ORIGINS.some(o => origin.startsWith(o));
+    const refererOk = !origin && referer && ALLOWED_ORIGINS.some(o => referer.startsWith(o));
+    if (!originOk && !refererOk) {
       return new Response(JSON.stringify({ error: 'Forbidden' }), {
         status: 403,
         headers: { 'Content-Type': 'application/json' }
@@ -59,6 +63,20 @@ export default {
     if (!passage) {
       return new Response(JSON.stringify({ error: 'Missing ?q= parameter' }), {
         status: 400,
+        headers: { 'Content-Type': 'application/json', ...getCorsHeaders(request) }
+      });
+    }
+
+    // Edge-cache by passage (not by requesting origin) so repeat requests
+    // for the same chapter — from any visitor, on either site — are served
+    // from Cloudflare's cache instead of spending ESV API quota.
+    const cache = caches.default;
+    const cacheKey = new Request(`https://esv-proxy-cache.internal/?q=${encodeURIComponent(passage)}`);
+    const cached = await cache.match(cacheKey);
+    if (cached) {
+      const data = await cached.json();
+      return new Response(JSON.stringify(data), {
+        status: 200,
         headers: { 'Content-Type': 'application/json', ...getCorsHeaders(request) }
       });
     }
@@ -96,6 +114,10 @@ export default {
       }
 
       const data = await esvResponse.json();
+
+      await cache.put(cacheKey, new Response(JSON.stringify(data), {
+        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=3600' }
+      }));
 
       return new Response(JSON.stringify(data), {
         status: 200,
