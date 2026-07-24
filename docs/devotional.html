@@ -66,12 +66,15 @@
         var currentIndex = 0;
         var ESV_PROXY = 'https://esv-proxy.cloudflare-dust598.workers.dev';
 
-        function getDayOfYear() {
+        function getDayIndex() {
+            // Start date: Jul 22, 2026 = index 0
+            var start = new Date(2026, 6, 22); // month is 0-indexed
             var now = new Date();
-            var start = new Date(now.getFullYear(), 0, 0);
-            var diff = now - start;
-            var oneDay = 1000 * 60 * 60 * 24;
-            return Math.floor(diff / oneDay);
+            now.setHours(0,0,0,0);
+            start.setHours(0,0,0,0);
+            var diff = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+            if (diff < 0) diff = 0;
+            return diff;
         }
 
         function formatDate() {
@@ -110,7 +113,8 @@
             .then(function(r) { return r.json(); })
             .then(function(data) {
                 devotionals = data;
-                var todayIndex = getDayOfYear() % devotionals.length;
+                var todayIndex = getDayIndex();
+                if (todayIndex >= devotionals.length) todayIndex = devotionals.length - 1;
                 render(todayIndex);
             })
             .catch(function() {
