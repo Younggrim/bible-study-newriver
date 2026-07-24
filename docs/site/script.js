@@ -175,26 +175,6 @@ function extractVerseNum(title) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Find all video containers in topical cards (divs containing yt-facade with border-top style)
-    document.querySelectorAll('.fruit-card > div[style*="border-top"]').forEach(function(container) {
-        var videos = container.querySelectorAll('.yt-facade');
-        if (videos.length === 0) return;
-
-        // Collapse the videos
-        container.style.display = 'none';
-
-        // Create toggle button
-        var btn = document.createElement('button');
-        btn.className = 'video-toggle-btn';
-        btn.innerHTML = '<i class="fas fa-play-circle"></i> Videos (' + videos.length + ')';
-        btn.addEventListener('click', function() {
-            var isHidden = container.style.display === 'none';
-            container.style.display = isHidden ? '' : 'none';
-            btn.classList.toggle('open', isHidden);
-        });
-        container.parentNode.insertBefore(btn, container);
-    });
-
     // Find video tab content in chapter pages
     var videoTab = document.getElementById('tab-videos');
     if (videoTab) {
@@ -216,33 +196,6 @@ document.addEventListener('DOMContentLoaded', function() {
             var parent = videos[0].parentNode;
             videoArray.forEach(function(v) { parent.appendChild(v); });
         }
-    }
-
-    // Find video sections in Life/struggle pages (section-block with "Video Resources" heading)
-    // Skip pages that have their own toggle system (#videoSection)
-    if (!document.getElementById('videoSection')) {
-        document.querySelectorAll('.section-block').forEach(function(block) {
-            var heading = block.querySelector('h2');
-            if (!heading || heading.textContent.indexOf('Video') === -1) return;
-            var videos = block.querySelectorAll('.yt-facade');
-            if (videos.length === 0) return;
-
-            // Hide all videos
-            videos.forEach(function(v) { v.style.display = 'none'; });
-
-            // Replace heading with toggle button
-            heading.style.cursor = 'pointer';
-            heading.innerHTML = '<i class="fas fa-play-circle" style="color:#c0392b;margin-right:8px;"></i>Videos (' + videos.length + ') <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:6px;color:#8a7e74;"></i>';
-            var expanded = false;
-            heading.addEventListener('click', function() {
-                expanded = !expanded;
-                videos.forEach(function(v) { v.style.display = expanded ? '' : 'none'; });
-                heading.querySelector('.fa-chevron-down, .fa-chevron-up').className = expanded ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
-                heading.querySelector('.fa-chevron-down, .fa-chevron-up').style.fontSize = '0.7rem';
-                heading.querySelector('.fa-chevron-down, .fa-chevron-up').style.marginLeft = '6px';
-                heading.querySelector('.fa-chevron-down, .fa-chevron-up').style.color = '#8a7e74';
-            });
-        });
     }
 });
 
