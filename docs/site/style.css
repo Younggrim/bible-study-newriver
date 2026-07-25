@@ -812,3 +812,13 @@ body.pwa-standalone .pwa-splash {
    prayer-section are hidden). This selector is more specific than
    that inline rule, so it wins regardless of source order. */
 body.pwa-standalone .section-hero { margin-top: 0; }
+
+/* ===== PWA Bible tab: compact passage navigator (replaces the full
+   66-book grid in the installed app) ===== */
+.pwa-bible-nav { display: none; max-width: 480px; margin: 32px auto 0; padding: 28px 24px 32px; background: #fff; border: 1px solid #e8e0d6; border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); text-align: center; }
+body.pwa-standalone .pwa-bible-nav { display: block; }
+.pwa-bible-nav h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #3d2b1f; margin: 0 0 18px; }
+.pwa-bible-nav .bible-nav-row { display: flex; gap: 10px; margin-bottom: 12px; }
+.pwa-bible-nav select { flex: 1; min-width: 0; padding: 10px 12px; border: 1px solid #d4c9bc; border-radius: 8px; font-size: 0.9rem; font-family: 'Inter', sans-serif; color: #3d2b1f; background: #faf8f5; }
+.pwa-bible-nav .nav-go-btn { width: 100%; padding: 12px; background: #8b3a2a; color: #fff; border: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; cursor: pointer; margin-top: 6px; transition: background 0.15s; }
+.pwa-bible-nav .nav-go-btn:hover { background: #6b2c1f; }

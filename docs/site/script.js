@@ -292,11 +292,17 @@ document.addEventListener('DOMContentLoaded', function() {
         contentBlock = document.querySelector('.content-block');
         siteFooter = document.querySelector('.site-footer');
 
-        // Bible = first section-hero (Bible) + first cards-container (books)
+        // Bible = first section-hero (Bible) + compact passage navigator
+        // (replaces the full 66-book grid — too long to scroll in-app)
         // Hide content-block (translation guide) — replaced by info icon
         if (contentBlock) contentBlock.style.display = 'none';
         if (allSectionHeroes[0]) bibleElements.push(allSectionHeroes[0]);
-        if (allCardsContainers[0]) bibleElements.push(allCardsContainers[0]);
+        var bibleNav = document.querySelector('.pwa-bible-nav');
+        if (bibleNav) bibleElements.push(bibleNav);
+        // The full book grid (allCardsContainers[0]) is permanently hidden
+        // in app mode, not part of the tab rotation — it's still used on
+        // the normal scrolling website, so hide it here rather than in CSS.
+        if (allCardsContainers[0]) allCardsContainers[0].style.display = 'none';
 
         // Topical = second section-hero + second cards-container
         if (allSectionHeroes[1]) topicalElements.push(allSectionHeroes[1]);

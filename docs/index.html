@@ -144,6 +144,146 @@
             </div>
         </div>
 
+        <div class="pwa-bible-nav">
+            <h3>Choose a Passage</h3>
+            <div class="bible-nav-row">
+                <select class="nav-book-select" id="bookSelect" onchange="updateChapters()">
+                    <optgroup label="Old Testament">
+                        <option value="genesis" data-chapters="50" selected>Genesis</option>
+                        <option value="exodus" data-chapters="40">Exodus</option>
+                        <option value="leviticus" data-chapters="27">Leviticus</option>
+                        <option value="numbers" data-chapters="36">Numbers</option>
+                        <option value="deuteronomy" data-chapters="34">Deuteronomy</option>
+                        <option value="joshua" data-chapters="24">Joshua</option>
+                        <option value="judges" data-chapters="21">Judges</option>
+                        <option value="ruth" data-chapters="4">Ruth</option>
+                        <option value="1samuel" data-chapters="31">1 Samuel</option>
+                        <option value="2samuel" data-chapters="24">2 Samuel</option>
+                        <option value="1kings" data-chapters="22">1 Kings</option>
+                        <option value="2kings" data-chapters="25">2 Kings</option>
+                        <option value="1chronicles" data-chapters="29">1 Chronicles</option>
+                        <option value="2chronicles" data-chapters="36">2 Chronicles</option>
+                        <option value="ezra" data-chapters="10">Ezra</option>
+                        <option value="nehemiah" data-chapters="13">Nehemiah</option>
+                        <option value="esther" data-chapters="10">Esther</option>
+                        <option value="job" data-chapters="42">Job</option>
+                        <option value="psalms" data-chapters="150">Psalms</option>
+                        <option value="proverbs" data-chapters="31">Proverbs</option>
+                        <option value="ecclesiastes" data-chapters="12">Ecclesiastes</option>
+                        <option value="songofsolomon" data-chapters="8">Song of Solomon</option>
+                        <option value="isaiah" data-chapters="66">Isaiah</option>
+                        <option value="jeremiah" data-chapters="52">Jeremiah</option>
+                        <option value="lamentations" data-chapters="5">Lamentations</option>
+                        <option value="ezekiel" data-chapters="48">Ezekiel</option>
+                        <option value="daniel" data-chapters="12">Daniel</option>
+                        <option value="hosea" data-chapters="14">Hosea</option>
+                        <option value="joel" data-chapters="3">Joel</option>
+                        <option value="amos" data-chapters="9">Amos</option>
+                        <option value="obadiah" data-chapters="1">Obadiah</option>
+                        <option value="jonah" data-chapters="4">Jonah</option>
+                        <option value="micah" data-chapters="7">Micah</option>
+                        <option value="nahum" data-chapters="3">Nahum</option>
+                        <option value="habakkuk" data-chapters="3">Habakkuk</option>
+                        <option value="zephaniah" data-chapters="3">Zephaniah</option>
+                        <option value="haggai" data-chapters="2">Haggai</option>
+                        <option value="zechariah" data-chapters="14">Zechariah</option>
+                        <option value="malachi" data-chapters="4">Malachi</option>
+                    </optgroup>
+                    <optgroup label="New Testament">
+                        <option value="matthew" data-chapters="28">Matthew</option>
+                        <option value="mark" data-chapters="16">Mark</option>
+                        <option value="luke" data-chapters="24">Luke</option>
+                        <option value="john" data-chapters="21">John</option>
+                        <option value="acts" data-chapters="28">Acts</option>
+                        <option value="romans" data-chapters="16">Romans</option>
+                        <option value="1corinthians" data-chapters="16">1 Corinthians</option>
+                        <option value="2corinthians" data-chapters="13">2 Corinthians</option>
+                        <option value="galatians" data-chapters="6">Galatians</option>
+                        <option value="ephesians" data-chapters="6">Ephesians</option>
+                        <option value="philippians" data-chapters="4">Philippians</option>
+                        <option value="colossians" data-chapters="4">Colossians</option>
+                        <option value="1thessalonians" data-chapters="5">1 Thessalonians</option>
+                        <option value="2thessalonians" data-chapters="3">2 Thessalonians</option>
+                        <option value="1timothy" data-chapters="6">1 Timothy</option>
+                        <option value="2timothy" data-chapters="4">2 Timothy</option>
+                        <option value="titus" data-chapters="3">Titus</option>
+                        <option value="philemon" data-chapters="1">Philemon</option>
+                        <option value="hebrews" data-chapters="13">Hebrews</option>
+                        <option value="james" data-chapters="5">James</option>
+                        <option value="1peter" data-chapters="5">1 Peter</option>
+                        <option value="2peter" data-chapters="3">2 Peter</option>
+                        <option value="1john" data-chapters="5">1 John</option>
+                        <option value="2john" data-chapters="1">2 John</option>
+                        <option value="3john" data-chapters="1">3 John</option>
+                        <option value="jude" data-chapters="1">Jude</option>
+                        <option value="revelation" data-chapters="22">Revelation</option>
+                    </optgroup>
+                </select>
+                <select class="nav-chapter-select" id="chapterSelect">
+                    <option value="1" selected>Ch 1</option>
+                    <option value="2">Ch 2</option>
+                    <option value="3">Ch 3</option>
+                    <option value="4">Ch 4</option>
+                    <option value="5">Ch 5</option>
+                    <option value="6">Ch 6</option>
+                    <option value="7">Ch 7</option>
+                    <option value="8">Ch 8</option>
+                    <option value="9">Ch 9</option>
+                    <option value="10">Ch 10</option>
+                    <option value="11">Ch 11</option>
+                    <option value="12">Ch 12</option>
+                    <option value="13">Ch 13</option>
+                    <option value="14">Ch 14</option>
+                    <option value="15">Ch 15</option>
+                    <option value="16">Ch 16</option>
+                    <option value="17">Ch 17</option>
+                    <option value="18">Ch 18</option>
+                    <option value="19">Ch 19</option>
+                    <option value="20">Ch 20</option>
+                    <option value="21">Ch 21</option>
+                    <option value="22">Ch 22</option>
+                    <option value="23">Ch 23</option>
+                    <option value="24">Ch 24</option>
+                    <option value="25">Ch 25</option>
+                    <option value="26">Ch 26</option>
+                    <option value="27">Ch 27</option>
+                    <option value="28">Ch 28</option>
+                    <option value="29">Ch 29</option>
+                    <option value="30">Ch 30</option>
+                    <option value="31">Ch 31</option>
+                    <option value="32">Ch 32</option>
+                    <option value="33">Ch 33</option>
+                    <option value="34">Ch 34</option>
+                    <option value="35">Ch 35</option>
+                    <option value="36">Ch 36</option>
+                    <option value="37">Ch 37</option>
+                    <option value="38">Ch 38</option>
+                    <option value="39">Ch 39</option>
+                    <option value="40">Ch 40</option>
+                    <option value="41">Ch 41</option>
+                    <option value="42">Ch 42</option>
+                    <option value="43">Ch 43</option>
+                    <option value="44">Ch 44</option>
+                    <option value="45">Ch 45</option>
+                    <option value="46">Ch 46</option>
+                    <option value="47">Ch 47</option>
+                    <option value="48">Ch 48</option>
+                    <option value="49">Ch 49</option>
+                    <option value="50">Ch 50</option>
+                </select>
+            </div>
+            <div class="bible-nav-row">
+                <select class="nav-translation" id="pwaTranslationSelect" onchange="try{localStorage.setItem('preferredTranslation', this.value)}catch(e){}">
+                    <option value="ESV">ESV</option>
+                    <option value="KJV">KJV</option>
+                    <option value="ASV">ASV</option>
+                    <option value="NET">NET</option>
+                    <option value="WEB">WEB</option>
+                </select>
+            </div>
+            <button class="nav-go-btn" onclick="goToChapter()">Go to Chapter</button>
+        </div>
+
         <div class="cards-container">
             <h3 class="testament-heading ot">Old Testament</h3>
             <div class="book-grid">
