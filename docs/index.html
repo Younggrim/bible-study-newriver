@@ -147,6 +147,15 @@
         <div class="pwa-bible-nav">
             <h3>Choose a Passage</h3>
             <div class="bible-nav-row">
+                <select class="nav-translation" id="pwaTranslationSelect" onchange="try{localStorage.setItem('preferredTranslation', this.value)}catch(e){}">
+                    <option value="ESV">ESV</option>
+                    <option value="KJV">KJV</option>
+                    <option value="ASV">ASV</option>
+                    <option value="NET">NET</option>
+                    <option value="WEB">WEB</option>
+                </select>
+            </div>
+            <div class="bible-nav-row">
                 <select class="nav-book-select" id="bookSelect" onchange="updateChapters()">
                     <optgroup label="Old Testament">
                         <option value="genesis" data-chapters="50" selected>Genesis</option>
@@ -219,6 +228,8 @@
                         <option value="revelation" data-chapters="22">Revelation</option>
                     </optgroup>
                 </select>
+            </div>
+            <div class="bible-nav-row">
                 <select class="nav-chapter-select" id="chapterSelect">
                     <option value="1" selected>Ch 1</option>
                     <option value="2">Ch 2</option>
@@ -270,15 +281,6 @@
                     <option value="48">Ch 48</option>
                     <option value="49">Ch 49</option>
                     <option value="50">Ch 50</option>
-                </select>
-            </div>
-            <div class="bible-nav-row">
-                <select class="nav-translation" id="pwaTranslationSelect" onchange="try{localStorage.setItem('preferredTranslation', this.value)}catch(e){}">
-                    <option value="ESV">ESV</option>
-                    <option value="KJV">KJV</option>
-                    <option value="ASV">ASV</option>
-                    <option value="NET">NET</option>
-                    <option value="WEB">WEB</option>
                 </select>
             </div>
             <button class="nav-go-btn" onclick="goToChapter()">Go to Chapter</button>
