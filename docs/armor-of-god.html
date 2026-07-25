@@ -3,12 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
     <title>Armor of God — Bible Study</title>
-    <meta http-equiv="refresh" content="0;url=topical-studies.html#armor">
-    <link rel="manifest" href="manifest.json">
-    <script>window.location.replace('topical-studies.html#armor');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="site/style.css">
+    <style>
+        body { background: #faf5ed; }
+        .page-content { margin: 0 auto; max-width: 960px; padding: 24px 24px 80px; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #4a5a8a; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link i { margin-right: 6px; }
+        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 8px; }
+        .item-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid; border-radius: 10px; text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
+        .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
+        .item-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 2px; }
+        .item-card .subtitle { font-size: 0.75rem; font-style: italic; color: #8a7e74; margin-bottom: 6px; }
+        .item-card .desc { font-size: 0.82rem; color: #5a4e44; line-height: 1.5; }
+        @media (max-width: 768px) { .item-grid { grid-template-columns: 1fr; } }
+    </style>
 </head>
 <body>
-    <p>Redirecting to <a href="topical-studies.html#armor">Armor of God</a>...</p>
+    <div class="section-hero">
+        <img src="https://images.unsplash.com/photo-1783231607186-1630da9b754b?w=1400&q=80&auto=format"
+             srcset="https://images.unsplash.com/photo-1783231607186-1630da9b754b?w=640&q=80&auto=format 640w,
+                     https://images.unsplash.com/photo-1783231607186-1630da9b754b?w=1000&q=80&auto=format 1000w,
+                     https://images.unsplash.com/photo-1783231607186-1630da9b754b?w=1600&q=80&auto=format 1600w"
+             sizes="100vw" fetchpriority="high" alt="An ancient shield and helmet displayed outdoors">
+        <div class="section-hero-overlay">
+            <h2>Armor of God</h2>
+            <p class="section-desc">The spiritual equipment God provides to stand firm against the enemy.</p>
+        </div>
+    </div>
+    <main class="page-content">
+        <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
+        <div class="item-grid">
+                <a href="armor-belt-of-truth.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Belt of Truth</h4>
+                    <p class="desc">Foundation of the Christian life — God's truth.</p>
+                </a>
+                <a href="armor-breastplate-of-righteousness.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Breastplate of Righteousness</h4>
+                    <p class="desc">Protection for the heart through Christ's righteousness.</p>
+                </a>
+                <a href="armor-shoes-of-the-gospel.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Shoes of the Gospel</h4>
+                    <p class="desc">Readiness to share and stand firm in peace.</p>
+                </a>
+                <a href="armor-shield-of-faith.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Shield of Faith</h4>
+                    <p class="desc">Extinguishes the fiery darts of the enemy.</p>
+                </a>
+                <a href="armor-helmet-of-salvation.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Helmet of Salvation</h4>
+                    <p class="desc">Protects the mind with assurance of salvation.</p>
+                </a>
+                <a href="armor-sword-of-the-spirit.html" class="item-card" style="border-left-color:#4a5a8a;">
+                    <h4 style="color:#4a5a8a;">Sword of the Spirit</h4>
+                    <p class="desc">The Word of God — our offensive weapon.</p>
+                </a>
+        </div>
+    </main>
+    <script src="site/script.js"></script>
 </body>
 </html>

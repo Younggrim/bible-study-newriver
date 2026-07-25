@@ -3,12 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
     <title>Men of the Bible — Bible Study</title>
-    <meta http-equiv="refresh" content="0;url=topical-studies.html#men">
-    <link rel="manifest" href="manifest.json">
-    <script>window.location.replace('topical-studies.html#men');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="site/style.css">
+    <style>
+        body { background: #faf5ed; }
+        .page-content { margin: 0 auto; max-width: 960px; padding: 24px 24px 80px; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #5a4030; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link i { margin-right: 6px; }
+        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 8px; }
+        .item-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid; border-radius: 10px; text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
+        .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
+        .item-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 2px; }
+        .item-card .subtitle { font-size: 0.75rem; font-style: italic; color: #8a7e74; margin-bottom: 6px; }
+        .item-card .desc { font-size: 0.82rem; color: #5a4e44; line-height: 1.5; }
+        @media (max-width: 768px) { .item-grid { grid-template-columns: 1fr; } }
+    </style>
 </head>
 <body>
-    <p>Redirecting to <a href="topical-studies.html#men">Men of the Bible</a>...</p>
+    <div class="section-hero">
+        <img src="https://images.unsplash.com/photo-1780942717333-d7ffca670324?w=1400&q=80&auto=format"
+             srcset="https://images.unsplash.com/photo-1780942717333-d7ffca670324?w=640&q=80&auto=format 640w,
+                     https://images.unsplash.com/photo-1780942717333-d7ffca670324?w=1000&q=80&auto=format 1000w,
+                     https://images.unsplash.com/photo-1780942717333-d7ffca670324?w=1600&q=80&auto=format 1600w"
+             sizes="100vw" fetchpriority="high" alt="A desert road leading toward distant mountains">
+        <div class="section-hero-overlay">
+            <h2>Men of the Bible</h2>
+            <p class="section-desc">Ordinary men whom God used in extraordinary ways.</p>
+        </div>
+    </div>
+    <main class="page-content">
+        <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
+        <div class="item-grid">
+                <a href="men-abraham.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">Abraham</h4>
+                    <p class="desc">Father of faith — believed God against all odds.</p>
+                </a>
+                <a href="men-moses.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">Moses</h4>
+                    <p class="desc">Deliverer of Israel — spoke with God face to face.</p>
+                </a>
+                <a href="men-david.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">David</h4>
+                    <p class="desc">A man after God's own heart — king and psalmist.</p>
+                </a>
+                <a href="men-joseph.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">Joseph</h4>
+                    <p class="desc">Faithful in suffering — God meant it for good.</p>
+                </a>
+                <a href="men-daniel.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">Daniel</h4>
+                    <p class="desc">Unwavering faithfulness in a hostile culture.</p>
+                </a>
+                <a href="men-elijah.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">Elijah</h4>
+                    <p class="desc">Prophet of fire — stood alone for God.</p>
+                </a>
+                <a href="men-paul.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">Paul</h4>
+                    <p class="desc">Persecutor turned apostle — transformed by grace.</p>
+                </a>
+                <a href="men-peter.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">Peter</h4>
+                    <p class="desc">Impulsive fisherman who became the rock.</p>
+                </a>
+                <a href="men-joshua.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">Joshua</h4>
+                    <p class="desc">Courageous leader — 'Be strong and courageous.'</p>
+                </a>
+                <a href="men-gideon.html" class="item-card" style="border-left-color:#5a4030;">
+                    <h4 style="color:#5a4030;">Gideon</h4>
+                    <p class="desc">Weak man made mighty by God's power.</p>
+                </a>
+        </div>
+    </main>
+    <script src="site/script.js"></script>
 </body>
 </html>
