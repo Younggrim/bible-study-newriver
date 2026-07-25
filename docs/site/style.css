@@ -803,3 +803,12 @@ body.pwa-standalone .pwa-splash {
     .section-hero { min-height: 220px; }
     .section-hero-overlay h2 { font-size: 1.6rem; }
 }
+
+/* In the installed app (PWA standalone), the bottom-nav tabs show
+   exactly one section-hero at a time as the very first thing on the
+   page (index.html's own inline .section-hero rule hardcodes
+   margin-top:48px, correct for the normal stacked homepage scroll,
+   wrong here since there's nothing above it once hero-section/
+   prayer-section are hidden). This selector is more specific than
+   that inline rule, so it wins regardless of source order. */
+body.pwa-standalone .section-hero { margin-top: 0; }
