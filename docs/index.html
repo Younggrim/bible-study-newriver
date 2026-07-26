@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="site/style.css?v=14">
+    <link rel="stylesheet" href="site/style.css?v=15">
     <style>
         body { background: #faf5ed !important; }
         .home-content { margin-top: 0; padding: 0; max-width: 100%; margin-left: auto; margin-right: auto; padding-bottom: 60px; background: #faf5ed; }
@@ -30,6 +30,17 @@
         .prayer-section { background: linear-gradient(180deg, #1a1410 0%, #2a1f14 15%, #3d2b1f 40%, #4a3828 60%, #6b5040 72%, #a08060 82%, #d4bea0 90%, #f5ebe0 96%, #faf5ed 100%); padding: 52px 32px 80px; text-align: center; }
         .prayer-text { font-family: "Cormorant Garamond", serif; font-size: 1.3rem; line-height: 2.1; color: #f0e4d4; font-style: italic; max-width: 720px; margin: 0 auto; font-weight: 500; }
         .prayer-label { font-family: "Cinzel", serif; font-size: 0.9rem; color: #c9a96e; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; }
+        /* Daily Devotional Preview */
+        .devo-preview-section { max-width: 900px; margin: 0 auto; padding: 0 32px; }
+        .devo-preview-card { background: linear-gradient(135deg, #3d2b1f 0%, #5c3d6e 50%, #2c6b4f 100%); border-radius: 16px; padding: 44px 40px; text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+        .devo-preview-date { font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 600; color: #d8c9a8; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+        .devo-preview-card h2 { font-family: 'Cinzel', serif; font-size: 1.5rem; color: #fff; margin-bottom: 6px; text-shadow: 1px 1px 4px rgba(0,0,0,0.4); }
+        .devo-preview-card h2 i { margin-right: 8px; }
+        .devo-preview-ref { font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 600; color: #f0c865; letter-spacing: 0.5px; margin-bottom: 18px; }
+        .devo-preview-snippet { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; line-height: 1.8; color: #f5ebe0; font-style: italic; max-width: 600px; margin: 0 auto 26px; }
+        .devo-preview-btn { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #3d2b1f; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9rem; transition: transform 0.15s, box-shadow 0.15s; }
+        .devo-preview-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.2); }
+
         /* Content Blocks */
         .content-block { margin: 0 auto; max-width: 900px; background: #faf5ed; border: none; border-radius: 0; padding: 40px 48px; box-shadow: none; }
         .content-block h2 { font-family: "Cinzel", serif; font-size: 1.4rem; color: #8b3a2a; margin-bottom: 8px; text-align: center; }
@@ -81,6 +92,9 @@
             .section-hero-overlay h2 { font-size: 1.6rem; }
             .cards-container { padding: 24px 16px 0; }
             .book-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+            .devo-preview-section { padding: 0 16px; }
+            .devo-preview-card { padding: 32px 24px; }
+            .devo-preview-card h2 { font-size: 1.25rem; }
         }
     </style>
 </head>
@@ -106,6 +120,17 @@
         <div class="prayer-section">
             <p class="prayer-label">A Prayer for You</p>
             <p class="prayer-text">Lord, we pray that this resource brings glory to Your name. Use it as a tool to draw hearts closer to You and to reveal Your plan and purpose for each person who visits these pages. May Your Word not return void, but accomplish everything You desire. Open eyes, soften hearts, and let the truth of Scripture transform lives for Your kingdom. In Jesus' name, Amen.</p>
+        </div>
+
+        <!-- Daily Devotional Preview -->
+        <div class="devo-preview-section">
+            <div class="devo-preview-card">
+                <p class="devo-preview-date" id="homeDevoDate"></p>
+                <h2><i class="fas fa-hands-praying"></i>Today's Devotional</h2>
+                <p class="devo-preview-ref" id="homeDevoRef"></p>
+                <p class="devo-preview-snippet" id="homeDevoSnippet">Loading today's devotional&hellip;</p>
+                <a href="devotional.html" class="devo-preview-btn">Read Today's Devotional <i class="fas fa-arrow-right"></i></a>
+            </div>
         </div>
 
         <!-- Translation Guide Block -->
@@ -445,6 +470,39 @@
       navigator.serviceWorker.register('/sw.js').catch(function() {});
     }
     </script>
-    <script src="site/script.js?v=13"></script>
+    <script src="site/script.js?v=14"></script>
+    <script>
+    (function() {
+        var dateEl = document.getElementById('homeDevoDate');
+        var refEl = document.getElementById('homeDevoRef');
+        var snippetEl = document.getElementById('homeDevoSnippet');
+        if (!dateEl || !refEl || !snippetEl) return;
+
+        function getDayIndex() {
+            var start = new Date(2026, 6, 22); // Jul 22, 2026 = index 0
+            var now = new Date();
+            now.setHours(0,0,0,0);
+            start.setHours(0,0,0,0);
+            var diff = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+            return diff < 0 ? 0 : diff;
+        }
+
+        dateEl.textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+        fetch('devotionals.json')
+            .then(function(r) { return r.json(); })
+            .then(function(devotionals) {
+                var idx = getDayIndex();
+                if (idx >= devotionals.length) idx = devotionals.length - 1;
+                var d = devotionals[idx];
+                if (!d) return;
+                refEl.textContent = d.verse;
+                snippetEl.textContent = d.reflection;
+            })
+            .catch(function() {
+                snippetEl.textContent = 'Unable to load today\'s devotional right now.';
+            });
+    })();
+    </script>
 </body>
 </html>

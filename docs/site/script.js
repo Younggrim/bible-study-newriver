@@ -230,7 +230,9 @@ document.addEventListener('DOMContentLoaded', function() {
         'unforgiveness-and-bitterness','life-studies'];
 
     var baseName = path.replace('.html','');
-    if (topicPages.indexOf(baseName) !== -1) {
+    if (baseName === 'devotional') {
+        section = 'devotional';
+    } else if (topicPages.indexOf(baseName) !== -1) {
         section = 'topical';
     } else if (strugglePages.indexOf(baseName) !== -1) {
         section = 'life';
@@ -276,9 +278,6 @@ document.addEventListener('DOMContentLoaded', function() {
         navItems.forEach(function(item) {
             if (item.dataset.section === sec) item.classList.add('active');
         });
-        // Hide devotional overlay if showing
-        var devOv = document.querySelector('.pwa-coming-soon');
-        if (devOv) devOv.classList.remove('show');
         // Scroll to top
         window.scrollTo(0, 0);
     }
@@ -296,6 +295,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // (replaces the full 66-book grid — too long to scroll in-app)
         // Hide content-block (translation guide) — replaced by info icon
         if (contentBlock) contentBlock.style.display = 'none';
+        // Hide the homepage devotional preview — the app has its own Devotional tab
+        var devoPreview = document.querySelector('.devo-preview-section');
+        if (devoPreview) devoPreview.style.display = 'none';
         if (allSectionHeroes[0]) bibleElements.push(allSectionHeroes[0]);
         var bibleNav = document.querySelector('.pwa-bible-nav');
         if (bibleNav) bibleElements.push(bibleNav);
@@ -390,7 +392,7 @@ document.addEventListener('DOMContentLoaded', function() {
         + '<i class="fas fa-lightbulb"></i><span>Topical</span></a>'
         + '<a class="pwa-nav-item' + (section==='life'?' active':'') + '" data-section="life" href="#">'
         + '<i class="fas fa-heart"></i><span>Life</span></a>'
-        + '<a class="pwa-nav-item" data-section="devotional" id="pwa-devotional-btn" href="#">'
+        + '<a class="pwa-nav-item' + (section==='devotional'?' active':'') + '" data-section="devotional" id="pwa-devotional-btn" href="#">'
         + '<i class="fas fa-hands-praying"></i><span>Devotional</span></a>';
     document.body.appendChild(nav);
 
@@ -419,16 +421,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-
-    // Devotional "Coming Soon" overlay
-    var devOverlay = document.createElement('div');
-    devOverlay.className = 'pwa-coming-soon';
-    devOverlay.innerHTML = ''
-        + '<i class="fas fa-hands-praying"></i>'
-        + '<h2>Devotional</h2>'
-        + '<p>Daily devotionals are coming soon. This space will offer guided daily readings, reflections, and prayers to walk with you through each day in God\'s Word.</p>'
-        + '<p style="margin-top:20px;font-size:0.8rem;color:#8a7e74;">Tap another tab to go back</p>';
-    document.body.appendChild(devOverlay);
 })();
 
 

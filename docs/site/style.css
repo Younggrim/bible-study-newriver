@@ -655,41 +655,6 @@ body.pwa-standalone .pwa-splash {
     letter-spacing: 1px;
 }
 
-/* ===== PWA Devotional Coming Soon ===== */
-.pwa-coming-soon {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 64px;
-    background: #faf5ed;
-    z-index: 9998;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 40px;
-    text-align: center;
-}
-.pwa-coming-soon.show {
-    display: flex;
-}
-.pwa-coming-soon i {
-    font-size: 3rem;
-    color: #c9a96e;
-    margin-bottom: 20px;
-}
-.pwa-coming-soon h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 1.4rem;
-    color: #6b4c3b;
-    margin-bottom: 12px;
-}
-.pwa-coming-soon p {
-    font-size: 0.9rem;
-    color: #5a4e44;
-    line-height: 1.7;
-    max-width: 400px;
-}
-
-
 /* ===== PWA Info Button & Popup ===== */
 .pwa-info-btn {
     display: inline-flex;
