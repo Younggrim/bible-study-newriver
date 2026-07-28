@@ -22,6 +22,10 @@
         .back-link:hover { color: #2e2548; }
         .back-link i { margin-right: 6px; }
 
+        .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
+        .jump-card { background: #fff; border: 1px solid #e8e0d6; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #4a3a6b; text-decoration: none; transition: background 0.15s, transform 0.15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+
         .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; scroll-margin-top: 76px; }
         .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.35rem; color: #4a3a6b; margin-bottom: 4px; }
         .section-block .section-kicker { display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #8a7e74; margin-bottom: 6px; }
@@ -44,6 +48,14 @@
         </div>
 
         <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
+
+        <nav class="jump-grid">
+            <a href="#what-is-the-trinity" class="jump-card">Overview</a>
+            <a href="#father" class="jump-card">God the Father</a>
+            <a href="#son" class="jump-card">God the Son</a>
+            <a href="#holy-spirit" class="jump-card">Holy Spirit</a>
+            <a href="#videos" class="jump-card">Videos</a>
+        </nav>
 
         <div class="section-block" id="what-is-the-trinity">
             <span class="section-kicker">The Foundation</span>
