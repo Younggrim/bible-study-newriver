@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#2c5a6b">
     <title>The Beatitudes — Bible Study</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,68 +13,312 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
     <link rel="stylesheet" href="site/style.css">
     <style>
-        body { background: #faf5ed; }
-        .page-content { margin: 0 auto; max-width: 960px; padding: 24px 24px 80px; }
+        .topic-hero { position: relative; overflow: hidden; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1775204653609-61995122d8d2?w=1200&q=80") center/cover no-repeat; filter: brightness(0.45) sepia(0.75) saturate(1.7); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #a0d4e8; letter-spacing: 0.5px; }
+
         .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #2c5a6b; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #1a3a45; }
         .back-link i { margin-right: 6px; }
-        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 8px; }
-        .item-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid; border-radius: 10px; text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
-        .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
-        .item-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 2px; }
-        .item-card .subtitle { font-size: 0.75rem; font-style: italic; color: #8a7e74; margin-bottom: 6px; }
-        .item-card .desc { font-size: 0.82rem; color: #5a4e44; line-height: 1.5; }
-        @media (max-width: 768px) { .item-grid { grid-template-columns: 1fr; } }
+
+        .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
+        .jump-card { background: #fff; border: 1px solid #e8e0d6; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #2c5a6b; text-decoration: none; transition: background 0.15s, transform 0.15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; scroll-margin-top: 76px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.35rem; color: #2c5a6b; margin-bottom: 4px; }
+        .section-block .section-kicker { display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #8a7e74; margin-bottom: 6px; }
+        .section-block h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; color: #2c5a6b; margin: 20px 0 12px; }
+        .section-block h4 { font-family: 'Cinzel', serif; font-size: 0.88rem; color: #2c5a6b; margin: 18px 0 10px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .video-grid:last-child { margin-bottom: 0; }
+
+        .verse-ref { color: #2c5a6b; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #1a3a45; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#2c5a6b; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="section-hero">
-        <img src="https://images.unsplash.com/photo-1775204653609-61995122d8d2?w=1400&q=80&auto=format"
-             srcset="https://images.unsplash.com/photo-1775204653609-61995122d8d2?w=640&q=80&auto=format 640w,
-                     https://images.unsplash.com/photo-1775204653609-61995122d8d2?w=1000&q=80&auto=format 1000w,
-                     https://images.unsplash.com/photo-1775204653609-61995122d8d2?w=1600&q=80&auto=format 1600w"
-             sizes="100vw" fetchpriority="high" alt="Sunrise over misty mountains">
-        <div class="section-hero-overlay">
-            <h2>The Beatitudes</h2>
-            <p class="section-desc">Jesus' blueprint for a blessed life, spoken from a Galilean hillside.</p>
+    <main class="main-content" style="margin-left:auto; margin-right:auto; max-width:960px; margin-top:0;">
+
+        <div class="topic-hero">
+            <p class="subtitle">Topical Study</p>
+            <h1>The Beatitudes</h1>
         </div>
-    </div>
-    <main class="page-content">
+
         <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
-        <div class="item-grid">
-                <a href="beatitudes-poor-in-spirit.html" class="item-card" style="border-left-color:#2c5a6b;">
-                    <h4 style="color:#2c5a6b;">Blessed Are the Poor in Spirit</h4>
-                    <p class="desc">Recognizing spiritual bankruptcy before God.</p>
-                </a>
-                <a href="beatitudes-those-who-mourn.html" class="item-card" style="border-left-color:#2c5a6b;">
-                    <h4 style="color:#2c5a6b;">Blessed Are Those Who Mourn</h4>
-                    <p class="desc">Grieving over sin leads to divine comfort.</p>
-                </a>
-                <a href="beatitudes-the-meek.html" class="item-card" style="border-left-color:#2c5a6b;">
-                    <h4 style="color:#2c5a6b;">Blessed Are the Meek</h4>
-                    <p class="desc">Power surrendered to God — inheriting the earth.</p>
-                </a>
-                <a href="beatitudes-hunger-for-righteousness.html" class="item-card" style="border-left-color:#2c5a6b;">
-                    <h4 style="color:#2c5a6b;">Blessed Are Those Who Hunger for Righteousness</h4>
-                    <p class="desc">A consuming desire for God's ways.</p>
-                </a>
-                <a href="beatitudes-the-merciful.html" class="item-card" style="border-left-color:#2c5a6b;">
-                    <h4 style="color:#2c5a6b;">Blessed Are the Merciful</h4>
-                    <p class="desc">Showing mercy as we have received mercy.</p>
-                </a>
-                <a href="beatitudes-pure-in-heart.html" class="item-card" style="border-left-color:#2c5a6b;">
-                    <h4 style="color:#2c5a6b;">Blessed Are the Pure in Heart</h4>
-                    <p class="desc">Single-minded devotion — seeing God.</p>
-                </a>
-                <a href="beatitudes-the-peacemakers.html" class="item-card" style="border-left-color:#2c5a6b;">
-                    <h4 style="color:#2c5a6b;">Blessed Are the Peacemakers</h4>
-                    <p class="desc">Reconciling others as children of God.</p>
-                </a>
-                <a href="beatitudes-the-persecuted.html" class="item-card" style="border-left-color:#2c5a6b;">
-                    <h4 style="color:#2c5a6b;">Blessed Are the Persecuted</h4>
-                    <p class="desc">Suffering for righteousness' sake — great reward.</p>
-                </a>
+
+        <nav class="jump-grid">
+            <a href="#what-are-the-beatitudes" class="jump-card">Overview</a>
+            <a href="#poor-in-spirit" class="jump-card">Poor in Spirit</a>
+            <a href="#those-who-mourn" class="jump-card">Those Who Mourn</a>
+            <a href="#the-meek" class="jump-card">The Meek</a>
+            <a href="#hunger-for-righteousness" class="jump-card">Hunger for Righteousness</a>
+            <a href="#the-merciful" class="jump-card">The Merciful</a>
+            <a href="#pure-in-heart" class="jump-card">Pure in Heart</a>
+            <a href="#the-peacemakers" class="jump-card">The Peacemakers</a>
+            <a href="#the-persecuted" class="jump-card">The Persecuted</a>
+            <a href="#videos" class="jump-card">Videos</a>
+        </nav>
+
+        <div class="section-block" id="what-are-the-beatitudes">
+            <span class="section-kicker">The Foundation</span>
+            <h2>What Are the Beatitudes?</h2>
+            <p>The Beatitudes are the opening words of the Sermon on the Mount, Jesus' longest recorded teaching, found in Matthew 5:1-12. Seeing the crowds, Jesus went up on a mountainside, sat down as a rabbi would to teach, and began with eight statements that all follow the same pattern: "Blessed are..." followed by a description of character, followed by a promise. The word "blessed" (Greek: makarios) does not mean a fleeting feeling of happiness dependent on circumstances — it describes a deep, settled flourishing that comes from being rightly related to God, regardless of outward conditions. The Beatitudes describe people the world would rarely call fortunate — the poor in spirit, the mourning, the persecuted — and declare them blessed anyway.</p>
+            <p>The setting itself carries meaning. Jesus ascending a mountain to deliver authoritative teaching to God's people intentionally echoes Moses ascending Sinai to receive the Law. But where Moses came down with commands external to the people, Jesus describes an internal character that the Kingdom produces from within. The Beatitudes are not a new law to obey in order to earn blessing; they are a description of what citizens of God's Kingdom actually look like — the fruit of grace already at work, not requirements to be met before grace can begin.</p>
+            <p>The eight beatitudes are not eight separate options, as though a person might be poor in spirit but skip being merciful. They form a connected progression, each flowing naturally into the next. Recognizing spiritual poverty (verse 3) leads to mourning over sin (verse 4), which produces meekness — surrendered strength (verse 5) — and a hunger for righteousness (verse 6). That hunger, once fed, produces mercy toward others (verse 7), purity of heart (verse 8), and active peacemaking (verse 9) — a character so distinct from the world's values that it inevitably provokes opposition, bringing the list full circle to persecution (verses 10-12), which Jesus calls cause for rejoicing rather than despair. Together, the eight beatitudes paint a single composite portrait: what it looks like when a human heart is fully surrendered to God and remade by His grace.</p>
         </div>
+
+        <div class="section-block" id="poor-in-spirit">
+            <span class="section-kicker">Matthew 5:3</span>
+            <h2>Blessed Are the Poor in Spirit</h2>
+            <h3>The Blessing</h3>
+            <p>In Matthew 5:3, Jesus opens the Sermon on the Mount with a paradox that overturns every human expectation: "Blessed are the poor in spirit, for theirs is the kingdom of heaven." This is not a celebration of material poverty or low self-esteem, but a declaration about those who recognize their complete spiritual bankruptcy before God. The poor in spirit are those who have come to the end of themselves — who know that they bring nothing to God that could earn His favor, and who stand before Him with empty hands and open hearts. This beatitude is the gateway to the Kingdom because it addresses the most fundamental obstacle to receiving God's grace: self-sufficiency. As long as we believe we are spiritually rich, we cannot receive what God offers.</p>
+            <p>To be poor in spirit is to live in a posture of humble dependence on God — it is the tax collector in Luke 18 who could not even lift his eyes to heaven but beat his breast saying, "God, be merciful to me, a sinner." It is the recognition that apart from Christ, we have no righteousness, no standing, and no hope — and that this recognition is itself the beginning of blessing, because it opens us to receive everything God longs to give.</p>
+            <h3>Living the Beatitude</h3>
+            <p>Living as the poor in spirit does not mean wallowing in self-condemnation, but maintaining a daily awareness that everything good in our lives flows from God's grace, not from our own merit. It means approaching prayer not as spiritual performers presenting our résumé to God, but as beggars who know where the bread is. Practically, poverty of spirit transforms how we relate to others: when we know we are spiritual beggars saved by grace, we lose the impulse to judge or compare, and we become more compassionate toward the failures of others because we are acutely aware of our own. The poor in spirit create communities of grace rather than hierarchies of achievement.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 5:3')">Matthew 5:3</span> — "Blessed are the poor in spirit, for theirs is the kingdom of heaven."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 66:2')">Isaiah 66:2</span> — "But this is the one to whom I will look: he who is humble and contrite in spirit and trembles at my word."</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 18:13-14')">Luke 18:13-14</span> — "But the tax collector, standing far off, would not even lift up his eyes to heaven... this man went down to his house justified."</li>
+                <li><span class="verse-ref" onclick="showVerse('James 4:6')">James 4:6</span> — "God opposes the proud but gives grace to the humble."</li>
+                <li><span class="verse-ref" onclick="showVerse('Revelation 3:17')">Revelation 3:17</span> — "You say, I am rich, I have prospered... not realizing that you are wretched, pitiable, poor, blind, and naked."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="those-who-mourn">
+            <span class="section-kicker">Matthew 5:4</span>
+            <h2>Blessed Are Those Who Mourn</h2>
+            <h3>The Blessing</h3>
+            <p>This beatitude follows naturally from poverty of spirit. Once we recognize our spiritual bankruptcy, the appropriate response is mourning — a holy grief that we have offended a holy God, that we have contributed to the world's brokenness, that sin has ravaged what God created to be beautiful. This is not mere guilt or shame, which turn us inward; it is godly sorrow that turns us toward God, as Paul describes in 2 Corinthians 7:10: "Godly grief produces a repentance that leads to salvation without regret." The comfort promised is not a superficial consolation but the deep, transforming comfort of God Himself drawing near to the brokenhearted.</p>
+            <p>Psalm 34:18 declares, "The LORD is near to the brokenhearted and saves the crushed in spirit." Those who mourn over sin discover that their very grief becomes the doorway through which God's comfort enters — a comfort that heals, restores, and ultimately transforms mourning into joy.</p>
+            <h3>Living the Beatitude</h3>
+            <p>Living as those who mourn means cultivating a tender heart in a world that rewards toughness and emotional detachment. It means refusing to numb ourselves to the reality of sin — both our own persistent failures and the suffering that sin inflicts on others. This is not a call to perpetual sadness, but to honest engagement with the brokenness around us rather than looking away. This beatitude also transforms our relationship with repentance: rather than treating confession as a mechanical religious duty, those who mourn approach it with genuine sorrow — not because they fear punishment, but because they love the God they have offended.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 5:4')">Matthew 5:4</span> — "Blessed are those who mourn, for they shall be comforted."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 7:10')">2 Corinthians 7:10</span> — "For godly grief produces a repentance that leads to salvation without regret, whereas worldly grief produces death."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 34:18')">Psalm 34:18</span> — "The LORD is near to the brokenhearted and saves the crushed in spirit."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 61:1-3')">Isaiah 61:1-3</span> — "He has sent me to bind up the brokenhearted... to comfort all who mourn... to give them a garland instead of ashes."</li>
+                <li><span class="verse-ref" onclick="showVerse('Revelation 21:4')">Revelation 21:4</span> — "He will wipe away every tear from their eyes, and death shall be no more, neither shall there be mourning."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="the-meek">
+            <span class="section-kicker">Matthew 5:5</span>
+            <h2>Blessed Are the Meek</h2>
+            <h3>The Blessing</h3>
+            <p>Meekness in Scripture is not weakness. The Greek word (praus) describes strength under control — a warhorse trained to obey its rider's slightest command, power that has been surrendered to a higher authority. Moses was called the meekest man on earth (Numbers 12:3), yet he confronted Pharaoh, led a nation, and spoke face to face with God. Jesus described Himself as "gentle and lowly in heart" (Matthew 11:29), yet He drove merchants from the temple and fearlessly challenged the religious authorities. Meekness is not the absence of power but the choice to place all one's power under God's direction.</p>
+            <p>The promise of inheriting the earth echoes Psalm 37:11 and points to the ultimate restoration of all things. While the aggressive and powerful seize temporary control through force, those who surrender their strength to God will receive the renewed earth as their eternal inheritance.</p>
+            <h3>Living the Beatitude</h3>
+            <p>Living as the meek requires a daily decision to surrender our rights, our reputation, and our power to God's control. This does not mean becoming a doormat or refusing to stand for justice — Moses and Jesus both demonstrate that meekness and boldness coexist. Rather, it means refusing to use our strength for self-advancement, choosing not to retaliate when wronged, and trusting God to vindicate us rather than taking matters into our own hands. Meekness transforms our relationships because it removes the constant competition for dominance that poisons human interaction, freeing us to genuinely serve others.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 5:5')">Matthew 5:5</span> — "Blessed are the meek, for they shall inherit the earth."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 37:11')">Psalm 37:11</span> — "But the meek shall inherit the land and delight themselves in abundant peace."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 11:29')">Matthew 11:29</span> — "Take my yoke upon you, and learn from me, for I am gentle and lowly in heart, and you will find rest for your souls."</li>
+                <li><span class="verse-ref" onclick="showVerse('Numbers 12:3')">Numbers 12:3</span> — "Now the man Moses was very meek, more than all people who were on the face of the earth."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Peter 3:4')">1 Peter 3:4</span> — "Let your adorning be the hidden person of the heart with the imperishable beauty of a gentle and quiet spirit, which in God's sight is very precious."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="hunger-for-righteousness">
+            <span class="section-kicker">Matthew 5:6</span>
+            <h2>Blessed Are Those Who Hunger for Righteousness</h2>
+            <h3>The Blessing</h3>
+            <p>This beatitude describes a consuming desire for God's righteousness — not merely moral self-improvement or religious performance, but a deep longing for God's ways to prevail in our hearts and in the world. It is the cry of Psalm 42: "As a deer pants for flowing streams, so pants my soul for you, O God." This hunger goes beyond wanting to be a better person; it is a desperate need for God Himself and for His Kingdom to come in fullness. The promise attached to this hunger is extraordinary: "they shall be satisfied." The Greek word (chortazo) means to be completely filled, gorged, lacking nothing.</p>
+            <p>This satisfaction comes progressively as we walk with Christ, and it will come perfectly when His Kingdom is fully realized. Unlike every earthly hunger that returns after being fed, this satisfaction deepens and grows richer over time.</p>
+            <h3>Living the Beatitude</h3>
+            <p>Living as those who hunger for righteousness means intentionally cultivating our appetite for God — creating space in our lives for Scripture, prayer, worship, and silence, not as religious duties to check off, but as the means by which we feast on the bread of life. This hunger also has a communal and prophetic dimension: those who hunger for righteousness are not satisfied merely with personal holiness — they long to see God's justice and righteousness prevail in their families, communities, and the world, and this holy dissatisfaction with the status quo drives them to pray, to act, and to hope.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 5:6')">Matthew 5:6</span> — "Blessed are those who hunger and thirst for righteousness, for they shall be satisfied."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 42:1-2')">Psalm 42:1-2</span> — "As a deer pants for flowing streams, so pants my soul for you, O God. My soul thirsts for God, for the living God."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 55:1-2')">Isaiah 55:1-2</span> — "Come, everyone who thirsts, come to the waters; and he who has no money, come, buy and eat!"</li>
+                <li><span class="verse-ref" onclick="showVerse('John 7:37-38')">John 7:37-38</span> — "If anyone thirsts, let him come to me and drink. Whoever believes in me... out of his heart will flow rivers of living water."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 63:1')">Psalm 63:1</span> — "O God, you are my God; earnestly I seek you; my soul thirsts for you; my flesh faints for you, as in a dry and weary land."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="the-merciful">
+            <span class="section-kicker">Matthew 5:7</span>
+            <h2>Blessed Are the Merciful</h2>
+            <h3>The Blessing</h3>
+            <p>This beatitude reflects the very heart of God. The entire story of Scripture is a story of divine mercy — God withholding the judgment humanity deserves and instead providing a way of rescue. "But God, being rich in mercy, because of the great love with which he loved us, even when we were dead in our trespasses, made us alive together with Christ" (Ephesians 2:4-5). The merciful person is one who has first received God's mercy and now extends it to others, not from superiority but from solidarity — knowing that they too are sinners saved by grace.</p>
+            <p>The promise that the merciful will receive mercy is not a transactional arrangement — as though we earn God's mercy by being nice to others. Rather, it reveals a spiritual reality: those who have truly received mercy become merciful, and their mercy-giving posture keeps them in the flow of God's ongoing grace.</p>
+            <h3>Living the Beatitude</h3>
+            <p>Living as the merciful begins with regularly returning to the cross and remembering the immensity of mercy we have received. When we lose sight of our own need for mercy, we quickly become harsh, judgmental, and demanding toward others. But when we keep fresh the memory of what God has forgiven us, mercy flows naturally — in how we speak about those who fail, how we respond when wronged, and how we extend second chances to those the world has written off. Mercy is costly, but it is also liberating — for the one who shows it as much as the one who receives it.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 5:7')">Matthew 5:7</span> — "Blessed are the merciful, for they shall receive mercy."</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 6:36')">Luke 6:36</span> — "Be merciful, even as your Father is merciful."</li>
+                <li><span class="verse-ref" onclick="showVerse('James 2:13')">James 2:13</span> — "For judgment is without mercy to one who has shown no mercy. Mercy triumphs over judgment."</li>
+                <li><span class="verse-ref" onclick="showVerse('Micah 6:8')">Micah 6:8</span> — "He has told you, O man, what is good; and what does the LORD require of you but to do justice, and to love mercy, and to walk humbly with your God?"</li>
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 2:4-5')">Ephesians 2:4-5</span> — "But God, being rich in mercy, because of the great love with which he loved us, even when we were dead in our trespasses, made us alive together with Christ."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="pure-in-heart">
+            <span class="section-kicker">Matthew 5:8</span>
+            <h2>Blessed Are the Pure in Heart</h2>
+            <h3>The Blessing</h3>
+            <p>Purity of heart is not sinless perfection but single-minded devotion. It describes an undivided heart — one that is not trying to serve two masters, not playing games with God, not maintaining a religious exterior while harboring hidden corruption within. The pure in heart are those whose inner life matches their outer life, whose motives are transparent before God, and whose deepest desire is God Himself rather than what God can give them. Kierkegaard captured it well: "Purity of heart is to will one thing." The connection between purity and seeing God runs throughout Scripture — Psalm 24:3-4 asks, "Who shall ascend the hill of the LORD?" and answers, "He who has clean hands and a pure heart."</p>
+            <p>Sin clouds our spiritual vision the way cataracts cloud physical sight. As our hearts are purified — through confession, through the work of the Spirit, through honest surrender — we begin to see God more clearly: in His Word, in His creation, in His people, and ultimately face to face when Christ returns.</p>
+            <h3>Living the Beatitude</h3>
+            <p>Living as the pure in heart requires a commitment to inner integrity that goes far beyond outward conformity. It means inviting God to search our motives — not just our actions — and being willing to let His light expose the mixed motivations and subtle self-deceptions that lurk beneath the surface of respectable religion. David's prayer in Psalm 139 becomes our daily prayer: "Search me, O God, and know my heart!" Purity of heart is not achieved through willpower alone but through the ongoing work of the Holy Spirit, growing through consistent time in God's Word and honest community, and sustained by keeping our eyes fixed on Jesus.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 5:8')">Matthew 5:8</span> — "Blessed are the pure in heart, for they shall see God."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 24:3-4')">Psalm 24:3-4</span> — "Who shall ascend the hill of the LORD? He who has clean hands and a pure heart, who does not lift up his soul to what is false."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 51:10')">Psalm 51:10</span> — "Create in me a clean heart, O God, and renew a right spirit within me."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 John 3:2-3')">1 John 3:2-3</span> — "When he appears we shall be like him, because we shall see him as he is. And everyone who thus hopes in him purifies himself as he is pure."</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 12:14')">Hebrews 12:14</span> — "Strive for peace with everyone, and for the holiness without which no one will see the Lord."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="the-peacemakers">
+            <span class="section-kicker">Matthew 5:9</span>
+            <h2>Blessed Are the Peacemakers</h2>
+            <h3>The Blessing</h3>
+            <p>The promise attached to this beatitude is extraordinary: peacemakers shall be called "sons of God." This is because peacemaking is the family business of God. The entire gospel is a story of God making peace between Himself and rebellious humanity through the cross of Christ. "For in him all the fullness of God was pleased to dwell, and through him to reconcile to himself all things... making peace by the blood of his cross" (Colossians 1:19-20). When we make peace, we reveal our family resemblance. Biblical peacemaking is not conflict avoidance or superficial harmony — true peace, the Hebrew shalom, is wholeness, flourishing, and right relationship, and it often requires honest confrontation and painful conversations rather than papering over symptoms.</p>
+            <h3>Living the Beatitude</h3>
+            <p>Living as peacemakers begins with being at peace with God ourselves through the gospel of Jesus Christ — we cannot export what we do not possess. From that foundation, we are equipped to enter the conflicts around us as agents of reconciliation: listening before speaking, seeking to understand before being understood, and being willing to go first — to apologize first, to forgive first, to extend the olive branch. Peacemaking also involves the ministry of reconciliation Paul describes in 2 Corinthians 5 — pointing others toward peace with God through Christ, bringing heaven's reconciliation into earth's conflicts one relationship at a time.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 5:9')">Matthew 5:9</span> — "Blessed are the peacemakers, for they shall be called sons of God."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 12:18')">Romans 12:18</span> — "If possible, so far as it depends on you, live peaceably with all."</li>
+                <li><span class="verse-ref" onclick="showVerse('James 3:17-18')">James 3:17-18</span> — "But the wisdom from above is first pure, then peaceable, gentle, open to reason... And a harvest of righteousness is sown in peace by those who make peace."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 5:18-19')">2 Corinthians 5:18-19</span> — "All this is from God, who through Christ reconciled us to himself and gave us the ministry of reconciliation."</li>
+                <li><span class="verse-ref" onclick="showVerse('Colossians 1:20')">Colossians 1:20</span> — "And through him to reconcile to himself all things... making peace by the blood of his cross."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="the-persecuted">
+            <span class="section-kicker">Matthew 5:10-12</span>
+            <h2>Blessed Are the Persecuted</h2>
+            <h3>The Blessing</h3>
+            <p>Jesus is not blessing all suffering indiscriminately. He specifies persecution "for righteousness' sake" and "on my account." This is suffering that comes precisely because we are living out the previous seven beatitudes — because we are poor in spirit in a world that celebrates self-sufficiency, because we are merciful in a world that demands vengeance, because we are peacemakers in a world that profits from division. The world's hostility toward the righteous is not a sign that something has gone wrong; it is confirmation that the Kingdom is advancing and the darkness is being threatened by light. The command to "rejoice and be glad" in the face of persecution is perhaps the most countercultural statement in all of Scripture.</p>
+            <p>Jesus is saying that persecution is not merely endurable but is cause for celebration — because it connects us to the great lineage of faithful prophets and stores up eternal reward that far outweighs any temporal suffering. The early church took this to heart: Acts 5:41 records that the apostles left the council "rejoicing that they were counted worthy to suffer dishonor for the name."</p>
+            <h3>Living the Beatitude</h3>
+            <p>Living as the persecuted does not mean seeking out suffering or manufacturing conflict — it means living so faithfully that the world's opposition becomes inevitable. When we refuse to compromise our convictions, when we speak truth in a culture of lies, when we extend grace in a system built on merit, we will eventually face pushback. The key to enduring persecution with joy rather than bitterness is maintaining an eternal perspective. Jesus does not minimize the pain of persecution, but sets it against a backdrop of "great reward in heaven" and membership in the company of the prophets — Moses, Elijah, Jeremiah, the apostles, and countless faithful witnesses who chose God's approval over the world's comfort.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 5:10-12')">Matthew 5:10-12</span> — "Blessed are those who are persecuted for righteousness' sake, for theirs is the kingdom of heaven... Rejoice and be glad, for your reward is great in heaven."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Peter 4:12-14')">1 Peter 4:12-14</span> — "Do not be surprised at the fiery trial... But rejoice insofar as you share Christ's sufferings, that you may also rejoice and be glad when his glory is revealed."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Timothy 3:12')">2 Timothy 3:12</span> — "Indeed, all who desire to live a godly life in Christ Jesus will be persecuted."</li>
+                <li><span class="verse-ref" onclick="showVerse('James 1:2-4')">James 1:2-4</span> — "Count it all joy, my brothers, when you meet trials of various kinds, for you know that the testing of your faith produces steadfastness."</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 5:41')">Acts 5:41</span> — "Then they left the presence of the council, rejoicing that they were counted worthy to suffer dishonor for the name."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="videos">
+            <span class="section-kicker">Watch & Learn</span>
+            <h2>Videos</h2>
+
+            <h4>Poor in Spirit</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'uol33148Hi0')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/uol33148Hi0/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Blessed Are the Poor In Spirit | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'s9246LGlngs')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/s9246LGlngs/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">“Blessed are the Poor in Spirit”: Explore the Meaning of the Beatitudes<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+            </div>
+
+            <h4>Those Who Mourn</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'TEYRLn-izvE')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/TEYRLn-izvE/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Blessed Are Those Who Mourn - Matthew 5:4<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+            </div>
+
+            <h4>The Meek</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'KTuSLKUR074')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/KTuSLKUR074/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Blessed Are The Meek - Matthew 5:5<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'5G8ExhZH8Lo')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/5G8ExhZH8Lo/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Blessed Are You When.... You&#39;re Meek | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
+
+            <h4>Hunger for Righteousness</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'GY92YLzbrto')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/GY92YLzbrto/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Blessed Are Those Who Hunger & Thirst For Righteousness - Matthew 5:6<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'0nDWEp-V_rg')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/0nDWEp-V_rg/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Blessed Are Those Who Hunger and Thirst for Righteousness - Matthew 5:6<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+            </div>
+
+            <h4>The Merciful</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'cEhj9cOizV8')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/cEhj9cOizV8/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Blessed Are The Merciful - Matthew 5:7<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'vnqWytHRt8M')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/vnqWytHRt8M/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Blessed Are You When.... You Are Merciful | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
+
+            <h4>Pure in Heart</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'BSymqVFugLQ')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/BSymqVFugLQ/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Blessed Are The Pure In Heart - Matthew 5:8<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'z_pVGEt-cpo')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/z_pVGEt-cpo/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Blessed Are You When... You&#39;re Pure In Heart | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
+
+            <h4>The Peacemakers</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'MtVAJ6Wb3W8')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/MtVAJ6Wb3W8/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Blessed Are The Peacemakers - Matthew 5:9<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+            </div>
+
+            <h4>The Persecuted</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'FS8yAxgwLnA')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/FS8yAxgwLnA/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Blessed Are The Persecuted - Matthew 5:10-12<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'eXe871CmVEs')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/eXe871CmVEs/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Blessed Are You When... You&#39;re Persecuted for Righteousness | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
+        </div>
+
     </main>
     <script src="site/script.js"></script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) {
+                textEl.innerHTML = data.passages[0];
+            } else {
+                textEl.innerHTML = '<em>Could not load this passage.</em>';
+            }
+        })
+        .catch(function() {
+            textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>';
+        });
+    }
+    function closeVerse() {
+        document.getElementById('verseOverlay').classList.remove('show');
+        document.getElementById('versePopup').classList.remove('show');
+    }
+    </script>
 </body>
 </html>
