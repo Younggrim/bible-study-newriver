@@ -22,10 +22,6 @@
         .back-link:hover { color: #2e2548; }
         .back-link i { margin-right: 6px; }
 
-        .trinity-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-        .trinity-nav a { background: #fff; border: 1px solid #e8e0d6; border-radius: 20px; padding: 7px 16px; font-size: 0.82rem; font-weight: 600; color: #4a3a6b; text-decoration: none; transition: background 0.15s, transform 0.15s; }
-        .trinity-nav a:hover { background: #f5ebe0; transform: translateY(-1px); }
-
         .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; scroll-margin-top: 76px; }
         .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.35rem; color: #4a3a6b; margin-bottom: 4px; }
         .section-block .section-kicker { display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #8a7e74; margin-bottom: 6px; }
@@ -34,22 +30,7 @@
         .section-block p:last-child { margin-bottom: 0; }
         .section-block hr.divider { border: none; border-top: 1px solid #e8e0d6; margin: 20px 0; }
 
-        .verse-list { list-style: none; padding: 0; margin: 0; }
-        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
-        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
-
-        .verse-ref { color: #4a3a6b; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
-        .verse-ref:hover { color: #2e2548; }
-        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
-        .verse-popup-overlay.show { display:block; }
-        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
-        .verse-popup.show { display:block; }
-        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#4a3a6b; margin-bottom:12px; font-weight:700; }
-        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
-        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
-        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
 
         @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
     </style>
@@ -63,14 +44,6 @@
         </div>
 
         <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
-
-        <nav class="trinity-nav">
-            <a href="#what-is-the-trinity">What Is the Trinity?</a>
-            <a href="#father">God the Father</a>
-            <a href="#son">God the Son</a>
-            <a href="#holy-spirit">God the Holy Spirit</a>
-            <a href="#videos">Videos</a>
-        </nav>
 
         <div class="section-block" id="what-is-the-trinity">
             <span class="section-kicker">The Foundation</span>
@@ -88,15 +61,6 @@
             <p>God the Father is the first person of the Trinity — the source and initiator of all things. He is the one Jesus addressed in prayer, the one who sent the Son into the world, and the one who pours out the Holy Spirit on believers. Scripture never presents Him as distant or detached; He is intimately involved in creation, in the unfolding story of Israel, and in the daily life of every one of His children. Long before the New Testament, God revealed His fatherly heart by adopting a nation — calling Israel "my son" and carrying His people "as a father carries his son" through the wilderness. That pattern of choosing, rescuing, and calling a people His own reaches its fullest expression in Christ, through whom all who believe are now welcomed into the same family.</p>
             <p>The title "Father" reveals God's relational nature. He is not merely a creator or an impersonal force but a person who desires relationship with those He has made. Jesus taught His disciples to begin their prayers with the words "Our Father in heaven" — placing every request inside a relationship of trust rather than a transaction with a distant power. Through Christ, believers are adopted into God's family and given the right to call Him "Abba," an intimate, childlike term of affection and trust that transforms our understanding of the Almighty from fearful distance to familial closeness. Paul makes this explicit: it is the Spirit Himself who testifies with our spirit that we are God's children, co-heirs with Christ of everything that belongs to Him.</p>
             <p>The Father's love is the origin of everything good in the gospel, and importantly, it is initiating rather than reactive. It was the Father who "so loved the world" that He gave His Son — the giving came first, before any response from us. It was the Father who planned redemption before the foundation of the world, choosing and predestining His people in love long before they existed to choose Him back. It was the Father who adopted us and blessed us "with every spiritual blessing in the heavenly realms." Understanding God as Father transforms a believer's whole identity: not an orphan striving to earn approval, but a beloved child already secure in a Father's love. Prayer becomes conversation rather than petition to a stranger; obedience flows from love rather than fear; failure is met with fatherly discipline rather than rejection. Even those whose experience of an earthly father was painful or absent can find real healing in the perfect Fatherhood of God — the Father, Paul writes, "from whom every family in heaven and on earth derives its name."</p>
-
-            <h3>Key Scriptures</h3>
-            <ul class="verse-list">
-                <li><span class="verse-ref" onclick="showVerse('Matthew 6:9')">Matthew 6:9</span> — "Our Father in heaven, hallowed be your name."</li>
-                <li><span class="verse-ref" onclick="showVerse('John 3:16')">John 3:16</span> — "For God so loved the world that he gave his one and only Son."</li>
-                <li><span class="verse-ref" onclick="showVerse('Romans 8:15')">Romans 8:15</span> — "The Spirit you received brought about your adoption to sonship. And by him we cry, Abba, Father."</li>
-                <li><span class="verse-ref" onclick="showVerse('1 John 3:1')">1 John 3:1</span> — "See what great love the Father has lavished on us, that we should be called children of God!"</li>
-                <li><span class="verse-ref" onclick="showVerse('Ephesians 1:3-6')">Ephesians 1:3-6</span> — "Praise be to the God and Father of our Lord Jesus Christ, who has blessed us in the heavenly realms."</li>
-            </ul>
         </div>
 
         <div class="section-block" id="son">
@@ -105,15 +69,6 @@
             <p>God the Son — Jesus Christ — is the second person of the Trinity: eternally God, yet the one who became human to reveal the Father and redeem humanity. He is not a created being but the Creator Himself, the eternal Word who was with God and was God before anything was made, the one "through whom all things were made" and "in whom all things hold together." The Son shares fully in the divine nature from eternity past — His humanity is something He added, not something He has always had, and something He took on, not something forced upon Him.</p>
             <p>The incarnation is the great mystery at the center of who the Son is: the eternal Word became flesh. Without ceasing to be God for even a moment, He became fully human — experiencing hunger, fatigue, sorrow, temptation, and ultimately death. Theologians describe this as the union of two natures, fully divine and fully human, in a single person, without either nature being diminished or blended into the other. This was not a diminishment of deity but a deliberate descent motivated by love: "being in very nature God," Paul writes, He "made himself nothing... and humbled himself by becoming obedient to death." Only because the Son is truly God could His death carry infinite worth sufficient to atone for sin; only because He is truly human could He stand in humanity's place.</p>
             <p>Jesus is the perfect revelation of God. When Philip asked to see the Father, Jesus answered simply, "Anyone who has seen me has seen the Father." In Christ's compassion for the outcast, we see God's compassion. In Christ's anger at injustice, we see God's justice. In Christ's willingness to lay down His life, we see the full measure of God's love. The Son makes the invisible God visible, the unknowable God knowable, the seemingly distant God near — "the radiance of God's glory and the exact representation of his being," as Hebrews puts it. His significance for us is total and ongoing: through His death we are forgiven, through His resurrection we have new life, through His continuing intercession we have access to the Father, and through His promised return we have a certain future. And because the Son became human, He is not a God who observes human weakness from a distance — He experienced hunger, grief, temptation, and exhaustion Himself, which is exactly why Scripture says we can approach His throne with confidence, "that we may receive mercy and find grace to help us in our time of need."</p>
-
-            <h3>Key Scriptures</h3>
-            <ul class="verse-list">
-                <li><span class="verse-ref" onclick="showVerse('John 1:1-14')">John 1:1-14</span> — "In the beginning was the Word, and the Word was with God, and the Word was God... The Word became flesh."</li>
-                <li><span class="verse-ref" onclick="showVerse('Colossians 1:15-17')">Colossians 1:15-17</span> — "The Son is the image of the invisible God, the firstborn over all creation. In him all things hold together."</li>
-                <li><span class="verse-ref" onclick="showVerse('Hebrews 1:3')">Hebrews 1:3</span> — "The Son is the radiance of God's glory and the exact representation of his being."</li>
-                <li><span class="verse-ref" onclick="showVerse('Philippians 2:5-11')">Philippians 2:5-11</span> — "Who, being in very nature God, did not consider equality with God something to be grasped... he humbled himself."</li>
-                <li><span class="verse-ref" onclick="showVerse('John 14:9')">John 14:9</span> — "Anyone who has seen me has seen the Father."</li>
-            </ul>
         </div>
 
         <div class="section-block" id="holy-spirit">
@@ -122,15 +77,6 @@
             <p>The Holy Spirit is the third person of the Trinity — fully God, fully personal, and actively present in the life of every believer. He is not a force or an influence, the way electricity or gravity are forces, but a divine person who thinks, feels, speaks, decides, and acts. He can be grieved, He intercedes, He teaches, and He testifies — all things only a person, not a power, can do. Jesus called Him "another Advocate," using a word that means another of the same kind as Himself, someone who would take Christ's place as a constant, personal presence with believers forever.</p>
             <p>The Spirit's role is multifaceted and touches nearly every part of the Christian life: He convicts of sin, regenerates dead hearts and makes them alive, indwells every believer permanently, produces spiritual fruit — love, joy, peace, patience, kindness, and the rest — distributes spiritual gifts for service to the church, illuminates Scripture so it can be truly understood, guides believers into truth, empowers them for witness, and intercedes for them in prayer with groans too deep for words. He is the immediate presence of God within the believer — the one who makes the Christian life possible from the inside out, rather than merely a set of external rules to obey.</p>
             <p>Before His ascension, Jesus told His disciples something that must have sounded strange in the moment: it was actually to their advantage that He was leaving, because the Spirit would come. While Jesus, in His human body, could only be in one place at a time, the Spirit would indwell every believer simultaneously, everywhere, making God's presence constant, internal, and universal rather than occasional and external. This is the practical, daily significance of the Spirit for believers: He is a companion who never leaves, a source of power for holy living that does not depend on willpower alone, a teacher who makes the Bible come alive, and a comforter who sustains believers through hardship. Without the Spirit, the Christian life would be mere rule-following attempted in one's own strength; with Him, it becomes a supernatural partnership with God Himself, in which Christlike character grows not through striving but through surrender — walking in step with the Spirit and letting His fruit take root naturally.</p>
-
-            <h3>Key Scriptures</h3>
-            <ul class="verse-list">
-                <li><span class="verse-ref" onclick="showVerse('John 14:16-17')">John 14:16-17</span> — "I will ask the Father, and he will give you another advocate to help you and be with you forever — the Spirit of truth."</li>
-                <li><span class="verse-ref" onclick="showVerse('Acts 1:8')">Acts 1:8</span> — "You will receive power when the Holy Spirit comes on you; and you will be my witnesses."</li>
-                <li><span class="verse-ref" onclick="showVerse('Romans 8:26-27')">Romans 8:26-27</span> — "The Spirit himself intercedes for us through wordless groans."</li>
-                <li><span class="verse-ref" onclick="showVerse('Galatians 5:22-23')">Galatians 5:22-23</span> — "The fruit of the Spirit is love, joy, peace, forbearance, kindness, goodness, faithfulness, gentleness and self-control."</li>
-                <li><span class="verse-ref" onclick="showVerse('John 16:13')">John 16:13</span> — "When he, the Spirit of truth, comes, he will guide you into all the truth."</li>
-            </ul>
         </div>
 
         <div class="section-block" id="videos">
@@ -153,40 +99,6 @@
     <script>
     function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
     function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
-    </script>
-    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
-    <div class="verse-popup" id="versePopup">
-        <button class="popup-close" onclick="closeVerse()">&times;</button>
-        <div class="popup-ref" id="popupRef"></div>
-        <div class="popup-text" id="popupText"></div>
-    </div>
-    <script>
-    function showVerse(passage) {
-        var overlay = document.getElementById('verseOverlay');
-        var popup = document.getElementById('versePopup');
-        var refEl = document.getElementById('popupRef');
-        var textEl = document.getElementById('popupText');
-        refEl.textContent = passage;
-        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
-        overlay.classList.add('show');
-        popup.classList.add('show');
-        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-            if (data.passages && data.passages[0]) {
-                textEl.innerHTML = data.passages[0];
-            } else {
-                textEl.innerHTML = '<em>Could not load this passage.</em>';
-            }
-        })
-        .catch(function() {
-            textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>';
-        });
-    }
-    function closeVerse() {
-        document.getElementById('verseOverlay').classList.remove('show');
-        document.getElementById('versePopup').classList.remove('show');
-    }
     </script>
 </body>
 </html>
