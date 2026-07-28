@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#8b3a2a">
     <title>The Gospel — Bible Study</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,68 +13,305 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
     <link rel="stylesheet" href="site/style.css">
     <style>
-        body { background: #faf5ed; }
-        .page-content { margin: 0 auto; max-width: 960px; padding: 24px 24px 80px; }
+        .topic-hero { position: relative; overflow: hidden; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1528825539566-2bcb5882445c?w=1200&q=80") center/cover no-repeat; filter: brightness(0.45) sepia(0.75) saturate(1.7); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #e8b4a0; letter-spacing: 0.5px; }
+
         .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #8b3a2a; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #5c2518; }
         .back-link i { margin-right: 6px; }
-        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 8px; }
-        .item-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid; border-radius: 10px; text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
-        .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
-        .item-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 2px; }
-        .item-card .subtitle { font-size: 0.75rem; font-style: italic; color: #8a7e74; margin-bottom: 6px; }
-        .item-card .desc { font-size: 0.82rem; color: #5a4e44; line-height: 1.5; }
-        @media (max-width: 768px) { .item-grid { grid-template-columns: 1fr; } }
+
+        .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
+        .jump-card { background: #fff; border: 1px solid #e8e0d6; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #8b3a2a; text-decoration: none; transition: background 0.15s, transform 0.15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; scroll-margin-top: 76px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.35rem; color: #8b3a2a; margin-bottom: 4px; }
+        .section-block .section-kicker { display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #8a7e74; margin-bottom: 6px; }
+        .section-block h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; color: #8b3a2a; margin: 20px 0 12px; }
+        .section-block h4 { font-family: 'Cinzel', serif; font-size: 0.88rem; color: #8b3a2a; margin: 18px 0 10px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .video-grid:last-child { margin-bottom: 0; }
+
+        .verse-ref { color: #8b3a2a; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #5c2518; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#8b3a2a; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="section-hero">
-        <img src="https://images.unsplash.com/photo-1528825539566-2bcb5882445c?w=1400&q=80&auto=format"
-             srcset="https://images.unsplash.com/photo-1528825539566-2bcb5882445c?w=640&q=80&auto=format 640w,
-                     https://images.unsplash.com/photo-1528825539566-2bcb5882445c?w=1000&q=80&auto=format 1000w,
-                     https://images.unsplash.com/photo-1528825539566-2bcb5882445c?w=1600&q=80&auto=format 1600w"
-             sizes="100vw" fetchpriority="high" alt="A cross silhouette at sunset">
-        <div class="section-hero-overlay">
-            <h2>The Gospel</h2>
-            <p class="section-desc">The good news of salvation through Jesus Christ, from beginning to end.</p>
+    <main class="main-content" style="margin-left:auto; margin-right:auto; max-width:960px; margin-top:0;">
+
+        <div class="topic-hero">
+            <p class="subtitle">Topical Study</p>
+            <h1>The Gospel</h1>
         </div>
-    </div>
-    <main class="page-content">
+
         <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
-        <div class="item-grid">
-                <a href="gospel-gods-holiness.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">God's Holiness</h4>
-                    <p class="desc">God is perfectly righteous — the standard of all good.</p>
-                </a>
-                <a href="gospel-mans-sin.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">Man's Sin</h4>
-                    <p class="desc">All have sinned and fall short of God's glory.</p>
-                </a>
-                <a href="gospel-sins-penalty.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">Sin's Penalty</h4>
-                    <p class="desc">The wages of sin is death — eternal separation.</p>
-                </a>
-                <a href="gospel-gods-love.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">God's Love</h4>
-                    <p class="desc">But God demonstrates His love toward us.</p>
-                </a>
-                <a href="gospel-christs-death.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">Christ's Death</h4>
-                    <p class="desc">He died in our place — the just for the unjust.</p>
-                </a>
-                <a href="gospel-faith-alone.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">Faith Alone</h4>
-                    <p class="desc">Saved by grace through faith — not works.</p>
-                </a>
-                <a href="gospel-repentance.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">Repentance</h4>
-                    <p class="desc">Turning from sin and self — toward God.</p>
-                </a>
-                <a href="gospel-new-life.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">New Life</h4>
-                    <p class="desc">Anyone in Christ is a new creation.</p>
-                </a>
+
+        <nav class="jump-grid">
+            <a href="#what-is-the-gospel" class="jump-card">Overview</a>
+            <a href="#gods-holiness" class="jump-card">God's Holiness</a>
+            <a href="#mans-sin" class="jump-card">Man's Sin</a>
+            <a href="#sins-penalty" class="jump-card">Sin's Penalty</a>
+            <a href="#gods-love" class="jump-card">God's Love</a>
+            <a href="#christs-death" class="jump-card">Christ's Death</a>
+            <a href="#faith-alone" class="jump-card">Faith Alone</a>
+            <a href="#repentance" class="jump-card">Repentance</a>
+            <a href="#new-life" class="jump-card">New Life</a>
+            <a href="#videos" class="jump-card">Videos</a>
+        </nav>
+
+        <div class="section-block" id="what-is-the-gospel">
+            <span class="section-kicker">The Foundation</span>
+            <h2>What Is the Gospel?</h2>
+            <p>"Gospel" means good news, and the good news only makes sense against the backdrop of bad news. Scripture presents the gospel not as a single verse but as a connected story with a deliberate logic — eight truths that build on one another, each one necessary for the next to make sense. Skip a step and the gospel stops working: without holiness, sin isn't serious; without sin, the cross isn't necessary; without the cross, faith has nothing to trust in. This page walks through that logic in order, the way it's meant to be understood — as one continuous account of who God is, what has gone wrong, and what He has done about it.</p>
+            <p>The story begins with God, not with us. Before anything is said about human failure, Scripture establishes who God is: infinitely holy, utterly set apart from sin. That starting point matters, because it's the only thing that explains why sin is actually a problem — not a social inconvenience or a personal shortcoming, but a violation of the character of the God who made everything, including us. From there the story turns to the human condition (sin, then its penalty), then pivots to what God did about it (His love, expressed concretely in Christ's death), and finally to how a person actually receives that gift and is changed by it (faith, repentance, and new life).</p>
+            <p>Two things are worth noticing about this structure before working through it piece by piece. First, it is symmetrical: three truths about God and the problem (holiness, sin, penalty), then a hinge (God's love), then four truths about the solution and its reception (Christ's death, faith, repentance, new life). Second, none of the eight truths stands alone as "the gospel" — the gospel is the whole arc together. A gospel presentation that only talks about God's love, without His holiness or sin's penalty, sounds sentimental rather than urgent. A gospel presentation that only talks about sin and penalty, without God's love and Christ's death, sounds like condemnation without hope. The good news is genuinely good only when the whole story is told.</p>
         </div>
+
+        <div class="section-block" id="gods-holiness">
+            <span class="section-kicker">Isaiah 6:3</span>
+            <h2>God's Holiness</h2>
+            <h3>The Truth</h3>
+            <p>The gospel begins not with human sin but with divine holiness. God is utterly, completely, infinitely holy — set apart from everything common, impure, or fallen. His holiness is not merely moral perfection (though it includes that) but a transcendent otherness that defines His very nature. In Isaiah's vision, the seraphim cry "Holy, holy, holy" — the only attribute of God repeated three times for emphasis in Scripture, communicating superlative intensity: God is not merely holy, or very holy, but holy beyond all comprehension. His holiness is so overwhelming that even sinless angels cover their faces in His presence.</p>
+            <p>Understanding God's holiness is essential to understanding the gospel because it establishes why sin is so serious and why the cross was necessary. A less-than-holy God could overlook sin; an infinitely holy God cannot. His holiness demands that sin be dealt with — either through judgment on the sinner or through the substitutionary sacrifice of an innocent victim.</p>
+            <h3>Why It Matters</h3>
+            <p>God's holiness matters because it is the standard against which all reality is measured. It explains why we cannot save ourselves — we are unholy trying to reach a holy God, which is like trying to reach the sun by climbing a ladder. It reveals the magnitude of what Christ accomplished — bridging an infinite moral gap through His perfect sacrifice. God's holiness is also our calling: "Be holy because I am holy" is not optional advice but a command rooted in our identity as God's children.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 6:3')">Isaiah 6:3</span> — "Holy, holy, holy is the LORD Almighty; the whole earth is full of his glory."</li>
+                <li><span class="verse-ref" onclick="showVerse('Habakkuk 1:13')">Habakkuk 1:13</span> — "Your eyes are too pure to look on evil; you cannot tolerate wrongdoing."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Peter 1:15-16')">1 Peter 1:15-16</span> — "Just as he who called you is holy, so be holy in all you do."</li>
+                <li><span class="verse-ref" onclick="showVerse('Revelation 4:8')">Revelation 4:8</span> — "Day and night they never stop saying: Holy, holy, holy is the Lord God Almighty."</li>
+                <li><span class="verse-ref" onclick="showVerse('Leviticus 11:44')">Leviticus 11:44</span> — "I am the LORD your God; consecrate yourselves and be holy, because I am holy."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="mans-sin">
+            <span class="section-kicker">Romans 3:23</span>
+            <h2>Man's Sin</h2>
+            <h3>The Truth</h3>
+            <p>Against the backdrop of God's perfect holiness, the reality of human sin becomes starkly clear. Sin is not merely breaking rules — it is falling short of God's glorious standard. Every human being, without exception, has missed the mark. The problem is universal: "all have sinned." No culture, no religion, no amount of education has produced a single sinless person. Scripture's diagnosis of the human condition is unflinching: our hearts are deceitful, our best efforts are insufficient, and our natural inclination bends toward selfishness and rebellion against God.</p>
+            <p>Sin affects every dimension of human existence: our minds (darkened understanding), our wills (enslaved to self), our relationships (broken by pride and selfishness), and our standing before God (guilty and condemned). This total effect of sin — what theologians call "total depravity" — does not mean we are as bad as possible, but that sin touches every part of who we are.</p>
+            <h3>Why It Matters</h3>
+            <p>Understanding the depth of our sin matters because it prevents two dangerous errors: self-righteousness (thinking we are good enough for God) and despair (thinking we are too bad for God). The gospel speaks to both: we are worse than we think, yet more loved than we dare hope. The universal nature of sin also creates a level playing field before God — no one stands above another in moral superiority, which demolishes human pride and creates the humble posture necessary to receive grace.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Romans 3:23')">Romans 3:23</span> — "For all have sinned and fall short of the glory of God."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 64:6')">Isaiah 64:6</span> — "All of us have become like one who is unclean, and all our righteous acts are like filthy rags."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 3:10-12')">Romans 3:10-12</span> — "There is no one righteous, not even one; there is no one who understands; there is no one who seeks God."</li>
+                <li><span class="verse-ref" onclick="showVerse('Genesis 6:5')">Genesis 6:5</span> — "Every inclination of the thoughts of the human heart was only evil all the time."</li>
+                <li><span class="verse-ref" onclick="showVerse('Jeremiah 17:9')">Jeremiah 17:9</span> — "The heart is deceitful above all things and beyond cure. Who can understand it?"</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="sins-penalty">
+            <span class="section-kicker">Romans 6:23</span>
+            <h2>Sin's Penalty</h2>
+            <h3>The Truth</h3>
+            <p>Sin carries a penalty — and that penalty is death. Not merely physical death, though sin introduced that into the world, but spiritual death: eternal separation from God, the source of all life, joy, and goodness. This is not arbitrary punishment but the natural consequence of severing the relationship with the One who is life itself. The concept of wages is instructive: wages are earned. Death is not an unfair imposition but something sin rightfully earns, just as a worker deserves payment for labor performed.</p>
+            <p>This truth is sobering but essential. Without understanding the penalty, we cannot appreciate the rescue. A person who does not know they are drowning will not reach for the lifeline. The bad news of sin's penalty creates the urgency that makes the good news of God's grace truly good.</p>
+            <h3>Why It Matters</h3>
+            <p>The penalty of sin matters because it reveals what is at stake — not a minor infraction with a small fine, but a capital offense with an eternal consequence. But Romans 6:23 does not end with bad news: "the wages of sin is death, but the gift of God is eternal life." The penalty has been paid — not by us, but by Christ. What justice demanded, grace provided. We deserve death, but God offers life. We earned judgment, but God gives a gift.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Romans 6:23')">Romans 6:23</span> — "The wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord."</li>
+                <li><span class="verse-ref" onclick="showVerse('Ezekiel 18:20')">Ezekiel 18:20</span> — "The one who sins is the one who will die."</li>
+                <li><span class="verse-ref" onclick="showVerse('Revelation 20:15')">Revelation 20:15</span> — "Anyone whose name was not found written in the book of life was thrown into the lake of fire."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 5:12')">Romans 5:12</span> — "Sin entered the world through one man, and death through sin, and in this way death came to all people."</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 9:27')">Hebrews 9:27</span> — "People are destined to die once, and after that to face judgment."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="gods-love">
+            <span class="section-kicker">Romans 5:8</span>
+            <h2>God's Love</h2>
+            <h3>The Truth</h3>
+            <p>Here is the stunning truth at the center of the gospel: the holy God who cannot tolerate sin is also the loving God who gave everything to save sinners. His holiness and His love are not in conflict — they meet perfectly at the cross, where justice is satisfied and mercy is extended simultaneously. The timing of God's love is what makes it so astonishing: Romans 5:8 emphasizes that Christ died for us "while we were still sinners" — not after we cleaned up, not when we deserved it. God's love is initiating love, reaching toward rebels and enemies with sacrifice rather than waiting for us to become lovable.</p>
+            <p>God's love is not a vague sentiment but a concrete action: He gave His Son. Love is measured not by feelings but by sacrifice, and God's sacrifice is infinite — the death of His only Son for those who hated Him. No greater love exists or can exist.</p>
+            <h3>Why It Matters</h3>
+            <p>God's love matters because it is the motivation behind the entire gospel. God did not save us out of obligation, pity, or self-interest — He saved us because He loves us. This means our salvation is secure in something unchangeable: God's nature. Understanding God's love also transforms our response from duty to delight — we do not obey in order to earn love, we obey because we have already received it.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Romans 5:8')">Romans 5:8</span> — "God demonstrates his own love for us in this: While we were still sinners, Christ died for us."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 3:16')">John 3:16</span> — "For God so loved the world that he gave his one and only Son."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 John 4:9-10')">1 John 4:9-10</span> — "This is love: not that we loved God, but that he loved us and sent his Son as an atoning sacrifice for our sins."</li>
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 2:4-5')">Ephesians 2:4-5</span> — "Because of his great love for us, God, who is rich in mercy, made us alive with Christ even when we were dead in transgressions."</li>
+                <li><span class="verse-ref" onclick="showVerse('Jeremiah 31:3')">Jeremiah 31:3</span> — "I have loved you with an everlasting love; I have drawn you with unfailing kindness."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="christs-death">
+            <span class="section-kicker">1 Peter 3:18</span>
+            <h2>Christ's Death</h2>
+            <h3>The Truth</h3>
+            <p>The death of Christ is the central event of human history — the moment when God's holiness and God's love converged in a single act of breathtaking grace. On the cross, the sinless Son of God took upon Himself the penalty that our sins deserved. He died in our place, as our substitute, bearing our judgment so that we might go free. The great exchange of the gospel is summarized in 2 Corinthians 5:21: God made Christ, who had no sin, to be sin for us — so that in Him we might become the righteousness of God. Our sin was transferred to Christ; His righteousness is transferred to us.</p>
+            <p>Christ's death was not a tragic accident or a noble martyrdom — it was a deliberate, predetermined act of substitutionary love. Jesus said no one took His life from Him; He laid it down voluntarily. The cross was the Father's plan, the Son's mission, and humanity's only hope.</p>
+            <h3>Why It Matters</h3>
+            <p>Christ's death matters because without it, we have no way to God. Our sin created an unbridgeable gap between us and a holy God. No amount of good works, religious rituals, or moral improvement could span that chasm. Only the death of the perfect God-man — fully divine and fully human — could satisfy divine justice and open the way for sinners to approach a holy God. The cross also reveals the full measure of both God's wrath against sin and His love for sinners — both truths must be held together to understand the gospel rightly.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Peter 3:18')">1 Peter 3:18</span> — "Christ suffered once for sins, the righteous for the unrighteous, to bring you to God."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 53:5-6')">Isaiah 53:5-6</span> — "He was pierced for our transgressions, he was crushed for our iniquities; the punishment that brought us peace was on him."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 5:21')">2 Corinthians 5:21</span> — "God made him who had no sin to be sin for us, so that in him we might become the righteousness of God."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 5:6-8')">Romans 5:6-8</span> — "At just the right time, when we were still powerless, Christ died for the ungodly."</li>
+                <li><span class="verse-ref" onclick="showVerse('Galatians 3:13')">Galatians 3:13</span> — "Christ redeemed us from the curse of the law by becoming a curse for us."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="faith-alone">
+            <span class="section-kicker">Ephesians 2:8-9</span>
+            <h2>Faith Alone</h2>
+            <h3>The Truth</h3>
+            <p>The gospel declares that salvation comes through faith alone — not faith plus works, not faith plus rituals, not faith plus moral achievement. Faith is the empty hand that receives the gift God offers. It contributes nothing to our salvation except receiving what grace provides. Faith alone does not mean that faith exists alone — genuine faith produces good works as naturally as a living tree produces fruit. But the works are the result of salvation, not its cause. We are saved by faith alone, but the faith that saves is never alone.</p>
+            <p>This truth demolishes human pride. If salvation could be earned, we would have reason to boast. But since it is received as a gift through faith, all boasting is excluded. The ground at the foot of the cross is level — no one arrives there by climbing; everyone arrives by falling on their knees in faith and receiving mercy.</p>
+            <h3>Why It Matters</h3>
+            <p>Faith alone matters because it makes salvation accessible to everyone equally. It does not require education, wealth, moral achievement, or religious pedigree — only trust in Christ. The thief on the cross, with no time for good works, was saved by faith alone in his final hour. Understanding faith alone also provides assurance: since salvation depends on Christ's finished work received through faith, our assurance rests on His perfection, not ours.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 2:8-9')">Ephesians 2:8-9</span> — "It is by grace you have been saved, through faith — and this is not from yourselves, it is the gift of God — not by works."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 3:28')">Romans 3:28</span> — "We maintain that a person is justified by faith apart from the works of the law."</li>
+                <li><span class="verse-ref" onclick="showVerse('Galatians 2:16')">Galatians 2:16</span> — "A person is not justified by the works of the law, but by faith in Jesus Christ."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 4:5')">Romans 4:5</span> — "To the one who does not work but trusts God who justifies the ungodly, their faith is credited as righteousness."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 6:29')">John 6:29</span> — "The work of God is this: to believe in the one he has sent."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="repentance">
+            <span class="section-kicker">Acts 3:19</span>
+            <h2>Repentance</h2>
+            <h3>The Truth</h3>
+            <p>Repentance is the turning of the whole person — mind, heart, and will — away from sin and toward God. It is not merely feeling bad about consequences or trying harder to be good. It is a fundamental change of direction: recognizing that we have been walking away from God and choosing, by grace, to turn around and walk toward Him. Jesus began His ministry with the word "Repent" — making clear that entering the kingdom requires a radical change of orientation. Repentance is not a one-time event at conversion but a lifestyle, an ongoing posture that characterizes the entire Christian life.</p>
+            <p>True repentance is a gift of grace, not merely a human decision. It is godly sorrow — sorrow that comes from seeing sin as God sees it, not merely regretting its earthly consequences. This kind of repentance "leads to salvation and leaves no regret."</p>
+            <h3>Why It Matters</h3>
+            <p>Repentance matters because it is God's appointed pathway to forgiveness and new life. Acts 3:19 connects repentance to sins being "wiped out" and "times of refreshing" coming from the Lord. Heaven itself rejoices over one sinner who repents — a stunning truth that reveals how precious repentance is in God's eyes, not a humiliating defeat but a celebrated homecoming. When we repent, we are not groveling before an angry judge but returning home to a Father who has been watching for us.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Acts 3:19')">Acts 3:19</span> — "Repent, then, and turn to God, so that your sins may be wiped out, that times of refreshing may come from the Lord."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 7:10')">2 Corinthians 7:10</span> — "Godly sorrow brings repentance that leads to salvation and leaves no regret."</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 15:7')">Luke 15:7</span> — "There will be more rejoicing in heaven over one sinner who repents than over ninety-nine righteous persons who do not need to repent."</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 17:30')">Acts 17:30</span> — "Now he commands all people everywhere to repent."</li>
+                <li><span class="verse-ref" onclick="showVerse('Mark 1:15')">Mark 1:15</span> — "The time has come. The kingdom of God has come near. Repent and believe the good news!"</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="new-life">
+            <span class="section-kicker">2 Corinthians 5:17</span>
+            <h2>New Life</h2>
+            <h3>The Truth</h3>
+            <p>The gospel does not merely forgive us and leave us unchanged — it makes us entirely new. Second Corinthians 5:17 declares that anyone in Christ is a "new creation" — the old has passed away, the new has come. This is not gradual improvement but radical transformation: a new heart, a new spirit, a new identity, a new power, and a new destiny. New life in Christ means that our old self — enslaved to sin, dead in transgressions, hostile to God — has been crucified with Christ and buried. We have been raised to walk in newness of life.</p>
+            <p>The new life is both a settled reality and an unfolding experience. Positionally, we are already new creations — complete in Christ. Experientially, we are being transformed day by day into His likeness. The old patterns do not disappear overnight, but they no longer define us.</p>
+            <h3>Why It Matters</h3>
+            <p>New life matters because it is the goal of the gospel — not merely forgiveness but transformation. God did not save us to leave us as we were but to make us what we were always meant to be. Understanding our new life in Christ also provides both motivation and empowerment for holy living: we do not pursue righteousness to become new — we pursue it because we already are new. Our behavior flows from our identity, not the reverse.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 5:17')">2 Corinthians 5:17</span> — "If anyone is in Christ, the new creation has come: The old has gone, the new is here!"</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 6:4')">Romans 6:4</span> — "We were buried with him through baptism into death in order that, just as Christ was raised, we may too live a new life."</li>
+                <li><span class="verse-ref" onclick="showVerse('Galatians 2:20')">Galatians 2:20</span> — "I have been crucified with Christ and I no longer live, but Christ lives in me."</li>
+                <li><span class="verse-ref" onclick="showVerse('Ezekiel 36:26')">Ezekiel 36:26</span> — "I will give you a new heart and put a new spirit in you; I will remove from you your heart of stone."</li>
+                <li><span class="verse-ref" onclick="showVerse('Colossians 3:1-3')">Colossians 3:1-3</span> — "Since, then, you have been raised with Christ, set your hearts on things above."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="videos">
+            <span class="section-kicker">Watch & Learn</span>
+            <h2>Videos</h2>
+
+            <h4>God's Holiness</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'dNLfrrIw38c')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/dNLfrrIw38c/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Holiness Q+R<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'l9vn5UvsHvM')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/l9vn5UvsHvM/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Is Holiness Just Moral Perfection? (The Bible's Bigger Idea)<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'ky3BxN4qIBg')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/ky3BxN4qIBg/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Striving for Holiness | Francis Chan<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Crazy Love</span></p></div>
+            </div>
+
+            <h4>God's Love</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'9aaVy1AmFX4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/9aaVy1AmFX4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What It Means to Love God With "All Your Strength"<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'slyevQ1LW7A')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/slyevQ1LW7A/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Agape - Love<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'g_igCcWAMAM')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/g_igCcWAMAM/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What It Means to Love God With "All Your Soul"<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+            </div>
+
+            <h4>Christ's Death</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'fm_SWpFRyqo')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/fm_SWpFRyqo/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Did the Jews kill Jesus? Who was responsible for Christ's death? - Podcast Episode 205<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>Faith Alone</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'TaN66NdyzoA')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/TaN66NdyzoA/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Protestant vs Catholic: Is salvation by faith alone or faith plus works plus+? - Podcast Episode 271<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'PbVrV5yCKKs')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/PbVrV5yCKKs/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Is salvation by faith alone, or by faith plus works?  |  GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'cocdaAhBIVE')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/cocdaAhBIVE/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Does GotQuestions.org teach salvation by grace, through faith, in Christ, alone? - Podcast Ep 227<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>Repentance</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'6AEy9hBxgsQ')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/6AEy9hBxgsQ/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">2 Corinthians 7 – Comforted by a Church's Repentance<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'8j_W7A3bjvo')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/8j_W7A3bjvo/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Rewarding Even A Shallow Repentance - 1 Kings 21:27-29<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'weZAVI2MkEA')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/weZAVI2MkEA/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Good Kind Of Repentance — 2 Samuel 19:18b-20<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+            </div>
+
+            <h4>New Life</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'d_Q6WkD_Pas')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/d_Q6WkD_Pas/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Isaiah 61 Visual Commentary • A Vision of the New Creation<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+            </div>
+        </div>
+
     </main>
     <script src="site/script.js"></script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) {
+                textEl.innerHTML = data.passages[0];
+            } else {
+                textEl.innerHTML = '<em>Could not load this passage.</em>';
+            }
+        })
+        .catch(function() {
+            textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>';
+        });
+    }
+    function closeVerse() {
+        document.getElementById('verseOverlay').classList.remove('show');
+        document.getElementById('versePopup').classList.remove('show');
+    }
+    </script>
 </body>
 </html>
