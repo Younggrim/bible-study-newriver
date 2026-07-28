@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#2a6b6b">
     <title>Spiritual Disciplines — Bible Study</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,68 +13,324 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
     <link rel="stylesheet" href="site/style.css">
     <style>
-        body { background: #faf5ed; }
-        .page-content { margin: 0 auto; max-width: 960px; padding: 24px 24px 80px; }
+        .topic-hero { position: relative; overflow: hidden; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1469228252629-cbe7cb7db2c8?w=1200&q=80") center/cover no-repeat; filter: brightness(0.45) sepia(0.75) saturate(1.7); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #a0e8e0; letter-spacing: 0.5px; }
+
         .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #2a6b6b; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #1a4545; }
         .back-link i { margin-right: 6px; }
-        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 8px; }
-        .item-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid; border-radius: 10px; text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
-        .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
-        .item-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 2px; }
-        .item-card .subtitle { font-size: 0.75rem; font-style: italic; color: #8a7e74; margin-bottom: 6px; }
-        .item-card .desc { font-size: 0.82rem; color: #5a4e44; line-height: 1.5; }
-        @media (max-width: 768px) { .item-grid { grid-template-columns: 1fr; } }
+
+        .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
+        .jump-card { background: #fff; border: 1px solid #e8e0d6; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #2a6b6b; text-decoration: none; transition: background 0.15s, transform 0.15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; scroll-margin-top: 76px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.35rem; color: #2a6b6b; margin-bottom: 4px; }
+        .section-block .section-kicker { display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #8a7e74; margin-bottom: 6px; }
+        .section-block h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; color: #2a6b6b; margin: 20px 0 12px; }
+        .section-block h4 { font-family: 'Cinzel', serif; font-size: 0.88rem; color: #2a6b6b; margin: 18px 0 10px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .video-grid:last-child { margin-bottom: 0; }
+
+        .verse-ref { color: #2a6b6b; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #1a4545; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#2a6b6b; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="section-hero">
-        <img src="https://images.unsplash.com/photo-1469228252629-cbe7cb7db2c8?w=1400&q=80&auto=format"
-             srcset="https://images.unsplash.com/photo-1469228252629-cbe7cb7db2c8?w=640&q=80&auto=format 640w,
-                     https://images.unsplash.com/photo-1469228252629-cbe7cb7db2c8?w=1000&q=80&auto=format 1000w,
-                     https://images.unsplash.com/photo-1469228252629-cbe7cb7db2c8?w=1600&q=80&auto=format 1600w"
-             sizes="100vw" fetchpriority="high" alt="An open Bible resting outdoors">
-        <div class="section-hero-overlay">
-            <h2>Spiritual Disciplines</h2>
-            <p class="section-desc">Practices that cultivate a deeper walk with God.</p>
+    <main class="main-content" style="margin-left:auto; margin-right:auto; max-width:960px; margin-top:0;">
+
+        <div class="topic-hero">
+            <p class="subtitle">Topical Study</p>
+            <h1>Spiritual Disciplines</h1>
         </div>
-    </div>
-    <main class="page-content">
+
         <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
-        <div class="item-grid">
-                <a href="disciplines-prayer.html" class="item-card" style="border-left-color:#2a6b6b;">
-                    <h4 style="color:#2a6b6b;">Prayer</h4>
-                    <p class="desc">Communion with God — speaking and listening.</p>
-                </a>
-                <a href="disciplines-bible-study.html" class="item-card" style="border-left-color:#2a6b6b;">
-                    <h4 style="color:#2a6b6b;">Bible Study & Meditation</h4>
-                    <p class="desc">Knowing God through His Word.</p>
-                </a>
-                <a href="disciplines-fasting.html" class="item-card" style="border-left-color:#2a6b6b;">
-                    <h4 style="color:#2a6b6b;">Fasting</h4>
-                    <p class="desc">Denying the flesh to sharpen the spirit.</p>
-                </a>
-                <a href="disciplines-worship.html" class="item-card" style="border-left-color:#2a6b6b;">
-                    <h4 style="color:#2a6b6b;">Worship</h4>
-                    <p class="desc">Declaring God's worth with all we are.</p>
-                </a>
-                <a href="disciplines-fellowship.html" class="item-card" style="border-left-color:#2a6b6b;">
-                    <h4 style="color:#2a6b6b;">Fellowship</h4>
-                    <p class="desc">Iron sharpens iron — community of believers.</p>
-                </a>
-                <a href="disciplines-giving.html" class="item-card" style="border-left-color:#2a6b6b;">
-                    <h4 style="color:#2a6b6b;">Giving & Generosity</h4>
-                    <p class="desc">Stewardship that reflects God's generous heart.</p>
-                </a>
-                <a href="disciplines-sabbath-rest.html" class="item-card" style="border-left-color:#2a6b6b;">
-                    <h4 style="color:#2a6b6b;">Sabbath Rest</h4>
-                    <p class="desc">Trusting God enough to stop striving.</p>
-                </a>
-                <a href="disciplines-scripture-memory.html" class="item-card" style="border-left-color:#2a6b6b;">
-                    <h4 style="color:#2a6b6b;">Scripture Memory</h4>
-                    <p class="desc">Hiding God's Word in your heart.</p>
-                </a>
+
+        <nav class="jump-grid">
+            <a href="#what-are-spiritual-disciplines" class="jump-card">Overview</a>
+            <a href="#prayer" class="jump-card">Prayer</a>
+            <a href="#bible-study" class="jump-card">Bible Study</a>
+            <a href="#fasting" class="jump-card">Fasting</a>
+            <a href="#worship" class="jump-card">Worship</a>
+            <a href="#fellowship" class="jump-card">Fellowship</a>
+            <a href="#giving" class="jump-card">Giving</a>
+            <a href="#sabbath-rest" class="jump-card">Sabbath Rest</a>
+            <a href="#scripture-memory" class="jump-card">Scripture Memory</a>
+            <a href="#videos" class="jump-card">Videos</a>
+        </nav>
+
+        <div class="section-block" id="what-are-spiritual-disciplines">
+            <span class="section-kicker">The Foundation</span>
+            <h2>What Are Spiritual Disciplines?</h2>
+            <p>Spiritual disciplines are practices Christians have used throughout church history to open themselves to God's transforming grace — habits like prayer, fasting, and Scripture study that create space for the Holy Spirit to do the deep work of shaping character that willpower alone cannot accomplish. It is essential to understand what disciplines are not: they are not a system for earning God's favor, impressing other believers, or checking spiritual boxes. Salvation is by grace through faith alone, never by religious performance. Disciplines are the means, not the merit — a farmer cannot make a seed grow, but planting, watering, and weeding create the conditions where growth happens. Spiritual disciplines work the same way in the soul.</p>
+            <p>Jesus Himself practiced these disciplines — He withdrew to pray, He fasted, He knew Scripture by heart, He worshiped, and He kept the Sabbath rhythm His Father established. If the sinless Son of God relied on these practices to sustain His communion with the Father, they are hardly optional for those who follow Him. Paul likewise describes training in godliness the way an athlete trains the body (1 Timothy 4:7-8) — not because effort earns the prize, but because certain habits position a person to receive and grow in what grace provides.</p>
+            <p>The eight disciplines gathered here fall into a natural rhythm. Some are inward and personal — prayer, Bible study and meditation, fasting, and Scripture memory — practices that shape the individual heart in solitude. Some are relational and outward — fellowship and giving — practices that cannot be done alone and that turn faith into visible love. And two set the pattern for all the rest — worship, which orients the whole of life toward God's worth, and Sabbath rest, which interrupts the relentless activity of the other disciplines with trust. None of these stand alone; together they form a well-rounded rhythm of a life increasingly oriented toward God.</p>
         </div>
+
+        <div class="section-block" id="prayer">
+            <span class="section-kicker">Communion with God</span>
+            <h2>Prayer</h2>
+            <h3>The Discipline</h3>
+            <p>Prayer is the most fundamental spiritual discipline — the direct communication between a human soul and the living God. It is not merely a religious duty but a relational privilege: the Creator of the universe invites us to speak with Him, listen to Him, and share in His purposes through the simple act of conversing in faith. Scripture presents prayer in many forms: adoration, confession, thanksgiving, supplication, intercession, and listening silence. Each form deepens our relationship with God in different ways.</p>
+            <p>Prayer changes things — and perhaps most importantly, it changes us. As we spend time in God's presence, our desires align with His, our perspective shifts to see through eternal eyes, and our trust deepens in ways that no amount of theological knowledge alone could produce. Prayer is where knowledge becomes relationship.</p>
+            <h3>Practicing It</h3>
+            <p>Practicing prayer begins with establishing a rhythm — a regular time and place where you meet with God. Jesus modeled this by rising early to pray in solitary places. Start simple: speak honestly, listen expectantly, and do not worry about eloquence. God is not impressed by fancy words but by honest hearts. Use Scripture to guide your prayers, let the Psalms teach you the language of prayer, and remember that the Holy Spirit intercedes for you even when you do not know what to pray.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Philippians 4:6-7')">Philippians 4:6-7</span> — "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Thessalonians 5:17')">1 Thessalonians 5:17</span> — "Pray continually."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 6:6')">Matthew 6:6</span> — "When you pray, go into your room, close the door and pray to your Father, who is unseen."</li>
+                <li><span class="verse-ref" onclick="showVerse('James 5:16')">James 5:16</span> — "The prayer of a righteous person is powerful and effective."</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 18:1')">Luke 18:1</span> — "Jesus told his disciples a parable to show them that they should always pray and not give up."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="bible-study">
+            <span class="section-kicker">Knowing God Through His Word</span>
+            <h2>Bible Study & Meditation</h2>
+            <h3>The Discipline</h3>
+            <p>Bible study and meditation form the foundation of spiritual growth. God has revealed Himself through His written Word, and engaging deeply with Scripture is how we come to know Him truly. Meditation in the biblical sense is not emptying the mind but filling it — chewing on God's Word until its truth permeates our thinking, shapes our values, and directs our actions. Joshua 1:8 promises that those who meditate on Scripture day and night will be prosperous and successful — not necessarily in worldly terms, but in the ways that matter eternally.</p>
+            <p>The Bible is described as living and active — not a static historical document but a dynamic word that speaks freshly into every generation. When we approach Scripture expectantly, the Holy Spirit illuminates its meaning for our specific circumstances, making ancient words powerfully relevant to our modern lives.</p>
+            <h3>Practicing It</h3>
+            <p>Practicing Bible study involves consistency, curiosity, and application. Choose a plan — whether a book study, a theme study, or a daily reading schedule — and stick with it. Come to the text with questions: What does this teach about God? What does it reveal about humanity? How should I respond? Meditation takes study deeper by slowing down to let a passage sink in — read a verse slowly, emphasize different words, ask the Holy Spirit to reveal its meaning, and carry it with you throughout the day. The goal is not to get through the Bible but to let the Bible get through you.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('2 Timothy 3:16-17')">2 Timothy 3:16-17</span> — "All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness."</li>
+                <li><span class="verse-ref" onclick="showVerse('Joshua 1:8')">Joshua 1:8</span> — "Keep this Book of the Law always on your lips; meditate on it day and night."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 1:2-3')">Psalm 1:2-3</span> — "Blessed is the one whose delight is in the law of the LORD, and who meditates on his law day and night."</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 4:12')">Hebrews 4:12</span> — "The word of God is alive and active. Sharper than any double-edged sword."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 119:11')">Psalm 119:11</span> — "I have hidden your word in my heart that I might not sin against you."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="fasting">
+            <span class="section-kicker">Denying the Flesh to Sharpen the Spirit</span>
+            <h2>Fasting</h2>
+            <h3>The Discipline</h3>
+            <p>Fasting is the voluntary denial of a physical need — typically food — for a spiritual purpose. It is practiced throughout Scripture by those seeking God with urgency: Moses on Sinai, David in repentance, Esther before approaching the king, Jesus before His ministry began. Fasting declares that spiritual hunger surpasses physical hunger. The purpose of fasting is not to impress God with our sacrifice or to twist His arm through deprivation — it creates space for focused prayer, heightened spiritual sensitivity, and deeper dependence on God.</p>
+            <p>Jesus assumed His followers would fast — He said "when you fast," not "if you fast." Yet He warned against the hypocrisy of fasting for public recognition. Biblical fasting is a private discipline between the soul and God, not a public display of spirituality.</p>
+            <h3>Practicing It</h3>
+            <p>Begin with a simple fast — perhaps skipping one meal and using that time for prayer instead. As your body protests with hunger, let each pang become a prayer prompt. Over time, you can extend fasts as the Spirit leads, always keeping health and medical needs in mind. Fasting is most powerful when paired with a specific purpose: seeking guidance for a major decision, interceding for someone in crisis, repenting from sin, or preparing for ministry. Without purpose, fasting becomes mere dieting; with purpose, it becomes one of the most powerful spiritual weapons available to believers.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 6:16-18')">Matthew 6:16-18</span> — "When you fast, put oil on your head and wash your face, so that it will not be obvious to others that you are fasting."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 58:6')">Isaiah 58:6</span> — "Is not this the kind of fasting I have chosen: to loose the chains of injustice?"</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 13:2-3')">Acts 13:2-3</span> — "While they were worshiping the Lord and fasting, the Holy Spirit said, Set apart for me Barnabas and Saul."</li>
+                <li><span class="verse-ref" onclick="showVerse('Joel 2:12')">Joel 2:12</span> — "Return to me with all your heart, with fasting and weeping and mourning."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 4:2')">Matthew 4:2</span> — "After fasting forty days and forty nights, he was hungry."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="worship">
+            <span class="section-kicker">Declaring God's Worth With All We Are</span>
+            <h2>Worship</h2>
+            <h3>The Discipline</h3>
+            <p>Worship is both the highest calling and the deepest need of the human soul. We were created to worship — to declare the worth of God with our whole being. Jesus taught that true worship is in spirit and truth — not confined to a location or a form but flowing from an authentic heart that knows God truly. This means worship can happen anywhere — in a cathedral or a car, on a mountaintop or a hospital bed.</p>
+            <p>Romans 12:1 expands worship beyond religious activity to the offering of our entire lives. Every decision made in obedience, every act of service done for God's glory, every thought brought captive to Christ is an act of worship. This transforms the mundane into the sacred and makes all of life a living sacrifice offered to God.</p>
+            <h3>Practicing It</h3>
+            <p>Practicing worship begins with cultivating awareness of God's presence and worthiness. Start each day by declaring who God is — His attributes, His works, His faithfulness. Let music, creation, and Scripture become springboards for praise. Corporate worship with the gathered church is irreplaceable — there is something unique about joining voices with other believers to honor God together. But personal worship fills the spaces between Sundays, keeping your heart tuned to God's frequency.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('John 4:23-24')">John 4:23-24</span> — "True worshipers will worship the Father in the Spirit and in truth, for they are the kind of worshipers the Father seeks."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 95:6')">Psalm 95:6</span> — "Come, let us bow down in worship, let us kneel before the LORD our Maker."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 12:1')">Romans 12:1</span> — "Offer your bodies as a living sacrifice, holy and pleasing to God — this is your true and proper worship."</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 13:15')">Hebrews 13:15</span> — "Through Jesus, therefore, let us continually offer to God a sacrifice of praise."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 100:1-4')">Psalm 100:1-4</span> — "Enter his gates with thanksgiving and his courts with praise; give thanks to him and praise his name."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="fellowship">
+            <span class="section-kicker">Iron Sharpens Iron</span>
+            <h2>Fellowship</h2>
+            <h3>The Discipline</h3>
+            <p>The Christian life was never designed to be lived alone. From the beginning, God declared that isolation is "not good," and the New Testament presents faith as inherently communal. Fellowship — genuine, vulnerable, mutual life together with other believers — is not optional for spiritual health; it is essential to growth, accountability, and perseverance. The early church modeled radical fellowship: sharing meals, possessions, prayers, and daily life together.</p>
+            <p>Biblical fellowship goes far beyond socializing. It involves speaking truth in love, bearing one another's burdens, confessing sins to each other, encouraging the discouraged, correcting the erring, and celebrating together in joy.</p>
+            <h3>Practicing It</h3>
+            <p>Practicing fellowship starts with commitment — deciding that community is a priority, not a convenience. This means showing up consistently, being honest about your struggles, asking for help, and offering help to others. Find or form a small group where you can be known, challenged, and supported. The church is not a building you attend but a family you belong to — and belonging requires the deliberate choice to be present and engaged.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 10:24-25')">Hebrews 10:24-25</span> — "Let us consider how we may spur one another on toward love and good deeds, not giving up meeting together."</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 2:42-47')">Acts 2:42-47</span> — "They devoted themselves to the apostles' teaching and to fellowship, to the breaking of bread and to prayer."</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 27:17')">Proverbs 27:17</span> — "As iron sharpens iron, so one person sharpens another."</li>
+                <li><span class="verse-ref" onclick="showVerse('Galatians 6:2')">Galatians 6:2</span> — "Carry each other's burdens, and in this way you will fulfill the law of Christ."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 John 1:7')">1 John 1:7</span> — "If we walk in the light... we have fellowship with one another, and the blood of Jesus purifies us."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="giving">
+            <span class="section-kicker">Stewardship That Reflects God's Generous Heart</span>
+            <h2>Giving & Generosity</h2>
+            <h3>The Discipline</h3>
+            <p>Giving is a spiritual discipline that breaks the grip of materialism and trains our hearts to trust God as our provider. When we give generously — of our money, time, and resources — we declare that God is our security, not our bank accounts. Scripture reveals a generous God who gives extravagantly: He gave creation, redemption, His own Son, and eternal life. When we give, we reflect His character and participate in His mission.</p>
+            <p>Jesus taught more about money than any other subject except the kingdom of God, because He knew that our treasure and our hearts are inseparably linked. Where we put our money reveals what we truly value.</p>
+            <h3>Practicing It</h3>
+            <p>Practicing generosity begins with the tithe — giving the first ten percent of income to God's work as an act of trust and worship. But biblical generosity goes beyond the tithe to cheerful, sacrificial, Spirit-led giving that responds to needs as God directs. Generosity is not just about money — give your time to serve others, your attention to listen, your skills to help, and your home to welcome. Practice hospitality, tip generously, give secretly, support missions, and look for creative ways to bless others.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 9:6-7')">2 Corinthians 9:6-7</span> — "Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver."</li>
+                <li><span class="verse-ref" onclick="showVerse('Malachi 3:10')">Malachi 3:10</span> — "Bring the whole tithe into the storehouse... and see if I will not throw open the floodgates of heaven."</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 20:35')">Acts 20:35</span> — "It is more blessed to give than to receive."</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 11:25')">Proverbs 11:25</span> — "A generous person will prosper; whoever refreshes others will be refreshed."</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 6:38')">Luke 6:38</span> — "Give, and it will be given to you. A good measure, pressed down, shaken together and running over."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="sabbath-rest">
+            <span class="section-kicker">Trusting God Enough to Stop Striving</span>
+            <h2>Sabbath Rest</h2>
+            <h3>The Discipline</h3>
+            <p>In a culture addicted to productivity and busyness, the discipline of Sabbath rest is countercultural and desperately needed. God Himself rested on the seventh day — not from exhaustion but to model a rhythm of work and rest that reflects trust in His sovereign provision. Sabbath is God's gift, not His burden — Jesus emphasized this when He said "the Sabbath was made for man, not man for the Sabbath."</p>
+            <p>True rest is not merely the absence of work but the presence of trust. It is the soul's deep exhale that says, "God is in control, and I don't have to be." This spiritual rest — resting from our own self-sufficient striving — is what Hebrews 4 describes as the Sabbath-rest that remains for God's people, available through faith in Christ.</p>
+            <h3>Practicing It</h3>
+            <p>Practicing Sabbath begins with choosing a regular rhythm of intentional rest — a day each week dedicated to worship, relationships, recreation, and soul care rather than productivity. Sabbath is not about rigid rules but about a posture of trust. Some rest by being in nature, others through naps and silence, others through joyful play with family. The form matters less than the heart: ceasing from self-reliant striving and entering the rest that comes from trusting God with what remains undone.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 4:9-11')">Hebrews 4:9-11</span> — "There remains, then, a Sabbath-rest for the people of God; for anyone who enters God's rest also rests from their works."</li>
+                <li><span class="verse-ref" onclick="showVerse('Exodus 20:8-11')">Exodus 20:8-11</span> — "Remember the Sabbath day by keeping it holy. Six days you shall labor and do all your work."</li>
+                <li><span class="verse-ref" onclick="showVerse('Mark 2:27')">Mark 2:27</span> — "The Sabbath was made for man, not man for the Sabbath."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 11:28-30')">Matthew 11:28-30</span> — "Come to me, all you who are weary and burdened, and I will give you rest."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 46:10')">Psalm 46:10</span> — "Be still, and know that I am God."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="scripture-memory">
+            <span class="section-kicker">Hiding God's Word in Your Heart</span>
+            <h2>Scripture Memory</h2>
+            <h3>The Discipline</h3>
+            <p>Scripture memory is the discipline of intentionally committing God's Word to memory so that it becomes permanently accessible — in moments of temptation, seasons of doubt, times of evangelism, and everyday decisions. Jesus demonstrated the power of memorized Scripture in the wilderness temptation: three times Satan attacked, and three times Jesus responded with "It is written" — quoting Deuteronomy from memory. He did not have a scroll with Him; the Word was in Him.</p>
+            <p>Beyond defense, Scripture memory shapes our thinking patterns over time. The verses we memorize become the lenses through which we interpret life — they correct wrong thinking automatically, comfort us in sorrow without needing to open a Bible, and give us words to share when others need encouragement.</p>
+            <h3>Practicing It</h3>
+            <p>Start with verses that address your specific needs or struggles. Write them on cards, set them as phone backgrounds, or use an app designed for memorization. Review daily — repetition is the key to long-term retention. Context helps memory stick: rather than memorizing isolated verses, learn the surrounding passage so you understand the meaning, meditate on what you are memorizing, and practice recall by quizzing yourself and reciting verses during walks.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Psalm 119:11')">Psalm 119:11</span> — "I have hidden your word in my heart that I might not sin against you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Deuteronomy 6:6-7')">Deuteronomy 6:6-7</span> — "These commandments that I give you today are to be on your hearts. Impress them on your children."</li>
+                <li><span class="verse-ref" onclick="showVerse('Colossians 3:16')">Colossians 3:16</span> — "Let the message of Christ dwell among you richly."</li>
+                <li><span class="verse-ref" onclick="showVerse('Joshua 1:8')">Joshua 1:8</span> — "Keep this Book of the Law always on your lips; meditate on it day and night."</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 7:1-3')">Proverbs 7:1-3</span> — "Keep my commands and you will live; guard my teachings as the apple of your eye. Bind them on your fingers; write them on the tablet of your heart."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="videos">
+            <span class="section-kicker">Watch & Learn</span>
+            <h2>Videos</h2>
+
+            <h4>Prayer</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'0mQ8RM30cSo')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/0mQ8RM30cSo/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What's the RIGHT Way to Pray?<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Impact Video Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'wyaroHqe_bw')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/wyaroHqe_bw/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How I LEVELED UP My Prayer Life!<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Impact Video Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'7sTSMa_o6uw')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/7sTSMa_o6uw/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How to GROW in prayer when it feels DRY<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Impact Video Ministries</span></p></div>
+            </div>
+
+            <h4>Bible Study & Meditation</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'DPEpfJm_3Ms')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/DPEpfJm_3Ms/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the proper way to study the Bible? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'peg2xPQIqDQ')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/peg2xPQIqDQ/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How to Study the Bible: Beginner Level - Impact Workshops<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Impact Video Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'d19YWtTeb0Q')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/d19YWtTeb0Q/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How to Study the Bible: Intermediate Level - Impact Workshops<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Impact Video Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'vWUKQMr9Y4o')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/vWUKQMr9Y4o/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How to Study the Bible: Advanced Level - Impact Workshops<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Impact Video Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'WyylpYlozqY')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/WyylpYlozqY/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How To Study The Bible (Part 1) | David Guzik<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'Fr7MMKrpciM')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/Fr7MMKrpciM/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How To Study The Bible (Part 2) | David Guzik<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'Gx8FkjsDqUM')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/Gx8FkjsDqUM/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How To Study The Bible (Part 3) | David Guzik<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'z1JEwJFScCA')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/z1JEwJFScCA/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Kind of Meditation That Christians Should Avoid<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Mike Winger</span></p></div>
+            </div>
+
+            <h4>Fasting</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'rBwVxw28m1w')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/rBwVxw28m1w/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">7 Biblical Fasting Principles You MUST Apply Next Time You Fast<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">THE BEAT by Allen Parr</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'LAbLvU-aYIo')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/LAbLvU-aYIo/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">4 Tips for HOW to Fast<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Impact Video Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'TMvkx8XF40Y')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/TMvkx8XF40Y/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the connection between prayer and fasting? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>Worship</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'5zttgYdUByQ')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/5zttgYdUByQ/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is Worship? | Francis Chan<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Crazy Love</span></p></div>
+            </div>
+
+            <h4>Fellowship</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'xlYTzu4PlGY')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/xlYTzu4PlGY/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What Every Christian Needs To Know About Fellowship<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Mike Winger</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'Z6RAPLMI00Q')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/Z6RAPLMI00Q/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Stop Chasing Friends, Start Becoming This Instead<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Impact Video Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'juiNyfLHofQ')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/juiNyfLHofQ/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How to Be a REAL Friend<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Impact Video Ministries</span></p></div>
+            </div>
+
+            <h4>Giving & Generosity</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'62CliEkRCso')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/62CliEkRCso/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">This Lie Can Keep You From Living Generously<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'cDZjdM4-VzI')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/cDZjdM4-VzI/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Tithing Made EASY for Everyone!<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Impact Video Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'ceAwBWNWRQk')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/ceAwBWNWRQk/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What does the Bible say about Christian tithing? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>Sabbath Rest</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'j1IFJIamH3c')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/j1IFJIamH3c/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">SHOULD CHRISTIANS KEEP THE SABBATH?<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">THE BEAT by Allen Parr</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'wj69iufhzhw')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/wj69iufhzhw/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How is Jesus our Sabbath Rest? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>Scripture Memory</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'xl8C_tiOwH8')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/xl8C_tiOwH8/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">7 Experts Share SECRETS to Scripture Memory Success<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Bible Memory Goal</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'D3nRRIjHe1c')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/D3nRRIjHe1c/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Memorize FASTER and EASIER with these 5 HABITS<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Bible Memory Goal</span></p></div>
+            </div>
+        </div>
+
     </main>
     <script src="site/script.js"></script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) {
+                textEl.innerHTML = data.passages[0];
+            } else {
+                textEl.innerHTML = '<em>Could not load this passage.</em>';
+            }
+        })
+        .catch(function() {
+            textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>';
+        });
+    }
+    function closeVerse() {
+        document.getElementById('verseOverlay').classList.remove('show');
+        document.getElementById('versePopup').classList.remove('show');
+    }
+    </script>
 </body>
 </html>
