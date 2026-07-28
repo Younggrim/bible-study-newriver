@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#2c6b4f">
     <title>Fruits of the Spirit — Bible Study</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,81 +13,288 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
     <link rel="stylesheet" href="site/style.css">
     <style>
-        body { background: #faf5ed; }
-        .page-content { margin: 0 auto; max-width: 960px; padding: 24px 24px 80px; }
+        .topic-hero { position: relative; overflow: hidden; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1558241665-f0512695d322?w=1200&q=80") center/cover no-repeat; filter: brightness(0.45) sepia(0.75) saturate(1.7); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #a8e6cf; letter-spacing: 0.5px; }
+
         .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #2c6b4f; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #1a4a35; }
         .back-link i { margin-right: 6px; }
-        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 8px; }
-        .item-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid; border-radius: 10px; text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
-        .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
-        .item-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 2px; }
-        .item-card .subtitle { font-size: 0.75rem; font-style: italic; color: #8a7e74; margin-bottom: 6px; }
-        .item-card .desc { font-size: 0.82rem; color: #5a4e44; line-height: 1.5; }
-        @media (max-width: 768px) { .item-grid { grid-template-columns: 1fr; } }
+
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.35rem; color: #2c6b4f; margin-bottom: 4px; }
+        .section-block .section-kicker { display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #8a7e74; margin-bottom: 6px; }
+        .section-block h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; color: #2c6b4f; margin: 20px 0 12px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+
+        .verse-ref { color: #2c6b4f; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #1a4a35; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#2c6b4f; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="section-hero">
-        <img src="https://images.unsplash.com/photo-1558241665-f0512695d322?w=1400&q=80&auto=format"
-             srcset="https://images.unsplash.com/photo-1558241665-f0512695d322?w=640&q=80&auto=format 640w,
-                     https://images.unsplash.com/photo-1558241665-f0512695d322?w=1000&q=80&auto=format 1000w,
-                     https://images.unsplash.com/photo-1558241665-f0512695d322?w=1600&q=80&auto=format 1600w"
-             sizes="100vw" fetchpriority="high" alt="Vineyard rows at sunset">
-        <div class="section-hero-overlay">
-            <h2>Fruits of the Spirit</h2>
-            <p class="section-desc">Nine expressions of Spirit-filled character growing in the believer's life.</p>
+    <main class="main-content" style="margin-left:auto; margin-right:auto; max-width:960px; margin-top:0;">
+
+        <div class="topic-hero">
+            <p class="subtitle">Topical Study</p>
+            <h1>Fruits of the Spirit</h1>
         </div>
-    </div>
-    <main class="page-content">
+
         <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
-        <div class="item-grid">
-                <a href="fruits-love.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Love</h4>
-                    <p class="subtitle">agape (ἀγάπη)</p>
-                    <p class="desc">Unconditional, sacrificial love that mirrors God's love.</p>
-                </a>
-                <a href="fruits-joy.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Joy</h4>
-                    <p class="subtitle">chara (χαρά)</p>
-                    <p class="desc">Deep gladness anchored in God, not circumstances.</p>
-                </a>
-                <a href="fruits-peace.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Peace</h4>
-                    <p class="subtitle">eirene (εἰρήνη)</p>
-                    <p class="desc">Wholeness and tranquility from being reconciled to God.</p>
-                </a>
-                <a href="fruits-patience.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Patience</h4>
-                    <p class="subtitle">makrothumia (μακροθυμία)</p>
-                    <p class="desc">Long-suffering endurance that bears with others.</p>
-                </a>
-                <a href="fruits-kindness.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Kindness</h4>
-                    <p class="subtitle">chrestotes (χρηστότης)</p>
-                    <p class="desc">A gracious disposition that seeks to bless others.</p>
-                </a>
-                <a href="fruits-goodness.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Goodness</h4>
-                    <p class="subtitle">agathosune (ἀγαθωσύνη)</p>
-                    <p class="desc">Moral excellence expressed through righteous action.</p>
-                </a>
-                <a href="fruits-faithfulness.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Faithfulness</h4>
-                    <p class="subtitle">pistis (πίστις)</p>
-                    <p class="desc">Trustworthiness reflecting God's covenant loyalty.</p>
-                </a>
-                <a href="fruits-gentleness.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Gentleness</h4>
-                    <p class="subtitle">prautes (πραΰτης)</p>
-                    <p class="desc">Strength under control — meekness yielded to God.</p>
-                </a>
-                <a href="fruits-self-control.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Self-Control</h4>
-                    <p class="subtitle">egkrateia (ἐγκράτεια)</p>
-                    <p class="desc">Mastery over desires through the Holy Spirit.</p>
-                </a>
+
+        <div class="section-block" id="what-are-the-fruits">
+            <span class="section-kicker">The Foundation</span>
+            <h2>What Are the Fruits of the Spirit?</h2>
+            <p>The fruit of the Spirit comes from a single passage: Galatians 5:16-25. Paul is writing to a church tempted to think that spiritual maturity comes through willpower and rule-keeping. His answer is the opposite: "Walk by the Spirit, and you will not gratify the desires of the flesh." He then lists what that flesh produces — sexual immorality, hatred, jealousy, fits of anger, envy, and more — and sets against it what the Spirit produces: "love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, self-control." It is worth noticing that Paul calls this list "the fruit" of the Spirit, singular, not "the fruits." Nine qualities, but one fruit — a single, unified harvest of Spirit-formed character, not nine separate achievements a believer might have some of and lack others of.</p>
+            <p>The word "fruit" itself is doing important theological work. Paul does not call these things the works of the Spirit — a term he could easily have used, since he had just listed the "works of the flesh" in the previous verses. Works are things a person does, often through direct effort. Fruit is different: it is the natural, organic result of a living thing growing according to its nature. An apple tree does not strain or labor to produce apples; it produces them because it is an apple tree, connected to root and soil and sun. Jesus taught the same principle in John 15: "Abide in me, and I in you. As the branch cannot bear fruit by itself, unless it abides in the vine, neither can you, unless you abide in me... apart from me you can do nothing." Christian character, in other words, is not manufactured by trying harder — it grows out of a living connection to Christ, cultivated by the Spirit who indwells every believer.</p>
+            <p>This matters enormously for how Christians think about spiritual growth. It means that love, joy, peace, and the rest are not a checklist to master through sheer determination, nor are they personality traits some people are simply born with and others are not. They are evidence of a supernatural work in progress — proof that the Spirit of God is present and active in a life. Jesus said as much when He taught, "by their fruit you will recognize them" (Matthew 7:16-20), using fruit as the test of what is genuinely growing from the root, as opposed to what is merely performed on the surface. This is also why the fruit of the Spirit matters so much for the Christian's own assurance and for the credibility of the church's witness to the world: changed character, produced over time by the Spirit's quiet work, is one of the clearest evidences that a person truly belongs to Christ.</p>
+            <p>Finally, it is worth noting that Paul frames the whole passage as a matter of direction, not perfection. "Walk by the Spirit" is a present-tense, ongoing posture — a daily choosing to yield to the Spirit's leading rather than the flesh's demands, not a one-time event after which fruit simply appears in full. Growth is gradual, uneven, and lifelong. Some fruit ripens quickly in a season of trial; other fruit takes years to mature. But the promise stands: everyone who keeps in step with the Spirit will see this fruit increasingly shape their life — not because they worked hard enough, but because they stayed close to the Vine.</p>
         </div>
+
+        <div class="section-block" id="love">
+            <span class="section-kicker">Agape (ἀγάπη)</span>
+            <h2>Love</h2>
+            <h3>Meaning</h3>
+            <p>In the Greek New Testament, the word used for the love that is a fruit of the Spirit is <em>agape</em> (ἀγάπη). Unlike the emotional or romantic connotations that "love" carries in English, agape describes a deliberate, unconditional, and sacrificial commitment to the well-being of another person — regardless of whether that love is reciprocated or deserved. It is not based on feelings, attraction, or personal benefit. It is a choice rooted in the will, empowered by the Holy Spirit.</p>
+            <p>The Greek language distinguishes several types of love. <em>Eros</em> is romantic or passionate love between partners. <em>Philia</em> is the warm affection shared between friends — brotherly love. <em>Storge</em> is the natural affection found in family bonds, especially between parents and children. But <em>agape</em> stands above them all. It is the love that gives without expecting return, that serves without condition, and that endures when every other kind of love would falter. It is uniquely divine in origin.</p>
+            <p>God Himself demonstrates agape love toward us in the most profound way: "But God shows his love for us in that while we were still sinners, Christ died for us" (Romans 5:8). God did not wait for humanity to become lovable or worthy. He loved us at our worst — rebellious, broken, and hostile toward Him. This is the pattern and power of agape: it initiates, it sacrifices, and it transforms. When the Spirit produces this fruit in a believer's life, they begin to love others with the same selfless, persevering love that God has shown them.</p>
+            <h3>How to Apply</h3>
+            <p>Practicing agape love begins with recognizing that it is not something we manufacture through willpower alone — it flows from an intimate relationship with Christ. As we abide in Him (John 15:4-5), His love naturally overflows through us toward others. This means daily surrender: asking the Spirit to give us eyes to see people as God sees them, and the willingness to act on their behalf even when it costs us something. Start small — choose one person today who is difficult to love, and serve them without expecting thanks or recognition.</p>
+            <p>Agape love is also intensely practical. It is not just a warm feeling during worship; it shows up in how we speak to our spouse when we are tired, how we respond to the coworker who frustrates us, how we treat the stranger who cuts us off in traffic. It means forgiving when an apology never comes. It means giving generously to someone who cannot repay you. It means staying present with someone in their pain rather than offering quick fixes. As you practice these things daily, you will find that the Spirit is reshaping your heart — making love less of an effort and more of a reflex.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 13:4-7')">1 Corinthians 13:4-7</span> — The definitive description of what love looks like in action: patient, kind, not envious or boastful.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 15:12-13')">John 15:12-13</span> — Jesus commands His disciples to love one another as He has loved them — laying down one's life for friends.</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 5:8')">Romans 5:8</span> — God demonstrates His own love toward us: while we were still sinners, Christ died for us.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 John 4:7-8')">1 John 4:7-8</span> — Love originates from God. Everyone who loves is born of God and knows God, for God is love.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 3:16')">John 3:16</span> — The ultimate expression of agape: God gave His only Son so that whoever believes in Him would not perish.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="joy">
+            <span class="section-kicker">Chara (χαρά)</span>
+            <h2>Joy</h2>
+            <h3>Meaning</h3>
+            <p>The Greek word for joy in the New Testament is <em>chara</em> (χαρά), derived from the same root as <em>charis</em> (grace). This connection is no accident — biblical joy is inseparably linked to grace. It is not a fleeting emotion dependent on favorable circumstances, but a deep, settled confidence that arises from knowing God is sovereign, His promises are sure, and His grace is sufficient. Chara is the inner gladness of the soul that persists even in the midst of suffering and trial.</p>
+            <p>Unlike worldly happiness, which rises and falls with circumstances, chara is rooted in an unchanging God. The early Christians experienced this supernatural joy even while facing persecution, imprisonment, and death. Paul wrote his letter to the Philippians — arguably the most joy-filled book in the New Testament — from a Roman prison cell. This paradox reveals the true nature of biblical joy: it is not the absence of hardship, but the presence of God in the midst of it.</p>
+            <p>God Himself is a God of joy. Zephaniah 3:17 tells us that He "rejoices over you with gladness" and "exults over you with loud singing." Jesus endured the cross "for the joy set before him" (Hebrews 12:2). The Holy Spirit produces this same divine joy in believers as they abide in Christ, transforming their perspective from one fixated on temporal troubles to one anchored in eternal hope.</p>
+            <h3>How to Apply</h3>
+            <p>Cultivating joy begins with a shift in focus — from circumstances to Christ. This does not mean denying pain or pretending that life is easy. It means training our minds to remember God's faithfulness, to rehearse His promises, and to look beyond the present difficulty to the eternal glory that awaits. Practically, this looks like beginning each day with gratitude, choosing worship over worry, and surrounding yourself with fellow believers who point you back to God's goodness when your vision grows dim.</p>
+            <p>Joy is also deeply communal. The New Testament repeatedly connects joy to fellowship — rejoicing with those who rejoice, bearing one another's burdens, and gathering together for worship and encouragement. When we isolate ourselves, joy withers. When we engage in authentic community — sharing meals, praying together, celebrating God's work in each other's lives — joy multiplies. Make it a practice to speak words of encouragement, to celebrate small victories, and to remind others (and yourself) that God is at work even in the waiting seasons.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Nehemiah 8:10')">Nehemiah 8:10</span> — "The joy of the LORD is your strength." God's joy empowers His people even in times of grief and rebuilding.</li>
+                <li><span class="verse-ref" onclick="showVerse('James 1:2-4')">James 1:2-4</span> — Count it all joy when you face trials, because the testing of your faith produces steadfastness and maturity.</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 4:4')">Philippians 4:4</span> — "Rejoice in the Lord always; again I will say, rejoice." A command repeated for emphasis — joy is a choice and a discipline.</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 16:11')">Psalm 16:11</span> — In God's presence there is fullness of joy; at His right hand are pleasures forevermore.</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 15:13')">Romans 15:13</span> — The God of hope fills believers with all joy and peace in believing, so that they may abound in hope by the power of the Holy Spirit.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="peace">
+            <span class="section-kicker">Eirene (εἰρήνη)</span>
+            <h2>Peace</h2>
+            <h3>Meaning</h3>
+            <p>The Greek word <em>eirene</em> (εἰρήνη) carries a richness far beyond the mere absence of conflict. It is the Greek equivalent of the Hebrew <em>shalom</em> — a concept describing wholeness, completeness, well-being, and harmony in every dimension of life. When the New Testament speaks of peace as a fruit of the Spirit, it envisions a deep inner tranquility that flows from a restored relationship with God and permeates every area of the believer's existence.</p>
+            <p>Biblical peace operates on multiple levels. There is peace <em>with</em> God — the objective reality that through Christ's atoning work, the hostility between sinful humanity and a holy God has been removed (Romans 5:1). There is also the peace <em>of</em> God — the subjective, experiential calm that guards the believer's heart and mind even in the most turbulent circumstances (Philippians 4:7). The Spirit produces both dimensions in the life of those who trust in Christ.</p>
+            <p>God Himself is called "the God of peace" (Romans 15:33, Philippians 4:9). Jesus is the Prince of Peace (Isaiah 9:6) who calmed storms with a word and told His disciples, "Peace I leave with you; my peace I give to you. Not as the world gives do I give to you" (John 14:27). The world offers temporary relief through favorable circumstances; Christ offers an unshakeable peace rooted in His sovereign care and eternal purposes.</p>
+            <h3>How to Apply</h3>
+            <p>Experiencing the peace of God begins with the discipline of surrendering our anxieties to Him. Philippians 4:6-7 provides the pattern: instead of worrying, bring every concern to God through prayer with thanksgiving. This is not a passive exercise — it requires actively choosing to release control and trust that God is working all things together for good. Practically, this might look like journaling your worries and then writing a prayer of trust beside each one, or pausing when anxiety rises to take a deep breath and whisper, "Lord, I trust You with this."</p>
+            <p>Peace also extends outward into our relationships. Paul repeatedly urges believers to "live at peace with everyone" as far as it depends on them (Romans 12:18). This means being quick to forgive, slow to take offense, and willing to pursue reconciliation even when it is costly. The Spirit-filled believer becomes a peacemaker — not one who avoids conflict at all costs, but one who addresses it with gentleness, truth, and a genuine desire for restoration. As you cultivate inner peace through trust in God, you will find yourself naturally carrying that peace into every room you enter.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Philippians 4:6-7')">Philippians 4:6-7</span> — Do not be anxious about anything; present your requests to God, and His peace will guard your hearts and minds in Christ Jesus.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 14:27')">John 14:27</span> — Jesus gives a peace the world cannot offer — a peace that calms fear and steadies the troubled heart.</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 26:3')">Isaiah 26:3</span> — God keeps in perfect peace the one whose mind is stayed on Him, because that person trusts in the Lord.</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 5:1')">Romans 5:1</span> — Justified by faith, we have peace with God through our Lord Jesus Christ — the foundation of all other peace.</li>
+                <li><span class="verse-ref" onclick="showVerse('Colossians 3:15')">Colossians 3:15</span> — Let the peace of Christ rule in your hearts, to which indeed you were called in one body.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="patience">
+            <span class="section-kicker">Makrothumia (μακροθυμία)</span>
+            <h2>Patience</h2>
+            <h3>Meaning</h3>
+            <p>The Greek word <em>makrothumia</em> (μακροθυμία) is a compound of <em>makros</em> (long) and <em>thumos</em> (temper or passion). Literally, it means "long-tempered" — the opposite of short-tempered. It describes the ability to endure provocation, delay, or hardship without retaliating or giving up. In biblical usage, makrothumia refers specifically to patience with <em>people</em> — bearing with their faults, offenses, and slowness to change — as distinct from <em>hupomone</em>, which denotes endurance under difficult circumstances.</p>
+            <p>This is not passive resignation or weakness. Biblical patience is a deliberate strength — the power to restrain anger, to withhold deserved punishment, and to give others time and space to grow. It is rooted in hope: the patient person believes that God is at work even when visible progress is slow. It is the quality of the farmer who plants seed and waits through long seasons, trusting the harvest will come (James 5:7).</p>
+            <p>God Himself is the supreme example of makrothumia. Exodus 34:6 declares Him "slow to anger and abounding in steadfast love." Peter writes that God's patience toward sinners is not slowness but salvation — He desires none to perish (2 Peter 3:9). Every day that God withholds judgment is an expression of His longsuffering love. When the Spirit cultivates patience in believers, He is reproducing the very character of God — the ability to bear long with imperfect people because we ourselves have been borne with by a perfectly patient God.</p>
+            <h3>How to Apply</h3>
+            <p>Growing in patience requires an honest assessment of where impatience shows up in your life. Is it in traffic? With your children's repeated mistakes? With a coworker who doesn't meet your standards? With God's timing on an unanswered prayer? Identify the specific trigger points, and then ask the Spirit to meet you in those exact moments. One practical step: when you feel frustration rising, pause and silently pray, "Lord, give me Your long view of this person. Help me see them as You do." This brief pause often breaks the cycle of reactive anger.</p>
+            <p>Remember also that patience is cultivated through trials, not removed from them. James tells us that the testing of our faith produces perseverance (James 1:3). God does not waste our waiting seasons — He uses them to deepen our trust, refine our character, and teach us to depend on His timing rather than our own. Embrace the slow work of sanctification in yourself and in others. Celebrate small steps of growth rather than demanding instant transformation. As you extend patience to others, you will find that the Spirit is simultaneously deepening patience within you.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Romans 12:12')">Romans 12:12</span> — Rejoice in hope, be patient in tribulation, be constant in prayer — a trio of Spirit-empowered responses to difficulty.</li>
+                <li><span class="verse-ref" onclick="showVerse('Colossians 3:12-13')">Colossians 3:12-13</span> — As God's chosen people, put on patience, bearing with one another and forgiving as the Lord forgave you.</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Peter 3:9')">2 Peter 3:9</span> — The Lord is not slow in keeping His promise; He is patient, not wanting anyone to perish but everyone to come to repentance.</li>
+                <li><span class="verse-ref" onclick="showVerse('James 5:7-8')">James 5:7-8</span> — Be patient like the farmer waiting for the precious fruit of the earth — the Lord's coming is near.</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 15:18')">Proverbs 15:18</span> — A hot-tempered person stirs up conflict, but the one who is patient calms a quarrel.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="kindness">
+            <span class="section-kicker">Chrestotes (χρηστότης)</span>
+            <h2>Kindness</h2>
+            <h3>Meaning</h3>
+            <p>The Greek word <em>chrestotes</em> (χρηστότης) describes a goodness that is active and generous — a disposition that goes beyond merely avoiding harm and actively seeks to bless others. It carries the sense of being useful, beneficial, and gracious. In classical Greek, the word was used to describe wine that had mellowed with age — smooth rather than harsh. Applied to character, chrestotes is a gentle benevolence that meets people where they are and offers them something good.</p>
+            <p>Kindness in the biblical sense is not mere niceness or people-pleasing. It is a moral strength rooted in the character of God. Paul reminds us that it was God's kindness that led us to repentance (Romans 2:4) — not His harshness, not His condemnation, but His tender goodness that melted our hard hearts. Kindness is love in action — it sees a need and moves toward it, it encounters harshness and responds with gentleness, it meets hostility with grace.</p>
+            <p>God demonstrates His kindness extravagantly. Titus 3:4-5 declares that "when the kindness and love of God our Savior appeared, he saved us, not because of righteous things we had done, but because of his mercy." Even in the Old Testament, God's kindness (chesed — lovingkindness) is celebrated repeatedly in the Psalms. When the Spirit produces kindness in believers, they become conduits of God's own tender care to a harsh and hurting world.</p>
+            <h3>How to Apply</h3>
+            <p>Kindness begins with awareness — noticing the people around you and their needs. In a world that moves fast and rewards self-promotion, kindness is counter-cultural. It slows down to hold the door, writes the encouraging note, asks the genuine question and actually listens to the answer. It remembers that the cashier, the neighbor, and the difficult family member are all made in God's image and worthy of dignity. Start each day asking the Spirit, "Who can I bless today?" and then watch for the opportunities He provides.</p>
+            <p>True kindness is also willing to be kind to the undeserving — just as God was kind to us when we were His enemies. This means extending grace to the person who cut you off in traffic, speaking gently to the child who disobeyed for the tenth time, and treating the difficult coworker with respect even when they don't reciprocate. Kindness costs something — it requires laying down our right to be harsh, our desire to retaliate, and our instinct to withhold good from those who have wronged us. But in giving kindness away, we discover that it multiplies — both in our own hearts and in the lives of those who receive it.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 4:32')">Ephesians 4:32</span> — Be kind to one another, tenderhearted, forgiving one another, as God in Christ forgave you.</li>
+                <li><span class="verse-ref" onclick="showVerse('Colossians 3:12')">Colossians 3:12</span> — As God's chosen people, clothe yourselves with compassion, kindness, humility, gentleness, and patience.</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 11:17')">Proverbs 11:17</span> — A kind person benefits themselves, but a cruel person brings ruin on themselves.</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 6:35')">Luke 6:35</span> — Love your enemies, do good to them, and lend expecting nothing back — for God is kind to the ungrateful and wicked.</li>
+                <li><span class="verse-ref" onclick="showVerse('Titus 3:4-5')">Titus 3:4-5</span> — When God's kindness appeared, He saved us not by our works but by His mercy through the washing of regeneration.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="goodness">
+            <span class="section-kicker">Agathosune (ἀγαθωσύνη)</span>
+            <h2>Goodness</h2>
+            <h3>Meaning</h3>
+            <p>The Greek word <em>agathosune</em> (ἀγαθωσύνη) is a uniquely biblical term — it appears almost exclusively in the New Testament and the Septuagint (Greek Old Testament), with very little usage in secular Greek literature. This suggests it describes a quality so distinctly God-like that the pagan world had no word for it. Agathosune denotes an active, energetic goodness — not just moral purity or innocence, but a robust virtue that vigorously pursues what is right and beneficial for others.</p>
+            <p>While kindness (chrestotes) is gentle and gracious, goodness (agathosune) can be firm and confrontational when necessary. Jesus displayed agathosune when He overturned the money changers' tables in the temple — it was an act of moral goodness that opposed evil and defended the oppressed. Goodness, in the biblical sense, is not passive. It actively opposes wrong, champions justice, and does what is right regardless of personal cost or popular opinion.</p>
+            <p>God is the source and standard of all goodness. Jesus Himself said, "No one is good except God alone" (Mark 10:18). Yet through the indwelling Spirit, God's own goodness begins to flow through believers. Psalm 23:6 promises that "surely goodness and mercy shall follow me all the days of my life." When the Spirit produces agathosune in us, we become agents of God's goodness in the world — people who not only refrain from evil but actively generate good wherever they go.</p>
+            <h3>How to Apply</h3>
+            <p>Living out goodness means being intentionally proactive about doing what is right. It is not enough to simply avoid sin — agathosune calls us to actively pursue righteousness and create good in the world around us. This might look like volunteering your time for a cause that serves the vulnerable, speaking up for someone who is being treated unfairly, or making a decision that costs you convenience but benefits others. Ask yourself daily: "Where can I generate good today — not just avoid evil?"</p>
+            <p>Goodness also requires moral courage. There will be times when doing what is right means standing alone, confronting injustice, or saying the hard truth that others are unwilling to say. Jesus' goodness was not always popular — it made religious leaders uncomfortable and exposed hypocrisy. Similarly, the Spirit-produced goodness in your life may sometimes create friction with a culture that celebrates comfort over conviction. But take heart: the good you do in God's power is never wasted. Galatians 6:9 promises a harvest for those who persist in doing good without giving up.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Romans 15:14')">Romans 15:14</span> — Paul is confident that believers are full of goodness, filled with knowledge, and able to instruct one another.</li>
+                <li><span class="verse-ref" onclick="showVerse('Galatians 6:9-10')">Galatians 6:9-10</span> — Do not grow weary of doing good, for in due season you will reap if you do not give up. Do good to everyone.</li>
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 5:8-9')">Ephesians 5:8-9</span> — Walk as children of light, for the fruit of light is found in all that is good and right and true.</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 23:6')">Psalm 23:6</span> — Surely goodness and mercy shall follow me all the days of my life, and I shall dwell in the house of the LORD forever.</li>
+                <li><span class="verse-ref" onclick="showVerse('3 John 1:11')">3 John 1:11</span> — Do not imitate evil but imitate good. Whoever does good is from God; whoever does evil has not seen God.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="faithfulness">
+            <span class="section-kicker">Pistis (πίστις)</span>
+            <h2>Faithfulness</h2>
+            <h3>Meaning</h3>
+            <p>The Greek word <em>pistis</em> (πίστις) is most commonly translated as "faith" or "belief," but when listed among the fruit of the Spirit in Galatians 5:22, it carries the meaning of faithfulness — reliability, trustworthiness, and steadfast loyalty. It describes a person whose word can be trusted, whose commitments are kept, and whose character remains consistent over time. A faithful person is someone others can depend on because they reflect the unwavering dependability of God Himself.</p>
+            <p>Faithfulness is not glamorous. It does not make headlines or attract applause. It is the quiet, consistent showing up — day after day, year after year — in marriages, friendships, work, and ministry. It is the unglamorous discipline of keeping your promises when no one is watching, finishing what you started when motivation fades, and remaining loyal to people and principles when it would be easier to walk away. Yet Scripture reveals that God values faithfulness above talent, results, or spectacle.</p>
+            <p>God is the ultimate model of faithfulness. Lamentations 3:22-23 declares that "his mercies never come to an end; they are new every morning; great is your faithfulness." He keeps every promise, never abandons His people, and remains constant when everything else shifts. Even when we are faithless, He remains faithful, for He cannot deny Himself (2 Timothy 2:13). The Spirit cultivates this same rock-solid dependability in believers — making them people whose word is their bond and whose presence can always be counted on.</p>
+            <h3>How to Apply</h3>
+            <p>Faithfulness is built in the small, daily decisions that no one else sees. It is keeping your word even when it costs you. It is showing up to serve even when you don't feel like it. It is staying committed to your marriage, your church, your friendships, and your calling through the unglamorous middle chapters — not just the exciting beginnings. Ask yourself: "Am I the kind of person others can count on? Do I follow through on what I say I will do?" Begin with one area where you have been inconsistent, and commit to showing up faithfully for 30 days.</p>
+            <p>Remember that faithfulness is also about stewardship — managing well whatever God has entrusted to you, whether that is great or small. Jesus taught that the one who is faithful in little things will be given greater responsibility (Luke 16:10). This applies to your finances, your time, your gifts, your relationships, and your daily work. Do not despise small beginnings or mundane tasks. God is watching your faithfulness in the hidden places, and He rewards those who persevere. The goal is not perfection but persistence — getting back up when you stumble and continuing to show up with integrity.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Lamentations 3:22-23')">Lamentations 3:22-23</span> — God's mercies are new every morning; great is His faithfulness — the foundation of all human faithfulness.</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 3:3-4')">Proverbs 3:3-4</span> — Let steadfast love and faithfulness never leave you; bind them around your neck and write them on your heart.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 25:21')">Matthew 25:21</span> — "Well done, good and faithful servant. You have been faithful over a little; I will set you over much."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 4:2')">1 Corinthians 4:2</span> — It is required of stewards that they be found faithful — not successful, not popular, but faithful.</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Timothy 2:13')">2 Timothy 2:13</span> — If we are faithless, He remains faithful — for He cannot deny Himself. His faithfulness does not depend on ours.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="gentleness">
+            <span class="section-kicker">Prautes (πραΰτης)</span>
+            <h2>Gentleness</h2>
+            <h3>Meaning</h3>
+            <p>The Greek word <em>prautes</em> (πραΰτης) is one of the most misunderstood virtues in Scripture. Often translated as "meekness" or "gentleness," it does not mean weakness, timidity, or passivity. In classical Greek, prautes was used to describe a wild horse that had been trained — its power was not diminished but brought under control. Biblical gentleness is strength under restraint — the power to act forcefully combined with the wisdom to know when force is unnecessary and the self-control to hold back.</p>
+            <p>Jesus described Himself as "gentle and lowly in heart" (Matthew 11:29), yet this same Jesus drove out money changers, rebuked Pharisees, and commanded storms. His gentleness was not the absence of strength but the perfect deployment of it. He was gentle with the broken, the repentant, and the seeking — and firm with the proud, the hypocritical, and the oppressive. Prautes is the discernment to know the difference and the discipline to respond appropriately in each case.</p>
+            <p>God demonstrates gentleness in His dealings with humanity. He does not crush the bruised reed or snuff out the smoldering wick (Isaiah 42:3). He leads His people like a shepherd carrying lambs close to His heart (Isaiah 40:11). When the Spirit produces gentleness in believers, they begin to handle people and situations with the same calibrated care — firm where firmness is needed, tender where tenderness is called for, and always guided by love rather than ego.</p>
+            <h3>How to Apply</h3>
+            <p>Practicing gentleness begins with how we speak. Proverbs 15:1 reminds us that a gentle answer turns away wrath. In our daily conversations — with family, coworkers, strangers online — we have a constant choice between harshness and gentleness. Before responding to a difficult email, a frustrating situation, or a disagreement, pause and ask: "How would Jesus respond to this person right now?" Often the gentle approach is not the easy one — it requires restraining our impulse to win the argument or prove we're right — but it is almost always the more effective one.</p>
+            <p>Gentleness is also essential in how we share our faith and correct others. Peter instructs us to give a reason for our hope "with gentleness and respect" (1 Peter 3:15). Paul says to restore someone caught in sin "gently" (Galatians 6:1). The manner in which truth is delivered often determines whether it is received. A person corrected harshly becomes defensive; a person corrected gently is far more likely to listen. Cultivate gentleness by remembering your own weakness and the grace God has shown you. When we remember how gently God has dealt with our failures, we find it natural to extend that same gentleness to others.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 11:29')">Matthew 11:29</span> — Jesus invites us to learn from Him, for He is gentle and lowly in heart, and in Him we find rest for our souls.</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 4:5')">Philippians 4:5</span> — Let your gentleness be evident to all. The Lord is near — a reminder that our gentle spirit witnesses to His presence.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Peter 3:15')">1 Peter 3:15</span> — Always be prepared to give an answer for the hope that you have, but do it with gentleness and respect.</li>
+                <li><span class="verse-ref" onclick="showVerse('Galatians 6:1')">Galatians 6:1</span> — If someone is caught in sin, restore them gently — watching yourself lest you also be tempted.</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 15:1')">Proverbs 15:1</span> — A gentle answer turns away wrath, but a harsh word stirs up anger.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="self-control">
+            <span class="section-kicker">Egkrateia (ἐγκράτεια)</span>
+            <h2>Self-Control</h2>
+            <h3>Meaning</h3>
+            <p>The Greek word <em>egkrateia</em> (ἐγκράτεια) comes from <em>en</em> (in) and <em>kratos</em> (power, strength). It literally means "inner strength" or "mastery from within" — the ability to govern one's own desires, impulses, and passions. In classical Greek, it was used of athletes who disciplined their bodies and appetites to achieve peak performance. In the New Testament, it describes the Spirit-empowered capacity to say "no" to what is harmful and "yes" to what honors God, even when every impulse screams otherwise.</p>
+            <p>Self-control is the final fruit listed in Galatians 5:22-23, and its placement is significant. It serves as a capstone that enables all the other virtues to function properly. Without self-control, love becomes sentimentality, joy becomes recklessness, and zeal becomes destructive. It is the internal governor that ensures our strengths are channeled rightly and our weaknesses are kept in check. Paul described it as the discipline of an athlete in training (1 Corinthians 9:25-27) — purposeful, focused, and willing to endure short-term discomfort for long-term gain.</p>
+            <p>Importantly, biblical self-control is not white-knuckle willpower alone. It is a <em>fruit of the Spirit</em> — meaning it is produced by God's power working within us, not merely by human determination. We cooperate with the Spirit through intentional choices and disciplines, but the power that enables us to overcome temptation, manage our emotions, and govern our appetites ultimately comes from God. This distinction frees us from the exhausting cycle of trying harder in our own strength and failing, and instead invites us into a posture of dependent obedience.</p>
+            <h3>How to Apply</h3>
+            <p>Self-control is exercised in the ordinary, repeated decisions of daily life. It shows up in what you eat, how you spend your time, what you watch, how you speak when angry, whether you check your phone compulsively, and how you manage your finances. Growth in self-control begins with identifying your specific areas of weakness — the places where you consistently lose the battle — and then building practical structures to support better choices. This might mean removing temptation from your environment, establishing accountability with a trusted friend, or creating habits that make the right choice the easy choice.</p>
+            <p>Remember that self-control is not about perfection or rigidity — it is about freedom. Proverbs 25:28 compares the person without self-control to a city without walls: defenseless, at the mercy of every invader. Conversely, the person who cultivates self-control experiences true liberty — freedom from the tyranny of impulse, addiction, and regret. Each small victory builds momentum. Each time you choose the harder right over the easier wrong, the Spirit is strengthening your inner resolve. Be patient with yourself in the process, rely on God's power rather than your own, and celebrate progress even when perfection remains out of reach.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 25:28')">Proverbs 25:28</span> — A person without self-control is like a city broken into and left without walls — exposed and vulnerable to every attack.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 9:25-27')">1 Corinthians 9:25-27</span> — Every athlete exercises self-control in all things. Paul disciplines his body and keeps it under control lest he be disqualified.</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Peter 1:5-6')">2 Peter 1:5-6</span> — Add to your faith virtue, knowledge, self-control, steadfastness, godliness — a ladder of spiritual growth with self-control at its center.</li>
+                <li><span class="verse-ref" onclick="showVerse('Titus 2:11-12')">Titus 2:11-12</span> — The grace of God teaches us to renounce ungodliness and worldly passions and to live self-controlled, upright, and godly lives.</li>
+                <li><span class="verse-ref" onclick="showVerse('Galatians 5:24')">Galatians 5:24</span> — Those who belong to Christ Jesus have crucified the flesh with its passions and desires — the decisive act that enables ongoing self-control.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="videos">
+            <span class="section-kicker">Watch & Learn</span>
+            <h2>Videos</h2>
+            <div class="video-grid" id="videoSection">
+                <p style="font-size:0.9rem;color:#8a7e74;font-style:italic;">Videos coming soon.</p>
+            </div>
+        </div>
+
     </main>
     <script src="site/script.js"></script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) {
+                textEl.innerHTML = data.passages[0];
+            } else {
+                textEl.innerHTML = '<em>Could not load this passage.</em>';
+            }
+        })
+        .catch(function() {
+            textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>';
+        });
+    }
+    function closeVerse() {
+        document.getElementById('verseOverlay').classList.remove('show');
+        document.getElementById('versePopup').classList.remove('show');
+    }
+    </script>
 </body>
 </html>
