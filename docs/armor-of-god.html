@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#4a5a8a">
     <title>Armor of God — Bible Study</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,60 +13,265 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
     <link rel="stylesheet" href="site/style.css">
     <style>
-        body { background: #faf5ed; }
-        .page-content { margin: 0 auto; max-width: 960px; padding: 24px 24px 80px; }
+        .topic-hero { position: relative; overflow: hidden; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1783231607186-1630da9b754b?w=1200&q=80") center/cover no-repeat; filter: brightness(0.45) sepia(0.75) saturate(1.7); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #a0c4e8; letter-spacing: 0.5px; }
+
         .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #4a5a8a; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #2e3a5c; }
         .back-link i { margin-right: 6px; }
-        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 8px; }
-        .item-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid; border-radius: 10px; text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
-        .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
-        .item-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 2px; }
-        .item-card .subtitle { font-size: 0.75rem; font-style: italic; color: #8a7e74; margin-bottom: 6px; }
-        .item-card .desc { font-size: 0.82rem; color: #5a4e44; line-height: 1.5; }
-        @media (max-width: 768px) { .item-grid { grid-template-columns: 1fr; } }
+
+        .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
+        .jump-card { background: #fff; border: 1px solid #e8e0d6; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #4a5a8a; text-decoration: none; transition: background 0.15s, transform 0.15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; scroll-margin-top: 76px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.35rem; color: #4a5a8a; margin-bottom: 4px; }
+        .section-block .section-kicker { display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #8a7e74; margin-bottom: 6px; }
+        .section-block h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; color: #4a5a8a; margin: 20px 0 12px; }
+        .section-block h4 { font-family: 'Cinzel', serif; font-size: 0.88rem; color: #4a5a8a; margin: 18px 0 10px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .video-grid:last-child { margin-bottom: 0; }
+
+        .verse-ref { color: #4a5a8a; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #2e3a5c; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#4a5a8a; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="section-hero">
-        <img src="https://images.unsplash.com/photo-1783231607186-1630da9b754b?w=1400&q=80&auto=format"
-             srcset="https://images.unsplash.com/photo-1783231607186-1630da9b754b?w=640&q=80&auto=format 640w,
-                     https://images.unsplash.com/photo-1783231607186-1630da9b754b?w=1000&q=80&auto=format 1000w,
-                     https://images.unsplash.com/photo-1783231607186-1630da9b754b?w=1600&q=80&auto=format 1600w"
-             sizes="100vw" fetchpriority="high" alt="An ancient shield and helmet displayed outdoors">
-        <div class="section-hero-overlay">
-            <h2>Armor of God</h2>
-            <p class="section-desc">The spiritual equipment God provides to stand firm against the enemy.</p>
+    <main class="main-content" style="margin-left:auto; margin-right:auto; max-width:960px; margin-top:0;">
+
+        <div class="topic-hero">
+            <p class="subtitle">Topical Study</p>
+            <h1>Armor of God</h1>
         </div>
-    </div>
-    <main class="page-content">
+
         <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
-        <div class="item-grid">
-                <a href="armor-belt-of-truth.html" class="item-card" style="border-left-color:#4a5a8a;">
-                    <h4 style="color:#4a5a8a;">Belt of Truth</h4>
-                    <p class="desc">Foundation of the Christian life — God's truth.</p>
-                </a>
-                <a href="armor-breastplate-of-righteousness.html" class="item-card" style="border-left-color:#4a5a8a;">
-                    <h4 style="color:#4a5a8a;">Breastplate of Righteousness</h4>
-                    <p class="desc">Protection for the heart through Christ's righteousness.</p>
-                </a>
-                <a href="armor-shoes-of-the-gospel.html" class="item-card" style="border-left-color:#4a5a8a;">
-                    <h4 style="color:#4a5a8a;">Shoes of the Gospel</h4>
-                    <p class="desc">Readiness to share and stand firm in peace.</p>
-                </a>
-                <a href="armor-shield-of-faith.html" class="item-card" style="border-left-color:#4a5a8a;">
-                    <h4 style="color:#4a5a8a;">Shield of Faith</h4>
-                    <p class="desc">Extinguishes the fiery darts of the enemy.</p>
-                </a>
-                <a href="armor-helmet-of-salvation.html" class="item-card" style="border-left-color:#4a5a8a;">
-                    <h4 style="color:#4a5a8a;">Helmet of Salvation</h4>
-                    <p class="desc">Protects the mind with assurance of salvation.</p>
-                </a>
-                <a href="armor-sword-of-the-spirit.html" class="item-card" style="border-left-color:#4a5a8a;">
-                    <h4 style="color:#4a5a8a;">Sword of the Spirit</h4>
-                    <p class="desc">The Word of God — our offensive weapon.</p>
-                </a>
+
+        <nav class="jump-grid">
+            <a href="#what-is-the-armor" class="jump-card">Overview</a>
+            <a href="#belt-of-truth" class="jump-card">Belt of Truth</a>
+            <a href="#breastplate-of-righteousness" class="jump-card">Breastplate</a>
+            <a href="#shoes-of-the-gospel" class="jump-card">Shoes of Peace</a>
+            <a href="#shield-of-faith" class="jump-card">Shield of Faith</a>
+            <a href="#helmet-of-salvation" class="jump-card">Helmet</a>
+            <a href="#sword-of-the-spirit" class="jump-card">Sword</a>
+            <a href="#videos" class="jump-card">Videos</a>
+        </nav>
+
+        <div class="section-block" id="what-is-the-armor">
+            <span class="section-kicker">The Foundation</span>
+            <h2>What Is the Armor of God?</h2>
+            <p>The armor of God comes from a single, vivid passage: Ephesians 6:10-18. Paul closes his letter to the Ephesian church with a call to "be strong in the Lord and in the strength of his might," then explains why such strength is needed: "our struggle is not against flesh and blood, but against the rulers, against the authorities, against the cosmic powers over this present darkness, against the spiritual forces of evil in the heavenly places." The Christian life, Paul insists, involves real spiritual opposition — and God has provided real equipment to stand against it.</p>
+            <p>The military imagery was not abstract for Paul's first readers. Paul wrote Ephesians while under Roman guard, likely chained at the wrist to a soldier at all times — he would have had a fully-armored Roman legionary within arm's reach as he dictated this letter. Each piece he names — belt, breastplate, shoes, shield, helmet, sword — was something he could point to. This is part of why the imagery lands with such precision: Paul was not inventing a metaphor from a distance but describing the very armor in front of him, piece by piece, and showing how each part had a spiritual counterpart already given to every believer.</p>
+            <p>It's worth noticing what the armor is for. Paul does not tell believers to advance and conquer new territory — he tells them to "stand firm" (repeated three times in verses 11, 13, and 14). The Christian's fundamental posture in spiritual warfare is not aggressive expansion but firm resistance: holding the ground that Christ has already won. Five of the six pieces are defensive — truth, righteousness, peace, faith, and salvation are all things that protect rather than attack. Only the sword, God's Word, is offensive. This tells us something important: spiritual warfare is fought primarily by standing secure in what is already true about us in Christ, not by manufacturing spiritual power of our own.</p>
+            <p>Paul also makes clear that none of this armor is self-generated. Every piece is something God supplies — His truth, Christ's righteousness, the gospel's peace, faith itself as a gift, the assurance of salvation, and the Spirit's own sword. The armor of God is not a set of techniques for believers to master through willpower; it is a description of the spiritual resources already available in Christ, which believers are called to consciously "put on" — to actively appropriate by faith rather than leave sitting unused. And Paul closes the passage not with a final weapon but with prayer (Ephesians 6:18), reminding readers that the armor is worn and wielded in ongoing dependence on God, not human strength.</p>
         </div>
+
+        <div class="section-block" id="belt-of-truth">
+            <span class="section-kicker">Ephesians 6:14</span>
+            <h2>Belt of Truth</h2>
+            <h3>Meaning</h3>
+            <p>In the armor of a Roman soldier, the belt was the foundational piece. Everything else — the breastplate, the sword, the tunic — was fastened to or held in place by the belt. Without it, the armor was loose, cumbersome, and ineffective. Paul chose this image deliberately: truth is the foundation that holds the entire spiritual life together. When truth is absent, every other piece of our spiritual defense becomes compromised.</p>
+            <p>The belt of truth operates on two levels. First, it refers to God's objective truth — His Word, His character, His promises. Jesus declared, "I am the way, the truth, and the life" (John 14:6), and He prayed for His disciples, "Sanctify them in the truth; your word is truth" (John 17:17). God's truth is the unchanging standard against which all claims, experiences, and feelings must be measured. Second, the belt of truth calls us to personal integrity — truthfulness in our inner being. Psalm 51:6 says, "Behold, you delight in truth in the inward parts." This means living without duplicity, without hidden sins, without the compartmentalization that creates cracks in our spiritual armor.</p>
+            <h3>How to Apply</h3>
+            <p>Wearing the belt of truth begins with saturating our minds in Scripture. The enemy's primary strategy is deception — twisting truth, planting doubt, and offering counterfeits. When we know God's Word deeply, we can identify lies quickly. Jesus Himself modeled this when He countered every temptation from Satan with "It is written" (Matthew 4). Practically, this means committing to daily time in God's Word, cultivating honesty in our relationships, confessing sin rather than concealing it, and refusing to live double lives — integrity is the belt that keeps our spiritual armor from falling apart under pressure.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 6:14')">Ephesians 6:14</span> — "Stand therefore, having fastened on the belt of truth..." Truth is the first piece Paul mentions — the starting point of spiritual readiness.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 8:32')">John 8:32</span> — "And you will know the truth, and the truth will set you free." Knowing God's truth liberates us from the bondage of deception and lies.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 14:6')">John 14:6</span> — "Jesus said to him, 'I am the way, and the truth, and the life.'" Truth is not merely a concept — it is a Person. Jesus embodies truth perfectly.</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 51:6')">Psalm 51:6</span> — "Behold, you delight in truth in the inward parts." God desires authenticity and honesty in the deepest places of our hearts.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 17:17')">John 17:17</span> — "Sanctify them in the truth; your word is truth." Scripture is the instrument God uses to set us apart and make us holy.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="breastplate-of-righteousness">
+            <span class="section-kicker">Ephesians 6:14</span>
+            <h2>Breastplate of Righteousness</h2>
+            <h3>Meaning</h3>
+            <p>The Roman breastplate — or thorax — covered the soldier's torso from neck to waist, protecting the most vital organs: the heart, lungs, and other life-sustaining systems. Without it, a single well-placed blow could be fatal. Paul's imagery is precise: righteousness protects our spiritual heart, the seat of our affections, motivations, and spiritual vitality. This righteousness is not our own moral achievement — Paul makes this clear: "Not having a righteousness of my own that comes from the law, but that which comes through faith in Christ" (Philippians 3:9). This is imputed righteousness — Christ's perfect standing before God credited to our account.</p>
+            <p>Isaiah prophesied that God Himself would put on "righteousness as a breastplate" (Isaiah 59:17) when He came to rescue His people. In Christ, God has given us that same protection. We are clothed in the righteousness of the One who never sinned, and this covering is what shields us from condemnation, shame, and the enemy's accusations that we are unworthy of God's love.</p>
+            <h3>How to Apply</h3>
+            <p>Wearing the breastplate of righteousness means resting in Christ's righteousness as our identity and defense. When guilt, shame, or condemnation press in — whether from our own conscience or from spiritual attack — we remind ourselves that "there is therefore now no condemnation for those who are in Christ Jesus" (Romans 8:1). This does not mean we become passive about sin; rather, because we are secure in Christ's righteousness, we are freed to pursue practical holiness without fear, confessing sin quickly because our standing doesn't depend on our perfection, and pursuing obedience joyfully because it flows from identity, not toward earning acceptance.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 6:14')">Ephesians 6:14</span> — "Stand therefore... having put on the breastplate of righteousness." Our hearts are guarded by the righteousness God provides.</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 59:17')">Isaiah 59:17</span> — "He put on righteousness as a breastplate, and a helmet of salvation on his head." God Himself models the armor He gives to His people.</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 5:21')">2 Corinthians 5:21</span> — "For our sake he made him to be sin who knew no sin, so that in him we might become the righteousness of God." The great exchange — our sin for His righteousness.</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 3:22')">Romans 3:22</span> — "The righteousness of God through faith in Jesus Christ for all who believe." This righteousness comes by faith, not works.</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 3:9')">Philippians 3:9</span> — "Not having a righteousness of my own... but that which comes through faith in Christ." Paul counted all self-righteousness as loss.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="shoes-of-the-gospel">
+            <span class="section-kicker">Ephesians 6:15</span>
+            <h2>Shoes of the Gospel of Peace</h2>
+            <h3>Meaning</h3>
+            <p>Roman soldiers wore caligae — heavy-soled sandals with hobnails that gripped the ground and gave them sure footing in battle. A soldier without proper footwear would slip, stumble, and become vulnerable. Paul draws on this image to show that the gospel of peace gives believers a firm foundation — stable footing from which to stand and advance. The phrase "gospel of peace" may seem paradoxical in the context of spiritual warfare, but this is precisely the point: our footing in battle comes from the peace we already have with God through Christ. Romans 5:1 declares, "Therefore, since we have been justified by faith, we have peace with God through our Lord Jesus Christ."</p>
+            <p>These shoes also speak of readiness — being prepared at any moment to share the good news. Isaiah 52:7 celebrates the beauty of feet that bring good tidings, and Romans 10:15 echoes this joy. The gospel shoes are not just defensive; they move us forward into the world with a message of reconciliation, carrying the peace of God to those still at war with Him.</p>
+            <h3>How to Apply</h3>
+            <p>Wearing the shoes of the gospel means walking through each day with two realities held together: the confidence of peace with God, and the readiness to share that peace with others. Practically, readiness means being prepared — knowing the gospel well enough to articulate it simply and clearly, cultivating relationships where spiritual conversations can happen naturally, and praying for opportunities. Standing firm in peace also means refusing to let anxiety, fear, or chaos steal our stability; the believer whose feet are shod with the gospel of peace can say with the psalmist, "He set my feet upon a rock, making my steps secure" (Psalm 40:2).</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 6:15')">Ephesians 6:15</span> — "And, as shoes for your feet, having put on the readiness given by the gospel of peace." Readiness and peace together form our spiritual footing.</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 10:15')">Romans 10:15</span> — "How beautiful are the feet of those who preach the good news!" Those who carry the gospel are honored by God.</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 52:7')">Isaiah 52:7</span> — "How beautiful upon the mountains are the feet of him who brings good news, who publishes peace." The prophetic vision of gospel messengers.</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 5:1')">Romans 5:1</span> — "Therefore, since we have been justified by faith, we have peace with God through our Lord Jesus Christ." The foundation of our firm footing.</li>
+                <li><span class="verse-ref" onclick="showVerse('Colossians 1:20')">Colossians 1:20</span> — "And through him to reconcile to himself all things... making peace by the blood of his cross." Christ's blood purchased the peace we stand on.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="shield-of-faith">
+            <span class="section-kicker">Ephesians 6:16</span>
+            <h2>Shield of Faith</h2>
+            <h3>Meaning</h3>
+            <p>The shield Paul references is the thureos — the large, door-shaped Roman shield that could cover nearly the entire body. Unlike the small, round shields used for quick parrying, this was a full-body defense designed to absorb sustained attack. Soldiers would soak their leather-covered shields in water before battle so that flaming arrows would be extinguished on impact. The "flaming darts of the evil one" represent every form of spiritual attack — temptation, doubt, accusation, fear, discouragement, and deception. Faith does not merely deflect these attacks; it extinguishes them.</p>
+            <p>Faith, as Hebrews 11:1 defines it, is "the assurance of things hoped for, the conviction of things not seen." It is not wishful thinking or positive feelings — it is a settled confidence in God's revealed truth, active rather than passive. "This is the victory that has overcome the world — our faith" (1 John 5:4).</p>
+            <h3>How to Apply</h3>
+            <p>Taking up the shield of faith is an active, daily choice. Paul says "in all circumstances" — not just when we feel strong. Faith must be lifted before the arrows arrive, not scrambled for in the middle of bombardment. When doubt whispers "God has forgotten you," faith lifts Hebrews 13:5 — "I will never leave you nor forsake you." Faith also grows stronger through use: Romans 10:17 tells us faith comes by hearing the Word of God, and faith is strengthened in community — Roman soldiers stood side by side, their shields forming an overlapping wall, and believers likewise stand stronger together, encouraging one another's faith.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 6:16')">Ephesians 6:16</span> — "In all circumstances take up the shield of faith, with which you can extinguish all the flaming darts of the evil one." Faith is our comprehensive defense.</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 11:1')">Hebrews 11:1</span> — "Now faith is the assurance of things hoped for, the conviction of things not seen." The biblical definition of the faith that shields us.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 John 5:4')">1 John 5:4</span> — "For everyone who has been born of God overcomes the world. And this is the victory that has overcome the world — our faith." Faith is the instrument of our triumph.</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 10:17')">Romans 10:17</span> — "So faith comes from hearing, and hearing through the word of Christ." Our shield is strengthened through engagement with Scripture.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Peter 5:8-9')">1 Peter 5:8-9</span> — "Resist him, firm in your faith, knowing that the same kinds of suffering are being experienced by your brotherhood." We stand firm together.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="helmet-of-salvation">
+            <span class="section-kicker">Ephesians 6:17</span>
+            <h2>Helmet of Salvation</h2>
+            <h3>Meaning</h3>
+            <p>The helmet protected the soldier's head — the command center of the body. A blow to the head could disorient, confuse, or kill. Paul's choice of the helmet for salvation is deeply intentional: our minds are the primary battlefield in spiritual warfare. The enemy attacks our thinking — planting doubts about our salvation, distorting our understanding of God, and filling our thoughts with fear, confusion, and despair. Salvation in Scripture is a comprehensive reality with three tenses: we have been saved (justification), we are being saved (sanctification), and we will be saved (glorification). The helmet encompasses all three, protecting us from doubting our past redemption, losing hope in our present transformation, and forgetting the future glory that awaits us.</p>
+            <p>Paul echoes this in 1 Thessalonians 5:8, calling it "the hope of salvation as a helmet." Hope here is not wishful thinking but confident expectation grounded in God's faithfulness. When our minds are covered with the certainty that God has saved us, is saving us, and will complete what He started, we can think clearly even in the fog of spiritual battle.</p>
+            <h3>How to Apply</h3>
+            <p>Wearing the helmet of salvation means actively guarding and renewing our minds. It begins with settling the question of our salvation — not based on feelings that fluctuate, but on the unchanging promise of God: "I give them eternal life, and they will never perish, and no one will snatch them out of my hand" (John 10:28). Romans 12:2 tells us transformation comes through the renewal of the mind — replacing lies with truth, worldly thinking with biblical thinking, anxiety with trust, and being intentional about what we consume mentally. Taking every thought captive (2 Corinthians 10:5) is active warfare: when a destructive thought enters, the helmet-wearing believer captures it, examines it against Scripture, and replaces it with truth.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 6:17')">Ephesians 6:17</span> — "And take the helmet of salvation..." Our minds are protected by the assurance of God's saving work in our lives.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Thessalonians 5:8')">1 Thessalonians 5:8</span> — "And for a helmet the hope of salvation." Confident hope in God's completed work guards our thought life.</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 12:2')">Romans 12:2</span> — "Do not be conformed to this world, but be transformed by the renewal of your mind." The helmet is maintained through active mind renewal.</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 10:5')">2 Corinthians 10:5</span> — "We take every thought captive to obey Christ." Protecting the mind requires actively managing our thought patterns.</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 4:8')">Philippians 4:8</span> — "Whatever is true, whatever is honorable... think about these things." Paul gives us the filter for a well-guarded mind.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="sword-of-the-spirit">
+            <span class="section-kicker">Ephesians 6:17</span>
+            <h2>Sword of the Spirit</h2>
+            <h3>Meaning</h3>
+            <p>Every other piece of the armor of God is defensive — designed to protect, guard, and shield. The sword of the Spirit is the one offensive weapon in the believer's arsenal. Paul identifies it explicitly: "the sword of the Spirit, which is the word of God" (Ephesians 6:17). The Greek word used here is machaira — not the large broadsword but the short, precise blade used for close combat, speaking to the specific, targeted use of Scripture in spiritual battle. Hebrews 4:12 expands on this: "The word of God is living and active, sharper than any two-edged sword, piercing to the division of soul and spirit... and discerning the thoughts and intentions of the heart."</p>
+            <p>Jesus Himself demonstrated the sword's power in Matthew 4 when Satan tempted Him in the wilderness. Three times the enemy attacked, and three times Jesus responded with the same weapon: "It is written." He did not debate or rely on His own reasoning — He wielded specific, relevant Scripture, and each time the attack was defeated.</p>
+            <h3>How to Apply</h3>
+            <p>A sword is only effective in the hands of someone who has trained with it. Wielding the sword of the Spirit daily means consistent, intentional engagement with God's Word — reading, studying, memorizing, and meditating on it until it becomes readily accessible in our hearts and minds. Jesus' example in Matthew 4 shows three principles: He knew Scripture deeply enough to recall the right passage for each specific attack, He applied it precisely rather than generically, and He spoke it aloud, declaring truth into the situation. The sword of the Spirit is also the Holy Spirit's weapon — He is the one who brings Scripture to our remembrance at the right moment (John 14:26). We study and memorize, filling the armory; the Spirit places the right blade in our hands when battle comes.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 6:17')">Ephesians 6:17</span> — "And the sword of the Spirit, which is the word of God." The only offensive weapon — God's Word wielded through the Spirit's power.</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 4:12')">Hebrews 4:12</span> — "The word of God is living and active, sharper than any two-edged sword." Scripture is supernaturally alive and devastatingly precise.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 4:4')">Matthew 4:4-10</span> — "It is written..." Jesus defeated every temptation by wielding specific Scripture against the enemy's lies.</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Timothy 3:16-17')">2 Timothy 3:16-17</span> — "All Scripture is breathed out by God and profitable for teaching, reproof, correction, and training in righteousness." The Word equips us completely.</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 119:105')">Psalm 119:105</span> — "Your word is a lamp to my feet and a light to my path." Scripture illuminates the way forward when darkness surrounds us.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="videos">
+            <span class="section-kicker">Watch & Learn</span>
+            <h2>Videos</h2>
+
+            <h4>Belt of Truth</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'e2H17pGh5E0')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/e2H17pGh5E0/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Belt of Truth | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'kd3UUTZhDo4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/kd3UUTZhDo4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the belt of truth (Ephesians 6:14)? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>Breastplate of Righteousness</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'g6tcr8uf-yw')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/g6tcr8uf-yw/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Breastplate of Righteousness | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'J59KvbvDwOU')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/J59KvbvDwOU/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the breastplate of righteousness (Ephesians 6:14)? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>Shoes of the Gospel of Peace</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'JvI8z6y7fjU')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/JvI8z6y7fjU/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the readiness of the gospel of peace (Ephesians 6:15)? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>Shield of Faith</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'KPiLT8KUK5s')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/KPiLT8KUK5s/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Shield of Faith | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'6eUXl63LOF8')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/6eUXl63LOF8/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the shield of faith (Ephesians 6:16)? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>Helmet of Salvation</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'8F6doZliW7g')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/8F6doZliW7g/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Helmet of Salvation - Ephesians 6:16-18<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'UmNdzVTeuDo')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/UmNdzVTeuDo/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the helmet of salvation (Ephesians 6:17)? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>Sword of the Spirit</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'OYuUJdf2GNw')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/OYuUJdf2GNw/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Sword of the Spirit - Ephesians 6:16-18<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'WtMi56MiEuY')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/WtMi56MiEuY/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the sword of the Spirit (Ephesians 6:17)? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+        </div>
+
     </main>
     <script src="site/script.js"></script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) {
+                textEl.innerHTML = data.passages[0];
+            } else {
+                textEl.innerHTML = '<em>Could not load this passage.</em>';
+            }
+        })
+        .catch(function() {
+            textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>';
+        });
+    }
+    function closeVerse() {
+        document.getElementById('verseOverlay').classList.remove('show');
+        document.getElementById('versePopup').classList.remove('show');
+    }
+    </script>
 </body>
 </html>
