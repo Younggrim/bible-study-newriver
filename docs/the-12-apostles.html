@@ -22,7 +22,11 @@
         .back-link:hover { color: #5c2518; }
         .back-link i { margin-right: 6px; }
 
-        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; }
+        .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
+        .jump-card { background: #fff; border: 1px solid #e8e0d6; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #8b3a2a; text-decoration: none; transition: background 0.15s, transform 0.15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; scroll-margin-top: 76px; }
         .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.35rem; color: #8b3a2a; margin-bottom: 4px; }
         .section-block .section-kicker { display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #8a7e74; margin-bottom: 6px; }
         .section-block h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; color: #8b3a2a; margin: 20px 0 12px; }
@@ -60,6 +64,23 @@
         </div>
 
         <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
+
+        <nav class="jump-grid">
+            <a href="#importance" class="jump-card">Overview</a>
+            <a href="#simon-peter" class="jump-card">Simon Peter</a>
+            <a href="#andrew" class="jump-card">Andrew</a>
+            <a href="#james" class="jump-card">James</a>
+            <a href="#john" class="jump-card">John</a>
+            <a href="#philip" class="jump-card">Philip</a>
+            <a href="#bartholomew" class="jump-card">Bartholomew</a>
+            <a href="#matthew" class="jump-card">Matthew</a>
+            <a href="#thomas" class="jump-card">Thomas</a>
+            <a href="#james-son-of-alphaeus" class="jump-card">James Alphaeus</a>
+            <a href="#thaddaeus" class="jump-card">Thaddaeus</a>
+            <a href="#simon-the-zealot" class="jump-card">Simon Zealot</a>
+            <a href="#judas-iscariot" class="jump-card">Judas Iscariot</a>
+            <a href="#videos" class="jump-card">Videos</a>
+        </nav>
 
         <div class="section-block" id="importance">
             <span class="section-kicker">The Foundation</span>
