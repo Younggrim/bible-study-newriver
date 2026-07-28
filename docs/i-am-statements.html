@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#8b6914">
     <title>I AM Statements of Jesus — Bible Study</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,64 +13,287 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
     <link rel="stylesheet" href="site/style.css">
     <style>
-        body { background: #faf5ed; }
-        .page-content { margin: 0 auto; max-width: 960px; padding: 24px 24px 80px; }
+        .topic-hero { position: relative; overflow: hidden; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1747326596342-1941a6ffc72b?w=1200&q=80") center/cover no-repeat; filter: brightness(0.45) sepia(0.75) saturate(1.7); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #e8d4a0; letter-spacing: 0.5px; }
+
         .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #8b6914; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #5c4a0d; }
         .back-link i { margin-right: 6px; }
-        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 8px; }
-        .item-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid; border-radius: 10px; text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
-        .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
-        .item-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 2px; }
-        .item-card .subtitle { font-size: 0.75rem; font-style: italic; color: #8a7e74; margin-bottom: 6px; }
-        .item-card .desc { font-size: 0.82rem; color: #5a4e44; line-height: 1.5; }
-        @media (max-width: 768px) { .item-grid { grid-template-columns: 1fr; } }
+
+        .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
+        .jump-card { background: #fff; border: 1px solid #e8e0d6; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #8b6914; text-decoration: none; transition: background 0.15s, transform 0.15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; scroll-margin-top: 76px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.35rem; color: #8b6914; margin-bottom: 4px; }
+        .section-block .section-kicker { display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #8a7e74; margin-bottom: 6px; }
+        .section-block h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; color: #8b6914; margin: 20px 0 12px; }
+        .section-block h4 { font-family: 'Cinzel', serif; font-size: 0.88rem; color: #8b6914; margin: 18px 0 10px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .video-grid:last-child { margin-bottom: 0; }
+
+        .verse-ref { color: #8b6914; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #5c4a0d; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#8b6914; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="section-hero">
-        <img src="https://images.unsplash.com/photo-1747326596342-1941a6ffc72b?w=1400&q=80&auto=format"
-             srcset="https://images.unsplash.com/photo-1747326596342-1941a6ffc72b?w=640&q=80&auto=format 640w,
-                     https://images.unsplash.com/photo-1747326596342-1941a6ffc72b?w=1000&q=80&auto=format 1000w,
-                     https://images.unsplash.com/photo-1747326596342-1941a6ffc72b?w=1600&q=80&auto=format 1600w"
-             sizes="100vw" fetchpriority="high" alt="Sunbeams breaking through mist over a field">
-        <div class="section-hero-overlay">
-            <h2>I AM Statements of Jesus</h2>
-            <p class="section-desc">Seven declarations where Jesus reveals His divine identity.</p>
+    <main class="main-content" style="margin-left:auto; margin-right:auto; max-width:960px; margin-top:0;">
+
+        <div class="topic-hero">
+            <p class="subtitle">Topical Study</p>
+            <h1>I AM Statements of Jesus</h1>
         </div>
-    </div>
-    <main class="page-content">
+
         <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
-        <div class="item-grid">
-                <a href="iam-bread-of-life.html" class="item-card" style="border-left-color:#8b6914;">
-                    <h4 style="color:#8b6914;">I Am the Bread of Life</h4>
-                    <p class="desc">Jesus satisfies our deepest spiritual hunger.</p>
-                </a>
-                <a href="iam-light-of-the-world.html" class="item-card" style="border-left-color:#8b6914;">
-                    <h4 style="color:#8b6914;">I Am the Light of the World</h4>
-                    <p class="desc">Jesus dispels darkness and reveals truth.</p>
-                </a>
-                <a href="iam-the-door.html" class="item-card" style="border-left-color:#8b6914;">
-                    <h4 style="color:#8b6914;">I Am the Door</h4>
-                    <p class="desc">Jesus is the only entrance to salvation.</p>
-                </a>
-                <a href="iam-good-shepherd.html" class="item-card" style="border-left-color:#8b6914;">
-                    <h4 style="color:#8b6914;">I Am the Good Shepherd</h4>
-                    <p class="desc">Jesus protects, guides, and lays down His life.</p>
-                </a>
-                <a href="iam-resurrection-and-life.html" class="item-card" style="border-left-color:#8b6914;">
-                    <h4 style="color:#8b6914;">I Am the Resurrection and the Life</h4>
-                    <p class="desc">Jesus conquers death itself.</p>
-                </a>
-                <a href="iam-way-truth-life.html" class="item-card" style="border-left-color:#8b6914;">
-                    <h4 style="color:#8b6914;">I Am the Way, the Truth, and the Life</h4>
-                    <p class="desc">No one comes to the Father except through Him.</p>
-                </a>
-                <a href="iam-true-vine.html" class="item-card" style="border-left-color:#8b6914;">
-                    <h4 style="color:#8b6914;">I Am the True Vine</h4>
-                    <p class="desc">Abiding in Christ produces spiritual fruit.</p>
-                </a>
+
+        <nav class="jump-grid">
+            <a href="#what-are-the-i-am-statements" class="jump-card">Overview</a>
+            <a href="#bread-of-life" class="jump-card">Bread of Life</a>
+            <a href="#light-of-the-world" class="jump-card">Light of the World</a>
+            <a href="#the-door" class="jump-card">The Door</a>
+            <a href="#good-shepherd" class="jump-card">Good Shepherd</a>
+            <a href="#resurrection-and-life" class="jump-card">Resurrection & Life</a>
+            <a href="#way-truth-life" class="jump-card">Way, Truth, Life</a>
+            <a href="#true-vine" class="jump-card">True Vine</a>
+            <a href="#videos" class="jump-card">Videos</a>
+        </nav>
+
+        <div class="section-block" id="what-are-the-i-am-statements">
+            <span class="section-kicker">The Foundation</span>
+            <h2>What Are the I AM Statements?</h2>
+            <p>Seven times in the Gospel of John, Jesus applies the phrase "I am" (Greek: ego eimi) to Himself, followed by a specific image: bread of life, light of the world, the door, the good shepherd, the resurrection and the life, the way and the truth and the life, and the true vine. John selected these seven declarations carefully — his Gospel states its purpose plainly near the end: "these are written so that you may believe that Jesus is the Christ, the Son of God, and that by believing you may have life in his name" (John 20:31). Each I AM statement is a piece of evidence in that case, a claim Jesus made about His own identity that His hearers could weigh for themselves.</p>
+            <p>The phrase "I am" carries far more weight than an ordinary self-introduction. In Exodus 3:14, when Moses asked God's name at the burning bush, God answered, "I AM WHO I AM... say this to the people of Israel, 'I AM has sent me to you.'" This name — built on the Hebrew verb "to be" — declared God's self-existence, His eternal and unchanging nature. When Jesus used the same construction about Himself, His original Jewish audience would have recognized exactly what He was claiming. This is made explicit in John 8:58, when Jesus said, "Before Abraham was, I am" — not "I was," but "I am," claiming timeless existence — and the crowd immediately picked up stones to kill Him for blasphemy. They understood precisely what He meant.</p>
+            <p>Each of the seven statements takes an image already saturated with Old Testament meaning and applies it directly to Jesus. Manna in the wilderness, the pillar of fire, the Temple gates, the Shepherd of Israel, the God who kills and makes alive, the way of the LORD, the vine of Israel — Jesus takes each of these and says, in effect, "I am the reality these pictures were always pointing toward." The statements are not a random collection of comforting metaphors; they are a sustained, deliberate argument that the God who acted throughout Israel's history has now stepped into it personally, in the person of Jesus of Nazareth.</p>
+            <p>Together, the seven statements also form a remarkably complete portrait of what Jesus offers: nourishment for the hungry soul (bread), guidance for the lost (light), access to God (the door), protection and personal care (the shepherd), victory over humanity's greatest fear (resurrection and life), the complete answer to the human search for meaning (way, truth, life), and the source of ongoing spiritual vitality (the vine). Every fundamental human need — sustenance, direction, security, belonging, hope, and lasting fruitfulness — finds its answer not in a system or a philosophy Jesus taught, but in Jesus Himself.</p>
         </div>
+
+        <div class="section-block" id="bread-of-life">
+            <span class="section-kicker">John 6:35</span>
+            <h2>I Am the Bread of Life</h2>
+            <h3>The Statement</h3>
+            <p>In John 6:35, after miraculously feeding five thousand people with five loaves and two fish, Jesus declared: "I am the bread of life; whoever comes to me shall not hunger, and whoever believes in me shall never thirst." The crowd had followed Him across the Sea of Galilee seeking more physical food, but Jesus redirected their hunger toward something eternal. He was not merely a provider of bread — He was claiming to be the bread itself, the sustenance that satisfies the deepest need of the human soul.</p>
+            <p>The context of this statement is critical. The crowd wanted a sign like the manna Moses gave (John 6:30-31). Jesus corrected them: it was not Moses but the Father who gave the bread from heaven, and now the Father was giving the true bread — not a substance that spoils, but a Person who gives eternal life. Jesus was claiming to be the ultimate answer to humanity's deepest hunger: the hunger for God Himself, for meaning, for life that death cannot extinguish.</p>
+            <h3>What Jesus Was Declaring</h3>
+            <p>Jesus was declaring that He alone can satisfy the deepest hunger of the human heart. Every person carries a spiritual emptiness that nothing in this world — wealth, pleasure, achievement, relationships — can permanently fill. We try to feed ourselves with temporary bread, but the hunger always returns. Jesus offers Himself as the one source of nourishment that never runs out, never grows stale, and never fails to satisfy. To "eat" this bread is to believe in Him, to take Him into the center of your life the way food is taken into the body. This declaration also carries a cost — many of Jesus' followers turned away when they heard this teaching (John 6:66), because it demanded total dependence on Him rather than on their own efforts or the signs He performed.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('John 6:35')">John 6:35</span> — "I am the bread of life; whoever comes to me shall not hunger, and whoever believes in me shall never thirst."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 6:48-51')">John 6:48-51</span> — "I am the living bread that came down from heaven. If anyone eats of this bread, he will live forever."</li>
+                <li><span class="verse-ref" onclick="showVerse('Deuteronomy 8:3')">Deuteronomy 8:3</span> — "Man does not live by bread alone, but by every word that comes from the mouth of the LORD."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 4:4')">Matthew 4:4</span> — Jesus quotes Deuteronomy 8:3 when tempted by Satan, affirming that God's word is true sustenance.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 6:27')">John 6:27</span> — "Do not work for the food that perishes, but for the food that endures to eternal life, which the Son of Man will give to you."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="light-of-the-world">
+            <span class="section-kicker">John 8:12</span>
+            <h2>I Am the Light of the World</h2>
+            <h3>The Statement</h3>
+            <p>During the Feast of Tabernacles in Jerusalem, when massive golden candelabras illuminated the Temple courts in remembrance of God's pillar of fire that guided Israel through the wilderness, Jesus stood and declared: "I am the light of the world. Whoever follows me will not walk in darkness, but will have the light of life" (John 8:12). The timing was no accident — surrounded by ceremonial light celebrating God's past guidance, Jesus claimed to be the living fulfillment of that very light. In the Old Testament, light is consistently associated with God's presence, truth, and salvation: "The LORD is my light and my salvation" (Psalm 27:1); "The people who walked in darkness have seen a great light" (Isaiah 9:2).</p>
+            <p>The contrast Jesus draws is absolute: light versus darkness, life versus death. There is no middle ground. This was a direct challenge to the religious leaders who believed they already had the light through the Law. Jesus was saying that without Him, even the most religious person stumbles in darkness — because He is not just a light, but the light, the single source from which all true illumination flows.</p>
+            <h3>What Jesus Was Declaring</h3>
+            <p>Jesus was declaring that apart from Him, humanity lives in spiritual blindness — unable to see God clearly, unable to understand our own condition, unable to find the path to life. The darkness Jesus speaks of is not merely ignorance but a moral and spiritual condition: sin distorts our vision, and the "god of this age" blinds minds to the gospel (2 Corinthians 4:4). To follow the Light means to live in honesty and transparency before God, welcoming His exposure of our sin rather than hiding from it. And remarkably, those who receive His light become light-bearers themselves (Matthew 5:14-16) — the Christian life is not just receiving illumination but becoming a conduit through which the light of Christ reaches others who still sit in darkness.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('John 8:12')">John 8:12</span> — "I am the light of the world. Whoever follows me will not walk in darkness, but will have the light of life."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 1:4-5')">John 1:4-5</span> — "In him was life, and the life was the light of men. The light shines in the darkness, and the darkness has not overcome it."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 5:14')">Matthew 5:14</span> — "You are the light of the world" — those who follow the Light become reflectors of that light to others.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 John 1:5-7')">1 John 1:5-7</span> — "God is light, and in him is no darkness at all. If we walk in the light... we have fellowship with one another."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 9:2')">Isaiah 9:2</span> — "The people who walked in darkness have seen a great light" — messianic prophecy fulfilled in Jesus.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="the-door">
+            <span class="section-kicker">John 10:9</span>
+            <h2>I Am the Door</h2>
+            <h3>The Statement</h3>
+            <p>In John 10:9, Jesus declared: "I am the door. If anyone enters by me, he will be saved and will go in and out and find pasture." This statement comes in the context of an extended metaphor about shepherds, sheep, and sheepfolds. In first-century Palestine, sheep pens often had a single opening with no gate — the shepherd himself would lie across the entrance at night, literally becoming the door with his own body. Jesus was not merely pointing to a way of salvation — He was claiming to be the exclusive access point between humanity and God, replacing the entire Old Testament system of mediated access through the Tabernacle and Temple. He is not a door among many; He is the door — singular, definite, exclusive.</p>
+            <p>The promise attached to this claim is threefold: salvation ("he will be saved"), freedom ("will go in and out"), and provision ("find pasture"). The door is not restrictive but liberating. The exclusivity of the entrance does not limit what lies beyond it — it guarantees it.</p>
+            <h3>What Jesus Was Declaring</h3>
+            <p>Jesus was declaring that access to God — salvation, fellowship, eternal life — comes exclusively through Him. This was a direct challenge to the Pharisees and religious leaders who claimed to be the gatekeepers of God's presence. But this exclusivity is not narrow in the way critics often suggest — the invitation is "if anyone enters by me," universally open. The door is narrow (Matthew 7:13-14), but it is open to everyone who will come through it. The door image also speaks of security: a shepherd-door protects the sheep from predators. To be "inside" Christ is to be protected from every spiritual threat, and no one can snatch His sheep from His hand (John 10:28-29).</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('John 10:9')">John 10:9</span> — "I am the door. If anyone enters by me, he will be saved and will go in and out and find pasture."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 10:7')">John 10:7</span> — "Truly, truly, I say to you, I am the door of the sheep" — emphasizing exclusivity with the solemn double "truly."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 14:6')">John 14:6</span> — "No one comes to the Father except through me" — the door metaphor stated in direct theological terms.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 4:12')">Acts 4:12</span> — "There is salvation in no one else, for there is no other name under heaven given among men by which we must be saved."</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 10:19-20')">Hebrews 10:19-20</span> — "We have confidence to enter the holy places by the blood of Jesus, by the new and living way that he opened for us."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="good-shepherd">
+            <span class="section-kicker">John 10:11</span>
+            <h2>I Am the Good Shepherd</h2>
+            <h3>The Statement</h3>
+            <p>In John 10:11, Jesus declared: "I am the good shepherd. The good shepherd lays down his life for the sheep." This statement would have been electrifying to His Jewish audience, because throughout the Old Testament, God Himself is described as the Shepherd of Israel: "The LORD is my shepherd" (Psalm 23:1). By claiming to be the Good Shepherd, Jesus was claiming the role that belonged exclusively to God. The word "good" (Greek: kalos) means not just morally good but beautiful, noble, ideal — the model shepherd against whom all others are measured, contrasted with hired hands who abandon the sheep when danger comes (John 10:12-13).</p>
+            <p>The defining characteristic of the Good Shepherd is that He "lays down his life for the sheep" — a clear reference to the cross. Jesus did not lose His life accidentally. "No one takes it from me, but I lay it down of my own accord" (John 10:18). The cross was not a tragedy that befell Jesus but a choice He made out of love for His sheep — each one known by name, each one purchased with His blood.</p>
+            <h3>What Jesus Was Declaring</h3>
+            <p>Jesus was declaring that His relationship with His people is personal, sacrificial, and eternally secure. He is not a distant deity managing the universe from afar — He is a shepherd who knows each sheep by name, who notices when one is missing and leaves the ninety-nine to find it. This declaration also provides absolute assurance of salvation: if Jesus laid down His life for His sheep — the highest possible price — will He fail to keep them? "I give them eternal life, and they will never perish, and no one will snatch them out of my hand" (John 10:28). The security of the believer rests not on the sheep's ability to hold onto the shepherd, but on the shepherd's ability to hold onto the sheep.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('John 10:11-14')">John 10:11-14</span> — "I am the good shepherd. The good shepherd lays down his life for the sheep... I know my own and my own know me."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 23:1-4')">Psalm 23:1-4</span> — "The LORD is my shepherd; I shall not want. He makes me lie down in green pastures" — the divine shepherd foreshadowing Christ.</li>
+                <li><span class="verse-ref" onclick="showVerse('Ezekiel 34:11-12')">Ezekiel 34:11-12</span> — "I myself will search for my sheep, and will seek them out" — God's promise to shepherd His people directly, fulfilled in Jesus.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 10:27-28')">John 10:27-28</span> — "My sheep hear my voice, and I know them, and they follow me. I give them eternal life, and they will never perish."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Peter 2:25')">1 Peter 2:25</span> — "You were straying like sheep, but have now returned to the Shepherd and Overseer of your souls."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="resurrection-and-life">
+            <span class="section-kicker">John 11:25-26</span>
+            <h2>I Am the Resurrection and the Life</h2>
+            <h3>The Statement</h3>
+            <p>Standing before a grieving Martha, whose brother Lazarus had been dead for four days, Jesus made one of His most stunning declarations: "I am the resurrection and the life. Whoever believes in me, though he die, yet shall he live, and everyone who lives and believes in me shall never die" (John 11:25-26). Martha believed in a future resurrection — Jesus redirected her faith from a distant theological event to His own person: the resurrection is not merely something that will happen — it is Someone standing in front of you. He is not saying He will perform resurrections (though He did, moments later) — He is saying He is resurrection itself.</p>
+            <p>The timing of this statement is profoundly pastoral. Jesus said these words not in a theological lecture but at a graveside, to a woman weeping over her brother. He wept with her (John 11:35). He proved His claim minutes later by calling Lazarus from the tomb with a shout, but the ultimate proof would come at His own resurrection, when He walked out of death permanently, never to die again.</p>
+            <h3>What Jesus Was Declaring</h3>
+            <p>Jesus was declaring His absolute authority over death — humanity's final and most feared enemy. His resurrection is not a resuscitation (like Lazarus, who would die again) but a transformation into indestructible life, and He promises to share this victory with everyone who believes in Him. But this declaration is not only about the future — "everyone who lives and believes in me shall never die" speaks to a present reality. Eternal life begins now for the believer: transforming character, renewing minds, producing hope in suffering, and giving purpose beyond the grave. This is why Paul could say, "To live is Christ, and to die is gain" (Philippians 1:21) — because death is not the end of life but its fuller beginning.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('John 11:25-26')">John 11:25-26</span> — "I am the resurrection and the life. Whoever believes in me, though he die, yet shall he live."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 6:5')">Romans 6:5</span> — "If we have been united with him in a death like his, we shall certainly be united with him in a resurrection like his."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 15:20-22')">1 Corinthians 15:20-22</span> — "Christ has been raised from the dead, the firstfruits of those who have fallen asleep... in Christ shall all be made alive."</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 3:10-11')">Philippians 3:10-11</span> — "That I may know him and the power of his resurrection... that by any means possible I may attain the resurrection from the dead."</li>
+                <li><span class="verse-ref" onclick="showVerse('Revelation 1:18')">Revelation 1:18</span> — "I died, and behold I am alive forevermore, and I have the keys of Death and Hades."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="way-truth-life">
+            <span class="section-kicker">John 14:6</span>
+            <h2>I Am the Way, the Truth, and the Life</h2>
+            <h3>The Statement</h3>
+            <p>On the night before His crucifixion, in the intimacy of the Upper Room, Jesus told His troubled disciples: "I am the way, and the truth, and the life. No one comes to the Father except through me" (John 14:6). Thomas had just asked, "Lord, we do not know where you are going. How can we know the way?" Jesus' answer was not a map or a set of instructions — it was Himself. This threefold claim is perhaps the most comprehensive of all Jesus' self-declarations: He does not merely show the way (as a prophet might), teach the truth (as a philosopher might), or offer life (as a healer might). He is these things in His very person.</p>
+            <p>The exclusive conclusion — "No one comes to the Father except through me" — follows necessarily from the claim itself. If Jesus is the way (not a way), then all other paths are dead ends. This is not arrogance but logic: if the claim is true, exclusivity is not narrow-mindedness but accuracy. And Jesus proved the claim by rising from the dead — the only religious founder in history to do so.</p>
+            <h3>What Jesus Was Declaring</h3>
+            <p>Jesus was declaring that the entire human quest — for direction (the way), for understanding (the truth), and for meaning (the life) — finds its answer in one Person. Humanity searches endlessly for these three things through philosophy, religion, science, art, and experience. Jesus claims to be the convergence point where all three are perfectly and finally found. For the disciples hearing these words, the context was deeply personal — Jesus was about to leave them, and into their fear and confusion He gave them not a theology lecture but a relationship promise: "You know the way — you know me." Knowing the way to the Father is not about intellectual mastery of doctrine but about personal relationship with Jesus.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('John 14:6')">John 14:6</span> — "I am the way, and the truth, and the life. No one comes to the Father except through me."</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 4:12')">Acts 4:12</span> — "There is salvation in no one else, for there is no other name under heaven given among men by which we must be saved."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 1:14')">John 1:14</span> — "The Word became flesh and dwelt among us... full of grace and truth" — Jesus as the incarnation of divine truth.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Timothy 2:5')">1 Timothy 2:5</span> — "There is one God, and there is one mediator between God and men, the man Christ Jesus."</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 10:19-20')">Hebrews 10:19-20</span> — "We have confidence to enter the holy places by the blood of Jesus, by the new and living way that he opened for us."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="true-vine">
+            <span class="section-kicker">John 15:1-5</span>
+            <h2>I Am the True Vine</h2>
+            <h3>The Statement</h3>
+            <p>In His final extended teaching before the cross, Jesus told His disciples: "I am the true vine, and my Father is the vinedresser. Every branch in me that does not bear fruit he takes away, and every branch that does bear fruit he prunes, that it may bear more fruit" (John 15:1-2). The vine was one of the most recognized symbols in Israel — it represented God's chosen people throughout the prophets, but Israel had been called an unfaithful vine that produced wild grapes (Isaiah 5:1-7). Jesus now claims to be the true vine — the faithful Israel, the genuine article that replaces the failed original.</p>
+            <p>This statement uniquely emphasizes the organic, living connection between Jesus and His followers. A branch has no life independent of the vine and cannot produce fruit by effort alone — it produces fruit only by remaining connected to the source of life. Jesus repeats the word "abide" eleven times in John 15:1-11: fruitfulness is not about trying harder but about staying connected.</p>
+            <h3>What Jesus Was Declaring</h3>
+            <p>Jesus was declaring that the Christian life is not fundamentally about performance but about connection. Every attempt to produce spiritual fruit through human effort alone — willpower, discipline, religious duty — is like a severed branch trying to grow grapes. "Apart from me you can do nothing" (John 15:5) is one of the most humbling and liberating statements in the Bible — humbling because it exposes our self-sufficiency as illusion, liberating because it removes the impossible burden of self-generated holiness. The Father's role as the vinedresser is also significant: He prunes fruitful branches to make them more fruitful, and every trial, every painful season of stripping back, is the Father's skilled hand making us more fruitful for His glory.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('John 15:1-5')">John 15:1-5</span> — "I am the vine; you are the branches. Whoever abides in me and I in him, he it is that bears much fruit, for apart from me you can do nothing."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 15:8')">John 15:8</span> — "By this my Father is glorified, that you bear much fruit and so prove to be my disciples."</li>
+                <li><span class="verse-ref" onclick="showVerse('Galatians 5:22-23')">Galatians 5:22-23</span> — "The fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, self-control."</li>
+                <li><span class="verse-ref" onclick="showVerse('Colossians 1:10')">Colossians 1:10</span> — "Walk in a manner worthy of the Lord, fully pleasing to him: bearing fruit in every good work and increasing in the knowledge of God."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 5:1-7')">Isaiah 5:1-7</span> — The Song of the Vineyard — God's disappointment with Israel's fruitlessness, fulfilled and resolved in Christ the True Vine.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="videos">
+            <span class="section-kicker">Watch & Learn</span>
+            <h2>Videos</h2>
+
+            <h4>Bread of Life</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'r1xfQDX24vY')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/r1xfQDX24vY/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Bread from Heaven - John 6:5-14<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'ImprSETeNkY')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/ImprSETeNkY/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Fresh Bread is Always Better - Exodus 25:23-24, 30<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+            </div>
+
+            <h4>Light of the World</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'S6UgmxvgIrc')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/S6UgmxvgIrc/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Jesus, Light of the World - John 8:12-32<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'ImZjeSfoEP4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/ImZjeSfoEP4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">I Am the Light of the World | John 8:12 | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'tM4mjTK2IfM')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/tM4mjTK2IfM/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What did Jesus mean when He said, “I am the Light of the World” in John 8:12?  |  GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>Good Shepherd</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'BPsyjS4ANiw')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/BPsyjS4ANiw/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Good Shepherd and the Lost Sheep - Aaron Wright<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Grace Family Baptist Church</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'QY0Iu3fLRxg')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/QY0Iu3fLRxg/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Zechariah 10-11 | The Good Shepherd | Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Spoken Gospel</span></p></div>
+            </div>
+
+            <h4>Resurrection and the Life</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'Vb24Lk1Oh5M')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/Vb24Lk1Oh5M/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Resurrection of Jesus: Luke 24<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'VoVYGwoTYq4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/VoVYGwoTYq4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">These 6 Facts PROVE the Resurrection!<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+            </div>
+
+            <h4>Way, Truth, and the Life</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'xfZv9DYi7gI')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/xfZv9DYi7gI/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Give Me an Answer -  Jesus Said, "I Am the Way, the Truth and the Life."<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Give Me An Answer with Stuart & Cliffe Knechtle</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'g3SkCskAn8c')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/g3SkCskAn8c/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">I Am the Way, the Truth, and the Life | John 14:6 | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'OTS1tMC38AQ')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/OTS1tMC38AQ/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What did Jesus mean when He said, “I am the way, the truth, and the life” (John 14:6)?<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>True Vine</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'Akk6MiuvZWA')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/Akk6MiuvZWA/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Francis Chan: I Am The True Vine - Oxygen, Sydney<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Crazy Love</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'2RKvIXVve3s')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/2RKvIXVve3s/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">“Jesus is the True Vine” John 15:1,5 | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
+        </div>
+
     </main>
     <script src="site/script.js"></script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) {
+                textEl.innerHTML = data.passages[0];
+            } else {
+                textEl.innerHTML = '<em>Could not load this passage.</em>';
+            }
+        })
+        .catch(function() {
+            textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>';
+        });
+    }
+    function closeVerse() {
+        document.getElementById('verseOverlay').classList.remove('show');
+        document.getElementById('versePopup').classList.remove('show');
+    }
+    </script>
 </body>
 </html>
