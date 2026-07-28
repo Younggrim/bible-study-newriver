@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#8b3a2a">
     <title>The 12 Apostles — Bible Study</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,84 +13,411 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
     <link rel="stylesheet" href="site/style.css">
     <style>
-        body { background: #faf5ed; }
-        .page-content { margin: 0 auto; max-width: 960px; padding: 24px 24px 80px; }
+        .topic-hero { position: relative; overflow: hidden; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1678134017317-4edd53da833d?w=1200&q=80") center/cover no-repeat; filter: brightness(0.45) sepia(0.75) saturate(1.7); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #e8b4a0; letter-spacing: 0.5px; }
+
         .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #8b3a2a; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #5c2518; }
         .back-link i { margin-right: 6px; }
-        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 8px; }
-        .item-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid; border-radius: 10px; text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
-        .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
-        .item-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 2px; }
-        .item-card .subtitle { font-size: 0.75rem; font-style: italic; color: #8a7e74; margin-bottom: 6px; }
-        .item-card .desc { font-size: 0.82rem; color: #5a4e44; line-height: 1.5; }
-        @media (max-width: 768px) { .item-grid { grid-template-columns: 1fr; } }
+
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.35rem; color: #8b3a2a; margin-bottom: 4px; }
+        .section-block .section-kicker { display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #8a7e74; margin-bottom: 6px; }
+        .section-block h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; color: #8b3a2a; margin: 20px 0 12px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+        .section-block h4 { font-family: 'Cinzel', serif; font-size: 0.88rem; color: #8b3a2a; margin: 18px 0 10px; }
+
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .video-grid:last-child { margin-bottom: 0; }
+
+        .verse-ref { color: #8b3a2a; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #5c2518; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#8b3a2a; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="section-hero">
-        <img src="https://images.unsplash.com/photo-1678134017317-4edd53da833d?w=1400&q=80&auto=format"
-             srcset="https://images.unsplash.com/photo-1678134017317-4edd53da833d?w=640&q=80&auto=format 640w,
-                     https://images.unsplash.com/photo-1678134017317-4edd53da833d?w=1000&q=80&auto=format 1000w,
-                     https://images.unsplash.com/photo-1678134017317-4edd53da833d?w=1600&q=80&auto=format 1600w"
-             sizes="100vw" fetchpriority="high" alt="Calm water with distant hills, evoking the Sea of Galilee">
-        <div class="section-hero-overlay">
-            <h2>The 12 Apostles</h2>
-            <p class="section-desc">The twelve men Jesus called, trained, and sent to change the world.</p>
+    <main class="main-content" style="margin-left:auto; margin-right:auto; max-width:960px; margin-top:0;">
+
+        <div class="topic-hero">
+            <p class="subtitle">Topical Study</p>
+            <h1>The 12 Apostles</h1>
         </div>
-    </div>
-    <main class="page-content">
+
         <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
-        <div class="item-grid">
-                <a href="apostles-simon-peter.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">Simon Peter</h4>
-                    <p class="desc">The rock — bold leader of the early church.</p>
-                </a>
-                <a href="apostles-andrew.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">Andrew</h4>
-                    <p class="desc">Peter's brother — the first to follow Jesus.</p>
-                </a>
-                <a href="apostles-james.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">James</h4>
-                    <p class="desc">Son of Zebedee — first apostle martyred.</p>
-                </a>
-                <a href="apostles-john.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">John</h4>
-                    <p class="desc">The beloved disciple — author of the Gospel of John.</p>
-                </a>
-                <a href="apostles-philip.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">Philip</h4>
-                    <p class="desc">From Bethsaida — brought Nathanael to Jesus.</p>
-                </a>
-                <a href="apostles-bartholomew.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">Bartholomew</h4>
-                    <p class="desc">Also Nathanael — 'an Israelite without guile.'</p>
-                </a>
-                <a href="apostles-matthew.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">Matthew</h4>
-                    <p class="desc">Tax collector turned Gospel writer.</p>
-                </a>
-                <a href="apostles-thomas.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">Thomas</h4>
-                    <p class="desc">The doubter who became a bold confessor.</p>
-                </a>
-                <a href="apostles-james-son-of-alphaeus.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">James son of Alphaeus</h4>
-                    <p class="desc">The lesser-known James — faithful servant.</p>
-                </a>
-                <a href="apostles-thaddaeus.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">Thaddaeus</h4>
-                    <p class="desc">Also Judas son of James — asked about revelation.</p>
-                </a>
-                <a href="apostles-simon-the-zealot.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">Simon the Zealot</h4>
-                    <p class="desc">Former political revolutionary turned disciple.</p>
-                </a>
-                <a href="apostles-judas-iscariot.html" class="item-card" style="border-left-color:#8b3a2a;">
-                    <h4 style="color:#8b3a2a;">Judas Iscariot</h4>
-                    <p class="desc">The betrayer — replaced by Matthias.</p>
-                </a>
+
+        <div class="section-block" id="importance">
+            <span class="section-kicker">The Foundation</span>
+            <h2>Importance of the 12 Apostles</h2>
+            <p>The number twelve was not incidental. When Jesus selected twelve men to be His closest followers, He was making a deliberate statement: He was reconstituting the people of God, echoing the twelve tribes of Israel. Israel had been founded on twelve patriarchs; the church would be founded on twelve apostles. Luke tells us Jesus did not choose them casually — He spent an entire night in prayer on a mountainside before calling His disciples to Him and naming twelve of them "apostles," a word that means "sent ones" (Luke 6:12-16). This was a decision made in deep communion with the Father, not a hasty recruitment.</p>
+            <p>The apostles' role was unique and unrepeatable. They were eyewitnesses — men who ate, traveled, and lived alongside Jesus for roughly three years, who saw His miracles firsthand, heard His teaching directly, and became witnesses of His death and resurrection. Peter later stated that the qualification for filling Judas's vacant place was having "accompanied us during all the time that the Lord Jesus went in and out among us... one of these men must become with us a witness to his resurrection" (Acts 1:21-22). Their authority rested on this firsthand experience — they did not merely believe secondhand reports; they testified to what they had personally seen and touched (1 John 1:1-3).</p>
+            <p>This is why Paul could describe the church as "built on the foundation of the apostles and prophets, Christ Jesus himself being the cornerstone" (Ephesians 2:20). The apostles were not simply the first Christians — they were the foundational witnesses whose testimony the entire church would be built upon. Their writings, or the writings produced under their authority and oversight, became the New Testament. Their preaching, beginning at Pentecost, launched the church's expansion from a small group in Jerusalem to a movement that would eventually reach the entire Roman world.</p>
+            <p>Perhaps most strikingly, the twelve were an unlikely and deliberately mixed group: fishermen without formal rabbinic training, a despised tax collector who collaborated with Rome, a zealot committed to Rome's violent overthrow, and others about whom Scripture says almost nothing at all. Jesus did not assemble an elite team of religious professionals — He called ordinary, flawed, and even opposed men, and transformed them into the foundation of a movement that has spanned two thousand years. Their diversity is itself a picture of the gospel's power: people with nothing in common by birth, politics, or profession, united and transformed by a shared devotion to Christ.</p>
+
+            <h4>Video</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'oI9AHBcW1Fg')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/oI9AHBcW1Fg/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The 12 Apostles Find Out They&#39;re the 12 Apostles (The Chosen Scene)<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Chosen</span></p></div>
+            </div>
         </div>
+
+        <div class="section-block" id="simon-peter">
+            <span class="section-kicker">Fisherman of Bethsaida — "The Rock"</span>
+            <h2>Simon Peter</h2>
+            <h3>Who He Was</h3>
+            <p>Simon Peter — originally named Simon bar Jonah — was a fisherman from Bethsaida who became the most prominent of Jesus' twelve apostles. He was impulsive, outspoken, and fiercely loyal, often serving as the spokesman for the group. Jesus gave him the name "Peter" (Petros in Greek, Cephas in Aramaic), meaning "rock," a prophetic declaration of the foundational role he would play in the early church.</p>
+            <h3>Historical Context</h3>
+            <p>Fishing on the Sea of Galilee was a demanding family trade, typically run as a small business with boats, nets, and hired hands — Peter and his brother Andrew worked in partnership with James and John, the sons of Zebedee (Luke 5:10). Mark 1:29-31 tells us Jesus healed Peter's mother-in-law, confirming Peter was married, consistent with ordinary Jewish life of the period. Renaming was significant in Jewish culture — much like God renaming Abram to Abraham — and Jesus' choice to rename Simon "Rock" was a declaration of identity and destiny given before Peter had done anything to earn it.</p>
+            <h3>Life and Death</h3>
+            <p>Peter's personality was marked by bold declarations and equally dramatic failures. He was the one who walked on water — and then sank. He confessed Jesus as the Christ — and then rebuked Him moments later. He swore he would never deny Jesus — and then denied Him three times before the rooster crowed. Yet Jesus never gave up on Peter. After the resurrection, Jesus personally restored him on the shores of Galilee with the threefold question: "Do you love me?" Following Pentecost, Peter emerged as the undisputed leader of the early church — he preached the first sermon that brought 3,000 to faith, performed miracles in Jesus' name, and opened the door of the gospel to the Gentiles through his encounter with Cornelius. His two epistles reveal a man transformed by grace.</p>
+            <p>Church tradition — attested early by writers such as Tertullian and Origen, and by the historian Eusebius — holds that Peter was crucified in Rome under the emperor Nero, sometime around AD 64-68, and that he requested to be crucified upside down, feeling unworthy to die in the same manner as his Lord. This account is not recorded in Scripture itself, though many readers connect it to Jesus' words in John 21:18-19, where He foretells that Peter would one day "stretch out your hands" and be led where he did not wish to go — words the Gospel writer explicitly says pointed to "the kind of death by which he would glorify God."</p>
+            <h3>Lessons</h3>
+            <p>Peter's life teaches us that God does not require perfection — He requires willingness. Peter failed spectacularly and publicly, yet Jesus did not discard him. Instead, Jesus used Peter's failures as the very furnace that refined his character. From Peter we learn that restoration is always available to those who return to Christ with humble hearts, that leadership in God's kingdom is not about self-promotion but about shepherding others with gentleness, and that bold faith sometimes means stepping out of the boat — even when the waves are high — and keeping our eyes on Jesus.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 16:18')">Matthew 16:18</span> — Jesus declares that upon this rock He will build His church, and the gates of hell shall not prevail against it.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 21:15-17')">John 21:15-17</span> — The risen Jesus restores Peter with three questions of love, commissioning him to feed and tend His sheep.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 2:14')">Acts 2:14</span> — Peter stands boldly at Pentecost and preaches to the crowd, leading 3,000 to repentance and baptism.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Peter 5:1-4')">1 Peter 5:1-4</span> — Peter exhorts elders to shepherd God's flock willingly, not for gain, and promises the crown of glory.</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 22:31-32')">Luke 22:31-32</span> — Jesus warns Peter that Satan has demanded to sift him, but assures him that He has prayed for his faith.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="andrew">
+            <span class="section-kicker">Fisherman of Bethsaida — "The First-Called"</span>
+            <h2>Andrew</h2>
+            <h3>Who He Was</h3>
+            <p>Andrew was a fisherman from Bethsaida and the brother of Simon Peter. Before following Jesus, Andrew was a disciple of John the Baptist. When John pointed to Jesus and declared "Behold, the Lamb of God," Andrew immediately left to follow Christ — making him the first of the twelve to be called. His very first act as a disciple was to find his brother Simon and bring him to Jesus, establishing the pattern that would define his entire ministry.</p>
+            <h3>Historical Context</h3>
+            <p>John the Baptist's wilderness ministry at the Jordan drew many Galileans anticipating the Messiah, and Andrew's presence there before ever meeting Jesus shows a man already earnestly seeking God. Unlike his brother Peter, Andrew does not dominate the Gospel narrative — he was not part of the innermost circle that witnessed the Transfiguration or the agony in Gethsemane. Yet every time Andrew appears in Scripture, he is doing the same thing: bringing someone to Jesus. He brought Peter, the boy with five loaves and two fish, and the Greek seekers who wanted to meet Jesus — a consistent pattern across three separate episodes in John's Gospel.</p>
+            <h3>Life and Death</h3>
+            <p>Later Christian tradition — developed especially in the apocryphal Acts of Andrew from the second and third centuries — holds that Andrew preached the gospel in regions around the Black Sea, in Scythia, and in Greece (which is why he is honored as a patron of Russia, Ukraine, and Romania). He is said to have been martyred in Patras, Greece, crucified on an X-shaped cross at his own request, because he felt unworthy to die on the same type of cross as his Lord. It is worth noting that the specific association of Andrew with an X-shaped "saltire" cross — now known as "St. Andrew's Cross" — is a detail that developed later in the medieval period rather than in the earliest accounts of his death, though the core tradition of his martyrdom in Greece is very old.</p>
+            <h3>Lessons</h3>
+            <p>Andrew teaches us that faithfulness does not require fame. He never preached a recorded sermon, never performed a miracle that bears his name in Scripture, and never held a titled position of authority among the twelve. Yet his simple, consistent ministry of bringing people to Jesus accomplished eternally significant things — including introducing the man who would become the leader of the early church. From Andrew we also learn the power of seeing potential in small things: when thousands were hungry, he brought a boy's lunch to Jesus, trusting God to multiply what he could not.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('John 1:40-42')">John 1:40-42</span> — Andrew hears John the Baptist's testimony, follows Jesus, and immediately brings his brother Simon to Christ.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 6:8-9')">John 6:8-9</span> — Andrew finds a boy with five barley loaves and two fish, bringing the small offering that Jesus multiplies to feed 5,000.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 12:20-22')">John 12:20-22</span> — Greeks seeking Jesus approach Philip, who tells Andrew, and together they bring the seekers to the Lord.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 4:18-19')">Matthew 4:18-19</span> — Jesus calls Andrew and Peter from their fishing nets, promising to make them fishers of men.</li>
+                <li><span class="verse-ref" onclick="showVerse('Mark 13:3')">Mark 13:3</span> — Andrew joins Peter, James, and John in privately asking Jesus about the signs of the end times on the Mount of Olives.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="james">
+            <span class="section-kicker">Son of Zebedee — "Son of Thunder"</span>
+            <h2>James</h2>
+            <h3>Who He Was</h3>
+            <p>James was the son of Zebedee and the elder brother of John. Together they were fishermen on the Sea of Galilee before Jesus called them to follow Him. Jesus nicknamed the brothers "Boanerges" — Sons of Thunder — likely a reference to their fiery temperament and passionate zeal. James was part of Jesus' innermost circle of three, along with Peter and John, privileged to witness events the other apostles did not see.</p>
+            <h3>Historical Context</h3>
+            <p>Mark 1:20 notes that Zebedee's fishing business employed "hired servants," suggesting the family had some measure of prosperity, not the poorest tier of Galilean society. Their mother is traditionally identified as Salome, who is later described as one of the women who supported Jesus' ministry and who was present at the crucifixion (Matthew 27:56) — showing a family whose devotion extended beyond James and John themselves.</p>
+            <h3>Life and Death</h3>
+            <p>James was present at the raising of Jairus' daughter, the Transfiguration on the mountain, and Jesus' agony in the Garden of Gethsemane. His zeal sometimes outran his wisdom — he and John once asked Jesus if they should call down fire from heaven on a Samaritan village that rejected them, and on another occasion asked for seats of honor at Jesus' right and left hand. James holds the distinction of being the first apostle martyred, and his death is the only apostolic death recorded directly in Scripture: around AD 44, King Herod Agrippa I had James executed by the sword as part of a persecution against the early church (Acts 12:1-2). Luke devotes only a single verse to it — a brevity that underscores how faithfulness to Christ may cost everything, without ceremony or warning.</p>
+            <h3>Lessons</h3>
+            <p>James teaches us that zeal for God is a gift — but it must be tempered by wisdom and submission to Christ. His desire to call down fire revealed a heart that burned for God's honor, but Jesus redirected that passion from destruction toward sacrificial love. From James we also learn that following Christ is not a pathway to worldly prominence — he asked for a throne and received a sword, yet in God's economy, the martyr's crown far surpasses any earthly seat of power.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Mark 1:19-20')">Mark 1:19-20</span> — Jesus calls James and John from their father's boat, and they immediately leave everything to follow Him.</li>
+                <li><span class="verse-ref" onclick="showVerse('Mark 10:35-40')">Mark 10:35-40</span> — James and John request seats of honor; Jesus asks if they can drink His cup and be baptized with His baptism.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 12:1-2')">Acts 12:1-2</span> — King Herod kills James with the sword, making him the first apostle to be martyred for the faith.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 17:1')">Matthew 17:1</span> — Jesus takes Peter, James, and John up a high mountain where He is transfigured before them in glory.</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 9:54')">Luke 9:54</span> — James and John ask Jesus if they should command fire from heaven on the Samaritan village that rejected Him.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="john">
+            <span class="section-kicker">Son of Zebedee — "The Beloved Disciple"</span>
+            <h2>John</h2>
+            <h3>Who He Was</h3>
+            <p>John was the younger son of Zebedee, brother of James, and a fisherman by trade before Jesus called him. He is widely identified as "the disciple whom Jesus loved" — a title he uses for himself in his Gospel, not out of arrogance but out of wonder that he was the object of such divine affection. Along with Peter and James, John belonged to Jesus' innermost circle and witnessed the most intimate moments of Christ's ministry.</p>
+            <h3>Historical Context</h3>
+            <p>In his younger years, John shared the fiery temperament that earned him and his brother the nickname "Sons of Thunder." Yet through decades of walking with Jesus and meditating on His teachings, John became known above all as the apostle of love — his three epistles return repeatedly to the theme that God is love and that those who know God must love one another, a striking transformation reflected across the writings traditionally attributed to him. He was the only apostle who stood at the foot of the cross, where Jesus entrusted His mother Mary into John's care.</p>
+            <h3>Life and Death</h3>
+            <p>John is credited with writing five New Testament books: the Gospel of John, three epistles, and the book of Revelation. Tradition holds that John lived to old age in Ephesus, was exiled to the island of Patmos under Roman persecution during the reign of the emperor Domitian (around AD 95) — where he received the vision recorded in Revelation — and later returned to Ephesus, dying there of natural causes. This tradition, recorded by the early church father Irenaeus (who claimed to have learned it from Polycarp, a disciple of John himself), makes John the only one of the Twelve who was not martyred.</p>
+            <h3>Lessons</h3>
+            <p>John's life demonstrates that intimacy with Jesus transforms character over time. The young man who wanted revenge on Samaritans became the aged apostle who could write nothing more urgent than "love one another." This change did not happen overnight — it was the fruit of decades of abiding in Christ. From John we also learn the importance of identity rooted in God's love: he defined himself not by his accomplishments or failures but as one loved by Jesus, a secure identity that freed him to love others without insecurity or competition.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('John 13:23')">John 13:23</span> — At the Last Supper, the disciple whom Jesus loved is reclining close to Him, an image of intimate fellowship.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 21:20-24')">John 21:20-24</span> — Jesus speaks of John's future, and John identifies himself as the disciple who testifies to these things.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 John 4:7-8')">1 John 4:7-8</span> — John declares that love comes from God, and everyone who loves is born of God, for God is love.</li>
+                <li><span class="verse-ref" onclick="showVerse('Revelation 1:9-11')">Revelation 1:9-11</span> — John, exiled on Patmos for his testimony, receives the vision of the risen Christ and is commanded to write.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 19:26-27')">John 19:26-27</span> — From the cross, Jesus entrusts His mother to John's care, and John takes her into his own home.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="philip">
+            <span class="section-kicker">Of Bethsaida — "Come and See"</span>
+            <h2>Philip</h2>
+            <h3>Who He Was</h3>
+            <p>Philip was from Bethsaida, the same town as Andrew and Peter. He was one of the earliest disciples called by Jesus — in fact, Jesus found Philip directly and said simply, "Follow me." Philip's response was immediate: he went and found Nathanael, telling him, "We have found him of whom Moses in the Law and also the prophets wrote, Jesus of Nazareth." From the very beginning, Philip combined personal faith with an eagerness to share what he had found.</p>
+            <h3>Historical Context</h3>
+            <p>"Philip" is a Greek name, not a Hebrew or Aramaic one, which likely reflects the Hellenistic cultural influence present in Galilee — Bethsaida sat near territory ruled by Philip the Tetrarch, an area with more exposure to Greek language and culture than more traditionally Jewish regions. This may explain why Greek-speaking seekers approached Philip specifically when they wanted to meet Jesus (John 12:20-22). Throughout the Gospels, Philip also appears as a practical, analytical thinker — when Jesus tested him about feeding the 5,000, Philip quickly calculated the cost, revealing a mind that thought in terms of logistics and resources.</p>
+            <h3>Life and Death</h3>
+            <p>Philip served as a bridge between cultures, bringing Greek seekers to Andrew and then to Jesus, and famously asked Jesus to "show us the Father" during the Upper Room discourse. Later tradition — recorded in the apocryphal Acts of Philip — holds that Philip preached in Phrygia, in modern-day Turkey, and was martyred at Hierapolis under the emperor Domitian, crucified upside down after converting the wife of the local proconsul. Historians note this tradition is genuinely uncertain: a very similar account is also told of Philip the Evangelist and Deacon (from Acts 6 and 8), a different man entirely, and ancient sources appear to have sometimes confused the two Philips. The location is well attested — an ancient tomb identified as Philip's has been excavated at Hierapolis (modern Pamukkale) — but the precise details of his death remain less certain than for some other apostles.</p>
+            <h3>Lessons</h3>
+            <p>Philip teaches us the value of honest questions. When he said "Show us the Father," he was not rebelling — he was seeking deeper understanding, and Jesus used the moment to reveal one of the most profound truths in Scripture: that to see Jesus is to see the Father. From Philip we also learn the power of a simple invitation — his evangelistic method was not complex theology but "Come and see." Sometimes the most powerful thing we can do for a skeptic is not to win the debate but to bring them into the presence of Christ and let Him speak for Himself.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('John 1:43-46')">John 1:43-46</span> — Jesus calls Philip directly, and Philip immediately finds Nathanael, inviting him to "come and see" for himself.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 6:5-7')">John 6:5-7</span> — Jesus tests Philip by asking where to buy bread; Philip calculates the impossibility, setting up the miracle of multiplication.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 14:8-9')">John 14:8-9</span> — Philip asks Jesus to show them the Father; Jesus responds that whoever has seen Him has seen the Father.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 12:21-22')">John 12:21-22</span> — Greeks seeking Jesus approach Philip, who tells Andrew, and together they bring the seekers to the Lord.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 1:13')">Acts 1:13</span> — Philip is present in the upper room with the other apostles after the ascension, devoted to prayer.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="bartholomew">
+            <span class="section-kicker">Also Nathanael — "An Israelite Without Guile"</span>
+            <h2>Bartholomew</h2>
+            <h3>Who He Was</h3>
+            <p>Bartholomew is widely identified with Nathanael, the man Philip brought to Jesus in John chapter 1. The name "Bartholomew" is a patronymic meaning "son of Talmai," while "Nathanael" (meaning "gift of God") was likely his given name. In the Synoptic Gospels, Bartholomew is always listed alongside Philip in the apostolic lists, supporting the identification of the two names as one person. He was from Cana in Galilee (John 21:2).</p>
+            <h3>Historical Context</h3>
+            <p>When Philip told Nathanael they had found the Messiah — Jesus of Nazareth — Nathanael responded with blunt skepticism: "Can anything good come out of Nazareth?" This was not arrogance but honesty rooted in his knowledge of Scripture; the prophets pointed to Bethlehem, not Nazareth, as the Messiah's birthplace (Micah 5:2), so his hesitation reflected genuine biblical literacy rather than closed-mindedness.</p>
+            <h3>Life and Death</h3>
+            <p>Upon meeting Nathanael, Jesus paid him a remarkable compliment: "Behold, an Israelite indeed, in whom there is no deceit!" When Nathanael asked how Jesus knew him, Jesus revealed supernatural knowledge — "Before Philip called you, when you were under the fig tree, I saw you" — and Nathanael immediately confessed, "Rabbi, you are the Son of God! You are the King of Israel!" Later tradition holds that Bartholomew carried the gospel to Armenia (with other traditions also mentioning India, Mesopotamia, Ethiopia, and Lycaonia), where he is honored as a founding apostle of the Armenian Apostolic Church. The most common martyrdom account holds that he was flayed alive and then beheaded at the order of a local ruler after converting the ruler's brother — which is why Christian art (most famously Michelangelo's Last Judgment) often depicts Bartholomew holding his own skin. Historians note that the specific royal names attached to this legend do not match any known Armenian king, so while the tradition of his martyrdom is old and widely held, its exact details are uncertain.</p>
+            <h3>Lessons</h3>
+            <p>Nathanael teaches us that honest skepticism is not the enemy of faith — it can be its doorway. Jesus did not condemn his skepticism; He honored his sincerity. What God opposes is not doubt but deceit — the pretense of belief without genuine engagement. From Nathanael we also learn the beauty of a guileless heart: he was the same person in private (under the fig tree) as he was in public, and this integrity of character is what Jesus saw and valued.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('John 1:45-51')">John 1:45-51</span> — Philip brings Nathanael to Jesus; Jesus calls him a man without guile, and Nathanael confesses Him as Son of God and King of Israel.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 21:2')">John 21:2</span> — Nathanael of Cana in Galilee is among the disciples present when Jesus appears at the Sea of Tiberias after the resurrection.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 10:3')">Matthew 10:3</span> — Bartholomew is listed among the twelve apostles whom Jesus sends out with authority over unclean spirits.</li>
+                <li><span class="verse-ref" onclick="showVerse('Mark 3:18')">Mark 3:18</span> — Bartholomew is named alongside Philip in Mark's account of the appointment of the twelve.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 1:13')">Acts 1:13</span> — Bartholomew is present in the upper room with the other apostles after the ascension, devoted to prayer.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="matthew">
+            <span class="section-kicker">Tax Collector of Capernaum — Gospel Writer</span>
+            <h2>Matthew</h2>
+            <h3>Who He Was</h3>
+            <p>Matthew, also called Levi, was a tax collector in Capernaum before Jesus called him to be an apostle. Jesus simply walked up to his tax booth and said, "Follow me." Matthew immediately rose, left everything behind, and followed — the decisiveness of his response suggests he may have already been listening to Jesus' teaching and was ready for a new life.</p>
+            <h3>Historical Context</h3>
+            <p>In first-century Roman Judea, tax collection was typically farmed out to local agents who paid Rome a set sum and then kept whatever they could collect beyond it, creating strong incentive for extortion. Tax collectors were despised as traitors who collaborated with the pagan occupiers, socially ostracized, grouped with "sinners" in Gospel language, and effectively barred from full participation in Jewish religious life. Matthew's profession made him one of the most unlikely candidates for apostleship — and that is precisely why Jesus chose him.</p>
+            <h3>Life and Death</h3>
+            <p>Matthew's first act as a disciple was to throw a great feast at his home, inviting his fellow tax collectors and sinners to meet Jesus — earning criticism from the Pharisees but a powerful declaration from Christ: "I came not to call the righteous, but sinners." Matthew is credited with writing the Gospel that bears his name, distinctly Jewish in character and structured to demonstrate that Jesus is the promised Messiah. His training as a tax collector — which required meticulous record-keeping — uniquely equipped him to compile and organize the teachings and events of Jesus' life. Tradition about his later death is notably uncertain even among ancient writers: Clement of Alexandria records that some held Matthew died a natural death, while most other early witnesses believed he was martyred. A later medieval legend places his death in Ethiopia, killed at the altar during Mass on the order of a king whose unlawful marriage he had condemned — but this account appears centuries after his life and its reliability is doubtful.</p>
+            <h3>Lessons</h3>
+            <p>Matthew's life is a testament to the transforming power of grace. No one is too far gone, too compromised, or too stained by their past for Jesus to call and use. From Matthew we also learn that God redeems our skills and experiences — even those developed in ungodly contexts. His literacy, his facility with numbers, his habit of keeping detailed records — all developed in the service of Roman taxation — became the very tools God used to give the world the first written Gospel.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 9:9-13')">Matthew 9:9-13</span> — Jesus calls Matthew from the tax booth; Matthew follows immediately and hosts a feast where Jesus declares He came for sinners.</li>
+                <li><span class="verse-ref" onclick="showVerse('Mark 2:14')">Mark 2:14</span> — Mark's account of Jesus calling Levi the son of Alphaeus from his tax collection post to follow Him.</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 5:27-32')">Luke 5:27-32</span> — Luke records Levi leaving everything, the great banquet, and Jesus' response that the sick need a physician.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 10:3')">Matthew 10:3</span> — In his own Gospel, Matthew identifies himself as "Matthew the tax collector" — a humble acknowledgment of his past.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 1:1')">Matthew 1:1</span> — Matthew opens his Gospel declaring Jesus as the son of David, the son of Abraham — the promised King of Israel.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="thomas">
+            <span class="section-kicker">Called Didymus — "The Twin"</span>
+            <h2>Thomas</h2>
+            <h3>Who He Was</h3>
+            <p>Thomas, also called Didymus (meaning "the twin"), is most remembered for his moment of doubt after the resurrection — earning him the unfortunate nickname "Doubting Thomas." But this single episode does not define the man. Throughout the Gospels, Thomas appears as a devoted follower willing to die alongside Jesus, and a thinker who asked penetrating questions.</p>
+            <h3>Historical Context</h3>
+            <p>Scripture never names Thomas's twin sibling, so nothing further is known about his family beyond his surname. What is clear from the text is that Thomas's courage predates his famous doubt: when Jesus announced His intention to return to Judea — where people had recently tried to stone Him — to raise Lazarus, it was Thomas who said to the other disciples, "Let us also go, that we may die with him" (John 11:16), a statement of loyalty and bravery that complicates the one-dimensional "doubter" reputation he is often given.</p>
+            <h3>Life and Death</h3>
+            <p>After the resurrection, Thomas was absent when Jesus first appeared to the gathered disciples. When told Jesus was alive, Thomas declared he would not believe unless he could see and touch the wounds himself. A week later, Jesus appeared again and invited Thomas to do exactly that. Thomas's response was immediate and total: "My Lord and my God!" — the highest christological confession in the Gospels. Tradition holds that Thomas carried the gospel eastward to Parthia and ultimately to India, where he was martyred, commonly said to have been speared to death near modern Chennai around AD 72. This tradition carries more historical weight than most other apostolic-death accounts because of the continuous, unbroken existence of the St. Thomas Christian community in Kerala, India, which has traced its founding to him since ancient times.</p>
+            <h3>Lessons</h3>
+            <p>Thomas teaches us that doubt is not the opposite of faith — it can be a pathway to deeper faith. His refusal to accept secondhand testimony was not stubbornness but a desire for personal encounter with the risen Christ, and Jesus honored that desire rather than dismissing it. From Thomas we also learn that the greatest confessions of faith often emerge from the deepest struggles — his declaration "My Lord and my God!" is the climactic confession of John's entire Gospel, and it came from the man who doubted most openly.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('John 20:24-29')">John 20:24-29</span> — Thomas doubts, Jesus appears, Thomas confesses "My Lord and my God!" and Jesus blesses those who believe without seeing.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 11:16')">John 11:16</span> — Thomas courageously says to the other disciples, "Let us also go, that we may die with him."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 14:5')">John 14:5</span> — Thomas honestly asks, "Lord, we do not know where you are going. How can we know the way?" prompting Jesus' "I am the way" declaration.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 20:28')">John 20:28</span> — Thomas makes the supreme confession of faith: "My Lord and my God!" — recognizing Jesus' full deity.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 21:2')">John 21:2</span> — Thomas is among the disciples present at the Sea of Tiberias when Jesus appears after the resurrection.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="james-son-of-alphaeus">
+            <span class="section-kicker">"James the Less" — The Quiet Servant</span>
+            <h2>James son of Alphaeus</h2>
+            <h3>Who He Was</h3>
+            <p>James the son of Alphaeus is one of the least-known apostles. He is sometimes called "James the Less" (or "James the Younger") to distinguish him from James the son of Zebedee — the designation likely refers to his shorter stature or younger age rather than lesser importance. Beyond his inclusion in every apostolic list, Scripture tells us almost nothing specific about his words or deeds.</p>
+            <h3>Historical Context</h3>
+            <p>Some scholars have proposed identifying James son of Alphaeus with "James the brother of the Lord" who later led the Jerusalem church, though this identification is debated and most modern scholars consider it unlikely, since "brothers of the Lord" is more commonly understood to mean Jesus' own half-siblings rather than this particular James. What is clear is that this James was a faithful, consistent presence among the apostles — he walked with Jesus for three years, witnessed His miracles and teachings, saw His death and resurrection, and was present in the upper room at Pentecost.</p>
+            <h3>Life and Death</h3>
+            <p>Unlike most of the other apostles, no well-attested or widely-held tradition records how James son of Alphaeus died. A handful of late and inconsistent legends place his later ministry in Egypt or Persia, with an uncertain martyrdom by stoning or crucifixion, but these accounts are thin, contradictory, and appear centuries after his life — far less reliable than the traditions surrounding apostles like Peter, Andrew, or Thomas. The most historically honest statement is that Scripture and history are simply silent on how his life ended.</p>
+            <h3>Lessons</h3>
+            <p>James the Less teaches us that faithful obscurity is not lesser discipleship. In a culture that prizes visibility, influence, and platform, James reminds us that God sees and values the quiet servant just as much as the prominent leader — he was chosen by Jesus, trained by Jesus, and sent by Jesus, the same commission given to Peter and John. From James we learn the discipline of simply showing up: present in the upper room, present at Pentecost, present through three years of itinerant ministry, faithful in the unseen places where no one applauds.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 10:3')">Matthew 10:3</span> — James son of Alphaeus is listed among the twelve apostles whom Jesus appointed and sent out with authority.</li>
+                <li><span class="verse-ref" onclick="showVerse('Mark 3:18')">Mark 3:18</span> — Mark includes James the son of Alphaeus in his record of the twelve whom Jesus appointed to be with Him.</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 6:15')">Luke 6:15</span> — Luke names James son of Alphaeus among the apostles chosen by Jesus after a night of prayer.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 1:13')">Acts 1:13</span> — After the ascension, James son of Alphaeus is among those gathered in the upper room, devoted to prayer.</li>
+                <li><span class="verse-ref" onclick="showVerse('Mark 15:40')">Mark 15:40</span> — Mary the mother of James the younger and Joses watches the crucifixion from a distance, possibly connecting to this James.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="thaddaeus">
+            <span class="section-kicker">Also Judas Son of James — The Question-Asker</span>
+            <h2>Thaddaeus</h2>
+            <h3>Who He Was</h3>
+            <p>Thaddaeus is one of the most enigmatic of the twelve apostles, known by multiple names in the New Testament. Matthew and Mark call him "Thaddaeus" (some manuscripts add "Lebbaeus"), while Luke identifies him as "Judas son of James" — carefully distinguished from Judas Iscariot. The Gospel of John refers to him simply as "Judas (not Iscariot)."</p>
+            <h3>Historical Context</h3>
+            <p>This multiplicity of names has made Thaddaeus difficult to track through history, but his single recorded statement in Scripture reveals a thoughtful disciple concerned with understanding how God reveals Himself. Many scholars identify Thaddaeus with the author of the epistle of Jude, who identifies himself in Jude 1:1 as "a servant of Jesus Christ and brother of James" — an identification that, while not certain, fits well with the "Judas son of James" name Luke uses for him.</p>
+            <h3>Life and Death</h3>
+            <p>In John 14:22, during the Upper Room discourse, Thaddaeus asks Jesus a penetrating question: "Lord, how is it that you will manifest yourself to us, and not to the world?" — the question many Jews had about the Messiah, since they expected a public, political revelation. Jesus responds by explaining that His manifestation comes through loving obedience. Tradition — developing from the fourth century onward — holds that Jude/Thaddaeus ministered in Mesopotamia, Syria, and Persia, often paired with Simon the Zealot, and that the two were martyred together in Persia, commonly said to have been killed with a club or axe. Notably, the early church father Basil the Great recorded an alternate tradition that Jude instead died peacefully at Edessa — a reminder that even ancient sources did not fully agree on the details of his death.</p>
+            <h3>Lessons</h3>
+            <p>Thaddaeus teaches us the value of asking the right questions. His single recorded question in John 14:22 prompted one of Jesus' most intimate teachings about the indwelling presence of the Father and Son in the life of the believer. From Thaddaeus we also learn that faithful service does not require a large public platform — he is remembered for one question and a name in a list, yet he was chosen by Christ, walked with Him for three years, witnessed the resurrection, and received the Holy Spirit at Pentecost.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('John 14:22')">John 14:22</span> — Judas (not Iscariot) asks Jesus how He will manifest Himself to the disciples but not to the world.</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 6:16')">Luke 6:16</span> — Luke lists "Judas son of James" among the twelve apostles chosen by Jesus after a night of prayer.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 1:13')">Acts 1:13</span> — Judas son of James is present in the upper room after the ascension, devoted to prayer with the other apostles.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 10:3')">Matthew 10:3</span> — Thaddaeus is named among the twelve whom Jesus sends out with authority to heal and proclaim the kingdom.</li>
+                <li><span class="verse-ref" onclick="showVerse('Jude 1:1')">Jude 1:1</span> — Jude identifies himself as a servant of Jesus Christ and brother of James, possibly the same person as Thaddaeus.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="simon-the-zealot">
+            <span class="section-kicker">The Cananaean — Former Revolutionary</span>
+            <h2>Simon the Zealot</h2>
+            <h3>Who He Was</h3>
+            <p>Simon is distinguished from Simon Peter by the title "the Zealot" (Luke and Acts) or "the Cananaean" (Matthew and Mark — from the Aramaic word <em>qan'an</em>, meaning "zealous one"). This designation almost certainly refers to his political background before following Jesus.</p>
+            <h3>Historical Context</h3>
+            <p>The Zealots were a Jewish nationalist faction that grew especially militant in the decades leading up to the Jewish revolt against Rome in AD 66-70, viewing armed resistance against pagan occupation — and against Jewish collaborators with Rome — as righteous action. That Jesus chose a Zealot to be among His twelve apostles is remarkable, especially considering Matthew the tax collector sat in the same group: a Zealot and a tax collector represented opposite poles of Jewish society, and Zealots would have considered tax collectors worthy of death for collaborating with the enemy.</p>
+            <h3>Life and Death</h3>
+            <p>Simon's transformation from political revolutionary to follower of Jesus required a fundamental reorientation of his understanding of God's kingdom — he came to Jesus likely expecting a military Messiah who would defeat Rome, and instead found a Savior who defeated sin and death through a cross. Tradition — appearing from the fourth century onward, in the apocryphal "Passion of Simon and Jude" — holds that Simon partnered with Jude/Thaddaeus in missionary work in Persia and was martyred there, most commonly said to have been sawed in half. As with Jude's death tradition, these details come from later legend rather than firsthand testimony, so they should be held with appropriate caution even though the tradition itself is old and widely repeated.</p>
+            <h3>Lessons</h3>
+            <p>Simon teaches us that Jesus transforms our deepest passions rather than eliminating them. Simon's zeal for God's honor and Israel's freedom was not wrong in itself — it was misdirected, and Jesus redirected that intensity toward the true kingdom. From Simon we also learn that the gospel creates community across the deepest political and social divides — Simon the Zealot and Matthew the tax collector, mortal enemies by every earthly measure, broke bread together, traveled together, and loved one another as brothers in Christ.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Luke 6:15')">Luke 6:15</span> — Simon is called "the Zealot," identifying his pre-conversion political affiliation among the twelve apostles.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 1:13')">Acts 1:13</span> — Simon the Zealot is present in the upper room after the ascension, united in prayer with the other apostles.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 10:4')">Matthew 10:4</span> — Simon the Cananaean is listed among the twelve whom Jesus sends out with authority to proclaim the kingdom.</li>
+                <li><span class="verse-ref" onclick="showVerse('Mark 3:18')">Mark 3:18</span> — Mark names Simon the Cananaean among those Jesus appointed to be with Him and to be sent out to preach.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="judas-iscariot">
+            <span class="section-kicker">Of Kerioth — The Betrayer</span>
+            <h2>Judas Iscariot</h2>
+            <h3>Who He Was</h3>
+            <p>Judas Iscariot is the most infamous of the twelve apostles — the man who betrayed Jesus Christ for thirty pieces of silver. His surname "Iscariot" likely refers to his hometown of Kerioth in southern Judea (from the Hebrew "ish-Kerioth," "man of Kerioth"), making him the only apostle who was not from Galilee. Judas served as the group's treasurer, carrying the money bag that supported Jesus and the twelve during their ministry.</p>
+            <h3>Historical Context</h3>
+            <p>John's Gospel reveals that Judas was a thief who helped himself to the funds entrusted to his care (John 12:6). The tragedy of Judas is that he had every opportunity to know and love Jesus — he walked with Christ for three years, heard every teaching, witnessed every miracle, and was trusted with responsibility among the twelve, even being sent out with the others to preach and heal. Yet beneath the surface of outward discipleship, Judas harbored a heart that was never truly surrendered to Christ.</p>
+            <h3>Life and Death</h3>
+            <p>After betraying Jesus with a kiss in Gethsemane, Judas was seized with remorse and returned the thirty silver coins to the chief priests, confessing "I have sinned by betraying innocent blood." Unlike Peter, who wept bitterly and returned to Christ, Judas turned inward in despair. Scripture itself records the manner of his death in two places that are traditionally read together: Matthew 27:5 states that he threw down the silver in the temple and went and hanged himself, while Acts 1:18 — Peter's account — states that he "fell headlong" in the field purchased with the money, and "his body burst open." These have long been harmonized as two views of the same event: he hanged himself, and the rope or branch gave way, causing his body to fall and rupture. Matthew's account echoes the suicide of Ahithophel in 2 Samuel 17:23, while Luke's account in Acts emphasizes the blood-bought field, tying the event to the prophecy Matthew separately cites from Zechariah. The apostles later chose Matthias by lot to restore the number of the Twelve to twelve (Acts 1:15-26).</p>
+            <h3>Lessons</h3>
+            <p>Judas is a warning that religious activity without heart transformation leads to destruction. He preached, he healed when sent out with the twelve, he appeared devoted — yet his heart was never surrendered to Christ. The contrast between Judas and Peter is instructive: both failed catastrophically, one betrayed and the other denied, but Peter turned back to Christ in brokenness while Judas turned inward in despair. Remorse says "I feel terrible about what I did." Repentance says "I return to Christ and receive His mercy." Judas also warns us about the cumulative power of unchecked sin — his betrayal grew from small acts of dishonesty and greed nurtured in secret. Sin left in the dark always grows.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 26:14-16')">Matthew 26:14-16</span> — Judas goes to the chief priests and agrees to betray Jesus for thirty pieces of silver.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 27:3-5')">Matthew 27:3-5</span> — Judas is seized with remorse, returns the silver, and hangs himself in despair rather than seeking forgiveness.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 12:4-6')">John 12:4-6</span> — Judas objects to the anointing of Jesus with expensive perfume — not from concern for the poor, but because he was a thief.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 6:70-71')">John 6:70-71</span> — Jesus reveals that He chose the twelve knowing one of them was a devil, speaking of Judas who would betray Him.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 1:15-26')">Acts 1:15-26</span> — Peter explains Judas' fate to the gathered believers, and Matthias is chosen by lot to take his place among the twelve.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="videos">
+            <span class="section-kicker">Watch & Learn</span>
+            <h2>Videos</h2>
+
+            <h4>Simon Peter</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'5tRxe8q92-8')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/5tRxe8q92-8/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Apostles of Jesus: Simon Peter<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Beliefnet</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'ihFnp3542tY')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/ihFnp3542tY/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Who was Peter in the Bible? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'ZkUoT5Wnkqc')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/ZkUoT5Wnkqc/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">6 Things You Didn't Know About Peter<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'QjQftj3ggms')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/QjQftj3ggms/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">When Simon Became Peter (The Chosen)<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Chosen</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'O7WWi65gb14')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/O7WWi65gb14/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Jesus Walks On Water and Saves Peter<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Chosen</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'DpWq2GVyVo4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/DpWq2GVyVo4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">SHOCKING Facts About Where and How Peter DIED<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+            </div>
+
+            <h4>Andrew</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'6twtEuN4XEc')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/6twtEuN4XEc/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Apostles of Jesus: Andrew, Brother of Peter<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Beliefnet</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'Y1e4_U6RHRc')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/Y1e4_U6RHRc/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">6 Things You Didn't Know About Andrew the Disciple<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+            </div>
+
+            <h4>James</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'c6-AHxfjmAA')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/c6-AHxfjmAA/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Apostles of Jesus: James, the Son of Zebedee<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Beliefnet</span></p></div>
+            </div>
+
+            <h4>John</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'28u8gh-2MZc')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/28u8gh-2MZc/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Apostles of Jesus: John, the Son of Zebedee<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Beliefnet</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'MJx8xI_ooa0')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/MJx8xI_ooa0/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">6 Things You Didn't Know About John the Apostle<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'wed1uzj6Ib4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/wed1uzj6Ib4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How did the apostle John die? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'sfJuOIJ-Re0')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/sfJuOIJ-Re0/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Why did Jesus entrust Mary to John? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>Matthew</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'HHVm8oOPTPU')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/HHVm8oOPTPU/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">7 Things You Didn't Know About Matthew<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+            </div>
+
+            <h4>Simon the Zealot</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'SWaua6aNthM')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/SWaua6aNthM/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Simon the Zealot Becomes a Disciple (The Chosen Scene)<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Chosen</span></p></div>
+            </div>
+
+            <h4>Judas Iscariot</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'t0Zz55ZLc2o')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/t0Zz55ZLc2o/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Apostles of Jesus: Judas Iscariot<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Beliefnet</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'uFoWwtX0-PU')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/uFoWwtX0-PU/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Surprising Facts About Where and How Judas Died<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'MDkttJPR-7I')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/MDkttJPR-7I/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">This Explains WHY Judas BETRAYED Jesus<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'xcdhklj0Z1Q')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/xcdhklj0Z1Q/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Why did Judas betray Jesus? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+        </div>
+
     </main>
     <script src="site/script.js"></script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) {
+                textEl.innerHTML = data.passages[0];
+            } else {
+                textEl.innerHTML = '<em>Could not load this passage.</em>';
+            }
+        })
+        .catch(function() {
+            textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>';
+        });
+    }
+    function closeVerse() {
+        document.getElementById('verseOverlay').classList.remove('show');
+        document.getElementById('versePopup').classList.remove('show');
+    }
+    </script>
 </body>
 </html>
