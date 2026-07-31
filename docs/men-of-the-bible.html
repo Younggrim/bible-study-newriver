@@ -14,75 +14,366 @@
     <link rel="stylesheet" href="site/style.css">
     <style>
         body { background: #faf5ed; }
-        .page-content { margin: 0 auto; max-width: 960px; padding: 24px 24px 80px; }
-        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #5a4030; text-decoration: none; font-weight: 600; transition: color 0.2s; }
-        .back-link i { margin-right: 6px; }
-        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 8px; }
-        .item-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid; border-radius: 10px; text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
-        .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
-        .item-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 2px; }
-        .item-card .subtitle { font-size: 0.75rem; font-style: italic; color: #8a7e74; margin-bottom: 6px; }
-        .item-card .desc { font-size: 0.82rem; color: #5a4e44; line-height: 1.5; }
-        @media (max-width: 768px) { .item-grid { grid-template-columns: 1fr; } }
+        .topic-hero { position: relative; height: 240px; overflow: hidden; }
+        .topic-hero img { width: 100%; height: 100%; object-fit: cover; }
+        .topic-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)); filter: brightness(0.45) sepia(0.75) saturate(1.7); backdrop-filter: none; }
+        .topic-hero .hero-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
+        .topic-hero h1 { font-family: 'Cinzel', serif; color: #fff; font-size: 2rem; margin: 0 0 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+        .topic-hero p { color: #f0e8dc; font-size: 0.95rem; max-width: 600px; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+        .page-content { margin: 0 auto; max-width: 820px; padding: 20px 24px 80px; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; color: #5a4030; font-weight: 600; font-size: 0.85rem; text-decoration: none; margin: 16px 0; }
+        .back-link:hover { text-decoration: underline; }
+        .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
+        .jump-card { background: #fff; border: 1px solid #e8e0d6; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #5a4030; text-decoration: none; transition: background .15s, transform .15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+        .section-block { background: #fff; border: 1px solid #e8e0d6; border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; scroll-margin-top: 76px; }
+        .section-block .section-kicker { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #a8937f; }
+        .section-block h2 { font-family: 'Cinzel', serif; color: #5a4030; font-size: 1.35rem; margin: 4px 0 12px; }
+        .section-block h3 { font-family: 'Cinzel', serif; color: #6b4f3a; font-size: 1.02rem; margin: 18px 0 8px; }
+        .section-block h4 { font-family: 'Cinzel', serif; color: #5a4030; font-size: 0.95rem; margin: 18px 0 8px; }
+        .section-block p { line-height: 1.7; color: #3d332b; margin: 0 0 10px; }
+        .verse-list { list-style: none; padding: 0; margin: 8px 0 0; }
+        .verse-list li { padding: 8px 0; border-bottom: 1px solid #f0e8dc; font-size: 0.9rem; line-height: 1.6; color: #4a3f35; }
+        .verse-list li:last-child { border-bottom: none; }
+        .verse-ref { color: #5a4030; font-weight: 600; text-decoration: underline dotted; cursor: pointer; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .video-grid:last-child { margin-bottom: 0; }
+        .verse-popup-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999; align-items: center; justify-content: center; padding: 20px; }
+        .verse-popup-overlay.active { display: flex; }
+        .verse-popup { background: #fff; border-radius: 12px; padding: 24px; max-width: 480px; width: 100%; max-height: 70vh; overflow-y: auto; position: relative; }
+        .verse-popup h4 { font-family: 'Cinzel', serif; color: #5a4030; margin: 0 0 12px; }
+        .verse-popup p { line-height: 1.7; color: #3d332b; }
+        .verse-popup .close-popup { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 1.3rem; color: #a8937f; cursor: pointer; }
+        @media (max-width: 600px) { .topic-hero h1 { font-size: 1.5rem; } }
     </style>
 </head>
 <body>
-    <div class="section-hero">
-        <img src="https://images.unsplash.com/photo-1780942717333-d7ffca670324?w=1400&q=80&auto=format"
-             srcset="https://images.unsplash.com/photo-1780942717333-d7ffca670324?w=640&q=80&auto=format 640w,
-                     https://images.unsplash.com/photo-1780942717333-d7ffca670324?w=1000&q=80&auto=format 1000w,
-                     https://images.unsplash.com/photo-1780942717333-d7ffca670324?w=1600&q=80&auto=format 1600w"
-             sizes="100vw" fetchpriority="high" alt="A desert road leading toward distant mountains">
-        <div class="section-hero-overlay">
-            <h2>Men of the Bible</h2>
-            <p class="section-desc">Ordinary men whom God used in extraordinary ways.</p>
+    <div class="topic-hero">
+        <img src="https://images.unsplash.com/photo-1780942717333-d7ffca670324?w=1400&q=80&auto=format" alt="Desert landscape at dawn">
+        <div class="hero-overlay">
+            <h1>Men of the Bible</h1>
+            <p>Ordinary men, used in extraordinary ways — flawed, faithful, and formed by God across every season of life.</p>
         </div>
     </div>
     <main class="page-content">
-        <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
-        <div class="item-grid">
-                <a href="men-abraham.html" class="item-card" style="border-left-color:#5a4030;">
-                    <h4 style="color:#5a4030;">Abraham</h4>
-                    <p class="desc">Father of faith — believed God against all odds.</p>
-                </a>
-                <a href="men-moses.html" class="item-card" style="border-left-color:#5a4030;">
-                    <h4 style="color:#5a4030;">Moses</h4>
-                    <p class="desc">Deliverer of Israel — spoke with God face to face.</p>
-                </a>
-                <a href="men-david.html" class="item-card" style="border-left-color:#5a4030;">
-                    <h4 style="color:#5a4030;">David</h4>
-                    <p class="desc">A man after God's own heart — king and psalmist.</p>
-                </a>
-                <a href="men-joseph.html" class="item-card" style="border-left-color:#5a4030;">
-                    <h4 style="color:#5a4030;">Joseph</h4>
-                    <p class="desc">Faithful in suffering — God meant it for good.</p>
-                </a>
-                <a href="men-daniel.html" class="item-card" style="border-left-color:#5a4030;">
-                    <h4 style="color:#5a4030;">Daniel</h4>
-                    <p class="desc">Unwavering faithfulness in a hostile culture.</p>
-                </a>
-                <a href="men-elijah.html" class="item-card" style="border-left-color:#5a4030;">
-                    <h4 style="color:#5a4030;">Elijah</h4>
-                    <p class="desc">Prophet of fire — stood alone for God.</p>
-                </a>
-                <a href="men-paul.html" class="item-card" style="border-left-color:#5a4030;">
-                    <h4 style="color:#5a4030;">Paul</h4>
-                    <p class="desc">Persecutor turned apostle — transformed by grace.</p>
-                </a>
-                <a href="men-peter.html" class="item-card" style="border-left-color:#5a4030;">
-                    <h4 style="color:#5a4030;">Peter</h4>
-                    <p class="desc">Impulsive fisherman who became the rock.</p>
-                </a>
-                <a href="men-joshua.html" class="item-card" style="border-left-color:#5a4030;">
-                    <h4 style="color:#5a4030;">Joshua</h4>
-                    <p class="desc">Courageous leader — 'Be strong and courageous.'</p>
-                </a>
-                <a href="men-gideon.html" class="item-card" style="border-left-color:#5a4030;">
-                    <h4 style="color:#5a4030;">Gideon</h4>
-                    <p class="desc">Weak man made mighty by God's power.</p>
-                </a>
+        <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Topical Studies</a>
+
+        <nav class="jump-grid">
+            <a href="#overview" class="jump-card">Overview</a>
+            <a href="#abraham" class="jump-card">Abraham</a>
+            <a href="#moses" class="jump-card">Moses</a>
+            <a href="#david" class="jump-card">David</a>
+            <a href="#joseph" class="jump-card">Joseph</a>
+            <a href="#daniel" class="jump-card">Daniel</a>
+            <a href="#elijah" class="jump-card">Elijah</a>
+            <a href="#paul" class="jump-card">Paul</a>
+            <a href="#peter" class="jump-card">Peter</a>
+            <a href="#joshua" class="jump-card">Joshua</a>
+            <a href="#gideon" class="jump-card">Gideon</a>
+            <a href="#videos" class="jump-card">Videos</a>
+        </nav>
+
+        <div class="section-block" id="overview">
+            <span class="section-kicker">Introduction</span>
+            <h2>Overview</h2>
+            <p>Scripture never flatters its heroes. The men whose stories anchor the Old and New Testaments are not marble statues of virtue — they are shepherds who lied, kings who murdered, prophets who despaired, and persecutors who became apostles. What sets them apart is not the absence of failure but the presence of God, who called imperfect men and patiently shaped them into instruments of His purpose.</p>
+            <p>Their stories span the whole arc of redemptive history: Abraham's covenant journey out of Ur, Moses leading a nation out of slavery, David's rise from shepherd boy to king after God's own heart, Joseph's suffering turned to providence, Daniel's unwavering integrity in a pagan court, Elijah's fire and fear on the same mountain, Paul's conversion from persecutor to preacher, Peter's failure redeemed into leadership, Joshua's courage inherited from decades of faithful following, and Gideon's weakness made the very stage for God's strength.</p>
+            <p>Taken together, these ten lives testify to a single truth: God does not wait for perfect men before He works. He calls the fearful, the flawed, and the unlikely, and through patient grace makes them faithful. Their example is not a standard of sinlessness to imitate but an invitation to trust the same God who met them in their weakness to meet us in ours.</p>
+        </div>
+
+        <div class="section-block" id="abraham">
+            <span class="section-kicker">Father of Faith</span>
+            <h2>Abraham</h2>
+            <h3>His Story</h3>
+            <p>Abraham's story begins with a call to leave everything familiar — his country, his people, his father's household — for a land God would show him. He obeyed without knowing the destination, launching a journey of faith that would span decades and test him in ways he could not have anticipated. Central to that journey was God's promise of a son, a promise that seemed to grow more impossible with each passing year as Abraham and Sarah aged well beyond childbearing years.</p>
+            <p>The wait for Isaac was marked by very human stumbles — Abraham's attempt to secure an heir through Hagar, and his repeated lies about Sarah being his sister out of fear for his own safety. Yet through it all, God remained faithful to His covenant, and Isaac was finally born when Abraham was a hundred years old, the promise arriving precisely on God's timetable rather than Abraham's.</p>
+            <p>The ultimate test came on Mount Moriah, when God asked Abraham to sacrifice the very son through whom the promise would be fulfilled. Abraham's willingness to obey, trusting that God would provide, revealed a faith so complete that Scripture calls him the father of all who believe. His life demonstrates that faith is not a single decision but a lifelong journey of trusting God's promises even when the path forward is unclear.</p>
+            <h3>Lessons from His Life</h3>
+            <p>Abraham teaches us that faith is a journey, not a destination reached in a single moment of decision. He believed God at the beginning of his story, yet his faith was refined and deepened through decades of waiting, failure, and renewed obedience. Each stumble along the way did not disqualify him — it became part of the larger story of a faith that matured over a lifetime.</p>
+            <p>His story also confronts the tension between God's timing and human impatience. Abraham's attempt to manufacture the promise through Hagar shows what happens when we try to fulfill God's purposes on our own schedule rather than trusting His. Yet God's covenant faithfulness proved stronger than Abraham's missteps, a pattern that echoes through every believer's walk of faith.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Genesis 12:1-4')">Genesis 12:1-4</span> — God calls Abram to leave his country for the land He will show him.</li>
+                <li><span class="verse-ref" onclick="showVerse('Genesis 15:6')">Genesis 15:6</span> — "He believed the LORD, and he counted it to him as righteousness."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 4:3')">Romans 4:3</span> — Paul cites Abraham's belief as the pattern of righteousness by faith.</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 11:8-12')">Hebrews 11:8-12</span> — Abraham's faith commended as the model for all who believe.</li>
+                <li><span class="verse-ref" onclick="showVerse('Genesis 22:1-2')">Genesis 22:1-2</span> — God tests Abraham, calling him to offer Isaac on Mount Moriah.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="moses">
+            <span class="section-kicker">Deliverer and Lawgiver</span>
+            <h2>Moses</h2>
+            <h3>His Story</h3>
+            <p>Moses was born under a death sentence, hidden by his mother, and set adrift on the Nile — only to be raised in the household of the very Pharaoh who had ordered his death. Straddling two worlds, Hebrew by birth and Egyptian by upbringing, Moses lived decades before God would use that unlikely position to prepare him for a mission he could not yet imagine.</p>
+            <p>After killing an Egyptian and fleeing to Midian, Moses spent forty years shepherding flocks in obscurity before God met him at a burning bush and called him to lead Israel out of slavery. What followed was a relationship of unmatched intimacy — Scripture says God spoke to Moses face to face, as a man speaks to his friend. Yet even Moses, humbled beyond any other man on earth, was barred from entering the Promised Land after striking the rock at Meribah in anger rather than trusting God's word.</p>
+            <p>Moses led Israel through the Exodus, the giving of the Law at Sinai, and forty years of wilderness wandering, shaping a nation of former slaves into a covenant people. His life stands as the towering example of a man wholly devoted to God's purposes, willing to intercede for a rebellious people even at cost to himself.</p>
+            <h3>Lessons from His Life</h3>
+            <p>Moses' forty years in the wilderness before his calling reveal how God often prepares His servants in seasons of obscurity long before the moment of public ministry. What looked like wasted years tending sheep were actually the training ground for shepherding a nation. God's timing is rarely our timing, and preparation often looks like delay.</p>
+            <p>Moses also shows us the cost and privilege of intercession. Again and again he stood between God's righteous anger and Israel's rebellion, pleading for mercy on behalf of a people who repeatedly failed him. His willingness to bear that burden, even at the cost of his own inheritance in the Promised Land, models a leadership rooted in selfless love for those entrusted to his care.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Exodus 3:10-14')">Exodus 3:10-14</span> — God calls Moses from the burning bush and reveals His name.</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 11:24-27')">Hebrews 11:24-27</span> — Moses chooses to suffer with God's people rather than enjoy Egypt's treasures.</li>
+                <li><span class="verse-ref" onclick="showVerse('Deuteronomy 34:10')">Deuteronomy 34:10</span> — No prophet like Moses arose again, whom the LORD knew face to face.</li>
+                <li><span class="verse-ref" onclick="showVerse('Numbers 12:3')">Numbers 12:3</span> — Moses was very meek, more than all people on the face of the earth.</li>
+                <li><span class="verse-ref" onclick="showVerse('Exodus 33:11')">Exodus 33:11</span> — The LORD spoke to Moses face to face, as a man speaks to his friend.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="david">
+            <span class="section-kicker">Shepherd King</span>
+            <h2>David</h2>
+            <h3>His Story</h3>
+            <p>David was the youngest of Jesse's sons, overlooked and left tending sheep while his brothers were considered for kingship. Yet when Samuel came to anoint Israel's next king, God directed him past every impressive elder brother to the boy in the field, declaring that man looks on the outward appearance but the LORD looks on the heart.</p>
+            <p>David's rise was neither swift nor easy. After defeating Goliath, he spent nearly a decade as a fugitive fleeing King Saul's jealous rage, repeatedly refusing opportunities to force his way to the throne even when Saul's life was in his hands. In the wilderness years, David wrote many of the psalms that would become Scripture's deepest expressions of trust, lament, and worship.</p>
+            <p>When David finally became king, God established an everlasting covenant through him. Yet David's reign was marred by grave sin — his affair with Bathsheba and the murder of her husband Uriah — followed by Nathan's confrontation and David's raw, broken repentance in Psalm 51. His life shows both the heights of devotion and the depths of failure that can coexist within a heart still fundamentally after God.</p>
+            <h3>Lessons from His Life</h3>
+            <p>David's anointing as a shepherd boy overlooked by everyone else reminds us that God evaluates the heart, not outward appearance or credentials. The world's measures of significance rarely match God's, and those the world dismisses are often exactly whom God chooses to use.</p>
+            <p>David's failure with Bathsheba, followed by his genuine repentance, teaches that even devastating sin is not the final word for those who turn back to God in honesty. Psalm 51 remains Scripture's model of true repentance — not excuse-making, but a broken and contrite heart laid bare before God, trusting in mercy rather than self-justification.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Samuel 13:14')">1 Samuel 13:14</span> — The LORD seeks out a man after His own heart.</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 51:10')">Psalm 51:10</span> — "Create in me a clean heart, O God, and renew a right spirit within me."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Samuel 7:16')">2 Samuel 7:16</span> — God establishes David's house and throne forever.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 13:22')">Acts 13:22</span> — God testifies of David: "a man after my heart, who will do all my will."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 23:1')">Psalm 23:1</span> — "The LORD is my shepherd; I shall not want."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="joseph">
+            <span class="section-kicker">From Pit to Palace</span>
+            <h2>Joseph</h2>
+            <h3>His Story</h3>
+            <p>Joseph was his father Jacob's favored son, a status that bred deep resentment among his brothers. At seventeen, that jealousy turned violent — sold into slavery and carried off to Egypt, torn from everything familiar. Yet Scripture repeats a striking refrain through Joseph's darkest years: "the LORD was with Joseph," even when every earthly circumstance suggested otherwise.</p>
+            <p>In Egypt, Joseph rose to prominence in Potiphar's household, only to be falsely accused and thrown into prison. Even there, his gift for interpreting dreams eventually brought him before Pharaoh, and he was elevated to prime minister of Egypt, second only to Pharaoh himself — a stunning reversal from slave and prisoner to the most powerful man in the nation outside the throne.</p>
+            <p>When famine drove his brothers to Egypt for grain, Joseph finally revealed his identity to the very men who had betrayed him. Rather than seeking revenge, he wept, forgave, and provided for the family that had discarded him, declaring: "You meant evil against me, but God meant it for good." His story stands as one of Scripture's clearest demonstrations of God's providence working through human evil to accomplish good purposes.</p>
+            <h3>Lessons from His Life</h3>
+            <p>Joseph's years of obscurity and injustice — as a slave, then a falsely accused prisoner — were not wasted time but preparation for the influence God would later give him. Faithfulness in hidden, unfair seasons often precedes the platform God has planned, even when that connection is invisible in the moment.</p>
+            <p>Joseph's forgiveness of his brothers was not naive sentiment but rooted in deep theological conviction — his ability to see God's providential hand even in others' evil intentions freed him from bitterness. This kind of forgiveness flows not from denying the wrong done, but from trusting that God's purposes are bigger than any single act of betrayal.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Genesis 50:20')">Genesis 50:20</span> — "You meant evil against me, but God meant it for good."</li>
+                <li><span class="verse-ref" onclick="showVerse('Genesis 39:2')">Genesis 39:2</span> — "The LORD was with Joseph, and he became a successful man."</li>
+                <li><span class="verse-ref" onclick="showVerse('Genesis 37:5-8')">Genesis 37:5-8</span> — Joseph's dreams of future authority stir his brothers' hatred.</li>
+                <li><span class="verse-ref" onclick="showVerse('Genesis 41:38-40')">Genesis 41:38-40</span> — Pharaoh sets Joseph over all the land of Egypt.</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 8:28')">Romans 8:28</span> — All things work together for good for those who love God.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="daniel">
+            <span class="section-kicker">Faithful in Exile</span>
+            <h2>Daniel</h2>
+            <h3>His Story</h3>
+            <p>Daniel was taken captive from Jerusalem as a teenager during Nebuchadnezzar's first siege, transported to Babylon, and enrolled in a program designed to erase his Jewish identity and replace it with Babylonian loyalty. Given a new name — Belteshazzar — and immersed in pagan learning, Daniel faced immediate pressure to compromise. Yet from his very first recorded act — resolving not to defile himself with the king's food — Daniel established a pattern of quiet, unwavering faithfulness that would define his entire life.</p>
+            <p>For over seventy years, Daniel served in the highest levels of multiple pagan governments — Babylonian and Persian — without compromising his devotion to God. His ability to interpret dreams and visions brought him influence with kings, yet he never used his position for personal gain. When his enemies sought to destroy him, the only accusation they could find was his faithfulness to God in prayer. The decree of the lions' den was engineered specifically because Daniel's integrity was so absolute that no other vulnerability existed.</p>
+            <p>Daniel's prayer life was legendary — three times daily, windows open toward Jerusalem, regardless of threat or consequence. His prophetic visions encompassed the rise and fall of world empires and pointed forward to the coming of the Messiah and the end of the age. Yet for all his supernatural gifts, Daniel remained humble, describing himself as greatly loved by God and consistently giving all glory to the "God of heaven" rather than claiming personal ability.</p>
+            <h3>Lessons from His Life</h3>
+            <p>Daniel demonstrates that faithfulness is built through daily decisions, not dramatic moments. His ability to stand firm in the lions' den was the fruit of decades of daily prayer, daily integrity, and daily refusal to compromise. The crisis moment revealed a character that had been formed in the quiet, unseen rhythms of ordinary faithfulness.</p>
+            <p>Daniel also shows us that it is possible to serve with excellence in secular environments without compromising spiritual convictions. He did not withdraw from Babylonian culture — he excelled in it — but he drew clear boundaries around practices that would violate his covenant with God, showing that cultural engagement and spiritual purity can coexist when rooted in unshakeable conviction.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Daniel 6:10')">Daniel 6:10</span> — Daniel continued praying three times daily despite the decree threatening his life.</li>
+                <li><span class="verse-ref" onclick="showVerse('Daniel 1:8')">Daniel 1:8</span> — "Daniel resolved that he would not defile himself with the king's food."</li>
+                <li><span class="verse-ref" onclick="showVerse('Daniel 2:20-21')">Daniel 2:20-21</span> — "Blessed be the name of God forever... He changes times and seasons."</li>
+                <li><span class="verse-ref" onclick="showVerse('Daniel 6:22')">Daniel 6:22</span> — "My God sent his angel and shut the lions' mouths."</li>
+                <li><span class="verse-ref" onclick="showVerse('Daniel 12:3')">Daniel 12:3</span> — "Those who are wise shall shine like the brightness of the sky above."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="elijah">
+            <span class="section-kicker">Fire and the Whisper</span>
+            <h2>Elijah</h2>
+            <h3>His Story</h3>
+            <p>Elijah burst onto the biblical stage without genealogy or introduction — a wild prophet from Gilead who stood before King Ahab and declared that no rain would fall except by his word. In an era when Israel had plunged into Baal worship under Ahab and Jezebel's influence, Elijah stood as God's solitary voice of truth. His ministry was characterized by dramatic divine interventions: ravens bringing food, a widow's jar of oil that never emptied, and a dead boy raised to life.</p>
+            <p>The pinnacle of Elijah's ministry came on Mount Carmel, where he challenged 450 prophets of Baal to a contest of divine power. After their god failed to respond to hours of frantic prayer, Elijah drenched his altar with water and prayed a simple, confident prayer. Fire fell from heaven, consuming the sacrifice, the stones, and even the water in the trench. The people fell on their faces crying, "The LORD, He is God!"</p>
+            <p>Yet immediately after this triumph, Elijah collapsed into depression and fear when Jezebel threatened his life. He fled into the wilderness, sat under a broom tree, and asked God to take his life. God's response was not rebuke but gentle care — food, rest, and ultimately a revelation of His presence not in wind, earthquake, or fire, but in a still, small voice.</p>
+            <h3>Lessons from His Life</h3>
+            <p>Elijah teaches us that courage and vulnerability can coexist in the same person. The man who fearlessly confronted a king and mocked false prophets was the same man who ran in terror from a queen's threat and begged to die. James reminds us that Elijah was "a man with a nature like ours" — not a superhero but a human being through whom God's power flowed.</p>
+            <p>Elijah's encounter at Horeb also reveals that God's primary mode of communication is not spectacular displays but quiet, intimate presence. In our noise-saturated world, his story invites us to cultivate the quiet attention that allows us to discern God's gentle voice, especially in seasons of exhaustion when we are tempted to believe God has abandoned us.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Kings 18:36-39')">1 Kings 18:36-39</span> — Elijah's prayer on Mount Carmel and fire falling from heaven.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Kings 19:11-12')">1 Kings 19:11-12</span> — God reveals Himself to Elijah not in wind or fire, but in a still small voice.</li>
+                <li><span class="verse-ref" onclick="showVerse('James 5:17')">James 5:17</span> — "Elijah was a man with a nature like ours, and he prayed fervently."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Kings 2:11')">2 Kings 2:11</span> — Elijah taken to heaven in a chariot of fire.</li>
+                <li><span class="verse-ref" onclick="showVerse('Malachi 4:5')">Malachi 4:5</span> — "I will send you Elijah the prophet before the great and awesome day of the LORD."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="paul">
+            <span class="section-kicker">Persecutor to Apostle</span>
+            <h2>Paul</h2>
+            <h3>His Story</h3>
+            <p>Before he was Paul the apostle, he was Saul the persecutor — a Pharisee of Pharisees, trained under Gamaliel, consumed with zeal for the traditions of his fathers. He oversaw the stoning of Stephen, dragged believers from their homes, and traveled to distant cities to imprison followers of "the Way." By his own admission, he was the chief of sinners, a man whose religious devotion had become a weapon against the very God he claimed to serve.</p>
+            <p>Everything changed on the road to Damascus when a blinding light knocked him to the ground and the risen Christ spoke: "Saul, Saul, why are you persecuting me?" In that moment, the persecutor became the persecuted, and the enemy of the church became its greatest champion. Paul's conversion was so dramatic, so inexplicable by human means, that it stands as one of history's strongest testimonies to the reality of the resurrection.</p>
+            <p>Paul's subsequent ministry transformed the ancient world. Over three missionary journeys, he planted churches across Asia Minor and Europe, wrote thirteen epistles that form the theological backbone of Christianity, and endured beatings, shipwrecks, imprisonments, and constant danger for the sake of the gospel. His final words — "I have fought the good fight, I have finished the race" — reveal a man who found Christ to be sufficient for every circumstance.</p>
+            <h3>Lessons from His Life</h3>
+            <p>Paul's life is the ultimate testimony to the transforming power of grace. If God could take the church's greatest enemy and make him its greatest advocate, then no one is beyond redemption. Paul never forgot what he had been, but he refused to be defined by it — his identity was completely rewritten by encounter with Christ.</p>
+            <p>Paul also teaches us that suffering and joy are not mutually exclusive. He discovered that God's grace was not a shield from difficulty but a strength within it. His declaration — "My power is made perfect in weakness" — overturns every worldly notion of success and invites us into a life where our limitations become the canvas for God's sufficiency.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Acts 9:3-6')">Acts 9:3-6</span> — Saul encounters the risen Christ on the road to Damascus.</li>
+                <li><span class="verse-ref" onclick="showVerse('Galatians 2:20')">Galatians 2:20</span> — "I have been crucified with Christ. It is no longer I who live, but Christ who lives in me."</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 3:7-8')">Philippians 3:7-8</span> — "I count everything as loss because of the surpassing worth of knowing Christ Jesus."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 12:9')">2 Corinthians 12:9</span> — "My grace is sufficient for you, for my power is made perfect in weakness."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Timothy 4:7')">2 Timothy 4:7</span> — "I have fought the good fight, I have finished the race, I have kept the faith."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="peter">
+            <span class="section-kicker">Restored and Sent</span>
+            <h2>Peter</h2>
+            <h3>His Story</h3>
+            <p>Simon Peter was a rough-handed fisherman from Galilee — impulsive, passionate, and prone to speaking before thinking. When Jesus called him from his nets, Peter left everything to follow, and from that moment became the most prominent of the twelve disciples. He was the first to confess Jesus as "the Christ, the Son of the living God," and Jesus responded by declaring that upon this rock-like confession, He would build His church.</p>
+            <p>Yet Peter's boldness was matched by his failures. He walked on water, then sank in doubt. He declared he would die for Jesus, then denied knowing Him three times before a servant girl. The night of Jesus' arrest, Peter's confidence shattered completely, and he wept bitterly at the depth of his cowardice.</p>
+            <p>On the shores of Galilee after the resurrection, Jesus restored Peter with a threefold question — "Do you love me?" — matching each of Peter's three denials with a commission to feed His sheep. This restoration transformed Peter from a broken failure into the bold leader of the early church. At Pentecost, the man who had cowered before a servant girl stood before thousands and preached with such power that three thousand came to faith.</p>
+            <h3>Lessons from His Life</h3>
+            <p>Peter's life is the greatest story of restoration in the New Testament. His denial was a catastrophic failure at the worst possible time, yet Jesus did not discard him — He pursued Peter with patient love, publicly restored him, and entrusted him with the very mission Peter had seemingly disqualified himself from.</p>
+            <p>Peter also demonstrates that spiritual maturity is a process, not an event. The impulsive fisherman who constantly said the wrong thing gradually became the wise elder who wrote about suffering with patience and casting anxieties on God. God is patient with our growth, and He finishes what He starts.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 16:18')">Matthew 16:18</span> — "You are Peter, and on this rock I will build my church."</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 22:61-62')">Luke 22:61-62</span> — Peter denies Jesus, and the Lord turns and looks at him. Peter weeps bitterly.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 21:17')">John 21:17</span> — Jesus restores Peter: "Feed my sheep."</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 2:14')">Acts 2:14</span> — Peter stands at Pentecost and preaches boldly to the crowds.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Peter 5:7')">1 Peter 5:7</span> — "Cast all your anxieties on him, because he cares for you."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="joshua">
+            <span class="section-kicker">Strong and Courageous</span>
+            <h2>Joshua</h2>
+            <h3>His Story</h3>
+            <p>Joshua served as Moses' assistant for forty years before being commissioned to lead Israel into the Promised Land. He was one of only two spies — along with Caleb — who believed God could deliver Canaan into Israel's hands when the other ten returned with a report of fear. That faith, tested through decades of wilderness wandering while an entire generation died around him, positioned Joshua to inherit the mantle of leadership when Moses could go no further.</p>
+            <p>God's charge to Joshua rings across the centuries: "Be strong and courageous. Do not be frightened, and do not be dismayed, for the LORD your God is with you wherever you go." This was not a suggestion but a command — because the task ahead was genuinely terrifying. Joshua's courage was not the absence of fear but obedience in the face of it.</p>
+            <p>Under Joshua's leadership, the walls of Jericho fell, the sun stood still at Gibeon, and the land was systematically conquered and divided among the tribes. His final address to Israel — "Choose this day whom you will serve... as for me and my house, we will serve the LORD" — remains one of Scripture's most memorable declarations of devotion.</p>
+            <h3>Lessons from His Life</h3>
+            <p>Joshua teaches us that leadership begins with followership. Before he ever led a nation, he faithfully served Moses for four decades. In a culture that celebrates self-made leaders, Joshua reminds us that the best preparation for leading others is learning to follow well.</p>
+            <p>Joshua also demonstrates that courage is a choice rooted in theology, not temperament. God did not say "feel brave" but "be strong and courageous" — because He knew that feelings follow faith, not the other way around. When we know that God goes before us, we can face giants and fortified cities without being paralyzed by fear.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Joshua 1:9')">Joshua 1:9</span> — "Be strong and courageous. Do not be frightened... for the LORD your God is with you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Joshua 24:15')">Joshua 24:15</span> — "Choose this day whom you will serve... as for me and my house, we will serve the LORD."</li>
+                <li><span class="verse-ref" onclick="showVerse('Deuteronomy 31:6')">Deuteronomy 31:6</span> — "Be strong and courageous... the LORD your God goes with you; he will never leave you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Joshua 1:5')">Joshua 1:5</span> — "No man shall be able to stand before you all the days of your life."</li>
+                <li><span class="verse-ref" onclick="showVerse('Numbers 27:18-20')">Numbers 27:18-20</span> — God commands Moses to commission Joshua, a man in whom is the Spirit.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="gideon">
+            <span class="section-kicker">Weakness Made Strength</span>
+            <h2>Gideon</h2>
+            <h3>His Story</h3>
+            <p>When the angel of the LORD appeared to Gideon, he found him threshing wheat in a winepress — hiding from the Midianites who had oppressed Israel for seven years. The greeting was startling: "The LORD is with you, mighty warrior." Gideon's response was incredulous. He saw himself as the least member of the weakest clan in Manasseh. Yet God saw something in Gideon that Gideon could not see in himself.</p>
+            <p>Gideon's journey from fearful farmer to victorious leader was marked by hesitation and testing. He asked for signs — the famous fleece, wet then dry — not from lack of faith but from honest wrestling with a calling that seemed impossibly beyond him. God patiently accommodated Gideon's weakness, confirming His word again and again until Gideon was ready to move.</p>
+            <p>The climax came when God reduced Gideon's army from 32,000 to just 300 men — deliberately making victory impossible by human calculation. Armed only with torches, jars, and trumpets, these 300 routed the vast Midianite army through divine confusion. The lesson was unmistakable: the victory belonged to God alone.</p>
+            <h3>Lessons from His Life</h3>
+            <p>Gideon's story demolishes the myth that God only uses the confident and capable. God deliberately chose the least person from the least family to accomplish the greatest victory — because His power is most clearly displayed through human weakness. Our insufficiency is not a disqualification; it is the very condition God uses to ensure that He receives the glory.</p>
+            <p>Gideon also teaches us that God is patient with our doubts. He did not rebuke Gideon for the fleece or for his many questions, but graciously provided confirmation until Gideon's faith was strong enough to act. Honest wrestling with doubt is not the same as unbelief.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Judges 6:12')">Judges 6:12</span> — "The LORD is with you, mighty warrior."</li>
+                <li><span class="verse-ref" onclick="showVerse('Judges 6:15')">Judges 6:15</span> — "How can I save Israel? My clan is the weakest... and I am the least in my family."</li>
+                <li><span class="verse-ref" onclick="showVerse('Judges 7:7')">Judges 7:7</span> — "With the three hundred men... I will save you and give the Midianites into your hands."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 12:10')">2 Corinthians 12:10</span> — "When I am weak, then I am strong."</li>
+                <li><span class="verse-ref" onclick="showVerse('Judges 6:36-40')">Judges 6:36-40</span> — Gideon tests God with the fleece, and God patiently confirms His word.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="videos">
+            <span class="section-kicker">Watch &amp; Learn</span>
+            <h2>Videos</h2>
+
+            <h4>Abraham</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'GOXEADdM0ZI')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/GOXEADdM0ZI/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Abraham and Melchizedek Q+R<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'KlZjA-3hiys')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/KlZjA-3hiys/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How Abraham and Melchizedek Point Forward to Jesus • The Royal Priest Series (Episode 2)<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'zZbmxTWq6u4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/zZbmxTWq6u4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Isaac Sins Like Abraham – Genesis 26<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+            </div>
+
+            <h4>Moses</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'iTj6ShRlHuc')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/iTj6ShRlHuc/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What God Wanted Moses to Tell Israel Before He Died • Deuteronomy Ep. 9<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'rhc1SjvYXqE')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/rhc1SjvYXqE/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Moses and Aaron<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'ahuGdJi5qwI')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/ahuGdJi5qwI/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The TRUTH About Why Moses COULD NOT Enter the Promised Land<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+            </div>
+
+            <h4>David</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'DwnHiF7_tTA')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/DwnHiF7_tTA/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">David, the Latecomer King • Firstborn Ep. 7<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'JCP2zWaJlGc')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/JCP2zWaJlGc/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">David the Priestly King<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+            </div>
+
+            <h4>Joseph</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'IdQLGT0uyIg')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/IdQLGT0uyIg/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Burial of Jacob; the Death of Joseph – Genesis 50<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'XOFrylnpyW4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/XOFrylnpyW4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Jacob Blesses Joseph's Sons – Genesis 48<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+            </div>
+
+            <h4>Daniel</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'9cSC9uobtPM')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/9cSC9uobtPM/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Book of Daniel Summary: A Complete Animated Overview<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'SS6oamvcJNY')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/SS6oamvcJNY/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How 3 WORDS from GOD Got a King KILLED | Daniel 5 | Beyond the Words<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'Ca1StNSfHYQ')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/Ca1StNSfHYQ/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What this King did was UNTHINKABLE! | Daniel 4 | Beyond the Words<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+            </div>
+
+            <h4>Elijah</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'UO6h9nk40HI')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/UO6h9nk40HI/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Mount Carmel: Where Elijah Called Down Heavenly Fire | Israel Trip Part 4<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'uLBy083fEbI')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/uLBy083fEbI/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Luke 9:18-36 - Witness of Moses &amp; Elijah<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'Z82G0z_3dMQ')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/Z82G0z_3dMQ/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Who was Elijah in the Bible? |  GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>Paul</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'oiVAbkINtRU')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/oiVAbkINtRU/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Apostle Paul: Acts 8-12<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'k4WKKDHOX_E')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/k4WKKDHOX_E/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Praying Like Paul (Ephesians Pt. 5) | Francis Chan<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Crazy Love</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'PinXPlqYOqQ')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/PinXPlqYOqQ/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">2 Corinthians 11 – Paul's "Foolish Boasting"<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+            </div>
+
+            <h4>Peter</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'wWLv_ITyKYc')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/wWLv_ITyKYc/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Book of 2 Peter Summary: A Complete Animated Overview<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'WhP7AZQlzCg')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/WhP7AZQlzCg/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Book of 1 Peter Summary: A Complete Animated Overview<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'DpWq2GVyVo4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/DpWq2GVyVo4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">SHOCKING Facts About Where and How Peter DIED<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+            </div>
+
+            <h4>Joshua</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'JqOqJlFF_eU')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/JqOqJlFF_eU/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Book of Joshua Summary: A Complete Animated Overview<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'N1T-ZRzn5pg')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/N1T-ZRzn5pg/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Final Chapter: Joshua 24 – The Covenant Renewed<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+            </div>
         </div>
     </main>
+
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="if(event.target===this)closeVerse()">
+        <div class="verse-popup" id="versePopup">
+            <button class="close-popup" onclick="closeVerse()">&times;</button>
+            <h4 id="popupRef"></h4>
+            <p id="popupText">Loading...</p>
+        </div>
+    </div>
+
     <script src="site/script.js"></script>
+    <script>
+        function loadYT(el, id) {
+            el.innerHTML = '<iframe width="100%" height="100%" style="position:absolute;inset:0;" src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        }
+        function showVerse(passage) {
+            document.getElementById('verseOverlay').classList.add('active');
+            document.getElementById('popupRef').textContent = passage;
+            document.getElementById('popupText').textContent = 'Loading...';
+            fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+                .then(r => r.json())
+                .then(data => {
+                    document.getElementById('popupText').textContent = (data.passages && data.passages[0]) ? data.passages[0].trim() : 'Verse not found.';
+                })
+                .catch(() => { document.getElementById('popupText').textContent = 'Unable to load verse.'; });
+        }
+        function closeVerse() {
+            document.getElementById('verseOverlay').classList.remove('active');
+        }
+    </script>
 </body>
 </html>
