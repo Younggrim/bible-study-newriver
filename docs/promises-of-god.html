@@ -14,83 +14,386 @@
     <link rel="stylesheet" href="site/style.css">
     <style>
         body { background: #faf5ed; }
-        .page-content { margin: 0 auto; max-width: 960px; padding: 24px 24px 80px; }
-        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #2c6b4f; text-decoration: none; font-weight: 600; transition: color 0.2s; }
-        .back-link i { margin-right: 6px; }
-        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 8px; }
-        .item-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid; border-radius: 10px; text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
-        .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
-        .item-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 2px; }
-        .item-card .subtitle { font-size: 0.75rem; font-style: italic; color: #8a7e74; margin-bottom: 6px; }
-        .item-card .desc { font-size: 0.82rem; color: #5a4e44; line-height: 1.5; }
-        @media (max-width: 768px) { .item-grid { grid-template-columns: 1fr; } }
+        .topic-hero { position: relative; height: 240px; overflow: hidden; }
+        .topic-hero img { width: 100%; height: 100%; object-fit: cover; }
+        .topic-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)); filter: brightness(0.45) sepia(0.75) saturate(1.7); backdrop-filter: none; }
+        .topic-hero .hero-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
+        .topic-hero h1 { font-family: 'Cinzel', serif; color: #fff; font-size: 2rem; margin: 0 0 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+        .topic-hero p { color: #f0e8dc; font-size: 0.95rem; max-width: 600px; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+        .page-content { margin: 0 auto; max-width: 820px; padding: 20px 24px 80px; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; color: #2c6b4f; font-weight: 600; font-size: 0.85rem; text-decoration: none; margin: 16px 0; }
+        .back-link:hover { text-decoration: underline; }
+        .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
+        .jump-card { background: #fff; border: 1px solid #e8e0d6; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #2c6b4f; text-decoration: none; transition: background .15s, transform .15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+        .section-block { background: #fff; border: 1px solid #e8e0d6; border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; scroll-margin-top: 76px; }
+        .section-block .section-kicker { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #7fa892; }
+        .section-block h2 { font-family: 'Cinzel', serif; color: #2c6b4f; font-size: 1.35rem; margin: 4px 0 12px; }
+        .section-block h3 { font-family: 'Cinzel', serif; color: #367d5c; font-size: 1.02rem; margin: 18px 0 8px; }
+        .section-block h4 { font-family: 'Cinzel', serif; color: #2c6b4f; font-size: 0.95rem; margin: 18px 0 8px; }
+        .section-block p { line-height: 1.7; color: #3d332b; margin: 0 0 10px; }
+        .verse-list { list-style: none; padding: 0; margin: 8px 0 0; }
+        .verse-list li { padding: 8px 0; border-bottom: 1px solid #f0e8dc; font-size: 0.9rem; line-height: 1.6; color: #4a3f35; }
+        .verse-list li:last-child { border-bottom: none; }
+        .verse-ref { color: #2c6b4f; font-weight: 600; text-decoration: underline dotted; cursor: pointer; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .video-grid:last-child { margin-bottom: 0; }
+        .verse-popup-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999; align-items: center; justify-content: center; padding: 20px; }
+        .verse-popup-overlay.active { display: flex; }
+        .verse-popup { background: #fff; border-radius: 12px; padding: 24px; max-width: 480px; width: 100%; max-height: 70vh; overflow-y: auto; position: relative; }
+        .verse-popup h4 { font-family: 'Cinzel', serif; color: #2c6b4f; margin: 0 0 12px; }
+        .verse-popup p { line-height: 1.7; color: #3d332b; }
+        .verse-popup .close-popup { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 1.3rem; color: #7fa892; cursor: pointer; }
+        @media (max-width: 600px) { .topic-hero h1 { font-size: 1.5rem; } }
     </style>
 </head>
 <body>
-    <div class="section-hero">
-        <img src="https://images.unsplash.com/photo-1557310201-640ef6677294?w=1400&q=80&auto=format"
-             srcset="https://images.unsplash.com/photo-1557310201-640ef6677294?w=640&q=80&auto=format 640w,
-                     https://images.unsplash.com/photo-1557310201-640ef6677294?w=1000&q=80&auto=format 1000w,
-                     https://images.unsplash.com/photo-1557310201-640ef6677294?w=1600&q=80&auto=format 1600w"
-             sizes="100vw" fetchpriority="high" alt="Golden wheat field at sunrise">
-        <div class="section-hero-overlay">
-            <h2>Promises of God</h2>
-            <p class="section-desc">God's covenant assurances to His people, kept across every generation.</p>
+    <div class="topic-hero">
+        <img src="https://images.unsplash.com/photo-1557310201-640ef6677294?w=1400&q=80&auto=format" alt="Golden wheat field at sunrise">
+        <div class="hero-overlay">
+            <h1>Promises of God</h1>
+            <p>God's covenant assurances to His people, kept across every generation.</p>
         </div>
     </div>
     <main class="page-content">
-        <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
-        <div class="item-grid">
-                <a href="promises-provision.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Provision</h4>
-                    <p class="desc">God will supply every need according to His riches.</p>
-                </a>
-                <a href="promises-protection.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Protection</h4>
-                    <p class="desc">He is our refuge, fortress, and shield.</p>
-                </a>
-                <a href="promises-presence.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Presence</h4>
-                    <p class="desc">'I will never leave you nor forsake you.'</p>
-                </a>
-                <a href="promises-peace.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Peace</h4>
-                    <p class="desc">Peace that passes all understanding guards your heart.</p>
-                </a>
-                <a href="promises-purpose.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Purpose</h4>
-                    <p class="desc">He works all things together for good.</p>
-                </a>
-                <a href="promises-forgiveness.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Forgiveness</h4>
-                    <p class="desc">As far as east is from west — sins removed.</p>
-                </a>
-                <a href="promises-strength.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Strength</h4>
-                    <p class="desc">'My grace is sufficient — power made perfect in weakness.'</p>
-                </a>
-                <a href="promises-guidance.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Guidance</h4>
-                    <p class="desc">'I will instruct you and teach you the way.'</p>
-                </a>
-                <a href="promises-eternal-life.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Eternal Life</h4>
-                    <p class="desc">Whoever believes in Him shall not perish.</p>
-                </a>
-                <a href="promises-answered-prayer.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Answered Prayer</h4>
-                    <p class="desc">'Ask and it will be given to you.'</p>
-                </a>
-                <a href="promises-comfort.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Comfort</h4>
-                    <p class="desc">The God of all comfort comforts us in affliction.</p>
-                </a>
-                <a href="promises-victory.html" class="item-card" style="border-left-color:#2c6b4f;">
-                    <h4 style="color:#2c6b4f;">Victory</h4>
-                    <p class="desc">In all things we are more than conquerors.</p>
-                </a>
+        <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Topical Studies</a>
+
+        <nav class="jump-grid">
+            <a href="#overview" class="jump-card">Overview</a>
+            <a href="#provision" class="jump-card">Provision</a>
+            <a href="#protection" class="jump-card">Protection</a>
+            <a href="#presence" class="jump-card">Presence</a>
+            <a href="#peace" class="jump-card">Peace</a>
+            <a href="#purpose" class="jump-card">Purpose</a>
+            <a href="#forgiveness" class="jump-card">Forgiveness</a>
+            <a href="#strength" class="jump-card">Strength</a>
+            <a href="#guidance" class="jump-card">Guidance</a>
+            <a href="#eternal-life" class="jump-card">Eternal Life</a>
+            <a href="#answered-prayer" class="jump-card">Answered Prayer</a>
+            <a href="#comfort" class="jump-card">Comfort</a>
+            <a href="#victory" class="jump-card">Victory</a>
+            <a href="#videos" class="jump-card">Videos</a>
+        </nav>
+
+        <div class="section-block" id="overview">
+            <span class="section-kicker">Introduction</span>
+            <h2>Overview</h2>
+            <p>Scripture is a book of promises — thousands of them, spanning covenants made to patriarchs, assurances spoken through prophets, and guarantees sealed in the blood of Christ. Unlike human promises, which are only as reliable as the one who makes them, God's promises rest on His unchanging character. He cannot lie, He does not forget, and He has never once failed to keep His word across the entire sweep of biblical history.</p>
+            <p>These twelve promises touch every dimension of life: material and physical needs (Provision, Protection), relational and emotional needs (Presence, Peace, Comfort), the deepest questions of identity and direction (Purpose, Guidance), the burden of sin and its remedy (Forgiveness), human limitation met by divine power (Strength), the practice of communication with God (Answered Prayer), and the ultimate hope that outlasts this life (Eternal Life, Victory). Together they form a comprehensive picture of a Father who has not left His children to fend for themselves in any area of need.</p>
+            <p>These promises are not blank checks to be claimed apart from relationship with God, nor are they escape hatches from the real difficulties of life. They are covenant realities to be received by faith, walked out in obedience, and proven true across a lifetime of trusting the God who cannot break His word.</p>
+        </div>
+
+        <div class="section-block" id="provision">
+            <span class="section-kicker">Philippians 4:19</span>
+            <h2>God Will Provide</h2>
+            <h3>The Promise</h3>
+            <p>One of the most reassuring promises in all of Scripture is God's commitment to provide for His children. From the ravens that fed Elijah to the manna that sustained Israel for forty years in the wilderness, God has consistently demonstrated that He knows our needs and meets them according to His riches in glory.</p>
+            <p>The name "Jehovah Jireh" — the Lord will provide — originated on Mount Moriah when God supplied a ram in place of Isaac. It reminds us that God's provision often comes at the precise moment of need, not before.</p>
+            <p>God's provision extends beyond material needs. He provides wisdom for decisions, strength for trials, comfort in grief, and purpose in confusion. When we align our desires with His kingdom purposes, we discover that He is extravagantly generous.</p>
+            <h3>Claiming the Promise</h3>
+            <p>Claiming God's promise of provision begins with seeking His kingdom first. Jesus taught that when we prioritize eternal things, the material necessities follow. This does not mean passive waiting but active trust: we work diligently, steward wisely, and trust God for the outcomes we cannot control.</p>
+            <p>Gratitude is the posture that unlocks awareness of God's provision. When we cultivate thankfulness for what we already have, we begin to see the countless ways God has already been providing.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Philippians 4:19')">Philippians 4:19</span> — "My God will meet all your needs according to the riches of his glory in Christ Jesus."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 6:31-33')">Matthew 6:31-33</span> — "Seek first his kingdom and his righteousness, and all these things will be given to you as well."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 23:1')">Psalm 23:1</span> — "The LORD is my shepherd, I lack nothing."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 9:8')">2 Corinthians 9:8</span> — "God is able to bless you abundantly, so that in all things at all times, having all that you need, you will abound in every good work."</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 12:24')">Luke 12:24</span> — "Consider the ravens... How much more valuable you are than birds!"</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="protection">
+            <span class="section-kicker">Psalm 91:1-2</span>
+            <h2>God Will Protect</h2>
+            <h3>The Promise</h3>
+            <p>God's promise of protection runs throughout Scripture like a golden thread. From shielding Noah through the flood to preserving Daniel in the lions' den, God has always been the defender of His people. This promise does not mean we will never face danger, but that God is our refuge and fortress.</p>
+            <p>The imagery of protection in Scripture is rich: God is a shield, a fortress, a strong tower, a hiding place, and a shelter from the storm. He guards our going out and coming in, and watches over us by day and night.</p>
+            <p>Spiritual protection is perhaps even more vital than physical safety. God promises to guard our hearts and minds, to keep us from the evil one, and to preserve our faith through every trial.</p>
+            <h3>Claiming the Promise</h3>
+            <p>Claiming God's protection means dwelling in His presence — making Him our daily refuge rather than turning to Him only in crisis. Psalm 91 connects protection to abiding: those who dwell in the shelter of the Most High experience His covering.</p>
+            <p>Protection also comes through obedience. This does not mean immunity from all harm, but it means that nothing can touch us apart from His sovereign permission — and whatever He allows, He will use for our ultimate good.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Psalm 91:1-2')">Psalm 91:1-2</span> — "Whoever dwells in the shelter of the Most High will rest in the shadow of the Almighty."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 121:7-8')">Psalm 121:7-8</span> — "The LORD will keep you from all harm — he will watch over your life."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 54:17')">Isaiah 54:17</span> — "No weapon forged against you will prevail."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Thessalonians 3:3')">2 Thessalonians 3:3</span> — "The Lord is faithful, and he will strengthen you and protect you from the evil one."</li>
+                <li><span class="verse-ref" onclick="showVerse('Nahum 1:7')">Nahum 1:7</span> — "The LORD is good, a refuge in times of trouble. He cares for those who trust in him."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="presence">
+            <span class="section-kicker">Matthew 28:20</span>
+            <h2>God Is With You</h2>
+            <h3>The Promise</h3>
+            <p>Of all God's promises, perhaps none is more intimate than His promise of presence. He does not merely act on our behalf from a distance — He walks with us, dwells within us, and promises never to leave or forsake us.</p>
+            <p>God's presence was the distinguishing mark of Israel among the nations. Moses declared that without God's presence, he would not take another step. In the New Covenant, this promise reaches its fullest expression: God's Spirit lives within every believer.</p>
+            <p>The promise of God's presence means that loneliness is a feeling, not a fact, for the Christian. Even in our darkest valleys, the Shepherd walks beside us.</p>
+            <h3>Claiming the Promise</h3>
+            <p>Experiencing God's presence requires intentional awareness. He is always with us, but we are not always conscious of Him. Spiritual disciplines like prayer, meditation on Scripture, and worship tune our hearts to recognize what is always true.</p>
+            <p>When we feel distant from God, the promise of His presence becomes our anchor. We claim this promise by faith, declaring what Scripture says over what our emotions suggest.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 28:20')">Matthew 28:20</span> — "Surely I am with you always, to the very end of the age."</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 13:5')">Hebrews 13:5</span> — "Never will I leave you; never will I forsake you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 139:7-10')">Psalm 139:7-10</span> — "Where can I go from your Spirit? Where can I flee from your presence?"</li>
+                <li><span class="verse-ref" onclick="showVerse('Deuteronomy 31:6')">Deuteronomy 31:6</span> — "The LORD your God goes with you; he will never leave you nor forsake you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Joshua 1:9')">Joshua 1:9</span> — "Be strong and courageous. Do not be afraid... for the LORD your God will be with you wherever you go."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="peace">
+            <span class="section-kicker">Philippians 4:6-7</span>
+            <h2>God Gives Peace</h2>
+            <h3>The Promise</h3>
+            <p>In a world filled with anxiety, conflict, and uncertainty, God offers a peace that defies explanation. This is not merely the absence of trouble but the presence of calm assurance in the midst of it. Jesus promised His disciples peace on the very night He would be arrested.</p>
+            <p>Biblical peace — shalom — encompasses wholeness, completeness, and harmony with God. It is the fruit of a right relationship with our Creator, made possible through the cross of Christ.</p>
+            <p>God's peace is both a gift and a discipline. It is freely given through the Holy Spirit, yet it is also cultivated through the choice to trust rather than worry, to pray rather than panic.</p>
+            <h3>Claiming the Promise</h3>
+            <p>Claiming God's peace requires an exchange: we bring our anxieties to Him in prayer and receive His peace in return. Philippians 4:6-7 outlines the process — prayer and petition with thanksgiving replace worry.</p>
+            <p>Peace also comes through surrender — releasing the outcomes we cannot control into God's sovereign hands. The one who entrusts their life to a faithful Creator discovers a deep, abiding calm.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Philippians 4:6-7')">Philippians 4:6-7</span> — "The peace of God, which transcends all understanding, will guard your hearts and minds in Christ Jesus."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 14:27')">John 14:27</span> — "Peace I leave with you; my peace I give you. I do not give to you as the world gives."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 26:3')">Isaiah 26:3</span> — "You will keep in perfect peace those whose minds are steadfast, because they trust in you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 15:33')">Romans 15:33</span> — "The God of peace be with you all."</li>
+                <li><span class="verse-ref" onclick="showVerse('Colossians 3:15')">Colossians 3:15</span> — "Let the peace of Christ rule in your hearts."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="purpose">
+            <span class="section-kicker">Romans 8:28</span>
+            <h2>God Has a Purpose</h2>
+            <h3>The Promise</h3>
+            <p>God is not random, and your life is not an accident. Scripture reveals a God who works all things according to the counsel of His will, who has prepared good works in advance for each of His children to walk in.</p>
+            <p>The promise of purpose does not mean every detail is scripted, but that every circumstance is being woven into a larger story of redemption. Romans 8:28 does not say all things are good, but that God works all things together for good.</p>
+            <p>Discovering God's purpose is less about finding a hidden plan and more about walking faithfully in the light you already have. Purpose is not a destination to arrive at but a journey to walk — one faithful step at a time.</p>
+            <h3>Claiming the Promise</h3>
+            <p>Claiming God's promise of purpose means trusting Him even when the path is unclear. Proverbs 3:5-6 calls us to lean not on our own understanding but to acknowledge Him in all our ways.</p>
+            <p>Purpose is also discovered in community. When passion, ability, and opportunity converge, we often find ourselves standing in the center of God's purpose — because we faithfully followed the Shepherd.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Romans 8:28')">Romans 8:28</span> — "We know that in all things God works for the good of those who love him, who have been called according to his purpose."</li>
+                <li><span class="verse-ref" onclick="showVerse('Jeremiah 29:11')">Jeremiah 29:11</span> — "For I know the plans I have for you, declares the LORD, plans to prosper you and not to harm you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 2:10')">Ephesians 2:10</span> — "We are God's handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do."</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 1:6')">Philippians 1:6</span> — "He who began a good work in you will carry it on to completion until the day of Christ Jesus."</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 3:5-6')">Proverbs 3:5-6</span> — "Trust in the LORD with all your heart and lean not on your own understanding."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="forgiveness">
+            <span class="section-kicker">1 John 1:9</span>
+            <h2>God Forgives</h2>
+            <h3>The Promise</h3>
+            <p>The promise of forgiveness is the heartbeat of the gospel. God does not merely overlook sin — He deals with it decisively through the cross of Christ, then extends complete and total forgiveness to all who come to Him in repentance and faith.</p>
+            <p>Scripture uses vivid imagery to describe God's forgiveness: sins removed as far as east is from west, thrown into the depths of the sea, blotted out like a thick cloud. When God forgives, He does so completely.</p>
+            <p>God's forgiveness is not earned by our efforts or deserved by our goodness. It flows from His character — He is faithful to His promises because Christ has already paid the penalty.</p>
+            <h3>Claiming the Promise</h3>
+            <p>Claiming God's forgiveness requires honest confession — agreeing with God about the reality of our sin. First John 1:9 makes the process beautifully simple: confess, and He forgives.</p>
+            <p>The challenge for many believers is not receiving God's initial forgiveness but living in the ongoing reality of it. Claiming forgiveness means choosing to believe God's word over our feelings.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 John 1:9')">1 John 1:9</span> — "If we confess our sins, he is faithful and just and will forgive us our sins and purify us from all unrighteousness."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 103:12')">Psalm 103:12</span> — "As far as the east is from the west, so far has he removed our transgressions from us."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 43:25')">Isaiah 43:25</span> — "I, even I, am he who blots out your transgressions, for my own sake, and remembers your sins no more."</li>
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 1:7')">Ephesians 1:7</span> — "In him we have redemption through his blood, the forgiveness of sins."</li>
+                <li><span class="verse-ref" onclick="showVerse('Micah 7:19')">Micah 7:19</span> — "You will tread our sins underfoot and hurl all our iniquities into the depths of the sea."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="strength">
+            <span class="section-kicker">Isaiah 40:31</span>
+            <h2>God Gives Strength</h2>
+            <h3>The Promise</h3>
+            <p>God never calls us to anything without providing the strength to accomplish it. When we reach the end of our own resources — physical, emotional, or spiritual — His power is just beginning.</p>
+            <p>Isaiah 40 paints a beautiful picture: even youths grow tired and young men stumble, but those who hope in the Lord will renew their strength. This renewal comes through waiting — active, expectant trust.</p>
+            <p>Paul discovered the paradox of divine strength: it is perfected in weakness. When we are weak, depleted, and desperate, we become the perfect vessels for His strength to flow through.</p>
+            <h3>Claiming the Promise</h3>
+            <p>Claiming God's strength begins with acknowledging our weakness. As long as we pretend to be self-sufficient, we cannot receive what He offers.</p>
+            <p>Strength from God comes through daily dependence, not once-for-all empowerment. Each morning we must return to the source, drawing fresh strength for that day's demands.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 40:31')">Isaiah 40:31</span> — "Those who hope in the LORD will renew their strength. They will soar on wings like eagles."</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 4:13')">Philippians 4:13</span> — "I can do all this through him who gives me strength."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 12:9')">2 Corinthians 12:9</span> — "My grace is sufficient for you, for my power is made perfect in weakness."</li>
+                <li><span class="verse-ref" onclick="showVerse('Deuteronomy 33:25')">Deuteronomy 33:25</span> — "Your strength will equal your days."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 73:26')">Psalm 73:26</span> — "My flesh and my heart may fail, but God is the strength of my heart and my portion forever."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="guidance">
+            <span class="section-kicker">Proverbs 3:5-6</span>
+            <h2>God Guides</h2>
+            <h3>The Promise</h3>
+            <p>God does not leave us to navigate life alone. He promises to guide His children — to illuminate the path ahead, to whisper direction at crucial crossroads, and to lead us in ways that align with His perfect will.</p>
+            <p>Divine guidance comes through multiple channels: Scripture that illuminates principles for living, the Holy Spirit who speaks to our hearts, wise counsel from mature believers, circumstances that open and close doors, and the inner peace that confirms we are walking in God's will.</p>
+            <p>The promise of guidance is particularly precious at life's crossroads. God is a loving Father who takes personal interest in the details of our lives and delights in leading us step by step.</p>
+            <h3>Claiming the Promise</h3>
+            <p>Claiming God's guidance requires a posture of surrender. Proverbs 3:5-6 says He will direct our paths when we trust Him with our whole heart and refuse to lean on our own understanding.</p>
+            <p>Patience is essential when seeking God's guidance. Like a lamp for our feet rather than a floodlight for the horizon, God gives enough light for today's obedience.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 3:5-6')">Proverbs 3:5-6</span> — "Trust in the LORD with all your heart... and he will make your paths straight."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 32:8')">Psalm 32:8</span> — "I will instruct you and teach you in the way you should go; I will counsel you with my loving eye on you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 30:21')">Isaiah 30:21</span> — "Your ears will hear a voice behind you, saying, This is the way; walk in it."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 16:13')">John 16:13</span> — "When he, the Spirit of truth, comes, he will guide you into all the truth."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 119:105')">Psalm 119:105</span> — "Your word is a lamp for my feet, a light on my path."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="eternal-life">
+            <span class="section-kicker">John 3:16</span>
+            <h2>Eternal Life</h2>
+            <h3>The Promise</h3>
+            <p>The promise of eternal life is the ultimate promise — the one that gives meaning to all other promises and hope beyond every earthly circumstance. God offers not merely extended existence but a quality of life that begins now and continues forever.</p>
+            <p>Eternal life is both a present possession and a future hope. Jesus said that whoever believes has eternal life — present tense. Yet the fullness of that life — free from sin, pain, and death — awaits us in the new creation.</p>
+            <p>This promise transforms how we face mortality. Death is not the end but a doorway. The one who holds the promise of eternal life can face death without terror, knowing that the best is always yet to come.</p>
+            <h3>Claiming the Promise</h3>
+            <p>Claiming the promise of eternal life is as simple and as profound as believing in Jesus Christ. It is not earned through religious performance — it is received as a gift through faith.</p>
+            <p>Living in light of eternity changes everything about how we live today. When we know that this life is not all there is, we hold earthly things more loosely, love more freely, and sacrifice more willingly.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('John 3:16')">John 3:16</span> — "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 10:28')">John 10:28</span> — "I give them eternal life, and they shall never perish; no one will snatch them out of my hand."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 6:23')">Romans 6:23</span> — "The gift of God is eternal life in Christ Jesus our Lord."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 John 5:11-12')">1 John 5:11-12</span> — "God has given us eternal life, and this life is in his Son."</li>
+                <li><span class="verse-ref" onclick="showVerse('Revelation 21:4')">Revelation 21:4</span> — "He will wipe every tear from their eyes. There will be no more death or mourning or crying or pain."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="answered-prayer">
+            <span class="section-kicker">Matthew 7:7</span>
+            <h2>Answered Prayer</h2>
+            <h3>The Promise</h3>
+            <p>God invites us to bring our requests before Him with the promise that He hears and answers. Prayer is communication with a Father who loves us, knows what we need, and has the power to act.</p>
+            <p>The promise of answered prayer does not mean God grants every wish like a cosmic vending machine. His answers come in His wisdom: sometimes yes, sometimes no, sometimes wait, and sometimes He gives something better than what we asked.</p>
+            <p>What makes prayer powerful is not the eloquence of our words but the One to whom we speak — a God whose ear is always attentive to the cries of His children.</p>
+            <h3>Claiming the Promise</h3>
+            <p>Claiming the promise of answered prayer involves aligning our requests with God's will. First John 5:14-15 gives us confidence: when we ask according to His will, He hears us.</p>
+            <p>Persistence in prayer is also essential. Sometimes the answer comes immediately; sometimes it unfolds over years. But God is never ignoring us — He is working behind the scenes.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 7:7')">Matthew 7:7</span> — "Ask and it will be given to you; seek and you will find; knock and the door will be opened to you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Jeremiah 33:3')">Jeremiah 33:3</span> — "Call to me and I will answer you and tell you great and unsearchable things you do not know."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 John 5:14-15')">1 John 5:14-15</span> — "If we ask anything according to his will, he hears us."</li>
+                <li><span class="verse-ref" onclick="showVerse('James 5:16')">James 5:16</span> — "The prayer of a righteous person is powerful and effective."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 34:17')">Psalm 34:17</span> — "The righteous cry out, and the LORD hears them; he delivers them from all their troubles."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="comfort">
+            <span class="section-kicker">2 Corinthians 1:3-4</span>
+            <h2>God Comforts</h2>
+            <h3>The Promise</h3>
+            <p>God identifies Himself as the "God of all comfort" — not some comfort, but all comfort. In every form of grief, loss, pain, and heartbreak, He meets us with tender compassion, drawing near to the brokenhearted.</p>
+            <p>Divine comfort is not mere sympathy — it is a supernatural sustaining that enables us to endure what we thought would destroy us. It is the strength to face another day when everything in us wants to give up.</p>
+            <p>Scripture reveals that our comfort has a purpose beyond our own relief: we are comforted so that we can comfort others. Our wounds, healed by His touch, become sources of healing for others.</p>
+            <h3>Claiming the Promise</h3>
+            <p>Claiming God's comfort means allowing ourselves to grieve honestly before Him. He invites us to pour out our hearts — the Psalms model this raw honesty.</p>
+            <p>Comfort also comes through community. God often delivers His comfort through human hands — a friend who listens, a church that surrounds us, a word spoken at the right time.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 1:3-4')">2 Corinthians 1:3-4</span> — "The Father of compassion and the God of all comfort, who comforts us in all our troubles."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 34:18')">Psalm 34:18</span> — "The LORD is close to the brokenhearted and saves those who are crushed in spirit."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 5:4')">Matthew 5:4</span> — "Blessed are those who mourn, for they will be comforted."</li>
+                <li><span class="verse-ref" onclick="showVerse('Revelation 21:4')">Revelation 21:4</span> — "He will wipe every tear from their eyes. There will be no more death or mourning or crying or pain."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 66:13')">Isaiah 66:13</span> — "As a mother comforts her child, so will I comfort you."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="victory">
+            <span class="section-kicker">Romans 8:37</span>
+            <h2>Victory in Christ</h2>
+            <h3>The Promise</h3>
+            <p>The promise of victory in Christ is not wishful thinking — it is accomplished fact. Through His death and resurrection, Jesus decisively defeated sin, death, and the powers of darkness. We do not fight for victory; we fight from victory.</p>
+            <p>Being "more than conquerors" means our victory is so complete that even the struggles we face become instruments of blessing. We do not merely survive; we thrive through every opposition because of Christ's love.</p>
+            <p>Victory in Christ encompasses every arena of life: over sin's dominion, fear's paralysis, death's sting, the enemy's accusations, and the world's pressure to conform.</p>
+            <h3>Claiming the Promise</h3>
+            <p>Claiming victory requires standing on what Christ has already accomplished rather than trying to achieve victory through our own effort. We overcome by the blood of the Lamb and by the word of our testimony.</p>
+            <p>Living victoriously also means refusing to live as though we are defeated. We are more than conquerors — not because of our strength, but through Him who loved us.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Romans 8:37')">Romans 8:37</span> — "In all these things we are more than conquerors through him who loved us."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 15:57')">1 Corinthians 15:57</span> — "Thanks be to God! He gives us the victory through our Lord Jesus Christ."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 John 5:4')">1 John 5:4</span> — "This is the victory that has overcome the world, even our faith."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 2:14')">2 Corinthians 2:14</span> — "Thanks be to God, who always leads us as captives in Christ's triumphal procession."</li>
+                <li><span class="verse-ref" onclick="showVerse('Revelation 12:11')">Revelation 12:11</span> — "They triumphed over him by the blood of the Lamb and by the word of their testimony."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="videos">
+            <span class="section-kicker">Watch &amp; Learn</span>
+            <h2>Videos</h2>
+
+            <h4>Provision</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'18_cSoDgnwM')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/18_cSoDgnwM/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Francis Chan: How To Live Fearlessly (Part 2) - Believing God Will Provide for Me<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Crazy Love</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'F8XfEoRAeS4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/F8XfEoRAeS4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">God Will Provide a Way Out of Temptation | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
+
+            <h4>Forgiveness</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'U_uhVwU-cZQ')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/U_uhVwU-cZQ/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Francis Chan: Give God Glory in Forgiving Others - HIM<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Crazy Love</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'SKC2KjKRsLg')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/SKC2KjKRsLg/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What does the Bible say about unforgiveness?<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'bTFTjEpm4Co')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/bTFTjEpm4Co/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Forgiving is Key in Relationships<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
+
+            <h4>Guidance</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'d--PbN1p3-E')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/d--PbN1p3-E/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How God Guides - Acts 13:4-5<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'GEouHztYbKw')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/GEouHztYbKw/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">1 Samuel 9 - God Guides the Unknowing<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+            </div>
+
+            <h4>Eternal Life</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'uCOycIMyJZM')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/uCOycIMyJZM/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is Eternal Life?<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'B0AFPxk7420')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/B0AFPxk7420/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The #1 Reason Many Christians Won't Experience Eternal Life<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+            </div>
+
+            <h4>Answered Prayer</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'GGlGYyiJfzI')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/GGlGYyiJfzI/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The REAL Reason Why God Isn't Talking To You...<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Impact Video Ministries</span></p></div>
+            </div>
+
+            <h4>Comfort</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'pUE-zaOD5Wk')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/pUE-zaOD5Wk/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">2 Corinthians 1 – The God of All Comfort<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'_s3KeiZeOys')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/_s3KeiZeOys/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Real Reasons For Comfort — Isaiah 40:1-2<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'ojhoJFn62Qk')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/ojhoJFn62Qk/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How do I find comfort and peace when I have lost a loved one to death?<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'DH1Muix7KEY')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/DH1Muix7KEY/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Comfort One Another<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
         </div>
     </main>
+
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="if(event.target===this)closeVerse()">
+        <div class="verse-popup" id="versePopup">
+            <button class="close-popup" onclick="closeVerse()">&times;</button>
+            <h4 id="popupRef"></h4>
+            <p id="popupText">Loading...</p>
+        </div>
+    </div>
+
     <script src="site/script.js"></script>
+    <script>
+        function loadYT(el, id) {
+            el.innerHTML = '<iframe width="100%" height="100%" style="position:absolute;inset:0;" src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        }
+        function showVerse(passage) {
+            document.getElementById('verseOverlay').classList.add('active');
+            document.getElementById('popupRef').textContent = passage;
+            document.getElementById('popupText').textContent = 'Loading...';
+            fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+                .then(r => r.json())
+                .then(data => {
+                    document.getElementById('popupText').textContent = (data.passages && data.passages[0]) ? data.passages[0].trim() : 'Verse not found.';
+                })
+                .catch(() => { document.getElementById('popupText').textContent = 'Unable to load verse.'; });
+        }
+        function closeVerse() {
+            document.getElementById('verseOverlay').classList.remove('active');
+        }
+    </script>
 </body>
 </html>
