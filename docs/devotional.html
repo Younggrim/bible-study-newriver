@@ -38,6 +38,10 @@
         .devo-reminder-dismiss { background: none; border: none; color: #aaa; font-size: 1.3rem; cursor: pointer; padding: 2px 4px; line-height: 1; }
         .devo-reminder-status { text-align: center; font-size: 0.82rem; color: #8a7e74; padding: 10px; cursor: pointer; }
         .devo-reminder-status i { color: #f0c865; }
+        .devo-reminder-time-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+        .devo-reminder-time-row label { font-size: 0.78rem; color: #5c5248; font-weight: 600; }
+        .devo-reminder-time-row select { font-family: 'Inter', sans-serif; font-size: 0.82rem; color: #3d2b1f; background: #faf5ed; border: 1px solid #e8e0d6; border-radius: 6px; padding: 5px 8px; }
+        .devo-reminder-turnoff { background: none; border: none; color: #8b3a2a; font-size: 0.78rem; font-weight: 600; text-decoration: underline; cursor: pointer; padding: 0; margin-left: 4px; }
         @media (max-width: 768px) { .devo-hero { padding: 28px 18px; } .devo-hero h1 { font-size: 1.3rem; } .devo-card { padding: 22px 18px; } .devo-reminder-banner { flex-wrap: wrap; } }
     </style>
 </head>
@@ -73,14 +77,19 @@
             <div class="devo-reminder-banner" id="devoReminderBanner" style="display:none;">
                 <div class="devo-reminder-icon"><i class="fas fa-bell"></i></div>
                 <div class="devo-reminder-text">
-                    <div class="devo-reminder-title">Enable Daily Reminders</div>
-                    <div class="devo-reminder-sub">Get a gentle nudge each morning when today's devotional is ready.</div>
+                    <div class="devo-reminder-title" id="devoReminderTitle">Enable Daily Reminders</div>
+                    <div class="devo-reminder-sub">Choose a time and get a nudge each day when today's devotional is ready.</div>
+                    <div class="devo-reminder-time-row">
+                        <label for="devoReminderTime">Remind me at</label>
+                        <select id="devoReminderTime"></select>
+                        <button class="devo-reminder-turnoff" id="devoReminderTurnoff" type="button" style="display:none;">Turn off reminders</button>
+                    </div>
                 </div>
                 <button class="devo-reminder-btn" id="devoReminderEnable">Enable</button>
                 <button class="devo-reminder-dismiss" id="devoReminderDismiss" aria-label="Dismiss">&times;</button>
             </div>
             <div class="devo-reminder-status" id="devoReminderStatus" style="display:none;">
-                <i class="fas fa-bell"></i> Reminders on — tap to turn off
+                <i class="fas fa-bell"></i> <span id="devoReminderStatusText">Reminders on</span>
             </div>
         </div>
     </main>
@@ -163,8 +172,12 @@
 
         var banner = document.getElementById('devoReminderBanner');
         var status = document.getElementById('devoReminderStatus');
+        var statusText = document.getElementById('devoReminderStatusText');
+        var titleEl = document.getElementById('devoReminderTitle');
         var enableBtn = document.getElementById('devoReminderEnable');
         var dismissBtn = document.getElementById('devoReminderDismiss');
+        var turnoffBtn = document.getElementById('devoReminderTurnoff');
+        var timeSelect = document.getElementById('devoReminderTime');
 
         function urlBase64ToUint8Array(base64String) {
             var base64 = base64String.replace(/-/g, '+').replace(/_/g, '/');
@@ -183,6 +196,41 @@
             });
         }
 
+        // Selecting an hour in the visitor's own local time, then reading
+        // it back via getUTCHours(), lets the browser's own DST-aware
+        // Date math do the local-to-UTC conversion instead of hand-rolled
+        // offset arithmetic. (The stored hourUTC is an absolute value —
+        // it isn't re-derived daily, so a subscriber's delivery time can
+        // drift by an hour across a DST transition, same known tradeoff
+        // as the rest of this feature.)
+        function localHourToUTCHour(localHour) {
+            var d = new Date();
+            d.setHours(localHour, 0, 0, 0);
+            return d.getUTCHours();
+        }
+
+        function formatHourLabel(localHour) {
+            var d = new Date();
+            d.setHours(localHour, 0, 0, 0);
+            return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+        }
+
+        function getSavedHour() {
+            var h = parseInt(localStorage.getItem('devo-push-hour'), 10);
+            return isNaN(h) ? 8 : h;
+        }
+
+        function populateTimeOptions(selectedHour) {
+            timeSelect.innerHTML = '';
+            for (var h = 5; h <= 22; h++) {
+                var opt = document.createElement('option');
+                opt.value = String(h);
+                opt.textContent = formatHourLabel(h);
+                if (h === selectedHour) opt.selected = true;
+                timeSelect.appendChild(opt);
+            }
+        }
+
         function refreshUI() {
             if (Notification.permission === 'denied') {
                 banner.style.display = 'none';
@@ -191,9 +239,16 @@
             }
             navigator.serviceWorker.ready.then(function(reg) {
                 reg.pushManager.getSubscription().then(function(sub) {
-                    if (sub && Notification.permission === 'granted') {
-                        banner.style.display = 'none';
+                    var savedHour = getSavedHour();
+                    var subscribed = !!sub && Notification.permission === 'granted';
+                    populateTimeOptions(savedHour);
+                    turnoffBtn.style.display = subscribed ? 'inline' : 'none';
+                    titleEl.textContent = subscribed ? 'Change Reminder Time' : 'Enable Daily Reminders';
+                    enableBtn.textContent = subscribed ? 'Save' : 'Enable';
+                    if (subscribed) {
+                        statusText.textContent = 'Reminders on at ' + formatHourLabel(savedHour) + ' — tap to change';
                         status.style.display = 'block';
+                        banner.style.display = 'none';
                     } else {
                         status.style.display = 'none';
                         banner.style.display = localStorage.getItem('devo-push-dismissed') ? 'none' : 'flex';
@@ -203,6 +258,7 @@
         }
 
         enableBtn.addEventListener('click', function() {
+            var chosenHour = parseInt(timeSelect.value, 10);
             Notification.requestPermission().then(function(permission) {
                 if (permission !== 'granted') { refreshUI(); return; }
                 navigator.serviceWorker.ready.then(function(reg) {
@@ -210,8 +266,12 @@
                         userVisibleOnly: true,
                         applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
                     }).then(function(subscription) {
-                        return postSubscription('/subscribe', subscription);
+                        var payload = subscription.toJSON();
+                        payload.hourUTC = localHourToUTCHour(chosenHour);
+                        localStorage.setItem('devo-push-hour', String(chosenHour));
+                        return postSubscription('/subscribe', payload);
                     }).then(function() {
+                        localStorage.removeItem('devo-push-dismissed');
                         refreshUI();
                     }).catch(function() { refreshUI(); });
                 });
@@ -220,10 +280,14 @@
 
         dismissBtn.addEventListener('click', function() {
             banner.style.display = 'none';
-            localStorage.setItem('devo-push-dismissed', '1');
+            navigator.serviceWorker.ready.then(function(reg) {
+                reg.pushManager.getSubscription().then(function(sub) {
+                    if (!sub) localStorage.setItem('devo-push-dismissed', '1');
+                });
+            });
         });
 
-        status.addEventListener('click', function() {
+        turnoffBtn.addEventListener('click', function() {
             navigator.serviceWorker.ready.then(function(reg) {
                 reg.pushManager.getSubscription().then(function(sub) {
                     if (!sub) { refreshUI(); return; }
@@ -235,6 +299,15 @@
                     });
                 });
             });
+        });
+
+        // Tapping the "reminders on" status line re-opens the banner
+        // (pre-filled with the current time) so it can be reused both
+        // to change the time and, via Turn off, to unsubscribe — one
+        // UI surface instead of scattering controls around the page.
+        status.addEventListener('click', function() {
+            status.style.display = 'none';
+            banner.style.display = 'flex';
         });
 
         refreshUI();
