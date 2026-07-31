@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#4a5a8a">
     <title>Prayers in the Bible — Bible Study</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,76 +13,318 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
     <link rel="stylesheet" href="site/style.css">
     <style>
-        body { background: #faf5ed; }
-        .page-content { margin: 0 auto; max-width: 960px; padding: 24px 24px 80px; }
+        .topic-hero { position: relative; overflow: hidden; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1769088508143-7f3f711877ee?w=1200&q=80") center/cover no-repeat; filter: brightness(0.45) sepia(0.75) saturate(1.7); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #a0c4e8; letter-spacing: 0.5px; }
+
         .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #4a5a8a; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #2e3a5c; }
         .back-link i { margin-right: 6px; }
-        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 8px; }
-        .item-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid; border-radius: 10px; text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
-        .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
-        .item-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 2px; }
-        .item-card .subtitle { font-size: 0.75rem; font-style: italic; color: #8a7e74; margin-bottom: 6px; }
-        .item-card .desc { font-size: 0.82rem; color: #5a4e44; line-height: 1.5; }
-        @media (max-width: 768px) { .item-grid { grid-template-columns: 1fr; } }
+
+        .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
+        .jump-card { background: #fff; border: 1px solid #e8e0d6; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #4a5a8a; text-decoration: none; transition: background 0.15s, transform 0.15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; scroll-margin-top: 76px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.35rem; color: #4a5a8a; margin-bottom: 4px; }
+        .section-block .section-kicker { display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #8a7e74; margin-bottom: 6px; }
+        .section-block h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; color: #4a5a8a; margin: 20px 0 12px; }
+        .section-block h4 { font-family: 'Cinzel', serif; font-size: 0.88rem; color: #4a5a8a; margin: 18px 0 10px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .video-grid:last-child { margin-bottom: 0; }
+
+        .verse-ref { color: #4a5a8a; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #2e3a5c; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#4a5a8a; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="section-hero">
-        <img src="https://images.unsplash.com/photo-1769088508143-7f3f711877ee?w=1400&q=80&auto=format"
-             srcset="https://images.unsplash.com/photo-1769088508143-7f3f711877ee?w=640&q=80&auto=format 640w,
-                     https://images.unsplash.com/photo-1769088508143-7f3f711877ee?w=1000&q=80&auto=format 1000w,
-                     https://images.unsplash.com/photo-1769088508143-7f3f711877ee?w=1600&q=80&auto=format 1600w"
-             sizes="100vw" fetchpriority="high" alt="A cross with lit candles in a quiet church">
-        <div class="section-hero-overlay">
-            <h2>Prayers in the Bible</h2>
-            <p class="section-desc">Prayers from Scripture that model how to approach God.</p>
+    <main class="main-content" style="margin-left:auto; margin-right:auto; max-width:960px; margin-top:0;">
+
+        <div class="topic-hero">
+            <p class="subtitle">Topical Study</p>
+            <h1>Prayers in the Bible</h1>
         </div>
-    </div>
-    <main class="page-content">
+
         <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
-        <div class="item-grid">
-                <a href="prayers-lords-prayer.html" class="item-card" style="border-left-color:#4a5a8a;">
-                    <h4 style="color:#4a5a8a;">The Lord's Prayer</h4>
-                    <p class="desc">Jesus' model for how to pray — Matthew 6:9-13.</p>
-                </a>
-                <a href="prayers-solomon-wisdom.html" class="item-card" style="border-left-color:#4a5a8a;">
-                    <h4 style="color:#4a5a8a;">Solomon's Prayer for Wisdom</h4>
-                    <p class="desc">Asked for wisdom over wealth — God gave both.</p>
-                </a>
-                <a href="prayers-hannah.html" class="item-card" style="border-left-color:#4a5a8a;">
-                    <h4 style="color:#4a5a8a;">Hannah's Prayer</h4>
-                    <p class="desc">A barren woman's desperate cry — answered with Samuel.</p>
-                </a>
-                <a href="prayers-jabez.html" class="item-card" style="border-left-color:#4a5a8a;">
-                    <h4 style="color:#4a5a8a;">Jabez's Prayer</h4>
-                    <p class="desc">'Bless me and enlarge my territory.'</p>
-                </a>
-                <a href="prayers-david-repentance.html" class="item-card" style="border-left-color:#4a5a8a;">
-                    <h4 style="color:#4a5a8a;">David's Prayer of Repentance</h4>
-                    <p class="desc">Psalm 51 — 'Create in me a clean heart.'</p>
-                </a>
-                <a href="prayers-gethsemane.html" class="item-card" style="border-left-color:#4a5a8a;">
-                    <h4 style="color:#4a5a8a;">Jesus in Gethsemane</h4>
-                    <p class="desc">'Not my will, but yours be done.'</p>
-                </a>
-                <a href="prayers-stephen.html" class="item-card" style="border-left-color:#4a5a8a;">
-                    <h4 style="color:#4a5a8a;">Stephen's Prayer</h4>
-                    <p class="desc">Forgiveness for his killers — like Jesus on the cross.</p>
-                </a>
-                <a href="prayers-paul-ephesians.html" class="item-card" style="border-left-color:#4a5a8a;">
-                    <h4 style="color:#4a5a8a;">Paul's Prayer for the Ephesians</h4>
-                    <p class="desc">That they may know the fullness of God.</p>
-                </a>
-                <a href="prayers-moses-intercession.html" class="item-card" style="border-left-color:#4a5a8a;">
-                    <h4 style="color:#4a5a8a;">Moses' Intercession</h4>
-                    <p class="desc">Standing in the gap — 'Spare your people.'</p>
-                </a>
-                <a href="prayers-daniel.html" class="item-card" style="border-left-color:#4a5a8a;">
-                    <h4 style="color:#4a5a8a;">Daniel's Prayer</h4>
-                    <p class="desc">Confession and petition — God answers with revelation.</p>
-                </a>
+
+        <nav class="jump-grid">
+            <a href="#overview" class="jump-card">Overview</a>
+            <a href="#lords-prayer" class="jump-card">Lord's Prayer</a>
+            <a href="#solomon-wisdom" class="jump-card">Solomon's Wisdom</a>
+            <a href="#hannah" class="jump-card">Hannah</a>
+            <a href="#jabez" class="jump-card">Jabez</a>
+            <a href="#david-repentance" class="jump-card">David's Repentance</a>
+            <a href="#gethsemane" class="jump-card">Gethsemane</a>
+            <a href="#stephen" class="jump-card">Stephen</a>
+            <a href="#paul-ephesians" class="jump-card">Paul's Prayer</a>
+            <a href="#moses-intercession" class="jump-card">Moses' Intercession</a>
+            <a href="#daniel" class="jump-card">Daniel</a>
+            <a href="#videos" class="jump-card">Videos</a>
+        </nav>
+
+        <div class="section-block" id="overview">
+            <span class="section-kicker">The Foundation</span>
+            <h2>What Can We Learn from Prayers in the Bible?</h2>
+            <p>Scripture does not just command believers to pray — it shows them praying. Woven throughout the Bible's narrative are moments where real people, in real crisis or real gratitude, stop and speak directly to God, and their words are preserved for us word for word. These recorded prayers are one of the most underused resources in Scripture: they teach not only what to pray about, but how prayer actually sounds when it is honest, desperate, bold, broken, or triumphant.</p>
+            <p>The ten prayers gathered on this page span nearly the entire biblical story and cover almost every register of human experience: a barren woman's anguished plea, a king's humble request for wisdom, an obscure man's audacious ask for blessing, a broken king's confession after catastrophic sin, the Son of God's agonized submission the night before His death, a dying martyr's forgiveness of his killers, an apostle's soaring intercession for a church he loved, a leader's bold stand between a furious God and a guilty nation, and a prophet's fasting confession on behalf of his whole people. Read together, they demonstrate that there is no emotional state, no circumstance, and no need too large or too small to bring before God.</p>
+            <p>What these prayers share is not a formula but a posture: each one is radically honest before God, refusing to perform a "proper" prayer instead of a true one. Hannah wept bitterly; Jesus asked if there was another way; David did not minimize his sin; Jabez asked boldly rather than modestly. And in nearly every case, the prayer does not end with the request — it ends with alignment: "not my will, but yours," "your hand be with me," "create in me." Studying how Scripture's own people prayed is one of the best ways to learn to pray ourselves — not by imitating their exact words, but by learning the same posture of honesty and surrender that made their prayers reach heaven.</p>
         </div>
+
+        <div class="section-block" id="lords-prayer">
+            <span class="section-kicker">Matthew 6:9-13</span>
+            <h2>The Lord's Prayer</h2>
+            <h3>The Prayer</h3>
+            <p>The Lord's Prayer is the most famous prayer in history — not because of its length or eloquence, but because Jesus Himself gave it as a pattern for how His followers should approach God. When the disciples asked "Lord, teach us to pray," Jesus responded not with a lecture on technique but with a model that contains the DNA of all authentic prayer. This prayer begins with worship ("hallowed be your name"), moves to surrender ("your kingdom come, your will be done"), addresses daily needs ("give us today our daily bread"), deals with broken relationships ("forgive us... as we forgive"), and ends with spiritual protection ("deliver us from the evil one").</p>
+            <p>The Lord's Prayer is both a prayer to be prayed and a framework to be expanded. Each phrase can become a launching point for extended conversation with God — "Our Father" alone could fuel hours of meditation on God's fatherly love, accessibility, and family identity.</p>
+            <h3>What We Learn About Prayer</h3>
+            <p>The Lord's Prayer teaches us that prayer begins with God, not with us. Before we bring our needs, we worship His name and submit to His kingdom purposes. This God-first orientation transforms prayer from a wish list into a relationship. We also learn that prayer is meant to be daily ("give us today") and communal ("our" Father, "our" daily bread) — not a sporadic emergency measure but a daily rhythm that connects us to the entire family of God.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 6:9-13')">Matthew 6:9-13</span> — Jesus teaches His disciples the model prayer: "Our Father in heaven, hallowed be your name..."</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 11:1-4')">Luke 11:1-4</span> — Luke's account of the Lord's Prayer, given in response to the disciples' request to learn to pray.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 6:6')">Matthew 6:6</span> — "When you pray, go into your room, close the door and pray to your Father, who is unseen."</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 4:6')">Philippians 4:6</span> — "In every situation, by prayer and petition, with thanksgiving, present your requests to God."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Thessalonians 5:17')">1 Thessalonians 5:17</span> — "Pray continually."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="solomon-wisdom">
+            <span class="section-kicker">1 Kings 3:5-14</span>
+            <h2>Solomon's Prayer for Wisdom</h2>
+            <h3>The Prayer</h3>
+            <p>When God offered Solomon anything he desired — wealth, long life, victory over enemies — the young king made a request that delighted the heart of God: wisdom. Solomon's prayer reveals a profound self-awareness — he called himself "a little child" who did not know how to carry out his duties. This humility, recognizing our own insufficiency, is the soil in which wisdom grows.</p>
+            <p>God's response exceeded Solomon's request. Not only did He grant unparalleled wisdom, but He added what Solomon had not asked for: riches and honor. This pattern appears throughout Scripture — when we seek first what God values, the rest is added.</p>
+            <h3>What We Learn About Prayer</h3>
+            <p>Solomon's prayer teaches us that God delights in giving wisdom to those who ask — James 1:5 extends this promise to every believer. We also learn that the best prayers are often selfless ones: Solomon did not ask for wisdom to impress others or gain advantage, but so he could serve God's people faithfully. When our requests are oriented toward others' good and God's glory rather than self-promotion, we pray prayers that move the heart of God.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Kings 3:9')">1 Kings 3:9</span> — "Give your servant a discerning heart to govern your people and to distinguish between right and wrong."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Kings 3:12')">1 Kings 3:12</span> — "I will give you a wise and discerning heart, so that there will never have been anyone like you."</li>
+                <li><span class="verse-ref" onclick="showVerse('James 1:5')">James 1:5</span> — "If any of you lacks wisdom, you should ask God, who gives generously to all without finding fault."</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 2:6')">Proverbs 2:6</span> — "The LORD gives wisdom; from his mouth come knowledge and understanding."</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 4:7')">Proverbs 4:7</span> — "The beginning of wisdom is this: Get wisdom. Though it cost all you have, get understanding."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="hannah">
+            <span class="section-kicker">1 Samuel 1-2</span>
+            <h2>Hannah's Prayer</h2>
+            <h3>The Prayer</h3>
+            <p>Hannah's prayer emerges from a place of deep pain. Barren in a culture that equated childlessness with divine disfavor, taunted by her husband's other wife, Hannah carried a grief that no human comfort could touch. Yet instead of becoming bitter, she turned her anguish into prayer — pouring out her soul before God with such intensity that the priest thought she was drunk. She promised that if God gave her a son, she would give him back — dedicating him to the Lord's service for life.</p>
+            <p>God answered Hannah's prayer with Samuel — a child who would become one of Israel's greatest prophets. Hannah's faithfulness in keeping her vow demonstrates that what we give to God is never lost but multiplied for His purposes.</p>
+            <h3>What We Learn About Prayer</h3>
+            <p>Hannah teaches us that honest, raw emotion in prayer is not disrespectful — it is worship. God is not offended by our tears, our desperation, or our anguish; He invites the full weight of our hearts, not sanitized, polished prayers that hide our true feelings. We also learn from Hannah the principle of dedication — offering back to God what He gives us. What we hold loosely, God can use fully.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Samuel 1:10-11')">1 Samuel 1:10-11</span> — "In her deep anguish Hannah prayed to the LORD, weeping bitterly."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Samuel 1:27-28')">1 Samuel 1:27-28</span> — "I prayed for this child, and the LORD has granted me what I asked of him."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Samuel 2:1')">1 Samuel 2:1</span> — "My heart rejoices in the LORD; in the LORD my horn is lifted high."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 37:4')">Psalm 37:4</span> — "Take delight in the LORD, and he will give you the desires of your heart."</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 4:6')">Philippians 4:6</span> — "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="jabez">
+            <span class="section-kicker">1 Chronicles 4:10</span>
+            <h2>Jabez's Prayer</h2>
+            <h3>The Prayer</h3>
+            <p>Tucked into an otherwise unremarkable genealogy, Jabez's prayer shines like a diamond in gravel. In just one verse, a man whose name means "pain" — given by his mother because of the sorrow of his birth — dares to ask God for blessing, expansion, presence, and protection. And God granted his request. Jabez refused to be defined by his painful origins, appealing to God for a different story.</p>
+            <p>The boldness of Jabez's prayer teaches us that God is not offended by large requests. He asked for blessing, enlarged territory, God's hand upon him, and protection from harm — not just survival, maintenance, distant approval, or tolerance of evil.</p>
+            <h3>What We Learn About Prayer</h3>
+            <p>Jabez teaches us to pray with holy boldness — to ask God for more than the minimum, to dream beyond our current boundaries, and to trust that He is a generous Father who delights in blessing His children. Yet Jabez's boldness was accompanied by dependence: "Let your hand be with me." He did not ask for blessing apart from God's presence but precisely through it — this keeps bold prayer from becoming presumptuous.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Chronicles 4:10')">1 Chronicles 4:10</span> — "Oh, that you would bless me and enlarge my territory! Let your hand be with me, and keep me from harm."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 7:7')">Matthew 7:7</span> — "Ask and it will be given to you; seek and you will find; knock and the door will be opened to you."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 15:7')">John 15:7</span> — "If you remain in me and my words remain in you, ask whatever you wish, and it will be done for you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 81:10')">Psalm 81:10</span> — "Open wide your mouth and I will fill it."</li>
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 3:20')">Ephesians 3:20</span> — "Now to him who is able to do immeasurably more than all we ask or imagine."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="david-repentance">
+            <span class="section-kicker">Psalm 51</span>
+            <h2>David's Prayer of Repentance</h2>
+            <h3>The Prayer</h3>
+            <p>Psalm 51 is the most profound prayer of repentance ever written. It emerged from the darkest chapter of David's life — his adultery with Bathsheba and murder of Uriah. When the prophet Nathan confronted him, David did not defend, deflect, or minimize. He broke. David's prayer appeals not to his own merit but to God's character: "according to your unfailing love, according to your great compassion."</p>
+            <p>The depth of David's repentance is seen in his request for inner transformation, not merely external pardon — he asks for a clean heart, a renewed spirit, the restoration of joy, and a willing spirit to sustain him going forward.</p>
+            <h3>What We Learn About Prayer</h3>
+            <p>David's prayer teaches us that God never rejects a broken and contrite heart. No matter how grievous the sin, the door of repentance is always open — God does not require us to clean ourselves up before coming to Him. We also learn that repentance is more than saying sorry — it involves a fundamental reorientation of the heart, dependent on God's creative work within us rather than our own efforts.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Psalm 51:1-2')">Psalm 51:1-2</span> — "Have mercy on me, O God, according to your unfailing love; according to your great compassion blot out my transgressions."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 51:10')">Psalm 51:10</span> — "Create in me a pure heart, O God, and renew a steadfast spirit within me."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 51:17')">Psalm 51:17</span> — "My sacrifice, O God, is a broken spirit; a broken and contrite heart you, God, will not despise."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 John 1:9')">1 John 1:9</span> — "If we confess our sins, he is faithful and just and will forgive us our sins."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Samuel 12:13')">2 Samuel 12:13</span> — "Then David said to Nathan, I have sinned against the LORD. Nathan replied, The LORD has taken away your sin."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="gethsemane">
+            <span class="section-kicker">Matthew 26:36-46</span>
+            <h2>Jesus in Gethsemane</h2>
+            <h3>The Prayer</h3>
+            <p>Gethsemane reveals Jesus at His most humanly vulnerable. Facing the full horror of the cross, Jesus fell on His face and prayed with an intensity that caused Him to sweat drops of blood. Jesus' prayer is striking in its honesty — He asks if there is any other way, not pretending the cup is easy to drink. Yet in the very same breath, He surrenders: "Not my will, but yours be done."</p>
+            <p>Three times Jesus prayed the same prayer, each time returning to find His disciples sleeping. His wrestling was solitary, His surrender costly, His obedience absolute.</p>
+            <h3>What We Learn About Prayer</h3>
+            <p>From Gethsemane we learn that prayer is the place where our will is aligned with God's — not where we manipulate God into aligning with ours. The highest prayer is not "give me what I want" but "let your will be done." We also learn that emotional anguish in prayer is not a sign of weak faith — Jesus, the sinless Son of God, prayed with tears, drops of blood, and repeated urgency. Gethsemane validates our struggles and assures us that wrestling with God in prayer is not rebellion but relationship.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 26:39')">Matthew 26:39</span> — "My Father, if it is possible, may this cup be taken from me. Yet not as I will, but as you will."</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 22:44')">Luke 22:44</span> — "Being in anguish, he prayed more earnestly, and his sweat was like drops of blood falling to the ground."</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 5:7')">Hebrews 5:7</span> — "During the days of Jesus' life on earth, he offered up prayers and petitions with fervent cries and tears."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 26:42')">Matthew 26:42</span> — "My Father, if it is not possible for this cup to be taken away unless I drink it, may your will be done."</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 2:8')">Philippians 2:8</span> — "He humbled himself by becoming obedient to death — even death on a cross."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="stephen">
+            <span class="section-kicker">Acts 7:59-60</span>
+            <h2>Stephen's Prayer</h2>
+            <h3>The Prayer</h3>
+            <p>Stephen's prayer is remarkable for its setting: he was being stoned to death. As rocks crushed his body, the first Christian martyr looked up to see heaven open and Jesus standing at the right hand of God. With his final breaths, he prayed two things — for his own spirit to be received by Christ, and for his murderers to be forgiven. The parallel to Jesus' words on the cross is unmistakable: just as Jesus prayed "Father, forgive them," Stephen prayed "Lord, do not hold this sin against them."</p>
+            <p>Among those watching Stephen die was a young man named Saul, who approved of the execution. Church tradition has long connected Stephen's prayer to Saul's later conversion — suggesting that this prayer of forgiveness planted a seed that eventually blossomed on the Damascus road.</p>
+            <h3>What We Learn About Prayer</h3>
+            <p>Stephen teaches us that the ultimate test of our prayer life is how we pray under persecution. It is easy to pray for enemies in comfort; it is supernatural to pray for them while they are actively harming us — a capacity that comes not from natural goodness but from being filled with the Holy Spirit. We also learn that forgiveness in prayer means we entrust justice to God rather than demanding vengeance ourselves.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Acts 7:59-60')">Acts 7:59-60</span> — "Lord Jesus, receive my spirit... Lord, do not hold this sin against them."</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 23:34')">Luke 23:34</span> — "Father, forgive them, for they do not know what they are doing."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 5:44')">Matthew 5:44</span> — "Love your enemies and pray for those who persecute you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 12:14')">Romans 12:14</span> — "Bless those who persecute you; bless and do not curse."</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 7:55-56')">Acts 7:55-56</span> — "Stephen, full of the Holy Spirit, looked up to heaven and saw the glory of God, and Jesus standing at the right hand of God."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="paul-ephesians">
+            <span class="section-kicker">Ephesians 1 & 3</span>
+            <h2>Paul's Prayer for the Ephesians</h2>
+            <h3>The Prayer</h3>
+            <p>Paul's prayers for the Ephesian believers are among the most theologically rich prayers in Scripture. Rather than praying for comfort or prosperity, Paul prays for spiritual enlightenment — that they would know the hope of their calling, the riches of God's glorious inheritance, and the incomparable greatness of His power toward those who believe. In Ephesians 3, Paul's prayer soars to breathtaking heights — that they would be strengthened in their inner being, that Christ would dwell in their hearts through faith, and that they would be filled to the measure of all the fullness of God.</p>
+            <p>What strikes us about Paul's prayers is their God-centered focus. He does not pray that circumstances would change but that believers would be changed.</p>
+            <h3>What We Learn About Prayer</h3>
+            <p>Paul teaches us to pray Scripture-shaped prayers for others — his intercessions are saturated with theological truth, praying God's own promises back to Him on behalf of His people. We also learn that praying for others' spiritual growth is one of the most loving things we can do. Paul could not be physically present with the Ephesians, but through prayer he participated in their transformation.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 1:17-19')">Ephesians 1:17-19</span> — "I pray that the eyes of your heart may be enlightened in order that you may know the hope to which he has called you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 3:16-19')">Ephesians 3:16-19</span> — "I pray that out of his glorious riches he may strengthen you with power through his Spirit in your inner being."</li>
+                <li><span class="verse-ref" onclick="showVerse('Colossians 1:9-10')">Colossians 1:9-10</span> — "We have not stopped praying for you, asking God to fill you with the knowledge of his will."</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 1:9-11')">Philippians 1:9-11</span> — "I pray that your love may abound more and more in knowledge and depth of insight."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 15:13')">Romans 15:13</span> — "May the God of hope fill you with all joy and peace as you trust in him."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="moses-intercession">
+            <span class="section-kicker">Exodus 32:11-14</span>
+            <h2>Moses' Intercession</h2>
+            <h3>The Prayer</h3>
+            <p>When Israel worshiped the golden calf while Moses was on Mount Sinai receiving the law, God's righteous anger burned against them. He told Moses He would destroy the nation and start over with Moses' descendants. What happened next is one of the most remarkable acts of intercession in all of Scripture — Moses stood between God and the people and pleaded for mercy. His intercession was not sentimental — it was theological, appealing to God's reputation, His covenant promises, and His own character as a God of mercy.</p>
+            <p>The result is stunning: "The LORD relented." This does not mean Moses changed God's eternal plan, but that prayer is a means God uses to accomplish His purposes.</p>
+            <h3>What We Learn About Prayer</h3>
+            <p>Moses teaches us the power and responsibility of intercession — standing in the gap for those who cannot or will not pray for themselves. We also learn to base our intercession on God's character and promises rather than human merit — appealing not to the worthiness of those we pray for but to the faithfulness, compassion, and covenant love of God.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Exodus 32:11-14')">Exodus 32:11-14</span> — "Moses sought the favor of the LORD his God... Then the LORD relented and did not bring the disaster he had threatened."</li>
+                <li><span class="verse-ref" onclick="showVerse('Numbers 14:13-19')">Numbers 14:13-19</span> — "In accordance with your great love, forgive the sin of these people, just as you have pardoned them from Egypt until now."</li>
+                <li><span class="verse-ref" onclick="showVerse('Deuteronomy 9:25-29')">Deuteronomy 9:25-29</span> — "I lay prostrate before the LORD those forty days and forty nights because the LORD had said he would destroy you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 106:23')">Psalm 106:23</span> — "He said he would destroy them — had not Moses, his chosen one, stood in the breach before him."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Timothy 2:1')">1 Timothy 2:1</span> — "I urge that petitions, prayers, intercession and thanksgiving be made for all people."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="daniel">
+            <span class="section-kicker">Daniel 9:1-19</span>
+            <h2>Daniel's Prayer</h2>
+            <h3>The Prayer</h3>
+            <p>Daniel's prayer in chapter 9 was triggered by his study of Scripture — specifically Jeremiah's prophecy that the exile would last seventy years. Rather than passively waiting for the prophecy to fulfill itself, Daniel responded with urgent, passionate prayer. The content of his prayer is remarkable for its identification with the sins of his people — though Daniel was personally righteous, he prayed "we have sinned, we have been wicked," carrying the community's failures before God as his own.</p>
+            <p>Daniel approached God with fasting, sackcloth, and ashes — physical expressions of spiritual urgency. The result was one of the most significant prophetic revelations in all of Scripture.</p>
+            <h3>What We Learn About Prayer</h3>
+            <p>Daniel teaches us that Scripture study and prayer are meant to work together — his reading of Jeremiah did not replace prayer, it fueled it. We also learn the power of humility and identification in prayer — including ourselves in confession, recognizing that we are part of a community and bear responsibility for one another. This kind of humble, corporate prayer moves the heart of God in ways individual self-righteousness never will.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Daniel 9:3-5')">Daniel 9:3-5</span> — "I turned to the Lord God and pleaded with him in prayer and petition, in fasting, and in sackcloth and ashes."</li>
+                <li><span class="verse-ref" onclick="showVerse('Daniel 9:17-19')">Daniel 9:17-19</span> — "Give ear, our God, and hear; open your eyes and see the desolation of the city that bears your Name."</li>
+                <li><span class="verse-ref" onclick="showVerse('Daniel 10:12')">Daniel 10:12</span> — "From the first day that you set your mind to gain understanding and to humble yourself before your God, your words were heard."</li>
+                <li><span class="verse-ref" onclick="showVerse('James 5:16')">James 5:16</span> — "The prayer of a righteous person is powerful and effective."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Chronicles 7:14')">2 Chronicles 7:14</span> — "If my people, who are called by my name, will humble themselves and pray... I will hear from heaven."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="videos">
+            <span class="section-kicker">Watch & Learn</span>
+            <h2>Videos</h2>
+
+            <h4>Lord's Prayer</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'ROskj4zDOtg')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/ROskj4zDOtg/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Francis Chan: The Lord's Prayer<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Crazy Love</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'hyDTKqfRXL4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/hyDTKqfRXL4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Pope Francis CHANGES The Lord's Prayer -- Aaron Wright<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Grace Family Baptist Church</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'TI5xpBteurY')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/TI5xpBteurY/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">5 Minutes of Hope | What If Everything Could Change Tomorrow? (The Lord's Prayer)<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+            </div>
+
+            <h4>Gethsemane</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'gaulA-7Ayeg')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/gaulA-7Ayeg/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Agony of Jesus in Gethsemane - Luke 22:39-46<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'LDjmaJvQ0Og')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/LDjmaJvQ0Og/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Why did Jesus sweat blood in the Garden of Gethsemane?  |  GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+        </div>
+
     </main>
     <script src="site/script.js"></script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) {
+                textEl.innerHTML = data.passages[0];
+            } else {
+                textEl.innerHTML = '<em>Could not load this passage.</em>';
+            }
+        })
+        .catch(function() {
+            textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>';
+        });
+    }
+    function closeVerse() {
+        document.getElementById('verseOverlay').classList.remove('show');
+        document.getElementById('versePopup').classList.remove('show');
+    }
+    </script>
 </body>
 </html>
