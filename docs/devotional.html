@@ -29,7 +29,16 @@
         .icon-reflect { background: #4a5a8a; }
         .icon-prayer { background: #2c6b4f; }
         .icon-apply { background: #5c3d6e; }
-        @media (max-width: 768px) { .devo-hero { padding: 28px 18px; } .devo-hero h1 { font-size: 1.3rem; } .devo-card { padding: 22px 18px; } }
+        .devo-reminder-banner { display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid #f0c865; border-radius: 14px; padding: 18px 20px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+        .devo-reminder-icon { width: 38px; height: 38px; border-radius: 10px; background: #3d2b1f; color: #f0c865; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+        .devo-reminder-text { flex: 1; min-width: 0; }
+        .devo-reminder-title { font-weight: 700; font-size: 0.92rem; color: #3d2b1f; margin-bottom: 2px; }
+        .devo-reminder-sub { font-size: 0.8rem; color: #8a7e74; line-height: 1.4; }
+        .devo-reminder-btn { background: #8b3a2a; color: #fff; border: none; padding: 9px 16px; border-radius: 8px; font-weight: 700; font-size: 0.82rem; cursor: pointer; white-space: nowrap; }
+        .devo-reminder-dismiss { background: none; border: none; color: #aaa; font-size: 1.3rem; cursor: pointer; padding: 2px 4px; line-height: 1; }
+        .devo-reminder-status { text-align: center; font-size: 0.82rem; color: #8a7e74; padding: 10px; cursor: pointer; }
+        .devo-reminder-status i { color: #f0c865; }
+        @media (max-width: 768px) { .devo-hero { padding: 28px 18px; } .devo-hero h1 { font-size: 1.3rem; } .devo-card { padding: 22px 18px; } .devo-reminder-banner { flex-wrap: wrap; } }
     </style>
 </head>
 <body>
@@ -61,6 +70,18 @@
         </div>
 
         <div class="devo-nav">
+            <div class="devo-reminder-banner" id="devoReminderBanner" style="display:none;">
+                <div class="devo-reminder-icon"><i class="fas fa-bell"></i></div>
+                <div class="devo-reminder-text">
+                    <div class="devo-reminder-title">Enable Daily Reminders</div>
+                    <div class="devo-reminder-sub">Get a gentle nudge each morning when today's devotional is ready.</div>
+                </div>
+                <button class="devo-reminder-btn" id="devoReminderEnable">Enable</button>
+                <button class="devo-reminder-dismiss" id="devoReminderDismiss" aria-label="Dismiss">&times;</button>
+            </div>
+            <div class="devo-reminder-status" id="devoReminderStatus" style="display:none;">
+                <i class="fas fa-bell"></i> Reminders on — tap to turn off
+            </div>
         </div>
     </main>
     <script src="site/script.js"></script>
@@ -124,6 +145,99 @@
             .catch(function() {
                 document.getElementById('devoText').textContent = 'Unable to load devotional. Please try again.';
             });
+    })();
+    </script>
+    <script>
+    // Daily reminder opt-in — Web Push subscription for this devotional.
+    (function() {
+        var VAPID_PUBLIC_KEY = 'BBXso6T-C1Ft59FLWrdRfANGYtKm21CHUktfb0rsmfDZOEJSFyn5Y62f2ZaFMr0PxiPCIyN9Wm6_8MxXMQ6AGuY';
+        var PUSH_WORKER = 'https://devotional-push.cloudflare-dust598.workers.dev';
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(function() {});
+        }
+
+        if (!('serviceWorker' in navigator) || !('PushManager' in window) || !('Notification' in window)) {
+            return; // not supported here (e.g. non-installed iOS Safari) — nothing to show
+        }
+
+        var banner = document.getElementById('devoReminderBanner');
+        var status = document.getElementById('devoReminderStatus');
+        var enableBtn = document.getElementById('devoReminderEnable');
+        var dismissBtn = document.getElementById('devoReminderDismiss');
+
+        function urlBase64ToUint8Array(base64String) {
+            var base64 = base64String.replace(/-/g, '+').replace(/_/g, '/');
+            var padded = base64 + new Array((4 - base64.length % 4) % 4 + 1).join('=');
+            var raw = atob(padded);
+            var arr = new Uint8Array(raw.length);
+            for (var i = 0; i < raw.length; i++) arr[i] = raw.charCodeAt(i);
+            return arr;
+        }
+
+        function postSubscription(path, payload) {
+            return fetch(PUSH_WORKER + path, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+        }
+
+        function refreshUI() {
+            if (Notification.permission === 'denied') {
+                banner.style.display = 'none';
+                status.style.display = 'none';
+                return;
+            }
+            navigator.serviceWorker.ready.then(function(reg) {
+                reg.pushManager.getSubscription().then(function(sub) {
+                    if (sub && Notification.permission === 'granted') {
+                        banner.style.display = 'none';
+                        status.style.display = 'block';
+                    } else {
+                        status.style.display = 'none';
+                        banner.style.display = localStorage.getItem('devo-push-dismissed') ? 'none' : 'flex';
+                    }
+                });
+            }).catch(function() {});
+        }
+
+        enableBtn.addEventListener('click', function() {
+            Notification.requestPermission().then(function(permission) {
+                if (permission !== 'granted') { refreshUI(); return; }
+                navigator.serviceWorker.ready.then(function(reg) {
+                    reg.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+                    }).then(function(subscription) {
+                        return postSubscription('/subscribe', subscription);
+                    }).then(function() {
+                        refreshUI();
+                    }).catch(function() { refreshUI(); });
+                });
+            });
+        });
+
+        dismissBtn.addEventListener('click', function() {
+            banner.style.display = 'none';
+            localStorage.setItem('devo-push-dismissed', '1');
+        });
+
+        status.addEventListener('click', function() {
+            navigator.serviceWorker.ready.then(function(reg) {
+                reg.pushManager.getSubscription().then(function(sub) {
+                    if (!sub) { refreshUI(); return; }
+                    var endpoint = sub.endpoint;
+                    sub.unsubscribe().then(function() {
+                        postSubscription('/unsubscribe', { endpoint: endpoint }).catch(function() {});
+                        localStorage.removeItem('devo-push-dismissed');
+                        refreshUI();
+                    });
+                });
+            });
+        });
+
+        refreshUI();
     })();
     </script>
 </body>
