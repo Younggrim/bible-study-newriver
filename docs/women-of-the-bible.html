@@ -14,75 +14,369 @@
     <link rel="stylesheet" href="site/style.css">
     <style>
         body { background: #faf5ed; }
-        .page-content { margin: 0 auto; max-width: 960px; padding: 24px 24px 80px; }
-        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #6b3a5a; text-decoration: none; font-weight: 600; transition: color 0.2s; }
-        .back-link i { margin-right: 6px; }
-        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 8px; }
-        .item-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid; border-radius: 10px; text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
-        .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
-        .item-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 2px; }
-        .item-card .subtitle { font-size: 0.75rem; font-style: italic; color: #8a7e74; margin-bottom: 6px; }
-        .item-card .desc { font-size: 0.82rem; color: #5a4e44; line-height: 1.5; }
-        @media (max-width: 768px) { .item-grid { grid-template-columns: 1fr; } }
+        .topic-hero { position: relative; height: 240px; overflow: hidden; }
+        .topic-hero img { width: 100%; height: 100%; object-fit: cover; }
+        .topic-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)); filter: brightness(0.45) sepia(0.75) saturate(1.7); backdrop-filter: none; }
+        .topic-hero .hero-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
+        .topic-hero h1 { font-family: 'Cinzel', serif; color: #fff; font-size: 2rem; margin: 0 0 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+        .topic-hero p { color: #f0e8dc; font-size: 0.95rem; max-width: 600px; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+        .page-content { margin: 0 auto; max-width: 820px; padding: 20px 24px 80px; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; color: #6b3a5a; font-weight: 600; font-size: 0.85rem; text-decoration: none; margin: 16px 0; }
+        .back-link:hover { text-decoration: underline; }
+        .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
+        .jump-card { background: #fff; border: 1px solid #e8e0d6; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #6b3a5a; text-decoration: none; transition: background .15s, transform .15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+        .section-block { background: #fff; border: 1px solid #e8e0d6; border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; scroll-margin-top: 76px; }
+        .section-block .section-kicker { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #a8829b; }
+        .section-block h2 { font-family: 'Cinzel', serif; color: #6b3a5a; font-size: 1.35rem; margin: 4px 0 12px; }
+        .section-block h3 { font-family: 'Cinzel', serif; color: #7d4a6c; font-size: 1.02rem; margin: 18px 0 8px; }
+        .section-block h4 { font-family: 'Cinzel', serif; color: #6b3a5a; font-size: 0.95rem; margin: 18px 0 8px; }
+        .section-block p { line-height: 1.7; color: #3d332b; margin: 0 0 10px; }
+        .verse-list { list-style: none; padding: 0; margin: 8px 0 0; }
+        .verse-list li { padding: 8px 0; border-bottom: 1px solid #f0e8dc; font-size: 0.9rem; line-height: 1.6; color: #4a3f35; }
+        .verse-list li:last-child { border-bottom: none; }
+        .verse-ref { color: #6b3a5a; font-weight: 600; text-decoration: underline dotted; cursor: pointer; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .video-grid:last-child { margin-bottom: 0; }
+        .verse-popup-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999; align-items: center; justify-content: center; padding: 20px; }
+        .verse-popup-overlay.active { display: flex; }
+        .verse-popup { background: #fff; border-radius: 12px; padding: 24px; max-width: 480px; width: 100%; max-height: 70vh; overflow-y: auto; position: relative; }
+        .verse-popup h4 { font-family: 'Cinzel', serif; color: #6b3a5a; margin: 0 0 12px; }
+        .verse-popup p { line-height: 1.7; color: #3d332b; }
+        .verse-popup .close-popup { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 1.3rem; color: #a8829b; cursor: pointer; }
+        @media (max-width: 600px) { .topic-hero h1 { font-size: 1.5rem; } }
     </style>
 </head>
 <body>
-    <div class="section-hero">
-        <img src="https://images.unsplash.com/photo-1531430550463-9658d67c492d?w=1400&q=80&auto=format"
-             srcset="https://images.unsplash.com/photo-1531430550463-9658d67c492d?w=640&q=80&auto=format 640w,
-                     https://images.unsplash.com/photo-1531430550463-9658d67c492d?w=1000&q=80&auto=format 1000w,
-                     https://images.unsplash.com/photo-1531430550463-9658d67c492d?w=1600&q=80&auto=format 1600w"
-             sizes="100vw" fetchpriority="high" alt="Rolling desert sand dunes">
-        <div class="section-hero-overlay">
-            <h2>Women of the Bible</h2>
-            <p class="section-desc">Women of courage, faith, and consequence throughout Scripture.</p>
+    <div class="topic-hero">
+        <img src="https://images.unsplash.com/photo-1531430550463-9658d67c492d?w=1400&q=80&auto=format" alt="Rolling desert sand dunes">
+        <div class="hero-overlay">
+            <h1>Women of the Bible</h1>
+            <p>Women of courage, faith, and consequence — whose obedience, wisdom, and devotion shaped the story of redemption.</p>
         </div>
     </div>
     <main class="page-content">
-        <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
-        <div class="item-grid">
-                <a href="women-ruth.html" class="item-card" style="border-left-color:#6b3a5a;">
-                    <h4 style="color:#6b3a5a;">Ruth</h4>
-                    <p class="desc">Loyalty and redemption — a Moabite in the line of Christ.</p>
-                </a>
-                <a href="women-esther.html" class="item-card" style="border-left-color:#6b3a5a;">
-                    <h4 style="color:#6b3a5a;">Esther</h4>
-                    <p class="desc">'For such a time as this' — courage before a king.</p>
-                </a>
-                <a href="women-mary-mother-of-jesus.html" class="item-card" style="border-left-color:#6b3a5a;">
-                    <h4 style="color:#6b3a5a;">Mary, Mother of Jesus</h4>
-                    <p class="desc">Humble handmaiden — 'Let it be according to your word.'</p>
-                </a>
-                <a href="women-sarah.html" class="item-card" style="border-left-color:#6b3a5a;">
-                    <h4 style="color:#6b3a5a;">Sarah</h4>
-                    <p class="desc">Mother of nations — faith tested and rewarded.</p>
-                </a>
-                <a href="women-deborah.html" class="item-card" style="border-left-color:#6b3a5a;">
-                    <h4 style="color:#6b3a5a;">Deborah</h4>
-                    <p class="desc">Judge and prophetess — led Israel with wisdom.</p>
-                </a>
-                <a href="women-hannah.html" class="item-card" style="border-left-color:#6b3a5a;">
-                    <h4 style="color:#6b3a5a;">Hannah</h4>
-                    <p class="desc">Prayed in desperation — gave her son to God.</p>
-                </a>
-                <a href="women-rahab.html" class="item-card" style="border-left-color:#6b3a5a;">
-                    <h4 style="color:#6b3a5a;">Rahab</h4>
-                    <p class="desc">A prostitute redeemed by faith — in Christ's lineage.</p>
-                </a>
-                <a href="women-mary-magdalene.html" class="item-card" style="border-left-color:#6b3a5a;">
-                    <h4 style="color:#6b3a5a;">Mary Magdalene</h4>
-                    <p class="desc">Delivered from demons — first witness of resurrection.</p>
-                </a>
-                <a href="women-abigail.html" class="item-card" style="border-left-color:#6b3a5a;">
-                    <h4 style="color:#6b3a5a;">Abigail</h4>
-                    <p class="desc">Wisdom and courage in the face of a fool.</p>
-                </a>
-                <a href="women-priscilla.html" class="item-card" style="border-left-color:#6b3a5a;">
-                    <h4 style="color:#6b3a5a;">Priscilla</h4>
-                    <p class="desc">Co-laborer with Paul — taught Apollos the Way.</p>
-                </a>
+        <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Topical Studies</a>
+
+        <nav class="jump-grid">
+            <a href="#overview" class="jump-card">Overview</a>
+            <a href="#ruth" class="jump-card">Ruth</a>
+            <a href="#esther" class="jump-card">Esther</a>
+            <a href="#mary-mother" class="jump-card">Mary, Mother of Jesus</a>
+            <a href="#sarah" class="jump-card">Sarah</a>
+            <a href="#deborah" class="jump-card">Deborah</a>
+            <a href="#hannah" class="jump-card">Hannah</a>
+            <a href="#rahab" class="jump-card">Rahab</a>
+            <a href="#mary-magdalene" class="jump-card">Mary Magdalene</a>
+            <a href="#abigail" class="jump-card">Abigail</a>
+            <a href="#priscilla" class="jump-card">Priscilla</a>
+            <a href="#videos" class="jump-card">Videos</a>
+        </nav>
+
+        <div class="section-block" id="overview">
+            <span class="section-kicker">Introduction</span>
+            <h2>Overview</h2>
+            <p>Scripture's women are too often reduced to footnotes, yet a closer reading reveals them as central figures whose courage, faith, and wisdom altered the course of God's redemptive story. They are not uniform in circumstance — a Moabite widow, a Jewish orphan turned queen, a barren wife, a judge, a desperate mother, a rescued prostitute, a delivered demoniac, a wise peacemaker, and a theologian in her own home — but each demonstrates that God's purposes have always run through women who trusted Him against the grain of their culture and circumstances.</p>
+            <p>Their stories span the whole sweep of Scripture: Sarah's decades of waiting for a promised son, Rahab's scarlet-cord deliverance from a doomed city, Deborah's leadership of a nation, Hannah's raw prayer answered with a prophet, Ruth's loyalty rewarded with a place in Christ's genealogy, Esther's courage that saved a people, Mary's surrender to bear the Messiah, Mary Magdalene's transformation from bondage to first witness of the resurrection, Abigail's wisdom that averted bloodshed, and Priscilla's quiet theological influence in the early church.</p>
+            <p>Together they testify that God has never confined His work to one kind of person or one path to faithfulness. He meets the barren and the bold, the outsider and the queen, the desperate and the wise, and through each one advances a story none of them could have written alone. Their example is not a single mold to imitate but an invitation: whatever your circumstance, God is not finished writing your part in His story.</p>
+        </div>
+
+        <div class="section-block" id="ruth">
+            <span class="section-kicker">Loyalty and Redemption</span>
+            <h2>Ruth</h2>
+            <h3>Her Story</h3>
+            <p>Ruth was a Moabite woman — a foreigner from a nation that had historically been an enemy of Israel. When famine drove Naomi's family to Moab, Ruth married one of Naomi's sons. But tragedy struck: Naomi's husband and both sons died, leaving three widows destitute. When Naomi decided to return to Bethlehem, she urged her daughters-in-law to go back to their own families. Orpah turned back, but Ruth clung to Naomi with words that echo through the ages: "Where you go I will go, and where you stay I will stay. Your people will be my people and your God my God."</p>
+            <p>Ruth's declaration was not mere sentiment — it was a covenant commitment that cost her everything familiar. She left her homeland, her gods, her family, and her future prospects to follow Naomi into poverty and uncertainty. In Bethlehem, she humbled herself to glean in the fields behind the harvesters. Yet her faithfulness caught the eye of Boaz, a kinsman-redeemer who recognized her extraordinary character.</p>
+            <p>Through Boaz's redemption, Ruth — the foreign widow with no standing and no future — became the great-grandmother of King David and an ancestor of Jesus Christ. Her story is one of the most beautiful pictures of redemption in all of Scripture: God took the outsider and made her an insider, took the destitute and made her an ancestor of royalty.</p>
+            <h3>Lessons from Her Life</h3>
+            <p>Ruth teaches us that loyalty and faithfulness can transform our destiny. Her commitment to Naomi was not strategic — it offered no visible advantage. Yet this selfless devotion placed her in the exact field, at the exact time, where God's provision awaited her.</p>
+            <p>Ruth also demonstrates that God's family has always been larger than ethnic or national boundaries. As a Moabite woman in Israel's royal lineage, Ruth prefigures the gospel truth that God's grace extends to all people. No background, no past, no nationality can exclude someone from God's redemptive purposes.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Ruth 1:16-17')">Ruth 1:16-17</span> — "Where you go I will go... Your people will be my people and your God my God."</li>
+                <li><span class="verse-ref" onclick="showVerse('Ruth 2:12')">Ruth 2:12</span> — "May you be richly rewarded by the LORD... under whose wings you have come to take refuge."</li>
+                <li><span class="verse-ref" onclick="showVerse('Ruth 4:13-17')">Ruth 4:13-17</span> — Ruth marries Boaz and becomes grandmother of Jesse, father of David.</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 31:10')">Proverbs 31:10</span> — "A wife of noble character who can find? She is worth far more than rubies."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 1:5')">Matthew 1:5</span> — Ruth named in the genealogy of Jesus Christ.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="esther">
+            <span class="section-kicker">For Such a Time as This</span>
+            <h2>Esther</h2>
+            <h3>Her Story</h3>
+            <p>Esther was a Jewish orphan raised by her cousin Mordecai in the Persian capital of Susa. When King Xerxes sought a new queen, Esther's beauty brought her to the palace — but her Jewish identity remained hidden. She lived in luxury while her people lived in danger, until the day Haman's genocidal decree threatened to annihilate every Jew in the Persian Empire.</p>
+            <p>Mordecai's challenge cut through Esther's fear: "Who knows whether you have not come to the kingdom for such a time as this?" Approaching the king uninvited meant risking death, yet Esther chose courage over self-preservation. Her response — "If I perish, I perish" — reveals a woman who understood that some things are worth dying for. She called for three days of fasting, then entered the king's presence with a strategic wisdom that matched her courage.</p>
+            <p>Through careful timing and divine providence, Esther exposed Haman's plot, saved her people, and saw their enemy destroyed on the very gallows he had built for Mordecai. Though God's name is never mentioned in the book of Esther, His fingerprints are on every page — proving that God works even when He seems silent.</p>
+            <h3>Lessons from Her Life</h3>
+            <p>Esther teaches us that our position in life — whatever it may be — is not accidental. God places us where we are for purposes that may not be immediately visible. The question is not whether we are in the right place, but whether we are willing to leverage our position for God's purposes when the moment of decision arrives.</p>
+            <p>Esther also shows us that courage is not the absence of fear but action in spite of it. She was genuinely terrified, yet she did not let fear have the final word. She prepared, she prayed, and she moved forward.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Esther 4:14')">Esther 4:14</span> — "Who knows whether you have come to the kingdom for such a time as this?"</li>
+                <li><span class="verse-ref" onclick="showVerse('Esther 4:16')">Esther 4:16</span> — "If I perish, I perish."</li>
+                <li><span class="verse-ref" onclick="showVerse('Esther 7:3')">Esther 7:3</span> — Esther reveals Haman's plot to King Xerxes and pleads for her people.</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 31:25')">Proverbs 31:25</span> — "She is clothed with strength and dignity; she can laugh at the days to come."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 46:5')">Psalm 46:5</span> — "God is within her, she will not fall; God will help her at break of day."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="mary-mother">
+            <span class="section-kicker">Humble Handmaiden</span>
+            <h2>Mary, Mother of Jesus</h2>
+            <h3>Her Story</h3>
+            <p>Mary was a young woman from Nazareth — an insignificant village in Galilee — when the angel Gabriel appeared with an announcement that would change history. She was told she would conceive by the Holy Spirit and bear the Son of God. Her response was not one of self-promotion or fear, but of humble surrender: "I am the Lord's servant. Let it be to me according to your word."</p>
+            <p>Mary's Magnificat — her song of praise recorded in Luke 1 — reveals a woman deeply steeped in Scripture, who understood that God's work through her was part of His larger story of lifting the humble and filling the hungry. Her song echoes Hannah's prayer centuries earlier, connecting her story to the long line of women God used to accomplish His purposes.</p>
+            <p>Throughout Jesus' life, Mary treasured things in her heart — pondering the shepherds' visit, the prophecy of Simeon, and the mysterious words of her growing Son. She was present at the cross, watching her firstborn die in agony, and was among the believers gathered in the upper room at Pentecost.</p>
+            <h3>Lessons from Her Life</h3>
+            <p>Mary teaches us what it means to say yes to God without knowing the full cost. Her surrender was not informed by a complete picture of what lay ahead. Yet she trusted that God's word was sufficient, even when the path was unclear.</p>
+            <p>Mary also models the discipline of treasuring and pondering. Not everything needs to be processed immediately or shared publicly. Sometimes the most faithful response to God's mysterious work is patient meditation — storing up what we observe and waiting for God to reveal its meaning in His own time.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Luke 1:38')">Luke 1:38</span> — "I am the Lord's servant. May your word to me be fulfilled."</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 1:46-49')">Luke 1:46-49</span> — Mary's Magnificat: "My soul magnifies the Lord... He has done great things for me."</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 2:19')">Luke 2:19</span> — "Mary treasured up all these things, pondering them in her heart."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 19:25')">John 19:25</span> — Mary standing at the foot of the cross.</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 2:35')">Luke 2:35</span> — Simeon's prophecy: "A sword will pierce through your own soul also."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="sarah">
+            <span class="section-kicker">Mother of Nations</span>
+            <h2>Sarah</h2>
+            <h3>Her Story</h3>
+            <p>Sarah was Abraham's wife and partner in the journey of faith from Ur to Canaan. She left everything familiar to follow her husband into an unknown future based on God's promise. For decades she bore the weight of barrenness in a culture where a woman's worth was measured by her children. The promise of a son seemed to mock her with each passing year, yet God had not forgotten.</p>
+            <p>When three visitors came to Abraham's tent and declared that Sarah would bear a son within a year, she laughed — not from joy but from the bitter impossibility of it. She was ninety years old. Yet God's response was not anger but a question that echoes through the ages: "Is anything too hard for the LORD?" Within the year, Isaac was born, and Sarah's laughter transformed from cynicism to pure delight.</p>
+            <p>Sarah's story is marked by both faith and failure. She gave Hagar to Abraham in an attempt to fulfill God's promise through human engineering, creating generations of conflict. Yet the New Testament honors her as a woman of faith and a model of hope.</p>
+            <h3>Lessons from Her Life</h3>
+            <p>Sarah teaches us that doubt and faith can coexist within the same heart. She laughed at God's promise, yet Scripture calls her a woman of faith. God does not demand perfect confidence — He asks only that we stay in the conversation with Him, even when His promises seem absurd.</p>
+            <p>Sarah also warns us about the danger of trying to help God fulfill His promises through human scheming. When God makes a promise, our job is to trust and wait — not to engineer solutions that seem more realistic.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Genesis 18:14')">Genesis 18:14</span> — "Is anything too hard for the LORD? At the appointed time I will return to you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Genesis 21:1-2')">Genesis 21:1-2</span> — The LORD visited Sarah as He had said, and she bore Abraham a son in his old age.</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 11:11')">Hebrews 11:11</span> — "By faith Sarah herself received power to conceive, because she considered him faithful who had promised."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Peter 3:6')">1 Peter 3:6</span> — Sarah obeyed Abraham, calling him lord — and you are her children if you do good.</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 4:19-21')">Romans 4:19-21</span> — Abraham did not weaken in faith... fully convinced that God was able to do what He had promised.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="deborah">
+            <span class="section-kicker">Judge and Prophetess</span>
+            <h2>Deborah</h2>
+            <h3>Her Story</h3>
+            <p>Deborah stands unique in Israel's history as a prophetess, judge, and military leader all at once. In an era when women held little formal authority, she sat under a palm tree between Ramah and Bethel, and all Israel came to her for judgment. Her wisdom was so widely recognized that both men and women sought her counsel, and her word carried the authority of God Himself.</p>
+            <p>When the time came for military action against the Canaanite oppressor Sisera, Deborah summoned Barak and delivered God's battle plan. Barak's response revealed his deep respect for her leadership: "If you will go with me, I will go, but if you will not go with me, I will not go." Deborah agreed but prophesied that the honor of victory would go to a woman — a prophecy fulfilled when Jael defeated Sisera.</p>
+            <p>Deborah's song of victory in Judges 5 celebrates God's deliverance and her own role as "a mother in Israel." Her leadership was not despite her femininity but expressed through it — she combined strength with nurture, authority with wisdom, and courage with compassion.</p>
+            <h3>Lessons from Her Life</h3>
+            <p>Deborah teaches us that God's calling transcends human categories and cultural limitations. In a patriarchal society, God raised up a woman to judge, prophesy, and lead a nation into battle. When God calls someone, no human structure can limit what He intends to accomplish through them.</p>
+            <p>Deborah also models the integration of multiple gifts. She was simultaneously a spiritual leader, a civic leader, and a military strategist, bringing the fullness of her God-given wisdom to every sphere.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Judges 4:4-5')">Judges 4:4-5</span> — Deborah, a prophetess, was judging Israel at that time. She held court under the Palm of Deborah.</li>
+                <li><span class="verse-ref" onclick="showVerse('Judges 4:14')">Judges 4:14</span> — "Up! For this is the day in which the LORD has given Sisera into your hand."</li>
+                <li><span class="verse-ref" onclick="showVerse('Judges 5:7')">Judges 5:7</span> — "The villagers ceased... until I arose; I, Deborah, arose as a mother in Israel."</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 31:26')">Proverbs 31:26</span> — "She opens her mouth with wisdom, and the teaching of kindness is on her tongue."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 41:10')">Isaiah 41:10</span> — "Fear not, for I am with you; be not dismayed, for I am your God."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="hannah">
+            <span class="section-kicker">A Prayer Answered</span>
+            <h2>Hannah</h2>
+            <h3>Her Story</h3>
+            <p>Hannah's story begins in grief. Year after year she accompanied her husband Elkanah to Shiloh for worship, and year after year she returned home without the child her heart longed for. Her rival Peninnah taunted her relentlessly about her barrenness, adding emotional cruelty to physical heartbreak.</p>
+            <p>One year at Shiloh, Hannah's grief reached a breaking point. She poured out her soul before the LORD with such intensity that the priest Eli thought she was drunk. Her prayer was not polished or composed — it was raw, desperate, and honest. She made a vow: if God would give her a son, she would give him back to the LORD for all the days of his life.</p>
+            <p>God answered Hannah's prayer, and Samuel was born. True to her word, as soon as the boy was weaned, Hannah brought him to the tabernacle at Shiloh and left him there to serve the LORD. Her prayer of thanksgiving — recorded in 1 Samuel 2 — is one of Scripture's most beautiful songs of praise.</p>
+            <h3>Lessons from Her Life</h3>
+            <p>Hannah teaches us that God welcomes raw, unfiltered prayer. Her example gives permission to every believer to weep before God, to pour out bitterness and longing without pretense. God is not offended by our desperation; He is moved by it.</p>
+            <p>Hannah also demonstrates the radical nature of true surrender. She prayed for a son, received him, and then gave him back. When we offer God our best with open hands, He multiplies what we could never have imagined.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Samuel 1:10-11')">1 Samuel 1:10-11</span> — In her deep anguish Hannah prayed to the LORD, weeping bitterly, and made a vow.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Samuel 1:27-28')">1 Samuel 1:27-28</span> — "I prayed for this child, and the LORD has granted me what I asked. So now I give him to the LORD."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Samuel 2:1')">1 Samuel 2:1</span> — "My heart rejoices in the LORD; in the LORD my horn is lifted high."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 37:4')">Psalm 37:4</span> — "Delight yourself in the LORD, and he will give you the desires of your heart."</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 4:6')">Philippians 4:6</span> — "Do not be anxious about anything, but in everything by prayer present your requests to God."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="rahab">
+            <span class="section-kicker">Faith of an Outsider</span>
+            <h2>Rahab</h2>
+            <h3>Her Story</h3>
+            <p>Rahab was a prostitute in Jericho — a woman at the very bottom of the social order in a city marked for divine judgment. When Joshua's spies entered Jericho, it was Rahab who hid them, lied to the king's soldiers, and helped them escape over the city wall. Her actions were born of genuine faith: "I know that the LORD has given you this land... for the LORD your God is God in heaven above and on earth below."</p>
+            <p>In exchange for her protection of the spies, Rahab secured a promise of safety for herself and her family when Jericho fell. The scarlet cord she hung from her window has become one of Scripture's most powerful symbols of redemption. When the walls of Jericho collapsed, Rahab's house alone stood firm.</p>
+            <p>Rahab's story did not end with survival. She was grafted into the nation of Israel, married Salmon, and became the mother of Boaz — who would marry Ruth and become great-grandfather of King David. She appears in the genealogy of Jesus Christ, forever honored as an ancestor of the Messiah.</p>
+            <h3>Lessons from Her Life</h3>
+            <p>Rahab demolishes every notion that our past disqualifies us from God's future. God does not require a cleaned-up life before He accepts us; He accepts us in the midst of our mess and then transforms us from within.</p>
+            <p>Rahab also teaches us that faith is demonstrated through action. James uses her as his primary example that "faith without works is dead." True faith always moves us to action, even when that action is costly and the outcome uncertain.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Joshua 2:11')">Joshua 2:11</span> — "The LORD your God is God in heaven above and on the earth below."</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 11:31')">Hebrews 11:31</span> — "By faith the prostitute Rahab, because she welcomed the spies, was not killed with those who were disobedient."</li>
+                <li><span class="verse-ref" onclick="showVerse('James 2:25')">James 2:25</span> — "Was not even Rahab the prostitute considered righteous for what she did when she gave lodging to the spies?"</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 1:5')">Matthew 1:5</span> — Rahab listed in the genealogy of Jesus Christ.</li>
+                <li><span class="verse-ref" onclick="showVerse('Joshua 6:25')">Joshua 6:25</span> — "Joshua spared Rahab the prostitute, with her family... because she hid the men Joshua had sent."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="mary-magdalene">
+            <span class="section-kicker">Delivered and Sent</span>
+            <h2>Mary Magdalene</h2>
+            <h3>Her Story</h3>
+            <p>Mary Magdalene's life before meeting Jesus was one of torment — Luke records that seven demons had been cast out of her. When Jesus freed her, the transformation was so complete that she became one of His most devoted followers, traveling with Him and supporting His ministry from her own resources.</p>
+            <p>Mary Magdalene's devotion to Jesus was tested at the cross. While most of the male disciples fled in fear, Mary remained, watching her Lord suffer and die. Her presence at Calvary was an act of courage and loyalty that defied the danger of being associated with an executed criminal.</p>
+            <p>On resurrection morning, Mary Magdalene was the first person to whom the risen Christ appeared. When Jesus spoke her name — "Mary" — she recognized Him instantly. He then commissioned her to carry the most important message in human history to the other disciples: "I have seen the Lord."</p>
+            <h3>Lessons from Her Life</h3>
+            <p>Mary Magdalene teaches us that those who have been delivered from the most become the most devoted. When we truly understand what God has rescued us from, half-hearted devotion becomes impossible.</p>
+            <p>Mary also shows us that faithful presence matters more than we realize. She simply stayed at the cross, and because she stayed, she was first to witness the resurrection. God honors those who remain faithful in the dark hours, even when they cannot do anything except be present.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Luke 8:2')">Luke 8:2</span> — Mary Magdalene, from whom seven demons had gone out.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 20:1-2')">John 20:1-2</span> — Early on the first day of the week, Mary Magdalene went to the tomb and saw the stone removed.</li>
+                <li><span class="verse-ref" onclick="showVerse('John 20:16-18')">John 20:16-18</span> — Jesus said to her, "Mary." She turned and said, "Rabboni!" ... "I have seen the Lord."</li>
+                <li><span class="verse-ref" onclick="showVerse('Mark 16:9')">Mark 16:9</span> — He appeared first to Mary Magdalene, out of whom he had driven seven demons.</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 7:47')">Luke 7:47</span> — "Her many sins have been forgiven — as her great love has shown."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="abigail">
+            <span class="section-kicker">Wisdom in the Storm</span>
+            <h2>Abigail</h2>
+            <h3>Her Story</h3>
+            <p>Abigail was married to Nabal — a man whose name literally means "fool" — a wealthy but brutish landowner. When David's men, who had protected Nabal's shepherds in the wilderness, asked for provisions, Nabal responded with insults and contempt, putting his entire household in mortal danger as David armed four hundred men and marched toward his estate with murderous intent.</p>
+            <p>Abigail acted with extraordinary speed and wisdom. Without consulting her husband, she gathered generous provisions, rode out to meet David, and delivered one of the most diplomatically brilliant speeches in Scripture — acknowledging David's rightful anger while appealing to his higher calling and reminding him that vengeance belongs to God.</p>
+            <p>Her intervention saved her household and preserved David from a sin he would have deeply regretted. David himself recognized the divine wisdom in her words: "Blessed be your discretion, and blessed be you, who have kept me this day from bloodguilt." After Nabal died of natural causes, David sent for Abigail and she became his wife.</p>
+            <h3>Lessons from Her Life</h3>
+            <p>Abigail teaches us that wisdom and courage combined can defuse even the most volatile situations. Her example shows that godly wisdom is not passive but engaged, not timid but bold, not reckless but strategic.</p>
+            <p>Abigail also demonstrates the power of a soft answer. Her approach models how to speak truth to power — with humility, with respect, and with genuine concern for the other person's spiritual well-being.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Samuel 25:3')">1 Samuel 25:3</span> — The woman was discerning and beautiful, but the man was harsh and badly behaved.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Samuel 25:32-33')">1 Samuel 25:32-33</span> — "Blessed be your discretion, and blessed be you, who have kept me this day from bloodguilt."</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 15:1')">Proverbs 15:1</span> — "A soft answer turns away wrath, but a harsh word stirs up anger."</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 31:26')">Proverbs 31:26</span> — "She opens her mouth with wisdom, and the teaching of kindness is on her tongue."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Samuel 25:23-24')">1 Samuel 25:23-24</span> — Abigail fell at David's feet and said, "On me alone, my lord, be the guilt."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="priscilla">
+            <span class="section-kicker">Co-Laborer in the Gospel</span>
+            <h2>Priscilla</h2>
+            <h3>Her Story</h3>
+            <p>Priscilla and her husband Aquila are always mentioned together in Scripture — a partnership in marriage, ministry, and mission that modeled the early church at its best. Tentmakers by trade, they were among the Jewish Christians expelled from Rome under Emperor Claudius. In Corinth, they met Paul and opened their home and workshop to him, beginning a partnership that would span years and cross continents.</p>
+            <p>When the eloquent Apollos arrived in Ephesus, preaching powerfully but with incomplete understanding, it was Priscilla and Aquila who "took him aside and explained to him the way of God more accurately." The fact that Priscilla is often named first in this couple suggests her prominent role in teaching and leadership.</p>
+            <p>Paul called Priscilla and Aquila his "fellow workers in Christ Jesus" who "risked their necks" for his life. They hosted house churches in every city they lived — Corinth, Ephesus, and Rome — representing the countless unnamed believers whose hospitality, teaching, and sacrifice built the early church from the ground up.</p>
+            <h3>Lessons from Her Life</h3>
+            <p>Priscilla teaches us that effective ministry often happens in the margins — in homes, workshops, and private conversations rather than from platforms and pulpits. Their model reminds us that the most transformative work often happens in intimate, personal settings.</p>
+            <p>Priscilla also demonstrates the power of partnership in ministry. She and Aquila worked as a seamless team, and their example invites reflection on how marriage can become a platform for gospel work together.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Acts 18:26')">Acts 18:26</span> — Priscilla and Aquila took Apollos aside and explained to him the way of God more accurately.</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 16:3-4')">Romans 16:3-4</span> — "Greet Prisca and Aquila, my fellow workers in Christ Jesus, who risked their necks for my life."</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 18:2-3')">Acts 18:2-3</span> — Paul went to see them, and because he was a tentmaker as they were, he stayed and worked with them.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 16:19')">1 Corinthians 16:19</span> — "The churches in the province of Asia send you greetings. Aquila and Prisca greet you warmly."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Timothy 4:19')">2 Timothy 4:19</span> — "Greet Prisca and Aquila" — Paul remembers them among his dearest co-laborers to the end.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="videos">
+            <span class="section-kicker">Watch &amp; Learn</span>
+            <h2>Videos</h2>
+
+            <h4>Ruth</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'0h1eoBeR4Jk')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/0h1eoBeR4Jk/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Book of Ruth Summary: A Complete Animated Overview<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'5-qMLUd6G1c')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/5-qMLUd6G1c/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Controversial Passage: Did RUTH Do Something INAPPROPRIATE to BOAZ?<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'FuhBVzLbSHE')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/FuhBVzLbSHE/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What are the most frequently asked questions about the book of Ruth? - Podcast Episode 301<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>Esther</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'JydNSlufRIs')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/JydNSlufRIs/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Book of Esther Summary: A Complete Animated Overview<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'q3tIfl6iT9k')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/q3tIfl6iT9k/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Story of Esther<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'QlSxlT9K1D4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/QlSxlT9K1D4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">A Summary of the Book of Esther  |  GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>Mary, Mother of Jesus</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'3hGI7_F9SC8')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/3hGI7_F9SC8/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">7 Things You Didn't Know About Mother Mary<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'5LLdJXW0GR0')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/5LLdJXW0GR0/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Protestant vs Catholic: How should Christians view Mary, the mother of Jesus? - Podcast Episode 273<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'m2c_yKQ6Aag')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/m2c_yKQ6Aag/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How old was Mary when Jesus was born?  |  GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>Sarah</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'cbZUyOZ2o4M')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/cbZUyOZ2o4M/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Death and Burial of Sarah – Genesis 23<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'NlomPffMV3U')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/NlomPffMV3U/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Abraham Lies About Sarah Again – Genesis 20<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'lZL4jHFevc8')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/lZL4jHFevc8/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Abraham & Sarah: Waited A Long Time | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
+
+            <h4>Deborah</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'VbT6JqEKHBs')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/VbT6JqEKHBs/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Judges 3:7-5 | Ehud and Deborah | Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Spoken Gospel</span></p></div>
+            </div>
+
+            <h4>Hannah</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'_mvgar5zUT0')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/_mvgar5zUT0/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Hannah's Poem and Power Reversals • Firstborn Ep. 6<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'83HPAKX4uWA')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/83HPAKX4uWA/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How to Wait on God When God Won't Give You What You Want | HEROES (HANNAH)<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">THE BEAT by Allen Parr</span></p></div>
+            </div>
+
+            <h4>Rahab</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'UZRBrNRyvTs')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/UZRBrNRyvTs/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Rescue of Rahab – Joshua 2<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'VkRbDHGe2Kk')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/VkRbDHGe2Kk/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What can we learn from the life of Rahab? How is Rahab's story our story? - Podcast Episode 177<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'kSqQZ3RZrpw')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/kSqQZ3RZrpw/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Joshua 2 | Rahab the Prostitute | Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Spoken Gospel</span></p></div>
+            </div>
+
+            <h4>Mary Magdalene</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'VNEIO4Ayk3I')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/VNEIO4Ayk3I/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Chosen Explained S2/E6 | Is It Possible for Mary Magdalene to Backslide?<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'tdQ8HzV1Uc4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/tdQ8HzV1Uc4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">6 Things You Didn't Know About Mary Magdalene<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+            </div>
+
+            <h4>Abigail</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'On2qYTkMPyY')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/On2qYTkMPyY/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How to Have the Keys to a Man's Heart | HEROES (ABIGAIL)<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">THE BEAT by Allen Parr</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'njm7TKTCfC4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/njm7TKTCfC4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">David and Abigail: A Couple that Valued Listening to Each Other's Advice | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
+
+            <h4>Priscilla</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'RhpyQUKEC4k')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/RhpyQUKEC4k/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Priscilla & Aquila: Prioritized Ministry and Even Sacrificed for the Gospel | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
         </div>
     </main>
+
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="if(event.target===this)closeVerse()">
+        <div class="verse-popup" id="versePopup">
+            <button class="close-popup" onclick="closeVerse()">&times;</button>
+            <h4 id="popupRef"></h4>
+            <p id="popupText">Loading...</p>
+        </div>
+    </div>
+
     <script src="site/script.js"></script>
+    <script>
+        function loadYT(el, id) {
+            el.innerHTML = '<iframe width="100%" height="100%" style="position:absolute;inset:0;" src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        }
+        function showVerse(passage) {
+            document.getElementById('verseOverlay').classList.add('active');
+            document.getElementById('popupRef').textContent = passage;
+            document.getElementById('popupText').textContent = 'Loading...';
+            fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+                .then(r => r.json())
+                .then(data => {
+                    document.getElementById('popupText').textContent = (data.passages && data.passages[0]) ? data.passages[0].trim() : 'Verse not found.';
+                })
+                .catch(() => { document.getElementById('popupText').textContent = 'Unable to load verse.'; });
+        }
+        function closeVerse() {
+            document.getElementById('verseOverlay').classList.remove('active');
+        }
+    </script>
 </body>
 </html>
