@@ -14,99 +14,502 @@
     <link rel="stylesheet" href="site/style.css">
     <style>
         body { background: #faf5ed; }
-        .page-content { margin: 0 auto; max-width: 960px; padding: 24px 24px 80px; }
-        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #6b4c3b; text-decoration: none; font-weight: 600; transition: color 0.2s; }
-        .back-link i { margin-right: 6px; }
-        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 8px; }
-        .item-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid; border-radius: 10px; text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
-        .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
-        .item-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 2px; }
-        .item-card .subtitle { font-size: 0.75rem; font-style: italic; color: #8a7e74; margin-bottom: 6px; }
-        .item-card .desc { font-size: 0.82rem; color: #5a4e44; line-height: 1.5; }
-        @media (max-width: 768px) { .item-grid { grid-template-columns: 1fr; } }
+        .topic-hero { position: relative; height: 240px; overflow: hidden; }
+        .topic-hero img { width: 100%; height: 100%; object-fit: cover; }
+        .topic-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)); filter: brightness(0.45) sepia(0.75) saturate(1.7); backdrop-filter: none; }
+        .topic-hero .hero-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
+        .topic-hero h1 { font-family: 'Cinzel', serif; color: #fff; font-size: 2rem; margin: 0 0 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+        .topic-hero p { color: #f0e8dc; font-size: 0.95rem; max-width: 600px; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+        .page-content { margin: 0 auto; max-width: 820px; padding: 20px 24px 80px; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; color: #6b4c3b; font-weight: 600; font-size: 0.85rem; text-decoration: none; margin: 16px 0; }
+        .back-link:hover { text-decoration: underline; }
+        .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
+        .jump-card { background: #fff; border: 1px solid #e8e0d6; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #6b4c3b; text-decoration: none; transition: background .15s, transform .15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+        .section-block { background: #fff; border: 1px solid #e8e0d6; border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; scroll-margin-top: 76px; }
+        .section-block .section-kicker { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #a68e78; }
+        .section-block h2 { font-family: 'Cinzel', serif; color: #6b4c3b; font-size: 1.35rem; margin: 4px 0 12px; }
+        .section-block h3 { font-family: 'Cinzel', serif; color: #7d5a45; font-size: 1.02rem; margin: 18px 0 8px; }
+        .section-block h4 { font-family: 'Cinzel', serif; color: #6b4c3b; font-size: 0.95rem; margin: 18px 0 8px; }
+        .section-block p { line-height: 1.7; color: #3d332b; margin: 0 0 10px; }
+        .verse-list { list-style: none; padding: 0; margin: 8px 0 0; }
+        .verse-list li { padding: 8px 0; border-bottom: 1px solid #f0e8dc; font-size: 0.9rem; line-height: 1.6; color: #4a3f35; }
+        .verse-list li:last-child { border-bottom: none; }
+        .verse-ref { color: #6b4c3b; font-weight: 600; text-decoration: underline dotted; cursor: pointer; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .video-grid:last-child { margin-bottom: 0; }
+        .verse-popup-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999; align-items: center; justify-content: center; padding: 20px; }
+        .verse-popup-overlay.active { display: flex; }
+        .verse-popup { background: #fff; border-radius: 12px; padding: 24px; max-width: 480px; width: 100%; max-height: 70vh; overflow-y: auto; position: relative; }
+        .verse-popup h4 { font-family: 'Cinzel', serif; color: #6b4c3b; margin: 0 0 12px; }
+        .verse-popup p { line-height: 1.7; color: #3d332b; }
+        .verse-popup .close-popup { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 1.3rem; color: #a68e78; cursor: pointer; }
+        @media (max-width: 600px) { .topic-hero h1 { font-size: 1.5rem; } }
     </style>
 </head>
 <body>
-    <div class="section-hero">
-        <img src="https://images.unsplash.com/photo-1772289935377-4bd72e95d473?w=1400&q=80&auto=format"
-             srcset="https://images.unsplash.com/photo-1772289935377-4bd72e95d473?w=640&q=80&auto=format 640w,
-                     https://images.unsplash.com/photo-1772289935377-4bd72e95d473?w=1000&q=80&auto=format 1000w,
-                     https://images.unsplash.com/photo-1772289935377-4bd72e95d473?w=1600&q=80&auto=format 1600w"
-             sizes="100vw" fetchpriority="high" alt="Majestic desert mountain at sunset">
-        <div class="section-hero-overlay">
-            <h2>Names of God</h2>
-            <p class="section-desc">Every name of God reveals another facet of who He is.</p>
+    <div class="topic-hero">
+        <img src="https://images.unsplash.com/photo-1772289935377-4bd72e95d473?w=1400&q=80&auto=format" alt="Majestic desert mountain at sunset">
+        <div class="hero-overlay">
+            <h1>Names of God</h1>
+            <p>Every name of God reveals another facet of who He is — Creator, Provider, Healer, Shepherd, Father.</p>
         </div>
     </div>
     <main class="page-content">
-        <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
-        <div class="item-grid">
-                <a href="names-elohim.html" class="item-card" style="border-left-color:#6b4c3b;">
-                    <h4 style="color:#6b4c3b;">Elohim</h4>
-                    <p class="desc">God the Creator — mighty and powerful.</p>
-                </a>
-                <a href="names-yahweh.html" class="item-card" style="border-left-color:#6b4c3b;">
-                    <h4 style="color:#6b4c3b;">Yahweh</h4>
-                    <p class="desc">The LORD — 'I AM WHO I AM.'</p>
-                </a>
-                <a href="names-adonai.html" class="item-card" style="border-left-color:#6b4c3b;">
-                    <h4 style="color:#6b4c3b;">Adonai</h4>
-                    <p class="desc">Lord, Master — sovereign ruler over all.</p>
-                </a>
-                <a href="names-el-shaddai.html" class="item-card" style="border-left-color:#6b4c3b;">
-                    <h4 style="color:#6b4c3b;">El Shaddai</h4>
-                    <p class="desc">God Almighty — all-sufficient one.</p>
-                </a>
-                <a href="names-el-elyon.html" class="item-card" style="border-left-color:#6b4c3b;">
-                    <h4 style="color:#6b4c3b;">El Elyon</h4>
-                    <p class="desc">God Most High — supreme over all.</p>
-                </a>
-                <a href="names-jehovah-jireh.html" class="item-card" style="border-left-color:#6b4c3b;">
-                    <h4 style="color:#6b4c3b;">Jehovah Jireh</h4>
-                    <p class="desc">The LORD will provide.</p>
-                </a>
-                <a href="names-jehovah-rapha.html" class="item-card" style="border-left-color:#6b4c3b;">
-                    <h4 style="color:#6b4c3b;">Jehovah Rapha</h4>
-                    <p class="desc">The LORD who heals.</p>
-                </a>
-                <a href="names-jehovah-nissi.html" class="item-card" style="border-left-color:#6b4c3b;">
-                    <h4 style="color:#6b4c3b;">Jehovah Nissi</h4>
-                    <p class="desc">The LORD our banner.</p>
-                </a>
-                <a href="names-jehovah-shalom.html" class="item-card" style="border-left-color:#6b4c3b;">
-                    <h4 style="color:#6b4c3b;">Jehovah Shalom</h4>
-                    <p class="desc">The LORD is peace.</p>
-                </a>
-                <a href="names-el-roi.html" class="item-card" style="border-left-color:#6b4c3b;">
-                    <h4 style="color:#6b4c3b;">El Roi</h4>
-                    <p class="desc">The God who sees me.</p>
-                </a>
-                <a href="names-yahweh-sabaoth.html" class="item-card" style="border-left-color:#6b4c3b;">
-                    <h4 style="color:#6b4c3b;">Yahweh Sabaoth</h4>
-                    <p class="desc">LORD of hosts — commander of armies.</p>
-                </a>
-                <a href="names-abba.html" class="item-card" style="border-left-color:#6b4c3b;">
-                    <h4 style="color:#6b4c3b;">Abba</h4>
-                    <p class="desc">Father — intimate, personal relationship.</p>
-                </a>
-                <a href="names-jehovah-rohi.html" class="item-card" style="border-left-color:#6b4c3b;">
-                    <h4 style="color:#6b4c3b;">Jehovah Rohi</h4>
-                    <p class="desc">The LORD my shepherd.</p>
-                </a>
-                <a href="names-jehovah-tsidkenu.html" class="item-card" style="border-left-color:#6b4c3b;">
-                    <h4 style="color:#6b4c3b;">Jehovah Tsidkenu</h4>
-                    <p class="desc">The LORD our righteousness.</p>
-                </a>
-                <a href="names-el-olam.html" class="item-card" style="border-left-color:#6b4c3b;">
-                    <h4 style="color:#6b4c3b;">El Olam</h4>
-                    <p class="desc">The Everlasting God.</p>
-                </a>
-                <a href="names-immanuel.html" class="item-card" style="border-left-color:#6b4c3b;">
-                    <h4 style="color:#6b4c3b;">Immanuel</h4>
-                    <p class="desc">God with us.</p>
-                </a>
+        <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Topical Studies</a>
+
+        <nav class="jump-grid">
+            <a href="#overview" class="jump-card">Overview</a>
+            <a href="#elohim" class="jump-card">Elohim</a>
+            <a href="#yahweh" class="jump-card">Yahweh</a>
+            <a href="#adonai" class="jump-card">Adonai</a>
+            <a href="#el-shaddai" class="jump-card">El Shaddai</a>
+            <a href="#el-elyon" class="jump-card">El Elyon</a>
+            <a href="#jehovah-jireh" class="jump-card">Jehovah Jireh</a>
+            <a href="#jehovah-rapha" class="jump-card">Jehovah Rapha</a>
+            <a href="#jehovah-nissi" class="jump-card">Jehovah Nissi</a>
+            <a href="#jehovah-shalom" class="jump-card">Jehovah Shalom</a>
+            <a href="#el-roi" class="jump-card">El Roi</a>
+            <a href="#yahweh-sabaoth" class="jump-card">Yahweh Sabaoth</a>
+            <a href="#abba" class="jump-card">Abba</a>
+            <a href="#jehovah-rohi" class="jump-card">Jehovah Rohi</a>
+            <a href="#jehovah-tsidkenu" class="jump-card">Jehovah Tsidkenu</a>
+            <a href="#el-olam" class="jump-card">El Olam</a>
+            <a href="#immanuel" class="jump-card">Immanuel</a>
+            <a href="#videos" class="jump-card">Videos</a>
+        </nav>
+
+        <div class="section-block" id="overview">
+            <span class="section-kicker">Introduction</span>
+            <h2>Overview</h2>
+            <p>In Hebrew thought, a name was never a mere label — it revealed character, nature, and reputation. When Scripture gives God a name, it is unveiling something true about who He is, often in response to a specific human need or crisis. Across the Old and New Testaments, God progressively reveals Himself through names that build on one another: the mighty Creator (Elohim), the covenant-keeping I AM (Yahweh), the sovereign Master (Adonai), the all-sufficient Almighty (El Shaddai), and dozens more — each one a facet of the same infinite God, given at the moment His people needed to know Him that way.</p>
+            <p>Many of these names were born in the crucible of real human experience: Hagar named God "the One who sees me" while fleeing into the wilderness; Abraham called Him "the LORD will provide" on the mountain where his son's life hung in the balance; Gideon named an altar "the LORD is peace" while trembling in fear; Moses learned the tetragrammaton at a burning bush that would not be consumed. God's names are not abstract theology — they are testimonies, each one a stone of remembrance marking a place where God met someone in their deepest need.</p>
+            <p>Together these sixteen names paint a composite portrait of God as Creator and Sustainer, Warrior and Peacemaker, Judge and Healer, sovereign King and intimate Father. To know His names is to know Him more fully — and to discover that whatever season we are walking through, there is a name of God that speaks directly into it.</p>
+        </div>
+
+        <div class="section-block" id="elohim">
+            <span class="section-kicker">God the Creator</span>
+            <h2>Elohim</h2>
+            <h3>Understanding Elohim</h3>
+            <p>Elohim is the very first name for God that appears in Scripture, introduced in the opening verse of the Bible: "In the beginning, God (Elohim) created the heavens and the earth" (Genesis 1:1). The Hebrew word is grammatically plural, yet it is consistently used with singular verbs when referring to the one true God — a "plural of majesty" that hints at the fullness of God's nature and foreshadows the triune nature revealed more fully in the New Testament.</p>
+            <p>The root of Elohim is "El," meaning strength, might, or power. As Elohim, God is presented as the supreme Creator who spoke the universe into existence by the sheer authority of His word. He is not a distant clockmaker but an intimately involved architect who designed every star, every creature, and every human soul with intentionality and purpose.</p>
+            <p>Throughout the Old Testament, Elohim appears over 2,500 times, making it the most frequently used name for God in the Hebrew Scriptures — the name associated with God's role as sovereign judge, mighty warrior, and faithful Creator.</p>
+            <h3>What This Name Means for Us</h3>
+            <p>Knowing God as Elohim means we serve a Creator who is infinitely powerful and purposeful. Nothing in our lives is accidental or beyond His ability to redeem. The same God who spoke galaxies into existence is the God who knit us together in our mother's womb, and who continues to create new hearts, new beginnings, and new possibilities in the lives of those who trust Him.</p>
+            <p>When we feel small or insignificant, the name Elohim reminds us that we were fashioned by the most powerful being in existence. When we face problems that seem insurmountable, we can remember that our God creates ex nihilo — something out of nothing — and specializes in bringing order out of chaos.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Genesis 1:1')">Genesis 1:1</span> — "In the beginning, God created the heavens and the earth."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 19:1')">Psalm 19:1</span> — "The heavens declare the glory of God; the skies proclaim the work of his hands."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 40:28')">Isaiah 40:28</span> — "The LORD is the everlasting God, the Creator of the ends of the earth."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 104:24')">Psalm 104:24</span> — "How many are your works, LORD! In wisdom you made them all."</li>
+                <li><span class="verse-ref" onclick="showVerse('Nehemiah 9:6')">Nehemiah 9:6</span> — "You alone are the LORD. You made the heavens... the earth and all that is on it."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="yahweh">
+            <span class="section-kicker">The LORD — "I AM WHO I AM"</span>
+            <h2>Yahweh</h2>
+            <h3>Understanding Yahweh</h3>
+            <p>Yahweh is the most sacred and personal name of God in the Hebrew Bible, revealed to Moses at the burning bush in Exodus 3:14 when God declared, "I AM WHO I AM." The Hebrew tetragrammaton YHWH was considered so holy that ancient Israelites would not pronounce it aloud, substituting "Adonai" in its place. This name appears over 6,800 times in the Old Testament — the most frequently used proper name for God.</p>
+            <p>The name is derived from the Hebrew verb "hayah," meaning "to be" or "to exist." It communicates God's self-existence — He is not contingent on anything or anyone else for His being. He is the uncaused cause, the eternal present, existence itself.</p>
+            <p>Yahweh is distinctly the covenant name of God — the name by which He bound Himself to Israel in faithful, steadfast love. It is intimate, personal, and relational: not a distant philosophical concept but a God who draws near, speaks, and acts on behalf of those He loves.</p>
+            <h3>What This Name Means for Us</h3>
+            <p>Knowing God as Yahweh means we are in relationship with a God who is eternally faithful. His covenant promises do not expire, and His character does not change. In a world of shifting circumstances and broken promises, Yahweh stands as the one constant — the "I AM" who is the same yesterday, today, and forever.</p>
+            <p>The name Yahweh also invites us into intimacy. He revealed His personal name because He desires to be known. When we call upon Yahweh, we are calling upon the God who stooped down to speak to a fugitive shepherd at a burning bush and who continues to hear the prayers of His people today.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Exodus 3:14')">Exodus 3:14</span> — "God said to Moses, 'I AM WHO I AM.'"</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 83:18')">Psalm 83:18</span> — "That they may know that you alone, whose name is the LORD, are the Most High over all the earth."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 42:8')">Isaiah 42:8</span> — "I am the LORD; that is my name! I will not yield my glory to another."</li>
+                <li><span class="verse-ref" onclick="showVerse('Deuteronomy 6:4')">Deuteronomy 6:4</span> — "Hear, O Israel: The LORD our God, the LORD is one."</li>
+                <li><span class="verse-ref" onclick="showVerse('Revelation 1:8')">Revelation 1:8</span> — "'I am the Alpha and the Omega,' says the Lord God, 'who is, and who was, and who is to come.'"</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="adonai">
+            <span class="section-kicker">Lord, Master</span>
+            <h2>Adonai</h2>
+            <h3>Understanding Adonai</h3>
+            <p>Adonai is the Hebrew word meaning "Lord" or "Master," speaking of God's absolute sovereignty and authority over all things. It is the plural form of "Adon," intensified to express supreme lordship — the One who has the right to command, direct, and govern every aspect of creation and human life.</p>
+            <p>This name became especially significant because devout Jews would say "Adonai" whenever they encountered the tetragrammaton in Scripture. When Isaiah beheld the Lord "high and lifted up" in his temple vision, the word used is Adonai — the sovereign Master seated upon His throne in unapproachable majesty.</p>
+            <p>To call God "Adonai" is to acknowledge total submission. Yet unlike earthly masters, Adonai rules with perfect wisdom, boundless love, and infinite justice. His lordship is not oppressive but liberating.</p>
+            <h3>What This Name Means for Us</h3>
+            <p>Calling God "Adonai" is an act of surrender — acknowledging that our lives are not our own. In a culture that celebrates autonomy, this name challenges us to release the illusion of control and place our trust in the One whose plans are always higher and better than our own.</p>
+            <p>Yet surrendering to Adonai is the truest freedom. When we submit to His lordship, we are freed from the tyranny of our own limited wisdom and the anxiety of carrying burdens too heavy for us. His authority is perfect love in action.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Psalm 8:1')">Psalm 8:1</span> — "LORD, our Lord, how majestic is your name in all the earth!"</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 6:1')">Isaiah 6:1</span> — "I saw the Lord, high and exalted, seated on a throne."</li>
+                <li><span class="verse-ref" onclick="showVerse('Malachi 1:6')">Malachi 1:6</span> — "A son honors his father, and a slave his master. If I am a master, where is the respect due me?"</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 110:1')">Psalm 110:1</span> — "The LORD says to my Lord: 'Sit at my right hand.'"</li>
+                <li><span class="verse-ref" onclick="showVerse('Joshua 3:11')">Joshua 3:11</span> — "The ark of the covenant of the Lord of all the earth will go before you."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="el-shaddai">
+            <span class="section-kicker">God Almighty</span>
+            <h2>El Shaddai</h2>
+            <h3>Understanding El Shaddai</h3>
+            <p>El Shaddai, translated "God Almighty," is the name God used when He appeared to Abraham in Genesis 17:1, saying, "I am God Almighty; walk before me faithfully and be blameless." Scholars debate the exact etymology — mountain (immovable strength), breast (nourishment and sufficiency), or a root meaning "to overpower." Together these paint a picture of a God who is both overwhelmingly powerful and tenderly sufficient.</p>
+            <p>This name appears most frequently in the book of Job and the patriarchal narratives of Genesis. When God called Himself El Shaddai, He was assuring Abraham that His power was more than adequate to fulfill seemingly impossible promises.</p>
+            <p>El Shaddai speaks of God's all-sufficiency: He is enough power for any obstacle, enough provision for any need, enough comfort for any sorrow, and enough grace for any failure.</p>
+            <h3>What This Name Means for Us</h3>
+            <p>When we face situations that seem impossible, El Shaddai reminds us that our God specializes in the impossible. There is no limitation, no obstacle, and no impossibility that can exhaust His almighty power or deplete His all-sufficient resources.</p>
+            <p>El Shaddai also invites us to rest rather than strive. We do not need to generate our own sufficiency — He is sufficient for us. In our weakness, His power is made perfect.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Genesis 17:1')">Genesis 17:1</span> — "I am God Almighty; walk before me faithfully."</li>
+                <li><span class="verse-ref" onclick="showVerse('Genesis 49:24-25')">Genesis 49:24-25</span> — "Because of the hand of the Mighty One... because of the Almighty, who blesses you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Ruth 1:20-21')">Ruth 1:20-21</span> — "The Almighty has made my life very bitter."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 91:1')">Psalm 91:1</span> — "Whoever dwells in the shelter of the Most High will rest in the shadow of the Almighty."</li>
+                <li><span class="verse-ref" onclick="showVerse('Revelation 4:8')">Revelation 4:8</span> — "Holy, holy, holy is the Lord God Almighty, who was, and is, and is to come."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="el-elyon">
+            <span class="section-kicker">God Most High</span>
+            <h2>El Elyon</h2>
+            <h3>Understanding El Elyon</h3>
+            <p>El Elyon, meaning "God Most High," first appears in Genesis 14:18-20 when Melchizedek blessed Abraham "by God Most High, Creator of heaven and earth." This name declares God's supreme position above all other powers, authorities, and spiritual beings.</p>
+            <p>The title comes from a Hebrew root meaning "to go up" or "to ascend." When Nebuchadnezzar was humbled by God and restored to sanity, he declared: "I praised the Most High; I honored and glorified him who lives forever" — even the most powerful earthly ruler had to acknowledge El Elyon's unchallenged supremacy.</p>
+            <p>By revealing Himself as El Elyon, God declared that He is not merely the God of Israel but the supreme God over all nations. His sovereignty is not regional or tribal — it is universal and absolute.</p>
+            <h3>What This Name Means for Us</h3>
+            <p>Knowing God as El Elyon means that no power in heaven or on earth can override His purposes for our lives. When circumstances spiral beyond our control, El Elyon sits enthroned above it all, working all things according to the counsel of His will.</p>
+            <p>This name also gives proper perspective. When we are tempted to elevate career, relationships, or reputation to the highest place, El Elyon reminds us that only God belongs on the throne.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Genesis 14:18-20')">Genesis 14:18-20</span> — Melchizedek blesses Abraham by "God Most High, Creator of heaven and earth."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 91:1-2')">Psalm 91:1-2</span> — "Whoever dwells in the shelter of the Most High will rest in the shadow of the Almighty."</li>
+                <li><span class="verse-ref" onclick="showVerse('Daniel 4:34-35')">Daniel 4:34-35</span> — "His dominion is an eternal dominion... He does as he pleases with the powers of heaven."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 47:2')">Psalm 47:2</span> — "For the LORD Most High is awesome, the great King over all the earth."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 14:14')">Isaiah 14:14</span> — "I will make myself like the Most High" — Satan's defeated ambition to rival El Elyon.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="jehovah-jireh">
+            <span class="section-kicker">The LORD Will Provide</span>
+            <h2>Jehovah Jireh</h2>
+            <h3>Understanding Jehovah Jireh</h3>
+            <p>Jehovah Jireh — "The LORD Will Provide" — is the name Abraham gave to the place on Mount Moriah where God provided a ram as a substitute sacrifice for his son Isaac (Genesis 22:14). The Hebrew word "jireh" means "to see" or "to provide," carrying the implication that God sees our needs before we express them.</p>
+            <p>God tested Abraham by commanding him to sacrifice his only son. Abraham obeyed in faith, even telling Isaac, "God himself will provide the lamb." At the very moment of sacrifice, God stayed Abraham's hand and revealed a ram caught in a thicket — His provision perfectly timed.</p>
+            <p>This name foreshadows God's ultimate provision: His own Son, the Lamb of God who takes away the sin of the world. Just as God provided a substitute for Isaac on Mount Moriah, so He provided His Son as our substitute on a cross just outside Jerusalem.</p>
+            <h3>What This Name Means for Us</h3>
+            <p>Jehovah Jireh assures us that God is never caught off guard by our needs. He sees the trial before it arrives and has already prepared His provision. He often provides at the last moment, not because He is slow, but because He is teaching us to trust.</p>
+            <p>This name also challenges anxiety and self-reliance. If Jehovah Jireh has promised to provide, then our worry is ultimately a question of faith: do we believe He will do what He has promised?</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Genesis 22:14')">Genesis 22:14</span> — "Abraham called that place The LORD Will Provide."</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 4:19')">Philippians 4:19</span> — "My God will meet all your needs according to the riches of his glory in Christ Jesus."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 6:31-33')">Matthew 6:31-33</span> — "Do not worry... your heavenly Father knows that you need them."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 23:1')">Psalm 23:1</span> — "The LORD is my shepherd, I lack nothing."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 8:32')">Romans 8:32</span> — "He who did not spare his own Son... how will he not also, along with him, graciously give us all things?"</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="jehovah-rapha">
+            <span class="section-kicker">The LORD Who Heals</span>
+            <h2>Jehovah Rapha</h2>
+            <h3>Understanding Jehovah Rapha</h3>
+            <p>Jehovah Rapha — "The LORD Who Heals" — is revealed in Exodus 15:26, at the waters of Marah, which were bitter and undrinkable. God made the waters sweet and declared: "I am the LORD who heals you." The Hebrew word "rapha" encompasses physical healing, emotional restoration, and spiritual renewal.</p>
+            <p>Israel had just witnessed God's miraculous deliverance at the Red Sea, yet three days later they grumbled over bitter water. God's response was not anger but healing — a pattern that runs throughout Scripture: in our moments of bitterness and brokenness, God meets us with restoration.</p>
+            <p>Jehovah Rapha's healing extends beyond physical ailments. Isaiah prophesied that the Messiah would be "pierced for our transgressions" and that "by his wounds we are healed." In Jesus, Jehovah Rapha's healing ministry reaches its fullest expression.</p>
+            <h3>What This Name Means for Us</h3>
+            <p>In a world full of brokenness, Jehovah Rapha offers hope that wholeness is possible. He does not always heal in the way or timing we expect, but He is always at work restoring what sin and suffering have damaged.</p>
+            <p>Knowing God as Jehovah Rapha gives us permission to bring our wounds to Him honestly. The God who turned bitter water sweet invites us to bring our bitterest experiences to Him and trust Him to bring healing.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Exodus 15:26')">Exodus 15:26</span> — "I am the LORD, who heals you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 103:2-3')">Psalm 103:2-3</span> — "Praise the LORD... who forgives all your sins and heals all your diseases."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 53:5')">Isaiah 53:5</span> — "By his wounds we are healed."</li>
+                <li><span class="verse-ref" onclick="showVerse('James 5:14-15')">James 5:14-15</span> — "The prayer offered in faith will make the sick person well; the Lord will raise them up."</li>
+                <li><span class="verse-ref" onclick="showVerse('Jeremiah 17:14')">Jeremiah 17:14</span> — "Heal me, LORD, and I will be healed; save me and I will be saved."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="jehovah-nissi">
+            <span class="section-kicker">The LORD Our Banner</span>
+            <h2>Jehovah Nissi</h2>
+            <h3>Understanding Jehovah Nissi</h3>
+            <p>Jehovah Nissi — "The LORD Is My Banner" — is the name Moses gave to the altar he built after Israel's victory over the Amalekites at Rephidim (Exodus 17:15). A banner served as a rallying point for troops — a visible sign of identity and the cause for which they fought. By naming the altar Jehovah Nissi, Moses declared that God Himself was Israel's rallying point.</p>
+            <p>The battle was won not by military strategy but by divine power: as long as Moses held up his hands, Israel prevailed. Aaron and Hur held up Moses' hands until sunset, and Israel won. The victory belonged entirely to God.</p>
+            <p>A banner also signifies love and belonging: "His banner over me is love" (Song of Solomon 2:4). We march under His banner — identified with Him, protected by Him, and fighting for His cause.</p>
+            <h3>What This Name Means for Us</h3>
+            <p>Jehovah Nissi reminds us that the spiritual battles we face are not ours to win alone. Whether we struggle against temptation, opposition, or discouragement, we need only lift our eyes to Him and rally under His banner.</p>
+            <p>This name also speaks to our identity. In a world offering countless banners to march under, Jehovah Nissi calls us to pledge allegiance to Him alone, assured that ultimate victory is certain because He has already overcome the world.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Exodus 17:15')">Exodus 17:15</span> — "Moses built an altar and called it The LORD is my Banner."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 20:5')">Psalm 20:5</span> — "May we shout for joy over your victory and lift up our banners in the name of our God."</li>
+                <li><span class="verse-ref" onclick="showVerse('Song of Solomon 2:4')">Song of Solomon 2:4</span> — "He brought me to the banqueting house, and his banner over me was love."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 11:10')">Isaiah 11:10</span> — "The Root of Jesse will stand as a banner for the peoples."</li>
+                <li><span class="verse-ref" onclick="showVerse('Deuteronomy 20:3-4')">Deuteronomy 20:3-4</span> — "Do not be fainthearted... for the LORD your God is the one who goes with you to fight for you."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="jehovah-shalom">
+            <span class="section-kicker">The LORD Is Peace</span>
+            <h2>Jehovah Shalom</h2>
+            <h3>Understanding Jehovah Shalom</h3>
+            <p>Jehovah Shalom — "The LORD Is Peace" — is the name Gideon gave to the altar he built after the Angel of the LORD said, "Peace! Do not be afraid" (Judges 6:23-24). The Hebrew word "shalom" means far more than the absence of conflict — completeness, wholeness, harmony, and well-being in every dimension of life.</p>
+            <p>Israel was being oppressed by the Midianites, their crops destroyed. Into this chaos, God revealed Himself as Shalom — not because circumstances had changed, but because His presence transforms any situation.</p>
+            <p>Jesus — the Prince of Peace — said, "Peace I leave with you; my peace I give you. I do not give to you as the world gives." The world offers temporary truces. Jehovah Shalom offers a peace that guards hearts and minds.</p>
+            <h3>What This Name Means for Us</h3>
+            <p>In a world drowning in anxiety, Jehovah Shalom offers what nothing else can: a peace not contingent on circumstances. It requires only that we fix our minds on the One who IS peace.</p>
+            <p>Jehovah Shalom also calls us to be peacemakers — carrying His peace into our homes, workplaces, and communities, and pursuing reconciliation where there is division.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Judges 6:24')">Judges 6:24</span> — "So Gideon built an altar to the LORD there and called it The LORD Is Peace."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 26:3')">Isaiah 26:3</span> — "You will keep in perfect peace those whose minds are steadfast, because they trust in you."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 14:27')">John 14:27</span> — "Peace I leave with you; my peace I give you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 4:6-7')">Philippians 4:6-7</span> — "The peace of God, which transcends all understanding, will guard your hearts and minds."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 15:33')">Romans 15:33</span> — "The God of peace be with you all."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="el-roi">
+            <span class="section-kicker">The God Who Sees Me</span>
+            <h2>El Roi</h2>
+            <h3>Understanding El Roi</h3>
+            <p>El Roi — "The God Who Sees Me" — is the only name for God given by a woman in Scripture. Hagar, mistreated and fleeing into the wilderness, was met by the Angel of the LORD beside a spring of water (Genesis 16:13). Alone, pregnant, and rejected, Hagar encountered a God who saw her in her desperation.</p>
+            <p>The Hebrew word "roi" describes an active, compassionate gaze — the kind that leads to action. El Roi does not merely observe our suffering; He sees with the intent to intervene. Hagar's amazed response was: "You are the God who sees me."</p>
+            <p>This name reveals that no one is invisible to God. Hagar was a slave with no advocate. Yet the God of the universe stooped down to see her in the wilderness. El Roi sees the forgotten, the marginalized, and the overlooked.</p>
+            <h3>What This Name Means for Us</h3>
+            <p>In moments when we feel unseen, El Roi reminds us that God's eyes are fixed on us. He sees the tears we cry alone, the sacrifices no one else notices, and the silent battles we fight without applause.</p>
+            <p>El Roi also brings both comfort and accountability. Living before El Roi means living transparently, finding freedom in vulnerability rather than fear — the God who sees everything still loves us completely.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Genesis 16:13')">Genesis 16:13</span> — "She gave this name to the LORD who spoke to her: 'You are the God who sees me.'"</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 139:1-4')">Psalm 139:1-4</span> — "You have searched me, LORD, and you know me... you perceive my thoughts from afar."</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 15:3')">Proverbs 15:3</span> — "The eyes of the LORD are everywhere, keeping watch on the wicked and the good."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Chronicles 16:9')">2 Chronicles 16:9</span> — "The eyes of the LORD range throughout the earth to strengthen those whose hearts are fully committed to him."</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 4:13')">Hebrews 4:13</span> — "Nothing in all creation is hidden from God's sight."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="yahweh-sabaoth">
+            <span class="section-kicker">LORD of Hosts</span>
+            <h2>Yahweh Sabaoth</h2>
+            <h3>Understanding Yahweh Sabaoth</h3>
+            <p>Yahweh Sabaoth — "The LORD of Hosts" or "The LORD of Armies" — is one of the most frequently used divine titles in the Old Testament prophets, appearing over 260 times. "Sabaoth" means armies or hosts, referring to the vast angelic armies of heaven and all the forces of creation that stand under God's command.</p>
+            <p>This name first appears prominently in 1 Samuel, when young David facing Goliath declared: "I come against you in the name of the LORD Almighty, the God of the armies of Israel." While Goliath trusted in sword and spear, David trusted in the name that commands legions of angels.</p>
+            <p>Isaiah's vision captures this name's majesty: the seraphim ceaselessly cry, "Holy, holy, holy is the LORD of hosts; the whole earth is full of his glory." This name reveals God as the King of an infinite kingdom, surrounded by innumerable hosts who worship Him unceasingly.</p>
+            <h3>What This Name Means for Us</h3>
+            <p>Knowing God as Yahweh Sabaoth means we never face our battles alone. When Elisha's servant was terrified by a surrounding enemy army, God opened his eyes to see "the hills full of horses and chariots of fire." The forces arrayed for us always outnumber the forces arrayed against us.</p>
+            <p>This name also puts our enemies in proper perspective. Whatever threatens us is nothing compared to the LORD of Hosts, who commands the stars and before whom all other powers bow.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Samuel 17:45')">1 Samuel 17:45</span> — "I come against you in the name of the LORD Almighty."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 46:7')">Psalm 46:7</span> — "The LORD of hosts is with us; the God of Jacob is our fortress."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 6:3')">Isaiah 6:3</span> — "Holy, holy, holy is the LORD of hosts; the whole earth is full of his glory."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 9:29')">Romans 9:29</span> — "Unless the Lord of Sabaoth had left us offspring, we would have been like Sodom."</li>
+                <li><span class="verse-ref" onclick="showVerse('James 5:4')">James 5:4</span> — "The cries of the harvesters have reached the ears of the Lord of Sabaoth."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="abba">
+            <span class="section-kicker">Father</span>
+            <h2>Abba</h2>
+            <h3>Understanding Abba</h3>
+            <p>Abba is an Aramaic word meaning "Father" — but the intimate, affectionate term a child uses, closer to "Daddy" or "Papa." Jesus used this word most poignantly in Gethsemane, crying "Abba, Father, everything is possible for you. Take this cup from me" (Mark 14:36).</p>
+            <p>In first-century Judaism, addressing God as "Abba" would have been shockingly intimate. Yet Jesus not only used this term but taught His disciples to pray "Our Father," and through the Spirit extended this privilege to all believers. Paul writes that the Spirit of adoption causes us to cry "Abba, Father" (Romans 8:15).</p>
+            <p>The name Abba represents the culmination of God's self-revelation: not only mighty Elohim and sovereign Adonai, but also Father — a loving parent who delights in His children and lavishes upon them an inheritance that can never perish.</p>
+            <h3>What This Name Means for Us</h3>
+            <p>Calling God "Abba" transforms our approach to the spiritual life. Prayer is no longer a formal audience with a distant monarch but an intimate conversation with a loving Father. We approach already beloved, already accepted, already His.</p>
+            <p>For those with absent or disappointing earthly fathers, the name Abba offers healing and redefinition. He is the perfect Father — protective, present, patient, and overflowing with unconditional love.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Romans 8:15')">Romans 8:15</span> — "The Spirit you received... brought about your adoption to sonship. And by him we cry, 'Abba, Father.'"</li>
+                <li><span class="verse-ref" onclick="showVerse('Galatians 4:6')">Galatians 4:6</span> — "Because you are his sons, God sent the Spirit of his Son into our hearts, the Spirit who calls out, 'Abba, Father.'"</li>
+                <li><span class="verse-ref" onclick="showVerse('Mark 14:36')">Mark 14:36</span> — "'Abba, Father,' he said, 'everything is possible for you. Take this cup from me.'"</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 6:9')">Matthew 6:9</span> — "This, then, is how you should pray: 'Our Father in heaven, hallowed be your name.'"</li>
+                <li><span class="verse-ref" onclick="showVerse('1 John 3:1')">1 John 3:1</span> — "See what great love the Father has lavished on us, that we should be called children of God!"</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="jehovah-rohi">
+            <span class="section-kicker">The LORD My Shepherd</span>
+            <h2>Jehovah Rohi</h2>
+            <h3>Understanding Jehovah Rohi</h3>
+            <p>Jehovah Rohi — "The LORD My Shepherd" — is revealed in the beloved opening of Psalm 23: "The LORD is my shepherd, I lack nothing." In the ancient Near East, a shepherd was a protector, provider, guide, and constant companion to his flock, living with them day and night.</p>
+            <p>David, who wrote Psalm 23, understood shepherding intimately, having fought lions and bears to protect his flock. When David declared God as his Shepherd, he was saying the same fierce protection and tender guidance he gave his sheep, God gives to him — only infinitely greater.</p>
+            <p>Jesus claimed this name explicitly: "I am the good shepherd. The good shepherd lays down his life for the sheep" (John 10:11). Jehovah Rohi personally knows each sheep by name and ultimately gives His own life so they might live.</p>
+            <h3>What This Name Means for Us</h3>
+            <p>Jehovah Rohi means we are never without guidance, provision, or protection. The Shepherd goes before us into every situation. Our role is simply to follow — to listen for His voice and trust He is leading us to good places even through dark valleys.</p>
+            <p>This name also speaks to rest. Jehovah Rohi gives us permission to stop striving and receive the rest our souls desperately need, knowing nothing will pluck us from His hand.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Psalm 23:1-3')">Psalm 23:1-3</span> — "The LORD is my shepherd, I lack nothing. He makes me lie down in green pastures."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 10:11')">John 10:11</span> — "I am the good shepherd. The good shepherd lays down his life for the sheep."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 10:14')">John 10:14</span> — "I am the good shepherd; I know my sheep and my sheep know me."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 40:11')">Isaiah 40:11</span> — "He tends his flock like a shepherd: He gathers the lambs in his arms."</li>
+                <li><span class="verse-ref" onclick="showVerse('Ezekiel 34:11-12')">Ezekiel 34:11-12</span> — "I myself will search for my sheep and look after them."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="jehovah-tsidkenu">
+            <span class="section-kicker">The LORD Our Righteousness</span>
+            <h2>Jehovah Tsidkenu</h2>
+            <h3>Understanding Jehovah Tsidkenu</h3>
+            <p>Jehovah Tsidkenu — "The LORD Our Righteousness" — is the prophetic name given to the coming Messiah in Jeremiah 23:6. It declares that the righteousness God's people need does not come from their own moral performance but from God Himself.</p>
+            <p>This name was given during one of Israel's darkest periods, when kings were corrupt and judgment was imminent. Into this moral bankruptcy, God promised a righteous Branch — a King who would become righteousness for His people.</p>
+            <p>The New Testament reveals this fulfilled in Christ: "God made him who had no sin to be sin for us, so that in him we might become the righteousness of God" (2 Corinthians 5:21) — the great exchange.</p>
+            <h3>What This Name Means for Us</h3>
+            <p>Jehovah Tsidkenu frees us from the exhausting treadmill of trying to earn God's acceptance through moral effort. When God looks at believers, He sees the perfect righteousness of His Son draped over us like a royal robe.</p>
+            <p>This truth produces both humility and confidence. On our worst day, we are still clothed in His righteousness — not that we became good enough for God, but that God became our goodness.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Jeremiah 23:6')">Jeremiah 23:6</span> — "This is the name by which he will be called: The LORD Our Righteousness."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 3:21-22')">Romans 3:21-22</span> — "A righteousness from God, apart from law, has been made known... through faith in Jesus Christ."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 5:21')">2 Corinthians 5:21</span> — "God made him who had no sin to be sin for us, so that in him we might become the righteousness of God."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 61:10')">Isaiah 61:10</span> — "He has clothed me with garments of salvation and arrayed me in a robe of his righteousness."</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 3:9')">Philippians 3:9</span> — "Not having a righteousness of my own... but that which is through faith in Christ."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="el-olam">
+            <span class="section-kicker">The Everlasting God</span>
+            <h2>El Olam</h2>
+            <h3>Understanding El Olam</h3>
+            <p>El Olam — "The Everlasting God" — first appears in Genesis 21:33, where Abraham "planted a tamarisk tree in Beersheba, and there he called on the name of the LORD, the Eternal God." The Hebrew word "olam" means everlasting, without beginning and without end.</p>
+            <p>Abraham planted one of the slowest-growing trees in the desert — an act of faith in God's long-term faithfulness, declaring trust in a God whose promises span generations and whose faithfulness never expires.</p>
+            <p>Isaiah expands this revelation: "The LORD is the everlasting God, the Creator of the ends of the earth. He will not grow tired or weary." Unlike everything else in creation that decays, El Olam endures.</p>
+            <h3>What This Name Means for Us</h3>
+            <p>In a culture obsessed with the immediate, El Olam invites us into an eternal perspective. Our problems are temporary, but God's love, promises, and purposes are everlasting.</p>
+            <p>El Olam also means God never burns out. His patience with us is eternal, His mercy new every morning, flowing from an inexhaustible source that will never run out.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Genesis 21:33')">Genesis 21:33</span> — "Abraham planted a tamarisk tree in Beersheba, and there he called on the name of the LORD, the Eternal God."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 40:28')">Isaiah 40:28</span> — "The LORD is the everlasting God, the Creator of the ends of the earth. He will not grow tired or weary."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 90:2')">Psalm 90:2</span> — "Before the mountains were born... from everlasting to everlasting you are God."</li>
+                <li><span class="verse-ref" onclick="showVerse('Deuteronomy 33:27')">Deuteronomy 33:27</span> — "The eternal God is your refuge, and underneath are the everlasting arms."</li>
+                <li><span class="verse-ref" onclick="showVerse('Revelation 1:8')">Revelation 1:8</span> — "'I am the Alpha and the Omega,' says the Lord God, 'who is, and who was, and who is to come.'"</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="immanuel">
+            <span class="section-kicker">God With Us</span>
+            <h2>Immanuel</h2>
+            <h3>Understanding Immanuel</h3>
+            <p>Immanuel — "God With Us" — is perhaps the most intimate of all God's names. First prophesied by Isaiah to King Ahaz during a national crisis (Isaiah 7:14), this name declares that the infinite, transcendent God would enter into human experience Himself — becoming a baby, born of a virgin, dwelling among us in flesh and blood.</p>
+            <p>Matthew's Gospel connects this prophecy to Jesus' birth: "The virgin will conceive and give birth to a son, and they will call him Immanuel — which means 'God with us.'" The invisible God became visible; the untouchable became touchable.</p>
+            <p>The name Immanuel encapsulates the entire arc of Scripture: from Eden where God walked with Adam and Eve, through the tabernacle and temple, to the incarnation, to Revelation 21:3 — "God's dwelling place is now among the people, and he will dwell with them."</p>
+            <h3>What This Name Means for Us</h3>
+            <p>Immanuel means we are never alone — not in our darkest moments, not in our deepest grief. The God of the universe chose to be WITH us, not just above us or for us, but present with us in every moment.</p>
+            <p>This name also reminds us of the staggering cost of God's presence. To be "with us" required incarnation — the eternal Son taking on human flesh, suffering, and death. Immanuel is the most costly love in the universe, given freely.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 7:14')">Isaiah 7:14</span> — "The virgin will conceive and give birth to a son, and will call him Immanuel."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 1:23')">Matthew 1:23</span> — "They will call him Immanuel — which means 'God with us.'"</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 28:20')">Matthew 28:20</span> — "Surely I am with you always, to the very end of the age."</li>
+                <li><span class="verse-ref" onclick="showVerse('Revelation 21:3')">Revelation 21:3</span> — "God's dwelling place is now among the people, and he will dwell with them."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 1:14')">John 1:14</span> — "The Word became flesh and made his dwelling among us."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="videos">
+            <span class="section-kicker">Watch &amp; Learn</span>
+            <h2>Videos</h2>
+
+            <h4>Elohim</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'U5iyUik97Lg')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/U5iyUik97Lg/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Elohim<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'GLPk74iB-0E')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/GLPk74iB-0E/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Elohim | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
+
+            <h4>Yahweh</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'JJQ44HnBfcw')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/JJQ44HnBfcw/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Is God's name Jehovah or Yahweh?<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Wes Huff</span></p></div>
+            </div>
+
+            <h4>Adonai</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'ZffgiIJaErE')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/ZffgiIJaErE/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Adonai | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
+
+            <h4>El Shaddai</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'2ofUgwUeiw4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/2ofUgwUeiw4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">El Shaddai | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
+
+            <h4>El Elyon</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'O7bLbA7qhhY')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/O7bLbA7qhhY/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">El Elyon | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
+
+            <h4>Jehovah Jireh</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'n5wGjzR6Sm0')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/n5wGjzR6Sm0/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Jehovah Jireh | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'dJJbcQlN2Ew')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/dJJbcQlN2Ew/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What does it mean that God is Jehovah-Jireh?<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>Jehovah Rapha</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'ZeJDPvkQDPM')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/ZeJDPvkQDPM/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Jehovah Rapha | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'72buGQfi_8o')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/72buGQfi_8o/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What does it mean that God is Jehovah-Rapha?  |  GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>Jehovah Shalom</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'6L57ni-Ehxk')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/6L57ni-Ehxk/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Jehovah Shalom | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
+
+            <h4>El Roi</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'cyWKnmnt1wM')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/cyWKnmnt1wM/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">El Roi | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
+
+            <h4>Abba</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'pn0SkXiTtco')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/pn0SkXiTtco/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Francis Chan - Our hearts cry "Abba! Father!"<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Crazy Love</span></p></div>
+            </div>
+
+            <h4>Jehovah Rohi</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'j36IuE3b9_E')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/j36IuE3b9_E/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Jehovah Rohi | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
+
+            <h4>El Olam</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'B5RPSntVRwI')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/B5RPSntVRwI/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">El Olam | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
+
+            <h4>Immanuel</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'9xRipGO7qBU')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/9xRipGO7qBU/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Isaiah Overview: Immanuel | Podcast<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Spoken Gospel</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'uyMywCzxtpA')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/uyMywCzxtpA/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">90-Second Sermon #14 || Jeremiah 30:11 || "Immanuel. Jesus."<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Spoken Gospel</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'lP94jeeNRUQ')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/lP94jeeNRUQ/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Immanuel | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
+            </div>
         </div>
     </main>
+
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="if(event.target===this)closeVerse()">
+        <div class="verse-popup" id="versePopup">
+            <button class="close-popup" onclick="closeVerse()">&times;</button>
+            <h4 id="popupRef"></h4>
+            <p id="popupText">Loading...</p>
+        </div>
+    </div>
+
     <script src="site/script.js"></script>
+    <script>
+        function loadYT(el, id) {
+            el.innerHTML = '<iframe width="100%" height="100%" style="position:absolute;inset:0;" src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        }
+        function showVerse(passage) {
+            document.getElementById('verseOverlay').classList.add('active');
+            document.getElementById('popupRef').textContent = passage;
+            document.getElementById('popupText').textContent = 'Loading...';
+            fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+                .then(r => r.json())
+                .then(data => {
+                    document.getElementById('popupText').textContent = (data.passages && data.passages[0]) ? data.passages[0].trim() : 'Verse not found.';
+                })
+                .catch(() => { document.getElementById('popupText').textContent = 'Unable to load verse.'; });
+        }
+        function closeVerse() {
+            document.getElementById('verseOverlay').classList.remove('active');
+        }
+    </script>
 </body>
 </html>
