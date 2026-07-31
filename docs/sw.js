@@ -71,11 +71,21 @@ self.addEventListener('push', event => {
 });
 
 self.addEventListener('notificationclick', event => {
+  const targetUrl = (event.notification.data && event.notification.data.url) || '/devotional.html';
   event.notification.close();
-  event.waitUntil(
-    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clientList => {
-      for (const c of clientList) if ('focus' in c) return c.focus();
-      if (self.clients.openWindow) return self.clients.openWindow(event.notification.data.url);
-    })
-  );
+  event.waitUntil((async () => {
+    const clientList = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+    for (const c of clientList) {
+      if ('focus' in c) {
+        // An already-open window (e.g. still on the start_url Bible tab)
+        // needs to be explicitly navigated, not just focused, or the
+        // notification tap silently lands wherever that window already was.
+        if ('navigate' in c) {
+          try { await c.navigate(targetUrl); } catch (e) { /* same-origin nav should always be allowed; ignore if not */ }
+        }
+        return c.focus();
+      }
+    }
+    if (self.clients.openWindow) return self.clients.openWindow(targetUrl);
+  })());
 });
