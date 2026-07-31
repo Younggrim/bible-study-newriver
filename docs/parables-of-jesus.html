@@ -14,83 +14,399 @@
     <link rel="stylesheet" href="site/style.css">
     <style>
         body { background: #faf5ed; }
-        .page-content { margin: 0 auto; max-width: 960px; padding: 24px 24px 80px; }
-        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #5c3d6e; text-decoration: none; font-weight: 600; transition: color 0.2s; }
-        .back-link i { margin-right: 6px; }
-        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 8px; }
-        .item-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid; border-radius: 10px; text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
-        .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
-        .item-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 2px; }
-        .item-card .subtitle { font-size: 0.75rem; font-style: italic; color: #8a7e74; margin-bottom: 6px; }
-        .item-card .desc { font-size: 0.82rem; color: #5a4e44; line-height: 1.5; }
-        @media (max-width: 768px) { .item-grid { grid-template-columns: 1fr; } }
+        .topic-hero { position: relative; height: 240px; overflow: hidden; }
+        .topic-hero img { width: 100%; height: 100%; object-fit: cover; }
+        .topic-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)); filter: brightness(0.45) sepia(0.75) saturate(1.7); backdrop-filter: none; }
+        .topic-hero .hero-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
+        .topic-hero h1 { font-family: 'Cinzel', serif; color: #fff; font-size: 2rem; margin: 0 0 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+        .topic-hero p { color: #f0e8dc; font-size: 0.95rem; max-width: 600px; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+        .page-content { margin: 0 auto; max-width: 820px; padding: 20px 24px 80px; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; color: #5c3d6e; font-weight: 600; font-size: 0.85rem; text-decoration: none; margin: 16px 0; }
+        .back-link:hover { text-decoration: underline; }
+        .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
+        .jump-card { background: #fff; border: 1px solid #e8e0d6; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #5c3d6e; text-decoration: none; transition: background .15s, transform .15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+        .section-block { background: #fff; border: 1px solid #e8e0d6; border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; scroll-margin-top: 76px; }
+        .section-block .section-kicker { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #9d84a8; }
+        .section-block h2 { font-family: 'Cinzel', serif; color: #5c3d6e; font-size: 1.35rem; margin: 4px 0 12px; }
+        .section-block h3 { font-family: 'Cinzel', serif; color: #6e4a80; font-size: 1.02rem; margin: 18px 0 8px; }
+        .section-block h4 { font-family: 'Cinzel', serif; color: #5c3d6e; font-size: 0.95rem; margin: 18px 0 8px; }
+        .section-block p { line-height: 1.7; color: #3d332b; margin: 0 0 10px; }
+        .verse-list { list-style: none; padding: 0; margin: 8px 0 0; }
+        .verse-list li { padding: 8px 0; border-bottom: 1px solid #f0e8dc; font-size: 0.9rem; line-height: 1.6; color: #4a3f35; }
+        .verse-list li:last-child { border-bottom: none; }
+        .verse-ref { color: #5c3d6e; font-weight: 600; text-decoration: underline dotted; cursor: pointer; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .video-grid:last-child { margin-bottom: 0; }
+        .verse-popup-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999; align-items: center; justify-content: center; padding: 20px; }
+        .verse-popup-overlay.active { display: flex; }
+        .verse-popup { background: #fff; border-radius: 12px; padding: 24px; max-width: 480px; width: 100%; max-height: 70vh; overflow-y: auto; position: relative; }
+        .verse-popup h4 { font-family: 'Cinzel', serif; color: #5c3d6e; margin: 0 0 12px; }
+        .verse-popup p { line-height: 1.7; color: #3d332b; }
+        .verse-popup .close-popup { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 1.3rem; color: #9d84a8; cursor: pointer; }
+        @media (max-width: 600px) { .topic-hero h1 { font-size: 1.5rem; } }
     </style>
 </head>
 <body>
-    <div class="section-hero">
-        <img src="https://images.unsplash.com/photo-1764410510151-f1c25f81c3ff?w=1400&q=80&auto=format"
-             srcset="https://images.unsplash.com/photo-1764410510151-f1c25f81c3ff?w=640&q=80&auto=format 640w,
-                     https://images.unsplash.com/photo-1764410510151-f1c25f81c3ff?w=1000&q=80&auto=format 1000w,
-                     https://images.unsplash.com/photo-1764410510151-f1c25f81c3ff?w=1600&q=80&auto=format 1600w"
-             sizes="100vw" fetchpriority="high" alt="Golden wheat field at sunset">
-        <div class="section-hero-overlay">
-            <h2>Parables of Jesus</h2>
-            <p class="section-desc">Simple stories carrying eternal truths about the Kingdom of God.</p>
+    <div class="topic-hero">
+        <img src="https://images.unsplash.com/photo-1764410510151-f1c25f81c3ff?w=1400&q=80&auto=format" alt="Golden wheat field at sunset">
+        <div class="hero-overlay">
+            <h1>Parables of Jesus</h1>
+            <p>Simple stories carrying eternal truths about the Kingdom of God.</p>
         </div>
     </div>
     <main class="page-content">
-        <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
-        <div class="item-grid">
-                <a href="parables-the-sower.html" class="item-card" style="border-left-color:#5c3d6e;">
-                    <h4 style="color:#5c3d6e;">The Sower</h4>
-                    <p class="desc">Four soils — four responses to God's Word.</p>
-                </a>
-                <a href="parables-the-mustard-seed.html" class="item-card" style="border-left-color:#5c3d6e;">
-                    <h4 style="color:#5c3d6e;">The Mustard Seed</h4>
-                    <p class="desc">The Kingdom starts small but grows immensely.</p>
-                </a>
-                <a href="parables-the-prodigal-son.html" class="item-card" style="border-left-color:#5c3d6e;">
-                    <h4 style="color:#5c3d6e;">The Prodigal Son</h4>
-                    <p class="desc">A father's lavish grace for returning sinners.</p>
-                </a>
-                <a href="parables-the-good-samaritan.html" class="item-card" style="border-left-color:#5c3d6e;">
-                    <h4 style="color:#5c3d6e;">The Good Samaritan</h4>
-                    <p class="desc">True neighborly love crosses every boundary.</p>
-                </a>
-                <a href="parables-the-lost-sheep.html" class="item-card" style="border-left-color:#5c3d6e;">
-                    <h4 style="color:#5c3d6e;">The Lost Sheep</h4>
-                    <p class="desc">God pursues the one who wanders.</p>
-                </a>
-                <a href="parables-the-talents.html" class="item-card" style="border-left-color:#5c3d6e;">
-                    <h4 style="color:#5c3d6e;">The Talents</h4>
-                    <p class="desc">Faithful stewardship of what God entrusts.</p>
-                </a>
-                <a href="parables-the-wedding-banquet.html" class="item-card" style="border-left-color:#5c3d6e;">
-                    <h4 style="color:#5c3d6e;">The Wedding Banquet</h4>
-                    <p class="desc">An invitation to the Kingdom — accept or refuse.</p>
-                </a>
-                <a href="parables-the-rich-fool.html" class="item-card" style="border-left-color:#5c3d6e;">
-                    <h4 style="color:#5c3d6e;">The Rich Fool</h4>
-                    <p class="desc">Earthly wealth without God is worthless.</p>
-                </a>
-                <a href="parables-the-pharisee-and-tax-collector.html" class="item-card" style="border-left-color:#5c3d6e;">
-                    <h4 style="color:#5c3d6e;">The Pharisee and Tax Collector</h4>
-                    <p class="desc">Humility, not self-righteousness, before God.</p>
-                </a>
-                <a href="parables-the-ten-virgins.html" class="item-card" style="border-left-color:#5c3d6e;">
-                    <h4 style="color:#5c3d6e;">The Ten Virgins</h4>
-                    <p class="desc">Be ready — the Bridegroom is coming.</p>
-                </a>
-                <a href="parables-the-unforgiving-servant.html" class="item-card" style="border-left-color:#5c3d6e;">
-                    <h4 style="color:#5c3d6e;">The Unforgiving Servant</h4>
-                    <p class="desc">Forgive as you have been forgiven.</p>
-                </a>
-                <a href="parables-the-pearl-of-great-price.html" class="item-card" style="border-left-color:#5c3d6e;">
-                    <h4 style="color:#5c3d6e;">The Pearl of Great Price</h4>
-                    <p class="desc">The Kingdom is worth everything.</p>
-                </a>
+        <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Topical Studies</a>
+
+        <nav class="jump-grid">
+            <a href="#overview" class="jump-card">Overview</a>
+            <a href="#sower" class="jump-card">The Sower</a>
+            <a href="#mustard-seed" class="jump-card">The Mustard Seed</a>
+            <a href="#prodigal-son" class="jump-card">The Prodigal Son</a>
+            <a href="#good-samaritan" class="jump-card">The Good Samaritan</a>
+            <a href="#lost-sheep" class="jump-card">The Lost Sheep</a>
+            <a href="#talents" class="jump-card">The Talents</a>
+            <a href="#wedding-banquet" class="jump-card">The Wedding Banquet</a>
+            <a href="#rich-fool" class="jump-card">The Rich Fool</a>
+            <a href="#pharisee-tax-collector" class="jump-card">Pharisee & Tax Collector</a>
+            <a href="#ten-virgins" class="jump-card">The Ten Virgins</a>
+            <a href="#unforgiving-servant" class="jump-card">The Unforgiving Servant</a>
+            <a href="#pearl" class="jump-card">The Pearl of Great Price</a>
+            <a href="#videos" class="jump-card">Videos</a>
+        </nav>
+
+        <div class="section-block" id="overview">
+            <span class="section-kicker">Introduction</span>
+            <h2>Overview</h2>
+            <p>Jesus taught in parables — brief, vivid stories drawn from everyday life — because they revealed truth to hearts ready to receive it while concealing it from those unwilling to search. A farmer sowing seed, a woman searching for a lost coin, a shepherd counting sheep, a merchant appraising pearls: ordinary images became windows into the extraordinary reality of God's Kingdom. Parables demand engagement. They cannot simply be heard; they must be entered, wrestled with, and applied.</p>
+            <p>These twelve parables span the full range of Jesus' teaching: the condition of the heart that receives God's Word (The Sower), the surprising growth of the Kingdom from humble beginnings (The Mustard Seed), the extravagance of God's grace toward sinners (The Prodigal Son, The Lost Sheep), the boundary-breaking nature of true love (The Good Samaritan), faithful stewardship of what God entrusts to us (The Talents), the urgency and openness of God's invitation (The Wedding Banquet, The Ten Virgins), the folly of materialism (The Rich Fool), the posture of true humility before God (The Pharisee and the Tax Collector), the necessity of forgiving as we've been forgiven (The Unforgiving Servant), and the surpassing worth of the Kingdom itself (The Pearl of Great Price).</p>
+            <p>Taken together, these stories form a composite portrait of the Kingdom of God: it grows quietly but unstoppably, it pursues the lost with relentless love, it demands total allegiance, and it is worth more than everything else combined. Each parable rewards not a single reading but a lifetime of returning — the deeper truths surface only as we bring our own lives into conversation with the story.</p>
+        </div>
+
+        <div class="section-block" id="sower">
+            <span class="section-kicker">Four Soils, One Seed</span>
+            <h2>The Sower</h2>
+            <h3>The Parable</h3>
+            <p>Jesus sat by the Sea of Galilee, and the crowds were so large that He climbed into a boat and taught from the water. He told them of a farmer who went out to sow seed. Some fell on the hard-packed path where birds devoured it. Other seed fell on rocky ground and withered under the sun for lack of root. Still other seed fell among thorns, which choked the young plants. But some seed fell on good soil and produced a harvest — thirty, sixty, even a hundredfold.</p>
+            <p>The disciples later asked Jesus why He spoke in parables. He explained that the mysteries of the Kingdom were given to them, but to others He spoke in stories so that those with ears to hear would understand. This parable is foundational — Jesus even said, "Do you not understand this parable? How then will you understand all the parables?" It is the key that unlocks the others.</p>
+            <p>For the original audience — Jewish farmers and fishermen — the imagery was immediately recognizable. Jesus was using their daily reality to reveal an eternal truth about how people receive God's Word.</p>
+            <h3>What Jesus Was Teaching</h3>
+            <p>The parable reveals that the variable is never the seed — God's Word is always potent, always living and active. The variable is the soil, the human heart. Jesus identifies four heart conditions: the hard heart, the shallow heart, the crowded heart, and the receptive heart. This is both a diagnostic tool and a call to self-examination.</p>
+            <p>Jesus was also teaching patience. Not everyone who hears the gospel will respond. But where the Word takes root in prepared soil, the harvest is extraordinary — far exceeding what was planted.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 13:3-9')">Matthew 13:3-9</span> — The parable itself: four soils, one sower, one seed, four drastically different outcomes.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 13:18-23')">Matthew 13:18-23</span> — Jesus explains each soil: the path, the rocky ground, the thorns, and the good soil.</li>
+                <li><span class="verse-ref" onclick="showVerse('Mark 4:14-20')">Mark 4:14-20</span> — Mark's account adds, "The sower sows the word."</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 8:11-15')">Luke 8:11-15</span> — Luke emphasizes that good-soil hearers "hold fast" the word with an honest and good heart.</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 55:10-11')">Isaiah 55:10-11</span> — God's Word never returns void — like rain that waters the earth and produces growth.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="mustard-seed">
+            <span class="section-kicker">Small Beginnings, Vast Growth</span>
+            <h2>The Mustard Seed</h2>
+            <h3>The Parable</h3>
+            <p>"The kingdom of heaven is like a grain of mustard seed that a man took and sowed in his field. It is the smallest of all seeds, but when it has grown it is larger than all the garden plants and becomes a tree, so that the birds of the air come and make nests in its branches." In two sentences, Jesus painted a picture that stunned His audience with its contrast — from nearly invisible to unmistakably present.</p>
+            <p>The mustard plant in first-century Palestine was known for its vigorous growth. A tiny black seed could produce a shrub ten to twelve feet tall in a single season. The birds nesting in its branches echo Old Testament imagery where great trees sheltering birds symbolize kingdoms that provide refuge for many peoples.</p>
+            <p>Jesus told this parable during a time when His movement looked insignificant — a handful of Galilean fishermen, a few women. Yet Jesus was declaring that what looked impossibly small would grow into something the whole world could not ignore.</p>
+            <h3>What Jesus Was Teaching</h3>
+            <p>Jesus was teaching His disciples not to despise small beginnings. The Kingdom of God does not arrive with political revolution — it starts in hidden, humble ways. God's Kingdom grows by its own divine energy, not by human engineering.</p>
+            <p>This parable also carries a personal application: the tiny seed of faith planted in a single heart can grow beyond anything we imagine. We are called to plant and water; God gives the growth.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 13:31-32')">Matthew 13:31-32</span> — The smallest seed becomes the largest garden plant — the Kingdom's growth defies expectation.</li>
+                <li><span class="verse-ref" onclick="showVerse('Mark 4:30-32')">Mark 4:30-32</span> — Mark adds, "It grows up and becomes larger than all the garden plants."</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 13:18-19')">Luke 13:18-19</span> — Luke's version: a man plants it in his garden and it becomes a tree.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 17:20')">Matthew 17:20</span> — "If you have faith like a grain of mustard seed... nothing will be impossible for you."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 1:27-28')">1 Corinthians 1:27-28</span> — God chooses the weak and foolish things of the world to shame the strong.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="prodigal-son">
+            <span class="section-kicker">A Father's Lavish Grace</span>
+            <h2>The Prodigal Son</h2>
+            <h3>The Parable</h3>
+            <p>A man had two sons. The younger demanded his inheritance early — an unthinkable insult — then squandered it in a distant country. When famine struck, he found himself feeding pigs and longing to eat their pods. "When he came to himself," he remembered his father's house and rehearsed a speech of repentance, expecting only servant status.</p>
+            <p>While he was still a great distance away, his father saw him and ran to him — undignified for a patriarch — and embraced him. Before the boy could finish his speech, the father called for a robe, a ring, and a feast. "This my son was dead, and is alive again; he was lost, and is found."</p>
+            <p>Meanwhile, the older brother refused to come in, angry at the celebration, revealing his own kind of lostness — serving out of obligation rather than love.</p>
+            <h3>What Jesus Was Teaching</h3>
+            <p>Jesus told this parable in response to Pharisees grumbling that He received sinners. The father represents God — not an angry judge but a watching father longing for reunion. The robe, ring, and sandals symbolize full sonship restored — not probation but complete reinstatement. Grace is not measured or cautious; it is lavish.</p>
+            <p>But the parable has a second target: the elder brother represents the Pharisees — those who stayed home and kept the rules yet never knew the father's heart. Jesus leaves his story unresolved — an open invitation to join the party.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Luke 15:11-24')">Luke 15:11-24</span> — The younger son's rebellion, ruin, repentance, and the father's extravagant restoration.</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 15:25-32')">Luke 15:25-32</span> — The elder brother's resentment reveals that proximity to the father doesn't guarantee intimacy with him.</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 5:8')">Romans 5:8</span> — "While we were still sinners, Christ died for us" — the running father in theological form.</li>
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 2:4-5')">Ephesians 2:4-5</span> — "Because of his great love... even when we were dead in our trespasses, made us alive together with Christ."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 John 1:9')">1 John 1:9</span> — "If we confess our sins, he is faithful and just to forgive us."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="good-samaritan">
+            <span class="section-kicker">True Neighborly Love</span>
+            <h2>The Good Samaritan</h2>
+            <h3>The Parable</h3>
+            <p>A lawyer, wanting to justify himself, asked Jesus, "Who is my neighbor?" Jesus responded with a story: a man traveling from Jerusalem to Jericho fell among robbers who beat him and left him half dead. A priest and a Levite each saw him and passed by on the other side, choosing ritual purity over compassion.</p>
+            <p>Then a Samaritan — despised by the Jewish audience — came and was moved with compassion. He bandaged the man's wounds, placed him on his own animal, brought him to an inn, and paid for his care.</p>
+            <p>Jesus asked, "Which of these three proved to be a neighbor?" The lawyer could barely say it: "The one who showed him mercy." Jesus said, "Go and do likewise."</p>
+            <h3>What Jesus Was Teaching</h3>
+            <p>Jesus reversed the lawyer's question entirely. He asked "Who is my neighbor?" — seeking to limit responsibility. Jesus reframed it as "To whom can I be a neighbor?" — expanding responsibility to anyone in need. The command to love has no boundary conditions.</p>
+            <p>Many early church fathers saw the Good Samaritan as a picture of Christ Himself. We are the man left half-dead by sin; Christ comes to us in our brokenness, binds our wounds, and pays a debt we cannot repay. We love others this way because we have first been loved this way.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Luke 10:25-37')">Luke 10:25-37</span> — The full parable: a question about eternal life becomes a lesson about boundary-breaking love.</li>
+                <li><span class="verse-ref" onclick="showVerse('Micah 6:8')">Micah 6:8</span> — "What does the LORD require of you but to do justice, love kindness, and walk humbly with your God?"</li>
+                <li><span class="verse-ref" onclick="showVerse('James 2:15-17')">James 2:15-17</span> — "Faith by itself, if it does not have works, is dead."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 25:40')">Matthew 25:40</span> — "As you did it to one of the least of these my brothers, you did it to me."</li>
+                <li><span class="verse-ref" onclick="showVerse('Galatians 6:2')">Galatians 6:2</span> — "Bear one another's burdens, and so fulfill the law of Christ."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="lost-sheep">
+            <span class="section-kicker">Pursued by Love</span>
+            <h2>The Lost Sheep</h2>
+            <h3>The Parable</h3>
+            <p>Jesus asked the Pharisees and scribes: "What man of you, having a hundred sheep, if he has lost one of them, does not leave the ninety-nine in the open country, and go after the one that is lost, until he finds it?" This shepherd is not driven by economics — he is driven by love for the individual.</p>
+            <p>When he finds the sheep, he lays it on his shoulders, rejoicing, and calls his friends together: "Rejoice with me, for I have found my sheep that was lost." The image is one of celebration, not obligation.</p>
+            <p>Jesus delivered the punchline: "There will be more joy in heaven over one sinner who repents than over ninety-nine righteous persons who need no repentance." A direct challenge to the Pharisees, who saw sinners as contamination to avoid rather than people to pursue.</p>
+            <h3>What Jesus Was Teaching</h3>
+            <p>Jesus was revealing God's heart for the individual. He doesn't manage populations — He pursues persons. The lost sheep didn't find its own way home; the shepherd went after it. This is the gospel in miniature: salvation is not primarily about human seeking but about divine pursuit.</p>
+            <p>Jesus was also rebuking the Pharisees' attitude toward sinners. True holiness moves toward brokenness, not away from it. A doctor goes to the sick, not the healthy.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Luke 15:3-7')">Luke 15:3-7</span> — The shepherd leaves the ninety-nine to find the one — heaven rejoices over one sinner who repents.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 18:12-14')">Matthew 18:12-14</span> — "It is not the will of my Father who is in heaven that one of these little ones should perish."</li>
+                <li><span class="verse-ref" onclick="showVerse('John 10:11-14')">John 10:11-14</span> — "I am the good shepherd. The good shepherd lays down his life for the sheep."</li>
+                <li><span class="verse-ref" onclick="showVerse('Ezekiel 34:11-12')">Ezekiel 34:11-12</span> — "I myself will search for my sheep and will seek them out."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 53:6')">Isaiah 53:6</span> — "All we like sheep have gone astray... and the LORD has laid on him the iniquity of us all."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="talents">
+            <span class="section-kicker">Faithful Stewardship</span>
+            <h2>The Talents</h2>
+            <h3>The Parable</h3>
+            <p>A man going on a journey entrusted his property to his servants — five talents to one, two to another, one to another, each according to his ability. A talent was worth roughly twenty years of wages. Two servants traded and doubled their money; the third buried his in the ground.</p>
+            <p>When the master returned, he commended the first two identically: "Well done, good and faithful servant... Enter into the joy of your master." The reward was not proportional to the amount but to the faithfulness.</p>
+            <p>The third servant offered fearful excuses. The master called him wicked and lazy — not for failing spectacularly, but for doing nothing at all. His talent was taken and given to the one with ten.</p>
+            <h3>What Jesus Was Teaching</h3>
+            <p>Jesus was teaching that everything we have — time, abilities, resources, the gospel itself — belongs to God and is entrusted to us for Kingdom purposes. God never compares us to others — only to our own calling.</p>
+            <p>The buried talent reveals the most dangerous spiritual posture: not rebellion, but passivity, rooted in a distorted view of God as harsh rather than generous. Fear of failure led to inaction, and inaction was judged more severely than risky failure would have been.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 25:14-30')">Matthew 25:14-30</span> — The full parable: three servants, varying gifts, one standard — faithfulness with what you've been given.</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 19:12-27')">Luke 19:12-27</span> — The Parable of the Minas — a parallel account emphasizing equal opportunity.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 4:2')">1 Corinthians 4:2</span> — "It is required of stewards that they be found faithful."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Peter 4:10')">1 Peter 4:10</span> — "As each has received a gift, use it to serve one another, as good stewards of God's varied grace."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 12:6-8')">Romans 12:6-8</span> — "Having gifts that differ according to the grace given to us, let us use them."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="wedding-banquet">
+            <span class="section-kicker">An Open Invitation</span>
+            <h2>The Wedding Banquet</h2>
+            <h3>The Parable</h3>
+            <p>A king prepared a wedding feast for his son and sent servants to call those invited — but they refused, and some even seized and killed his servants. The king destroyed those murderers, then sent his servants to the main roads: "Invite to the wedding feast as many as you find." The hall was filled with guests, both bad and good.</p>
+            <p>But the king found a man with no wedding garment. "Friend, how did you get in here without a wedding garment?" The man was speechless and was cast out. In ancient custom, the host often provided garments — this man had refused the king's provision, attempting to come on his own terms.</p>
+            <p>The invitation that the privileged refused was extended to everyone without distinction — but entry still requires accepting what the king provides.</p>
+            <h3>What Jesus Was Teaching</h3>
+            <p>Jesus was warning Israel's religious leaders that their privileged position did not guarantee entrance into the Kingdom. The open invitation to the streets represents the gospel going to Gentiles, sinners, and outsiders — anyone willing to come.</p>
+            <p>The wedding garment adds a crucial nuance: the invitation is free but not without expectation. It represents the righteousness of Christ given to those who believe. Salvation is free but not cheap; it requires surrender to the King's provision rather than insistence on our own adequacy.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 22:1-14')">Matthew 22:1-14</span> — The full parable: rejected invitation, open call, and the necessity of the wedding garment.</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 14:15-24')">Luke 14:15-24</span> — Luke's parallel: "Go out to the highways and hedges and compel people to come in."</li>
+                <li><span class="verse-ref" onclick="showVerse('Revelation 19:7-9')">Revelation 19:7-9</span> — "Blessed are those who are invited to the marriage supper of the Lamb."</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 25:6-8')">Isaiah 25:6-8</span> — "On this mountain the LORD of hosts will make for all peoples a feast of rich food."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 7:21-23')">Matthew 7:21-23</span> — "Not everyone who says to me, 'Lord, Lord,' will enter the kingdom."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="rich-fool">
+            <span class="section-kicker">Wealth Without God</span>
+            <h2>The Rich Fool</h2>
+            <h3>The Parable</h3>
+            <p>Someone asked Jesus to arbitrate an inheritance dispute; He refused and instead warned against covetousness, telling of a rich man whose land produced so plentifully he had nowhere to store it. His solution was entirely self-referential: "I will tear down my barns and build larger ones... Soul, you have ample goods laid up for many years; relax, eat, drink, be merry."</p>
+            <p>There was no thought of God, no thought of neighbor, no thought of eternity. God broke into the monologue: "Fool! This night your soul is required of you, and the things you have prepared, whose will they be?"</p>
+            <p>Jesus concluded: "So is the one who lays up treasure for himself and is not rich toward God." The fool's sin was not having wealth but hoarding it apart from God.</p>
+            <h3>What Jesus Was Teaching</h3>
+            <p>Jesus was exposing the lie at the heart of materialism: that security and satisfaction come from accumulation. The rich fool was condemned for treating God's provision as his own possession and for building a future that excluded God entirely.</p>
+            <p>Being "rich toward God" means living with open hands — generous toward others, aware that everything we have is temporary and entrusted. The question is not "How much can I store?" but "How much can I give and steward for God's glory?"</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Luke 12:15-21')">Luke 12:15-21</span> — The parable: abundant harvest, bigger barns, a soul demanded — life is more than possessions.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Timothy 6:17-19')">1 Timothy 6:17-19</span> — "Set your hopes on God, who richly provides... be generous and ready to share."</li>
+                <li><span class="verse-ref" onclick="showVerse('James 4:13-14')">James 4:13-14</span> — "You do not know what tomorrow will bring. What is your life? A mist that appears for a little time."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 39:6')">Psalm 39:6</span> — "He heaps up wealth and does not know who will gather it."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 6:19-21')">Matthew 6:19-21</span> — "Where your treasure is, there your heart will be also."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="pharisee-tax-collector">
+            <span class="section-kicker">Humility Before God</span>
+            <h2>The Pharisee and the Tax Collector</h2>
+            <h3>The Parable</h3>
+            <p>Jesus told this parable to those who "trusted in themselves that they were righteous, and treated others with contempt." Two men went to the temple to pray. The Pharisee prayed: "God, I thank you that I am not like other men... I fast twice a week; I give tithes of all that I get." His prayer was really a performance review delivered to himself.</p>
+            <p>The tax collector stood far off, would not lift his eyes, and beat his breast: "God, be merciful to me, a sinner!" He made no comparison, offered no resume, claimed no merit.</p>
+            <p>Jesus delivered the shocking verdict: "This man went down to his house justified, rather than the other. For everyone who exalts himself will be humbled, but the one who humbles himself will be exalted."</p>
+            <h3>What Jesus Was Teaching</h3>
+            <p>Jesus was demolishing the foundation of self-righteousness. The Pharisee's prayer reveals the anatomy of spiritual pride: comparison, religious performance as currency, and blindness to his own need. Religious activity without humility is the most dangerous form of self-deception.</p>
+            <p>The tax collector's prayer is the model for genuine encounter with God: honest about sin, desperate for mercy. Justification comes not to those who perform but to those who confess.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Luke 18:9-14')">Luke 18:9-14</span> — The full parable: two prayers, two postures, two outcomes — humility is justified, pride is not.</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 66:2')">Isaiah 66:2</span> — "This is the one to whom I will look: he who is humble and contrite in spirit."</li>
+                <li><span class="verse-ref" onclick="showVerse('James 4:6')">James 4:6</span> — "God opposes the proud but gives grace to the humble."</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 16:18')">Proverbs 16:18</span> — "Pride goes before destruction, and a haughty spirit before a fall."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Peter 5:5')">1 Peter 5:5</span> — "Clothe yourselves, all of you, with humility toward one another."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="ten-virgins">
+            <span class="section-kicker">Be Ready</span>
+            <h2>The Ten Virgins</h2>
+            <h3>The Parable</h3>
+            <p>Jesus said the Kingdom of heaven would be like ten virgins who took their lamps to meet the bridegroom. Five were wise and took extra oil; five were foolish and took none. The bridegroom was delayed, and all of them slept.</p>
+            <p>At midnight the cry rang out: "Here is the bridegroom!" The foolish discovered their lamps going out and had no oil. While they went to buy more, the bridegroom came, and those who were ready went in with him — and the door was shut.</p>
+            <p>When the foolish virgins returned, he answered, "I do not know you." Jesus concluded: "Watch therefore, for you know neither the day nor the hour." The shut door is final.</p>
+            <h3>What Jesus Was Teaching</h3>
+            <p>Jesus was teaching about the urgency of spiritual readiness. The oil represents genuine, personal relationship with God — something that cannot be borrowed or acquired at the last minute. Spiritual readiness is not a crisis-moment achievement but a daily cultivation.</p>
+            <p>The delay of the bridegroom is significant — Jesus warned that waiting would tempt people to drift into spiritual sleep. The difference was not alertness but preparation. Be ready now, because the bridegroom's arrival is certain — only the timing is unknown.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 25:1-13')">Matthew 25:1-13</span> — The full parable: ten lamps, a delayed bridegroom, and a door that shuts permanently.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Thessalonians 5:2-6')">1 Thessalonians 5:2-6</span> — "The day of the Lord will come like a thief in the night... let us keep awake."</li>
+                <li><span class="verse-ref" onclick="showVerse('Revelation 3:3')">Revelation 3:3</span> — "If you will not wake up, I will come like a thief."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 24:42-44')">Matthew 24:42-44</span> — "Stay awake, for you do not know on what day your Lord is coming."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 13:11-12')">Romans 13:11-12</span> — "The night is far gone; the day is at hand."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="unforgiving-servant">
+            <span class="section-kicker">Forgive as You've Been Forgiven</span>
+            <h2>The Unforgiving Servant</h2>
+            <h3>The Parable</h3>
+            <p>Peter asked how often he must forgive — "as many as seven times?" Jesus answered, "seventy-seven times," then told a parable. A servant owed his king ten thousand talents — an unpayable sum. Moved with compassion, the king forgave the entire debt.</p>
+            <p>That same servant then found a fellow servant who owed him a hundred denarii — about three months' wages. He seized him by the throat and had him thrown into prison, refusing to extend the mercy he himself had just received.</p>
+            <p>When the king heard, he was furious: "Should you not have had mercy on your fellow servant, as I had mercy on you?" The king delivered him to the jailers.</p>
+            <h3>What Jesus Was Teaching</h3>
+            <p>Jesus was teaching that forgiveness is not optional for those who have been forgiven. The ratio — roughly 600,000 to 1 — makes clear that whatever anyone has done to us is infinitesimally small compared to what we have done against a holy God.</p>
+            <p>Unforgiveness is ultimately a failure to comprehend grace. When we refuse to forgive, we are saying, "What was done to me is bigger than what God did for me."</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 18:21-35')">Matthew 18:21-35</span> — The full parable: an impossible debt forgiven, a small debt refused — mercy demands mercy.</li>
+                <li><span class="verse-ref" onclick="showVerse('Colossians 3:13')">Colossians 3:13</span> — "As the Lord has forgiven you, so you also must forgive."</li>
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 4:32')">Ephesians 4:32</span> — "Be kind to one another, tenderhearted, forgiving one another, as God in Christ forgave you."</li>
+                <li><span class="verse-ref" onclick="showVerse('Mark 11:25')">Mark 11:25</span> — "Whenever you stand praying, forgive, if you have anything against anyone."</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 6:14-15')">Matthew 6:14-15</span> — "If you forgive others their trespasses, your heavenly Father will also forgive you."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="pearl">
+            <span class="section-kicker">Worth Everything</span>
+            <h2>The Pearl of Great Price</h2>
+            <h3>The Parable</h3>
+            <p>"The kingdom of heaven is like a merchant in search of fine pearls, who, on finding one pearl of great value, went and sold all that he had and bought it." This merchant was a professional dealer who knew quality, yet when he found this one pearl, everything else became worthless by comparison.</p>
+            <p>Pearls were the most valued of all ancient gems, their beauty formed entirely naturally over years. The merchant's decision to sell everything was not reckless — it was the most rational act of his life.</p>
+            <p>Jesus paired this parable with the treasure hidden in a field: whether you stumble upon the Kingdom by accident or search for it deliberately, the response is the same — joyful, total surrender of everything else to possess it.</p>
+            <h3>What Jesus Was Teaching</h3>
+            <p>Jesus was teaching that the Kingdom of God is not an addition to life but a replacement for life's center. Following Christ is not about adding religious activity to an unchanged existence; it is a fundamental revaluation of everything.</p>
+            <p>Notice the joy — the man hid his find "in his joy." The selling of everything was not grim sacrifice but glad exchange. The problem is never that the cost is too high; it is that we have not yet truly seen the pearl.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Matthew 13:45-46')">Matthew 13:45-46</span> — The merchant sells everything for one pearl — the Kingdom demands and deserves total investment.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 13:44')">Matthew 13:44</span> — The treasure hidden in a field — "in his joy he goes and sells all that he has and buys that field."</li>
+                <li><span class="verse-ref" onclick="showVerse('Philippians 3:7-8')">Philippians 3:7-8</span> — "I count everything as loss because of the surpassing worth of knowing Christ Jesus my Lord."</li>
+                <li><span class="verse-ref" onclick="showVerse('Colossians 2:3')">Colossians 2:3</span> — "In Christ are hidden all the treasures of wisdom and knowledge."</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 2:3-5')">Proverbs 2:3-5</span> — "If you seek it like silver and search for it as for hidden treasures."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="videos">
+            <span class="section-kicker">Watch &amp; Learn</span>
+            <h2>Videos</h2>
+
+            <h4>The Sower</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'I1yqXp7C9uU')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/I1yqXp7C9uU/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the meaning of the Parable of the Sower?<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'4fE-9808Gkw')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/4fE-9808Gkw/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Most People Miss this CRUCIAL Lesson in the Parable of the Sower<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+            </div>
+
+            <h4>The Mustard Seed</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'Cr2g_FS6c5k')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/Cr2g_FS6c5k/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Give Me an Answer - #2015 - Faith as Big as a Mustard Seed<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Give Me An Answer with Stuart & Cliffe Knechtle</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'34L4jOezMkQ')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/34L4jOezMkQ/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the meaning of the Parable of the Mustard Seed? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>The Prodigal Son</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'3ThHG7YP8DE')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/3ThHG7YP8DE/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What Most Churches WON'T Tell You About the Prodigal Son! (part 2)<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'bk1PTBaUzAw')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/bk1PTBaUzAw/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What Most Churches WON'T Tell You About the Prodigal Son! (part 1)<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'jUCCUHurV0I')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/jUCCUHurV0I/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Prodigal Son: Luke 9-19<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+            </div>
+
+            <h4>The Good Samaritan</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'LCU7_G9aRV8')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/LCU7_G9aRV8/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Luke 10:25-42 - Witness of The Good Samaritan<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'70tDSEd2qfM')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/70tDSEd2qfM/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Parable of the Good Samaritan -- Aaron Wright<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Grace Family Baptist Church</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'pUUxIVl3Fi0')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/pUUxIVl3Fi0/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Parable of the Good Samaritan EXPLAINED VERSE BY VERSE!<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">THE BEAT by Allen Parr</span></p></div>
+            </div>
+
+            <h4>The Lost Sheep</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'BPsyjS4ANiw')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/BPsyjS4ANiw/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Good Shepherd and the Lost Sheep - Aaron Wright<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Grace Family Baptist Church</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'lIxVhtPxN_I')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/lIxVhtPxN_I/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Why did Jesus say that He was sent only to the lost sheep of Israel? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+
+            <h4>The Talents</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'7TRATaN4B0k')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/7TRATaN4B0k/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the meaning of the Parable of the Talents? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'UO0dQDaxNfI')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/UO0dQDaxNfI/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Tapestry of Talents — Aaron Wright<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Grace Family Baptist Church</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'U1qx3IrwClI')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/U1qx3IrwClI/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">How to Get Ready for Jesus' Return | The Parable of the Talents<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">THE BEAT by Allen Parr</span></p></div>
+            </div>
+
+            <h4>The Rich Fool</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'uqFRx-dDO94')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/uqFRx-dDO94/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Luke 12:16-34 - Witness of the Rich Fool<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'RypCPPdgL3s')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/RypCPPdgL3s/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Rich Fool - Aaron Wright<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Grace Family Baptist Church</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'WNkjBOif58c')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/WNkjBOif58c/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Meet a Blind Man with 5 Eyes | The Parable of the Rich Fool<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">THE BEAT by Allen Parr</span></p></div>
+            </div>
+
+            <h4>The Ten Virgins</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'02z8NQ6c9Z4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/02z8NQ6c9Z4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the meaning of the Parable of the Ten Virgins? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
         </div>
     </main>
+
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="if(event.target===this)closeVerse()">
+        <div class="verse-popup" id="versePopup">
+            <button class="close-popup" onclick="closeVerse()">&times;</button>
+            <h4 id="popupRef"></h4>
+            <p id="popupText">Loading...</p>
+        </div>
+    </div>
+
     <script src="site/script.js"></script>
+    <script>
+        function loadYT(el, id) {
+            el.innerHTML = '<iframe width="100%" height="100%" style="position:absolute;inset:0;" src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        }
+        function showVerse(passage) {
+            document.getElementById('verseOverlay').classList.add('active');
+            document.getElementById('popupRef').textContent = passage;
+            document.getElementById('popupText').textContent = 'Loading...';
+            fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+                .then(r => r.json())
+                .then(data => {
+                    document.getElementById('popupText').textContent = (data.passages && data.passages[0]) ? data.passages[0].trim() : 'Verse not found.';
+                })
+                .catch(() => { document.getElementById('popupText').textContent = 'Unable to load verse.'; });
+        }
+        function closeVerse() {
+            document.getElementById('verseOverlay').classList.remove('active');
+        }
+    </script>
 </body>
 </html>
