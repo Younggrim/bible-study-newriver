@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#8b6914">
     <title>Kings of Israel & Judah — Bible Study</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,72 +13,328 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
     <link rel="stylesheet" href="site/style.css">
     <style>
-        body { background: #faf5ed; }
-        .page-content { margin: 0 auto; max-width: 960px; padding: 24px 24px 80px; }
+        .topic-hero { position: relative; overflow: hidden; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1655658738987-cb154cc56c4a?w=1200&q=80") center/cover no-repeat; filter: brightness(0.45) sepia(0.75) saturate(1.7); }
+        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #e8d4a0; letter-spacing: 0.5px; }
+
         .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #8b6914; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #5c4a0d; }
         .back-link i { margin-right: 6px; }
-        .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; padding-top: 8px; }
-        .item-card { display: block; padding: 16px 18px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid; border-radius: 10px; text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; }
-        .item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
-        .item-card h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin: 0 0 2px; }
-        .item-card .subtitle { font-size: 0.75rem; font-style: italic; color: #8a7e74; margin-bottom: 6px; }
-        .item-card .desc { font-size: 0.82rem; color: #5a4e44; line-height: 1.5; }
-        @media (max-width: 768px) { .item-grid { grid-template-columns: 1fr; } }
+
+        .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
+        .jump-card { background: #fff; border: 1px solid #e8e0d6; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #8b6914; text-decoration: none; transition: background 0.15s, transform 0.15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; scroll-margin-top: 76px; }
+        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.35rem; color: #8b6914; margin-bottom: 4px; }
+        .section-block .section-kicker { display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #8a7e74; margin-bottom: 6px; }
+        .section-block h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; color: #8b6914; margin: 20px 0 12px; }
+        .section-block h4 { font-family: 'Cinzel', serif; font-size: 0.88rem; color: #8b6914; margin: 18px 0 10px; }
+        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e8e0d6; }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .video-grid:last-child { margin-bottom: 0; }
+
+        .verse-ref { color: #8b6914; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #5c4a0d; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#8b6914; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="section-hero">
-        <img src="https://images.unsplash.com/photo-1655658738987-cb154cc56c4a?w=1400&q=80&auto=format"
-             srcset="https://images.unsplash.com/photo-1655658738987-cb154cc56c4a?w=640&q=80&auto=format 640w,
-                     https://images.unsplash.com/photo-1655658738987-cb154cc56c4a?w=1000&q=80&auto=format 1000w,
-                     https://images.unsplash.com/photo-1655658738987-cb154cc56c4a?w=1600&q=80&auto=format 1600w"
-             sizes="100vw" fetchpriority="high" alt="Ancient stone ruins overlooking the sea at sunset">
-        <div class="section-hero-overlay">
-            <h2>Kings of Israel &amp; Judah</h2>
-            <p class="section-desc">The rulers of a divided kingdom — some faithful, many not.</p>
+    <main class="main-content" style="margin-left:auto; margin-right:auto; max-width:960px; margin-top:0;">
+
+        <div class="topic-hero">
+            <p class="subtitle">Topical Study</p>
+            <h1>Kings of Israel & Judah</h1>
         </div>
-    </div>
-    <main class="page-content">
+
         <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
-        <div class="item-grid">
-                <a href="kings-saul.html" class="item-card" style="border-left-color:#8b6914;">
-                    <h4 style="color:#8b6914;">Saul</h4>
-                    <p class="desc">Israel's first king — started well, ended in ruin.</p>
-                </a>
-                <a href="kings-david.html" class="item-card" style="border-left-color:#8b6914;">
-                    <h4 style="color:#8b6914;">David</h4>
-                    <p class="desc">The greatest king — established God's throne forever.</p>
-                </a>
-                <a href="kings-solomon.html" class="item-card" style="border-left-color:#8b6914;">
-                    <h4 style="color:#8b6914;">Solomon</h4>
-                    <p class="desc">Wisest man alive — undone by divided loyalty.</p>
-                </a>
-                <a href="kings-rehoboam.html" class="item-card" style="border-left-color:#8b6914;">
-                    <h4 style="color:#8b6914;">Rehoboam</h4>
-                    <p class="desc">Arrogance that split a kingdom in two.</p>
-                </a>
-                <a href="kings-jeroboam.html" class="item-card" style="border-left-color:#8b6914;">
-                    <h4 style="color:#8b6914;">Jeroboam</h4>
-                    <p class="desc">Led Israel into idolatry — 'the sin of Jeroboam.'</p>
-                </a>
-                <a href="kings-ahab.html" class="item-card" style="border-left-color:#8b6914;">
-                    <h4 style="color:#8b6914;">Ahab</h4>
-                    <p class="desc">Most wicked king — married Jezebel, worshiped Baal.</p>
-                </a>
-                <a href="kings-jehoshaphat.html" class="item-card" style="border-left-color:#8b6914;">
-                    <h4 style="color:#8b6914;">Jehoshaphat</h4>
-                    <p class="desc">Good king who sought God — but made bad alliances.</p>
-                </a>
-                <a href="kings-hezekiah.html" class="item-card" style="border-left-color:#8b6914;">
-                    <h4 style="color:#8b6914;">Hezekiah</h4>
-                    <p class="desc">Revival king — trusted God against Assyria.</p>
-                </a>
-                <a href="kings-josiah.html" class="item-card" style="border-left-color:#8b6914;">
-                    <h4 style="color:#8b6914;">Josiah</h4>
-                    <p class="desc">The boy king who found the lost Book of the Law.</p>
-                </a>
+
+        <nav class="jump-grid">
+            <a href="#overview" class="jump-card">Overview</a>
+            <a href="#saul" class="jump-card">Saul</a>
+            <a href="#david" class="jump-card">David</a>
+            <a href="#solomon" class="jump-card">Solomon</a>
+            <a href="#rehoboam" class="jump-card">Rehoboam</a>
+            <a href="#jeroboam" class="jump-card">Jeroboam</a>
+            <a href="#ahab" class="jump-card">Ahab</a>
+            <a href="#jehoshaphat" class="jump-card">Jehoshaphat</a>
+            <a href="#hezekiah" class="jump-card">Hezekiah</a>
+            <a href="#josiah" class="jump-card">Josiah</a>
+            <a href="#videos" class="jump-card">Videos</a>
+        </nav>
+
+        <div class="section-block" id="overview">
+            <span class="section-kicker">The Foundation</span>
+            <h2>The Kings of a Divided Kingdom</h2>
+            <p>Israel's monarchy began around 1050 BC when the people demanded a king "such as all the other nations have" (1 Samuel 8:5) — a request God granted, though it was, in a real sense, a rejection of His own direct rule over them. Saul, David, and Solomon reigned in succession over a single united kingdom, each ruling roughly forty years. Saul's disobedience cost him the dynasty; David's faithfulness (despite serious failure) earned his family an everlasting covenant promise, later fulfilled in Christ; and Solomon's wisdom built the Temple but his divided loyalty planted the seeds of collapse.</p>
+            <p>When Solomon's son Rehoboam alienated the northern tribes around 930 BC, the united kingdom permanently split in two. The northern kingdom kept the name Israel, set up its own capital and worship system under Jeroboam, and was ruled by nineteen kings across roughly two centuries — every single one of them is evaluated negatively in Scripture, since none removed the idolatrous worship Jeroboam established. Israel fell to the Assyrian Empire in 722 BC and its population was scattered, never to return as a nation. The southern kingdom, Judah, kept Jerusalem, the Temple, and the Davidic royal line, and was ruled by twenty kings over roughly three and a half centuries — a mixed record of reform and relapse, with a handful of genuinely godly kings (Jehoshaphat, Hezekiah, and Josiah among the best) interspersed among the unfaithful. Judah fell to Babylon in 586 BC, its Temple destroyed and its people exiled.</p>
+            <p>The nine kings gathered on this page trace that whole arc: the united monarchy (Saul, David, Solomon), the moment of the split (Rehoboam of Judah and Jeroboam of Israel, contemporaries and opposite numbers), a representative of Israel's unrelenting decline (Ahab, its most wicked king), and three of Judah's high points of reform (Jehoshaphat, Hezekiah, and Josiah). Read together, their stories form a single sustained argument the books of Kings and Chronicles keep making: national fate rises and falls not with military strength or political shrewdness, but with whether a king's heart was wholly devoted to the LORD.</p>
         </div>
+
+        <div class="section-block" id="saul">
+            <span class="section-kicker">United Monarchy — First King of Israel</span>
+            <h2>Saul</h2>
+            <h3>His Reign</h3>
+            <p>Saul was Israel's first king — tall, handsome, and initially humble. When Samuel anointed him, Saul was hiding among the baggage, overwhelmed by the weight of what God was calling him to. The Spirit of God came upon him powerfully, and his early reign showed genuine promise. He rallied Israel against the Ammonites at Jabesh-Gilead with decisive courage, and the nation united behind their new king with hope.</p>
+            <p>But Saul's character contained a fatal flaw: he feared people more than he feared God. When pressured by circumstances at Gilgal, he offered sacrifices instead of waiting for Samuel as commanded. When sent to destroy the Amalekites completely, he spared the best livestock and King Agag, then lied about it. Samuel's devastating verdict — "To obey is better than sacrifice" — marked the beginning of Saul's unraveling.</p>
+            <p>Saul's final decades were marked by paranoia, jealousy toward David, consultation with a medium, and ultimate despair. The man who began with such promise ended by falling on his own sword on Mount Gilboa, his kingdom torn from his family.</p>
+            <h3>Legacy and Lessons</h3>
+            <p>Saul's life warns us that a strong start does not guarantee a strong finish. He began with genuine humility and divine empowerment, yet progressively chose self-will over obedience until God's Spirit departed from him entirely. Saul also teaches us the devastating consequences of partial obedience — he did most of what God commanded, but kept back what he wanted for himself. In God's economy, partial obedience is disobedience.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Samuel 10:1')">1 Samuel 10:1</span> — Samuel anointed Saul and said, "The LORD has anointed you ruler over his inheritance."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Samuel 15:22-23')">1 Samuel 15:22-23</span> — "To obey is better than sacrifice... Because you have rejected the word of the LORD, he has rejected you as king."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Samuel 16:14')">1 Samuel 16:14</span> — "The Spirit of the LORD had departed from Saul, and a harmful spirit from the LORD tormented him."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Samuel 31:4')">1 Samuel 31:4</span> — Saul took his own sword and fell on it, ending his reign in tragedy.</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 16:18')">Proverbs 16:18</span> — "Pride goes before destruction, and a haughty spirit before a fall."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="david">
+            <span class="section-kicker">United Monarchy — Man After God's Own Heart</span>
+            <h2>David</h2>
+            <h3>His Reign</h3>
+            <p>David's reign as king represents both the golden age of Israel and a cautionary tale about the dangers of unchecked power. Anointed as a shepherd boy, he waited over a decade before ascending to the throne — first ruling Judah from Hebron, then uniting all twelve tribes under his leadership in Jerusalem. He conquered the Jebusite stronghold, made it his capital, and brought the Ark of the Covenant there with dancing and celebration.</p>
+            <p>God made an everlasting covenant with David — promising that his throne would be established forever, a promise ultimately fulfilled in Jesus Christ. David's military victories expanded Israel's borders to their greatest extent, and as a psalmist, he gave Israel its hymnbook, expressing the full range of human emotion in worship to God.</p>
+            <p>Yet David's sin with Bathsheba and murder of Uriah revealed that even the greatest king was capable of the most grievous evil when he abandoned dependence on God. The prophet Nathan's confrontation, David's broken repentance in Psalm 51, and the devastating consequences that followed through his family — Amnon, Tamar, Absalom's rebellion — show that sin always costs more than we anticipate.</p>
+            <h3>Legacy and Lessons</h3>
+            <p>David's kingship teaches us that leadership is stewardship, not ownership — the throne belonged to God, and David was its custodian. David also demonstrates that restoration after catastrophic sin is possible but costly. God forgave David completely, yet the consequences of his choices rippled through his family for generations. Grace does not eliminate consequences — it sustains us through them.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('2 Samuel 7:16')">2 Samuel 7:16</span> — "Your house and your kingdom shall be made sure forever before me. Your throne shall be established forever."</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 51:10')">Psalm 51:10</span> — "Create in me a clean heart, O God, and renew a right spirit within me."</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 13:22')">Acts 13:22</span> — "I have found in David the son of Jesse a man after my heart, who will do all my will."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Samuel 16:7')">1 Samuel 16:7</span> — "The LORD sees not as man sees: man looks on the outward appearance, but the LORD looks on the heart."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Samuel 12:13')">2 Samuel 12:13</span> — David said to Nathan, "I have sinned against the LORD." Nathan said, "The LORD also has put away your sin."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="solomon">
+            <span class="section-kicker">United Monarchy — Wisest King, Divided Heart</span>
+            <h2>Solomon</h2>
+            <h3>His Reign</h3>
+            <p>Solomon inherited a united, prosperous kingdom from his father David and asked God for the one thing that would define his reign: wisdom. God was so pleased with this request — that Solomon asked for wisdom to govern rather than wealth or long life — that He granted all three. Solomon's wisdom became legendary, attracting the Queen of Sheba and rulers from across the known world to hear his insight.</p>
+            <p>Solomon's greatest achievement was building the Temple in Jerusalem — the permanent dwelling place of God among His people that David had dreamed of but was not permitted to construct. The dedication of the Temple, with God's glory filling the building so that the priests could not stand, marked the pinnacle of Israel's worship life.</p>
+            <p>Yet Solomon's end contradicts his beginning. Despite his unmatched wisdom, he married seven hundred wives and three hundred concubines — many from nations God had explicitly forbidden. These foreign wives turned his heart after other gods, and the wisest man who ever lived built high places for Chemosh and Molech on the hills surrounding Jerusalem.</p>
+            <h3>Legacy and Lessons</h3>
+            <p>Solomon's tragedy teaches us that wisdom without application is meaningless. He wrote Proverbs warning against the seduction of foreign women, then lived out the very failure he warned others about. Solomon also warns about the gradual nature of spiritual compromise — the drift was slow, one alliance, one wife, one concession at a time, until the cumulative weight of compromise crushed his devotion.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Kings 3:9')">1 Kings 3:9</span> — "Give your servant an understanding heart to judge your people, that I may discern between good and evil."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Kings 4:29')">1 Kings 4:29</span> — "God gave Solomon wisdom and understanding beyond measure, and breadth of mind like the sand on the seashore."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Kings 11:4')">1 Kings 11:4</span> — "When Solomon was old his wives turned away his heart after other gods, and his heart was not wholly true to the LORD."</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 1:7')">Proverbs 1:7</span> — "The fear of the LORD is the beginning of knowledge; fools despise wisdom and instruction."</li>
+                <li><span class="verse-ref" onclick="showVerse('Ecclesiastes 12:13')">Ecclesiastes 12:13</span> — "The end of the matter; all has been heard. Fear God and keep his commandments, for this is the whole duty of man."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="rehoboam">
+            <span class="section-kicker">Judah — The King Who Split the Kingdom</span>
+            <h2>Rehoboam</h2>
+            <h3>His Reign</h3>
+            <p>Rehoboam inherited the most prosperous kingdom in the world from his father Solomon, yet managed to tear it in two within days of his coronation. When the northern tribes came to him requesting relief from Solomon's heavy taxation and forced labor, Rehoboam faced a defining leadership decision. The older counselors — men who had served his father — advised compassion: "If you will be a servant to this people today, they will be your servants forever."</p>
+            <p>Instead, Rehoboam rejected their wisdom and turned to his young friends who had grown up with him in palace privilege. Their advice was brutal arrogance: "My little finger is thicker than my father's waist." Rehoboam delivered this threat to the assembled tribes, and in that moment, ten of twelve tribes permanently seceded, creating the divided kingdom of Israel and Judah.</p>
+            <p>Rehoboam's reign over the remaining kingdom of Judah was marked by continued spiritual decline — "he did evil, for he did not set his heart to seek the LORD."</p>
+            <h3>Legacy and Lessons</h3>
+            <p>Rehoboam teaches us the catastrophic consequences of rejecting wise counsel. He had access to experienced advisors who understood servant leadership, yet he chose instead to listen to those who told him what he wanted to hear. Rehoboam also illustrates that inherited position does not equal inherited wisdom — every generation must seek God fresh.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Kings 12:13-14')">1 Kings 12:13-14</span> — The king answered the people harshly, rejecting the advice the elders gave him.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Kings 12:16')">1 Kings 12:16</span> — "What portion do we have in David?... To your tents, O Israel!"</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 12:15')">Proverbs 12:15</span> — "The way of a fool is right in his own eyes, but a wise man listens to advice."</li>
+                <li><span class="verse-ref" onclick="showVerse('Proverbs 15:22')">Proverbs 15:22</span> — "Without counsel plans fail, but with many advisers they succeed."</li>
+                <li><span class="verse-ref" onclick="showVerse('James 1:5')">James 1:5</span> — "If any of you lacks wisdom, let him ask God, who gives generously to all without reproach."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="jeroboam">
+            <span class="section-kicker">Israel — First King, First Idolatry</span>
+            <h2>Jeroboam</h2>
+            <h3>His Reign</h3>
+            <p>Jeroboam was one of Solomon's capable officials whom God chose to rule the ten northern tribes after the kingdom divided. Through the prophet Ahijah, God promised Jeroboam a dynasty like David's — if he would walk in God's ways and keep His commandments. But Jeroboam's faith crumbled under political anxiety. Fearing that his people would return to Rehoboam if they continued worshipping at the Temple in Jerusalem, he constructed two golden calves — one at Dan and one at Bethel — and told Israel, "Here are your gods who brought you up out of Egypt."</p>
+            <p>Jeroboam's sin became so foundational to Israel's apostasy that subsequent writers refer to it repeatedly as "the sin of Jeroboam the son of Nebat, which he made Israel to sin." Every wicked king of the northern kingdom is measured against this standard, and this pattern of idolatry persisted for two centuries until Israel's final destruction by Assyria.</p>
+            <h3>Legacy and Lessons</h3>
+            <p>Jeroboam teaches us the devastating consequences of prioritizing political expediency over spiritual faithfulness. He had a genuine promise from God, yet he trusted his own calculations over divine assurance. Jeroboam also illustrates how fear-based leadership creates systems of false worship — his golden calves were born not from theological conviction but from political insecurity.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Kings 12:28-30')">1 Kings 12:28-30</span> — Jeroboam made two calves of gold and said, "Here are your gods, O Israel." And this thing became a sin.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Kings 14:16')">1 Kings 14:16</span> — "He will give Israel up because of the sins of Jeroboam, which he sinned and made Israel to sin."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Kings 17:21-22')">2 Kings 17:21-22</span> — "Israel walked in all the sins that Jeroboam did. They did not depart from them."</li>
+                <li><span class="verse-ref" onclick="showVerse('Exodus 32:4')">Exodus 32:4</span> — The golden calf at Sinai — the pattern Jeroboam deliberately repeated.</li>
+                <li><span class="verse-ref" onclick="showVerse('Hosea 8:5-6')">Hosea 8:5-6</span> — "Your calf is rejected, O Samaria... it is not God. The calf of Samaria shall be broken to pieces."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="ahab">
+            <span class="section-kicker">Israel — Its Most Wicked King</span>
+            <h2>Ahab</h2>
+            <h3>His Reign</h3>
+            <p>Ahab is remembered as the most wicked king in Israel's history — a man who "did more to provoke the LORD, the God of Israel, to anger than all the kings of Israel who were before him." His marriage to Jezebel, a Phoenician princess devoted to Baal, introduced institutionalized pagan worship into Israel on an unprecedented scale. Together they built a temple to Baal in Samaria and actively hunted down the prophets of the LORD.</p>
+            <p>Ahab's confrontation with Elijah at Mount Carmel exposed the emptiness of Baal worship, yet even this spectacular display of God's power did not permanently turn Ahab's heart. His coveting of Naboth's vineyard — and Jezebel's murder of Naboth to obtain it — revealed a king who believed his power entitled him to whatever he desired.</p>
+            <p>Yet even Ahab experienced a moment of genuine repentance. When Elijah delivered God's judgment for Naboth's murder, Ahab tore his clothes, put on sackcloth, and humbled himself. God noticed — and delayed the judgment, declaring that the disaster would come in his son's days rather than his own.</p>
+            <h3>Legacy and Lessons</h3>
+            <p>Ahab warns us about the corrupting power of ungodly alliances. His marriage to Jezebel was politically advantageous but spiritually catastrophic — Jezebel's influence pushed him to depths he might never have reached alone. Ahab also teaches us that persistent exposure to truth creates accountability even when it does not produce transformation.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Kings 16:30-33')">1 Kings 16:30-33</span> — "Ahab did more to provoke the LORD, the God of Israel, to anger than all the kings before him."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Kings 21:25')">1 Kings 21:25</span> — "There was none who sold himself to do what was evil in the sight of the LORD like Ahab."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Kings 18:21')">1 Kings 18:21</span> — "How long will you go limping between two different opinions? If the LORD is God, follow him."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Chronicles 21:6')">2 Chronicles 21:6</span> — Ahab's influence corrupted even the southern kingdom of Judah through intermarriage.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Kings 22:37-38')">1 Kings 22:37-38</span> — Ahab's death fulfilled the prophecy — dogs licked his blood at the pool of Samaria.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="jehoshaphat">
+            <span class="section-kicker">Judah — The King Who Prayed First</span>
+            <h2>Jehoshaphat</h2>
+            <h3>His Reign</h3>
+            <p>Jehoshaphat was one of Judah's best kings — a man who sought the LORD, removed idols, and sent teachers throughout the land to instruct the people in God's law. His reign brought peace and prosperity to Judah, and even surrounding nations feared the God of Jehoshaphat. He reformed the judicial system, establishing judges in every fortified city with the charge: "Consider carefully what you do, because you are not judging for mere mortals but for the LORD."</p>
+            <p>His finest hour came when a vast army of Moabites, Ammonites, and Meunites marched against Judah. Jehoshaphat's response was not military strategy but prayer and fasting: "We do not know what to do, but our eyes are on you." God's answer came through a Levite prophet: "The battle is not yours but God's." Judah went out singing, and God set ambushes that destroyed the enemy armies.</p>
+            <p>Yet Jehoshaphat's fatal weakness was his alliances with the wicked kings of Israel. He married his son to Ahab's daughter, joined Ahab in battle at Ramoth-Gilead (nearly dying in the process), and partnered with Ahaziah in a merchant fleet that God destroyed.</p>
+            <h3>Legacy and Lessons</h3>
+            <p>Jehoshaphat teaches us the power of corporate prayer and worship in the face of overwhelming odds — when the army approached, he called a prayer meeting, not a war council. Jehoshaphat also warns us that even godly people can make disastrous partnership decisions; good intentions do not sanctify bad alliances.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('2 Chronicles 20:3-4')">2 Chronicles 20:3-4</span> — Alarmed, Jehoshaphat resolved to inquire of the LORD, and he proclaimed a fast for all Judah.</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Chronicles 20:12')">2 Chronicles 20:12</span> — "We do not know what to do, but our eyes are on you."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Chronicles 20:15')">2 Chronicles 20:15</span> — "Do not be afraid... the battle is not yours but God's."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Chronicles 19:2')">2 Chronicles 19:2</span> — "Should you help the wicked and love those who hate the LORD?"</li>
+                <li><span class="verse-ref" onclick="showVerse('Psalm 37:5')">Psalm 37:5</span> — "Commit your way to the LORD; trust in him, and he will act."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="hezekiah">
+            <span class="section-kicker">Judah — The Revival King</span>
+            <h2>Hezekiah</h2>
+            <h3>His Reign</h3>
+            <p>Hezekiah inherited a kingdom in spiritual ruin from his father Ahaz, who had shut the Temple doors, set up altars to foreign gods, and even sacrificed his own children in pagan rituals. In his very first month as king, Hezekiah reopened and purified the Temple, reinstated proper worship, and called the nation to celebrate Passover for the first time in generations.</p>
+            <p>Hezekiah's greatest test came when Sennacherib of Assyria — the superpower that had already destroyed the northern kingdom — surrounded Jerusalem with an overwhelming army. Hezekiah's response was to take Sennacherib's threatening letter, spread it before the LORD in the Temple, and pray one of Scripture's most honest prayers of desperation.</p>
+            <p>God's answer was decisive: that very night, the angel of the LORD struck down 185,000 Assyrian soldiers, and Sennacherib retreated in disgrace to be murdered by his own sons. Yet his later years included the foolish display of his treasures to Babylonian envoys — planting the seeds of future exile.</p>
+            <h3>Legacy and Lessons</h3>
+            <p>Hezekiah demonstrates that spiritual revival often begins with a single leader willing to act decisively — he did not wait for consensus, he reopened the Temple because it was right. Hezekiah also teaches us the proper response to overwhelming threat: bring it directly to God, specifically, honestly, and rooted in His character rather than our capability.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('2 Kings 18:5-6')">2 Kings 18:5-6</span> — "He trusted in the LORD, the God of Israel, so that there was none like him among all the kings of Judah."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Kings 19:15-19')">2 Kings 19:15-19</span> — Hezekiah's prayer: spreading the threatening letter before the LORD and asking for deliverance.</li>
+                <li><span class="verse-ref" onclick="showVerse('Isaiah 37:36')">Isaiah 37:36</span> — "The angel of the LORD went out and put to death a hundred and eighty-five thousand in the Assyrian camp."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Chronicles 30:1')">2 Chronicles 30:1</span> — Hezekiah invited all Israel and Judah to come to Jerusalem for Passover.</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Kings 20:5')">2 Kings 20:5</span> — "I have heard your prayer and seen your tears; I will heal you."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="josiah">
+            <span class="section-kicker">Judah — The Boy King Who Found the Law</span>
+            <h2>Josiah</h2>
+            <h3>His Reign</h3>
+            <p>Josiah became king at eight years old, inheriting a nation steeped in idolatry after the disastrous reigns of his grandfather Manasseh and father Amon. Yet at sixteen, he "began to seek the God of his father David," and at twenty, he began purging Judah of its high places, Asherah poles, and carved images.</p>
+            <p>The turning point came when Josiah was twenty-six. During Temple repairs, the high priest Hilkiah discovered the Book of the Law — likely Deuteronomy — buried and forgotten in the Temple itself. When Josiah heard its words read aloud, he tore his robes in grief, recognizing how far the nation had drifted from God's commands.</p>
+            <p>Josiah led the most thorough national repentance in Judah's history. He read the entire Book of the Law publicly, renewed the covenant, destroyed every idol and high place in the land, and celebrated a Passover unprecedented since the days of the judges. Scripture's verdict is extraordinary: "Before him there was no king like him, who turned to the LORD with all his heart."</p>
+            <h3>Legacy and Lessons</h3>
+            <p>Josiah teaches us that the discovery of God's Word should produce immediate, radical response — he did not form a committee, he tore his clothes and acted. Josiah also demonstrates that godly heritage is not required for godly living: his grandfather and father were among Judah's worst kings, yet Josiah chose a different path while still a teenager.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('2 Kings 22:2')">2 Kings 22:2</span> — "He did what was right in the eyes of the LORD and walked in all the way of David his father."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Kings 22:11')">2 Kings 22:11</span> — When the king heard the words of the Book of the Law, he tore his clothes.</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Kings 23:25')">2 Kings 23:25</span> — "Before him there was no king like him, who turned to the LORD with all his heart."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Chronicles 34:3')">2 Chronicles 34:3</span> — "While he was still young, he began to seek the God of his father David."</li>
+                <li><span class="verse-ref" onclick="showVerse('Deuteronomy 6:5')">Deuteronomy 6:5</span> — "You shall love the LORD your God with all your heart and with all your soul and with all your might."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="videos">
+            <span class="section-kicker">Watch & Learn</span>
+            <h2>Videos</h2>
+
+            <h4>Saul</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'tMP7U5a_spY')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/tMP7U5a_spY/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Saul the Anti-Anointed • The Anointed Ep. 3<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'Xbb1If8XfL8')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/Xbb1If8XfL8/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Sad And Tragic End Of King Saul - 1 Samuel 31:3-6<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+            </div>
+
+            <h4>David</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'DwnHiF7_tTA')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/DwnHiF7_tTA/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">David, the Latecomer King • Firstborn Ep. 7<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'JCP2zWaJlGc')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/JCP2zWaJlGc/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">David the Priestly King<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+            </div>
+
+            <h4>Solomon</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'WJgt1vRkPbI')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/WJgt1vRkPbI/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Books of Solomon<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'lX2PyEVWTyw')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/lX2PyEVWTyw/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Abide - David's Charge to Solomon - 1 Chronicles 22<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+            </div>
+
+            <h4>Ahab</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'fvvmFyFHtj0')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/fvvmFyFHtj0/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">1 Kings 17-19 | Elijah vs Ahab | Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Spoken Gospel</span></p></div>
+            </div>
+
+            <h4>Hezekiah</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'eh7vGlJ_Tuk')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/eh7vGlJ_Tuk/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Who was Hezekiah in the Bible?  |  GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'ctb4oidSuXI')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/ctb4oidSuXI/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">2 Kings 18-20 | King Hezekiah | Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Spoken Gospel</span></p></div>
+            </div>
+
+            <h4>Josiah</h4>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'868x1eEcP9U')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/868x1eEcP9U/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">2 Kings 21-23 | Josiah, the Last Good King | Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Spoken Gospel</span></p></div>
+            </div>
+        </div>
+
     </main>
     <script src="site/script.js"></script>
+    <script>
+    function toggleTopicDropdown(){document.getElementById("topicDropdown").classList.toggle("open")}document.addEventListener("click",function(e){if(!e.target.closest(".topic-dropdown")){document.getElementById("topicDropdown").classList.remove("open")}});
+    function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) {
+                textEl.innerHTML = data.passages[0];
+            } else {
+                textEl.innerHTML = '<em>Could not load this passage.</em>';
+            }
+        })
+        .catch(function() {
+            textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>';
+        });
+    }
+    function closeVerse() {
+        document.getElementById('verseOverlay').classList.remove('show');
+        document.getElementById('versePopup').classList.remove('show');
+    }
+    </script>
 </body>
 </html>
