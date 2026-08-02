@@ -196,19 +196,6 @@
             });
         }
 
-        // Selecting an hour in the visitor's own local time, then reading
-        // it back via getUTCHours(), lets the browser's own DST-aware
-        // Date math do the local-to-UTC conversion instead of hand-rolled
-        // offset arithmetic. (The stored hourUTC is an absolute value —
-        // it isn't re-derived daily, so a subscriber's delivery time can
-        // drift by an hour across a DST transition, same known tradeoff
-        // as the rest of this feature.)
-        function localHourToUTCHour(localHour) {
-            var d = new Date();
-            d.setHours(localHour, 0, 0, 0);
-            return d.getUTCHours();
-        }
-
         function formatHourLabel(localHour) {
             var d = new Date();
             d.setHours(localHour, 0, 0, 0);
@@ -267,7 +254,8 @@
                         applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
                     }).then(function(subscription) {
                         var payload = subscription.toJSON();
-                        payload.hourUTC = localHourToUTCHour(chosenHour);
+                        payload.localHour = chosenHour;
+                        payload.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
                         localStorage.setItem('devo-push-hour', String(chosenHour));
                         return postSubscription('/subscribe', payload);
                     }).then(function() {
