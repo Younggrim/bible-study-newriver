@@ -1,4 +1,6 @@
 const CACHE_NAME = 'bible-study-v6';
+const VAPID_PUBLIC_KEY = 'BBXso6T-C1Ft59FLWrdRfANGYtKm21CHUktfb0rsmfDZOEJSFyn5Y62f2ZaFMr0PxiPCIyN9Wm6_8MxXMQ6AGuY';
+const PUSH_WORKER = 'https://devotional-push.cloudflare-dust598.workers.dev';
 
 // Install: cache the shell
 self.addEventListener('install', event => {
@@ -69,6 +71,41 @@ self.addEventListener('push', event => {
     });
   })());
 });
+
+// The browser/OS can silently rotate a subscriber's push endpoint (this
+// happens periodically, especially on iOS) — without catching this event
+// the old endpoint just goes dead, the worker's next send deletes it after
+// a 404/410, and the subscriber stops getting reminders with zero warning.
+// Re-subscribing here and telling the server about the swap (preserving
+// their chosen hourUTC) is what makes reminders keep working long-term.
+self.addEventListener('pushsubscriptionchange', event => {
+  const oldEndpoint = event.oldSubscription ? event.oldSubscription.endpoint : null;
+  event.waitUntil((async () => {
+    try {
+      const newSubscription = event.newSubscription
+        || await self.registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+        });
+      const payload = newSubscription.toJSON();
+      payload.oldEndpoint = oldEndpoint;
+      await fetch(PUSH_WORKER + '/resubscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (e) { /* nothing more we can do from here; next push will just fail silently again */ }
+  })());
+});
+
+function urlBase64ToUint8Array(base64String) {
+  const base64 = base64String.replace(/-/g, '+').replace(/_/g, '/');
+  const padded = base64 + '='.repeat((4 - (base64.length % 4)) % 4);
+  const raw = atob(padded);
+  const arr = new Uint8Array(raw.length);
+  for (let i = 0; i < raw.length; i++) arr[i] = raw.charCodeAt(i);
+  return arr;
+}
 
 self.addEventListener('notificationclick', event => {
   const targetUrl = (event.notification.data && event.notification.data.url) || '/devotional.html';
