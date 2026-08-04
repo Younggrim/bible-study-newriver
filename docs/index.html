@@ -6,7 +6,10 @@
     <title>Bible Study</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#3d2b1f">
-    <link rel="apple-touch-icon" href="site/icon-192v2.png">
+    <link rel="apple-touch-icon" href="site/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Bible Study">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -468,7 +471,7 @@
     <!-- Install Prompt Banner -->
     <div id="install-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:linear-gradient(135deg,#3d2b1f 0%,#5a3e2b 100%); color:#fff; padding:16px 20px; box-shadow:0 -4px 20px rgba(0,0,0,0.3); font-family:'Inter',sans-serif;">
         <div style="max-width:600px; margin:0 auto; display:flex; align-items:center; gap:14px;">
-            <img src="site/icon-192v2.png" alt="Bible Study" style="width:48px; height:48px; border-radius:10px; flex-shrink:0;">
+            <img src="site/icon-192.png" alt="Bible Study" style="width:48px; height:48px; border-radius:10px; flex-shrink:0;">
             <div style="flex:1;">
                 <div style="font-weight:600; font-size:0.95rem; margin-bottom:4px;">Add Bible Study to Home Screen</div>
                 <div id="install-instructions" style="font-size:0.8rem; color:#ddd; line-height:1.4;"></div>
@@ -530,7 +533,7 @@
       });
     })();
     </script>
-    <script src="site/script.js?v=14"></script>
+    <script src="site/script.js?v=15"></script>
     <script>
     (function() {
         var dateEl = document.getElementById('homeDevoDate');
