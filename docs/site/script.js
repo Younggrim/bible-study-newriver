@@ -3,6 +3,87 @@
 /* ESV API Configuration — via Cloudflare Worker proxy */
 var ESV_PROXY_URL = 'https://esv-proxy.cloudflare-dust598.workers.dev';
 
+/* Service worker registration — every page, not just index.html/devotional.html,
+   so offline caching and the install prompt below both work regardless of
+   which page someone lands on first (a shared chapter link, a bookmark, etc). */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').catch(function() {});
+}
+
+/* ===== Add-to-Home-Screen install banner — site-wide =====
+   Moved here from index.html so every entry point (a shared chapter link,
+   a topical study, the devotional page) offers the install nudge, not just
+   the homepage. Guards against double-injection in case a page already has
+   its own #install-banner markup. */
+(function() {
+  if (document.getElementById('install-banner')) return;
+  if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) return;
+  if (localStorage.getItem('install-banner-dismissed')) return;
+
+  function buildBanner() {
+    var wrap = document.createElement('div');
+    wrap.id = 'install-banner';
+    wrap.style.cssText = "display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#3d2b1f 0%,#5a3e2b 100%);color:#fff;padding:16px 20px;box-shadow:0 -4px 20px rgba(0,0,0,0.3);font-family:'Inter',sans-serif;";
+    wrap.innerHTML =
+      '<div style="max-width:600px;margin:0 auto;display:flex;align-items:center;gap:14px;">'
+      + '<img src="site/icon-192.png" alt="Bible Study" style="width:48px;height:48px;border-radius:10px;flex-shrink:0;">'
+      + '<div style="flex:1;">'
+      + '<div style="font-weight:600;font-size:0.95rem;margin-bottom:4px;">Add Bible Study to Home Screen</div>'
+      + '<div id="install-instructions" style="font-size:0.8rem;color:#ddd;line-height:1.4;"></div>'
+      + '</div>'
+      + '<button id="install-btn" style="background:#f0c865;color:#3d2b1f;border:none;padding:10px 18px;border-radius:8px;font-weight:700;font-size:0.85rem;cursor:pointer;white-space:nowrap;">Install</button>'
+      + '<button id="install-dismiss" style="background:none;border:none;color:#aaa;font-size:1.4rem;cursor:pointer;padding:4px 8px;line-height:1;" aria-label="Dismiss">&times;</button>'
+      + '</div>';
+    document.body.appendChild(wrap);
+    return wrap;
+  }
+
+  var banner = null, installBtn, dismissBtn, instructions, deferredPrompt = null;
+
+  function ensureBanner() {
+    if (!banner) {
+      banner = buildBanner();
+      installBtn = document.getElementById('install-btn');
+      dismissBtn = document.getElementById('install-dismiss');
+      instructions = document.getElementById('install-instructions');
+
+      installBtn.addEventListener('click', function() {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(function() {
+            deferredPrompt = null;
+            banner.style.display = 'none';
+          });
+        }
+      });
+      dismissBtn.addEventListener('click', function() {
+        banner.style.display = 'none';
+        localStorage.setItem('install-banner-dismissed', '1');
+      });
+    }
+    return banner;
+  }
+
+  // Android / Chrome — catches the native install prompt
+  window.addEventListener('beforeinstallprompt', function(e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    var b = ensureBanner();
+    instructions.textContent = 'Get quick access like a native app — works offline too.';
+    b.style.display = 'block';
+  });
+
+  // iOS Safari — no native prompt exists, so show manual instructions
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  var isSafari = /Safari/.test(navigator.userAgent) && !/CriOS|FxiOS|OPiOS|EdgiOS/.test(navigator.userAgent);
+  if (isIOS && isSafari && !navigator.standalone) {
+    var b = ensureBanner();
+    instructions.innerHTML = 'Tap <strong>Share</strong> <span style="font-size:1.1em;">&#9757;</span> then <strong>"Add to Home Screen"</strong>';
+    installBtn.style.display = 'none';
+    b.style.display = 'block';
+  }
+})();
+
 function switchTab(tabId) {
     document.querySelectorAll('.study-tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
