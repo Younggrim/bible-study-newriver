@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bible-study-v6';
+const CACHE_NAME = 'bible-study-v7';
 const VAPID_PUBLIC_KEY = 'BBXso6T-C1Ft59FLWrdRfANGYtKm21CHUktfb0rsmfDZOEJSFyn5Y62f2ZaFMr0PxiPCIyN9Wm6_8MxXMQ6AGuY';
 const PUSH_WORKER = 'https://devotional-push.cloudflare-dust598.workers.dev';
 
@@ -111,6 +111,15 @@ self.addEventListener('notificationclick', event => {
   const targetUrl = (event.notification.data && event.notification.data.url) || '/devotional.html';
   event.notification.close();
   event.waitUntil((async () => {
+    // iOS can launch this installed PWA at start_url on a cold notification
+    // tap, ignoring navigate()/openWindow() below entirely (a known WebKit
+    // limitation). Stash the real destination so index.html's own redirect
+    // fallback can self-correct once it loads.
+    try {
+      const navCache = await caches.open('nav-intent');
+      await navCache.put('/__nav-intent', new Response(targetUrl));
+    } catch (e) { /* best effort */ }
+
     const clientList = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
     for (const c of clientList) {
       if ('focus' in c) {

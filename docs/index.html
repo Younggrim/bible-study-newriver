@@ -2,6 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script>
+    /* iOS can launch this installed PWA at start_url (this page) when a push
+       notification is tapped, ignoring the service worker's openWindow()/
+       navigate() target — a known WebKit limitation. The notificationclick
+       handler in sw.js stashes the real destination in Cache Storage as a
+       fallback; redirect here immediately if one is waiting. */
+    (function () {
+        if (!('caches' in window)) return;
+        caches.open('nav-intent').then(function (cache) {
+            return cache.match('/__nav-intent').then(function (resp) {
+                if (!resp) return;
+                cache.delete('/__nav-intent');
+                return resp.text().then(function (url) {
+                    if (url && url !== '/index.html' && url !== '/') location.replace(url);
+                });
+            });
+        }).catch(function () {});
+    })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bible Study</title>
     <link rel="manifest" href="manifest.json">
