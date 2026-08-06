@@ -3,45 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
-    <title>Daily Devotional — Bible Study</title>
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#000000">
+    <title>Daily Devotional — New River Bible Study</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
     <link rel="stylesheet" href="site/style.css">
     <style>
-        body { background: #faf5ed; }
+        body { background: #fafafa; }
         .page-content { margin: 0 auto; max-width: 720px; padding: 24px 20px 100px; }
-        .devo-date { font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; color: #8a7e74; text-transform: uppercase; letter-spacing: 1px; text-align: center; margin-bottom: 8px; }
-        .devo-hero { background: linear-gradient(135deg, #3d2b1f 0%, #5c3d6e 50%, #2c6b4f 100%); border-radius: 16px; padding: 40px 28px; text-align: center; margin-bottom: 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
-        .devo-hero h1 { font-family: 'Cinzel', serif; font-size: 1.6rem; color: #fff; margin: 0 0 6px; text-shadow: 1px 1px 4px rgba(0,0,0,0.4); }
-        .devo-hero .devo-ref { font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; color: #f0c865; letter-spacing: 0.5px; }
-        .devo-card { background: #fff; border: 1px solid #e8e0d6; border-radius: 14px; padding: 28px 24px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
-        .devo-card h2 { font-family: 'Cinzel', serif; font-size: 1rem; margin: 0 0 14px; display: flex; align-items: center; gap: 10px; }
+        .devo-date { font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; color: #707070; text-transform: uppercase; letter-spacing: 1px; text-align: center; margin-bottom: 8px; }
+        .devo-hero { background: linear-gradient(135deg, #000000 0%, #333333 50%, #1a1a1a 100%); border-radius: 16px; padding: 40px 28px; text-align: center; margin-bottom: 28px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+        .devo-hero h1 { font-family: "Archivo Black", "Inter", sans-serif; font-size: 1.6rem; color: #fff; margin: 0 0 6px; text-shadow: 1px 1px 4px rgba(0,0,0,0.4); }
+        .devo-hero .devo-ref { font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; color: #e8e8e8; letter-spacing: 0.5px; }
+        .devo-card { background: #fff; border: 1px solid #e2e2e2; border-radius: 14px; padding: 28px 24px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+        .devo-card h2 { font-family: "Archivo Black", "Inter", sans-serif; font-size: 1rem; margin: 0 0 14px; display: flex; align-items: center; gap: 10px; }
         .devo-card h2 i { font-size: 0.9rem; }
-        .devo-card p { font-size: 0.92rem; color: #3d342e; line-height: 1.85; margin: 0; }
-        .devo-verse-text { font-family: 'Merriweather', serif; font-style: italic; font-size: 1.05rem; color: #3d2b1f; line-height: 2; border-left: 3px solid #8b3a2a; padding-left: 18px; margin: 0; }
+        .devo-card p { font-size: 0.92rem; color: #1a1a1a; line-height: 1.85; margin: 0; }
+        .devo-verse-text { font-family: 'Merriweather', serif; font-style: italic; font-size: 1.05rem; color: #000000; line-height: 2; border-left: 3px solid #000000; padding-left: 18px; margin: 0; }
         .devo-section-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: #fff; }
-        .icon-scripture { background: #8b3a2a; }
-        .icon-reflect { background: #4a5a8a; }
-        .icon-prayer { background: #2c6b4f; }
-        .icon-apply { background: #5c3d6e; }
-        .devo-reminder-banner { display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #e8e0d6; border-left: 4px solid #f0c865; border-radius: 14px; padding: 18px 20px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
-        .devo-reminder-icon { width: 38px; height: 38px; border-radius: 10px; background: #3d2b1f; color: #f0c865; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+        .icon-scripture { background: #000000; }
+        .icon-reflect { background: #333333; }
+        .icon-prayer { background: #1a1a1a; }
+        .icon-apply { background: #333333; }
+        .devo-reminder-banner { display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #e2e2e2; border-left: 4px solid #e8e8e8; border-radius: 14px; padding: 18px 20px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+        .devo-reminder-icon { width: 38px; height: 38px; border-radius: 10px; background: #000000; color: #e8e8e8; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
         .devo-reminder-text { flex: 1; min-width: 0; }
-        .devo-reminder-title { font-weight: 700; font-size: 0.92rem; color: #3d2b1f; margin-bottom: 2px; }
-        .devo-reminder-sub { font-size: 0.8rem; color: #8a7e74; line-height: 1.4; }
-        .devo-reminder-btn { background: #8b3a2a; color: #fff; border: none; padding: 9px 16px; border-radius: 8px; font-weight: 700; font-size: 0.82rem; cursor: pointer; white-space: nowrap; }
+        .devo-reminder-title { font-weight: 700; font-size: 0.92rem; color: #000000; margin-bottom: 2px; }
+        .devo-reminder-sub { font-size: 0.8rem; color: #707070; line-height: 1.4; }
+        .devo-reminder-btn { background: #000000; color: #fff; border: none; padding: 9px 16px; border-radius: 8px; font-weight: 700; font-size: 0.82rem; cursor: pointer; white-space: nowrap; }
         .devo-reminder-dismiss { background: none; border: none; color: #aaa; font-size: 1.3rem; cursor: pointer; padding: 2px 4px; line-height: 1; }
-        .devo-reminder-status { text-align: center; font-size: 0.82rem; color: #8a7e74; padding: 10px; cursor: pointer; }
-        .devo-reminder-status i { color: #f0c865; }
+        .devo-reminder-status { text-align: center; font-size: 0.82rem; color: #707070; padding: 10px; cursor: pointer; }
+        .devo-reminder-status i { color: #e8e8e8; }
         .devo-reminder-time-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
         .devo-reminder-time-row label { font-size: 0.78rem; color: #5c5248; font-weight: 600; }
-        .devo-reminder-time-row select { font-family: 'Inter', sans-serif; font-size: 0.82rem; color: #3d2b1f; background: #faf5ed; border: 1px solid #e8e0d6; border-radius: 6px; padding: 5px 8px; }
-        .devo-reminder-turnoff { background: none; border: none; color: #8b3a2a; font-size: 0.78rem; font-weight: 600; text-decoration: underline; cursor: pointer; padding: 0; margin-left: 4px; }
+        .devo-reminder-time-row select { font-family: 'Inter', sans-serif; font-size: 0.82rem; color: #000000; background: #fafafa; border: 1px solid #e2e2e2; border-radius: 6px; padding: 5px 8px; }
+        .devo-reminder-turnoff { background: none; border: none; color: #000000; font-size: 0.78rem; font-weight: 600; text-decoration: underline; cursor: pointer; padding: 0; margin-left: 4px; }
         @media (max-width: 768px) { .devo-hero { padding: 28px 18px; } .devo-hero h1 { font-size: 1.3rem; } .devo-card { padding: 22px 18px; } .devo-reminder-banner { flex-wrap: wrap; } }
     </style>
 </head>
@@ -128,7 +128,7 @@
 
             // Fetch actual ESV text for the verse
             var textEl = document.getElementById('devoText');
-            textEl.innerHTML = '<em style="color:#8a7e74;font-size:0.88rem;">Loading scripture...</em>';
+            textEl.innerHTML = '<em style="color:#707070;font-size:0.88rem;">Loading scripture...</em>';
             fetch(ESV_PROXY + '/?q=' + encodeURIComponent(d.verse))
                 .then(function(r) { return r.json(); })
                 .then(function(data) {

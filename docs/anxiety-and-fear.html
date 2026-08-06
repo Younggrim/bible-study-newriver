@@ -3,42 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#3d2b1f">
-    <title>What the Bible Says About Anxiety &amp; Fear — Bible Study</title>
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#000000">
+    <title>What the Bible Says About Anxiety &amp; Fear — New River Bible Study</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
     <link rel="stylesheet" href="site/style.css">
     <style>
         .topic-hero { position: relative; overflow: hidden; border: none; border-radius: var(--radius-lg); padding: 36px; text-align: center; margin-bottom: 32px; box-shadow: var(--shadow-sm); }
-        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=80") center/cover no-repeat; filter: brightness(0.45) sepia(0.75) saturate(1.7); }
-        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
-        .topic-hero .key-passage { font-family: 'Merriweather', serif; font-size: 1.05rem; font-style: italic; color: #f5f0e8; text-shadow: 1px 1px 6px rgba(0,0,0,0.7); max-width: 700px; margin: 16px auto 8px; line-height: 1.8; }
-        .topic-hero .ref { font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; color: #f0c865; }
+        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=80") center/cover no-repeat; filter: grayscale(1) contrast(1.15) brightness(0.55); }
+        .topic-hero h1 { font-family: "Archivo Black", "Inter", sans-serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .key-passage { font-family: 'Merriweather', serif; font-size: 1.05rem; font-style: italic; color: #f5f5f5; text-shadow: 1px 1px 6px rgba(0,0,0,0.7); max-width: 700px; margin: 16px auto 8px; line-height: 1.8; }
+        .topic-hero .ref { font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; color: #e8e8e8; }
         .section-block { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 28px 32px; box-shadow: var(--shadow-sm); margin-bottom: 24px; }
-        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--accent-brown); margin-bottom: 16px; }
-        .verse-item { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #e8e0d6; }
+        .section-block h2 { font-family: "Archivo Black", "Inter", sans-serif; font-size: 1.2rem; color: var(--accent-brown); margin-bottom: 16px; }
+        .verse-item { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #e2e2e2; }
         .verse-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .verse-item .ref { font-weight: 700; color: #2c5a6b; font-size: 0.9rem; }
-        .verse-item .text { font-size: 0.9rem; color: #3d342e; line-height: 1.7; margin-top: 4px; font-style: italic; }
-        .practical-item { font-size: 0.9rem; color: #3d342e; line-height: 1.7; margin-bottom: 8px; padding-left: 20px; position: relative; }
-        .practical-item::before { content: "\25B8"; position: absolute; left: 0; color: #2c5a6b; }
+        .verse-item .ref { font-weight: 700; color: #333333; font-size: 0.9rem; }
+        .verse-item .text { font-size: 0.9rem; color: #1a1a1a; line-height: 1.7; margin-top: 4px; font-style: italic; }
+        .practical-item { font-size: 0.9rem; color: #1a1a1a; line-height: 1.7; margin-bottom: 8px; padding-left: 20px; position: relative; }
+        .practical-item::before { content: "\25B8"; position: absolute; left: 0; color: #333333; }
         @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 24px 16px; } .section-block { padding: 20px 16px; } }
 
         /* Verse Popup */
-        .verse-ref { color: #8b3a2a; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
-        .verse-ref:hover { color: #2c6b4f; }
+        .verse-ref { color: #000000; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #1a1a1a; }
         .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
         .verse-popup-overlay.show { display:block; }
         .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
         .verse-popup.show { display:block; }
-        .verse-popup .popup-ref { font-family:'Cinzel',serif; font-size:1rem; color:#8b3a2a; margin-bottom:12px; font-weight:700; }
-        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#3d2b1f; }
-        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#8a7e74; }
-        .verse-popup .popup-loading { font-size:0.85rem; color:#8a7e74; font-style:italic; }
+        .verse-popup .popup-ref { font-family: "Archivo Black", "Inter", sans-serif; font-size:1rem; color:#000000; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#000000; }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#707070; }
+        .verse-popup .popup-loading { font-size:0.85rem; color:#707070; font-style:italic; }
     </style></head>
 <body>
     <main class="main-content" style="margin-left:auto; margin-right:auto; max-width:960px; margin-top:0;">

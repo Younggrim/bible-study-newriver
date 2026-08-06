@@ -1,11 +1,11 @@
 {
-  "name": "Bible Study",
-  "short_name": "Bible Study",
-  "description": "Chapter-by-chapter Bible study with topical studies, verse popups, and video resources.",
+  "name": "New River Bible Study",
+  "short_name": "New River",
+  "description": "Chapter-by-chapter Bible study with topical studies, verse popups, and New River Church video resources.",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#faf3e0",
-  "theme_color": "#3d2b1f",
+  "background_color": "#fafafa",
+  "theme_color": "#000000",
   "orientation": "any",
   "icons": [
     {

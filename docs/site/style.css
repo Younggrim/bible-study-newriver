@@ -1,22 +1,22 @@
-/* Bible Study Site — Shared Styles */
+/* New River Bible Study — Shared Styles (forked from bible-study, no longer synced) */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-    --bg-primary: #faf8f5;
-    --bg-secondary: #f5f0e8;
-    --bg-sidebar: #ece5da;
+    --bg-primary: #fafafa;
+    --bg-secondary: #f0f0f0;
+    --bg-sidebar: #f0f0f0;
     --bg-card: #ffffff;
-    --text-primary: #2c2420;
-    --text-secondary: #3d342e;
-    --text-muted: #5c5248;
-    --accent-gold: #8b6914;
-    --accent-gold-light: #c49a2a;
-    --accent-brown: #6b4c3b;
-    --border-light: #e8e0d6;
-    --border-medium: #d4c9bc;
-    --shadow-sm: 0 1px 3px rgba(44,36,32,0.06);
-    --shadow-md: 0 4px 12px rgba(44,36,32,0.08);
-    --shadow-lg: 0 8px 24px rgba(44,36,32,0.1);
+    --text-primary: #000000;
+    --text-secondary: #1a1a1a;
+    --text-muted: #6e6e6e;
+    --accent-gold: #000000;
+    --accent-gold-light: #333333;
+    --accent-brown: #000000;
+    --border-light: #e2e2e2;
+    --border-medium: #cccccc;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
     --radius-sm: 6px;
     --radius-md: 10px;
     --radius-lg: 14px;
@@ -47,10 +47,11 @@ body {
 }
 
 .nav-brand {
-    font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--accent-brown);
+    font-family: 'Archivo Black', 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
     text-decoration: none;
 }
 
@@ -76,9 +77,9 @@ body {
 .nav-translation {
     font-size: 0.85rem;
     padding: 7px 14px;
-    border: 2px solid #8b3a2a;
+    border: 2px solid #000000;
     border-radius: var(--radius-sm);
-    background: #8b3a2a;
+    background: #000000;
     color: #fff;
     cursor: pointer;
     font-weight: 600;
@@ -158,10 +159,10 @@ body {
 }
 
 .sidebar-item.active {
-    background: #efe8dc;
+    background: #ececec;
     color: var(--accent-brown);
     font-weight: 500;
-    border-right: 3px solid var(--accent-gold);
+    border-right: 3px solid #000000;
 }
 
 .sidebar-item i {
@@ -184,9 +185,9 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 0.8rem;
-    border: 1px solid #d4c4a8;
+    border: 1px solid #d0d0d0;
     border-radius: var(--radius-sm);
-    background: #faf5ed;
+    background: #fafafa;
     color: var(--accent-brown);
     cursor: pointer;
     transition: all 0.15s;
@@ -194,11 +195,11 @@ body {
     font-weight: 500;
 }
 
-.chapter-btn:hover { background: #f0e4d4; color: var(--text-primary); border-color: #c9a96e; }
+.chapter-btn:hover { background: #ececec; color: var(--text-primary); border-color: #b0b0b0; }
 .chapter-btn.active {
-    background: #8b3a2a;
-    color: #faf5ed;
-    border-color: #8b3a2a;
+    background: #000000;
+    color: #fafafa;
+    border-color: #000000;
     font-weight: 700;
 }
 
@@ -269,9 +270,9 @@ body {
 }
 
 .book-header h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 2rem;
-    font-weight: 600;
+    font-family: 'Archivo Black', 'Inter', sans-serif;
+    font-size: 1.9rem;
+    font-weight: 700;
     color: var(--accent-brown);
     margin-bottom: 4px;
 }
@@ -290,7 +291,7 @@ body {
     padding: 32px 36px;
     box-shadow: var(--shadow-sm);
     margin-bottom: 32px;
-    color: #8b3a2a;
+    color: #000000;
 }
 
 .verse {
@@ -324,7 +325,7 @@ body {
     padding: 10px 16px;
     font-size: 0.85rem;
     font-weight: 600;
-    color: #7a6b5f;
+    color: #555555;
     cursor: pointer;
     border: 1px solid var(--border-light);
     background: var(--bg-primary);
@@ -334,11 +335,11 @@ body {
     text-align: center;
 }
 
-.study-tab:hover { color: #3d2b1f; background: var(--bg-secondary); border-color: var(--border-medium); }
+.study-tab:hover { color: #000000; background: var(--bg-secondary); border-color: var(--border-medium); }
 .study-tab.active {
     color: #fff;
-    background: #8b3a2a;
-    border-color: #8b3a2a;
+    background: #000000;
+    border-color: #000000;
 }
 
 .tab-content {
@@ -353,8 +354,8 @@ body {
 .tab-content.active { display: block; }
 
 .tab-content h3 {
-    font-family: 'Cinzel', serif;
-    font-size: 1.1rem;
+    font-family: 'Archivo Black', 'Inter', sans-serif;
+    font-size: 1rem;
     color: var(--accent-brown);
     margin-bottom: 16px;
 }
@@ -367,7 +368,7 @@ body {
 }
 
 .tab-content ul { padding-left: 20px; list-style: none; }
-.tab-content li::before { content: "✦ "; color: var(--accent-gold-light); }
+.tab-content li::before { content: "— "; color: var(--accent-gold-light); }
 .tab-content a { color: var(--accent-brown); text-decoration: underline; text-decoration-color: var(--border-medium); }
 .tab-content a:hover { color: var(--accent-gold); }
 
@@ -385,7 +386,7 @@ body {
 
 .video-card-icon {
     width: 44px; height: 44px;
-    background: #fee;
+    background: #f0f0f0;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -393,15 +394,15 @@ body {
     flex-shrink: 0;
 }
 
-.video-card-icon i { color: #c0392b; font-size: 1.1rem; }
+.video-card-icon i { color: #000000; font-size: 1.1rem; }
 
 .video-card-info h4 { font-size: 0.88rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
 .video-card-info p { font-size: 0.78rem; color: var(--text-muted); margin: 0; }
 
 /* KEY VERSE HIGHLIGHT */
 .key-verse {
-    background: linear-gradient(135deg, #fdf8ee, #faf3e0);
-    border-left: 3px solid var(--accent-gold);
+    background: #f5f5f5;
+    border-left: 3px solid #000000;
     padding: 12px 16px;
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     margin-bottom: 12px;
@@ -482,7 +483,7 @@ body {
     line-height: 1.6;
 }
 .trans-popup.show { display: block; }
-.trans-popup h4 { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--accent-brown); margin-bottom: 12px; }
+.trans-popup h4 { font-family: 'Archivo Black', 'Inter', sans-serif; font-size: 0.95rem; color: var(--accent-brown); margin-bottom: 12px; }
 .trans-popup .trans-item { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--border-light); }
 .trans-popup .trans-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 .trans-popup .trans-name { font-weight: 700; color: var(--text-primary); }
@@ -502,7 +503,7 @@ body {
 
 .auth-label {
     font-weight: 700;
-    color: #8b3a2a;
+    color: #000000;
     font-size: 0.95rem;
 }
 
@@ -552,7 +553,7 @@ body.pwa-standalone .hamburger { display: none !important; }
     right: 0;
     height: 64px;
     background: #fff;
-    border-top: 1px solid #e0d6c8;
+    border-top: 1px solid #e2e2e2;
     box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
     z-index: 9999;
     align-items: center;
@@ -579,7 +580,7 @@ body.pwa-standalone .pwa-bottom-nav {
 
 .pwa-nav-item i {
     font-size: 1.2rem;
-    color: #8a7e74;
+    color: #707070;
     margin-bottom: 3px;
     transition: color 0.15s;
 }
@@ -588,18 +589,18 @@ body.pwa-standalone .pwa-bottom-nav {
     font-family: 'Inter', sans-serif;
     font-size: 0.65rem;
     font-weight: 600;
-    color: #8a7e74;
+    color: #707070;
     transition: color 0.15s;
 }
 
 .pwa-nav-item.active i,
 .pwa-nav-item.active span {
-    color: #8b3a2a;
+    color: #000000;
 }
 
 .pwa-nav-item:hover i,
 .pwa-nav-item:hover span {
-    color: #6b4c3b;
+    color: #000000;
 }
 
 
@@ -608,7 +609,7 @@ body.pwa-standalone .pwa-bottom-nav {
     display: none;
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(180deg, #1a1410 0%, #2a1f14 20%, #3d2b1f 50%, #6b5040 75%, #d4bea0 92%, #faf5ed 100%);
+    background: #000000;
     z-index: 99999;
     align-items: center;
     justify-content: center;
@@ -627,13 +628,13 @@ body.pwa-standalone .pwa-splash {
 }
 .pwa-splash .splash-icon {
     font-size: 2.4rem;
-    color: #f0c865;
+    color: #ffffff;
     margin-bottom: 20px;
 }
 .pwa-splash .splash-label {
-    font-family: 'Cinzel', serif;
-    font-size: 0.9rem;
-    color: #c9a96e;
+    font-family: 'Archivo Black', 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: #cccccc;
     letter-spacing: 3px;
     text-transform: uppercase;
     margin-bottom: 16px;
@@ -642,7 +643,7 @@ body.pwa-standalone .pwa-splash {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.15rem;
     line-height: 2;
-    color: #f0e4d4;
+    color: #f0f0f0;
     font-style: italic;
     max-width: 600px;
     font-weight: 500;
@@ -651,7 +652,7 @@ body.pwa-standalone .pwa-splash {
     margin-top: 32px;
     font-family: 'Inter', sans-serif;
     font-size: 0.7rem;
-    color: #8a7e74;
+    color: #909090;
     letter-spacing: 1px;
 }
 
@@ -663,16 +664,16 @@ body.pwa-standalone .pwa-splash {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.15);
     border: 1px solid rgba(255,255,255,0.4);
-    color: #f0c865;
+    color: #ffffff;
     font-size: 1.1rem;
     cursor: pointer;
     margin-top: 12px;
     transition: background 0.2s;
 }
 .pwa-info-btn:hover {
-    background: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.25);
 }
 
 .pwa-info-popup {
@@ -695,18 +696,18 @@ body.pwa-standalone .pwa-splash {
     display: block;
 }
 .pwa-info-popup h3 {
-    font-family: 'Cinzel', serif;
-    font-size: 1rem;
-    color: #6b4c3b;
+    font-family: 'Archivo Black', 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #000000;
     margin-bottom: 12px;
 }
 .pwa-info-item {
     font-size: 0.82rem;
     line-height: 1.6;
-    color: #3d342e;
+    color: #1a1a1a;
     margin-bottom: 10px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #f0e8e0;
+    border-bottom: 1px solid #eeeeee;
 }
 .pwa-info-item:last-child {
     border-bottom: none;
@@ -720,7 +721,7 @@ body.pwa-standalone .pwa-splash {
     background: none;
     border: none;
     font-size: 1.4rem;
-    color: #8a7e74;
+    color: #707070;
     cursor: pointer;
 }
 
@@ -733,37 +734,37 @@ body.pwa-standalone .pwa-splash {
     width: 100%;
     margin-top: 14px;
     padding: 10px 14px;
-    background: #faf5ed;
-    border: 1px solid #e0d6c8;
+    background: #fafafa;
+    border: 1px solid #e2e2e2;
     border-radius: 8px;
     font-family: 'Inter', sans-serif;
     font-size: 0.82rem;
     font-weight: 600;
-    color: #6b4c3b;
+    color: #000000;
     cursor: pointer;
     transition: background 0.15s, color 0.15s;
 }
 .video-toggle-btn:hover {
-    background: #f0e4d4;
+    background: #ececec;
 }
 .video-toggle-btn i {
-    color: #c0392b;
+    color: #000000;
     font-size: 1rem;
 }
 .video-toggle-btn.open {
-    background: #f0e4d4;
-    border-color: #c9a96e;
+    background: #ececec;
+    border-color: #cccccc;
 }
 
 /* ===== Shared full-bleed section hero (used on index.html and standalone
    topic-index pages like topical-studies.html / life-studies.html, so the
    PWA bottom-nav tabs render a consistent hero style) ===== */
 .section-hero { position: relative; width: 100%; min-height: 280px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-top: 0; }
-.section-hero img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.45) sepia(0.75) saturate(1.7); }
+.section-hero img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.15) brightness(0.55); }
 .section-hero-overlay { position: relative; z-index: 1; text-align: center; padding: 40px 28px; max-width: 800px; }
-.section-hero-overlay h2 { font-family: "Cinzel", serif; font-size: 2.4rem; color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); margin-bottom: 12px; letter-spacing: 2px; }
-.section-hero-overlay .section-subtitle { font-family: "Merriweather", serif; font-size: 1rem; color: #f0c865; font-style: italic; text-shadow: 1px 1px 4px rgba(0,0,0,0.6); margin-bottom: 16px; }
-.section-hero-overlay .section-desc { font-family: "Cormorant Garamond", serif; font-size: 1.1rem; line-height: 1.9; color: #f5ebe0; font-style: italic; text-shadow: 1px 1px 6px rgba(0,0,0,0.7); }
+.section-hero-overlay h2 { font-family: "Archivo Black", "Inter", sans-serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); margin-bottom: 12px; letter-spacing: 0; }
+.section-hero-overlay .section-subtitle { font-family: "Merriweather", serif; font-size: 1rem; color: #e8e8e8; font-style: italic; text-shadow: 1px 1px 4px rgba(0,0,0,0.6); margin-bottom: 16px; }
+.section-hero-overlay .section-desc { font-family: "Cormorant Garamond", serif; font-size: 1.1rem; line-height: 1.9; color: #f0f0f0; font-style: italic; text-shadow: 1px 1px 6px rgba(0,0,0,0.7); }
 @media (max-width: 768px) {
     .section-hero { min-height: 220px; }
     .section-hero-overlay h2 { font-size: 1.6rem; }
@@ -780,10 +781,10 @@ body.pwa-standalone .section-hero { margin-top: 0; }
 
 /* ===== PWA Bible tab: compact passage navigator (replaces the full
    66-book grid in the installed app) ===== */
-.pwa-bible-nav { display: none; max-width: 480px; margin: 32px auto 0; padding: 28px 24px 32px; background: #fff; border: 1px solid #e8e0d6; border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); text-align: center; }
+.pwa-bible-nav { display: none; max-width: 480px; margin: 32px auto 0; padding: 28px 24px 32px; background: #fff; border: 1px solid #e2e2e2; border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); text-align: center; }
 body.pwa-standalone .pwa-bible-nav { display: block; }
-.pwa-bible-nav h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #3d2b1f; margin: 0 0 18px; }
+.pwa-bible-nav h3 { font-family: 'Archivo Black', 'Inter', sans-serif; font-size: 1rem; color: #000000; margin: 0 0 18px; }
 .pwa-bible-nav .bible-nav-row { display: flex; gap: 10px; margin-bottom: 12px; }
-.pwa-bible-nav select { flex: 1; min-width: 0; max-width: none; width: 100%; padding: 10px 12px; border: 1px solid #d4c9bc; border-radius: 8px; font-size: 0.9rem; font-family: 'Inter', sans-serif; color: #3d2b1f; background: #faf8f5; }
-.pwa-bible-nav .nav-go-btn { width: 100%; padding: 12px; background: #8b3a2a; color: #fff; border: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; cursor: pointer; margin-top: 6px; transition: background 0.15s; }
-.pwa-bible-nav .nav-go-btn:hover { background: #6b2c1f; }
+.pwa-bible-nav select { flex: 1; min-width: 0; max-width: none; width: 100%; padding: 10px 12px; border: 1px solid #cccccc; border-radius: 8px; font-size: 0.9rem; font-family: 'Inter', sans-serif; color: #000000; background: #fafafa; }
+.pwa-bible-nav .nav-go-btn { width: 100%; padding: 12px; background: #000000; color: #fff; border: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; cursor: pointer; margin-top: 6px; transition: background 0.15s; }
+.pwa-bible-nav .nav-go-btn:hover { background: #333333; }

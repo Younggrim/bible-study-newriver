@@ -98,13 +98,13 @@ function toggleSidebar() {
     document.querySelector('.sidebar-overlay').classList.toggle('show');
 }
 
-/* Translation colors — match homepage Translation Guide */
+/* Monochrome brand — every translation reads in the same ink, no per-translation tinting */
 var TRANSLATION_COLORS = {
-    'ESV': '#8b3a2a',
-    'KJV': '#4a5a8a',
-    'ASV': '#7a5c2e',
-    'NET': '#5c3d6e',
-    'WEB': '#2c6b4f'
+    'ESV': '#000000',
+    'KJV': '#000000',
+    'ASV': '#000000',
+    'NET': '#000000',
+    'WEB': '#000000'
 };
 
 function switchTranslation(trans) {
@@ -115,7 +115,7 @@ function switchTranslation(trans) {
     // Apply translation color to the active block
     var container = document.querySelector('.scripture-container');
     if (container) {
-        container.style.color = TRANSLATION_COLORS[trans] || '#3d2b1f';
+        container.style.color = TRANSLATION_COLORS[trans] || '#000000';
     }
 
     // Save preference to localStorage

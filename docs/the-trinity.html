@@ -3,36 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#4a3a6b">
-    <title>The Trinity — Bible Study</title>
+    <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#000000">
+    <title>The Trinity — New River Bible Study</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
     <link rel="stylesheet" href="site/style.css">
     <style>
         .topic-hero { position: relative; overflow: hidden; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
-        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1782193287075-e978e935f0de?w=1200&q=80") center/cover no-repeat; filter: brightness(0.45) sepia(0.75) saturate(1.7); }
-        .topic-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1782193287075-e978e935f0de?w=1200&q=80") center/cover no-repeat; filter: grayscale(1) contrast(1.15) brightness(0.55); }
+        .topic-hero h1 { font-family: "Archivo Black", "Inter", sans-serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
         .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #c4a0e8; letter-spacing: 0.5px; }
 
-        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #4a3a6b; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #000000; text-decoration: none; font-weight: 600; transition: color 0.2s; }
         .back-link:hover { color: #2e2548; }
         .back-link i { margin-right: 6px; }
 
         .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
-        .jump-card { background: #fff; border: 1px solid #e8e0d6; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #4a3a6b; text-decoration: none; transition: background 0.15s, transform 0.15s; }
-        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+        .jump-card { background: #fff; border: 1px solid #e2e2e2; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #000000; text-decoration: none; transition: background 0.15s, transform 0.15s; }
+        .jump-card:hover { background: #f5f5f5; transform: translateY(-1px); }
 
-        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e8e0d6); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; scroll-margin-top: 76px; }
-        .section-block h2 { font-family: 'Cinzel', serif; font-size: 1.35rem; color: #4a3a6b; margin-bottom: 4px; }
-        .section-block .section-kicker { display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #8a7e74; margin-bottom: 6px; }
-        .section-block h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; color: #4a3a6b; margin: 20px 0 12px; }
-        .section-block p { font-size: 0.92rem; color: #3d342e; line-height: 1.8; margin-bottom: 14px; }
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e2e2e2); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; scroll-margin-top: 76px; }
+        .section-block h2 { font-family: "Archivo Black", "Inter", sans-serif; font-size: 1.35rem; color: #000000; margin-bottom: 4px; }
+        .section-block .section-kicker { display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #707070; margin-bottom: 6px; }
+        .section-block h3 { font-family: "Archivo Black", "Inter", sans-serif; font-size: 0.95rem; color: #000000; margin: 20px 0 12px; }
+        .section-block p { font-size: 0.92rem; color: #1a1a1a; line-height: 1.8; margin-bottom: 14px; }
         .section-block p:last-child { margin-bottom: 0; }
-        .section-block hr.divider { border: none; border-top: 1px solid #e8e0d6; margin: 20px 0; }
+        .section-block hr.divider { border: none; border-top: 1px solid #e2e2e2; margin: 20px 0; }
 
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
 
