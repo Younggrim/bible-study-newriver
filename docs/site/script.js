@@ -443,7 +443,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var splash = document.createElement('div');
         splash.className = 'pwa-splash';
         splash.innerHTML = ''
-            + '<div class="splash-icon"><i class="fas fa-cross"></i></div>'
+            + '<div class="splash-icon"><img src="site/dove-black.png" alt="New River" style="width:72px;height:auto;"></div>'
             + '<p class="splash-label">A Prayer for You</p>'
             + '<p class="splash-prayer">Lord, we pray that this resource brings glory to Your name. Use it as a tool to draw hearts closer to You and to reveal Your plan and purpose for each person who visits these pages. May Your Word not return void, but accomplish everything You desire. Open eyes, soften hearts, and let the truth of Scripture transform lives for Your kingdom. In Jesus\' name, Amen.</p>'
             + '<p class="splash-tap">Tap anywhere to continue</p>';
