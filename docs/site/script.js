@@ -98,13 +98,14 @@ function toggleSidebar() {
     document.querySelector('.sidebar-overlay').classList.toggle('show');
 }
 
-/* Monochrome brand — every translation reads in the same ink, no per-translation tinting */
+/* A splash of color per translation — the one deliberate spot of color on
+   an otherwise black/white chapter page, kept from the original palette */
 var TRANSLATION_COLORS = {
-    'ESV': '#000000',
-    'KJV': '#000000',
-    'ASV': '#000000',
-    'NET': '#000000',
-    'WEB': '#000000'
+    'ESV': '#8b3a2a',
+    'KJV': '#4a5a8a',
+    'ASV': '#7a5c2e',
+    'NET': '#5c3d6e',
+    'WEB': '#2c6b4f'
 };
 
 function switchTranslation(trans) {
