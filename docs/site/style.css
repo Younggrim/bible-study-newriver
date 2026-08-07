@@ -595,7 +595,7 @@ body.pwa-standalone .pwa-bottom-nav {
 
 .pwa-nav-item.active i,
 .pwa-nav-item.active span {
-    color: #000000;
+    color: #c0392b;
 }
 
 .pwa-nav-item:hover i,
