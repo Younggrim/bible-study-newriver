@@ -26,7 +26,10 @@
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg-primary);
+    /* True black outside the content cards themselves — --bg-primary stays
+       its light value for nav/tab/dropdown backgrounds, which sit on their
+       own white/off-white surfaces and shouldn't go black along with this. */
+    background: #000000;
     color: var(--text-primary);
     line-height: 1.6;
     min-height: 100vh;
@@ -338,8 +341,8 @@ body {
 .study-tab:hover { color: #000000; background: var(--bg-secondary); border-color: var(--border-medium); }
 .study-tab.active {
     color: #fff;
-    background: #000000;
-    border-color: #000000;
+    background: #c0392b;
+    border-color: #c0392b;
 }
 
 .tab-content {
@@ -764,9 +767,9 @@ body.pwa-standalone .pwa-splash {
 .section-hero { position: relative; width: 100%; min-height: 280px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-top: 0; }
 .section-hero img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.15) brightness(0.55); }
 .section-hero-overlay { position: relative; z-index: 1; text-align: center; padding: 40px 28px; max-width: 800px; }
-.section-hero-overlay h2 { font-family: "Archivo Black", "Inter", sans-serif; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); margin-bottom: 12px; letter-spacing: 0; }
-.section-hero-overlay .section-subtitle { font-family: "Merriweather", serif; font-size: 1rem; color: #e8e8e8; font-style: italic; text-shadow: 1px 1px 4px rgba(0,0,0,0.6); margin-bottom: 16px; }
-.section-hero-overlay .section-desc { font-family: "Cormorant Garamond", serif; font-size: 1.1rem; line-height: 1.9; color: #f0f0f0; font-style: italic; text-shadow: 1px 1px 6px rgba(0,0,0,0.7); }
+.section-hero-overlay h2 { font-family: "Archivo Black", "Inter", sans-serif; font-size: 2.2rem; color: #d4a017; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); margin-bottom: 12px; letter-spacing: 0; }
+.section-hero-overlay .section-subtitle { font-family: "Merriweather", serif; font-size: 1rem; color: #e8d9b8; font-style: italic; text-shadow: 1px 1px 4px rgba(0,0,0,0.6); margin-bottom: 16px; }
+.section-hero-overlay .section-desc { font-family: "Cormorant Garamond", serif; font-size: 1.1rem; line-height: 1.9; color: #f0e6cc; font-style: italic; text-shadow: 1px 1px 6px rgba(0,0,0,0.7); }
 @media (max-width: 768px) {
     .section-hero { min-height: 220px; }
     .section-hero-overlay h2 { font-size: 1.6rem; }

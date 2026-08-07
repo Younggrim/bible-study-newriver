@@ -4,7 +4,7 @@
   "description": "Chapter-by-chapter Bible study with topical studies, verse popups, and New River Church video resources.",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#fafafa",
+  "background_color": "#000000",
   "theme_color": "#000000",
   "orientation": "any",
   "icons": [
