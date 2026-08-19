@@ -347,7 +347,7 @@
             fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
                 .then(r => r.json())
                 .then(data => {
-                    document.getElementById('popupText').textContent = (data.passages && data.passages[0]) ? data.passages[0].trim() : 'Verse not found.';
+                    document.getElementById('popupText').innerHTML = (data.passages && data.passages[0]) ? data.passages[0].trim() : 'Verse not found.';
                 })
                 .catch(() => { document.getElementById('popupText').textContent = 'Unable to load verse.'; });
         }
