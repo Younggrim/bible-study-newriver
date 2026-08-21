@@ -169,6 +169,14 @@
             navigator.serviceWorker.register('/sw.js').catch(function() {});
         }
 
+        // Daily reminders only make sense in the installed app — on the plain
+        // website there's no home-screen icon to notice a badge on and the
+        // permission prompt is just noise, so skip the whole feature there.
+        var isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+        if (!isStandalone) {
+            return;
+        }
+
         if (!('serviceWorker' in navigator) || !('PushManager' in window) || !('Notification' in window)) {
             return; // not supported here (e.g. non-installed iOS Safari) — nothing to show
         }
