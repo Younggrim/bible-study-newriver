@@ -50,7 +50,7 @@ body {
 }
 
 .nav-brand {
-    font-family: 'Archivo Black', 'Inter', sans-serif;
+    font-family: 'Poppins', 'Inter', sans-serif;
     font-size: 1.1rem;
     font-weight: 700;
     letter-spacing: -0.01em;
@@ -282,7 +282,7 @@ body {
 }
 
 .book-header h1 {
-    font-family: 'Archivo Black', 'Inter', sans-serif;
+    font-family: 'Poppins', 'Inter', sans-serif;
     font-size: 1.9rem;
     font-weight: 700;
     color: var(--accent-brown);
@@ -366,7 +366,8 @@ body {
 .tab-content.active { display: block; }
 
 .tab-content h3 {
-    font-family: 'Archivo Black', 'Inter', sans-serif;
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-weight: 700;
     font-size: 1rem;
     color: var(--accent-brown);
     margin-bottom: 16px;
@@ -495,7 +496,7 @@ body {
     line-height: 1.6;
 }
 .trans-popup.show { display: block; }
-.trans-popup h4 { font-family: 'Archivo Black', 'Inter', sans-serif; font-size: 0.95rem; color: var(--accent-brown); margin-bottom: 12px; }
+.trans-popup h4 { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--accent-brown); margin-bottom: 12px; }
 .trans-popup .trans-item { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--border-light); }
 .trans-popup .trans-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 .trans-popup .trans-name { font-weight: 700; color: var(--text-primary); }
@@ -643,7 +644,8 @@ body.pwa-standalone .pwa-splash {
     filter: drop-shadow(0 2px 10px rgba(0,0,0,0.35));
 }
 .pwa-splash .splash-label {
-    font-family: 'Archivo Black', 'Inter', sans-serif;
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-weight: 700;
     font-size: 0.85rem;
     color: #ffffff;
     letter-spacing: 3px;
@@ -710,7 +712,8 @@ body.pwa-standalone .pwa-splash {
     display: block;
 }
 .pwa-info-popup h3 {
-    font-family: 'Archivo Black', 'Inter', sans-serif;
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-weight: 700;
     font-size: 0.95rem;
     color: #000000;
     margin-bottom: 12px;
@@ -776,7 +779,7 @@ body.pwa-standalone .pwa-splash {
 .section-hero { position: relative; width: 100%; min-height: 280px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-top: 0; }
 .section-hero img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.15) brightness(0.55); }
 .section-hero-overlay { position: relative; z-index: 1; text-align: center; padding: 40px 28px; max-width: 800px; }
-.section-hero-overlay h2 { font-family: "Archivo Black", "Inter", sans-serif; font-size: 2.2rem; color: #d4a017; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); margin-bottom: 12px; letter-spacing: 0; }
+.section-hero-overlay h2 { font-family: "Poppins", "Inter", sans-serif; font-weight: 700; font-size: 2.2rem; color: #d4a017; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); margin-bottom: 12px; letter-spacing: 0; }
 .section-hero-overlay .section-subtitle { font-family: "Merriweather", serif; font-size: 1rem; color: #e8d9b8; font-style: italic; text-shadow: 1px 1px 4px rgba(0,0,0,0.6); margin-bottom: 16px; }
 .section-hero-overlay .section-desc { font-family: "Cormorant Garamond", serif; font-size: 1.1rem; line-height: 1.9; color: #f0e6cc; font-style: italic; text-shadow: 1px 1px 6px rgba(0,0,0,0.7); }
 @media (max-width: 768px) {
@@ -797,7 +800,7 @@ body.pwa-standalone .section-hero { margin-top: 0; }
    66-book grid in the installed app) ===== */
 .pwa-bible-nav { display: none; max-width: 480px; margin: 32px auto 0; padding: 28px 24px 32px; background: #fff; border: 1px solid #e2e2e2; border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); text-align: center; }
 body.pwa-standalone .pwa-bible-nav { display: block; }
-.pwa-bible-nav h3 { font-family: 'Archivo Black', 'Inter', sans-serif; font-size: 1rem; color: #000000; margin: 0 0 18px; }
+.pwa-bible-nav h3 { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 1rem; color: #000000; margin: 0 0 18px; }
 .pwa-bible-nav .bible-nav-row { display: flex; gap: 10px; margin-bottom: 12px; }
 .pwa-bible-nav select { flex: 1; min-width: 0; max-width: none; width: 100%; padding: 10px 12px; border: 1px solid #cccccc; border-radius: 8px; font-size: 0.9rem; font-family: 'Inter', sans-serif; color: #000000; background: #fafafa; }
 .pwa-bible-nav .nav-go-btn { width: 100%; padding: 12px; background: #000000; color: #fff; border: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; cursor: pointer; margin-top: 6px; transition: background 0.15s; }
