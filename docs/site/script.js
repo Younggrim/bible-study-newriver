@@ -422,7 +422,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 + '<div class="pwa-info-item"><strong style="color:#5c3d6e;">NET</strong> — New English Translation (2005). 60,000+ translator notes.</div>'
                 + '<div class="pwa-info-item"><strong style="color:#2c6b4f;">WEB</strong> — World English Bible (2000). Modern, public domain.</div>'
                 + '<h3 style="margin-top:18px;">Commentaries</h3>'
-                + '<div class="pwa-info-item"><strong>David Guzik</strong> — Enduring Word. Verse-by-verse commentary, freely available online.</div>';
+                + '<div class="pwa-info-item"><strong>David Guzik</strong> — Enduring Word. Verse-by-verse commentary, freely available online.</div>'
+                + '<div class="pwa-info-item"><strong>NET Bible notes</strong> — 60,000+ translator notes on the text, wording, and alternative readings.</div>'
+                + '<div class="pwa-info-item"><strong>Matthew Henry</strong> — Exposition (1710). Devotional, verse-by-verse, public domain.</div>';
             document.body.appendChild(infoPopup);
 
             infoBtn.addEventListener('click', function(e) {
