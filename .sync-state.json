@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "520d53917f19c9bfcd09d3a5f625556c123e6f7e Remove fabricated Charles Spurgeon quotes from Commentary tabs",
+  "upstream_commit": "f0347e3de30b1179c89e47ec1ce6c768ce3e3b0c Remove the Spurgeon commentator card from the front page",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "8c78a039"
