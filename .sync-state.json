@@ -1,0 +1,9 @@
+{
+  "upstream_commit": "8ef7fe06f5d78949f9002df6ad3afa07f8089a75 Document the two-repo workflow so any tool follows the same rules",
+  "upstream_fingerprints": {
+    "site/style.css": "d52a9e21",
+    "site/script.js": "8c78a039"
+  },
+  "style_css_v": "173ef5ab",
+  "script_js_v": "d07404aa"
+}

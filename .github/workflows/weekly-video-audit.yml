@@ -1,0 +1,80 @@
+name: Weekly video audit
+
+# Two independent checks, both reporting to issues rather than changing the site.
+#
+#   new uploads   watches the channels in .automation/ and lists anything not
+#                 seen before, without guessing which chapter it belongs on
+#   dead links    asks YouTube whether every video the site references still
+#                 plays, via the keyless oEmbed endpoint
+#
+# Neither ever edits docs/. Deciding whether a video belongs on a chapter, and
+# removing one that has died, is a judgment call left to a person or an
+# assistant working from the issue. See WORKFLOW.md.
+
+on:
+  schedule:
+    - cron: '0 13 * * 1'   # Mondays, 13:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: video-audit
+  cancel-in-progress: false
+
+jobs:
+  new-uploads:
+    name: Check tracked channels for new uploads
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check channel feeds
+        id: check
+        run: python3 check_new_videos.py
+
+      - name: Commit updated watch state
+        if: steps.check.outputs.has_new == 'true'
+        run: |
+          if [ -n "$(git status --porcelain .automation/)" ]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add .automation/
+            git commit -m "Record newly seen videos on tracked channels"
+            git push
+          else
+            echo "No state change to commit."
+          fi
+
+      - name: Open an issue listing the new uploads
+        if: steps.check.outputs.has_new == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "New videos on tracked channels ($(date -u +%Y-%m-%d))" \
+            --body-file /tmp/new_videos_issue_body.md
+
+  dead-links:
+    name: Audit referenced videos for dead links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Modest concurrency on purpose. YouTube rate-limits datacenter IPs more
+      # readily than home ones, and a throttled request must never be mistaken
+      # for a dead video. Anything inconclusive is reported as unchecked.
+      - name: Probe every referenced video
+        id: audit
+        run: python3 check_video_links.py --workers 6
+
+      - name: Open an issue listing the broken videos
+        if: steps.audit.outputs.has_dead == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "${{ steps.audit.outputs.dead_count }} video(s) no longer play ($(date -u +%Y-%m-%d))" \
+            --body-file /tmp/dead_videos_issue_body.md

@@ -11,42 +11,42 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="site/style.css?v=17">
+    <link rel="stylesheet" href="site/style.css?v=173ef5ab">
     <style>
-        body { background: #fafafa; }
+        body { background: #faf5ed; }
         .topic-hero { position: relative; height: 240px; overflow: hidden; }
         .topic-hero img { width: 100%; height: 100%; object-fit: cover; }
-        .topic-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)); filter: grayscale(1) contrast(1.15) brightness(0.55); backdrop-filter: none; }
+        .topic-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)); filter: brightness(0.45) sepia(0.75) saturate(1.7); backdrop-filter: none; }
         .topic-hero .hero-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
-        .topic-hero h1 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #fff; font-size: 2rem; margin: 0 0 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-        .topic-hero p { color: #ececec; font-size: 0.95rem; max-width: 600px; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+        .topic-hero h1 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #fff; font-size: 2rem; margin: 0 0 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+        .topic-hero p { color: #f0e8dc; font-size: 0.95rem; max-width: 600px; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
         .page-content { margin: 0 auto; max-width: 1100px; padding: 20px 24px 80px; }
-        .back-link { display: inline-flex; align-items: center; gap: 6px; color: #333333; font-weight: 600; font-size: 0.85rem; text-decoration: none; margin: 16px 0; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; color: #5c3d6e; font-weight: 600; font-size: 0.85rem; text-decoration: none; margin: 16px 0; }
         .back-link:hover { text-decoration: underline; }
         .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
-        .jump-card { background: #fff; border: 1px solid #e2e2e2; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #333333; text-decoration: none; transition: background .15s, transform .15s; }
-        .jump-card:hover { background: #f5f5f5; transform: translateY(-1px); }
-        .section-block { background: #fff; border: 1px solid #e2e2e2; border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; scroll-margin-top: 76px; }
-        .section-block .section-kicker { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #999999; }
-        .section-block h2 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #5c3d6e; font-size: 1.35rem; margin: 4px 0 12px; }
-        .section-block h3 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #6e4a80; font-size: 1.02rem; margin: 18px 0 8px; }
-        .section-block h4 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #333333; font-size: 0.95rem; margin: 18px 0 8px; }
-        .section-block p { line-height: 1.7; color: #1a1a1a; margin: 0 0 10px; }
+        .jump-card { background: #fff; border: 1px solid var(--border-light); border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #5c3d6e; text-decoration: none; transition: background .15s, transform .15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+        .section-block { background: #fff; border: 1px solid var(--border-light); border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; scroll-margin-top: 76px; }
+        .section-block .section-kicker { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #9d84a8; }
+        .section-block h2 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #5c3d6e; font-size: 1.35rem; margin: 4px 0 12px; }
+        .section-block h3 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #6e4a80; font-size: 1.02rem; margin: 18px 0 8px; }
+        .section-block h4 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #5c3d6e; font-size: 0.95rem; margin: 18px 0 8px; }
+        .section-block p { line-height: 1.7; color: #3d332b; margin: 0 0 10px; }
         .verse-list { list-style: none; padding: 0; margin: 8px 0 0; }
-        .verse-list li { padding: 8px 0; border-bottom: 1px solid #ececec; font-size: 0.9rem; line-height: 1.6; color: #1a1a1a; }
+        .verse-list li { padding: 8px 0; border-bottom: 1px solid #f0e8dc; font-size: 0.9rem; line-height: 1.6; color: #4a3f35; }
         .verse-list li:last-child { border-bottom: none; }
-        .verse-ref { color:#8b3a2a; font-weight: 600; text-decoration: underline dotted; cursor: pointer; }
+        .verse-ref { color: #5c3d6e; font-weight: 600; text-decoration: underline dotted; cursor: pointer; }
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
         .video-grid:last-child { margin-bottom: 0; }
         .verse-popup-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999; align-items: center; justify-content: center; padding: 20px; }
         .verse-popup-overlay.active { display: flex; }
         .verse-popup { background: #fff; border-radius: 12px; padding: 24px; max-width: 480px; width: 100%; max-height: 70vh; overflow-y: auto; position: relative; }
-        .verse-popup h4 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #333333; margin: 0 0 12px; }
-        .verse-popup p { line-height: 1.7; color: #1a1a1a; }
-        .verse-popup .close-popup { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 1.3rem; color: #999999; cursor: pointer; }
+        .verse-popup h4 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #5c3d6e; margin: 0 0 12px; }
+        .verse-popup p { line-height: 1.7; color: #3d332b; }
+        .verse-popup .close-popup { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 1.3rem; color: #9d84a8; cursor: pointer; }
         @media (max-width: 600px) { .topic-hero h1 { font-size: 1.5rem; } }
     </style>
 </head>
@@ -95,6 +95,7 @@
             <h3>What Jesus Was Teaching</h3>
             <p>The parable reveals that the variable is never the seed — God's Word is always potent, always living and active. The variable is the soil, the human heart. Jesus identifies four heart conditions: the hard heart, the shallow heart, the crowded heart, and the receptive heart. This is both a diagnostic tool and a call to self-examination.</p>
             <p>Jesus was also teaching patience. Not everyone who hears the gospel will respond. But where the Word takes root in prepared soil, the harvest is extraordinary — far exceeding what was planted.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'I1yqXp7C9uU')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/I1yqXp7C9uU/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the meaning of the Parable of the Sower?<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
@@ -120,6 +121,7 @@
             <h3>What Jesus Was Teaching</h3>
             <p>Jesus was teaching His disciples not to despise small beginnings. The Kingdom of God does not arrive with political revolution — it starts in hidden, humble ways. God's Kingdom grows by its own divine energy, not by human engineering.</p>
             <p>This parable also carries a personal application: the tiny seed of faith planted in a single heart can grow beyond anything we imagine. We are called to plant and water; God gives the growth.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'Cr2g_FS6c5k')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/Cr2g_FS6c5k/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Give Me an Answer - #2015 - Faith as Big as a Mustard Seed<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Give Me An Answer with Stuart & Cliffe Knechtle</span></p></div>
@@ -145,6 +147,7 @@
             <h3>What Jesus Was Teaching</h3>
             <p>Jesus told this parable in response to Pharisees grumbling that He received sinners. The father represents God — not an angry judge but a watching father longing for reunion. The robe, ring, and sandals symbolize full sonship restored — not probation but complete reinstatement. Grace is not measured or cautious; it is lavish.</p>
             <p>But the parable has a second target: the elder brother represents the Pharisees — those who stayed home and kept the rules yet never knew the father's heart. Jesus leaves his story unresolved — an open invitation to join the party.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'3ThHG7YP8DE')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/3ThHG7YP8DE/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What Most Churches WON'T Tell You About the Prodigal Son! (part 2)<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
@@ -171,6 +174,7 @@
             <h3>What Jesus Was Teaching</h3>
             <p>Jesus reversed the lawyer's question entirely. He asked "Who is my neighbor?" — seeking to limit responsibility. Jesus reframed it as "To whom can I be a neighbor?" — expanding responsibility to anyone in need. The command to love has no boundary conditions.</p>
             <p>Many early church fathers saw the Good Samaritan as a picture of Christ Himself. We are the man left half-dead by sin; Christ comes to us in our brokenness, binds our wounds, and pays a debt we cannot repay. We love others this way because we have first been loved this way.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'LCU7_G9aRV8')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/LCU7_G9aRV8/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Luke 10:25-42 - Witness of The Good Samaritan<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
@@ -197,6 +201,7 @@
             <h3>What Jesus Was Teaching</h3>
             <p>Jesus was revealing God's heart for the individual. He doesn't manage populations — He pursues persons. The lost sheep didn't find its own way home; the shepherd went after it. This is the gospel in miniature: salvation is not primarily about human seeking but about divine pursuit.</p>
             <p>Jesus was also rebuking the Pharisees' attitude toward sinners. True holiness moves toward brokenness, not away from it. A doctor goes to the sick, not the healthy.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'BPsyjS4ANiw')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/BPsyjS4ANiw/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Good Shepherd and the Lost Sheep - Aaron Wright<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Grace Family Baptist Church</span></p></div>
@@ -221,6 +226,7 @@
             <h3>What Jesus Was Teaching</h3>
             <p>Jesus was teaching that everything we have — time, abilities, resources, the gospel itself — belongs to God and is entrusted to us for Kingdom purposes. God never compares us to others — only to our own calling.</p>
             <p>The buried talent reveals the most dangerous spiritual posture: not rebellion, but passivity, rooted in a distorted view of God as harsh rather than generous. Fear of failure led to inaction, and inaction was judged more severely than risky failure would have been.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'7TRATaN4B0k')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/7TRATaN4B0k/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the meaning of the Parable of the Talents? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
@@ -271,6 +277,7 @@
             <h3>What Jesus Was Teaching</h3>
             <p>Jesus was exposing the lie at the heart of materialism: that security and satisfaction come from accumulation. The rich fool was condemned for treating God's provision as his own possession and for building a future that excluded God entirely.</p>
             <p>Being "rich toward God" means living with open hands — generous toward others, aware that everything we have is temporary and entrusted. The question is not "How much can I store?" but "How much can I give and steward for God's glory?"</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'uqFRx-dDO94')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/uqFRx-dDO94/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Luke 12:16-34 - Witness of the Rich Fool<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
@@ -321,6 +328,7 @@
             <h3>What Jesus Was Teaching</h3>
             <p>Jesus was teaching about the urgency of spiritual readiness. The oil represents genuine, personal relationship with God — something that cannot be borrowed or acquired at the last minute. Spiritual readiness is not a crisis-moment achievement but a daily cultivation.</p>
             <p>The delay of the bridegroom is significant — Jesus warned that waiting would tempt people to drift into spiritual sleep. The difference was not alertness but preparation. Be ready now, because the bridegroom's arrival is certain — only the timing is unknown.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'02z8NQ6c9Z4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/02z8NQ6c9Z4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the meaning of the Parable of the Ten Virgins? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
@@ -385,7 +393,7 @@
         </div>
     </div>
 
-    <script src="site/script.js"></script>
+    <script src="site/script.js?v=d07404aa"></script>
     <script>
         function loadYT(el, id) {
             el.innerHTML = '<iframe width="100%" height="100%" style="position:absolute;inset:0;" src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';

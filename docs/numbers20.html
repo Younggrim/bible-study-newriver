@@ -11,10 +11,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="site/style.css?v=17">
+    <link rel="stylesheet" href="site/style.css?v=173ef5ab">
 </head>
 <body>
     <nav class="top-nav">
@@ -132,7 +132,7 @@
                 <option value="35">Ch 35</option>
                 <option value="36">Ch 36</option>
             </select>
-            <button onclick="goToChapter()" style="padding:6px 12px;background:#000000;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
+            <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
                 <option value="KJV">KJV</option>
@@ -402,6 +402,8 @@
                 <div class="study-tab active" data-tab="summary">Summary</div>
                 <div class="study-tab" data-tab="authorship">Authorship & Background</div>
                 <div class="study-tab" data-tab="mapgeo">Map & Geography</div>
+                <div class="study-tab" data-tab="commentary">Commentary</div>
+                <div class="study-tab" data-tab="videos">Videos</div>
                 <div class="study-tab" data-tab="reflection">Reflection</div>
             </div>
             <div class="tab-content active" id="tab-summary">
@@ -421,12 +423,23 @@
                 <h3>Map & Geography</h3>
                 <ul>
                     <li>Kadesh (v.1): Israel returns to Kadesh in the wilderness of Zin after 38 years. Miriam dies and is buried here.</li>
-                    <li>Meribah (v.13): &quot;Quarreling&quot; — the place where Moses strikes the rock instead of speaking to it, and is barred from entering <a href="https://en.wikipedia.org/wiki/Canaan" target="_blank" style="color:#000000;text-decoration:none;border-bottom:1px dotted #000000;">Canaan</a>.</li>
-                    <li>Mount Hor (vv.22-29): On the border of <a href="https://en.wikipedia.org/wiki/Edom" target="_blank" style="color:#000000;text-decoration:none;border-bottom:1px dotted #000000;">Edom</a>. Aaron dies here; Eleazar succeeds him as high priest.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Edom" target="_blank" style="color:#000000;text-decoration:none;border-bottom:1px dotted #000000;">Edom</a> refuses passage (vv.14-21): Israel cannot go through Edom (east of the Arabah) and must detour around.</li>
+                    <li>Meribah (v.13): &quot;Quarreling&quot; — the place where Moses strikes the rock instead of speaking to it, and is barred from entering <a href="https://en.wikipedia.org/wiki/Canaan" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Canaan</a>.</li>
+                    <li>Mount Hor (vv.22-29): On the border of <a href="https://en.wikipedia.org/wiki/Edom" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Edom</a>. Aaron dies here; Eleazar succeeds him as high priest.</li>
+                    <li><a href="https://en.wikipedia.org/wiki/Edom" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Edom</a> refuses passage (vv.14-21): Israel cannot go through Edom (east of the Arabah) and must detour around.</li>
                 </ul>
             </div>
-            
+            <div class="tab-content" id="tab-commentary">
+                <h3>Commentary</h3>
+                <ul>
+                    <li><strong>Enduring Word (David Guzik):</strong> <a href="https://enduringword.com/bible-commentary/numbers-20/" target="_blank">enduringword.com</a> Guzik emphasizes the typological significance: the rock struck at Rephidim (Exodus 17) pictures Christ crucified once; the rock spoken to at Meribah pictures Christ accessed by faith/prayer after His one sacrifice. Moses' striking the rock twice "re-crucifies" Christ typologically. He also notes the poignancy of Moses stripping his own brother of the priestly garments on the mountaintop.</li>
+                </ul>
+            </div>
+            <div class="tab-content" id="tab-videos">
+                <h3>Videos</h3>
+                <div class="yt-facade" onclick="loadYT(this,'IxBnE0_McAM')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/IxBnE0_McAM/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">No Special Exceptions - Numbers 20:1,12, 28<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'IDrYiHnRHX4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/IDrYiHnRHX4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">It's Really Up To Us - Numbers 20:12-13<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'G5q9RSHPyaU')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/G5q9RSHPyaU/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">A Better Measure than Success - Numbers 20:10-11<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'cwgXtpLcPWI')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/cwgXtpLcPWI/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Numbers 20-21 | The Bronze Serpent | Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Spoken Gospel</span></p></div></div>
             <div class="tab-content" id="tab-reflection">
                 <h3>Reflection</h3>
                 <ul>
@@ -440,12 +453,12 @@
         </div>
     </main>
 
-    <footer style="text-align:center;padding:20px 16px;font-size:0.7rem;color:#707070;line-height:1.8;border-top:1px solid #e2e2e2;margin-top:32px;">
+    <footer style="text-align:center;padding:20px 16px;font-size:0.7rem;color:var(--text-faint);line-height:1.8;border-top:1px solid var(--rule-warm);margin-top:32px;">
         <p>Scripture quotations marked (ESV) are from the ESV Bible (The Holy Bible, English Standard Version), copyright 2001 by Crossway. Used via API per Crossway Conditions of Use.</p>
-        <p>Scripture quoted by permission. Quotations designated (NET) are from the NET Bible&reg; copyright &copy;1996, 2019 by Biblical Studies Press, L.L.C. <a href="http://netbible.com" style="color:#707070;">netbible.com</a> All rights reserved.</p>
+        <p>Scripture quoted by permission. Quotations designated (NET) are from the NET Bible&reg; copyright &copy;1996, 2019 by Biblical Studies Press, L.L.C. <a href="http://netbible.com" style="color:var(--text-faint);">netbible.com</a> All rights reserved.</p>
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=16"></script>
+    <script src="site/script.js?v=d07404aa"></script>
 </body>
 </html>

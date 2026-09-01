@@ -22,6 +22,11 @@
     --radius-lg: 14px;
     --sidebar-width: 260px;
     --right-panel-width: 280px;
+
+    --accent-link: #000000;   /* links, accent rules, primary button fill */
+    --text-faint: #707070;   /* footer text, captions, muted labels */
+    --rule-warm: #e2e2e2;   /* footer hairline and card borders */
+    --ink-deep: #000000;   /* darkest body text */
 }
 
 body {

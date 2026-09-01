@@ -11,41 +11,41 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="site/style.css?v=17">
+    <link rel="stylesheet" href="site/style.css?v=173ef5ab">
     <style>
-        body { background: #fafafa; }
+        body { background: #faf5ed; }
         .topic-hero { position: relative; height: 240px; overflow: hidden; }
         .topic-hero img { width: 100%; height: 100%; object-fit: cover; }
-        .topic-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)); filter: grayscale(1) contrast(1.15) brightness(0.55); backdrop-filter: none; }
+        .topic-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)); filter: brightness(0.45) sepia(0.75) saturate(1.7); backdrop-filter: none; }
         .topic-hero .hero-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
-        .topic-hero h1 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #fff; font-size: 2rem; margin: 0 0 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-        .topic-hero p { color: #ececec; font-size: 0.95rem; max-width: 600px; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+        .topic-hero h1 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #fff; font-size: 2rem; margin: 0 0 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+        .topic-hero p { color: #f0e8dc; font-size: 0.95rem; max-width: 600px; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
         .page-content { margin: 0 auto; max-width: 1100px; padding: 20px 24px 80px; }
-        .back-link { display: inline-flex; align-items: center; gap: 6px; color: #000000; font-weight: 600; font-size: 0.85rem; text-decoration: none; margin: 16px 0; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; color: #6b4c3b; font-weight: 600; font-size: 0.85rem; text-decoration: none; margin: 16px 0; }
         .back-link:hover { text-decoration: underline; }
         .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
-        .jump-card { background: #fff; border: 1px solid #e2e2e2; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #000000; text-decoration: none; transition: background .15s, transform .15s; }
-        .jump-card:hover { background: #f5f5f5; transform: translateY(-1px); }
-        .section-block { background: #fff; border: 1px solid #e2e2e2; border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; scroll-margin-top: 76px; }
+        .jump-card { background: #fff; border: 1px solid var(--border-light); border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #6b4c3b; text-decoration: none; transition: background .15s, transform .15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+        .section-block { background: #fff; border: 1px solid var(--border-light); border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; scroll-margin-top: 76px; }
         .section-block .section-kicker { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #a68e78; }
-        .section-block h2 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #6b4c3b; font-size: 1.35rem; margin: 4px 0 12px; }
-        .section-block h3 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #7d5a45; font-size: 1.02rem; margin: 18px 0 8px; }
-        .section-block h4 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #000000; font-size: 0.95rem; margin: 18px 0 8px; }
-        .section-block p { line-height: 1.7; color: #1a1a1a; margin: 0 0 10px; }
+        .section-block h2 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #6b4c3b; font-size: 1.35rem; margin: 4px 0 12px; }
+        .section-block h3 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #7d5a45; font-size: 1.02rem; margin: 18px 0 8px; }
+        .section-block h4 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #6b4c3b; font-size: 0.95rem; margin: 18px 0 8px; }
+        .section-block p { line-height: 1.7; color: #3d332b; margin: 0 0 10px; }
         .verse-list { list-style: none; padding: 0; margin: 8px 0 0; }
-        .verse-list li { padding: 8px 0; border-bottom: 1px solid #ececec; font-size: 0.9rem; line-height: 1.6; color: #1a1a1a; }
+        .verse-list li { padding: 8px 0; border-bottom: 1px solid #f0e8dc; font-size: 0.9rem; line-height: 1.6; color: #4a3f35; }
         .verse-list li:last-child { border-bottom: none; }
-        .verse-ref { color:#8b3a2a; font-weight: 600; text-decoration: underline dotted; cursor: pointer; }
+        .verse-ref { color: #6b4c3b; font-weight: 600; text-decoration: underline dotted; cursor: pointer; }
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
         .video-grid:last-child { margin-bottom: 0; }
         .verse-popup-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999; align-items: center; justify-content: center; padding: 20px; }
         .verse-popup-overlay.active { display: flex; }
         .verse-popup { background: #fff; border-radius: 12px; padding: 24px; max-width: 480px; width: 100%; max-height: 70vh; overflow-y: auto; position: relative; }
-        .verse-popup h4 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #000000; margin: 0 0 12px; }
-        .verse-popup p { line-height: 1.7; color: #1a1a1a; }
+        .verse-popup h4 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #6b4c3b; margin: 0 0 12px; }
+        .verse-popup p { line-height: 1.7; color: #3d332b; }
         .verse-popup .close-popup { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 1.3rem; color: #a68e78; cursor: pointer; }
         @media (max-width: 600px) { .topic-hero h1 { font-size: 1.5rem; } }
     </style>
@@ -99,6 +99,7 @@
             <h3>What This Name Means for Us</h3>
             <p>Knowing God as Elohim means we serve a Creator who is infinitely powerful and purposeful. Nothing in our lives is accidental or beyond His ability to redeem. The same God who spoke galaxies into existence is the God who knit us together in our mother's womb, and who continues to create new hearts, new beginnings, and new possibilities in the lives of those who trust Him.</p>
             <p>When we feel small or insignificant, the name Elohim reminds us that we were fashioned by the most powerful being in existence. When we face problems that seem insurmountable, we can remember that our God creates ex nihilo — something out of nothing — and specializes in bringing order out of chaos.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'U5iyUik97Lg')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/U5iyUik97Lg/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Elohim<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
@@ -124,6 +125,7 @@
             <h3>What This Name Means for Us</h3>
             <p>Knowing God as Yahweh means we are in relationship with a God who is eternally faithful. His covenant promises do not expire, and His character does not change. In a world of shifting circumstances and broken promises, Yahweh stands as the one constant — the "I AM" who is the same yesterday, today, and forever.</p>
             <p>The name Yahweh also invites us into intimacy. He revealed His personal name because He desires to be known. When we call upon Yahweh, we are calling upon the God who stooped down to speak to a fugitive shepherd at a burning bush and who continues to hear the prayers of His people today.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'JJQ44HnBfcw')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/JJQ44HnBfcw/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Is God's name Jehovah or Yahweh?<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Wes Huff</span></p></div>
@@ -148,6 +150,7 @@
             <h3>What This Name Means for Us</h3>
             <p>Calling God "Adonai" is an act of surrender — acknowledging that our lives are not our own. In a culture that celebrates autonomy, this name challenges us to release the illusion of control and place our trust in the One whose plans are always higher and better than our own.</p>
             <p>Yet surrendering to Adonai is the truest freedom. When we submit to His lordship, we are freed from the tyranny of our own limited wisdom and the anxiety of carrying burdens too heavy for us. His authority is perfect love in action.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'ZffgiIJaErE')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/ZffgiIJaErE/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Adonai | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
@@ -172,6 +175,7 @@
             <h3>What This Name Means for Us</h3>
             <p>When we face situations that seem impossible, El Shaddai reminds us that our God specializes in the impossible. There is no limitation, no obstacle, and no impossibility that can exhaust His almighty power or deplete His all-sufficient resources.</p>
             <p>El Shaddai also invites us to rest rather than strive. We do not need to generate our own sufficiency — He is sufficient for us. In our weakness, His power is made perfect.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'2ofUgwUeiw4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/2ofUgwUeiw4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">El Shaddai | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
@@ -196,6 +200,7 @@
             <h3>What This Name Means for Us</h3>
             <p>Knowing God as El Elyon means that no power in heaven or on earth can override His purposes for our lives. When circumstances spiral beyond our control, El Elyon sits enthroned above it all, working all things according to the counsel of His will.</p>
             <p>This name also gives proper perspective. When we are tempted to elevate career, relationships, or reputation to the highest place, El Elyon reminds us that only God belongs on the throne.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'O7bLbA7qhhY')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/O7bLbA7qhhY/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">El Elyon | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
@@ -220,6 +225,7 @@
             <h3>What This Name Means for Us</h3>
             <p>Jehovah Jireh assures us that God is never caught off guard by our needs. He sees the trial before it arrives and has already prepared His provision. He often provides at the last moment, not because He is slow, but because He is teaching us to trust.</p>
             <p>This name also challenges anxiety and self-reliance. If Jehovah Jireh has promised to provide, then our worry is ultimately a question of faith: do we believe He will do what He has promised?</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'n5wGjzR6Sm0')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/n5wGjzR6Sm0/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Jehovah Jireh | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
@@ -245,6 +251,7 @@
             <h3>What This Name Means for Us</h3>
             <p>In a world full of brokenness, Jehovah Rapha offers hope that wholeness is possible. He does not always heal in the way or timing we expect, but He is always at work restoring what sin and suffering have damaged.</p>
             <p>Knowing God as Jehovah Rapha gives us permission to bring our wounds to Him honestly. The God who turned bitter water sweet invites us to bring our bitterest experiences to Him and trust Him to bring healing.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'ZeJDPvkQDPM')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/ZeJDPvkQDPM/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Jehovah Rapha | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
@@ -294,6 +301,7 @@
             <h3>What This Name Means for Us</h3>
             <p>In a world drowning in anxiety, Jehovah Shalom offers what nothing else can: a peace not contingent on circumstances. It requires only that we fix our minds on the One who IS peace.</p>
             <p>Jehovah Shalom also calls us to be peacemakers — carrying His peace into our homes, workplaces, and communities, and pursuing reconciliation where there is division.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'6L57ni-Ehxk')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/6L57ni-Ehxk/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Jehovah Shalom | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
@@ -318,6 +326,7 @@
             <h3>What This Name Means for Us</h3>
             <p>In moments when we feel unseen, El Roi reminds us that God's eyes are fixed on us. He sees the tears we cry alone, the sacrifices no one else notices, and the silent battles we fight without applause.</p>
             <p>El Roi also brings both comfort and accountability. Living before El Roi means living transparently, finding freedom in vulnerability rather than fear — the God who sees everything still loves us completely.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'cyWKnmnt1wM')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/cyWKnmnt1wM/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">El Roi | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
@@ -366,6 +375,7 @@
             <h3>What This Name Means for Us</h3>
             <p>Calling God "Abba" transforms our approach to the spiritual life. Prayer is no longer a formal audience with a distant monarch but an intimate conversation with a loving Father. We approach already beloved, already accepted, already His.</p>
             <p>For those with absent or disappointing earthly fathers, the name Abba offers healing and redefinition. He is the perfect Father — protective, present, patient, and overflowing with unconditional love.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'pn0SkXiTtco')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/pn0SkXiTtco/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Francis Chan - Our hearts cry "Abba! Father!"<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Crazy Love</span></p></div>
@@ -390,6 +400,7 @@
             <h3>What This Name Means for Us</h3>
             <p>Jehovah Rohi means we are never without guidance, provision, or protection. The Shepherd goes before us into every situation. Our role is simply to follow — to listen for His voice and trust He is leading us to good places even through dark valleys.</p>
             <p>This name also speaks to rest. Jehovah Rohi gives us permission to stop striving and receive the rest our souls desperately need, knowing nothing will pluck us from His hand.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'j36IuE3b9_E')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/j36IuE3b9_E/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Jehovah Rohi | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
@@ -438,6 +449,7 @@
             <h3>What This Name Means for Us</h3>
             <p>In a culture obsessed with the immediate, El Olam invites us into an eternal perspective. Our problems are temporary, but God's love, promises, and purposes are everlasting.</p>
             <p>El Olam also means God never burns out. His patience with us is eternal, His mercy new every morning, flowing from an inexhaustible source that will never run out.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'B5RPSntVRwI')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/B5RPSntVRwI/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">El Olam | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
@@ -462,6 +474,7 @@
             <h3>What This Name Means for Us</h3>
             <p>Immanuel means we are never alone — not in our darkest moments, not in our deepest grief. The God of the universe chose to be WITH us, not just above us or for us, but present with us in every moment.</p>
             <p>This name also reminds us of the staggering cost of God's presence. To be "with us" required incarnation — the eternal Son taking on human flesh, suffering, and death. Immanuel is the most costly love in the universe, given freely.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'9xRipGO7qBU')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/9xRipGO7qBU/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Isaiah Overview: Immanuel | Podcast<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Spoken Gospel</span></p></div>
@@ -488,7 +501,7 @@
         </div>
     </div>
 
-    <script src="site/script.js"></script>
+    <script src="site/script.js?v=d07404aa"></script>
     <script>
         function loadYT(el, id) {
             el.innerHTML = '<iframe width="100%" height="100%" style="position:absolute;inset:0;" src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
