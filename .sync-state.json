@@ -1,9 +1,9 @@
 {
-  "upstream_commit": "e8e01af9dd3453c10e3797e058e66cac1ed7b19d Remove Spurgeon from the in-app Translation & Commentary panel (#5)",
+  "upstream_commit": "c4ee6862bba764e854d558adc191c2e9d02a8b52 Expand the Commentary tab from one source to three, on every chapter (#6)",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
-    "site/script.js": "0d6a6f7d"
+    "site/script.js": "2f33b5a3"
   },
   "style_css_v": "173ef5ab",
-  "script_js_v": "0bdb40d2"
+  "script_js_v": "fa16d0d5"
 }
