@@ -11,10 +11,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="site/style.css?v=17">
+    <link rel="stylesheet" href="site/style.css?v=173ef5ab">
 </head>
 <body>
     <nav class="top-nav">
@@ -124,7 +124,7 @@
                 <option value="27">Ch 27</option>
                 <option value="28">Ch 28</option>
             </select>
-            <button onclick="goToChapter()" style="padding:6px 12px;background:#000000;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
+            <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
                 <option value="KJV">KJV</option>
@@ -414,6 +414,8 @@
                 <div class="study-tab active" data-tab="summary">Summary</div>
                 <div class="study-tab" data-tab="authorship">Authorship & Background</div>
                 <div class="study-tab" data-tab="mapgeo">Map & Geography</div>
+                <div class="study-tab" data-tab="commentary">Commentary</div>
+                <div class="study-tab" data-tab="videos">Videos</div>
                 <div class="study-tab" data-tab="reflection">Reflection</div>
             </div>
             <div class="tab-content active" id="tab-summary">
@@ -430,12 +432,23 @@
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
                 <ul>
-                    <li>Machaerus: The fortress east of the <a href="https://en.wikipedia.org/wiki/Dead_Sea" target="_blank" style="color:#000000;text-decoration:none;border-bottom:1px dotted #000000;">Dead Sea</a> (in <a href="https://en.wikipedia.org/wiki/Perea" target="_blank" style="color:#000000;text-decoration:none;border-bottom:1px dotted #000000;">Perea</a>) where Herod imprisoned and beheaded John the Baptist.</li>
-                    <li>A desert place (v.13): A remote area on the northeast shore of the <a href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" style="color:#000000;text-decoration:none;border-bottom:1px dotted #000000;">Sea of Galilee</a> near Bethsaida, where the feeding of the 5,000 occurred.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" style="color:#000000;text-decoration:none;border-bottom:1px dotted #000000;">Sea of Galilee</a>: Jesus walked on the water crossing from the eastern shore back toward <a href="https://en.wikipedia.org/wiki/Capernaum" target="_blank" style="color:#000000;text-decoration:none;border-bottom:1px dotted #000000;">Capernaum</a>/Gennesaret on the western shore (v.34).</li>
+                    <li>Machaerus: The fortress east of the <a href="https://en.wikipedia.org/wiki/Dead_Sea" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Dead Sea</a> (in <a href="https://en.wikipedia.org/wiki/Perea" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Perea</a>) where Herod imprisoned and beheaded John the Baptist.</li>
+                    <li>A desert place (v.13): A remote area on the northeast shore of the <a href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Sea of Galilee</a> near Bethsaida, where the feeding of the 5,000 occurred.</li>
+                    <li><a href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Sea of Galilee</a>: Jesus walked on the water crossing from the eastern shore back toward <a href="https://en.wikipedia.org/wiki/Capernaum" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Capernaum</a>/Gennesaret on the western shore (v.34).</li>
                 </ul>
             </div>
-            
+            <div class="tab-content" id="tab-commentary">
+                <h3>Commentary</h3>
+                <ul>
+                    <li><strong>Enduring Word (David Guzik):</strong> <a href="https://enduringword.com/bible-commentary/matthew-14/" target="_blank">enduringword.com</a> Guzik examines Herod's guilty conscience, the feeding miracle's structure, Peter's walk on water, and the significance of "It is I" (ego eimi).</li>
+                </ul>
+            </div>
+            <div class="tab-content" id="tab-videos">
+                <h3>Videos</h3><div class="yt-facade" onclick="loadYT(this,'EQcUf-c7Tmg')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/EQcUf-c7Tmg/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Take Heart, It Is I | Matthew 14:27 | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div><div class="yt-facade" onclick="loadYT(this,'QpSYFOkv4XY')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/QpSYFOkv4XY/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Matthew 14 | Jesus Feeds 5,000 Jews | Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Spoken Gospel</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'kepfqB9mpKg')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/kepfqB9mpKg/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Dance that Killed John the Baptist (Matthew 14)<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Chosen</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'O7WWi65gb14')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/O7WWi65gb14/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Jesus Walks On Water and Saves Peter (Matthew 14)<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Chosen</span></p></div>
+
+            </div>
             <div class="tab-content" id="tab-reflection">
                 <h3>Reflection</h3>
                 <ul>
@@ -450,12 +463,12 @@
         </div>
     </main>
 
-    <footer style="text-align:center;padding:20px 16px;font-size:0.7rem;color:#707070;line-height:1.8;border-top:1px solid #e2e2e2;margin-top:32px;">
+    <footer style="text-align:center;padding:20px 16px;font-size:0.7rem;color:var(--text-faint);line-height:1.8;border-top:1px solid var(--rule-warm);margin-top:32px;">
         <p>Scripture quotations marked (ESV) are from the ESV Bible (The Holy Bible, English Standard Version), copyright 2001 by Crossway. Used via API per Crossway Conditions of Use.</p>
-        <p>Scripture quoted by permission. Quotations designated (NET) are from the NET Bible&reg; copyright &copy;1996, 2019 by Biblical Studies Press, L.L.C. <a href="http://netbible.com" style="color:#707070;">netbible.com</a> All rights reserved.</p>
+        <p>Scripture quoted by permission. Quotations designated (NET) are from the NET Bible&reg; copyright &copy;1996, 2019 by Biblical Studies Press, L.L.C. <a href="http://netbible.com" style="color:var(--text-faint);">netbible.com</a> All rights reserved.</p>
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=16"></script>
+    <script src="site/script.js?v=d07404aa"></script>
 </body>
 </html>

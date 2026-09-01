@@ -11,10 +11,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="site/style.css?v=17">
+    <link rel="stylesheet" href="site/style.css?v=173ef5ab">
 </head>
 <body>
     <nav class="top-nav">
@@ -112,7 +112,7 @@
                 <option value="15">Ch 15</option>
                 <option value="16">Ch 16</option>
             </select>
-            <button onclick="goToChapter()" style="padding:6px 12px;background:#000000;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
+            <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
                 <option value="KJV">KJV</option>
@@ -398,6 +398,8 @@
                 <div class="study-tab active" data-tab="summary">Summary</div>
                 <div class="study-tab" data-tab="authorship">Authorship & Background</div>
                 <div class="study-tab" data-tab="mapgeo">Map & Geography</div>
+                <div class="study-tab" data-tab="commentary">Commentary</div>
+                <div class="study-tab" data-tab="videos">Videos</div>
                 <div class="study-tab" data-tab="reflection">Reflection</div>
             </div>
             <div class="tab-content active" id="tab-summary">
@@ -415,12 +417,24 @@
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
                 <ul>
-                    <li>Dalmanutha/Magadan (v.10): A town on the western shore of the <a href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" style="color:#000000;text-decoration:none;border-bottom:1px dotted #000000;">Sea of Galilee</a>.</li>
-                    <li>Bethsaida (v.22): A fishing village on the northeast shore of the <a href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" style="color:#000000;text-decoration:none;border-bottom:1px dotted #000000;">Sea of Galilee</a>. Jesus healed the blind man here in two stages.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Caesarea_Philippi" target="_blank" style="color:#000000;text-decoration:none;border-bottom:1px dotted #000000;">Caesarea Philippi</a> (v.27): A pagan city at the base of <a href="https://en.wikipedia.org/wiki/Mount_Hermon" target="_blank" style="color:#000000;text-decoration:none;border-bottom:1px dotted #000000;">Mount Hermon</a>, 25 miles north of the <a href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" style="color:#000000;text-decoration:none;border-bottom:1px dotted #000000;">Sea of Galilee</a>. Peter&#x27;s great confession occurred here — far from <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:#000000;text-decoration:none;border-bottom:1px dotted #000000;">Jerusalem</a>&#x27;s religious establishment.</li>
+                    <li>Dalmanutha/Magadan (v.10): A town on the western shore of the <a href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Sea of Galilee</a>.</li>
+                    <li>Bethsaida (v.22): A fishing village on the northeast shore of the <a href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Sea of Galilee</a>. Jesus healed the blind man here in two stages.</li>
+                    <li><a href="https://en.wikipedia.org/wiki/Caesarea_Philippi" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Caesarea Philippi</a> (v.27): A pagan city at the base of <a href="https://en.wikipedia.org/wiki/Mount_Hermon" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Mount Hermon</a>, 25 miles north of the <a href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Sea of Galilee</a>. Peter&#x27;s great confession occurred here — far from <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a>&#x27;s religious establishment.</li>
                 </ul>
             </div>
-            
+            <div class="tab-content" id="tab-commentary">
+                <h3>Commentary</h3>
+                <ul>
+                    <li><strong>Enduring Word (David Guzik):</strong> <a href="https://enduringword.com/bible-commentary/mark-8/" target="_blank">enduringword.com</a> Guzik examines the feeding of the 4,000, the disciples' hardened hearts, the two-stage healing as a parable of understanding, Peter's confession, and the cost of discipleship.</li>
+                </ul>
+            </div>
+            <div class="tab-content" id="tab-videos">
+                <h3>Videos</h3><div class="yt-facade" onclick="loadYT(this,'nxedE5n6w9I')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/nxedE5n6w9I/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Mark 8:27-9:32 | Transfiguration and Unbelief | Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Spoken Gospel</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'ypvstiNWPiw')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/ypvstiNWPiw/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The TURNING POINT in Mark's Gospel | Beyond the Word | Mark 8<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Brandon Robbins</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'5vX7Db1lKAw')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/5vX7Db1lKAw/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Faith & Humility �Mark 7:24-8:10 Explained<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'Re1F76FlHx4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/Re1F76FlHx4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Coming to See �Mark 8:11-33 Explained<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'orptaKmcIxE')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/orptaKmcIxE/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Cross and the Glory �Mark 8:34-9:13<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+</div>
             <div class="tab-content" id="tab-reflection">
                 <h3>Reflection</h3>
                 <ul>
@@ -435,12 +449,12 @@
         </div>
     </main>
 
-    <footer style="text-align:center;padding:20px 16px;font-size:0.7rem;color:#707070;line-height:1.8;border-top:1px solid #e2e2e2;margin-top:32px;">
+    <footer style="text-align:center;padding:20px 16px;font-size:0.7rem;color:var(--text-faint);line-height:1.8;border-top:1px solid var(--rule-warm);margin-top:32px;">
         <p>Scripture quotations marked (ESV) are from the ESV Bible (The Holy Bible, English Standard Version), copyright 2001 by Crossway. Used via API per Crossway Conditions of Use.</p>
-        <p>Scripture quoted by permission. Quotations designated (NET) are from the NET Bible&reg; copyright &copy;1996, 2019 by Biblical Studies Press, L.L.C. <a href="http://netbible.com" style="color:#707070;">netbible.com</a> All rights reserved.</p>
+        <p>Scripture quoted by permission. Quotations designated (NET) are from the NET Bible&reg; copyright &copy;1996, 2019 by Biblical Studies Press, L.L.C. <a href="http://netbible.com" style="color:var(--text-faint);">netbible.com</a> All rights reserved.</p>
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=16"></script>
+    <script src="site/script.js?v=d07404aa"></script>
 </body>
 </html>

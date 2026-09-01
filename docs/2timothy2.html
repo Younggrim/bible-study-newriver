@@ -11,10 +11,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="site/style.css?v=17">
+    <link rel="stylesheet" href="site/style.css?v=173ef5ab">
 </head>
 <body>
     <nav class="top-nav">
@@ -100,7 +100,7 @@
                 <option value="3">Ch 3</option>
                 <option value="4">Ch 4</option>
             </select>
-            <button onclick="goToChapter()" style="padding:6px 12px;background:#000000;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
+            <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
                 <option value="KJV">KJV</option>
@@ -325,6 +325,8 @@
             <div class="study-tabs">
                 <div class="study-tab active" data-tab="summary">Summary</div>
                 <div class="study-tab" data-tab="authorship">Authorship & Background</div>
+                <div class="study-tab" data-tab="commentary">Commentary</div>
+                <div class="study-tab" data-tab="videos">Videos</div>
                 <div class="study-tab" data-tab="reflection">Reflection</div>
             </div>
             <div class="tab-content active" id="tab-summary">
@@ -341,7 +343,15 @@
                     <div class="auth-item"><span class="auth-label">Handling Truth (vv.14-19):</span> Don&#x27;t quarrel about words (v.14). Be an approved workman who &quot;rightly divides the word of truth&quot; (v.15). Avoid empty talk (v.16). God&#x27;s foundation stands firm (v.19).</div>
                     <div class="auth-item"><span class="auth-label">The Lord&#x27;s Servant (vv.20-26):</span> Be a vessel of honor — cleansed, useful, prepared (v.21). Flee youthful lusts; pursue righteousness (v.22). Don&#x27;t quarrel; be gentle, teachable, patient (vv.24-25). The goal: opponents may repent and escape the devil&#x27;s snare (vv.25-26).</div>
             </div>
-            
+            <div class="tab-content" id="tab-commentary">
+                <h3>Commentary</h3>
+                <ul>
+                    <li><strong>Enduring Word (David Guzik):</strong> <a href="https://enduringword.com/bible-commentary/2-timothy-2/" target="_blank">enduringword.com</a> Guzik covers the seven metaphors, the faithful saying, rightly dividing the Word, vessels of honor, and the Lord's servant.</li>
+                </ul>
+            </div>
+            <div class="tab-content" id="tab-videos">
+                <h3>Videos</h3><div class="yt-facade" onclick="loadYT(this,'_Z2L9Y025io')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/_Z2L9Y025io/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">2 Timothy 1:13-2:13 - Holding Fast to a Faithful God<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div><div class="yt-facade" onclick="loadYT(this,'3ZiuPmYFsKE')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/3ZiuPmYFsKE/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">2 Timothy 1:1-2:13 | The Apostle Paul’s Last Letter  | Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Spoken Gospel</span></p></div><div class="yt-facade" onclick="loadYT(this,'-t6Q91POoBE')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/-t6Q91POoBE/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">2 Timothy 2:14-3:17 | False Teachers Have Always Been a Problem | Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Spoken Gospel</span></p></div><div class="yt-facade" onclick="loadYT(this,'PkV4eMsrZUE')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/PkV4eMsrZUE/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">2 Timothy 2:14-26 - Focused on the Right Things<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+</div>
             <div class="tab-content" id="tab-reflection">
                 <h3>Reflection</h3>
                 <ul>
@@ -356,12 +366,12 @@
         </div>
     </main>
 
-    <footer style="text-align:center;padding:20px 16px;font-size:0.7rem;color:#707070;line-height:1.8;border-top:1px solid #e2e2e2;margin-top:32px;">
+    <footer style="text-align:center;padding:20px 16px;font-size:0.7rem;color:var(--text-faint);line-height:1.8;border-top:1px solid var(--rule-warm);margin-top:32px;">
         <p>Scripture quotations marked (ESV) are from the ESV Bible (The Holy Bible, English Standard Version), copyright 2001 by Crossway. Used via API per Crossway Conditions of Use.</p>
-        <p>Scripture quoted by permission. Quotations designated (NET) are from the NET Bible&reg; copyright &copy;1996, 2019 by Biblical Studies Press, L.L.C. <a href="http://netbible.com" style="color:#707070;">netbible.com</a> All rights reserved.</p>
+        <p>Scripture quoted by permission. Quotations designated (NET) are from the NET Bible&reg; copyright &copy;1996, 2019 by Biblical Studies Press, L.L.C. <a href="http://netbible.com" style="color:var(--text-faint);">netbible.com</a> All rights reserved.</p>
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=16"></script>
+    <script src="site/script.js?v=d07404aa"></script>
 </body>
 </html>

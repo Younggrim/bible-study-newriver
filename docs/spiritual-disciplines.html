@@ -11,49 +11,49 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="site/style.css?v=17">
+    <link rel="stylesheet" href="site/style.css?v=173ef5ab">
     <style>
         .topic-hero { position: relative; overflow: hidden; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
-        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1469228252629-cbe7cb7db2c8?w=1200&q=80") center/cover no-repeat; filter: grayscale(1) contrast(1.15) brightness(0.55); }
-        .topic-hero h1 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1469228252629-cbe7cb7db2c8?w=1200&q=80") center/cover no-repeat; filter: brightness(0.45) sepia(0.75) saturate(1.7); }
+        .topic-hero h1 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
         .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #a0e8e0; letter-spacing: 0.5px; }
 
-        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #000000; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #2a6b6b; text-decoration: none; font-weight: 600; transition: color 0.2s; }
         .back-link:hover { color: #1a4545; }
         .back-link i { margin-right: 6px; }
 
         .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
-        .jump-card { background: #fff; border: 1px solid #e2e2e2; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #000000; text-decoration: none; transition: background 0.15s, transform 0.15s; }
-        .jump-card:hover { background: #f5f5f5; transform: translateY(-1px); }
+        .jump-card { background: #fff; border: 1px solid var(--border-light); border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #2a6b6b; text-decoration: none; transition: background 0.15s, transform 0.15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
 
-        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, #e2e2e2); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; scroll-margin-top: 76px; }
-        .section-block h2 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; font-size: 1.35rem; color: #2a6b6b; margin-bottom: 4px; }
-        .section-block .section-kicker { display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #707070; margin-bottom: 6px; }
-        .section-block h3 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; font-size: 0.95rem; color: #2a6b6b; margin: 20px 0 12px; }
-        .section-block h4 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; font-size: 0.88rem; color: #000000; margin: 18px 0 10px; }
-        .section-block p { font-size: 0.92rem; color: #1a1a1a; line-height: 1.8; margin-bottom: 14px; }
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, var(--border-light)); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; scroll-margin-top: 76px; }
+        .section-block h2 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; font-size: 1.35rem; color: #2a6b6b; margin-bottom: 4px; }
+        .section-block .section-kicker { display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; }
+        .section-block h3 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; font-size: 0.95rem; color: #2a6b6b; margin: 20px 0 12px; }
+        .section-block h4 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; font-size: 0.88rem; color: #2a6b6b; margin: 18px 0 10px; }
+        .section-block p { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 14px; }
         .section-block p:last-child { margin-bottom: 0; }
 
         .verse-list { list-style: none; padding: 0; margin: 0; }
-        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e2e2e2; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border-light); }
         .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
         .video-grid:last-child { margin-bottom: 0; }
 
-        .verse-ref { color: #8b3a2a; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref { color: #2a6b6b; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
         .verse-ref:hover { color: #1a4545; }
         .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
         .verse-popup-overlay.show { display:block; }
         .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
         .verse-popup.show { display:block; }
-        .verse-popup .popup-ref { font-family: "Poppins", "Inter", sans-serif; font-size:1rem; color:#8b3a2a; margin-bottom:12px; font-weight:700; }
-        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:#000000; }
-        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#707070; }
-        .verse-popup .popup-loading { font-size:0.85rem; color:#707070; font-style:italic; }
+        .verse-popup .popup-ref { font-family:'Poppins','Inter',sans-serif; font-size:1rem; color:#2a6b6b; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:var(--ink-deep); }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:var(--text-faint); }
+        .verse-popup .popup-loading { font-size:0.85rem; color:var(--text-faint); font-style:italic; }
 
         @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
     </style>
@@ -96,6 +96,7 @@
             <p>Prayer changes things — and perhaps most importantly, it changes us. As we spend time in God's presence, our desires align with His, our perspective shifts to see through eternal eyes, and our trust deepens in ways that no amount of theological knowledge alone could produce. Prayer is where knowledge becomes relationship.</p>
             <h3>Practicing It</h3>
             <p>Practicing prayer begins with establishing a rhythm — a regular time and place where you meet with God. Jesus modeled this by rising early to pray in solitary places. Start simple: speak honestly, listen expectantly, and do not worry about eloquence. God is not impressed by fancy words but by honest hearts. Use Scripture to guide your prayers, let the Psalms teach you the language of prayer, and remember that the Holy Spirit intercedes for you even when you do not know what to pray.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'0mQ8RM30cSo')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/0mQ8RM30cSo/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What's the RIGHT Way to Pray?<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Impact Video Ministries</span></p></div>
@@ -120,6 +121,7 @@
             <p>The Bible is described as living and active — not a static historical document but a dynamic word that speaks freshly into every generation. When we approach Scripture expectantly, the Holy Spirit illuminates its meaning for our specific circumstances, making ancient words powerfully relevant to our modern lives.</p>
             <h3>Practicing It</h3>
             <p>Practicing Bible study involves consistency, curiosity, and application. Choose a plan — whether a book study, a theme study, or a daily reading schedule — and stick with it. Come to the text with questions: What does this teach about God? What does it reveal about humanity? How should I respond? Meditation takes study deeper by slowing down to let a passage sink in — read a verse slowly, emphasize different words, ask the Holy Spirit to reveal its meaning, and carry it with you throughout the day. The goal is not to get through the Bible but to let the Bible get through you.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'DPEpfJm_3Ms')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/DPEpfJm_3Ms/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the proper way to study the Bible? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
@@ -149,6 +151,7 @@
             <p>Jesus assumed His followers would fast — He said "when you fast," not "if you fast." Yet He warned against the hypocrisy of fasting for public recognition. Biblical fasting is a private discipline between the soul and God, not a public display of spirituality.</p>
             <h3>Practicing It</h3>
             <p>Begin with a simple fast — perhaps skipping one meal and using that time for prayer instead. As your body protests with hunger, let each pang become a prayer prompt. Over time, you can extend fasts as the Spirit leads, always keeping health and medical needs in mind. Fasting is most powerful when paired with a specific purpose: seeking guidance for a major decision, interceding for someone in crisis, repenting from sin, or preparing for ministry. Without purpose, fasting becomes mere dieting; with purpose, it becomes one of the most powerful spiritual weapons available to believers.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'rBwVxw28m1w')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/rBwVxw28m1w/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">7 Biblical Fasting Principles You MUST Apply Next Time You Fast<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">THE BEAT by Allen Parr</span></p></div>
@@ -173,6 +176,7 @@
             <p>Romans 12:1 expands worship beyond religious activity to the offering of our entire lives. Every decision made in obedience, every act of service done for God's glory, every thought brought captive to Christ is an act of worship. This transforms the mundane into the sacred and makes all of life a living sacrifice offered to God.</p>
             <h3>Practicing It</h3>
             <p>Practicing worship begins with cultivating awareness of God's presence and worthiness. Start each day by declaring who God is — His attributes, His works, His faithfulness. Let music, creation, and Scripture become springboards for praise. Corporate worship with the gathered church is irreplaceable — there is something unique about joining voices with other believers to honor God together. But personal worship fills the spaces between Sundays, keeping your heart tuned to God's frequency.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'5zttgYdUByQ')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/5zttgYdUByQ/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is Worship? | Francis Chan<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Crazy Love</span></p></div>
@@ -195,6 +199,7 @@
             <p>Biblical fellowship goes far beyond socializing. It involves speaking truth in love, bearing one another's burdens, confessing sins to each other, encouraging the discouraged, correcting the erring, and celebrating together in joy.</p>
             <h3>Practicing It</h3>
             <p>Practicing fellowship starts with commitment — deciding that community is a priority, not a convenience. This means showing up consistently, being honest about your struggles, asking for help, and offering help to others. Find or form a small group where you can be known, challenged, and supported. The church is not a building you attend but a family you belong to — and belonging requires the deliberate choice to be present and engaged.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'xlYTzu4PlGY')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/xlYTzu4PlGY/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What Every Christian Needs To Know About Fellowship<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Mike Winger</span></p></div>
@@ -219,6 +224,7 @@
             <p>Jesus taught more about money than any other subject except the kingdom of God, because He knew that our treasure and our hearts are inseparably linked. Where we put our money reveals what we truly value.</p>
             <h3>Practicing It</h3>
             <p>Practicing generosity begins with the tithe — giving the first ten percent of income to God's work as an act of trust and worship. But biblical generosity goes beyond the tithe to cheerful, sacrificial, Spirit-led giving that responds to needs as God directs. Generosity is not just about money — give your time to serve others, your attention to listen, your skills to help, and your home to welcome. Practice hospitality, tip generously, give secretly, support missions, and look for creative ways to bless others.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'62CliEkRCso')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/62CliEkRCso/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">This Lie Can Keep You From Living Generously<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
@@ -243,6 +249,7 @@
             <p>True rest is not merely the absence of work but the presence of trust. It is the soul's deep exhale that says, "God is in control, and I don't have to be." This spiritual rest — resting from our own self-sufficient striving — is what Hebrews 4 describes as the Sabbath-rest that remains for God's people, available through faith in Christ.</p>
             <h3>Practicing It</h3>
             <p>Practicing Sabbath begins with choosing a regular rhythm of intentional rest — a day each week dedicated to worship, relationships, recreation, and soul care rather than productivity. Sabbath is not about rigid rules but about a posture of trust. Some rest by being in nature, others through naps and silence, others through joyful play with family. The form matters less than the heart: ceasing from self-reliant striving and entering the rest that comes from trusting God with what remains undone.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'j1IFJIamH3c')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/j1IFJIamH3c/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">SHOULD CHRISTIANS KEEP THE SABBATH?<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">THE BEAT by Allen Parr</span></p></div>
@@ -266,6 +273,7 @@
             <p>Beyond defense, Scripture memory shapes our thinking patterns over time. The verses we memorize become the lenses through which we interpret life — they correct wrong thinking automatically, comfort us in sorrow without needing to open a Bible, and give us words to share when others need encouragement.</p>
             <h3>Practicing It</h3>
             <p>Start with verses that address your specific needs or struggles. Write them on cards, set them as phone backgrounds, or use an app designed for memorization. Review daily — repetition is the key to long-term retention. Context helps memory stick: rather than memorizing isolated verses, learn the surrounding passage so you understand the meaning, meditate on what you are memorizing, and practice recall by quizzing yourself and reciting verses during walks.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'xl8C_tiOwH8')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/xl8C_tiOwH8/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">7 Experts Share SECRETS to Scripture Memory Success<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Bible Memory Goal</span></p></div>
@@ -282,7 +290,7 @@
         </div>
 
         </main>
-    <script src="site/script.js"></script>
+    <script src="site/script.js?v=d07404aa"></script>
     <script>
         function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
     </script>

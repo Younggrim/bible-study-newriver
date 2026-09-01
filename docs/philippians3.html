@@ -11,10 +11,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="site/style.css?v=17">
+    <link rel="stylesheet" href="site/style.css?v=173ef5ab">
 </head>
 <body>
     <nav class="top-nav">
@@ -100,7 +100,7 @@
                 <option value="3" selected>Ch 3</option>
                 <option value="4">Ch 4</option>
             </select>
-            <button onclick="goToChapter()" style="padding:6px 12px;background:#000000;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
+            <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
                 <option value="KJV">KJV</option>
@@ -305,6 +305,7 @@
             <div class="study-tabs">
                 <div class="study-tab active" data-tab="summary">Summary</div>
                 <div class="study-tab" data-tab="authorship">Authorship & Background</div>
+                <div class="study-tab" data-tab="commentary">Commentary</div>
                 <div class="study-tab" data-tab="videos">Videos</div>
                 <div class="study-tab" data-tab="reflection">Reflection</div>
             </div>
@@ -321,10 +322,18 @@
                     <div class="auth-item"><span class="auth-label">Pressing Toward the Goal (vv.12-16):</span> Paul hasn&#x27;t arrived — he&#x27;s still pressing forward. &quot;Forgetting those things which are behind, and reaching forth unto those things which are before&quot; (v.13). One thing: press toward the prize (v.14).</div>
                     <div class="auth-item"><span class="auth-label">Citizens of Heaven (vv.17-21):</span> Our citizenship is in heaven (v.20). We await Christ&#x27;s return, when He will transform our bodies to be like His glorious body (v.21).</div>
             </div>
-            
+            <div class="tab-content" id="tab-commentary">
+                <h3>Commentary</h3>
+                <ul>
+                    <li><strong>Enduring Word (David Guzik):</strong> <a href="https://enduringword.com/bible-commentary/philippians-3/" target="_blank">enduringword.com</a> Guzik covers the warning against Judaizers, Paul's credentials, the surpassing value of knowing Christ, pressing toward the goal, and heavenly citizenship.</li>
+                </ul>
+            </div>
             <div class="tab-content" id="tab-videos">
-                <h3>Videos</h3><div class="yt-facade" onclick="loadYT(this,'-xtCAVxfIOs')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/-xtCAVxfIOs/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Why You Still Feel Empty Even When Life Is Good | Philippians 3:1-11<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">New River Church</span></p></div><div class="yt-facade" onclick="loadYT(this,'usGVf8q56Ig')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/usGVf8q56Ig/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Is Jesus Your Savior or Just Your Co-Pilot? | Philippians 3:7-14<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">New River Church</span></p></div><div class="yt-facade" onclick="loadYT(this,'PQIErHGe_ME')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/PQIErHGe_ME/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Is Your Past Keeping You From Following Jesus? | Philippians 3:12-21<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">New River Church</span></p></div>
-            </div><div class="tab-content" id="tab-reflection">
+                <h3>Videos</h3><div class="yt-facade" onclick="loadYT(this,'3EhvfS9T2ZQ')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/3EhvfS9T2ZQ/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Philippians 3 | Boasting in Jesus Alone | Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Spoken Gospel</span></p></div><div class="yt-facade" onclick="loadYT(this,'8rFkjU2kC1o')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/8rFkjU2kC1o/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">PHILIPPIANS 3 | "IS KNOWING JESUS YOUR HIGHEST PRIORITY?"<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">THE BEAT by Allen Parr</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'JjAp5V2DChw')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/JjAp5V2DChw/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Philippians 3:1-11 � How Paul Learned To Count<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'zSUtNaXFpYo')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/zSUtNaXFpYo/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Philippians 3:12-21 � Pressing On<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+</div>
+            <div class="tab-content" id="tab-reflection">
                 <h3>Reflection</h3>
                 <ul>
                     <li><strong>Gain Counted as Loss (v.7)</strong> — Paul takes his impressive religious resume and counts it all as loss compared to Christ. What accomplishments or credentials are you tempted to trust in instead of resting fully in Christ?</li>
@@ -337,12 +346,12 @@
         </div>
     </main>
 
-    <footer style="text-align:center;padding:20px 16px;font-size:0.7rem;color:#707070;line-height:1.8;border-top:1px solid #e2e2e2;margin-top:32px;">
+    <footer style="text-align:center;padding:20px 16px;font-size:0.7rem;color:var(--text-faint);line-height:1.8;border-top:1px solid var(--rule-warm);margin-top:32px;">
         <p>Scripture quotations marked (ESV) are from the ESV Bible (The Holy Bible, English Standard Version), copyright 2001 by Crossway. Used via API per Crossway Conditions of Use.</p>
-        <p>Scripture quoted by permission. Quotations designated (NET) are from the NET Bible&reg; copyright &copy;1996, 2019 by Biblical Studies Press, L.L.C. <a href="http://netbible.com" style="color:#707070;">netbible.com</a> All rights reserved.</p>
+        <p>Scripture quoted by permission. Quotations designated (NET) are from the NET Bible&reg; copyright &copy;1996, 2019 by Biblical Studies Press, L.L.C. <a href="http://netbible.com" style="color:var(--text-faint);">netbible.com</a> All rights reserved.</p>
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=16"></script>
+    <script src="site/script.js?v=d07404aa"></script>
 </body>
 </html>

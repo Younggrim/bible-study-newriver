@@ -11,41 +11,41 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="site/style.css?v=17">
+    <link rel="stylesheet" href="site/style.css?v=173ef5ab">
     <style>
-        body { background: #fafafa; }
+        body { background: #faf5ed; }
         .topic-hero { position: relative; height: 240px; overflow: hidden; }
         .topic-hero img { width: 100%; height: 100%; object-fit: cover; }
-        .topic-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)); filter: grayscale(1) contrast(1.15) brightness(0.55); backdrop-filter: none; }
+        .topic-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)); filter: brightness(0.45) sepia(0.75) saturate(1.7); backdrop-filter: none; }
         .topic-hero .hero-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
-        .topic-hero h1 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #fff; font-size: 2rem; margin: 0 0 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-        .topic-hero p { color: #ececec; font-size: 0.95rem; max-width: 600px; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+        .topic-hero h1 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #fff; font-size: 2rem; margin: 0 0 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+        .topic-hero p { color: #f0e8dc; font-size: 0.95rem; max-width: 600px; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
         .page-content { margin: 0 auto; max-width: 1100px; padding: 20px 24px 80px; }
-        .back-link { display: inline-flex; align-items: center; gap: 6px; color: #000000; font-weight: 600; font-size: 0.85rem; text-decoration: none; margin: 16px 0; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--accent-link); font-weight: 600; font-size: 0.85rem; text-decoration: none; margin: 16px 0; }
         .back-link:hover { text-decoration: underline; }
         .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
-        .jump-card { background: #fff; border: 1px solid #e2e2e2; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #000000; text-decoration: none; transition: background .15s, transform .15s; }
-        .jump-card:hover { background: #f5f5f5; transform: translateY(-1px); }
-        .section-block { background: #fff; border: 1px solid #e2e2e2; border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; scroll-margin-top: 76px; }
+        .jump-card { background: #fff; border: 1px solid var(--border-light); border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: var(--accent-link); text-decoration: none; transition: background .15s, transform .15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+        .section-block { background: #fff; border: 1px solid var(--border-light); border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; scroll-margin-top: 76px; }
         .section-block .section-kicker { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #b28277; }
-        .section-block h2 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #8b3a2a; font-size: 1.35rem; margin: 4px 0 12px; }
-        .section-block h3 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #9d4a38; font-size: 1.02rem; margin: 18px 0 8px; }
-        .section-block h4 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #000000; font-size: 0.95rem; margin: 18px 0 8px; }
-        .section-block p { line-height: 1.7; color: #1a1a1a; margin: 0 0 10px; }
+        .section-block h2 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: var(--accent-link); font-size: 1.35rem; margin: 4px 0 12px; }
+        .section-block h3 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #9d4a38; font-size: 1.02rem; margin: 18px 0 8px; }
+        .section-block h4 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: var(--accent-link); font-size: 0.95rem; margin: 18px 0 8px; }
+        .section-block p { line-height: 1.7; color: #3d332b; margin: 0 0 10px; }
         .verse-list { list-style: none; padding: 0; margin: 8px 0 0; }
-        .verse-list li { padding: 8px 0; border-bottom: 1px solid #ececec; font-size: 0.9rem; line-height: 1.6; color: #1a1a1a; }
+        .verse-list li { padding: 8px 0; border-bottom: 1px solid #f0e8dc; font-size: 0.9rem; line-height: 1.6; color: #4a3f35; }
         .verse-list li:last-child { border-bottom: none; }
-        .verse-ref { color:#8b3a2a; font-weight: 600; text-decoration: underline dotted; cursor: pointer; }
+        .verse-ref { color: var(--accent-link); font-weight: 600; text-decoration: underline dotted; cursor: pointer; }
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
         .video-grid:last-child { margin-bottom: 0; }
         .verse-popup-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999; align-items: center; justify-content: center; padding: 20px; }
         .verse-popup-overlay.active { display: flex; }
         .verse-popup { background: #fff; border-radius: 12px; padding: 24px; max-width: 480px; width: 100%; max-height: 70vh; overflow-y: auto; position: relative; }
-        .verse-popup h4 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #000000; margin: 0 0 12px; }
-        .verse-popup p { line-height: 1.7; color: #1a1a1a; }
+        .verse-popup h4 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: var(--accent-link); margin: 0 0 12px; }
+        .verse-popup p { line-height: 1.7; color: #3d332b; }
         .verse-popup .close-popup { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 1.3rem; color: #b28277; cursor: pointer; }
         @media (max-width: 600px) { .topic-hero h1 { font-size: 1.5rem; } }
     </style>
@@ -95,6 +95,7 @@
             <h3>What It Reveals About Jesus</h3>
             <p>This miracle reveals Jesus as the Creator who has authority over the elements of His creation. It also reveals His heart — He cares about human joy and celebration. His first miracle was not a dramatic exorcism but a quiet act of abundance at a party, revealing that the Kingdom of God is overflowing life, not austere religion.</p>
             <p>By providing wine in such extraordinary quantity and quality, Jesus was declaring that the long-awaited age had arrived, and He is its source — the true Bridegroom who brings the superior wine of grace, joy, and new creation.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'2ffKzY5oqhg')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/2ffKzY5oqhg/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">John 1:35-2:25 | Water Into Wine | Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Spoken Gospel</span></p></div>
@@ -121,6 +122,7 @@
             <h3>What It Reveals About Jesus</h3>
             <p>This miracle reveals Jesus as the compassionate Shepherd who sees the needs of His people and provides abundantly. Matthew records that Jesus "had compassion on them" before He fed them. It also reveals His sovereign power — He creates matter from nothing, demonstrating authority that belongs to God alone.</p>
             <p>The twelve baskets of leftovers show that God's provision through Jesus is not merely adequate but overflowing. Jesus does not ask us to provide from our own resources but to bring what little we have to Him in faith.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'-VE-D3eRHTI')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/-VE-D3eRHTI/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Feeding of the Five Thousand — Luke 9<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
@@ -146,6 +148,7 @@
             <h3>What It Reveals About Jesus</h3>
             <p>This miracle reveals Jesus' divine sovereignty over creation — specifically over waters and storms that in ancient thought represented chaos and death. He comes to His people in their darkest, most exhausting hour, not when things are calm.</p>
             <p>The phrase "It is I" (Greek: ego eimi) echoes God's self-revelation to Moses: "I AM." Peter's experience adds another layer: faith in Jesus enables the impossible, but self-reliance leads to sinking. We are safe not because the storm stops, but because Jesus is present.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'NZWqERQ-Vr0')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/NZWqERQ-Vr0/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What was the meaning of Jesus walking on water? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
@@ -170,6 +173,7 @@
             <h3>What It Reveals About Jesus</h3>
             <p>This miracle reveals Jesus' absolute authority over the natural world and His divine identity as Creator. It also reveals the mystery of the incarnation — the God who never sleeps was genuinely asleep in human exhaustion, yet His divine authority remained fully intact.</p>
             <p>His apparent inactivity was not indifference but trust in the Father's timing. The lesson is not that storms won't come, but that Jesus is in the boat with us, and His presence is sufficient even when He seems silent.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'nDUGlHwDiBo')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/nDUGlHwDiBo/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the significance of Jesus calming the storm? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
@@ -194,6 +198,7 @@
             <h3>What It Reveals About Jesus</h3>
             <p>This miracle reveals Jesus as the Light of the World — the source of spiritual illumination itself, fulfilling Isaiah's prophecy of the servant who would "open the eyes that are blind."</p>
             <p>The progressive revelation of Jesus' identity mirrors the journey every believer takes — a progressive opening of the eyes. And the man's growing sight brought increasing opposition, showing that true vision of Jesus often costs the approval of those invested in spiritual blindness.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'k85ZOEzmfOQ')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/k85ZOEzmfOQ/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Healing of a Man Born Blind - John 9:1-9<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
@@ -219,6 +224,7 @@
             <h3>What It Reveals About Jesus</h3>
             <p>This miracle reveals Jesus as sovereign over humanity's greatest enemy: death. His delay was not indifference but intentional — He allowed the situation to become humanly impossible so that God's glory would be undeniable.</p>
             <p>Equally powerful is what it reveals about Jesus' heart. He wept at Lazarus' tomb even though He knew He was about to raise him — a Savior who enters fully into human grief, both sovereign Lord and compassionate friend.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'e-OXgunuz_4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/e-OXgunuz_4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Jesus Raises Lazarus from the Dead (John 11)<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Chosen</span></p></div>
@@ -268,6 +274,7 @@
             <h3>What It Reveals About Jesus</h3>
             <p>This miracle reveals Jesus' authority to do what only God can do — forgive sins. He addressed the man's deepest need first (sin) before his most obvious need (paralysis), seeing past our symptoms to our root condition.</p>
             <p>The faith of the four friends is also instructive — they refused to let obstacles prevent them from bringing their friend to Jesus. Intercessory faith, believing on behalf of others, moves the heart of God.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'dlBOmQ1PaMY')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/dlBOmQ1PaMY/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Jesus Heals the Paralytic (Matthew 9)<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Chosen</span></p></div>
@@ -294,6 +301,7 @@
             <h3>What It Reveals About Jesus</h3>
             <p>This miracle reveals Jesus' absolute authority over the spiritual realm. An entire legion of demons could not resist His command — they did not argue or fight; they begged. No spiritual bondage is beyond His power to break.</p>
             <p>The transformation of the man is equally revealing: Jesus restores not just spiritual freedom but human dignity — clothing, sanity, community, and purpose — then sends him as a witness.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'am8EO4zZ39I')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/am8EO4zZ39I/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Jesus Casts Out Demons (The Chosen Scene)<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Chosen</span></p></div>
@@ -318,6 +326,7 @@
             <h3>What It Reveals About Jesus</h3>
             <p>This miracle reveals that no situation is too far gone for Jesus — not even death. When the messengers said "It's too late," Jesus said "Only believe." His command to "arise" foreshadows His own resurrection.</p>
             <p>The miracle also reveals Jesus' intimate care for individuals. He put the mockers outside and worked with only the parents and three disciples present, exercising His power always with personal, tender attention.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'pLbIaA5u3gY')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/pLbIaA5u3gY/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Raising Jairus' Daughter (Mark 5)<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Chosen</span></p></div>
@@ -343,6 +352,7 @@
             <h3>What It Reveals About Jesus</h3>
             <p>This miracle reveals Jesus' lordship over all creation, including the fish of the sea. It demonstrates that obedience to His word, even when it contradicts our expertise, leads to abundance beyond imagination.</p>
             <p>The miracle also reveals how Jesus calls people into mission. He demonstrates His power and trustworthiness first, then issues the call, redeeming and redirecting existing skills for kingdom purposes.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'emTSbyX9S8A')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/emTSbyX9S8A/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Miraculous Catch of Fish | Daily Devo Bible Study<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">The Daily Devo</span></p></div>
@@ -368,6 +378,7 @@
             <h3>What It Reveals About Jesus</h3>
             <p>This miracle reveals that Jesus is never too busy for one desperate person. He was on His way to a prominent, public mission, yet He halted everything for a nameless woman society had discarded. No one is too insignificant to deserve His full attention.</p>
             <p>The miracle also reveals that Jesus' holiness operates by a different logic than the purity system. His purity flows outward and overcomes impurity — grace is God entering our mess and making us whole.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'53P5N0aWMpA')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/53P5N0aWMpA/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the meaning of the story of the woman with the issue of blood? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
@@ -392,7 +403,7 @@
         </div>
     </div>
 
-    <script src="site/script.js"></script>
+    <script src="site/script.js?v=d07404aa"></script>
     <script>
         function loadYT(el, id) {
             el.innerHTML = '<iframe width="100%" height="100%" style="position:absolute;inset:0;" src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';

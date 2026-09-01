@@ -11,41 +11,41 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Cinzel:wght@400;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="site/style.css?v=17">
+    <link rel="stylesheet" href="site/style.css?v=173ef5ab">
     <style>
-        body { background: #fafafa; }
+        body { background: #faf5ed; }
         .topic-hero { position: relative; height: 240px; overflow: hidden; }
         .topic-hero img { width: 100%; height: 100%; object-fit: cover; }
-        .topic-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)); filter: grayscale(1) contrast(1.15) brightness(0.55); backdrop-filter: none; }
+        .topic-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)); filter: brightness(0.45) sepia(0.75) saturate(1.7); backdrop-filter: none; }
         .topic-hero .hero-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
-        .topic-hero h1 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #fff; font-size: 2rem; margin: 0 0 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-        .topic-hero p { color: #ececec; font-size: 0.95rem; max-width: 600px; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+        .topic-hero h1 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #fff; font-size: 2rem; margin: 0 0 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+        .topic-hero p { color: #f0e8dc; font-size: 0.95rem; max-width: 600px; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
         .page-content { margin: 0 auto; max-width: 1100px; padding: 20px 24px 80px; }
-        .back-link { display: inline-flex; align-items: center; gap: 6px; color: #000000; font-weight: 600; font-size: 0.85rem; text-decoration: none; margin: 16px 0; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; color: #5a4030; font-weight: 600; font-size: 0.85rem; text-decoration: none; margin: 16px 0; }
         .back-link:hover { text-decoration: underline; }
         .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
-        .jump-card { background: #fff; border: 1px solid #e2e2e2; border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #000000; text-decoration: none; transition: background .15s, transform .15s; }
-        .jump-card:hover { background: #f5f5f5; transform: translateY(-1px); }
-        .section-block { background: #fff; border: 1px solid #e2e2e2; border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; scroll-margin-top: 76px; }
+        .jump-card { background: #fff; border: 1px solid var(--border-light); border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #5a4030; text-decoration: none; transition: background .15s, transform .15s; }
+        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+        .section-block { background: #fff; border: 1px solid var(--border-light); border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; scroll-margin-top: 76px; }
         .section-block .section-kicker { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #a8937f; }
-        .section-block h2 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #5a4030; font-size: 1.35rem; margin: 4px 0 12px; }
-        .section-block h3 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #6b4f3a; font-size: 1.02rem; margin: 18px 0 8px; }
-        .section-block h4 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #000000; font-size: 0.95rem; margin: 18px 0 8px; }
-        .section-block p { line-height: 1.7; color: #1a1a1a; margin: 0 0 10px; }
+        .section-block h2 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #5a4030; font-size: 1.35rem; margin: 4px 0 12px; }
+        .section-block h3 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #6b4f3a; font-size: 1.02rem; margin: 18px 0 8px; }
+        .section-block h4 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #5a4030; font-size: 0.95rem; margin: 18px 0 8px; }
+        .section-block p { line-height: 1.7; color: #3d332b; margin: 0 0 10px; }
         .verse-list { list-style: none; padding: 0; margin: 8px 0 0; }
-        .verse-list li { padding: 8px 0; border-bottom: 1px solid #ececec; font-size: 0.9rem; line-height: 1.6; color: #1a1a1a; }
+        .verse-list li { padding: 8px 0; border-bottom: 1px solid #f0e8dc; font-size: 0.9rem; line-height: 1.6; color: #4a3f35; }
         .verse-list li:last-child { border-bottom: none; }
-        .verse-ref { color:#8b3a2a; font-weight: 600; text-decoration: underline dotted; cursor: pointer; }
+        .verse-ref { color: #5a4030; font-weight: 600; text-decoration: underline dotted; cursor: pointer; }
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
         .video-grid:last-child { margin-bottom: 0; }
         .verse-popup-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999; align-items: center; justify-content: center; padding: 20px; }
         .verse-popup-overlay.active { display: flex; }
         .verse-popup { background: #fff; border-radius: 12px; padding: 24px; max-width: 480px; width: 100%; max-height: 70vh; overflow-y: auto; position: relative; }
-        .verse-popup h4 { font-family: "Poppins", "Inter", sans-serif; font-weight:700; color: #000000; margin: 0 0 12px; }
-        .verse-popup p { line-height: 1.7; color: #1a1a1a; }
+        .verse-popup h4 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #5a4030; margin: 0 0 12px; }
+        .verse-popup p { line-height: 1.7; color: #3d332b; }
         .verse-popup .close-popup { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 1.3rem; color: #a8937f; cursor: pointer; }
         @media (max-width: 600px) { .topic-hero h1 { font-size: 1.5rem; } }
     </style>
@@ -93,6 +93,7 @@
             <h3>Lessons from His Life</h3>
             <p>Abraham teaches us that faith is a journey, not a destination reached in a single moment of decision. He believed God at the beginning of his story, yet his faith was refined and deepened through decades of waiting, failure, and renewed obedience. Each stumble along the way did not disqualify him — it became part of the larger story of a faith that matured over a lifetime.</p>
             <p>His story also confronts the tension between God's timing and human impatience. Abraham's attempt to manufacture the promise through Hagar shows what happens when we try to fulfill God's purposes on our own schedule rather than trusting His. Yet God's covenant faithfulness proved stronger than Abraham's missteps, a pattern that echoes through every believer's walk of faith.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'GOXEADdM0ZI')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/GOXEADdM0ZI/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Abraham and Melchizedek Q+R<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
@@ -118,6 +119,7 @@
             <h3>Lessons from His Life</h3>
             <p>Moses' forty years in the wilderness before his calling reveal how God often prepares His servants in seasons of obscurity long before the moment of public ministry. What looked like wasted years tending sheep were actually the training ground for shepherding a nation. God's timing is rarely our timing, and preparation often looks like delay.</p>
             <p>Moses also shows us the cost and privilege of intercession. Again and again he stood between God's righteous anger and Israel's rebellion, pleading for mercy on behalf of a people who repeatedly failed him. His willingness to bear that burden, even at the cost of his own inheritance in the Promised Land, models a leadership rooted in selfless love for those entrusted to his care.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'iTj6ShRlHuc')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/iTj6ShRlHuc/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What God Wanted Moses to Tell Israel Before He Died • Deuteronomy Ep. 9<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
@@ -144,6 +146,7 @@
             <h3>Lessons from His Life</h3>
             <p>David's anointing as a shepherd boy overlooked by everyone else reminds us that God evaluates the heart, not outward appearance or credentials. The world's measures of significance rarely match God's, and those the world dismisses are often exactly whom God chooses to use.</p>
             <p>David's failure with Bathsheba, followed by his genuine repentance, teaches that even devastating sin is not the final word for those who turn back to God in honesty. Psalm 51 remains Scripture's model of true repentance — not excuse-making, but a broken and contrite heart laid bare before God, trusting in mercy rather than self-justification.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'DwnHiF7_tTA')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/DwnHiF7_tTA/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">David, the Latecomer King • Firstborn Ep. 7<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
@@ -169,6 +172,7 @@
             <h3>Lessons from His Life</h3>
             <p>Joseph's years of obscurity and injustice — as a slave, then a falsely accused prisoner — were not wasted time but preparation for the influence God would later give him. Faithfulness in hidden, unfair seasons often precedes the platform God has planned, even when that connection is invisible in the moment.</p>
             <p>Joseph's forgiveness of his brothers was not naive sentiment but rooted in deep theological conviction — his ability to see God's providential hand even in others' evil intentions freed him from bitterness. This kind of forgiveness flows not from denying the wrong done, but from trusting that God's purposes are bigger than any single act of betrayal.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'IdQLGT0uyIg')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/IdQLGT0uyIg/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Burial of Jacob; the Death of Joseph – Genesis 50<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
@@ -193,6 +197,7 @@
             <h3>Lessons from His Life</h3>
             <p>Daniel demonstrates that faithfulness is built through daily decisions, not dramatic moments. His ability to stand firm in the lions' den was the fruit of decades of daily prayer, daily integrity, and daily refusal to compromise. The crisis moment revealed a character that had been formed in the quiet, unseen rhythms of ordinary faithfulness.</p>
             <p>Daniel also shows us that it is possible to serve with excellence in secular environments without compromising spiritual convictions. He did not withdraw from Babylonian culture — he excelled in it — but he drew clear boundaries around practices that would violate his covenant with God, showing that cultural engagement and spiritual purity can coexist when rooted in unshakeable conviction.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'9cSC9uobtPM')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/9cSC9uobtPM/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Book of Daniel Summary: A Complete Animated Overview<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
@@ -217,6 +222,7 @@
             <h3>Lessons from His Life</h3>
             <p>Elijah teaches us that courage and vulnerability can coexist in the same person. The man who fearlessly confronted a king and mocked false prophets was the same man who ran in terror from a queen's threat and begged to die. James reminds us that Elijah was "a man with a nature like ours" — not a superhero but a human being through whom God's power flowed.</p>
             <p>Elijah's encounter at Horeb also reveals that God's primary mode of communication is not spectacular displays but quiet, intimate presence. In our noise-saturated world, his story invites us to cultivate the quiet attention that allows us to discern God's gentle voice, especially in seasons of exhaustion when we are tempted to believe God has abandoned us.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'UO6h9nk40HI')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/UO6h9nk40HI/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Mount Carmel: Where Elijah Called Down Heavenly Fire | Israel Trip Part 4<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
@@ -243,6 +249,7 @@
             <h3>Lessons from His Life</h3>
             <p>Paul's life is the ultimate testimony to the transforming power of grace. If God could take the church's greatest enemy and make him its greatest advocate, then no one is beyond redemption. Paul never forgot what he had been, but he refused to be defined by it — his identity was completely rewritten by encounter with Christ.</p>
             <p>Paul also teaches us that suffering and joy are not mutually exclusive. He discovered that God's grace was not a shield from difficulty but a strength within it. His declaration — "My power is made perfect in weakness" — overturns every worldly notion of success and invites us into a life where our limitations become the canvas for God's sufficiency.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'oiVAbkINtRU')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/oiVAbkINtRU/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">The Apostle Paul: Acts 8-12<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
@@ -269,6 +276,7 @@
             <h3>Lessons from His Life</h3>
             <p>Peter's life is the greatest story of restoration in the New Testament. His denial was a catastrophic failure at the worst possible time, yet Jesus did not discard him — He pursued Peter with patient love, publicly restored him, and entrusted him with the very mission Peter had seemingly disqualified himself from.</p>
             <p>Peter also demonstrates that spiritual maturity is a process, not an event. The impulsive fisherman who constantly said the wrong thing gradually became the wise elder who wrote about suffering with patience and casting anxieties on God. God is patient with our growth, and He finishes what He starts.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'wWLv_ITyKYc')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/wWLv_ITyKYc/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Book of 2 Peter Summary: A Complete Animated Overview<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
@@ -295,6 +303,7 @@
             <h3>Lessons from His Life</h3>
             <p>Joshua teaches us that leadership begins with followership. Before he ever led a nation, he faithfully served Moses for four decades. In a culture that celebrates self-made leaders, Joshua reminds us that the best preparation for leading others is learning to follow well.</p>
             <p>Joshua also demonstrates that courage is a choice rooted in theology, not temperament. God did not say "feel brave" but "be strong and courageous" — because He knew that feelings follow faith, not the other way around. When we know that God goes before us, we can face giants and fortified cities without being paralyzed by fear.</p>
+            
             <h3>Videos</h3>
             <div class="video-grid">
                 <div class="yt-facade" onclick="loadYT(this,'JqOqJlFF_eU')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/JqOqJlFF_eU/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Book of Joshua Summary: A Complete Animated Overview<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">BibleProject</span></p></div>
@@ -344,7 +353,7 @@
         </div>
     </div>
 
-    <script src="site/script.js"></script>
+    <script src="site/script.js?v=d07404aa"></script>
     <script>
         function loadYT(el, id) {
             el.innerHTML = '<iframe width="100%" height="100%" style="position:absolute;inset:0;" src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
