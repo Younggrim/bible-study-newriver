@@ -422,8 +422,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 + '<div class="pwa-info-item"><strong style="color:#5c3d6e;">NET</strong> — New English Translation (2005). 60,000+ translator notes.</div>'
                 + '<div class="pwa-info-item"><strong style="color:#2c6b4f;">WEB</strong> — World English Bible (2000). Modern, public domain.</div>'
                 + '<h3 style="margin-top:18px;">Commentaries</h3>'
-                + '<div class="pwa-info-item"><strong>David Guzik</strong> — Enduring Word. Verse-by-verse commentary, freely available online.</div>'
-                + '<div class="pwa-info-item"><strong>C.H. Spurgeon</strong> — The Prince of Preachers. Christ-centered, doctrinally rich sermons (public domain).</div>';
+                + '<div class="pwa-info-item"><strong>David Guzik</strong> — Enduring Word. Verse-by-verse commentary, freely available online.</div>';
             document.body.appendChild(infoPopup);
 
             infoBtn.addEventListener('click', function(e) {
