@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "f0347e3de30b1179c89e47ec1ce6c768ce3e3b0c Remove the Spurgeon commentator card from the front page",
+  "upstream_commit": "8ef7fe06f5d78949f9002df6ad3afa07f8089a75 Document the two-repo workflow so any tool follows the same rules",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "8c78a039"
