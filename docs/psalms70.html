@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,14 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 70">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>For the choirmaster. Of David. To bring remembrance. Make haste, O God, to deliver me! Hurry, O LORD, to help me!</p>
+            <p class="verse"><span class="verse-num">2</span>May those who seek my life be ashamed and confounded; may those who wish me harm be repelled and humiliated.</p>
+            <p class="verse"><span class="verse-num">3</span>May those who say, “Aha, aha!” retreat because of their shame.</p>
+            <p class="verse"><span class="verse-num">4</span>May all who seek You rejoice and be glad in You; may those who love Your salvation always say, “Let God be magnified!”</p>
+            <p class="verse"><span class="verse-num">5</span>But I am poor and needy; hurry to me, O God. You are my help and my deliverer; O LORD, do not delay.</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>Make haste, O God, to deliver me; make haste to help me, O LORD.</p>
             <p class="verse"><span class="verse-num">2</span>Let them be ashamed and confounded that seek after my soul: let them be turned backward, and put to confusion, that desire my hurt.</p>
@@ -574,6 +583,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

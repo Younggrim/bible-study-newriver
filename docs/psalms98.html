@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,18 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 98">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>A Psalm. Sing to the LORD a new song, for He has done wonders; His right hand and holy arm have gained Him the victory.</p>
+            <p class="verse"><span class="verse-num">2</span>The LORD has proclaimed His salvation and revealed His righteousness to the nations.</p>
+            <p class="verse"><span class="verse-num">3</span>He has remembered His love and faithfulness to the house of Israel; all the ends of the earth have seen the salvation of our God.</p>
+            <p class="verse"><span class="verse-num">4</span>Make a joyful noise to the LORD, all the earth; break forth—let your cry ring out, and sing praises!</p>
+            <p class="verse"><span class="verse-num">5</span>Sing praises to the LORD with the lyre, in melodious song with the harp.</p>
+            <p class="verse"><span class="verse-num">6</span>With trumpets and the blast of the ram’s horn shout for joy before the LORD, the King.</p>
+            <p class="verse"><span class="verse-num">7</span>Let the sea resound, and all that fills it, the world, and all who dwell in it.</p>
+            <p class="verse"><span class="verse-num">8</span>Let the rivers clap their hands, let the mountains sing together for joy</p>
+            <p class="verse"><span class="verse-num">9</span>before the LORD, for He comes to judge the earth. He will judge the world with righteousness and the peoples with equity.</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>O sing unto the LORD a new song; for he hath done marvellous things: his right hand, and his holy arm, hath gotten him the victory.</p>
             <p class="verse"><span class="verse-num">2</span>The LORD hath made known his salvation: his righteousness hath he openly shewed in the sight of the heathen.</p>
@@ -590,6 +603,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

@@ -121,6 +121,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -241,6 +242,38 @@
         <div class="scripture-container">
         <div class="translation-block active" data-translation="ESV" data-passage="Revelation 2">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
+        </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>“To the angel of the church in Ephesus write: These are the words of Him who holds the seven stars in His right hand and walks among the seven golden lampstands.</p>
+            <p class="verse"><span class="verse-num">2</span>I know your deeds, your labor, and your perseverance. I know that you cannot tolerate those who are evil, and you have tested and exposed as liars those who falsely claim to be apostles.</p>
+            <p class="verse"><span class="verse-num">3</span>Without growing weary, you have persevered and endured many things for the sake of My name.</p>
+            <p class="verse"><span class="verse-num">4</span>But I have this against you: You have abandoned your first love.</p>
+            <p class="verse"><span class="verse-num">5</span>Therefore, keep in mind how far you have fallen. Repent and perform the deeds you did at first. But if you do not repent, I will come to you and remove your lampstand from its place.</p>
+            <p class="verse"><span class="verse-num">6</span>But you have this to your credit: You hate the works of the Nicolaitans, which I also hate.</p>
+            <p class="verse"><span class="verse-num">7</span>He who has an ear, let him hear what the Spirit says to the churches. To the one who overcomes, I will grant the right to eat from the tree of life in the Paradise of God.</p>
+            <p class="verse"><span class="verse-num">8</span>To the angel of the church in Smyrna write: These are the words of the First and the Last, who died and returned to life.</p>
+            <p class="verse"><span class="verse-num">9</span>I know your affliction and your poverty—though you are rich! And I am aware of the slander of those who falsely claim to be Jews, but are in fact a synagogue of Satan.</p>
+            <p class="verse"><span class="verse-num">10</span>Do not fear what you are about to suffer. Behold, the devil is about to throw some of you into prison to test you, and you will suffer tribulation for ten days. Be faithful even unto death, and I will give you the crown of life.</p>
+            <p class="verse"><span class="verse-num">11</span>He who has an ear, let him hear what the Spirit says to the churches. The one who overcomes will not be harmed by the second death.</p>
+            <p class="verse"><span class="verse-num">12</span>To the angel of the church in Pergamum write: These are the words of the One who holds the sharp, double-edged sword.</p>
+            <p class="verse"><span class="verse-num">13</span>I know where you live, where the throne of Satan sits, yet you hold fast to My name. You did not deny your faith in Me, even in the days of My faithful witness Antipas, who was killed among you where Satan dwells.</p>
+            <p class="verse"><span class="verse-num">14</span>But I have a few things against you, because some of you hold to the teaching of Balaam, who taught Balak to place a stumbling block before the Israelites so they would eat food sacrificed to idols and commit sexual immorality.</p>
+            <p class="verse"><span class="verse-num">15</span>In the same way, some of you also hold to the teaching of the Nicolaitans.</p>
+            <p class="verse"><span class="verse-num">16</span>Therefore repent! Otherwise I will come to you shortly and wage war against them with the sword of My mouth.</p>
+            <p class="verse"><span class="verse-num">17</span>He who has an ear, let him hear what the Spirit says to the churches. To the one who overcomes, I will give the hidden manna. I will also give him a white stone inscribed with a new name, known only to the one who receives it.</p>
+            <p class="verse"><span class="verse-num">18</span>To the angel of the church in Thyatira write: These are the words of the Son of God, whose eyes are like a blazing fire and whose feet are like polished bronze.</p>
+            <p class="verse"><span class="verse-num">19</span>I know your deeds—your love, your faith, your service, your perseverance—and your latest deeds are greater than your first.</p>
+            <p class="verse"><span class="verse-num">20</span>But I have this against you: You tolerate that woman Jezebel, who calls herself a prophetess. By her teaching she misleads My servants to be sexually immoral and to eat food sacrificed to idols.</p>
+            <p class="verse"><span class="verse-num">21</span>Even though I have given her time to repent of her immorality, she is unwilling.</p>
+            <p class="verse"><span class="verse-num">22</span>Behold, I will cast her onto a bed of sickness, and those who commit adultery with her will suffer great tribulation unless they repent of her deeds.</p>
+            <p class="verse"><span class="verse-num">23</span>Then I will strike her children dead, and all the churches will know that I am the One who searches minds and hearts, and I will repay each of you according to your deeds.</p>
+            <p class="verse"><span class="verse-num">24</span>But I say to the rest of you in Thyatira, who do not hold to her teaching and have not learned the so-called deep things of Satan: I will place no further burden upon you</p>
+            <p class="verse"><span class="verse-num">25</span>than to hold fast to what you have until I come.</p>
+            <p class="verse"><span class="verse-num">26</span>And to the one who overcomes and continues in My work until the end, I will give authority over the nations.</p>
+            <p class="verse"><span class="verse-num">27</span>He will rule them with an iron scepter and shatter them like pottery—just as I have received authority from My Father.</p>
+            <p class="verse"><span class="verse-num">28</span>And I will give him the morning star.</p>
+            <p class="verse"><span class="verse-num">29</span>He who has an ear, let him hear what the Spirit says to the churches.</p>
         </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>Unto the angel of the church of Ephesus write; These things saith he that holdeth the seven stars in his right hand, who walketh in the midst of the seven golden candlesticks;</p>
@@ -427,6 +460,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

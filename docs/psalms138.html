@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,17 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 138">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>Of David. I give You thanks with all my heart; before the gods I sing Your praises.</p>
+            <p class="verse"><span class="verse-num">2</span>I bow down toward Your holy temple and give thanks to Your name for Your loving devotion and Your faithfulness; You have exalted Your name and Your word above all else.</p>
+            <p class="verse"><span class="verse-num">3</span>On the day I called, You answered me; You emboldened me and strengthened my soul.</p>
+            <p class="verse"><span class="verse-num">4</span>All the kings of the earth will give You thanks, O LORD, when they hear the words of Your mouth.</p>
+            <p class="verse"><span class="verse-num">5</span>They will sing of the ways of the LORD, for the glory of the LORD is great.</p>
+            <p class="verse"><span class="verse-num">6</span>Though the LORD is on high, He attends to the lowly; but the proud He knows from afar.</p>
+            <p class="verse"><span class="verse-num">7</span>If I walk in the midst of trouble, You preserve me from the anger of my foes; You extend Your hand, and Your right hand saves me.</p>
+            <p class="verse"><span class="verse-num">8</span>The LORD will fulfill His purpose for me. O LORD, Your loving devotion endures forever—do not abandon the works of Your hands.</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>I will praise thee with my whole heart: before the gods will I sing praise unto thee.</p>
             <p class="verse"><span class="verse-num">2</span>I will worship toward thy holy temple, and praise thy name for thy lovingkindness and for thy truth: for thou hast magnified thy word above all thy name.</p>
@@ -587,6 +599,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

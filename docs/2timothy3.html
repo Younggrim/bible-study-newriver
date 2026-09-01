@@ -103,6 +103,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -205,6 +206,26 @@
         <div class="scripture-container">
         <div class="translation-block active" data-translation="ESV" data-passage="2 Timothy 3">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
+        </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>But understand this: In the last days terrible times will come.</p>
+            <p class="verse"><span class="verse-num">2</span>For men will be lovers of themselves, lovers of money, boastful, arrogant, abusive, disobedient to their parents, ungrateful, unholy,</p>
+            <p class="verse"><span class="verse-num">3</span>unloving, unforgiving, slanderous, without self-control, brutal, without love of good,</p>
+            <p class="verse"><span class="verse-num">4</span>traitorous, reckless, conceited, lovers of pleasure rather than lovers of God,</p>
+            <p class="verse"><span class="verse-num">5</span>having a form of godliness but denying its power. Turn away from such as these!</p>
+            <p class="verse"><span class="verse-num">6</span>They are the kind who worm their way into households and captivate vulnerable women who are weighed down with sins and led astray by various passions,</p>
+            <p class="verse"><span class="verse-num">7</span>who are always learning but never able to come to a knowledge of the truth.</p>
+            <p class="verse"><span class="verse-num">8</span>Just as Jannes and Jambres opposed Moses, so also these men oppose the truth. They are depraved in mind and disqualified from the faith.</p>
+            <p class="verse"><span class="verse-num">9</span>But they will not advance much further. For just like Jannes and Jambres, their folly will be plain to everyone.</p>
+            <p class="verse"><span class="verse-num">10</span>You, however, have observed my teaching, my conduct, my purpose, my faith, my patience, my love, my perseverance,</p>
+            <p class="verse"><span class="verse-num">11</span>my persecutions, and the sufferings that came upon me in Antioch, Iconium, and Lystra. What persecutions I endured! Yet the Lord rescued me from all of them.</p>
+            <p class="verse"><span class="verse-num">12</span>Indeed, all who desire to live godly lives in Christ Jesus will be persecuted,</p>
+            <p class="verse"><span class="verse-num">13</span>while evil men and imposters go from bad to worse, deceiving and being deceived.</p>
+            <p class="verse"><span class="verse-num">14</span>But as for you, continue in the things you have learned and firmly believed, since you know from whom you have learned them.</p>
+            <p class="verse"><span class="verse-num">15</span>From infancy you have known the Holy Scriptures, which are able to make you wise for salvation through faith in Christ Jesus.</p>
+            <p class="verse"><span class="verse-num">16</span>All Scripture is God-breathed and is useful for instruction, for conviction, for correction, and for training in righteousness,</p>
+            <p class="verse"><span class="verse-num">17</span>so that the man of God may be complete, fully equipped for every good work.</p>
         </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>This know also, that in the last days perilous times shall come.</p>
@@ -340,6 +361,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

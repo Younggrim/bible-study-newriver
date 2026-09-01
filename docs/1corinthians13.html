@@ -115,6 +115,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -229,6 +230,22 @@
         <div class="scripture-container">
         <div class="translation-block active" data-translation="ESV" data-passage="1 Corinthians 13">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
+        </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>If I speak in the tongues of men and of angels, but have not love, I am only a ringing gong or a clanging cymbal.</p>
+            <p class="verse"><span class="verse-num">2</span>If I have the gift of prophecy and can fathom all mysteries and all knowledge, and if I have absolute faith so as to move mountains, but have not love, I am nothing.</p>
+            <p class="verse"><span class="verse-num">3</span>If I give all I possess to the poor and exult in the surrender of my body, but have not love, I gain nothing.</p>
+            <p class="verse"><span class="verse-num">4</span>Love is patient, love is kind. It does not envy, it does not boast, it is not proud.</p>
+            <p class="verse"><span class="verse-num">5</span>It is not rude, it is not self-seeking, it is not easily angered, it keeps no account of wrongs.</p>
+            <p class="verse"><span class="verse-num">6</span>Love takes no pleasure in evil, but rejoices in the truth.</p>
+            <p class="verse"><span class="verse-num">7</span>It bears all things, believes all things, hopes all things, endures all things.</p>
+            <p class="verse"><span class="verse-num">8</span>Love never fails. But where there are prophecies, they will cease; where there are tongues, they will be restrained; where there is knowledge, it will be dismissed.</p>
+            <p class="verse"><span class="verse-num">9</span>For we know in part and we prophesy in part,</p>
+            <p class="verse"><span class="verse-num">10</span>but when the perfect comes, the partial passes away.</p>
+            <p class="verse"><span class="verse-num">11</span>When I was a child, I talked like a child, I thought like a child, I reasoned like a child. When I became a man, I set aside childish ways.</p>
+            <p class="verse"><span class="verse-num">12</span>Now we see but a dim reflection as in a mirror; then we shall see face to face. Now I know in part; then I shall know fully, even as I am fully known.</p>
+            <p class="verse"><span class="verse-num">13</span>And now these three remain: faith, hope, and love; but the greatest of these is love.</p>
         </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>Though I speak with the tongues of men and of angels, and have not charity, I am become as sounding brass, or a tinkling cymbal.</p>
@@ -354,6 +371,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

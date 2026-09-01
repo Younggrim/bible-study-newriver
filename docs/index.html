@@ -163,6 +163,7 @@
             <h2><i class="fas fa-book-open" style="margin-right:10px;"></i>Translation Guide<i class="fas fa-book-open" style="margin-left:10px;"></i></h2>
             <p class="block-desc">This site presents Scripture in five trusted English translations. Each offers a unique perspective — from word-for-word accuracy to natural modern readability. Comparing translations side by side reveals the richness and depth of the original Hebrew and Greek texts.</p>
             <div class="trans-guide-item"><strong style="color:var(--accent-link);">ESV — English Standard Version (2001)</strong><p>An essentially literal translation balancing word-for-word accuracy with modern readability. Translated from the Masoretic Hebrew text and Nestle-Aland Greek text. Widely used for preaching, study, and memorization.</p></div>
+            <div class="trans-guide-item"><strong style="color:#1f6b73;">BSB — Berean Standard Bible (2022)</strong><p>A completely new translation produced by the Berean Bible Translation Committee with Bible Hub, Discovery Bible, unfoldingWord and others. Every word is tied back to the underlying Greek or Hebrew, so the text can be studied for root meanings while still reading naturally. Its committee worked in the open, publishing the translation tables for anyone to inspect. On 30 April 2023 the BSB was dedicated to the public domain — remarkable for a modern translation, and the reason it can be included here in full with no restrictions.</p></div>
             <div class="trans-guide-item"><strong style="color:#4a5a8a;">KJV — King James Version (1611)</strong><p>The most influential English Bible in history. Commissioned by King James I and translated by 47 scholars from the Textus Receptus. Known for majestic, poetic language that has shaped English literature for over 400 years.</p></div>
             <div class="trans-guide-item"><strong style="color:#7a5c2e;">ASV — American Standard Version (1901)</strong><p>A revision of the KJV using more accurate manuscript evidence. Extremely literal — almost word-for-word from the original languages. Excellent for detailed word studies.</p></div>
             <div class="trans-guide-item"><strong style="color:#5c3d6e;">NET — New English Translation (2005)</strong><p>Created by over 25 biblical scholars with 60,000+ translator notes explaining translation choices. Balances accuracy with natural English. An exceptional study resource.</p></div>
@@ -195,6 +196,7 @@
             <div class="bible-nav-row">
                 <select class="nav-translation" id="pwaTranslationSelect" onchange="try{localStorage.setItem('preferredTranslation', this.value)}catch(e){}">
                     <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                     <option value="KJV">KJV</option>
                     <option value="ASV">ASV</option>
                     <option value="NET">NET</option>
@@ -488,7 +490,7 @@
     </main>
     <!-- Install prompt banner + service worker registration now live in
          site/script.js so every page gets them, not just the homepage. -->
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
     <script>
     (function() {
         var dateEl = document.getElementById('homeDevoDate');

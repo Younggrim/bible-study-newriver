@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,18 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 137">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>By the rivers of Babylon we sat and wept when we remembered Zion.</p>
+            <p class="verse"><span class="verse-num">2</span>There on the willows we hung our harps,</p>
+            <p class="verse"><span class="verse-num">3</span>for there our captors requested a song; our tormentors demanded songs of joy: “Sing us a song of Zion.”</p>
+            <p class="verse"><span class="verse-num">4</span>How can we sing a song of the LORD in a foreign land?</p>
+            <p class="verse"><span class="verse-num">5</span>If I forget you, O Jerusalem, may my right hand cease to function.</p>
+            <p class="verse"><span class="verse-num">6</span>May my tongue cling to the roof of my mouth if I do not remember you, if I do not exalt Jerusalem as my greatest joy!</p>
+            <p class="verse"><span class="verse-num">7</span>Remember, O LORD, the sons of Edom on the day Jerusalem fell: “Destroy it,” they said, “tear it down to its foundations!”</p>
+            <p class="verse"><span class="verse-num">8</span>O Daughter of Babylon, doomed to destruction, blessed is he who repays you as you have done to us.</p>
+            <p class="verse"><span class="verse-num">9</span>Blessed is he who seizes your infants and dashes them against the rocks.</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>By the rivers of Babylon, there we sat down, yea, we wept, when we remembered Zion.</p>
             <p class="verse"><span class="verse-num">2</span>We hanged our harps upon the willows in the midst thereof.</p>
@@ -600,6 +613,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

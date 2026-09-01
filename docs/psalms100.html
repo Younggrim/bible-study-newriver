@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,14 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 100">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>A Psalm of thanksgiving. Make a joyful noise to the LORD, all the earth.</p>
+            <p class="verse"><span class="verse-num">2</span>Serve the LORD with gladness; come into His presence with joyful songs.</p>
+            <p class="verse"><span class="verse-num">3</span>Know that the LORD is God. It is He who made us, and we are His; we are His people, and the sheep of His pasture.</p>
+            <p class="verse"><span class="verse-num">4</span>Enter His gates with thanksgiving and His courts with praise; give thanks to Him and bless His name.</p>
+            <p class="verse"><span class="verse-num">5</span>For the LORD is good, and His loving devotion endures forever; His faithfulness continues to all generations.</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>Make a joyful noise unto the LORD, all ye lands.</p>
             <p class="verse"><span class="verse-num">2</span>Serve the LORD with gladness: come before his presence with singing.</p>
@@ -575,6 +584,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

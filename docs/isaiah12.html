@@ -165,6 +165,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -330,6 +331,15 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Isaiah 12">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>In that day you will say: “O LORD, I will praise You. Although You were angry with me, Your anger has turned away, and You have comforted me.</p>
+            <p class="verse"><span class="verse-num">2</span>Surely God is my salvation; I will trust and not be afraid. For the LORD GOD is my strength and my song, and He also has become my salvation.”</p>
+            <p class="verse"><span class="verse-num">3</span>With joy you will draw water from the springs of salvation,</p>
+            <p class="verse"><span class="verse-num">4</span>and on that day you will say: “Give praise to the LORD; proclaim His name! Make His works known among the peoples; declare that His name is exalted.</p>
+            <p class="verse"><span class="verse-num">5</span>Sing to the LORD, for He has done glorious things. Let this be known in all the earth.</p>
+            <p class="verse"><span class="verse-num">6</span>Cry out and sing, O citizen of Zion, for great among you is the Holy One of Israel.”</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>And in that day thou shalt say, O LORD, I will praise thee: though thou wast angry with me, thine anger is turned away, and thou comfortedst me.</p>
             <p class="verse"><span class="verse-num">2</span>Behold, God is my salvation; I will trust, and not be afraid: for the LORD JEHOVAH is my strength and my song; he also is become my salvation.</p>
@@ -423,6 +433,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

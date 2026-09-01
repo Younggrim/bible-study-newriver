@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,13 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 123">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>A song of ascents. I lift up my eyes to You, the One enthroned in heaven.</p>
+            <p class="verse"><span class="verse-num">2</span>As the eyes of servants look to the hand of their master, as the eyes of a maidservant look to the hand of her mistress, so our eyes are on the LORD our God until He shows us mercy.</p>
+            <p class="verse"><span class="verse-num">3</span>Have mercy on us, O LORD, have mercy, for we have endured much contempt.</p>
+            <p class="verse"><span class="verse-num">4</span>We have endured much scorn from the arrogant, much contempt from the proud.</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>Unto thee lift I up mine eyes, O thou that dwellest in the heavens.</p>
             <p class="verse"><span class="verse-num">2</span>Behold, as the eyes of servants look unto the hand of their masters, and as the eyes of a maiden unto the hand of her mistress; so our eyes wait upon the LORD our God, until that he have mercy upon us.</p>
@@ -569,6 +577,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

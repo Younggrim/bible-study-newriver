@@ -115,6 +115,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -229,6 +230,43 @@
         <div class="scripture-container">
         <div class="translation-block active" data-translation="ESV" data-passage="1 Corinthians 11">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
+        </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>You are to imitate me, just as I imitate Christ.</p>
+            <p class="verse"><span class="verse-num">2</span>Now I commend you for remembering me in everything and for maintaining the traditions, just as I passed them on to you.</p>
+            <p class="verse"><span class="verse-num">3</span>But I want you to understand that the head of every man is Christ, and the head of the woman is man, and the head of Christ is God.</p>
+            <p class="verse"><span class="verse-num">4</span>Every man who prays or prophesies with his head covered dishonors his head.</p>
+            <p class="verse"><span class="verse-num">5</span>And every woman who prays or prophesies with her head uncovered dishonors her head, for it is just as if her head were shaved.</p>
+            <p class="verse"><span class="verse-num">6</span>If a woman does not cover her head, she should have her hair cut off. And if it is shameful for a woman to have her hair cut or shaved off, she should cover her head.</p>
+            <p class="verse"><span class="verse-num">7</span>A man ought not to cover his head, since he is the image and glory of God; but the woman is the glory of man.</p>
+            <p class="verse"><span class="verse-num">8</span>For man did not come from woman, but woman from man.</p>
+            <p class="verse"><span class="verse-num">9</span>Neither was man created for woman, but woman for man.</p>
+            <p class="verse"><span class="verse-num">10</span>For this reason a woman ought to have a sign of authority on her head, because of the angels.</p>
+            <p class="verse"><span class="verse-num">11</span>In the Lord, however, woman is not independent of man, nor is man independent of woman.</p>
+            <p class="verse"><span class="verse-num">12</span>For just as woman came from man, so also man is born of woman. But everything comes from God.</p>
+            <p class="verse"><span class="verse-num">13</span>Judge for yourselves: Is it proper for a woman to pray to God with her head uncovered?</p>
+            <p class="verse"><span class="verse-num">14</span>Doesn’t nature itself teach you that if a man has long hair, it is a disgrace to him,</p>
+            <p class="verse"><span class="verse-num">15</span>but that if a woman has long hair, it is her glory? For long hair is given to her as a covering.</p>
+            <p class="verse"><span class="verse-num">16</span>If anyone is inclined to dispute this, we have no other practice, nor do the churches of God.</p>
+            <p class="verse"><span class="verse-num">17</span>In the following instructions I have no praise to offer, because your gatherings do more harm than good.</p>
+            <p class="verse"><span class="verse-num">18</span>First of all, I hear that when you come together as a church, there are divisions among you, and in part I believe it.</p>
+            <p class="verse"><span class="verse-num">19</span>And indeed, there must be differences among you to show which of you are approved.</p>
+            <p class="verse"><span class="verse-num">20</span>Now then, when you come together, it is not the Lord’s Supper you eat.</p>
+            <p class="verse"><span class="verse-num">21</span>For as you eat, each of you goes ahead without sharing his meal. While one remains hungry, another gets drunk.</p>
+            <p class="verse"><span class="verse-num">22</span>Don’t you have your own homes in which to eat and drink? Or do you despise the church of God and humiliate those who have nothing? What can I say to you? Shall I praise you for this? No, I will not!</p>
+            <p class="verse"><span class="verse-num">23</span>For I received from the Lord what I also passed on to you: The Lord Jesus, on the night He was betrayed, took bread,</p>
+            <p class="verse"><span class="verse-num">24</span>and when He had given thanks, He broke it and said, “This is My body, which is for you; do this in remembrance of Me.”</p>
+            <p class="verse"><span class="verse-num">25</span>In the same way, after supper He took the cup, saying, “This cup is the new covenant in My blood; do this, as often as you drink it, in remembrance of Me.”</p>
+            <p class="verse"><span class="verse-num">26</span>For as often as you eat this bread and drink this cup, you proclaim the Lord’s death until He comes.</p>
+            <p class="verse"><span class="verse-num">27</span>Therefore, whoever eats the bread or drinks the cup of the Lord in an unworthy manner will be guilty of sinning against the body and blood of the Lord.</p>
+            <p class="verse"><span class="verse-num">28</span>Each one must examine himself before he eats of the bread and drinks of the cup.</p>
+            <p class="verse"><span class="verse-num">29</span>For anyone who eats and drinks without recognizing the body eats and drinks judgment on himself.</p>
+            <p class="verse"><span class="verse-num">30</span>That is why many among you are weak and sick, and a number of you have fallen asleep.</p>
+            <p class="verse"><span class="verse-num">31</span>Now if we judged ourselves properly, we would not come under judgment.</p>
+            <p class="verse"><span class="verse-num">32</span>But when we are judged by the Lord, we are being disciplined so that we will not be condemned with the world.</p>
+            <p class="verse"><span class="verse-num">33</span>So, my brothers, when you come together to eat, wait for one another.</p>
+            <p class="verse"><span class="verse-num">34</span>If anyone is hungry, he should eat at home, so that when you come together it will not result in judgment. And when I come, I will give instructions about the remaining matters.</p>
         </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>Be ye followers of me, even as I also am of Christ.</p>
@@ -428,6 +466,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

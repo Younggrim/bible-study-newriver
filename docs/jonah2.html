@@ -103,6 +103,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -205,6 +206,19 @@
         <div class="scripture-container">
         <div class="translation-block active" data-translation="ESV" data-passage="Jonah 2">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
+        </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>From inside the fish, Jonah prayed to the LORD his God,</p>
+            <p class="verse"><span class="verse-num">2</span>saying: “In my distress I called to the LORD, and He answered me. From the belly of Sheol I called for help, and You heard my voice.</p>
+            <p class="verse"><span class="verse-num">3</span>For You cast me into the deep, into the heart of the seas, and the current swirled about me; all Your breakers and waves swept over me.</p>
+            <p class="verse"><span class="verse-num">4</span>At this, I said, ‘I have been banished from Your sight; yet I will look once more toward Your holy temple.’</p>
+            <p class="verse"><span class="verse-num">5</span>The waters engulfed me to take my life; the watery depths closed around me; the seaweed wrapped around my head.</p>
+            <p class="verse"><span class="verse-num">6</span>To the roots of the mountains I descended; the earth beneath me barred me in forever! But You raised my life from the pit, O LORD my God!</p>
+            <p class="verse"><span class="verse-num">7</span>As my life was fading away, I remembered the LORD. My prayer went up to You, to Your holy temple.</p>
+            <p class="verse"><span class="verse-num">8</span>Those who cling to worthless idols forsake His loving devotion.</p>
+            <p class="verse"><span class="verse-num">9</span>But I, with the voice of thanksgiving, will sacrifice to You. I will fulfill what I have vowed. Salvation is from the LORD!”</p>
+            <p class="verse"><span class="verse-num">10</span>And the LORD commanded the fish, and it vomited Jonah onto dry land.</p>
         </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>Then Jonah prayed unto the LORD his God out of the fish’s belly,</p>
@@ -317,6 +331,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

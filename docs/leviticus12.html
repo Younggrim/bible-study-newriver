@@ -126,6 +126,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -252,6 +253,17 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Leviticus 12">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>Then the LORD said to Moses,</p>
+            <p class="verse"><span class="verse-num">2</span>“Say to the Israelites, ‘A woman who becomes pregnant and gives birth to a son will be unclean for seven days, as she is during the days of her menstruation.</p>
+            <p class="verse"><span class="verse-num">3</span>And on the eighth day the flesh of the boy’s foreskin is to be circumcised.</p>
+            <p class="verse"><span class="verse-num">4</span>The woman shall continue in purification from her bleeding for thirty-three days. She must not touch anything sacred or go into the sanctuary until the days of her purification are complete.</p>
+            <p class="verse"><span class="verse-num">5</span>If, however, she gives birth to a daughter, the woman will be unclean for two weeks as she is during her menstruation. Then she must continue in purification from her bleeding for sixty-six days.</p>
+            <p class="verse"><span class="verse-num">6</span>When the days of her purification are complete, whether for a son or for a daughter, she is to bring to the priest at the entrance to the Tent of Meeting a year-old lamb for a burnt offering and a young pigeon or a turtledove for a sin offering.</p>
+            <p class="verse"><span class="verse-num">7</span>And the priest will present them before the LORD and make atonement for her; and she shall be ceremonially cleansed from her flow of blood. This is the law for a woman giving birth, whether to a male or to a female.</p>
+            <p class="verse"><span class="verse-num">8</span>But if she cannot afford a lamb, she shall bring two turtledoves or two young pigeons, one for a burnt offering and the other for a sin offering. Then the priest will make atonement for her, and she will be clean.’”</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>And the LORD spake unto Moses, saying,</p>
             <p class="verse"><span class="verse-num">2</span>Speak unto the children of Israel, saying, If a woman have conceived seed, and born a man child: then she shall be unclean seven days; according to the days of the separation for her infirmity shall she be unclean.</p>
@@ -343,6 +355,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

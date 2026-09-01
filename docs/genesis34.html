@@ -149,6 +149,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -297,6 +298,40 @@
         <div class="scripture-container">
         <div class="translation-block active" data-translation="ESV" data-passage="Genesis 34">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
+        </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>Now Dinah, the daughter Leah had borne to Jacob, went out to visit the daughters of the land.</p>
+            <p class="verse"><span class="verse-num">2</span>When Shechem son of Hamor the Hivite, the prince of the region, saw her, he took her and lay with her by force.</p>
+            <p class="verse"><span class="verse-num">3</span>And his soul was drawn to Dinah, the daughter of Jacob. He loved the young girl and spoke to her tenderly.</p>
+            <p class="verse"><span class="verse-num">4</span>So Shechem told his father Hamor, “Get me this girl as a wife.”</p>
+            <p class="verse"><span class="verse-num">5</span>Jacob heard that Shechem had defiled his daughter Dinah, but since his sons were with his livestock in the field, he remained silent about it until they returned.</p>
+            <p class="verse"><span class="verse-num">6</span>Meanwhile, Shechem’s father Hamor came to speak with Jacob.</p>
+            <p class="verse"><span class="verse-num">7</span>When Jacob’s sons heard what had happened, they returned from the field. They were filled with grief and fury, because Shechem had committed an outrage in Israel by lying with Jacob’s daughter—a thing that should not be done.</p>
+            <p class="verse"><span class="verse-num">8</span>But Hamor said to them, “My son Shechem longs for your daughter. Please give her to him as his wife.</p>
+            <p class="verse"><span class="verse-num">9</span>Intermarry with us; give us your daughters and take our daughters for yourselves.</p>
+            <p class="verse"><span class="verse-num">10</span>You may settle among us, and the land will be open to you. Live here, move about freely, and acquire your own property.”</p>
+            <p class="verse"><span class="verse-num">11</span>Then Shechem said to Dinah’s father and brothers, “Grant me this favor, and I will give you whatever you ask.</p>
+            <p class="verse"><span class="verse-num">12</span>Demand a high dowry and an expensive gift, and I will give you whatever you ask. Only give me the girl as my wife!”</p>
+            <p class="verse"><span class="verse-num">13</span>But because Shechem had defiled their sister Dinah, Jacob’s sons answered him and his father Hamor deceitfully.</p>
+            <p class="verse"><span class="verse-num">14</span>“We cannot do such a thing,” they said. “To give our sister to an uncircumcised man would be a disgrace to us.</p>
+            <p class="verse"><span class="verse-num">15</span>We will consent to this on one condition, that you become circumcised like us—every one of your males.</p>
+            <p class="verse"><span class="verse-num">16</span>Then we will give you our daughters and take your daughters for ourselves. We will dwell among you and become one people.</p>
+            <p class="verse"><span class="verse-num">17</span>But if you will not agree to be circumcised, then we will take our sister and go.”</p>
+            <p class="verse"><span class="verse-num">18</span>Their offer seemed good to Hamor and his son Shechem.</p>
+            <p class="verse"><span class="verse-num">19</span>The young man, who was the most respected of all his father’s household, did not hesitate to fulfill this request, because he was delighted with Jacob’s daughter.</p>
+            <p class="verse"><span class="verse-num">20</span>So Hamor and his son Shechem went to the gate of their city and addressed the men of their city:</p>
+            <p class="verse"><span class="verse-num">21</span>“These men are at peace with us. Let them live and trade in our land; indeed, it is large enough for them. Let us take their daughters in marriage and give our daughters to them.</p>
+            <p class="verse"><span class="verse-num">22</span>But only on this condition will the men agree to dwell with us and be one people: if all our men are circumcised as they are.</p>
+            <p class="verse"><span class="verse-num">23</span>Will not their livestock, their possessions, and all their animals become ours? Only let us consent to them, and they will dwell among us.”</p>
+            <p class="verse"><span class="verse-num">24</span>All the men who went out of the city gate listened to Hamor and his son Shechem, and every male of the city was circumcised.</p>
+            <p class="verse"><span class="verse-num">25</span>Three days later, while they were still in pain, two of Jacob’s sons (Dinah’s brothers Simeon and Levi) took their swords, went into the unsuspecting city, and slaughtered every male.</p>
+            <p class="verse"><span class="verse-num">26</span>They killed Hamor and his son Shechem with their swords, took Dinah out of Shechem’s house, and went away.</p>
+            <p class="verse"><span class="verse-num">27</span>Jacob’s other sons came upon the slaughter and looted the city, because their sister had been defiled.</p>
+            <p class="verse"><span class="verse-num">28</span>They took their flocks and herds and donkeys, and everything else in the city or in the field.</p>
+            <p class="verse"><span class="verse-num">29</span>They carried off all their possessions and women and children, and they plundered everything in their houses.</p>
+            <p class="verse"><span class="verse-num">30</span>Then Jacob said to Simeon and Levi, “You have brought trouble upon me by making me a stench to the Canaanites and Perizzites, the people of this land. We are few in number; if they unite against me and attack me, I and my household will be destroyed.”</p>
+            <p class="verse"><span class="verse-num">31</span>But they replied, “Should he have treated our sister like a prostitute?”</p>
         </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>And Dinah the daughter of Leah, which she bare unto Jacob, went out to see the daughters of the land.</p>
@@ -491,6 +526,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

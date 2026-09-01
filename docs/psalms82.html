@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,17 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 82">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>A Psalm of Asaph. God presides in the divine assembly; He renders judgment among the gods:</p>
+            <p class="verse"><span class="verse-num">2</span>“How long will you judge unjustly and show partiality to the wicked? Selah</p>
+            <p class="verse"><span class="verse-num">3</span>Defend the cause of the weak and fatherless; uphold the rights of the afflicted and oppressed.</p>
+            <p class="verse"><span class="verse-num">4</span>Rescue the weak and needy; save them from the hand of the wicked.</p>
+            <p class="verse"><span class="verse-num">5</span>They do not know or understand; they wander in the darkness; all the foundations of the earth are shaken.</p>
+            <p class="verse"><span class="verse-num">6</span>I have said, ‘You are gods; you are all sons of the Most High.’</p>
+            <p class="verse"><span class="verse-num">7</span>But like mortals you will die, and like rulers you will fall.”</p>
+            <p class="verse"><span class="verse-num">8</span>Arise, O God, judge the earth, for all the nations are Your inheritance.</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>God standeth in the congregation of the mighty; he judgeth among the gods.</p>
             <p class="verse"><span class="verse-num">2</span>How long will ye judge unjustly, and accept the persons of the wicked? Selah.</p>
@@ -590,6 +602,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

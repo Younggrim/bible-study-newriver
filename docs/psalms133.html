@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,12 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 133">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>A song of ascents. Of David. Behold, how good and pleasant it is when brothers live together in harmony!</p>
+            <p class="verse"><span class="verse-num">2</span>It is like fine oil on the head, running down on the beard, running down Aaron’s beard over the collar of his robes.</p>
+            <p class="verse"><span class="verse-num">3</span>It is like the dew of Hermon falling on the mountains of Zion. For there the LORD has bestowed the blessing of life forevermore.</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>Behold, how good and how pleasant it is for brethren to dwell together in unity!</p>
             <p class="verse"><span class="verse-num">2</span>It is like the precious ointment upon the head, that ran down upon the beard, even Aaron’s beard: that went down to the skirts of his garments;</p>
@@ -572,6 +579,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

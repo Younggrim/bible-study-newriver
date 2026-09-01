@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,16 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 120">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>A song of ascents. In my distress I cried to the LORD, and He answered me.</p>
+            <p class="verse"><span class="verse-num">2</span>Deliver my soul, O LORD, from lying lips and a deceitful tongue.</p>
+            <p class="verse"><span class="verse-num">3</span>What will He do to you, and what will be added to you, O deceitful tongue?</p>
+            <p class="verse"><span class="verse-num">4</span>Sharp arrows will come from the warrior, with burning coals of the broom tree!</p>
+            <p class="verse"><span class="verse-num">5</span>Woe to me that I dwell in Meshech, that I live among the tents of Kedar!</p>
+            <p class="verse"><span class="verse-num">6</span>Too long have I dwelt among those who hate peace.</p>
+            <p class="verse"><span class="verse-num">7</span>I am in favor of peace; but when I speak, they want war.</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>In my distress I cried unto the LORD, and he heard me.</p>
             <p class="verse"><span class="verse-num">2</span>Deliver my soul, O LORD, from lying lips, and from a deceitful tongue.</p>
@@ -584,6 +595,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

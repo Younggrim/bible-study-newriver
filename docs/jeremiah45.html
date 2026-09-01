@@ -151,6 +151,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -302,6 +303,14 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Jeremiah 45">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>This is the word that Jeremiah the prophet spoke to Baruch son of Neriah when he wrote these words on a scroll at the dictation of Jeremiah in the fourth year of Jehoiakim son of Josiah, king of Judah:</p>
+            <p class="verse"><span class="verse-num">2</span>“This is what the LORD, the God of Israel, says to you, Baruch:</p>
+            <p class="verse"><span class="verse-num">3</span>You have said, ‘Woe is me because the LORD has added sorrow to my pain! I am worn out with groaning and have found no rest.’”</p>
+            <p class="verse"><span class="verse-num">4</span>Thus Jeremiah was to say to Baruch: “This is what the LORD says: Throughout the land I will demolish what I have built and uproot what I have planted.</p>
+            <p class="verse"><span class="verse-num">5</span>But as for you, do you seek great things for yourself? Stop seeking! For I will bring disaster on every living creature, declares the LORD, but wherever you go, I will grant your life as a spoil of war.”</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>The word that Jeremiah the prophet spake unto Baruch the son of Neriah, when he had written these words in a book at the mouth of Jeremiah, in the fourth year of Jehoiakim the son of Josiah king of Judah, saying,</p>
             <p class="verse"><span class="verse-num">2</span>Thus saith the LORD, the God of Israel, unto thee, O Baruch;</p>
@@ -384,6 +393,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

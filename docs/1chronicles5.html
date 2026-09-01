@@ -128,6 +128,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -255,6 +256,35 @@
         <div class="scripture-container">
         <div class="translation-block active" data-translation="ESV" data-passage="1 Chronicles 5">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
+        </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>These were the sons of Reuben the firstborn of Israel. Though he was the firstborn, his birthright was given to the sons of Joseph son of Israel, because Reuben defiled his father’s bed. So he is not reckoned according to birthright.</p>
+            <p class="verse"><span class="verse-num">2</span>And though Judah prevailed over his brothers and a ruler came from him, the birthright belonged to Joseph.</p>
+            <p class="verse"><span class="verse-num">3</span>The sons of Reuben, the firstborn of Israel: Hanoch, Pallu, Hezron, and Carmi.</p>
+            <p class="verse"><span class="verse-num">4</span>The descendants of Joel: Shemaiah his son, Gog his son, Shimei his son,</p>
+            <p class="verse"><span class="verse-num">5</span>Micah his son, Reaiah his son, Baal his son,</p>
+            <p class="verse"><span class="verse-num">6</span>and Beerah his son, whom Tiglath-pileser king of Assyria carried into exile. Beerah was a leader of the Reubenites.</p>
+            <p class="verse"><span class="verse-num">7</span>His relatives by their clans are recorded in their genealogy: Jeiel the chief, Zechariah,</p>
+            <p class="verse"><span class="verse-num">8</span>and Bela son of Azaz, the son of Shema, the son of Joel. They settled in Aroer and as far as Nebo and Baal-meon.</p>
+            <p class="verse"><span class="verse-num">9</span>They also settled in the east as far as the edge of the desert that extends to the Euphrates River, because their livestock had increased in the land of Gilead.</p>
+            <p class="verse"><span class="verse-num">10</span>During the days of Saul they waged war against the Hagrites, who were defeated at their hands, and they occupied the dwellings of the Hagrites throughout the region east of Gilead.</p>
+            <p class="verse"><span class="verse-num">11</span>The descendants of Gad lived next to the Reubenites in the land of Bashan, as far as Salecah:</p>
+            <p class="verse"><span class="verse-num">12</span>Joel was the chief, Shapham the second, then Jaanai and Shaphat, who lived in Bashan.</p>
+            <p class="verse"><span class="verse-num">13</span>Their kinsmen by families were Michael, Meshullam, Sheba, Jorai, Jacan, Zia, and Eber—seven in all.</p>
+            <p class="verse"><span class="verse-num">14</span>These were the sons of Abihail son of Huri, the son of Jaroah, the son of Gilead, the son of Michael, the son of Jeshishai, the son of Jahdo, the son of Buz.</p>
+            <p class="verse"><span class="verse-num">15</span>Ahi son of Abdiel, the son of Guni, was head of their family.</p>
+            <p class="verse"><span class="verse-num">16</span>They lived in Gilead, in Bashan and its towns, and throughout the pasturelands of Sharon.</p>
+            <p class="verse"><span class="verse-num">17</span>All of them were recorded in the genealogies during the reigns of Jotham king of Judah and Jeroboam king of Israel.</p>
+            <p class="verse"><span class="verse-num">18</span>The Reubenites, the Gadites, and the half-tribe of Manasseh had 44,760 warriors—valiant men who carried the shield and sword, drew the bow, and were trained for battle.</p>
+            <p class="verse"><span class="verse-num">19</span>They waged war against the Hagrites, as well as Jetur, Naphish, and Nodab.</p>
+            <p class="verse"><span class="verse-num">20</span>And because they cried out to God in battle, they were helped against their enemies, and the Hagrites and all their allies were delivered into their hands. Because they put their trust in God, He answered their prayers.</p>
+            <p class="verse"><span class="verse-num">21</span>They seized the livestock of the Hagrites—50,000 camels, 250,000 sheep, and 2,000 donkeys. They also took 100,000 captives,</p>
+            <p class="verse"><span class="verse-num">22</span>and many others fell slain, because the battle belonged to God. And they occupied the land until the exile.</p>
+            <p class="verse"><span class="verse-num">23</span>Now the people of the half-tribe of Manasseh were numerous. They settled in the land from Bashan to Baal-hermon (that is, Senir, also known as Mount Hermon).</p>
+            <p class="verse"><span class="verse-num">24</span>These were the heads of their families: Epher, Ishi, Eliel, Azriel, Jeremiah, Hodaviah, and Jahdiel. They were mighty men of valor, famous men, and heads of their families.</p>
+            <p class="verse"><span class="verse-num">25</span>But they were unfaithful to the God of their fathers, and they prostituted themselves with the gods of the peoples of the land, whom God had destroyed before them.</p>
+            <p class="verse"><span class="verse-num">26</span>So the God of Israel stirred up the spirit of Pul king of Assyria (that is, Tiglath-pileser king of Assyria) to take the Reubenites, the Gadites, and the half-tribe of Manasseh into exile. And he brought them to Halah, Habor, Hara, and the river of Gozan, where they remain to this day.</p>
         </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>Now the sons of Reuben the firstborn of Israel, (for he was the firstborn; but, forasmuch as he defiled his father’s bed, his birthright was given unto the sons of Joseph the son of Israel: and the genealogy is not to be reckoned after the birthright.</p>
@@ -425,6 +455,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

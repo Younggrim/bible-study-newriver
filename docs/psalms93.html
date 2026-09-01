@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,14 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 93">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>The LORD reigns! He is robed in majesty; the LORD has clothed and armed Himself with strength. The world indeed is firmly established; it cannot be moved.</p>
+            <p class="verse"><span class="verse-num">2</span>Your throne was established long ago; You are from all eternity.</p>
+            <p class="verse"><span class="verse-num">3</span>The floodwaters have risen, O LORD; the rivers have raised their voice; the seas lift up their pounding waves.</p>
+            <p class="verse"><span class="verse-num">4</span>Above the roar of many waters—the mighty breakers of the sea—the LORD on high is majestic.</p>
+            <p class="verse"><span class="verse-num">5</span>Your testimonies are fully confirmed; holiness adorns Your house, O LORD, for all the days to come.</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>The LORD reigneth, he is clothed with majesty; the LORD is clothed with strength, wherewith he hath girded himself: the world also is stablished, that it cannot be moved.</p>
             <p class="verse"><span class="verse-num">2</span>Thy throne is established of old: thou art from everlasting.</p>
@@ -574,6 +583,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

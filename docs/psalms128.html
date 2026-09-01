@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,15 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 128">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>A song of ascents. Blessed are all who fear the LORD, who walk in His ways!</p>
+            <p class="verse"><span class="verse-num">2</span>For when you eat the fruit of your labor, blessings and prosperity will be yours.</p>
+            <p class="verse"><span class="verse-num">3</span>Your wife will be like a fruitful vine flourishing within your house, your sons like olive shoots sitting around your table.</p>
+            <p class="verse"><span class="verse-num">4</span>In this way indeed shall blessing come to the man who fears the LORD.</p>
+            <p class="verse"><span class="verse-num">5</span>May the LORD bless you from Zion, that you may see the prosperity of Jerusalem all the days of your life,</p>
+            <p class="verse"><span class="verse-num">6</span>that you may see your children’s children. Peace be upon Israel!</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>Blessed is every one that feareth the LORD; that walketh in his ways.</p>
             <p class="verse"><span class="verse-num">2</span>For thou shalt eat the labour of thine hands: happy shalt thou be, and it shall be well with thee.</p>
@@ -585,6 +595,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>
