@@ -111,6 +111,44 @@ This distinction was previously broken: 124 New River Church videos were baked
 inline into New River's HTML, which the sync would have destroyed. They have
 been recovered into the overlay. Keep them there.
 
+### Use add_video.py rather than hand-editing
+
+```bash
+python3 add_video.py daniel5.html <video-id>
+python3 add_video.py spiritual-disciplines.html <video-id> --section Worship
+python3 add_video.py suffering.html <video-id> --check      # preview only
+```
+
+It takes the title and channel name from oEmbed instead of having them typed
+in, which is what keeps captions accurate and prevents a repeat of the U+FFFD
+corruption. It refuses to add a video YouTube reports as deleted or private, is
+a no-op if the video is already on the page, and aborts if the edit would
+unbalance the page's `<div>` tags.
+
+It handles all three container shapes the site uses:
+
+| shape | container | pages |
+|---|---|---|
+| chapter | `<div class="tab-content" id="tab-videos">` | the 1189 chapter pages |
+| life study | `<div class="section-block"><h2>Video Resources</h2>` | temptation, suffering, addiction, identity-and-self-worth, and similar |
+| disciplines | `<h3>Videos</h3><div class="video-grid">` | spiritual-disciplines.html, which has eight, so `--section` is required |
+
+Run it in **bible-study**, then sync. Running it against New River works but the
+next sync discards the result.
+
+### Standing rule: the 2BeLikeChrist Daniel series
+
+2BeLikeChrist has a per-chapter series on the site under the older title pattern
+`<Book> <Chapter> Explained: 5 Minute Bible Study`, 454 videos, but **no Daniel
+chapter had one**. They are now publishing Daniel under a new pattern,
+`Daniel <N> - Bible Study, Explanation, and Application`, and chapters 2, 3 and
+4 have been added.
+
+As Daniel 5 through 12 appear in the weekly issue, add each to its chapter page
+without waiting to be asked. Same for a Daniel 1 video if one shows up. This is
+a pre-approved series; anything else from any channel still needs a human to
+approve it.
+
 ## Automation
 
 **GitHub Actions detects. A person or assistant decides.** That split is
