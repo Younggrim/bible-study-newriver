@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,17 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 129">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>A song of ascents. Many a time they have persecuted me from my youth—let Israel now declare—</p>
+            <p class="verse"><span class="verse-num">2</span>many a time they have persecuted me from my youth, but they have not prevailed against me.</p>
+            <p class="verse"><span class="verse-num">3</span>The plowmen plowed over my back; they made their furrows long.</p>
+            <p class="verse"><span class="verse-num">4</span>The LORD is righteous; He has cut me from the cords of the wicked.</p>
+            <p class="verse"><span class="verse-num">5</span>May all who hate Zion be turned back in shame.</p>
+            <p class="verse"><span class="verse-num">6</span>May they be like grass on the rooftops, which withers before it can grow,</p>
+            <p class="verse"><span class="verse-num">7</span>unable to fill the hands of the reaper, or the arms of the binder of sheaves.</p>
+            <p class="verse"><span class="verse-num">8</span>May none who pass by say to them, “The blessing of the LORD be on you; we bless you in the name of the LORD.”</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>Many a time have they afflicted me from my youth, may Israel now say:</p>
             <p class="verse"><span class="verse-num">2</span>Many a time have they afflicted me from my youth: yet they have not prevailed against me.</p>
@@ -590,6 +602,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

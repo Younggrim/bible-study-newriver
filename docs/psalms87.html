@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,16 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 87">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>A Psalm of the sons of Korah. A song. He has founded His city on the holy mountains.</p>
+            <p class="verse"><span class="verse-num">2</span>The LORD loves the gates of Zion more than all the dwellings of Jacob.</p>
+            <p class="verse"><span class="verse-num">3</span>Glorious things are ascribed to you, O city of God. Selah</p>
+            <p class="verse"><span class="verse-num">4</span>“I will mention Rahab and Babylon among those who know Me—along with Philistia, Tyre, and Cush—when I say, ‘This one was born in Zion.’”</p>
+            <p class="verse"><span class="verse-num">5</span>And it will be said of Zion: “This one and that one were born in her, and the Most High Himself will establish her.”</p>
+            <p class="verse"><span class="verse-num">6</span>The LORD will record in the register of the peoples: “This one was born in Zion.” Selah</p>
+            <p class="verse"><span class="verse-num">7</span>Singers and pipers will proclaim, “All my springs of joy are in You.”</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>His foundation is in the holy mountains.</p>
             <p class="verse"><span class="verse-num">2</span>The LORD loveth the gates of Zion more than all the dwellings of Jacob.</p>
@@ -591,6 +602,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

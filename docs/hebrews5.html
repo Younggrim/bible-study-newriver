@@ -112,6 +112,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -223,6 +224,23 @@
         <div class="scripture-container">
         <div class="translation-block active" data-translation="ESV" data-passage="Hebrews 5">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
+        </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>Every high priest is appointed from among men to represent them in matters relating to God, to offer gifts and sacrifices for sins.</p>
+            <p class="verse"><span class="verse-num">2</span>He is able to deal gently with those who are ignorant and misguided, since he himself is subject to weakness.</p>
+            <p class="verse"><span class="verse-num">3</span>That is why he is obligated to offer sacrifices for his own sins, as well as for the sins of the people.</p>
+            <p class="verse"><span class="verse-num">4</span>No one takes this honor upon himself; he must be called by God, just as Aaron was.</p>
+            <p class="verse"><span class="verse-num">5</span>So also Christ did not take upon Himself the glory of becoming a high priest, but He was called by the One who said to Him: “You are My Son; today I have become Your Father.”</p>
+            <p class="verse"><span class="verse-num">6</span>And in another passage God says: “You are a priest forever in the order of Melchizedek.”</p>
+            <p class="verse"><span class="verse-num">7</span>During the days of Jesus’ earthly life, He offered up prayers and petitions with loud cries and tears to the One who could save Him from death, and He was heard because of His reverence.</p>
+            <p class="verse"><span class="verse-num">8</span>Although He was a Son, He learned obedience from what He suffered.</p>
+            <p class="verse"><span class="verse-num">9</span>And having been made perfect, He became the source of eternal salvation to all who obey Him</p>
+            <p class="verse"><span class="verse-num">10</span>and was designated by God as high priest in the order of Melchizedek.</p>
+            <p class="verse"><span class="verse-num">11</span>We have much to say about this, but it is hard to explain, because you are dull of hearing.</p>
+            <p class="verse"><span class="verse-num">12</span>Although by this time you ought to be teachers, you need someone to reteach you the basic principles of God’s word. You need milk, not solid food!</p>
+            <p class="verse"><span class="verse-num">13</span>For everyone who lives on milk is still an infant, inexperienced in the message of righteousness.</p>
+            <p class="verse"><span class="verse-num">14</span>But solid food is for the mature, who by constant use have trained their senses to distinguish good from evil.</p>
         </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>For every high priest taken from among men is ordained for men in things pertaining to God, that he may offer both gifts and sacrifices for sins:</p>
@@ -339,6 +357,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

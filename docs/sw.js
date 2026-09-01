@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bible-study-v7';
+const CACHE_NAME = 'bible-study-v8';
 const VAPID_PUBLIC_KEY = 'BBXso6T-C1Ft59FLWrdRfANGYtKm21CHUktfb0rsmfDZOEJSFyn5Y62f2ZaFMr0PxiPCIyN9Wm6_8MxXMQ6AGuY';
 const PUSH_WORKER = 'https://devotional-push.cloudflare-dust598.workers.dev';
 
@@ -26,19 +26,57 @@ self.addEventListener('activate', event => {
   self.clients.claim();
 });
 
-// Fetch: network-first with cache fallback
+// The ESV is the only translation fetched at runtime, because its licence does
+// not allow the text to be stored the way KJV, BSB, ASV, NET and WEB are. That
+// makes it the site's one visible single point of failure: it is also the
+// default translation, so if the proxy or api.esv.org is having a bad day, the
+// first thing every visitor sees is an error while five working translations
+// sit one click away.
+const ESV_PROXY = 'https://esv-proxy.cloudflare-dust598.workers.dev';
+
+// Fetch: scripture is cache-first, everything else is network-first.
 self.addEventListener('fetch', event => {
+  const req = event.request;
+
+  // Passages already fetched are served from cache immediately and refreshed in
+  // the background. Scripture text does not change, so there is nothing to be
+  // gained by waiting on the network, and this makes repeat visits instant and
+  // offline reading work.
+  if (req.method === 'GET' && req.url.startsWith(ESV_PROXY)) {
+    event.respondWith((async () => {
+      const cache = await caches.open(CACHE_NAME);
+      const cached = await cache.match(req);
+
+      const fromNetwork = fetch(req)
+        .then(res => {
+          if (res.ok) cache.put(req, res.clone());
+          return res;
+        })
+        .catch(() => null);
+
+      if (cached) {
+        // Revalidate without making the page wait for it. waitUntil keeps the
+        // worker alive long enough for the update to finish.
+        event.waitUntil(fromNetwork);
+        return cached;
+      }
+      return (await fromNetwork) || Response.error();
+    })());
+    return;
+  }
+
+  // Everything else: network-first with cache fallback.
   event.respondWith(
-    fetch(event.request)
+    fetch(req)
       .then(response => {
         // Cache successful responses for offline use
-        if (response.ok && event.request.method === 'GET') {
+        if (response.ok && req.method === 'GET') {
           const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          caches.open(CACHE_NAME).then(cache => cache.put(req, clone));
         }
         return response;
       })
-      .catch(() => caches.match(event.request))
+      .catch(() => caches.match(req))
   );
 });
 

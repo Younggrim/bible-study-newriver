@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,14 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 43">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>Vindicate me, O God, and plead my case against an ungodly nation; deliver me from deceitful and unjust men.</p>
+            <p class="verse"><span class="verse-num">2</span>For You are the God of my refuge. Why have You rejected me? Why must I walk in sorrow because of the enemy’s oppression?</p>
+            <p class="verse"><span class="verse-num">3</span>Send out Your light and Your truth; let them lead me. Let them bring me to Your holy mountain and to the place where You dwell.</p>
+            <p class="verse"><span class="verse-num">4</span>Then I will go to the altar of God, to God, my greatest joy. I will praise You with the harp, O God, my God.</p>
+            <p class="verse"><span class="verse-num">5</span>Why are you downcast, O my soul? Why the unease within me? Put your hope in God, for I will yet praise Him, my Savior and my God.</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>Judge me, O God, and plead my cause against an ungodly nation: O deliver me from the deceitful and unjust man.</p>
             <p class="verse"><span class="verse-num">2</span>For thou art the God of my strength: why dost thou cast me off? why go I mourning because of the oppression of the enemy?</p>
@@ -576,6 +585,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

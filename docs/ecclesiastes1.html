@@ -111,6 +111,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -221,6 +222,27 @@
         <div class="scripture-container">
         <div class="translation-block active" data-translation="ESV" data-passage="Ecclesiastes 1">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
+        </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>These are the words of the Teacher, the son of David, king in Jerusalem:</p>
+            <p class="verse"><span class="verse-num">2</span>“Futility of futilities,” says the Teacher, “futility of futilities! Everything is futile!”</p>
+            <p class="verse"><span class="verse-num">3</span>What does a man gain from all his labor, at which he toils under the sun?</p>
+            <p class="verse"><span class="verse-num">4</span>Generations come and generations go, but the earth remains forever.</p>
+            <p class="verse"><span class="verse-num">5</span>The sun rises and the sun sets; it hurries back to where it rises.</p>
+            <p class="verse"><span class="verse-num">6</span>The wind blows southward, then turns northward; round and round it swirls, ever returning on its course.</p>
+            <p class="verse"><span class="verse-num">7</span>All the rivers flow into the sea, yet the sea is never full; to the place from which the streams come, there again they flow.</p>
+            <p class="verse"><span class="verse-num">8</span>All things are wearisome, more than one can describe; the eye is not satisfied with seeing, nor the ear content with hearing.</p>
+            <p class="verse"><span class="verse-num">9</span>What has been will be again, and what has been done will be done again; there is nothing new under the sun.</p>
+            <p class="verse"><span class="verse-num">10</span>Is there a case where one can say, “Look, this is new”? It has already existed in the ages before us.</p>
+            <p class="verse"><span class="verse-num">11</span>There is no remembrance of those who came before, and those yet to come will not be remembered by those who follow after.</p>
+            <p class="verse"><span class="verse-num">12</span>I, the Teacher, was king over Israel in Jerusalem.</p>
+            <p class="verse"><span class="verse-num">13</span>And I set my mind to seek and explore by wisdom all that is done under heaven. What a miserable task God has laid upon the sons of men to occupy them!</p>
+            <p class="verse"><span class="verse-num">14</span>I have seen all the things that are done under the sun, and have found them all to be futile, a pursuit of the wind.</p>
+            <p class="verse"><span class="verse-num">15</span>What is crooked cannot be straightened, and what is lacking cannot be counted.</p>
+            <p class="verse"><span class="verse-num">16</span>I said to myself, “Behold, I have grown and increased in wisdom beyond all those before me who were over Jerusalem, and my mind has observed a wealth of wisdom and knowledge.”</p>
+            <p class="verse"><span class="verse-num">17</span>So I set my mind to know wisdom and madness and folly; I learned that this, too, is a pursuit of the wind.</p>
+            <p class="verse"><span class="verse-num">18</span>For with much wisdom comes much sorrow, and as knowledge grows, grief increases.</p>
         </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>The words of the Preacher, the son of David, king in Jerusalem.</p>
@@ -370,6 +392,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

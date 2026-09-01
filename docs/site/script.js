@@ -102,6 +102,7 @@ function toggleSidebar() {
    an otherwise black/white chapter page, kept from the original palette */
 var TRANSLATION_COLORS = {
     'ESV': '#8b3a2a',
+    'BSB': '#1f6b73',
     'KJV': '#4a5a8a',
     'ASV': '#7a5c2e',
     'NET': '#5c3d6e',
@@ -415,6 +416,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 + '<button class="pwa-info-close" onclick="this.parentElement.classList.remove(\'show\')">&times;</button>'
                 + '<h3>Translation Guide</h3>'
                 + '<div class="pwa-info-item"><strong style="color:#8b3a2a;">ESV</strong> — English Standard Version (2001). Word-for-word accuracy with modern readability.</div>'
+                + '<div class="pwa-info-item"><strong style="color:#1f6b73;">BSB</strong> — Berean Standard Bible (2022). Modern and readable, dedicated to the public domain.</div>'
                 + '<div class="pwa-info-item"><strong style="color:#4a5a8a;">KJV</strong> — King James Version (1611). Majestic, poetic language. Most influential English Bible.</div>'
                 + '<div class="pwa-info-item"><strong style="color:#7a5c2e;">ASV</strong> — American Standard Version (1901). Extremely literal, great for word studies.</div>'
                 + '<div class="pwa-info-item"><strong style="color:#5c3d6e;">NET</strong> — New English Translation (2005). 60,000+ translator notes.</div>'

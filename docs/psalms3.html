@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,17 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 3">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>A Psalm of David, when he fled from his son Absalom. O LORD, how my foes have increased! How many rise up against me!</p>
+            <p class="verse"><span class="verse-num">2</span>Many say of me, “God will not deliver him.” Selah</p>
+            <p class="verse"><span class="verse-num">3</span>But You, O LORD, are a shield around me, my glory, and the One who lifts my head.</p>
+            <p class="verse"><span class="verse-num">4</span>To the LORD I cry aloud, and He answers me from His holy mountain. Selah</p>
+            <p class="verse"><span class="verse-num">5</span>I lie down and sleep; I wake again, for the LORD sustains me.</p>
+            <p class="verse"><span class="verse-num">6</span>I will not fear the myriads set against me on every side.</p>
+            <p class="verse"><span class="verse-num">7</span>Arise, O LORD! Save me, O my God! Strike all my enemies on the jaw; break the teeth of the wicked.</p>
+            <p class="verse"><span class="verse-num">8</span>Salvation belongs to the LORD; may Your blessing be on Your people. Selah</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>LORD, how are they increased that trouble me! many are they that rise up against me.</p>
             <p class="verse"><span class="verse-num">2</span>Many there be which say of my soul, There is no help for him in God. Selah.</p>
@@ -587,6 +599,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

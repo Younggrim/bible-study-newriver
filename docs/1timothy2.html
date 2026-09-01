@@ -105,6 +105,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -209,6 +210,24 @@
         <div class="scripture-container">
         <div class="translation-block active" data-translation="ESV" data-passage="1 Timothy 2">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
+        </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>First of all, then, I urge that petitions, prayers, intercessions, and thanksgiving be offered for everyone—</p>
+            <p class="verse"><span class="verse-num">2</span>for kings and all those in authority—so that we may lead tranquil and quiet lives in all godliness and dignity.</p>
+            <p class="verse"><span class="verse-num">3</span>This is good and pleasing in the sight of God our Savior,</p>
+            <p class="verse"><span class="verse-num">4</span>who wants everyone to be saved and to come to the knowledge of the truth.</p>
+            <p class="verse"><span class="verse-num">5</span>For there is one God, and there is one mediator between God and men, the man Christ Jesus,</p>
+            <p class="verse"><span class="verse-num">6</span>who gave Himself as a ransom for all—the testimony that was given at just the right time.</p>
+            <p class="verse"><span class="verse-num">7</span>For this reason I was appointed as a preacher, an apostle, and a faithful and true teacher of the Gentiles. I am telling the truth; I am not lying about anything.</p>
+            <p class="verse"><span class="verse-num">8</span>Therefore I want the men everywhere to pray, lifting up holy hands, without anger or dissension.</p>
+            <p class="verse"><span class="verse-num">9</span>Likewise, I want the women to adorn themselves with respectable apparel, with modesty, and with self-control, not with braided hair or gold or pearls or expensive clothes,</p>
+            <p class="verse"><span class="verse-num">10</span>but with good deeds, as is proper for women who profess to worship God.</p>
+            <p class="verse"><span class="verse-num">11</span>A woman must learn in quietness and full submissiveness.</p>
+            <p class="verse"><span class="verse-num">12</span>I do not permit a woman to teach or to exercise authority over a man; she is to remain quiet.</p>
+            <p class="verse"><span class="verse-num">13</span>For Adam was formed first, and then Eve.</p>
+            <p class="verse"><span class="verse-num">14</span>And it was not Adam who was deceived, but the woman who was deceived and fell into transgression.</p>
+            <p class="verse"><span class="verse-num">15</span>Women, however, will be saved through childbearing, if they continue in faith, love, and holiness, with self-control.</p>
         </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>I exhort therefore, that, first of all, supplications, prayers, intercessions, and giving of thanks, be made for all men;</p>
@@ -333,6 +352,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

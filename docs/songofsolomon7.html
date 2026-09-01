@@ -107,6 +107,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -213,6 +214,22 @@
         <div class="scripture-container">
         <div class="translation-block active" data-translation="ESV" data-passage="Song of Solomon 7">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
+        </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>How beautiful are your sandaled feet, O daughter of the prince! The curves of your thighs are like jewels, the handiwork of a master.</p>
+            <p class="verse"><span class="verse-num">2</span>Your navel is a rounded goblet; it never lacks blended wine. Your waist is a mound of wheat encircled by the lilies.</p>
+            <p class="verse"><span class="verse-num">3</span>Your breasts are like two fawns, twins of a gazelle.</p>
+            <p class="verse"><span class="verse-num">4</span>Your neck is like a tower made of ivory; your eyes are like the pools of Heshbon by the gate of Bath-rabbim; your nose is like the tower of Lebanon, facing toward Damascus.</p>
+            <p class="verse"><span class="verse-num">5</span>Your head crowns you like Mount Carmel, the hair of your head like purple threads; the king is captured in your tresses.</p>
+            <p class="verse"><span class="verse-num">6</span>How fair and pleasant you are, O love, with your delights!</p>
+            <p class="verse"><span class="verse-num">7</span>Your stature is like a palm tree; your breasts are clusters of fruit.</p>
+            <p class="verse"><span class="verse-num">8</span>I said, “I will climb the palm tree; I will take hold of its fruit.” May your breasts be like clusters of the vine, the fragrance of your breath like apples,</p>
+            <p class="verse"><span class="verse-num">9</span>and your mouth like the finest wine. May it flow smoothly to my beloved, gliding gently over lips and teeth.</p>
+            <p class="verse"><span class="verse-num">10</span>I belong to my beloved, and his desire is for me.</p>
+            <p class="verse"><span class="verse-num">11</span>Come, my beloved, let us go to the countryside; let us spend the night among the wildflowers.</p>
+            <p class="verse"><span class="verse-num">12</span>Let us go early to the vineyards to see if the vine has budded, if the blossom has opened, if the pomegranates are in bloom—there I will give you my love.</p>
+            <p class="verse"><span class="verse-num">13</span>The mandrakes send forth a fragrance, and at our door is every delicacy, new as well as old, that I have treasured up for you, my beloved.</p>
         </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>How beautiful are thy feet with shoes, O prince’s daughter! the joints of thy thighs are like jewels, the work of the hands of a cunning workman.</p>
@@ -334,6 +351,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,18 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 113">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>Hallelujah! Give praise, O servants of the LORD; praise the name of the LORD.</p>
+            <p class="verse"><span class="verse-num">2</span>Blessed be the name of the LORD both now and forevermore.</p>
+            <p class="verse"><span class="verse-num">3</span>From where the sun rises to where it sets, the name of the LORD is praised.</p>
+            <p class="verse"><span class="verse-num">4</span>The LORD is exalted over all the nations, His glory above the heavens.</p>
+            <p class="verse"><span class="verse-num">5</span>Who is like the LORD our God, the One enthroned on high?</p>
+            <p class="verse"><span class="verse-num">6</span>He humbles Himself to behold the heavens and the earth.</p>
+            <p class="verse"><span class="verse-num">7</span>He raises the poor from the dust and lifts the needy from the dump</p>
+            <p class="verse"><span class="verse-num">8</span>to seat them with nobles, with the princes of His people.</p>
+            <p class="verse"><span class="verse-num">9</span>He settles the barren woman in her home as a joyful mother to her children. Hallelujah!</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>Praise ye the LORD. Praise, O ye servants of the LORD, praise the name of the LORD.</p>
             <p class="verse"><span class="verse-num">2</span>Blessed be the name of the LORD from this time forth and for evermore.</p>
@@ -588,6 +601,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

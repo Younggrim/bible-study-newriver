@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,17 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 130">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>A song of ascents. Out of the depths I cry to You, O LORD!</p>
+            <p class="verse"><span class="verse-num">2</span>O Lord, hear my voice; let Your ears be attentive to my plea for mercy.</p>
+            <p class="verse"><span class="verse-num">3</span>If You, O LORD, kept track of iniquities, then who, O Lord, could stand?</p>
+            <p class="verse"><span class="verse-num">4</span>But with You there is forgiveness, so that You may be feared.</p>
+            <p class="verse"><span class="verse-num">5</span>I wait for the LORD; my soul does wait, and in His word I put my hope.</p>
+            <p class="verse"><span class="verse-num">6</span>My soul waits for the Lord more than watchmen wait for the morning—more than watchmen wait for the morning.</p>
+            <p class="verse"><span class="verse-num">7</span>O Israel, put your hope in the LORD, for with the LORD is loving devotion, and with Him is redemption in abundance.</p>
+            <p class="verse"><span class="verse-num">8</span>And He will redeem Israel from all iniquity.</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>Out of the depths have I cried unto thee, O LORD.</p>
             <p class="verse"><span class="verse-num">2</span>Lord, hear my voice: let thine ears be attentive to the voice of my supplications.</p>
@@ -588,6 +600,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

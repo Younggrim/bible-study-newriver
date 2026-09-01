@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,17 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 121">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>A song of ascents. I lift up my eyes to the hills. From where does my help come?</p>
+            <p class="verse"><span class="verse-num">2</span>My help comes from the LORD, the Maker of heaven and earth.</p>
+            <p class="verse"><span class="verse-num">3</span>He will not allow your foot to slip; your Protector will not slumber.</p>
+            <p class="verse"><span class="verse-num">4</span>Behold, the Protector of Israel will neither slumber nor sleep.</p>
+            <p class="verse"><span class="verse-num">5</span>The LORD is your keeper; the LORD is the shade on your right hand.</p>
+            <p class="verse"><span class="verse-num">6</span>The sun will not strike you by day, nor the moon by night.</p>
+            <p class="verse"><span class="verse-num">7</span>The LORD will guard you from all evil; He will preserve your soul.</p>
+            <p class="verse"><span class="verse-num">8</span>The LORD will watch over your coming and going, both now and forevermore.</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>I will lift up mine eyes unto the hills, from whence cometh my help.</p>
             <p class="verse"><span class="verse-num">2</span>My help cometh from the LORD, which made heaven and earth.</p>
@@ -588,6 +600,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

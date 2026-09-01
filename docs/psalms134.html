@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,12 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 134">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>A song of ascents. Come, bless the LORD, all you servants of the LORD who serve by night in the house of the LORD!</p>
+            <p class="verse"><span class="verse-num">2</span>Lift up your hands to the sanctuary and bless the LORD!</p>
+            <p class="verse"><span class="verse-num">3</span>May the LORD, the Maker of heaven and earth, bless you from Zion.</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>Behold, bless ye the LORD, all ye servants of the LORD, which by night stand in the house of the LORD.</p>
             <p class="verse"><span class="verse-num">2</span>Lift up your hands in the sanctuary, and bless the LORD.</p>
@@ -570,6 +577,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

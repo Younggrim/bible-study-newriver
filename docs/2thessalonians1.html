@@ -102,6 +102,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -203,6 +204,21 @@
         <div class="scripture-container">
         <div class="translation-block active" data-translation="ESV" data-passage="2 Thessalonians 1">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
+        </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>Paul, Silvanus, and Timothy, To the church of the Thessalonians in God our Father and the Lord Jesus Christ:</p>
+            <p class="verse"><span class="verse-num">2</span>Grace and peace to you from God our Father and the Lord Jesus Christ.</p>
+            <p class="verse"><span class="verse-num">3</span>We are obligated to thank God for you all the time, brothers, as is fitting, because your faith is growing more and more, and your love for one another is increasing.</p>
+            <p class="verse"><span class="verse-num">4</span>That is why we boast among God’s churches about your perseverance and faith in the face of all the persecution and affliction you are enduring.</p>
+            <p class="verse"><span class="verse-num">5</span>All this is clear evidence of God’s righteous judgment. And so you will be counted worthy of the kingdom of God, for which you are suffering.</p>
+            <p class="verse"><span class="verse-num">6</span>After all, it is only right for God to repay with affliction those who afflict you,</p>
+            <p class="verse"><span class="verse-num">7</span>and to grant relief to you who are oppressed and to us as well. This will take place when the Lord Jesus is revealed from heaven with His mighty angels</p>
+            <p class="verse"><span class="verse-num">8</span>in blazing fire, inflicting vengeance on those who do not know God and do not obey the gospel of our Lord Jesus.</p>
+            <p class="verse"><span class="verse-num">9</span>They will suffer the penalty of eternal destruction, separated from the presence of the Lord and the glory of His might,</p>
+            <p class="verse"><span class="verse-num">10</span>on the day He comes to be glorified in His saints and regarded with wonder by all who have believed, including you who have believed our testimony.</p>
+            <p class="verse"><span class="verse-num">11</span>To this end, we always pray for you, that our God will count you worthy of His calling, and that He will powerfully fulfill your every good desire and work of faith,</p>
+            <p class="verse"><span class="verse-num">12</span>so that the name of our Lord Jesus will be glorified in you, and you in Him, according to the grace of our God and of the Lord Jesus Christ.</p>
         </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>Paul, and Silvanus, and Timotheus, unto the church of the Thessalonians in God our Father and the Lord Jesus Christ:</p>
@@ -314,6 +330,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

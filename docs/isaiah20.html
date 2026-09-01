@@ -165,6 +165,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -330,6 +331,15 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Isaiah 20">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>Before the year that the chief commander, sent by Sargon king of Assyria, came to Ashdod and attacked and captured it,</p>
+            <p class="verse"><span class="verse-num">2</span>the LORD had already spoken through Isaiah son of Amoz, saying, “Go, remove the sackcloth from your waist and the sandals from your feet.” And Isaiah did so, walking around naked and barefoot.</p>
+            <p class="verse"><span class="verse-num">3</span>Then the LORD said, “Just as My servant Isaiah has gone naked and barefoot for three years as a sign and omen against Egypt and Cush,</p>
+            <p class="verse"><span class="verse-num">4</span>so the king of Assyria will lead away the captives of Egypt and the exiles of Cush, young and old alike, naked and barefoot, with bared buttocks—to Egypt’s shame.</p>
+            <p class="verse"><span class="verse-num">5</span>Those who made Cush their hope and Egypt their boast will be dismayed and ashamed.</p>
+            <p class="verse"><span class="verse-num">6</span>And on that day the dwellers of this coastland will say, ‘See what has happened to our source of hope, those to whom we fled for help and deliverance from the king of Assyria! How then can we escape?’”</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>In the year that Tartan came unto Ashdod, (when Sargon the king of Assyria sent him,) and fought against Ashdod, and took it;</p>
             <p class="verse"><span class="verse-num">2</span>At the same time spake the LORD by Isaiah the son of Amoz, saying, Go and loose the sackcloth from off thy loins, and put off thy shoe from thy foot. And he did so, walking naked and barefoot.</p>
@@ -424,6 +434,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

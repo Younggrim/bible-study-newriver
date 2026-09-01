@@ -107,6 +107,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -213,6 +214,26 @@
         <div class="scripture-container">
         <div class="translation-block active" data-translation="ESV" data-passage="Song of Solomon 1">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
+        </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>This is Solomon’s Song of Songs.</p>
+            <p class="verse"><span class="verse-num">2</span>Let him kiss me with the kisses of his mouth! For your love is more delightful than wine.</p>
+            <p class="verse"><span class="verse-num">3</span>The fragrance of your perfume is pleasing; your name is like perfume poured out. No wonder the maidens adore you.</p>
+            <p class="verse"><span class="verse-num">4</span>Take me away with you—let us hurry! May the king bring me to his chambers. We will rejoice and delight in you; we will praise your love more than wine. It is only right that they adore you.</p>
+            <p class="verse"><span class="verse-num">5</span>I am dark, yet lovely, O daughters of Jerusalem, like the tents of Kedar, like the curtains of Solomon.</p>
+            <p class="verse"><span class="verse-num">6</span>Do not stare because I am dark, for the sun has gazed upon me. My mother’s sons were angry with me; they made me a keeper of the vineyards, but my own vineyard I have neglected.</p>
+            <p class="verse"><span class="verse-num">7</span>Tell me, O one I love, where do you pasture your sheep? Where do you rest them at midday? Why should I be like a veiled woman beside the flocks of your companions?</p>
+            <p class="verse"><span class="verse-num">8</span>If you do not know, O fairest of women, follow the tracks of the flock, and graze your young goats near the tents of the shepherds.</p>
+            <p class="verse"><span class="verse-num">9</span>I compare you, my darling, to a mare among Pharaoh’s chariots.</p>
+            <p class="verse"><span class="verse-num">10</span>Your cheeks are beautiful with ornaments, your neck with strings of jewels.</p>
+            <p class="verse"><span class="verse-num">11</span>We will make you ornaments of gold, studded with beads of silver.</p>
+            <p class="verse"><span class="verse-num">12</span>While the king was at his table, my perfume spread its fragrance.</p>
+            <p class="verse"><span class="verse-num">13</span>My beloved is to me a sachet of myrrh resting between my breasts.</p>
+            <p class="verse"><span class="verse-num">14</span>My beloved is to me a cluster of henna blossoms in the vineyards of En-gedi.</p>
+            <p class="verse"><span class="verse-num">15</span>How beautiful you are, my darling! Oh, how very beautiful! Your eyes are like doves.</p>
+            <p class="verse"><span class="verse-num">16</span>How handsome you are, my beloved! Oh, how delightful! The soft grass is our bed.</p>
+            <p class="verse"><span class="verse-num">17</span>The beams of our house are cedars; our rafters are fragrant firs.</p>
         </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>The song of songs, which is Solomon’s.</p>
@@ -358,6 +379,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

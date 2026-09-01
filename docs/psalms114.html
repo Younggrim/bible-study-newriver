@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,17 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 114">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>When Israel departed from Egypt, the house of Jacob from a people of foreign tongue,</p>
+            <p class="verse"><span class="verse-num">2</span>Judah became God’s sanctuary, Israel His dominion.</p>
+            <p class="verse"><span class="verse-num">3</span>The sea observed and fled; the Jordan turned back;</p>
+            <p class="verse"><span class="verse-num">4</span>the mountains skipped like rams, the hills like lambs.</p>
+            <p class="verse"><span class="verse-num">5</span>Why was it, O sea, that you fled, O Jordan, that you turned back,</p>
+            <p class="verse"><span class="verse-num">6</span>O mountains, that you skipped like rams, O hills, like lambs?</p>
+            <p class="verse"><span class="verse-num">7</span>Tremble, O earth, at the presence of the Lord, at the presence of the God of Jacob,</p>
+            <p class="verse"><span class="verse-num">8</span>who turned the rock into a pool, the flint into a fountain of water!</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>When Israel went out of Egypt, the house of Jacob from a people of strange language;</p>
             <p class="verse"><span class="verse-num">2</span>Judah was his sanctuary, and Israel his dominion.</p>
@@ -594,6 +606,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

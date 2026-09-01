@@ -2,8 +2,8 @@
   "upstream_commit": "6123831f10b481bcfc9def5b1519c4fdceebbcc8 Add 15 approved videos and a tool for adding them (#3)",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
-    "site/script.js": "8c78a039"
+    "site/script.js": "59ad3c9b"
   },
   "style_css_v": "173ef5ab",
-  "script_js_v": "d07404aa"
+  "script_js_v": "36c60ccb"
 }

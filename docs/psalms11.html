@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,16 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 11">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>For the choirmaster. Of David. In the LORD I take refuge. How then can you say to me: “Flee like a bird to your mountain!</p>
+            <p class="verse"><span class="verse-num">2</span>For behold, the wicked bend their bows. They set their arrow on the string to shoot from the shadows at the upright in heart.</p>
+            <p class="verse"><span class="verse-num">3</span>If the foundations are destroyed, what can the righteous do?”</p>
+            <p class="verse"><span class="verse-num">4</span>The LORD is in His holy temple; the LORD is on His heavenly throne. His eyes are watching closely; they examine the sons of men.</p>
+            <p class="verse"><span class="verse-num">5</span>The LORD tests the righteous and the wicked; His soul hates the lover of violence.</p>
+            <p class="verse"><span class="verse-num">6</span>On the wicked He will rain down fiery coals and sulfur; a scorching wind will be their portion.</p>
+            <p class="verse"><span class="verse-num">7</span>For the LORD is righteous; He loves justice. The upright will see His face.</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>In the LORD put I my trust: How say ye to my soul, Flee as a bird to your mountain?</p>
             <p class="verse"><span class="verse-num">2</span>For, lo, the wicked bend their bow, they make ready their arrow upon the string, that they may privily shoot at the upright in heart.</p>
@@ -583,6 +594,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

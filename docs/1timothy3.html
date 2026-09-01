@@ -105,6 +105,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -209,6 +210,25 @@
         <div class="scripture-container">
         <div class="translation-block active" data-translation="ESV" data-passage="1 Timothy 3">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
+        </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>This is a trustworthy saying: If anyone aspires to be an overseer, he desires a noble task.</p>
+            <p class="verse"><span class="verse-num">2</span>An overseer, then, must be above reproach, the husband of but one wife, temperate, self-controlled, respectable, hospitable, able to teach,</p>
+            <p class="verse"><span class="verse-num">3</span>not dependent on wine, not violent but gentle, peaceable, and free of the love of money.</p>
+            <p class="verse"><span class="verse-num">4</span>An overseer must manage his own household well and keep his children under control, with complete dignity.</p>
+            <p class="verse"><span class="verse-num">5</span>For if someone does not know how to manage his own household, how can he care for the church of God?</p>
+            <p class="verse"><span class="verse-num">6</span>He must not be a recent convert, or he may become conceited and fall under the same condemnation as the devil.</p>
+            <p class="verse"><span class="verse-num">7</span>Furthermore, he must have a good reputation with outsiders, so that he will not fall into disgrace and into the snare of the devil.</p>
+            <p class="verse"><span class="verse-num">8</span>Deacons likewise must be dignified, not double-tongued or given to much wine or greedy for money.</p>
+            <p class="verse"><span class="verse-num">9</span>They must hold to the mystery of the faith with a clear conscience.</p>
+            <p class="verse"><span class="verse-num">10</span>Additionally, they must first be tested. Then, if they are above reproach, let them serve as deacons.</p>
+            <p class="verse"><span class="verse-num">11</span>In the same way, the women must be dignified, not slanderers, but temperate and faithful in all things.</p>
+            <p class="verse"><span class="verse-num">12</span>A deacon must be the husband of but one wife, a good manager of his children and of his own household.</p>
+            <p class="verse"><span class="verse-num">13</span>For those who have served well as deacons acquire for themselves a high standing and great confidence in the faith that is in Christ Jesus.</p>
+            <p class="verse"><span class="verse-num">14</span>Although I hope to come to you soon, I am writing you these things</p>
+            <p class="verse"><span class="verse-num">15</span>in case I am delayed, so that you will know how each one must conduct himself in God’s household, which is the church of the living God, the pillar and foundation of the truth.</p>
+            <p class="verse"><span class="verse-num">16</span>By common confession, the mystery of godliness is great: He appeared in the flesh, was vindicated by the Spirit, was seen by angels, was proclaimed among the nations, was believed in throughout the world, was taken up in glory.</p>
         </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>This is a true saying, If a man desire the office of a bishop, he desireth a good work.</p>
@@ -333,6 +353,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,15 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 1">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>Blessed is the man who does not walk in the counsel of the wicked, or set foot on the path of sinners, or sit in the seat of mockers.</p>
+            <p class="verse"><span class="verse-num">2</span>But his delight is in the Law of the LORD, and on His law he meditates day and night.</p>
+            <p class="verse"><span class="verse-num">3</span>He is like a tree planted by streams of water, yielding its fruit in season, whose leaf does not wither, and who prospers in all he does.</p>
+            <p class="verse"><span class="verse-num">4</span>Not so the wicked! For they are like chaff driven off by the wind.</p>
+            <p class="verse"><span class="verse-num">5</span>Therefore the wicked will not stand in the judgment, nor sinners in the assembly of the righteous.</p>
+            <p class="verse"><span class="verse-num">6</span>For the LORD guards the path of the righteous, but the way of the wicked will perish.</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>Blessed is the man that walketh not in the counsel of the ungodly, nor standeth in the way of sinners, nor sitteth in the seat of the scornful.</p>
             <p class="verse"><span class="verse-num">2</span>But his delight is in the law of the LORD; and in his law doth he meditate day and night.</p>
@@ -586,6 +596,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

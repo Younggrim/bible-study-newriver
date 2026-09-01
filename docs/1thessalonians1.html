@@ -104,6 +104,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -208,6 +209,19 @@
         <div class="translation-block active" data-translation="ESV" data-passage="1 Thessalonians 1">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>Paul, Silvanus, and Timothy, To the church of the Thessalonians in God the Father and the Lord Jesus Christ: Grace and peace to you.</p>
+            <p class="verse"><span class="verse-num">2</span>We always thank God for all of you, remembering you in our prayers</p>
+            <p class="verse"><span class="verse-num">3</span>and continually recalling before our God and Father your work of faith, your labor of love, and your enduring hope in our Lord Jesus Christ.</p>
+            <p class="verse"><span class="verse-num">4</span>Brothers who are beloved by God, we know that He has chosen you,</p>
+            <p class="verse"><span class="verse-num">5</span>because our gospel came to you not only in word, but also in power, in the Holy Spirit, and with great conviction—just as you know we lived among you for your sake.</p>
+            <p class="verse"><span class="verse-num">6</span>And you became imitators of us and of the Lord when you welcomed the message with the joy of the Holy Spirit, in spite of your great suffering.</p>
+            <p class="verse"><span class="verse-num">7</span>As a result, you have become an example to all the believers in Macedonia and Achaia.</p>
+            <p class="verse"><span class="verse-num">8</span>For not only did the message of the Lord ring out from you to Macedonia and Achaia, but your faith in God has gone out to every place, so that we have no need to say anything more.</p>
+            <p class="verse"><span class="verse-num">9</span>For they themselves report what kind of welcome you gave us, and how you turned to God from idols to serve the living and true God</p>
+            <p class="verse"><span class="verse-num">10</span>and to await His Son from heaven, whom He raised from the dead—Jesus our deliverer from the coming wrath.</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>Paul, and Silvanus, and Timotheus, unto the church of the Thessalonians which is in God the Father and in the Lord Jesus Christ: Grace be unto you, and peace, from God our Father, and the Lord Jesus Christ.</p>
             <p class="verse"><span class="verse-num">2</span>We give thanks to God always for you all, making mention of you in our prayers;</p>
@@ -310,6 +324,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>

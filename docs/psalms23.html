@@ -249,6 +249,7 @@
             <button onclick="goToChapter()" style="padding:6px 12px;background:var(--accent-link);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">Go</button>
             <select class="nav-translation" onchange="switchTranslation(this.value)">
                 <option value="ESV">ESV</option>
+                    <option value="BSB">BSB</option>
                 <option value="KJV">KJV</option>
                 <option value="ASV">ASV</option>
                 <option value="NET">NET</option>
@@ -498,6 +499,15 @@
         <div class="translation-block active" data-translation="ESV" data-passage="Psalms 23">
             <p class="verse esv-loading" style="color:var(--text-muted);font-style:italic;">Loading ESV text...</p>
         </div>
+
+        <div class="translation-block" data-translation="BSB">
+            <p class="verse"><span class="verse-num">1</span>A Psalm of David. The LORD is my shepherd; I shall not want.</p>
+            <p class="verse"><span class="verse-num">2</span>He makes me lie down in green pastures; He leads me beside quiet waters.</p>
+            <p class="verse"><span class="verse-num">3</span>He restores my soul; He guides me in the paths of righteousness for the sake of His name.</p>
+            <p class="verse"><span class="verse-num">4</span>Even though I walk through the valley of the shadow of death, I will fear no evil, for You are with me; Your rod and Your staff, they comfort me.</p>
+            <p class="verse"><span class="verse-num">5</span>You prepare a table before me in the presence of my enemies. You anoint my head with oil; my cup overflows.</p>
+            <p class="verse"><span class="verse-num">6</span>Surely goodness and mercy will follow me all the days of my life, and I will dwell in the house of the LORD forever.</p>
+        </div>
         <div class="translation-block" data-translation="KJV">
             <p class="verse"><span class="verse-num">1</span>The LORD is my shepherd; I shall not want.</p>
             <p class="verse"><span class="verse-num">2</span>He maketh me to lie down in green pastures: he leadeth me beside the still waters.</p>
@@ -583,6 +593,6 @@
         <p>KJV, ASV, and WEB texts are in the public domain.</p>
     </footer>
 
-    <script src="site/script.js?v=d07404aa"></script>
+    <script src="site/script.js?v=36c60ccb"></script>
 </body>
 </html>
