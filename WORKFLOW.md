@@ -113,49 +113,70 @@ been recovered into the overlay. Keep them there.
 
 ## Automation
 
-**Weekly general check.** Reads the 17 channels in
-`bible-study/.automation/channel_watch_state.json`, reports unseen uploads for
-human review, and does not guess which chapter a video belongs to. Approved
-videos are added to bible-study and then synced, so they land on both sites.
+**GitHub Actions detects. A person or assistant decides.** That split is
+deliberate. Fetching feeds, probing 3617 videos, and updating state is
+mechanical and belongs on a runner that works whether anyone's laptop is on.
+Deciding whether a new video belongs on Ephesians 4 needs context and judgment,
+so the workflows only ever open an issue. **Nothing automated edits `docs/`.**
 
-The 17 channels: BibleProject, ImpactVideoMinistries, BrandonRobbinsMinistry,
-QCSocials, SpokenGospel, MikeWinger, GiveMeAnAnswer, WesHuff,
-DavidGuzikEnduringWord, TheBeatAllenParr, GotQuestions, TheChosen,
-TheDailyDevo, CrazyLoveMinistries, GraceFamilyBaptistChurch, LakepointeChurch,
-2BeLikeChrist.
+`.github/workflows/weekly-video-audit.yml` is identical in both repos and runs
+Mondays at 13:00 UTC, plus on demand via workflow_dispatch. It has two
+independent jobs.
 
-**New River check.** Runs only in `bible-study-newriver` against the New River
-Church channel, and its results go only into `newriver-videos.json`. Never
-push New River Church videos upstream.
+**Job `new-uploads`** runs `check_new_videos.py`, which reads every state file
+in `.automation/` and reports uploads not seen before. Which channels get
+watched is decided entirely by those files, so one script serves both repos:
 
-## Known gaps
+- `bible-study` watches **17 general channels**: BibleProject,
+  ImpactVideoMinistries, BrandonRobbinsMinistry, QCSocials, SpokenGospel,
+  MikeWinger, GiveMeAnAnswer, WesHuff, DavidGuzikEnduringWord,
+  TheBeatAllenParr, GotQuestions, TheChosen, TheDailyDevo, CrazyLoveMinistries,
+  GraceFamilyBaptistChurch, LakepointeChurch, 2BeLikeChrist. Approved videos go
+  into the chapter HTML here and reach New River through a sync, so they appear
+  on both sites.
+- `bible-study-newriver` watches **New River Church only**. Approved videos go
+  into `docs/newriver-videos.json` and never go upstream.
 
-These are real and unfixed as of this writing. Do not assume the automation
-described above is fully working.
+**Job `dead-links`** runs `check_video_links.py`, which asks YouTube whether
+each referenced video still plays using the oEmbed endpoint. No API key, no
+quota:
 
-1. **The 17-channel check has no script or workflow in bible-study.**
-   `.automation/channel_watch_state.json` sits there with all 17 channels and
-   384-plus tracked IDs, but `check_new_videos.py` exists only in
-   `bible-study-newriver`, and bible-study's only workflow is `static.yml`
-   (deploy). The weekly general check is therefore not automated in the repo
-   that owns it.
+| response | meaning |
+|---|---|
+| 200 | plays |
+| 404 | deleted or never existed |
+| 401 | private, or embedding disabled, so it will not play in the site's embed |
 
-2. **New River's weekly workflow crashes.** `check-new-videos.yml` runs Mondays
-   at 13:00 UTC and calls `check_new_videos.py`, whose `iter_channels()` does
-   `data["channels"].items()`. In `newriver_channel_state.json`, `channels` is a
-   **list**, not a dict, so the job fails with `AttributeError` before checking
-   anything. Either the script must handle the list shape or the state file must
-   be converted to the documented dict shape.
+It scans `docs/*.html` for inline players and `docs/newriver-videos.json` when
+present, so it covers the sermon overlay too.
 
-3. **New River's check tracks the wrong channels.** Its state file lists three:
-   New River Church, Got Questions Ministries, and BibleProject. The last two
-   are general channels that belong to the 17-channel upstream check. The New
-   River check should watch only New River Church.
+**Only a definitive 404 or 401 is reported as broken.** Rate limits and
+timeouts are retried and then listed separately as inconclusive. That asymmetry
+matters: a false positive here would get a working video deleted from the site.
 
-4. **No dead-link checking exists anywhere.** `check_new_videos.py` only
-   discovers new uploads. Nothing verifies that the 3617 videos already
-   referenced still play. Videos get deleted and go private, so this is the
-   likeliest source of silent rot.
+### Running the checks by hand
+
+```bash
+python3 check_new_videos.py --check      # report, write nothing
+python3 check_video_links.py --limit 40  # quick smoke test
+python3 check_video_links.py --titles    # also flag titles renamed on YouTube
+```
+
+`automation_http.py` is shared by both scripts. It uses urllib normally, and
+falls back to curl the moment urllib hits an SSL error. That exists for one
+concrete reason: behind a TLS-inspecting corporate proxy whose CA has no
+Authority Key Identifier, Python's OpenSSL refuses the connection outright
+while curl is fine. Without the fallback these scripts cannot be run by hand
+from such a machine at all.
+
+### One-time repair scripts
+
+`fix_video_titles.py` repairs video captions corrupted by a bad encoding
+round-trip, where an en-dash became U+FFFD. It takes the correct title from
+oEmbed rather than guessing, and leaves any video it cannot resolve untouched.
+It fixed 173 captions across 132 pages. Run it in **bible-study**, then sync.
+Keep it around; the same corruption can recur if titles are ever pasted through
+a non-UTF-8 tool.
 
 ## Verifying the invariant
 
@@ -225,6 +246,20 @@ Tab coverage should be identical across both repos. Current expected values:
 | commentary | 972 |
 | videos | 1189 |
 | reflection | 1189 |
+
+```bash
+# No caption should contain the Unicode replacement character. Expect 0.
+grep -l $'\ufffd' docs/*.html | wc -l
+```
+
+### Baseline as of the last full audit
+
+- 3617 unique videos referenced, **all 3617 playable**, 0 deleted, 0 private
+- 0 captions containing U+FFFD
+- 0 unexplained diff hunks between the repos
+- New River sermon overlay: 127 videos across 60 chapters
+
+A full audit takes about a minute.
 
 ## Deploys
 
