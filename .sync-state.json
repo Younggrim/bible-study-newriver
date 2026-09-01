@@ -1,9 +1,9 @@
 {
-  "upstream_commit": "6123831f10b481bcfc9def5b1519c4fdceebbcc8 Add 15 approved videos and a tool for adding them (#3)",
+  "upstream_commit": "e8e01af9dd3453c10e3797e058e66cac1ed7b19d Remove Spurgeon from the in-app Translation & Commentary panel (#5)",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
-    "site/script.js": "59ad3c9b"
+    "site/script.js": "0d6a6f7d"
   },
   "style_css_v": "173ef5ab",
-  "script_js_v": "36c60ccb"
+  "script_js_v": "0bdb40d2"
 }
