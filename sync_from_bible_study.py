@@ -29,6 +29,10 @@ safe and repeatable:
     the Cinzel font, used by New River's headings
     the nav brand, dove logo plus "New River"
 
+  mirrored from upstream, outside docs/
+    WORKFLOW.md               shared documentation
+    video_sources.py          shared allow lists, including this repo's
+    automation_http.py        shared curl-fallback HTTP helper
 Colors are NOT rewritten here. Both sites resolve their palette through CSS
 custom properties in site/style.css, so the mirrored HTML is already
 theme-neutral. If that ever stops being true this script will say so rather
@@ -73,6 +77,16 @@ PRESERVE = {
     "site/favicon-32.png",
     "site/icon-192.png",
     "site/icon-512.png",
+}
+
+# Root-level files, outside docs/, that must match upstream exactly. These are
+# shared tooling and documentation rather than deployment-specific, and keeping
+# them in step by hand does not work: WORKFLOW.md drifted once because an edit
+# upstream had no way to reach this repo.
+SHARED_ROOT = {
+    "WORKFLOW.md",
+    "video_sources.py",
+    "automation_http.py",
 }
 
 # Upstream files whose content feeds New River's own theme layer. If any of
@@ -210,6 +224,35 @@ def read_state():
     return {}
 
 
+def shared_root_drift(repo_root):
+    """Which SHARED_ROOT files differ from upstream, or are missing on either side."""
+    drift = []
+    for rel in sorted(SHARED_ROOT):
+        src = os.path.join(repo_root, rel)
+        dst = os.path.join(BASE_DIR, rel)
+        if not os.path.isfile(src):
+            drift.append((rel, "absent upstream"))
+        elif not os.path.isfile(dst):
+            drift.append((rel, "missing here"))
+        elif open(src, "rb").read() != open(dst, "rb").read():
+            drift.append((rel, "differs"))
+    return drift
+
+
+def mirror_shared_root(repo_root):
+    """Copy shared tooling and docs down from upstream. Returns what changed."""
+    changed = []
+    for rel, why in shared_root_drift(repo_root):
+        if why == "absent upstream":
+            continue
+        src = os.path.join(repo_root, rel)
+        dst = os.path.join(BASE_DIR, rel)
+        os.makedirs(os.path.dirname(dst) or ".", exist_ok=True)
+        shutil.copyfile(src, dst)
+        changed.append(rel)
+    return changed
+
+
 def snapshot_preserved():
     """Read the New River files that must survive the mirror."""
     kept = {}
@@ -279,6 +322,12 @@ def main():
         print(f"upstream: {commit}")
         print(f"would mirror {html} HTML files from {src_docs}")
         print(f"would preserve {len(snapshot_preserved())} New River files")
+        drift = shared_root_drift(src_root)
+        if drift:
+            for rel, why in drift:
+                print(f"would mirror shared root file {rel} ({why})")
+        else:
+            print(f"shared root files already match ({len(SHARED_ROOT)} checked)")
         for w in warnings:
             print(f"WARNING: {w}")
         if neutral_problems:
@@ -297,6 +346,8 @@ def main():
         shutil.rmtree(DOCS_DIR)
     shutil.copytree(src_docs, DOCS_DIR)
     restore_preserved(kept)
+
+    shared = mirror_shared_root(src_root)
 
     if "newriver-videos.json" not in kept:
         with open(os.path.join(DOCS_DIR, "newriver-videos.json"), "w") as f:
@@ -357,6 +408,8 @@ def main():
           f"({len(vs.NEW_RIVER_ALLOW)} sources allowed here), "
           f"{vid_tabs_dropped} empty Videos tabs tidied")
     print(f"  preserved       {len(kept)} New River files")
+    print(f"  shared root     {len(shared)} of {len(SHARED_ROOT)} files updated"
+          f"{' (' + ', '.join(shared) + ')' if shared else ', already in step'}")
     print(f"  sermon overlay  {sermons} videos across {len(overlay)} chapters")
     if missing:
         print(f"  NOTE: expected New River files were absent: {', '.join(missing)}")
