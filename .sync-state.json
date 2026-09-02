@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "3b1a6ea6d5db836082bd3798cc5d9be51be08db8 Relabel six chapters whose section headings sat in the body text",
+  "upstream_commit": "fcc542f5340793595c0b500a5ab569ee9759e2f9 Split the Classification field, which held two or three fields in one div",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
