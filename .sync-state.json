@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "8ec81b2aa3ce7cc6d5902b257828734a3b9b26ac Restrict video sources to an allow list, and remove all Shorts",
+  "upstream_commit": "39e2230263b71a4ca251a8ddb479a20842da9b63 Add Historical Context to Joshua 13-24",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
