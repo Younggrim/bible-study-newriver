@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "7a680f1b575c31616853728f60090ec249aa09d1 Finish 1 Corinthians, and catch labels cut between chapter and verse",
+  "upstream_commit": "bdb2b92659140a6a53d1bb68f39d1acb00a8c966 Finish 2 Corinthians, and check that sections run in verse order",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
