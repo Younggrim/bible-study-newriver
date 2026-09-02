@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "c4ee6862bba764e854d558adc191c2e9d02a8b52 Expand the Commentary tab from one source to three, on every chapter (#6)",
+  "upstream_commit": "8ec81b2aa3ce7cc6d5902b257828734a3b9b26ac Restrict video sources to an allow list, and remove all Shorts",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
