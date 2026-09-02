@@ -49,6 +49,9 @@ import shutil
 import subprocess
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import video_sources as vs  # noqa: E402
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DOCS_DIR = os.path.join(BASE_DIR, "docs")
 SRC_CLONE_DIR = os.path.join(BASE_DIR, ".bible-study-src")
@@ -305,6 +308,8 @@ def main():
     rules = build_rules()
     busted = 0
     touched = 0
+    vids_removed = 0
+    vid_tabs_dropped = 0
     for fname in sorted(os.listdir(DOCS_DIR)):
         if not fname.endswith(".html"):
             continue
@@ -313,6 +318,18 @@ def main():
         text = original
         for rule in rules:
             text = rule.run(text)
+
+        # New River carries a tighter set of video sources than upstream. That
+        # is why this cannot be a plain mirror: upstream's docs/ contains
+        # players from channels this deployment does not show, so they are
+        # stripped on every sync rather than being hand-removed and then
+        # silently restored by the next one.
+        text, removed, _ = vs.apply_filter(text, vs.NEW_RIVER_ALLOW)
+        vids_removed += removed
+        text, dropped = vs.strip_empty_videos_tab(text)
+        if dropped:
+            vid_tabs_dropped += 1
+
         text, n = cache_bust(text, css_v, js_v)
         busted += n
         if text != original:
@@ -336,6 +353,9 @@ def main():
     for rule in rules:
         print(f"    {rule.name:20} {rule.applied}")
     print(f"  cache-bust      {busted} refs (css v={css_v}, js v={js_v})")
+    print(f"  video filter    {vids_removed} players removed "
+          f"({len(vs.NEW_RIVER_ALLOW)} sources allowed here), "
+          f"{vid_tabs_dropped} empty Videos tabs tidied")
     print(f"  preserved       {len(kept)} New River files")
     print(f"  sermon overlay  {sermons} videos across {len(overlay)} chapters")
     if missing:

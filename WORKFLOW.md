@@ -6,12 +6,18 @@ picking up work here, read this before editing.
 
 ## The invariant
 
-**New River is bible-study with a different palette and its own church's
-sermon videos. Nothing else differs.**
+**New River is bible-study with a different palette, a tighter set of video
+sources, and its own church's sermons. Nothing else differs.**
 
-Every page, every tab, every study note, every general video is the same on both
-sites. If you find any other difference, it is drift and should be corrected,
+Every page, every tab, every study note is the same on both sites. Videos are
+the one content difference, and it is deliberate: bible-study allows 13 sources,
+New River allows 6. Anything else that differs is drift and should be corrected,
 not preserved.
+
+This replaced an earlier and wrong reading. New River once carried 688 videos
+against upstream's 3,617, that was diagnosed as drift, and a sync was written to
+mirror everything. The filtered set was in fact the intent. The sync now enforces
+the filter on every run instead of erasing it.
 
 | | bible-study | bible-study-newriver |
 |---|---|---|
@@ -44,9 +50,48 @@ Deliberately still literal, do not tokenize these:
 - the `theme-color` `<meta>` tag, because a meta tag cannot resolve `var()`
 - per-topic and per-translation accent colors, the intentional splashes of color
 
-**2. New River sermon videos.** Only in `bible-study-newriver`, only in
+**2. Allowed video sources.** Defined in `video_sources.py`, which lives in both
+repos and is the single source of truth. `sync_from_bible_study.py` imports it
+and strips disallowed players on every sync, so the two lists cannot drift.
+
+| source | bible-study | New River |
+|---|---|---|
+| David Guzik | yes | yes |
+| Spoken Gospel | yes | yes |
+| 2BeLikeChrist | yes | yes |
+| Got Questions Ministries | yes | yes |
+| BibleProject | yes | yes |
+| The Chosen | yes | yes |
+| The Daily Devo | yes | no |
+| Mike Winger | yes | no |
+| THE BEAT by Allen Parr | yes | no |
+| Brandon Robbins | yes | no |
+| Impact Video Ministries | yes | no |
+| Give Me An Answer (Knechtle) | yes | no |
+| Wes Huff | yes | no |
+
+Anything not on a list is removed. If a chapter ends up with no players, its
+Videos tab is dropped rather than left as an empty pane.
+
+`ALIASES` in that module exists because three players were captioned
+inconsistently for channels that *are* allowed — two Guzik variants and one
+Knechtle with an HTML-escaped ampersand. Filtering purely by label would have
+deleted them. They are rewritten to the canonical label before filtering.
+
+**No YouTube Shorts, anywhere.** `youtube.com/shorts/<id>` identifies them with
+no API key: a genuine Short serves 200, a normal video 303-redirects to
+`/watch`. 13 were found across 3,631 videos and removed. `check_new_videos.py`
+runs the same test on every new upload and never suggests a Short, while still
+recording it as seen so it is tested once and not raised again.
+
+In both the filter and the weekly check, **only a clean 200 counts as a Short**.
+Anything ambiguous is treated as a normal video, because wrongly flagging a full
+teaching video would hide it from review entirely.
+
+**3. New River sermon videos.** Only in `bible-study-newriver`, only in
 `docs/newriver-videos.json`, never inline in HTML. `docs/site/script.js` renders
-them at runtime keyed by page filename. That script is identical in both repos,
+them at runtime keyed by page filename. These are **not** subject to the allow
+list; they are the church's own. That script is identical in both repos,
 and the file simply does not exist upstream, so the fetch 404s harmlessly there.
 
 ```json
@@ -101,7 +146,7 @@ ones listed above.
 
 ## Adding videos
 
-**General videos** (any of the 17 tracked channels) go in the chapter HTML in
+**General videos** (any of the 13 allowed sources) go in the chapter HTML in
 **bible-study**, then reach New River through a sync. They appear on both sites.
 
 **New River Church videos** go only in
@@ -165,13 +210,16 @@ independent jobs.
 in `.automation/` and reports uploads not seen before. Which channels get
 watched is decided entirely by those files, so one script serves both repos:
 
-- `bible-study` watches **17 general channels**: BibleProject,
-  ImpactVideoMinistries, BrandonRobbinsMinistry, QCSocials, SpokenGospel,
-  MikeWinger, GiveMeAnAnswer, WesHuff, DavidGuzikEnduringWord,
-  TheBeatAllenParr, GotQuestions, TheChosen, TheDailyDevo, CrazyLoveMinistries,
-  GraceFamilyBaptistChurch, LakepointeChurch, 2BeLikeChrist. Approved videos go
-  into the chapter HTML here and reach New River through a sync, so they appear
-  on both sites.
+- `bible-study` watches **13 general channels**: DavidGuzikEnduringWord,
+  SpokenGospel, 2BeLikeChrist, GotQuestions, TheDailyDevo, BibleProject,
+  MikeWinger, TheBeatAllenParr, BrandonRobbinsMinistry, ImpactVideoMinistries,
+  TheChosen, GiveMeAnAnswer, WesHuff. Approved videos go into the chapter HTML
+  here and reach New River through a sync, subject to New River's tighter allow
+  list.
+
+  Four channels were dropped from polling: CrazyLoveMinistries,
+  GraceFamilyBaptistChurch, LakepointeChurch and QCSocials. Their videos were
+  removed from both sites and they are no longer suggested.
 - `bible-study-newriver` watches **New River Church only**. Approved videos go
   into `docs/newriver-videos.json` and never go upstream.
 
