@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "6446f3c5bf607cd0e51ab9fff3913868c25c9ea5 Finish Romans",
+  "upstream_commit": "86e1d56c555f2624a798d28214a295352c89ba20 Finish Mark, and clear the last cut label in the corpus",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
