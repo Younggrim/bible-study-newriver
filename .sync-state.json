@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "23d2ec421297f95bf96511ec1f22fef35fb35f7f Rejoin 30 labels cut at the wrong colon, and finish Exodus, Ephesians, Galatians, Hebrews",
+  "upstream_commit": "4e5d4ebafdf2369fd6a1e779338d97bc3976d454 Add label checks to the audit, and merge 26 sentence-fragment labels back",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
