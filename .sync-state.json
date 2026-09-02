@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "e0752d887e8fb5f7534fb681f1248cff11ed0cf4 Fold three chapters that were being counted as done, and fix the count",
+  "upstream_commit": "7a6c6341e06ea0254f5031f7de33c9ac964ce974 Fold Daniel 1 to 6, the narrative half",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
