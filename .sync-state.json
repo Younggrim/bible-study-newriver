@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "2db489425fb92862e3137b592452c05c34496056 Complete Hosea and Zechariah, rejoin split hyphenations corpus-wide",
+  "upstream_commit": "68c99c7b82b8c5864d4261dff5c27cc3bdd0a30b Close the 45 pages with small coverage and label defects",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
