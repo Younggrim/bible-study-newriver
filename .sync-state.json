@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "bdb2b92659140a6a53d1bb68f39d1acb00a8c966 Finish 2 Corinthians, and check that sections run in verse order",
+  "upstream_commit": "6446f3c5bf607cd0e51ab9fff3913868c25c9ea5 Finish Romans",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
