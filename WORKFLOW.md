@@ -419,6 +419,14 @@ substance into the prose, or keep it. Genesis 1's list stated the forming/fillin
 pattern of the six days, which is the organising insight of the chapter and not an
 outline of it; it was folded into the day sections rather than deleted.
 
+That test is necessary but **not sufficient**. Joshua 12's sublist has a verse
+range on all six items, so the rule above would clear it for deletion, yet it is a
+regional breakdown of the 31-king ledger that the two sections never restate —
+Jericho and Ai, the southern coalition, the central region, the northern coalition.
+Deleting it would have lost every place name in the chapter. Before dropping a
+list, check that the sections actually say the same thing. If they do not, the list
+is content whatever its items look like, and its substance goes into the prose.
+
 ```python
 items = re.findall(r'<li>(.*?)</li>', pane, re.S)
 plain = [i for i in items if not re.search(r'\(vv?\.\s*\d', i)]

@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "837070c1c44afa74c481f41e06ed8f710fba4fc6 Fold the four remaining tracked openers, and guard non-outline sublists",
+  "upstream_commit": "3b1a6ea6d5db836082bd3798cc5d9be51be08db8 Relabel six chapters whose section headings sat in the body text",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
