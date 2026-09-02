@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "8552fed3a2a4cc037ccd5b51368967571d928262 Finish 1 Samuel",
+  "upstream_commit": "7a680f1b575c31616853728f60090ec249aa09d1 Finish 1 Corinthians, and catch labels cut between chapter and verse",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
