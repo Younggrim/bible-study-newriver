@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "d45a116e54cffd72b996de502687dfa9c2aed0f2 Finish seven books: Job, 2 Samuel, Ruth, Titus, Colossians, 1 Peter, 1 Thessalonians",
+  "upstream_commit": "23d2ec421297f95bf96511ec1f22fef35fb35f7f Rejoin 30 labels cut at the wrong colon, and finish Exodus, Ephesians, Galatians, Hebrews",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
