@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "e0752d887e8fb5f7534fb681f1248cff11ed0cf4 Fold three chapters that were being counted as done, and fix the count",
+  "upstream_commit": "6cecc61b29015e8180f08a2ffb9644e20a394f22 Complete Daniel: chapters 7, 8, 10, 11 and 12, the vision half",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
