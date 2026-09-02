@@ -402,6 +402,56 @@ skeleton**. It already names each movement and its verse range; carry the
 headings over unchanged and replace the bullets with exposition. That is how
 Jonah was done.
 
+### Counting what is done: the label must END with the range
+
+A section heading looks like `Seventy Weeks (vv.24-27):` — the range is the last
+thing before the colon. Do **not** count a pane as folded merely because some label
+contains a range. Three pages were miscounted for exactly that reason, because they
+carried a sentence fragment as a label:
+
+```
+Daniel's prayer (vv.4-19) is entirely about GOD:
+The boiling pot parable (vv.3-14) echoes Ezekiel 11:
+The comparison to Sodom (v.6) is devastating:
+```
+
+The loose test reported 647 done and 48 complete books. The strict test reported 644
+and 47 — Lamentations was being called complete while `lamentations4` had never been
+folded. Use this:
+
+```python
+TAIL = re.compile(r'\(vv?\.[\d]+[a-z]?(?:[-,:\s]+[\d]+[a-z]?)*\)\s*:\s*$')
+done = any(TAIL.search(l if l.endswith(':') else l + ':') for l in labels)
+```
+
+Two related traps, both real: the `Mark 13:` / `This passage (4:` class, where a
+label was cut at the colon of a verse reference, and the Luke 5/6/10 class, where
+substantive topical labels cover only part of a chapter. **Always measure coverage
+against the actual verse count.** Luke 1 was carrying four verses of eighty.
+
+### Deferred: the Author / Key themes audit
+
+Not to be done piecemeal. `Author:` currently has three shapes across the 1189 pages:
+
+| shape | pages |
+|---|---|
+| pointer, e.g. `Paul (see Chapter 1 notes...)` | 498 |
+| full paragraph ending `Key themes: ...` | 386 |
+| full paragraph, no themes | 305 |
+
+The 386 embedded theme strings are **book-level** and there are only **13 distinct
+ones** — one is repeated 150 times, on every Psalm. A separate `Key Themes:` field
+is chapter-level, and 151 pages already carry both scopes.
+
+Agreed plan, to run as a single audit **after all folding is finished**: `Author:`
+holds authorship only, everywhere; chapter-level `Key Themes:` on every page. That
+gives one uniform shape — Author, Classification, Key Themes, Historical Context,
+sections. Two pieces of work, in this order so no page is ever left without themes:
+
+1. write chapter-level `Key Themes:` for the **122** already-folded pages that have
+   only the embedded book-level ones (mostly 1-2 Kings, 1-2 Chronicles)
+2. strip `Key themes:` and everything after it from `Author:` on the 386
+
 ### Sublists: check before you drop one
 
 455 panes still carry a `<ul class="auth-sublist">`. Most are verse-range
