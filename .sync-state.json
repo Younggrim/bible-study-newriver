@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "fcc542f5340793595c0b500a5ab569ee9759e2f9 Split the Classification field, which held two or three fields in one div",
+  "upstream_commit": "1933d8e4e51eec6e0b0220cd6bd33b3476135fb1 Fold Haggai, Nahum and Habakkuk: three complete books, eight chapters",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
