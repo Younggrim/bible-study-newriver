@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "5e9c3a262796535aaa0cf7a45fc1a3b2575afb86 Complete John: chapters 1, 2, 3, 4, 5, 6, 7, 10, 14, 17, 19 and 21",
+  "upstream_commit": "a10585739c19eb0e4af448c63101f5e3eef4ec1d Complete Joshua and normalise pane punctuation corpus-wide",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
