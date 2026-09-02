@@ -402,6 +402,37 @@ skeleton**. It already names each movement and its verse range; carry the
 headings over unchanged and replace the bullets with exposition. That is how
 Jonah was done.
 
+### Sublists: check before you drop one
+
+455 panes still carry a `<ul class="auth-sublist">`. Most are verse-range
+outlines, and replacing them with sections loses nothing. **13 are not**, and a
+fold that captures only `auth-item` divs will silently delete them:
+
+```
+genesis1   isaiah53   proverbs25   proverbs26   revelation6
+songofsolomon1 2 3 4 5 6 7 8
+```
+
+Rule: a sublist may be dropped only when **every** `<li>` carries a verse range.
+If any item does not, the list is content rather than an outline — carry its
+substance into the prose, or keep it. Genesis 1's list stated the forming/filling
+pattern of the six days, which is the organising insight of the chapter and not an
+outline of it; it was folded into the day sections rather than deleted.
+
+```python
+items = re.findall(r'<li>(.*?)</li>', pane, re.S)
+plain = [i for i in items if not re.search(r'\(vv?\.\s*\d', i)]
+if plain:
+    raise SystemExit(f'{page}: {len(plain)} non-outline sublist items')
+```
+
+Two other pane elements are easy to lose. A **headless** `auth-item` with no
+`auth-label` may be a heading for the sublist below it, in which case it goes with
+the list — or it may be a standalone note worth keeping, as with Acts 1's "Began
+both to do and teach" and Romans 12's "Therefore". Distinguish by whether a
+sublist follows. And a `Structure:` field holding prose rather than bullets is
+still an outline the sections supersede, so drop it, but say so in the commit.
+
 Target totals, matching what Ruth and Jonah landed at:
 
 | chapter length | sections | pane total |
