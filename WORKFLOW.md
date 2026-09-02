@@ -347,6 +347,140 @@ grep -l $'\ufffd' docs/*.html | wc -l
 
 A full audit takes about a minute.
 
+## Authorship & Background: the target format
+
+Every chapter's Authorship & Background pane must end up in this shape. Jonah 1-4
+is the reference implementation; read `jonah1.html` beside `ruth1.html` before
+starting a new book.
+
+**Status: 559 of 1189 chapters done. 630 remaining.**
+
+### Field order, exactly
+
+```
+Author:              book level. Identical on every chapter of a book.
+Classification:      genre only, one line. "Prophetic Narrative", "Wisdom
+                     Poetry", "Historical Narrative", "Epistle".
+Key Themes:          its own field. Never appended to Classification.
+Historical Context:  chapter level. What this chapter is doing and the
+                     historical or cultural background needed to read it.
+<verse-range sections>   one per movement of the chapter, in verse order.
+```
+
+Only `Historical Context:` and the verse-range sections carry chapter-specific
+content. `Author:` is book level and repeats. Everything else is structural and
+must match across all 1189 chapters.
+
+### Markup, exactly
+
+```html
+                    <div class="auth-item"><span class="auth-label">Classification:</span> Prophetic Narrative</div>
+```
+
+One `auth-item` div per field. The label goes in `auth-label`, the body follows
+the closing `</span>` after a single space. No `<ul>`, no `auth-sublist`, no
+bulleted `Structure:` outline — those are what the fold replaces.
+
+### Verse-range sections
+
+The heading names the movement and its verses, then a colon:
+
+```
+The Call: Go to Nineveh (vv.1-2):
+Deliverance: Thou Hast Brought Up My Life (v.6b):
+```
+
+Each body is one paragraph of continuous prose, roughly 500-900 characters.
+Not a summary of what happens — the reader has the text on the same page. It
+should carry what the reader would otherwise miss: historical or cultural
+background, the force of a Hebrew or Greek word, a cross-reference that explains
+the passage, a structural pattern in the chapter, or an honest note where the
+text is ambiguous.
+
+Where a chapter already has a bulleted `Structure:` outline, **use it as the
+skeleton**. It already names each movement and its verse range; carry the
+headings over unchanged and replace the bullets with exposition. That is how
+Jonah was done.
+
+Target totals, matching what Ruth and Jonah landed at:
+
+| chapter length | sections | pane total |
+|---|---|---|
+| short, under 20 verses | 4-5 | 3,000-4,000 chars |
+| typical, 20-40 verses | 5-7 | 4,000-5,500 chars |
+| long, over 40 verses | 6-8 | 5,000-6,500 chars |
+
+### Prose style
+
+**No emphatic capitals.** Some existing paragraphs shout — "a NARRATIVE about
+the prophet", "he wants them DESTROYED", "always DOWNWARD". 413 chapters carry
+1,115 such words. Write sentence case and normalize them when folding a book.
+
+Never lowercase: `LORD`, `GOD` where the source has it for the divine name,
+`YHWH`, translation abbreviations (`ESV`, `KJV`, `ASV`, `NET`, `WEB`, `BSB`),
+`NT`, `OT`, `BC`, `AD`, and Roman numerals.
+
+### Two things that will bite
+
+**Div balance.** The authorship pane's captured region runs up to the next
+`tab-content` div, so it **includes the pane's own closing `</div>`**. A
+replacement that rebuilds the body must put that tag back. Always count
+`<div` against `</div>` and refuse to write when they disagree — this caught a
+real bug on the first Jonah run.
+
+**Counting sections.** A verse label can carry a letter suffix, as in
+`(vv.5-6a)` and `(v.6b)`. This regex undercounts:
+
+```
+\(vv?\.[\d:,\s-]+\)          WRONG - reads Jonah 2 as 5 sections, not 7
+\(vv?\.[\d]+[a-z]?(?:[-,:\s]+[\d]+[a-z]?)*\)     correct
+```
+
+### Finding what is left
+
+```bash
+python3 - <<'PY'
+import os, re
+VR = re.compile(r'\(vv?\.[\d]+[a-z]?(?:[-,:\s]+[\d]+[a-z]?)*\)')
+todo = {}
+for n in sorted(os.listdir('docs')):
+    if not re.match(r'^[a-z0-9]+\d+\.html$', n) or n == '404.html':
+        continue
+    t = open(f'docs/{n}', encoding='utf-8').read()
+    m = re.search(r'id="tab-authorship">(.*?)(?=<div class="tab-content")', t, re.S)
+    if not m:
+        continue
+    labels = re.findall(r'class="auth-label">([^<]+)</span>', m.group(1))
+    if not any(VR.search(l) for l in labels):
+        book = re.match(r'^([a-z0-9]+?)\d+', n).group(1)
+        todo.setdefault(book, []).append(n)
+for b, v in sorted(todo.items(), key=lambda x: -len(x[1])):
+    print(f"{b:16} {len(v):>3}")
+print("total:", sum(len(v) for v in todo.values()))
+PY
+```
+
+### Books with nothing yet
+
+Psalms 150, Isaiah 66, Jeremiah 52, Ezekiel 46, 2 Chronicles 36, Proverbs 31,
+1 Chronicles 29, Ezra 10, Nehemiah 13, Esther 10, Ecclesiastes 12, Song of
+Solomon 8, and all twelve Minor Prophets except Jonah.
+
+Partly done: Matthew 14 of 28, Exodus 13 of 40, Joshua 13 of 24, John 12 of 21.
+
+Do a book at a time and stop for review before starting the next. **Psalms
+last** — 150 chapters of poetry needs different treatment from narrative, and
+the pattern should be settled on prose books first.
+
+### The 27 book-opening pages: leave them
+
+These lack a literal `Historical Context:` label and that is correct. They are
+book introductions carrying the same substance under more specific headings:
+1 Corinthians 1 has `Corinth:`, Galatians 1 has `The Crisis:`, Revelation 1 has
+`Setting:`, Titus 1 has `Crete:`. Adding a generic field beside a specific one
+makes the page worse. They still need verse-range sections like any other
+chapter.
+
 ## Deploys
 
 Both repos deploy to GitHub Pages via `static.yml`, triggered only by a push to

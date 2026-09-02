@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "669ed7ac290b3e16c15bb68a0192a7b5b072ef26 Fold Jonah onto the target Authorship & Background format",
+  "upstream_commit": "2c1b4e203a15f4d43034ba8fcc33b8375246422b Normalize emphatic capitals in Authorship, and spec the target format",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
