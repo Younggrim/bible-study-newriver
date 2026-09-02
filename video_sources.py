@@ -55,6 +55,16 @@ NEW_RIVER_ALLOW = {
     "The Chosen",
 }
 
+# Individual videos to keep off both sites even though their channel is allowed.
+# Deleting a player from the HTML is not enough on its own: the channel stays in
+# the allow list, so the next sync or re-run of filter_videos.py would let it back.
+# Keyed by YouTube id, with the reason, because "why was this dropped" is the
+# question anyone will have later.
+DROP_VIDEO_IDS = {
+    "bk0fGfS9KVw": "BibleProject 'Season 7 Preview: Visual Commentary - Genesis 1' "
+                   "-- a series trailer rather than teaching on the chapter",
+}
+
 FACADE_OPEN = '<div class="yt-facade"'
 
 
@@ -93,9 +103,12 @@ def players(text):
 
 
 def apply_filter(text, allow, drop_ids=()):
-    """Remove players whose channel is not allowed, or whose id is in drop_ids.
-    Also rewrites alias labels to their canonical form so the page and the
-    filter agree. Returns (new_text, removed_count, relabelled_count)."""
+    """Remove players whose channel is not allowed, or whose id is dropped.
+    DROP_VIDEO_IDS always applies; drop_ids adds to it, which is how
+    filter_videos.py passes the Shorts it found. Also rewrites alias labels to
+    their canonical form so the page and the filter agree.
+    Returns (new_text, removed_count, relabelled_count)."""
+    drop_ids = set(drop_ids) | set(DROP_VIDEO_IDS)
     removed = relabelled = 0
     # right to left so earlier offsets stay valid
     for start, end, vid, label in sorted(players(text), reverse=True):
