@@ -450,10 +450,20 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="moab,sinai,canaan"></div>
                 <ul>
-                    <li>Moses speaks from the plains of <a href="https://en.wikipedia.org/wiki/Moab" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Moab</a>. He recounts the golden calf at <a href="https://en.wikipedia.org/wiki/Mount_Sinai" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Horeb</a> and the events at Taberah, Massah, and Kibroth-hattaavah (v.22).</li>
-                    <li>&quot;The Anakim&quot; (v.2): The giant inhabitants of <a href="https://en.wikipedia.org/wiki/Canaan" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Canaan</a>&#x27;s hill country whom Israel must now face.</li>
+                    <li>Moses speaks from the plains of <a class="geo-ref" href="#geo-note-moab">Moab</a>. He recounts the golden calf at <a class="geo-ref" href="#geo-note-sinai">Horeb</a> and the events at Taberah, Massah, and Kibroth-hattaavah (v.22).</li>
+                    <li>&quot;The Anakim&quot; (v.2): The giant inhabitants of <a class="geo-ref" href="#geo-note-canaan">Canaan</a>&#x27;s hill country whom Israel must now face.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-moab" data-place="moab"><span class="geo-name">Moab</span><span class="geo-where">west-central Jordan</span><span class="geo-note">The plateau east of the Dead Sea, cut off from Israel by the rift valley and from Ammon by the Arnon gorge. High enough to farm grain, which is why Naomi's family went there in a famine. <a class="geo-more" href="https://en.wikipedia.org/wiki/Moab" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-sinai" data-place="sinai"><span class="geo-name">Mount Sinai</span><span class="geo-where">Jebel Musa, Sinai Peninsula, Egypt</span><span class="geo-note">Traditionally Jebel Musa in the granite mountains of the southern Sinai peninsula, about 7,500 feet high. The identification dates from Christian monastic tradition rather than from the text, and other candidates have been proposed, but this has been the pilgrimage site since the fourth century. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mount_Sinai" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-canaan" data-place="canaan"><span class="geo-name">Canaan</span><span class="geo-where">Israel, West Bank, Lebanon</span><span class="geo-note">The land bridge between Egypt and Mesopotamia, which is why armies crossed it for three thousand years. Within about 60 miles it goes from coastal plain to hill country to rift valley to desert plateau, so control of it was always local and piecemeal. <a class="geo-more" href="https://en.wikipedia.org/wiki/Canaan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -486,5 +496,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

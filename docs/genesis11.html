@@ -496,12 +496,24 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="babylon,harran,canaan,ur,mesopotamia"></div>
                 <ul>
                     <li>Shinar (v.2) — the plain of Babylonia (modern southern Iraq). The people migrate eastward (away from God&#x27;s presence, the recurring Genesis pattern).</li>
-                    <li>Babel (v.9) — <a href="https://en.wikipedia.org/wiki/Babylon" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Babylon</a>, one of the most significant cities in ancient history. Its name means &quot;gate of god&quot; but is linked to &quot;confusion&quot; (balal).</li>
+                    <li>Babel (v.9) — <a class="geo-ref" href="#geo-note-babylon">Babylon</a>, one of the most significant cities in ancient history. Its name means &quot;gate of god&quot; but is linked to &quot;confusion&quot; (balal).</li>
                     <li>Ur of the Chaldees (v.28) — Abram&#x27;s origin city in southern Mesopotamia (modern Tell el-Muqayyar, Iraq). A major Sumerian urban center.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Harran" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Haran</a> (v.31) — a city in northwest Mesopotamia (modern Harran, Turkey), a caravan crossroads on the route between Ur and <a href="https://en.wikipedia.org/wiki/Canaan" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Canaan</a>.</li>
+                    <li><a class="geo-ref" href="#geo-note-harran">Haran</a> (v.31) — a city in northwest Mesopotamia (modern Harran, Turkey), a caravan crossroads on the route between Ur and <a class="geo-ref" href="#geo-note-canaan">Canaan</a>.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-babylon" data-place="babylon"><span class="geo-name">Babylon</span><span class="geo-where">near Hillah, Iraq</span><span class="geo-note">On the Euphrates about 55 miles south of modern Baghdad. Judah's exiles were marched roughly 900 miles to get here, the long way round the Arabian desert, which is why the journey took months and the return was a genuine undertaking rather than a short trip home. <a class="geo-more" href="https://en.wikipedia.org/wiki/Babylon" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-harran" data-place="harran"><span class="geo-name">Harran</span><span class="geo-where">Harran, Turkey</span><span class="geo-note">A caravan town on the Balikh, a tributary of the Euphrates in northern Mesopotamia. Abraham's family stopped here on the way from Ur, and it stayed the family's home ground: Isaac's and Jacob's wives were both fetched from it. <a class="geo-more" href="https://en.wikipedia.org/wiki/Harran" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-canaan" data-place="canaan"><span class="geo-name">Canaan</span><span class="geo-where">Israel, West Bank, Lebanon</span><span class="geo-note">The land bridge between Egypt and Mesopotamia, which is why armies crossed it for three thousand years. Within about 60 miles it goes from coastal plain to hill country to rift valley to desert plateau, so control of it was always local and piecemeal. <a class="geo-more" href="https://en.wikipedia.org/wiki/Canaan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-ur" data-place="ur"><span class="geo-name">Ur</span><span class="geo-where">Tell el-Muqayyar, Iraq</span><span class="geo-note">A Sumerian city near the lower Euphrates, once close to the head of the Persian Gulf before the coastline moved. Leaving it for Canaan meant leaving one of the most developed places on earth for hill country. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ur" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mesopotamia" data-place="mesopotamia"><span class="geo-name">Mesopotamia</span><span class="geo-where">Iraq and eastern Syria</span><span class="geo-note">The land between the Tigris and Euphrates, flat, hot and farmable only by irrigation, which forced early cities into large-scale cooperation. Abraham came from its southern end and Israel's exiles were taken to its middle. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mesopotamia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -533,5 +545,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

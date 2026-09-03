@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bible-study-v8';
+const CACHE_NAME = 'bible-study-v9';
 const VAPID_PUBLIC_KEY = 'BBXso6T-C1Ft59FLWrdRfANGYtKm21CHUktfb0rsmfDZOEJSFyn5Y62f2ZaFMr0PxiPCIyN9Wm6_8MxXMQ6AGuY';
 const PUSH_WORKER = 'https://devotional-push.cloudflare-dust598.workers.dev';
 
@@ -9,7 +9,11 @@ self.addEventListener('install', event => {
       return cache.addAll([
         '/index.html',
         '/site/style.css',
-        '/site/script.js'
+        '/site/script.js',
+        // The Map & Geography basemap. Precached so the maps survive going
+        // offline, which is the reason it is self-hosted vector data rather
+        // than tiles from a service.
+        '/site/mapgeo.js'
       ]);
     })
   );

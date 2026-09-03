@@ -379,11 +379,22 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="ammon,jordan_river,jerusalem,aram"></div>
                 <ul>
-                    <li>Rabbah (of <a href="https://en.wikipedia.org/wiki/Ammon" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Ammon</a>): The Ammonite capital (modern Amman, <a href="https://en.wikipedia.org/wiki/Jordan_River" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jordan</a>) — besieged by Joab while David stays in <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a></li>
+                    <li>Rabbah (of <a class="geo-ref" href="#geo-note-ammon">Ammon</a>): The Ammonite capital (modern Amman, <a class="geo-ref" href="#geo-note-jordan_river">Jordan</a>) — besieged by Joab while David stays in <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a></li>
                     <li>The &quot;city of waters&quot; (12:27): Joab captures the water supply of Rabbah before David arrives for the final assault</li>
-                    <li>Medeba/Helam: Where the Aramean allies of <a href="https://en.wikipedia.org/wiki/Ammon" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Ammon</a> are defeated in separate battles north and east of Israel</li>
+                    <li>Medeba/Helam: Where the Aramean allies of <a class="geo-ref" href="#geo-note-ammon">Ammon</a> are defeated in separate battles north and east of Israel</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-ammon" data-place="ammon"><span class="geo-name">Ammon</span><span class="geo-where">Amman, Jordan</span><span class="geo-note">The plateau at the desert's edge east of Gilead, with its capital Rabbah at the head of a wadi where modern Amman still preserves the name. Squeezed between the desert and Israel, it spent its history pushing west whenever Israel was weak. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ammon" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jordan_river" data-place="jordan_river"><span class="geo-name">Jordan River</span><span class="geo-where">Israel / Jordan border</span><span class="geo-note">Runs about 65 miles as the crow flies from the Sea of Galilee to the Dead Sea, dropping from 700 to 1,400 feet below sea level. Narrow enough to wade at most fords, it was still the boundary that divided wilderness from inheritance. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jordan_River" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-aram" data-place="aram"><span class="geo-name">Aram</span><span class="geo-where">Syria</span><span class="geo-note">The Syrian interior north-east of Israel, a set of city-states rather than one kingdom, with Damascus the strongest. Aramaic, its language, became the everyday speech of the whole region including Judea. <a class="geo-more" href="https://en.wikipedia.org/wiki/Aram_(region)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -416,5 +427,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

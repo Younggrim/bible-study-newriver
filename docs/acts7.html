@@ -592,11 +592,24 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="jerusalem,canaan,egypt,sinai,mesopotamia,tarsus"></div>
                 <ul>
-                    <li><a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> / the Sanhedrin: Stephen&#x27;s speech was delivered before the Sanhedrin (Jewish council) in Jerusalem.</li>
-                    <li>Stephen traces Israel&#x27;s geographic history: Mesopotamia (Abraham&#x27;s origin), <a href="https://en.wikipedia.org/wiki/Canaan" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Canaan</a>, <a href="https://en.wikipedia.org/wiki/Ancient_Egypt" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Egypt</a>, <a href="https://en.wikipedia.org/wiki/Mount_Sinai" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Sinai</a>, and the Promised Land — showing that God was never confined to the Temple.</li>
-                    <li>&quot;Outside the city&quot; (v.58): Stephen was stoned outside the walls of <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a>. Saul of Tarsus watched and approved.</li>
+                    <li><a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> / the Sanhedrin: Stephen&#x27;s speech was delivered before the Sanhedrin (Jewish council) in Jerusalem.</li>
+                    <li>Stephen traces Israel&#x27;s geographic history: Mesopotamia (Abraham&#x27;s origin), <a class="geo-ref" href="#geo-note-canaan">Canaan</a>, <a class="geo-ref" href="#geo-note-egypt">Egypt</a>, <a class="geo-ref" href="#geo-note-sinai">Sinai</a>, and the Promised Land — showing that God was never confined to the Temple.</li>
+                    <li>&quot;Outside the city&quot; (v.58): Stephen was stoned outside the walls of <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a>. Saul of Tarsus watched and approved.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-canaan" data-place="canaan"><span class="geo-name">Canaan</span><span class="geo-where">Israel, West Bank, Lebanon</span><span class="geo-note">The land bridge between Egypt and Mesopotamia, which is why armies crossed it for three thousand years. Within about 60 miles it goes from coastal plain to hill country to rift valley to desert plateau, so control of it was always local and piecemeal. <a class="geo-more" href="https://en.wikipedia.org/wiki/Canaan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-egypt" data-place="egypt"><span class="geo-name">Egypt</span><span class="geo-where">Egypt</span><span class="geo-note">A ribbon of irrigated land along the Nile, ending in the Delta where Israel settled in Goshen. Rain-fed Canaan depended on weather; Egypt depended on a river that flooded on schedule, which made it the place everyone went when the harvest failed. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ancient_Egypt" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-sinai" data-place="sinai"><span class="geo-name">Mount Sinai</span><span class="geo-where">Jebel Musa, Sinai Peninsula, Egypt</span><span class="geo-note">Traditionally Jebel Musa in the granite mountains of the southern Sinai peninsula, about 7,500 feet high. The identification dates from Christian monastic tradition rather than from the text, and other candidates have been proposed, but this has been the pilgrimage site since the fourth century. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mount_Sinai" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mesopotamia" data-place="mesopotamia"><span class="geo-name">Mesopotamia</span><span class="geo-where">Iraq and eastern Syria</span><span class="geo-note">The land between the Tigris and Euphrates, flat, hot and farmable only by irrigation, which forced early cities into large-scale cooperation. Abraham came from its southern end and Israel's exiles were taken to its middle. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mesopotamia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-tarsus" data-place="tarsus"><span class="geo-name">Tarsus</span><span class="geo-where">Tarsus, Turkey</span><span class="geo-note">On the Cilician plain a few miles up a navigable river from the sea, below the pass through the Taurus called the Cilician Gates. A university town and a Roman citizen colony, which explains a good deal about Paul. <a class="geo-more" href="https://en.wikipedia.org/wiki/Tarsus,_Mersin" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -630,5 +643,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

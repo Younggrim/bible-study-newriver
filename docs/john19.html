@@ -494,12 +494,21 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="jerusalem,calvary"></div>
                 <ul>
-                    <li>The Praetorium (v.9): Pilate&#x27;s judgment hall in <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> where Jesus was scourged and sentenced.</li>
+                    <li>The Praetorium (v.9): Pilate&#x27;s judgment hall in <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> where Jesus was scourged and sentenced.</li>
                     <li>Gabbatha / the Pavement (v.13): The stone pavement where Pilate rendered his verdict. A raised platform for public judgment.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Calvary" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Golgotha</a> (v.17): &quot;The place of a skull&quot; — outside <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a>&#x27;s walls. John preserves the Hebrew/Aramaic name.</li>
-                    <li>A garden near <a href="https://en.wikipedia.org/wiki/Calvary" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Golgotha</a> (v.41): Joseph of Arimathea&#x27;s tomb was in a garden near the crucifixion site — a new tomb where Jesus was buried.</li>
+                    <li><a class="geo-ref" href="#geo-note-calvary">Golgotha</a> (v.17): &quot;The place of a skull&quot; — outside <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a>&#x27;s walls. John preserves the Hebrew/Aramaic name.</li>
+                    <li>A garden near <a class="geo-ref" href="#geo-note-calvary">Golgotha</a> (v.41): Joseph of Arimathea&#x27;s tomb was in a garden near the crucifixion site — a new tomb where Jesus was buried.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-calvary" data-place="calvary"><span class="geo-name">Calvary</span><span class="geo-where">Church of the Holy Sepulchre, Jerusalem</span><span class="geo-note">Golgotha, place of a skull, was an outcrop of rock beside a road just outside the city wall of the time, next to a disused quarry used for tombs. The wall was later extended, which is why the traditional site now sits inside the Old City. <a class="geo-more" href="https://en.wikipedia.org/wiki/Calvary" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -535,5 +544,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

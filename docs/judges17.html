@@ -344,11 +344,20 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="bethlehem,ephraim"></div>
                 <ul>
                     <li>&quot;The hill country of Ephraim&quot; (v.1): The central highlands where Micah lives — unspecified location</li>
-                    <li>This chapter is set in the Ephraimite hills; the Levite comes from <a href="https://en.wikipedia.org/wiki/Bethlehem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Bethlehem</a>-judah (far south) to serve in a private shrine</li>
+                    <li>This chapter is set in the Ephraimite hills; the Levite comes from <a class="geo-ref" href="#geo-note-bethlehem">Bethlehem</a>-judah (far south) to serve in a private shrine</li>
                     <li>The geography highlights lawlessness even in the central heartland of Israel</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-bethlehem" data-place="bethlehem"><span class="geo-name">Bethlehem</span><span class="geo-where">Bethlehem, West Bank</span><span class="geo-note">A small town on the ridge road five miles south of Jerusalem, at the edge of the cultivated land before the Judean wilderness. Its name means house of bread, and its terraced barley fields are where Ruth gleaned and where David kept sheep. <a class="geo-more" href="https://en.wikipedia.org/wiki/Bethlehem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-ephraim" data-place="ephraim"><span class="geo-name">Ephraim</span><span class="geo-where">central West Bank</span><span class="geo-note">The central hill country north of Benjamin, the largest and best watered of the northern territories. It dominated the north so thoroughly that the prophets use Ephraim to mean the whole northern kingdom. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ephraim" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -380,5 +389,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

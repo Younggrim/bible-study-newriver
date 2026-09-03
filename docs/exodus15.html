@@ -452,11 +452,19 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="red_sea"></div>
                 <ul>
-                    <li>The eastern shore of the <a href="https://en.wikipedia.org/wiki/Red_Sea" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Red Sea</a>: Israel sings the victory song on the far side of the crossing.</li>
+                    <li>The eastern shore of the <a class="geo-ref" href="#geo-note-red_sea">Red Sea</a>: Israel sings the victory song on the far side of the crossing.</li>
                     <li>Marah (v.23): &quot;Bitter&quot; — three days into the Wilderness of Shur, they find water but it is undrinkable. God makes it sweet.</li>
                     <li>Elim (v.27): An oasis with twelve wells and seventy palm trees — provision and rest after testing.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-red_sea" data-place="red_sea"><span class="geo-name">Red Sea</span><span class="geo-where">Egypt, Sudan, Saudi Arabia</span><span class="geo-note">The Hebrew yam suph, sea of reeds, covers the Red Sea proper and its two northern arms, the Gulf of Suez and the Gulf of Aqaba, along with the marshy lakes between. Which of them Israel crossed is debated; the northern route is the usual reconstruction. <a class="geo-more" href="https://en.wikipedia.org/wiki/Red_Sea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -491,5 +499,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

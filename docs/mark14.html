@@ -636,12 +636,24 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="bethany,mount_of_olives,jerusalem,gethsemane,kidron"></div>
                 <ul>
-                    <li><a href="https://en.wikipedia.org/wiki/Bethany_(biblical_village)" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Bethany</a> (v.3): The anointing occurred at Simon the leper&#x27;s house in Bethany, on the eastern slope of the <a href="https://en.wikipedia.org/wiki/Mount_of_Olives" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Mount of Olives</a>.</li>
-                    <li>The Upper Room (v.15): A large furnished room in <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> where Jesus celebrated the Last Supper.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Gethsemane" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Gethsemane</a> (v.32): A garden on the western slope of the <a href="https://en.wikipedia.org/wiki/Mount_of_Olives" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Mount of Olives</a>, across the <a href="https://en.wikipedia.org/wiki/Kidron_Valley" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Kidron Valley</a> from the Temple. Jesus prayed and was arrested here.</li>
-                    <li>The High Priest&#x27;s palace (v.53): Caiaphas&#x27;s residence in <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> where Jesus was tried by the Sanhedrin.</li>
+                    <li><a class="geo-ref" href="#geo-note-bethany">Bethany</a> (v.3): The anointing occurred at Simon the leper&#x27;s house in Bethany, on the eastern slope of the <a class="geo-ref" href="#geo-note-mount_of_olives">Mount of Olives</a>.</li>
+                    <li>The Upper Room (v.15): A large furnished room in <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> where Jesus celebrated the Last Supper.</li>
+                    <li><a class="geo-ref" href="#geo-note-gethsemane">Gethsemane</a> (v.32): A garden on the western slope of the <a class="geo-ref" href="#geo-note-mount_of_olives">Mount of Olives</a>, across the <a class="geo-ref" href="#geo-note-kidron">Kidron Valley</a> from the Temple. Jesus prayed and was arrested here.</li>
+                    <li>The High Priest&#x27;s palace (v.53): Caiaphas&#x27;s residence in <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> where Jesus was tried by the Sanhedrin.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-bethany" data-place="bethany"><span class="geo-name">Bethany</span><span class="geo-where">al-Eizariya, West Bank</span><span class="geo-note">A village on the east slope of the Mount of Olives, under two miles from Jerusalem but out of sight of it. Close enough for Jesus to lodge here through the last week and walk in each morning. <a class="geo-more" href="https://en.wikipedia.org/wiki/Bethany_(biblical_village)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mount_of_olives" data-place="mount_of_olives"><span class="geo-name">Mount of Olives</span><span class="geo-where">Jerusalem</span><span class="geo-note">A limestone ridge just east of Jerusalem, separated from the city by the Kidron Valley and about 250 feet higher, so it looks straight down into the temple courts. The road to Jericho and Bethany crosses it, which is why Jesus is so often on it. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mount_of_Olives" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-gethsemane" data-place="gethsemane"><span class="geo-name">Gethsemane</span><span class="geo-where">Jerusalem</span><span class="geo-note">An olive grove at the foot of the Mount of Olives, just across the Kidron from the temple. The name means oil press. It was outside the walls but minutes from them, which is why an arrest there could be made quietly at night. <a class="geo-more" href="https://en.wikipedia.org/wiki/Gethsemane" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-kidron" data-place="kidron"><span class="geo-name">Kidron Valley</span><span class="geo-where">Jerusalem</span><span class="geo-note">The dry ravine between Jerusalem and the Mount of Olives, dropping steeply below the temple's eastern wall. It ran with the runoff of sacrifice and became the city's dumping ground for idols, and it is the valley David crossed fleeing Absalom and Jesus crossed to Gethsemane. <a class="geo-more" href="https://en.wikipedia.org/wiki/Kidron_Valley" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -679,5 +691,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

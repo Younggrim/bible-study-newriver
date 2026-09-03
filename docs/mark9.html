@@ -522,11 +522,22 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="mount_hermon,caesarea_philippi,galilee,capernaum"></div>
                 <ul>
-                    <li>&quot;A high mountain&quot; (v.2): The Transfiguration occurred on a high mountain, likely <a href="https://en.wikipedia.org/wiki/Mount_Hermon" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Mount Hermon</a> near <a href="https://en.wikipedia.org/wiki/Caesarea_Philippi" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Caesarea Philippi</a> (the location of ch.8). At ~9,200 feet, it dominates the northern landscape.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Galilee</a> (v.30): Jesus passed through Galilee privately, heading south. He did not want anyone to know — this was a time for private teaching of the disciples.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Capernaum" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Capernaum</a> (v.33): Jesus returned to Capernaum where the disciples argued about greatness &quot;in the house.&quot;</li>
+                    <li>&quot;A high mountain&quot; (v.2): The Transfiguration occurred on a high mountain, likely <a class="geo-ref" href="#geo-note-mount_hermon">Mount Hermon</a> near <a class="geo-ref" href="#geo-note-caesarea_philippi">Caesarea Philippi</a> (the location of ch.8). At ~9,200 feet, it dominates the northern landscape.</li>
+                    <li><a class="geo-ref" href="#geo-note-galilee">Galilee</a> (v.30): Jesus passed through Galilee privately, heading south. He did not want anyone to know — this was a time for private teaching of the disciples.</li>
+                    <li><a class="geo-ref" href="#geo-note-capernaum">Capernaum</a> (v.33): Jesus returned to Capernaum where the disciples argued about greatness &quot;in the house.&quot;</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-mount_hermon" data-place="mount_hermon"><span class="geo-name">Mount Hermon</span><span class="geo-where">Syria / Lebanon / Golan border</span><span class="geo-note">The 9,200-foot southern end of the Anti-Lebanon range, snow-covered most of the year and visible from much of Galilee. Its snowmelt feeds the springs that become the Jordan, and it marked the northern limit of Israel's conquests. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mount_Hermon" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-caesarea_philippi" data-place="caesarea_philippi"><span class="geo-name">Caesarea Philippi</span><span class="geo-where">Banias, Golan Heights</span><span class="geo-note">At the foot of Mount Hermon, where a spring bursts out of a cliff beside a grotto of Pan, about 25 miles north of the Sea of Galilee. Peter's confession is made here, in the most conspicuously pagan place in the region. <a class="geo-more" href="https://en.wikipedia.org/wiki/Caesarea_Philippi" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-galilee" data-place="galilee"><span class="geo-name">Galilee</span><span class="geo-where">northern Israel</span><span class="geo-note">The northern hill country above the Jezreel Valley, wetter and greener than Judah and crossed by the trade road to Damascus. That traffic is why Judeans considered it mixed and provincial, and why Jesus grew up hearing more than one language. <a class="geo-more" href="https://en.wikipedia.org/wiki/Galilee" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-capernaum" data-place="capernaum"><span class="geo-name">Capernaum</span><span class="geo-where">Kfar Nahum, Israel</span><span class="geo-note">A fishing village on the north-west shore of the Sea of Galilee, on the road running from the coast to Damascus. A customs post and a garrison explain the tax collector and the centurion; the harbour and the synagogue explain why Jesus made it his base. <a class="geo-more" href="https://en.wikipedia.org/wiki/Capernaum" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -563,5 +574,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

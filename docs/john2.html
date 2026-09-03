@@ -407,10 +407,21 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="galilee,nazareth,jerusalem,cana"></div>
                 <ul>
-                    <li>Cana of <a href="https://en.wikipedia.org/wiki/Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Galilee</a> (v.1): A village in Galilee (exact location debated — possibly Kefr Kenna, 4 miles northeast of <a href="https://en.wikipedia.org/wiki/Nazareth" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Nazareth</a>). Jesus performed His first miracle here.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> / the Temple (v.13): Jesus went up to Jerusalem for Passover and cleansed the Temple. John places this early in Jesus&#x27; ministry (the Synoptics record a later cleansing).</li>
+                    <li>Cana of <a class="geo-ref" href="#geo-note-galilee">Galilee</a> (v.1): A village in Galilee (exact location debated — possibly Kefr Kenna, 4 miles northeast of <a class="geo-ref" href="#geo-note-nazareth">Nazareth</a>). Jesus performed His first miracle here.</li>
+                    <li><a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> / the Temple (v.13): Jesus went up to Jerusalem for Passover and cleansed the Temple. John places this early in Jesus&#x27; ministry (the Synoptics record a later cleansing).</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-galilee" data-place="galilee"><span class="geo-name">Galilee</span><span class="geo-where">northern Israel</span><span class="geo-note">The northern hill country above the Jezreel Valley, wetter and greener than Judah and crossed by the trade road to Damascus. That traffic is why Judeans considered it mixed and provincial, and why Jesus grew up hearing more than one language. <a class="geo-more" href="https://en.wikipedia.org/wiki/Galilee" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-nazareth" data-place="nazareth"><span class="geo-name">Nazareth</span><span class="geo-where">Nazareth, Israel</span><span class="geo-note">A small village in a hollow of the Galilean hills, unmentioned in the Old Testament or by Josephus. The Roman city of Sepphoris was four miles away and the Via Maris ran below, so it was obscure without being isolated. <a class="geo-more" href="https://en.wikipedia.org/wiki/Nazareth" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-cana" data-place="cana"><span class="geo-name">Cana</span><span class="geo-where">Khirbet Qana, Israel</span><span class="geo-note">A Galilean village a few miles north of Nazareth, site of the first sign. Two candidate locations compete and neither is settled. <a class="geo-more" href="https://en.wikipedia.org/wiki/Cana" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -443,5 +454,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

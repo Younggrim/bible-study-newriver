@@ -506,11 +506,24 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="canaan,egypt,nile,sinai,beersheba,goshen"></div>
                 <ul>
-                    <li>Beer-sheba (v.1) — Jacob&#x27;s last stop in <a href="https://en.wikipedia.org/wiki/Canaan" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Canaan</a> before entering <a href="https://en.wikipedia.org/wiki/Ancient_Egypt" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Egypt</a>. He offers sacrifices here, the traditional southern boundary of the Promised Land. God appears to confirm the journey.</li>
-                    <li>Goshen (v.28) — the eastern <a href="https://en.wikipedia.org/wiki/Nile" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Nile</a> Delta, where Jacob reunites with Joseph. This fertile region becomes Israel&#x27;s home for the next 400+ years.</li>
-                    <li>The journey from Beer-sheba to Goshen crosses the <a href="https://en.wikipedia.org/wiki/Mount_Sinai" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Sinai</a> Peninsula — approximately 200 miles through desert terrain.</li>
+                    <li>Beer-sheba (v.1) — Jacob&#x27;s last stop in <a class="geo-ref" href="#geo-note-canaan">Canaan</a> before entering <a class="geo-ref" href="#geo-note-egypt">Egypt</a>. He offers sacrifices here, the traditional southern boundary of the Promised Land. God appears to confirm the journey.</li>
+                    <li>Goshen (v.28) — the eastern <a class="geo-ref" href="#geo-note-nile">Nile</a> Delta, where Jacob reunites with Joseph. This fertile region becomes Israel&#x27;s home for the next 400+ years.</li>
+                    <li>The journey from Beer-sheba to Goshen crosses the <a class="geo-ref" href="#geo-note-sinai">Sinai</a> Peninsula — approximately 200 miles through desert terrain.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-canaan" data-place="canaan"><span class="geo-name">Canaan</span><span class="geo-where">Israel, West Bank, Lebanon</span><span class="geo-note">The land bridge between Egypt and Mesopotamia, which is why armies crossed it for three thousand years. Within about 60 miles it goes from coastal plain to hill country to rift valley to desert plateau, so control of it was always local and piecemeal. <a class="geo-more" href="https://en.wikipedia.org/wiki/Canaan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-egypt" data-place="egypt"><span class="geo-name">Egypt</span><span class="geo-where">Egypt</span><span class="geo-note">A ribbon of irrigated land along the Nile, ending in the Delta where Israel settled in Goshen. Rain-fed Canaan depended on weather; Egypt depended on a river that flooded on schedule, which made it the place everyone went when the harvest failed. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ancient_Egypt" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-nile" data-place="nile"><span class="geo-name">Nile</span><span class="geo-where">Egypt</span><span class="geo-note">Egypt's only real water source, flooding every summer and leaving the silt that made the valley farmable. Because the whole country depended on it, turning it to blood was an attack on Egypt's economy and its gods at once. <a class="geo-more" href="https://en.wikipedia.org/wiki/Nile" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-sinai" data-place="sinai"><span class="geo-name">Mount Sinai</span><span class="geo-where">Jebel Musa, Sinai Peninsula, Egypt</span><span class="geo-note">Traditionally Jebel Musa in the granite mountains of the southern Sinai peninsula, about 7,500 feet high. The identification dates from Christian monastic tradition rather than from the text, and other candidates have been proposed, but this has been the pilgrimage site since the fourth century. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mount_Sinai" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-beersheba" data-place="beersheba"><span class="geo-name">Beersheba</span><span class="geo-where">Beersheba, Israel</span><span class="geo-note">A well at the top of the Negev, the last settled place before the desert, which is why from Dan to Beersheba means the whole land. Abraham, Isaac and Jacob all camped here. <a class="geo-more" href="https://en.wikipedia.org/wiki/Beersheba" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-goshen" data-place="goshen"><span class="geo-name">Goshen</span><span class="geo-where">eastern Nile Delta, Egypt</span><span class="geo-note">The eastern Delta, well watered grazing country on the edge of Egypt rather than in its heart, which is exactly why shepherds were settled there and could stay distinct. <a class="geo-more" href="https://en.wikipedia.org/wiki/Land_of_Goshen" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -545,5 +558,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

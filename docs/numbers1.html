@@ -579,10 +579,19 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="sinai,egypt"></div>
                 <ul>
-                    <li>Wilderness of <a href="https://en.wikipedia.org/wiki/Mount_Sinai" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Sinai</a> (v.1): Israel is still encamped at <a href="https://en.wikipedia.org/wiki/Mount_Sinai" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Mount Sinai</a>. The census is taken &quot;in the tabernacle of the congregation&quot; at the base of the mountain.</li>
-                    <li>Israel has been at <a href="https://en.wikipedia.org/wiki/Mount_Sinai" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Sinai</a> for approximately 13 months since leaving <a href="https://en.wikipedia.org/wiki/Ancient_Egypt" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Egypt</a>.</li>
+                    <li>Wilderness of <a class="geo-ref" href="#geo-note-sinai">Sinai</a> (v.1): Israel is still encamped at <a class="geo-ref" href="#geo-note-sinai">Mount Sinai</a>. The census is taken &quot;in the tabernacle of the congregation&quot; at the base of the mountain.</li>
+                    <li>Israel has been at <a class="geo-ref" href="#geo-note-sinai">Sinai</a> for approximately 13 months since leaving <a class="geo-ref" href="#geo-note-egypt">Egypt</a>.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-sinai" data-place="sinai"><span class="geo-name">Mount Sinai</span><span class="geo-where">Jebel Musa, Sinai Peninsula, Egypt</span><span class="geo-note">Traditionally Jebel Musa in the granite mountains of the southern Sinai peninsula, about 7,500 feet high. The identification dates from Christian monastic tradition rather than from the text, and other candidates have been proposed, but this has been the pilgrimage site since the fourth century. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mount_Sinai" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-egypt" data-place="egypt"><span class="geo-name">Egypt</span><span class="geo-where">Egypt</span><span class="geo-note">A ribbon of irrigated land along the Nile, ending in the Delta where Israel settled in Goshen. Rain-fed Canaan depended on weather; Egypt depended on a river that flooded on schedule, which made it the place everyone went when the harvest failed. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ancient_Egypt" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -618,5 +627,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

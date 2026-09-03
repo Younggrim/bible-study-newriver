@@ -544,11 +544,21 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="jerusalem,euphrates,egypt"></div>
                 <ul>
                     <li>This psalm/song reviews David&#x27;s life geographically: delivered from &quot;many waters&quot; (enemies), the wilderness, the strongholds</li>
-                    <li>&quot;He brought me forth into a large place&quot; (v.20) — from caves and deserts to <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> and a kingdom</li>
-                    <li>Universal scope: David&#x27;s kingdom reaches from the <a href="https://en.wikipedia.org/wiki/Euphrates" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Euphrates</a> to the border of <a href="https://en.wikipedia.org/wiki/Ancient_Egypt" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Egypt</a> — the promised territory</li>
+                    <li>&quot;He brought me forth into a large place&quot; (v.20) — from caves and deserts to <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> and a kingdom</li>
+                    <li>Universal scope: David&#x27;s kingdom reaches from the <a class="geo-ref" href="#geo-note-euphrates">Euphrates</a> to the border of <a class="geo-ref" href="#geo-note-egypt">Egypt</a> — the promised territory</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-euphrates" data-place="euphrates"><span class="geo-name">Euphrates</span><span class="geo-where">Turkey, Syria, Iraq</span><span class="geo-note">The longest river in western Asia, running about 1,700 miles from eastern Turkey to the Persian Gulf. It is the northern limit named in the promise to Abraham and the boundary Assyria and Babylon crossed to reach the Levant. <a class="geo-more" href="https://en.wikipedia.org/wiki/Euphrates" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-egypt" data-place="egypt"><span class="geo-name">Egypt</span><span class="geo-where">Egypt</span><span class="geo-note">A ribbon of irrigated land along the Nile, ending in the Delta where Israel settled in Goshen. Rain-fed Canaan depended on weather; Egypt depended on a river that flooded on schedule, which made it the place everyone went when the harvest failed. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ancient_Egypt" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -580,5 +590,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

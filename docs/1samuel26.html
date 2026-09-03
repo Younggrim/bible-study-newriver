@@ -423,11 +423,21 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="judean_desert,en_gedi,judea"></div>
                 <ul>
                     <li>Wilderness of Ziph: The hill of Hachilah, south of Jeshimon — Saul camps here with 3,000 men pursuing David</li>
                     <li>David enters Saul&#x27;s camp at night: The trench/barricade of wagons surrounds the sleeping army</li>
-                    <li>This is the second time David spares Saul (first was En-gedi, ch.24) — both in the <a href="https://en.wikipedia.org/wiki/Judean_Desert" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Judean wilderness</a></li>
+                    <li>This is the second time David spares Saul (first was En-gedi, ch.24) — both in the <a class="geo-ref" href="#geo-note-judean_desert">Judean wilderness</a></li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-judean_desert" data-place="judean_desert"><span class="geo-name">Judean Wilderness</span><span class="geo-where">West Bank and Israel</span><span class="geo-note">The rain shadow on the eastern side of the Judean ridge: chalk hills falling 3,500 feet to the Dead Sea in about 15 miles, with almost no water. Close enough to Jerusalem to walk to in a morning, empty enough to disappear into, which is why fugitives, prophets and monastics all used it. <a class="geo-more" href="https://en.wikipedia.org/wiki/Judean_Desert" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-en_gedi" data-place="en_gedi"><span class="geo-name">En-gedi</span><span class="geo-where">Ein Gedi, Israel</span><span class="geo-note">A freshwater spring and waterfall in the cliffs on the western shore of the Dead Sea, an oasis in absolute desert. David hid in its caves, and spared Saul in one of them. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ein_Gedi" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-judea" data-place="judea"><span class="geo-name">Judea</span><span class="geo-where">southern Israel and the West Bank</span><span class="geo-note">The southern hill country around Jerusalem, high, stony and dry, with the wilderness on one side and the Philistine plain on the other. Poor farming and hard access are what let it stay independent longest. <a class="geo-more" href="https://en.wikipedia.org/wiki/Judea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -460,5 +470,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

@@ -434,11 +434,23 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="moab,jericho,jordan_river,mesopotamia,philistia"></div>
                 <ul>
                     <li>Othniel: Delivers the southern tribes from Cushan-rishathaim of Mesopotamia (far northeast — Aram-naharaim)</li>
-                    <li>Ehud: A Benjamite who delivers Israel from <a href="https://en.wikipedia.org/wiki/Moab" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Moab</a>; the action centers on <a href="https://en.wikipedia.org/wiki/Jericho" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jericho</a> (&quot;city of palm trees&quot;) and the fords of the <a href="https://en.wikipedia.org/wiki/Jordan_River" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jordan</a></li>
+                    <li>Ehud: A Benjamite who delivers Israel from <a class="geo-ref" href="#geo-note-moab">Moab</a>; the action centers on <a class="geo-ref" href="#geo-note-jericho">Jericho</a> (&quot;city of palm trees&quot;) and the fords of the <a class="geo-ref" href="#geo-note-jordan_river">Jordan</a></li>
                     <li>Shamgar: Operates in the southwestern coastal region against the Philistines</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-moab" data-place="moab"><span class="geo-name">Moab</span><span class="geo-where">west-central Jordan</span><span class="geo-note">The plateau east of the Dead Sea, cut off from Israel by the rift valley and from Ammon by the Arnon gorge. High enough to farm grain, which is why Naomi's family went there in a famine. <a class="geo-more" href="https://en.wikipedia.org/wiki/Moab" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jericho" data-place="jericho"><span class="geo-name">Jericho</span><span class="geo-where">Jericho, West Bank</span><span class="geo-note">An oasis at a perennial spring in the Jordan valley, 850 feet below sea level and among the oldest continuously settled sites anywhere. It guarded the ford and the climb up to the central hills, so anyone entering Canaan from the east had to deal with it first. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jericho" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jordan_river" data-place="jordan_river"><span class="geo-name">Jordan River</span><span class="geo-where">Israel / Jordan border</span><span class="geo-note">Runs about 65 miles as the crow flies from the Sea of Galilee to the Dead Sea, dropping from 700 to 1,400 feet below sea level. Narrow enough to wade at most fords, it was still the boundary that divided wilderness from inheritance. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jordan_River" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mesopotamia" data-place="mesopotamia"><span class="geo-name">Mesopotamia</span><span class="geo-where">Iraq and eastern Syria</span><span class="geo-note">The land between the Tigris and Euphrates, flat, hot and farmable only by irrigation, which forced early cities into large-scale cooperation. Abraham came from its southern end and Israel's exiles were taken to its middle. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mesopotamia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-philistia" data-place="philistia"><span class="geo-name">Philistia</span><span class="geo-where">southern coastal Israel and Gaza</span><span class="geo-note">The coastal plain south of Joppa, held by a league of five cities: Gaza, Ashkelon, Ashdod, Gath and Ekron. Flat, fertile and on the trade road, it gave the Philistines chariots and iron while Israel held the hills above them. <a class="geo-more" href="https://en.wikipedia.org/wiki/Philistia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -470,5 +482,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

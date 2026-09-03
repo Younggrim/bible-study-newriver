@@ -379,11 +379,23 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="megiddo,ephraim,jezreel_valley,beth_shan,jezreel"></div>
                 <ul>
                     <li>West Manasseh: Central highlands north of Ephraim, extending to the Jezreel Valley</li>
-                    <li>Key unconquered cities: Beth-shean, Taanach, Dor, Ibleam, <a href="https://en.wikipedia.org/wiki/Megiddo" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Megiddo</a> — all in the fertile Jezreel/Esdraelon plain</li>
+                    <li>Key unconquered cities: Beth-shean, Taanach, Dor, Ibleam, <a class="geo-ref" href="#geo-note-megiddo">Megiddo</a> — all in the fertile Jezreel/Esdraelon plain</li>
                     <li>Zelophehad&#x27;s daughters receive land in west Manasseh — the hill country is forested and must be cleared</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-megiddo" data-place="megiddo"><span class="geo-name">Megiddo</span><span class="geo-where">Tel Megiddo, Israel</span><span class="geo-note">A fortress mound guarding the pass where the main coastal road cuts through the Carmel ridge into the Jezreel Valley. More battles have been fought on this plain than almost anywhere, which is why Revelation borrows its name for the last one. <a class="geo-more" href="https://en.wikipedia.org/wiki/Megiddo" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-ephraim" data-place="ephraim"><span class="geo-name">Ephraim</span><span class="geo-where">central West Bank</span><span class="geo-note">The central hill country north of Benjamin, the largest and best watered of the northern territories. It dominated the north so thoroughly that the prophets use Ephraim to mean the whole northern kingdom. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ephraim" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jezreel_valley" data-place="jezreel_valley"><span class="geo-name">Jezreel Valley</span><span class="geo-where">northern Israel</span><span class="geo-note">The one flat corridor cutting across the country from the coast to the Jordan, dividing Galilee from the central hills. Good chariot ground, which is why every invading army and most of Israel's decisive battles ended up here. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jezreel_Valley" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-beth_shan" data-place="beth_shan"><span class="geo-name">Beth-shan</span><span class="geo-where">Beit She'an, Israel</span><span class="geo-note">Where the Jezreel Valley meets the Jordan, controlling both routes. Saul's body was hung on its wall after Gilboa. <a class="geo-more" href="https://en.wikipedia.org/wiki/Beit_She'an" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jezreel" data-place="jezreel"><span class="geo-name">Jezreel</span><span class="geo-where">Tel Yizre'el, Israel</span><span class="geo-note">Ahab's second residence, at the eastern end of the valley that carries its name. Naboth's vineyard was here, and Jezebel died here. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jezreel_(city)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -414,5 +426,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

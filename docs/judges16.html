@@ -434,11 +434,22 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="gaza,hebron,philistia,judea"></div>
                 <ul>
-                    <li><a href="https://en.wikipedia.org/wiki/Gaza_City" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Gaza</a>: The southernmost Philistine city on the coastal plain — Samson carries its gates to a hill near <a href="https://en.wikipedia.org/wiki/Hebron" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Hebron</a> (about 38 miles uphill)</li>
+                    <li><a class="geo-ref" href="#geo-note-gaza">Gaza</a>: The southernmost Philistine city on the coastal plain — Samson carries its gates to a hill near <a class="geo-ref" href="#geo-note-hebron">Hebron</a> (about 38 miles uphill)</li>
                     <li>Valley of Sorek: Where Delilah lives — a valley running from the Judean hills down to Philistine territory; the border zone</li>
-                    <li>The Philistine temple (Dagon&#x27;s house) in <a href="https://en.wikipedia.org/wiki/Gaza_City" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Gaza</a>: Where Samson&#x27;s final act occurs</li>
+                    <li>The Philistine temple (Dagon&#x27;s house) in <a class="geo-ref" href="#geo-note-gaza">Gaza</a>: Where Samson&#x27;s final act occurs</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-gaza" data-place="gaza"><span class="geo-name">Gaza</span><span class="geo-where">Gaza City</span><span class="geo-note">The southernmost of the five Philistine cities and the last stop on the coastal road before the desert crossing to Egypt. Controlling it meant controlling the caravan trade, which is why it changes hands constantly through the Old Testament. <a class="geo-more" href="https://en.wikipedia.org/wiki/Gaza_City" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-hebron" data-place="hebron"><span class="geo-name">Hebron</span><span class="geo-where">Hebron, West Bank</span><span class="geo-note">The highest town in the Judean hills at about 3,000 feet, 19 miles south of Jerusalem. Abraham bought a burial cave here, and David reigned from it for seven years before moving north, so it carries both the patriarchal and the royal claim to the land. <a class="geo-more" href="https://en.wikipedia.org/wiki/Hebron" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-philistia" data-place="philistia"><span class="geo-name">Philistia</span><span class="geo-where">southern coastal Israel and Gaza</span><span class="geo-note">The coastal plain south of Joppa, held by a league of five cities: Gaza, Ashkelon, Ashdod, Gath and Ekron. Flat, fertile and on the trade road, it gave the Philistines chariots and iron while Israel held the hills above them. <a class="geo-more" href="https://en.wikipedia.org/wiki/Philistia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-judea" data-place="judea"><span class="geo-name">Judea</span><span class="geo-where">southern Israel and the West Bank</span><span class="geo-note">The southern hill country around Jerusalem, high, stony and dry, with the wilderness on one side and the Philistine plain on the other. Poor farming and hard access are what let it stay independent longest. <a class="geo-more" href="https://en.wikipedia.org/wiki/Judea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -470,5 +481,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

@@ -552,11 +552,21 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="mount_of_olives,kidron,jerusalem"></div>
                 <ul>
-                    <li>The <a href="https://en.wikipedia.org/wiki/Mount_of_Olives" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Mount of Olives</a> (v.3): Jesus sat on the Mount of Olives, directly overlooking the Temple, when the disciples asked about the end times. The Temple was visible across the <a href="https://en.wikipedia.org/wiki/Kidron_Valley" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Kidron Valley</a>.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> and the Temple (vv.1-2): Jesus prophesied the destruction of the Temple (fulfilled in AD 70 by the Romans under Titus).</li>
+                    <li>The <a class="geo-ref" href="#geo-note-mount_of_olives">Mount of Olives</a> (v.3): Jesus sat on the Mount of Olives, directly overlooking the Temple, when the disciples asked about the end times. The Temple was visible across the <a class="geo-ref" href="#geo-note-kidron">Kidron Valley</a>.</li>
+                    <li><a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> and the Temple (vv.1-2): Jesus prophesied the destruction of the Temple (fulfilled in AD 70 by the Romans under Titus).</li>
                     <li>&quot;All the world&quot; (v.14): The global scope of the Gospel&#x27;s reach before the end.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-mount_of_olives" data-place="mount_of_olives"><span class="geo-name">Mount of Olives</span><span class="geo-where">Jerusalem</span><span class="geo-note">A limestone ridge just east of Jerusalem, separated from the city by the Kidron Valley and about 250 feet higher, so it looks straight down into the temple courts. The road to Jericho and Bethany crosses it, which is why Jesus is so often on it. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mount_of_Olives" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-kidron" data-place="kidron"><span class="geo-name">Kidron Valley</span><span class="geo-where">Jerusalem</span><span class="geo-note">The dry ravine between Jerusalem and the Mount of Olives, dropping steeply below the temple's eastern wall. It ran with the runoff of sacrifice and became the city's dumping ground for idols, and it is the valley David crossed fleeing Absalom and Jesus crossed to Gethsemane. <a class="geo-more" href="https://en.wikipedia.org/wiki/Kidron_Valley" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -593,5 +603,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

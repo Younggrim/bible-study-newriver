@@ -672,11 +672,23 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="harran,canaan,mesopotamia,aram,negev"></div>
                 <ul>
-                    <li>Mesopotamia / &quot;the city of Nahor&quot; (v.10) — Abraham&#x27;s servant travels to northwest Mesopotamia (<a href="https://en.wikipedia.org/wiki/Harran" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Haran</a> region, modern southeastern Turkey/Syria border) to find a wife for Isaac.</li>
-                    <li>The journey back to <a href="https://en.wikipedia.org/wiki/Canaan" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Canaan</a> covers approximately 500 miles along ancient caravan routes through the Fertile Crescent.</li>
+                    <li>Mesopotamia / &quot;the city of Nahor&quot; (v.10) — Abraham&#x27;s servant travels to northwest Mesopotamia (<a class="geo-ref" href="#geo-note-harran">Haran</a> region, modern southeastern Turkey/Syria border) to find a wife for Isaac.</li>
+                    <li>The journey back to <a class="geo-ref" href="#geo-note-canaan">Canaan</a> covers approximately 500 miles along ancient caravan routes through the Fertile Crescent.</li>
                     <li>Beer-lahai-roi (v.62) — where Isaac dwells in the Negev, the same well where God appeared to Hagar (16:14).</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-harran" data-place="harran"><span class="geo-name">Harran</span><span class="geo-where">Harran, Turkey</span><span class="geo-note">A caravan town on the Balikh, a tributary of the Euphrates in northern Mesopotamia. Abraham's family stopped here on the way from Ur, and it stayed the family's home ground: Isaac's and Jacob's wives were both fetched from it. <a class="geo-more" href="https://en.wikipedia.org/wiki/Harran" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-canaan" data-place="canaan"><span class="geo-name">Canaan</span><span class="geo-where">Israel, West Bank, Lebanon</span><span class="geo-note">The land bridge between Egypt and Mesopotamia, which is why armies crossed it for three thousand years. Within about 60 miles it goes from coastal plain to hill country to rift valley to desert plateau, so control of it was always local and piecemeal. <a class="geo-more" href="https://en.wikipedia.org/wiki/Canaan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mesopotamia" data-place="mesopotamia"><span class="geo-name">Mesopotamia</span><span class="geo-where">Iraq and eastern Syria</span><span class="geo-note">The land between the Tigris and Euphrates, flat, hot and farmable only by irrigation, which forced early cities into large-scale cooperation. Abraham came from its southern end and Israel's exiles were taken to its middle. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mesopotamia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-aram" data-place="aram"><span class="geo-name">Aram</span><span class="geo-where">Syria</span><span class="geo-note">The Syrian interior north-east of Israel, a set of city-states rather than one kingdom, with Damascus the strongest. Aramaic, its language, became the everyday speech of the whole region including Judea. <a class="geo-more" href="https://en.wikipedia.org/wiki/Aram_(region)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-negev" data-place="negev"><span class="geo-name">Negev</span><span class="geo-where">southern Israel</span><span class="geo-note">The arid triangle south of the Judean hills, grazing land in a good year and desert in a bad one. Hebrew uses the same word for it as for the direction south. <a class="geo-more" href="https://en.wikipedia.org/wiki/Negev" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -710,5 +722,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

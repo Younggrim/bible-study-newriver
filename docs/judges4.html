@@ -400,11 +400,24 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="galilee,mount_tabor,hazor,jezreel_valley,kishon,jezreel"></div>
                 <ul>
-                    <li>Hazor: Jabin&#x27;s capital in upper <a href="https://en.wikipedia.org/wiki/Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Galilee</a> (rebuilt since Joshua 11) — oppressing the northern tribes</li>
+                    <li>Hazor: Jabin&#x27;s capital in upper <a class="geo-ref" href="#geo-note-galilee">Galilee</a> (rebuilt since Joshua 11) — oppressing the northern tribes</li>
                     <li>Harosheth-hagoiim: Sisera&#x27;s base, likely at the western end of the Jezreel Valley near the Kishon River</li>
-                    <li>Kedesh (Naphtali): Where Barak is summoned; <a href="https://en.wikipedia.org/wiki/Mount_Tabor" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Mount Tabor</a>: The staging ground overlooking the Jezreel plain</li>
+                    <li>Kedesh (Naphtali): Where Barak is summoned; <a class="geo-ref" href="#geo-note-mount_tabor">Mount Tabor</a>: The staging ground overlooking the Jezreel plain</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-galilee" data-place="galilee"><span class="geo-name">Galilee</span><span class="geo-where">northern Israel</span><span class="geo-note">The northern hill country above the Jezreel Valley, wetter and greener than Judah and crossed by the trade road to Damascus. That traffic is why Judeans considered it mixed and provincial, and why Jesus grew up hearing more than one language. <a class="geo-more" href="https://en.wikipedia.org/wiki/Galilee" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mount_tabor" data-place="mount_tabor"><span class="geo-name">Mount Tabor</span><span class="geo-where">Mount Tabor, Israel</span><span class="geo-note">A steep isolated dome rising 1,300 feet straight out of the Jezreel Valley, unmistakable from every direction. Barak mustered on it because chariots could not follow him up, and later tradition made it the mount of transfiguration. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mount_Tabor" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-hazor" data-place="hazor"><span class="geo-name">Hazor</span><span class="geo-where">Tel Hazor, Israel</span><span class="geo-note">The largest Canaanite city in the country, on the trade road north of the Sea of Galilee, called the head of all those kingdoms. Joshua burned it and Solomon refortified it. <a class="geo-more" href="https://en.wikipedia.org/wiki/Tel_Hazor" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jezreel_valley" data-place="jezreel_valley"><span class="geo-name">Jezreel Valley</span><span class="geo-where">northern Israel</span><span class="geo-note">The one flat corridor cutting across the country from the coast to the Jordan, dividing Galilee from the central hills. Good chariot ground, which is why every invading army and most of Israel's decisive battles ended up here. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jezreel_Valley" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-kishon" data-place="kishon"><span class="geo-name">River Kishon</span><span class="geo-where">northern Israel</span><span class="geo-note">Drains the Jezreel Valley north-west past Carmel to the sea. Usually a trickle, it floods fast, which is how it swept away Sisera's chariots. <a class="geo-more" href="https://en.wikipedia.org/wiki/Kishon_River" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jezreel" data-place="jezreel"><span class="geo-name">Jezreel</span><span class="geo-where">Tel Yizre'el, Israel</span><span class="geo-note">Ahab's second residence, at the eastern end of the valley that carries its name. Naboth's vineyard was here, and Jezebel died here. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jezreel_(city)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -435,5 +448,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

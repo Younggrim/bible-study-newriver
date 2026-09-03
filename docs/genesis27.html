@@ -568,10 +568,20 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="harran,beersheba,negev"></div>
                 <ul>
                     <li>Beer-sheba — the family home where Isaac dwells, Jacob deceives, and Esau hunts in the surrounding wilderness (the Negev).</li>
-                    <li>Jacob will flee from here northward to <a href="https://en.wikipedia.org/wiki/Harran" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Haran</a> (ch.28) — a journey of approximately 500 miles. The deception forces a geographic separation.</li>
+                    <li>Jacob will flee from here northward to <a class="geo-ref" href="#geo-note-harran">Haran</a> (ch.28) — a journey of approximately 500 miles. The deception forces a geographic separation.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-harran" data-place="harran"><span class="geo-name">Harran</span><span class="geo-where">Harran, Turkey</span><span class="geo-note">A caravan town on the Balikh, a tributary of the Euphrates in northern Mesopotamia. Abraham's family stopped here on the way from Ur, and it stayed the family's home ground: Isaac's and Jacob's wives were both fetched from it. <a class="geo-more" href="https://en.wikipedia.org/wiki/Harran" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-beersheba" data-place="beersheba"><span class="geo-name">Beersheba</span><span class="geo-where">Beersheba, Israel</span><span class="geo-note">A well at the top of the Negev, the last settled place before the desert, which is why from Dan to Beersheba means the whole land. Abraham, Isaac and Jacob all camped here. <a class="geo-more" href="https://en.wikipedia.org/wiki/Beersheba" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-negev" data-place="negev"><span class="geo-name">Negev</span><span class="geo-where">southern Israel</span><span class="geo-note">The arid triangle south of the Judean hills, grazing land in a good year and desert in a bad one. Hebrew uses the same word for it as for the direction south. <a class="geo-more" href="https://en.wikipedia.org/wiki/Negev" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -604,5 +614,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

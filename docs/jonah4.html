@@ -303,11 +303,24 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="mediterranean,tarshish,nineveh,tigris,joppa,assyria"></div>
                 <ul>
-                    <li>Joppa (modern Jaffa/Tel Aviv) — <a href="https://en.wikipedia.org/wiki/Mediterranean_Sea" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Mediterranean</a> port city where Jonah boards a ship fleeing God&#x27;s call.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Tarshish" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Tarshish</a> (likely Tartessus in modern Spain) — the farthest west one could sail; the exact OPPOSITE direction from <a href="https://en.wikipedia.org/wiki/Nineveh" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Nineveh</a>.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Nineveh" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Nineveh</a> (modern Mosul, Iraq) — capital of the Assyrian Empire, located on the <a href="https://en.wikipedia.org/wiki/Tigris" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Tigris</a> River, approximately 500 miles northeast of Israel.</li>
+                    <li>Joppa (modern Jaffa/Tel Aviv) — <a class="geo-ref" href="#geo-note-mediterranean">Mediterranean</a> port city where Jonah boards a ship fleeing God&#x27;s call.</li>
+                    <li><a class="geo-ref" href="#geo-note-tarshish">Tarshish</a> (likely Tartessus in modern Spain) — the farthest west one could sail; the exact OPPOSITE direction from <a class="geo-ref" href="#geo-note-nineveh">Nineveh</a>.</li>
+                    <li><a class="geo-ref" href="#geo-note-nineveh">Nineveh</a> (modern Mosul, Iraq) — capital of the Assyrian Empire, located on the <a class="geo-ref" href="#geo-note-tigris">Tigris</a> River, approximately 500 miles northeast of Israel.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-mediterranean" data-place="mediterranean"><span class="geo-name">Mediterranean Sea</span><span class="geo-note">Called simply the Great Sea, and treated as the western edge of the world. Israel's coast has almost no natural harbours, so for most of its history the sea was a boundary rather than a road, and seafaring was left to the Phoenicians. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mediterranean_Sea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-tarshish" data-place="tarshish"><span class="geo-name">Tarshish</span><span class="geo-where">probably southern Spain</span><span class="geo-note">Usually identified with Tartessos near the mouth of the Guadalquivir in southern Spain, at the far western end of the Phoenician trade routes, though the identification is not certain. Either way it meant the end of the known world, and it lies almost exactly opposite Nineveh from Joppa. <a class="geo-more" href="https://en.wikipedia.org/wiki/Tarshish" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-nineveh" data-place="nineveh"><span class="geo-name">Nineveh</span><span class="geo-where">Mosul, Iraq</span><span class="geo-note">Assyria's last capital, on the east bank of the Tigris across from modern Mosul, about 500 miles north-east of Israel. Sennacherib walled in an enormous city here, which is the scale behind Jonah's three days' journey and its 120,000 who cannot tell right from left. <a class="geo-more" href="https://en.wikipedia.org/wiki/Nineveh" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-tigris" data-place="tigris"><span class="geo-name">Tigris</span><span class="geo-where">Turkey, Syria, Iraq</span><span class="geo-note">The faster and shorter of Mesopotamia's two rivers, running about 1,150 miles from eastern Turkey to join the Euphrates near the Gulf. Nineveh, Calah and Asshur all sat on it, and Daniel received his last vision on its bank. <a class="geo-more" href="https://en.wikipedia.org/wiki/Tigris" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-joppa" data-place="joppa"><span class="geo-name">Joppa</span><span class="geo-where">Jaffa, Tel Aviv, Israel</span><span class="geo-note">The one usable harbour on Israel's straight coast, a rock shelf with a gap in it, dangerous but workable. Cedar for both temples was landed here, Jonah sailed from here, and Peter saw his vision on a roof here. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jaffa" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-assyria" data-place="assyria"><span class="geo-name">Assyria</span><span class="geo-where">northern Iraq</span><span class="geo-note">The upper Tigris heartland around Nineveh, Calah and Asshur. Its armies reached Israel by following the Fertile Crescent north-west and then south down the coast, so the threat always arrived from the north even though Assyria lay to the east. <a class="geo-more" href="https://en.wikipedia.org/wiki/Assyria" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
             <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -341,5 +354,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

@@ -506,11 +506,21 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="hebron,negev,philistia"></div>
                 <ul>
                     <li>Beer-lahai-roi (v.11) — Isaac settles near this well in the Negev after Abraham&#x27;s death. The same site associated with Hagar&#x27;s encounter with God.</li>
                     <li>The Gerar area — where Isaac and Esau&#x27;s families interact. Located in the southern coastal lowlands near Philistine territory.</li>
-                    <li>Abraham is buried at Machpelah/<a href="https://en.wikipedia.org/wiki/Hebron" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Hebron</a> (v.9) — the family burial cave.</li>
+                    <li>Abraham is buried at Machpelah/<a class="geo-ref" href="#geo-note-hebron">Hebron</a> (v.9) — the family burial cave.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-hebron" data-place="hebron"><span class="geo-name">Hebron</span><span class="geo-where">Hebron, West Bank</span><span class="geo-note">The highest town in the Judean hills at about 3,000 feet, 19 miles south of Jerusalem. Abraham bought a burial cave here, and David reigned from it for seven years before moving north, so it carries both the patriarchal and the royal claim to the land. <a class="geo-more" href="https://en.wikipedia.org/wiki/Hebron" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-negev" data-place="negev"><span class="geo-name">Negev</span><span class="geo-where">southern Israel</span><span class="geo-note">The arid triangle south of the Judean hills, grazing land in a good year and desert in a bad one. Hebrew uses the same word for it as for the direction south. <a class="geo-more" href="https://en.wikipedia.org/wiki/Negev" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-philistia" data-place="philistia"><span class="geo-name">Philistia</span><span class="geo-where">southern coastal Israel and Gaza</span><span class="geo-note">The coastal plain south of Joppa, held by a league of five cities: Gaza, Ashkelon, Ashdod, Gath and Ekron. Flat, fertile and on the trade road, it gave the Philistines chariots and iron while Israel held the hills above them. <a class="geo-more" href="https://en.wikipedia.org/wiki/Philistia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -544,5 +554,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

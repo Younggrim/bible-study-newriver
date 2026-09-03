@@ -427,10 +427,21 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="hebron,canaan,philistia,kadesh_barnea"></div>
                 <ul>
-                    <li>Gerar (v.1) — a Philistine city in the southern coastal plain, between Kadesh and Shur. Abraham moves southwest from <a href="https://en.wikipedia.org/wiki/Hebron" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Hebron</a> into this region.</li>
-                    <li>This is Philistine territory — the coastal lowlands of southern <a href="https://en.wikipedia.org/wiki/Canaan" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Canaan</a> (distinct from the hill country where Abraham usually dwells).</li>
+                    <li>Gerar (v.1) — a Philistine city in the southern coastal plain, between Kadesh and Shur. Abraham moves southwest from <a class="geo-ref" href="#geo-note-hebron">Hebron</a> into this region.</li>
+                    <li>This is Philistine territory — the coastal lowlands of southern <a class="geo-ref" href="#geo-note-canaan">Canaan</a> (distinct from the hill country where Abraham usually dwells).</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-hebron" data-place="hebron"><span class="geo-name">Hebron</span><span class="geo-where">Hebron, West Bank</span><span class="geo-note">The highest town in the Judean hills at about 3,000 feet, 19 miles south of Jerusalem. Abraham bought a burial cave here, and David reigned from it for seven years before moving north, so it carries both the patriarchal and the royal claim to the land. <a class="geo-more" href="https://en.wikipedia.org/wiki/Hebron" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-canaan" data-place="canaan"><span class="geo-name">Canaan</span><span class="geo-where">Israel, West Bank, Lebanon</span><span class="geo-note">The land bridge between Egypt and Mesopotamia, which is why armies crossed it for three thousand years. Within about 60 miles it goes from coastal plain to hill country to rift valley to desert plateau, so control of it was always local and piecemeal. <a class="geo-more" href="https://en.wikipedia.org/wiki/Canaan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-philistia" data-place="philistia"><span class="geo-name">Philistia</span><span class="geo-where">southern coastal Israel and Gaza</span><span class="geo-note">The coastal plain south of Joppa, held by a league of five cities: Gaza, Ashkelon, Ashdod, Gath and Ekron. Flat, fertile and on the trade road, it gave the Philistines chariots and iron while Israel held the hills above them. <a class="geo-more" href="https://en.wikipedia.org/wiki/Philistia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-kadesh_barnea" data-place="kadesh_barnea"><span class="geo-name">Kadesh-barnea</span><span class="geo-where">Ain el-Qudeirat, Egypt/Israel border</span><span class="geo-note">The largest spring in the northern Sinai, about 50 miles south of Beersheba. Israel camped here, sent the spies north from here, and was turned back here to spend a generation in the wilderness. <a class="geo-more" href="https://en.wikipedia.org/wiki/Kadesh-barnea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -463,5 +474,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

@@ -128,6 +128,10 @@ All content changes go to **bible-study** first. Then mirror.
 # 1. edit in bible-study
 cd bible-study
 $EDITOR docs/genesis1.html
+
+# 1a. only if you touched a Map & Geography pane, so its map matches the prose
+python3 build_mapgeo.py && python3 add_mapgeo_maps.py
+
 git add docs/ && git commit
 
 # 2. mirror into New River
@@ -264,6 +268,81 @@ It fixed 173 captions across 132 pages. Run it in **bible-study**, then sync.
 Keep it around; the same corruption can recur if titles are ever pasted through
 a non-UTF-8 tool.
 
+## Map & Geography: the maps
+
+Every Map & Geography pane that names a place we can locate opens with a small
+map of that chapter's geography, and closes with a short write-up of each place:
+where it is now, and the two or three sentences of context that make the verse
+land. 831 of the 842 panes have one.
+
+This replaced a bare Wikipedia link on each place name. The link answered
+"where is Nineveh" by sending the reader to another site; the map answers it on
+the page, with Nineveh on the Tigris opposite modern Mosul, 500 miles from
+Israel, which is the fact Jonah 1 is leaning on. The Wikipedia article is still
+one click away from each write-up, as a source rather than as the answer.
+
+### Where it lives
+
+| file | what it is |
+|---|---|
+| `mapgeo_places.py` | the gazetteer: 182 places, coordinates, kind, write-ups |
+| `mapgeo_basemap.py` | clips and encodes Natural Earth coastlines, lakes, rivers |
+| `mapgeo.template.js` | the renderer |
+| `mapgeo.css` | the styling, compiled into the renderer |
+| `build_mapgeo.py` | assembles the three into `docs/site/mapgeo.js` |
+| `add_mapgeo_maps.py` | writes the map div and the write-ups into the panes |
+
+`docs/site/mapgeo.js` is about 100 KB, 57 KB over the wire, and is the only
+asset the maps need. It is precached by `sw.js`, so the maps work offline.
+
+### Rebuilding, in this order
+
+```bash
+cd bible-study
+python3 mapgeo_places.py       # validates the gazetteer, prints counts
+python3 build_mapgeo.py        # writes docs/site/mapgeo.js
+python3 add_mapgeo_maps.py     # writes the panes and stamps that file's hash
+```
+
+Both scripts are idempotent: a second run reports 0 files changed. Run
+`build_mapgeo.py` first, because `add_mapgeo_maps.py` stamps
+`?v=<hash of mapgeo.js>` onto the script tag and would otherwise stamp a stale
+one. Then sync New River as usual.
+
+### Why self-hosted vector data rather than a tile service
+
+Tiles would mean an API key, somebody's usage policy, and a blank grey box the
+moment a reader opens the site offline through the service worker. Natural Earth
+is public domain, so 60,000 coordinates of coastline, lake and river live in the
+repo instead, quantised to 1/500 of a degree and delta encoded. Modern coastlines
+on a biblical map are a compromise worth naming: the Dead Sea in particular has
+shrunk and split since antiquity, and the map shows it as it is now.
+
+### Two things that will bite
+
+**Only `mapgeo.js` may hold the coordinates.** The write-ups are baked into each
+page's HTML on purpose, so a reader with no JavaScript loses the picture and
+keeps all of the content. Do not move them into the asset to save bytes.
+
+**Read a pane through `mapgeo_places.pane_source()`, never raw.** The write-ups
+are full of place names and each carries a Wikipedia link, so anything that
+scans a finished pane for places will find some the chapter never mentioned and
+grow the list a little on every run. `find_places()` strips them for you; this is
+only a trap if you write a new scanner.
+
+### Adding a place
+
+Add it to `PLACES` in `mapgeo_places.py` with coordinates, a `kind`, the modern
+location and a note, then rebuild. `aka` holds the other spellings the panes use,
+matched longest-first so "Sea of Galilee" beats "Galilee". Two things to watch:
+
+- A demonym usually means the people or the empire, not the place. "Roman" was
+  putting a pin on Italy in chapters set in Galilee, and "Greek" almost always
+  means the language. `NEVER_MATCH` is the escape hatch.
+- Say so in the note when a site is disputed rather than letting the pin imply
+  precision. Sodom, Emmaus, Ai, Gilgal, Derbe and Tarshish are the existing
+  cases.
+
 ## Verifying the invariant
 
 Run these after any change to confirm the two repos differ only where allowed.
@@ -338,12 +417,47 @@ Tab coverage should be identical across both repos. Current expected values:
 grep -l $'\ufffd' docs/*.html | wc -l
 ```
 
+```bash
+# Maps: both rebuilds are no-ops, and every pin the prose promises exists.
+# Expect "0 files changed" and no PROBLEM lines from either.
+cd bible-study
+python3 build_mapgeo.py --check
+python3 add_mapgeo_maps.py --check
+```
+
+```bash
+# Every place a pane pins must still be in the shipped asset, or the map draws
+# fewer pins than the write-ups list. Expect 0 missing.
+cd bible-study
+python3 - <<'PY'
+import json, os, re
+js = open("docs/site/mapgeo.js", encoding='utf-8').read()
+have = set(json.loads(re.search(r'var PLACES = (\{.*?\});', js).group(1)))
+missing = set()
+for n in sorted(os.listdir("docs")):
+    if not n.endswith(".html"):
+        continue
+    for m in re.finditer(r'<div class="geo-map" data-places="([^"]*)"',
+                         open(f"docs/{n}", encoding='utf-8').read()):
+        missing |= {k for k in m.group(1).split(",") if k and k not in have}
+print("pinned but not shipped:", sorted(missing) or "none")
+PY
+```
+
+The renderer itself is checked by driving all 831 real place lists through it in
+a browser, which is worth doing after any change to `mapgeo.template.js`. Serve
+`docs/` and load a page that appends one `.geo-map` per list, calls
+`MapGeo.refresh()` once, then reports any pin drawn outside the frame, any label
+whose `getBBox()` leaves it, and anything on `window.onerror`. The last run:
+831 rendered, 2262 pins after clustering, 0 off-frame, 0 overflowing, 0 errors.
+
 ### Baseline as of the last full audit
 
 - 3617 unique videos referenced, **all 3617 playable**, 0 deleted, 0 private
 - 0 captions containing U+FFFD
 - 0 unexplained diff hunks between the repos
 - New River sermon overlay: 127 videos across 60 chapters
+- Maps on 831 of the 842 Map & Geography panes, 2811 pins from 162 places
 
 A full audit takes about a minute.
 

@@ -454,12 +454,22 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="canaan,edom,kadesh_barnea"></div>
                 <ul>
                     <li>Kadesh (v.1): Israel returns to Kadesh in the wilderness of Zin after 38 years. Miriam dies and is buried here.</li>
-                    <li>Meribah (v.13): &quot;Quarreling&quot; — the place where Moses strikes the rock instead of speaking to it, and is barred from entering <a href="https://en.wikipedia.org/wiki/Canaan" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Canaan</a>.</li>
-                    <li>Mount Hor (vv.22-29): On the border of <a href="https://en.wikipedia.org/wiki/Edom" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Edom</a>. Aaron dies here; Eleazar succeeds him as high priest.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Edom" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Edom</a> refuses passage (vv.14-21): Israel cannot go through Edom (east of the Arabah) and must detour around.</li>
+                    <li>Meribah (v.13): &quot;Quarreling&quot; — the place where Moses strikes the rock instead of speaking to it, and is barred from entering <a class="geo-ref" href="#geo-note-canaan">Canaan</a>.</li>
+                    <li>Mount Hor (vv.22-29): On the border of <a class="geo-ref" href="#geo-note-edom">Edom</a>. Aaron dies here; Eleazar succeeds him as high priest.</li>
+                    <li><a class="geo-ref" href="#geo-note-edom">Edom</a> refuses passage (vv.14-21): Israel cannot go through Edom (east of the Arabah) and must detour around.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-canaan" data-place="canaan"><span class="geo-name">Canaan</span><span class="geo-where">Israel, West Bank, Lebanon</span><span class="geo-note">The land bridge between Egypt and Mesopotamia, which is why armies crossed it for three thousand years. Within about 60 miles it goes from coastal plain to hill country to rift valley to desert plateau, so control of it was always local and piecemeal. <a class="geo-more" href="https://en.wikipedia.org/wiki/Canaan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-edom" data-place="edom"><span class="geo-name">Edom</span><span class="geo-where">southern Jordan</span><span class="geo-note">The red sandstone highlands south-east of the Dead Sea, holding the King's Highway and later Petra. Settlements sat behind cliffs and narrow gorges, which is the pride Obadiah addresses when he speaks to those who dwell in the clefts of the rock. <a class="geo-more" href="https://en.wikipedia.org/wiki/Edom" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-kadesh_barnea" data-place="kadesh_barnea"><span class="geo-name">Kadesh-barnea</span><span class="geo-where">Ain el-Qudeirat, Egypt/Israel border</span><span class="geo-note">The largest spring in the northern Sinai, about 50 miles south of Beersheba. Israel camped here, sent the spies north from here, and was turned back here to spend a generation in the wilderness. <a class="geo-more" href="https://en.wikipedia.org/wiki/Kadesh-barnea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -495,5 +505,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

@@ -549,11 +549,21 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="jerusalem,galilee,judea"></div>
                 <ul>
-                    <li><a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> / the Temple (v.14): Jesus went up to Jerusalem for the Feast of Tabernacles (a major pilgrimage feast) and taught in the Temple courts.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Galilee</a> (v.1): Jesus had been staying in Galilee, avoiding Judea because the Jews there sought to kill Him.</li>
+                    <li><a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> / the Temple (v.14): Jesus went up to Jerusalem for the Feast of Tabernacles (a major pilgrimage feast) and taught in the Temple courts.</li>
+                    <li><a class="geo-ref" href="#geo-note-galilee">Galilee</a> (v.1): Jesus had been staying in Galilee, avoiding Judea because the Jews there sought to kill Him.</li>
                     <li>The Pool of Siloam (implied, cf. 9:7): The water-pouring ceremony during Tabernacles drew water from the Pool of Siloam — the backdrop for Jesus&#x27; &quot;rivers of living water&quot; declaration.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-galilee" data-place="galilee"><span class="geo-name">Galilee</span><span class="geo-where">northern Israel</span><span class="geo-note">The northern hill country above the Jezreel Valley, wetter and greener than Judah and crossed by the trade road to Damascus. That traffic is why Judeans considered it mixed and provincial, and why Jesus grew up hearing more than one language. <a class="geo-more" href="https://en.wikipedia.org/wiki/Galilee" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-judea" data-place="judea"><span class="geo-name">Judea</span><span class="geo-where">southern Israel and the West Bank</span><span class="geo-note">The southern hill country around Jerusalem, high, stony and dry, with the wilderness on one side and the Philistine plain on the other. Poor farming and hard access are what let it stay independent longest. <a class="geo-more" href="https://en.wikipedia.org/wiki/Judea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -590,5 +600,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

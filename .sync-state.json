@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "bcb3dd6a518f52399e159a1d4463e31a8ec9def4 Finish Matthew",
+  "upstream_commit": "13193f25309513c856f4e36b80a54ae8696c92f7 Map & Geography: draw the map instead of linking to Wikipedia",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"

@@ -558,10 +558,21 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="jerusalem,galilee,samaria,perea"></div>
                 <ul>
-                    <li>On the journey to <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a>: Jesus is traveling south toward Jerusalem (set in motion in 9:51). This teaching occurs &quot;on the way&quot; — the exact location is unspecified but is between <a href="https://en.wikipedia.org/wiki/Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Galilee</a> and Jerusalem.</li>
-                    <li>Jesus teaches His disciples privately amid growing crowds during this travel period through <a href="https://en.wikipedia.org/wiki/Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Galilee</a>, <a href="https://en.wikipedia.org/wiki/Samaria" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Samaria</a>, or <a href="https://en.wikipedia.org/wiki/Perea" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Perea</a>.</li>
+                    <li>On the journey to <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a>: Jesus is traveling south toward Jerusalem (set in motion in 9:51). This teaching occurs &quot;on the way&quot; — the exact location is unspecified but is between <a class="geo-ref" href="#geo-note-galilee">Galilee</a> and Jerusalem.</li>
+                    <li>Jesus teaches His disciples privately amid growing crowds during this travel period through <a class="geo-ref" href="#geo-note-galilee">Galilee</a>, <a class="geo-ref" href="#geo-note-samaria">Samaria</a>, or <a class="geo-ref" href="#geo-note-perea">Perea</a>.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-galilee" data-place="galilee"><span class="geo-name">Galilee</span><span class="geo-where">northern Israel</span><span class="geo-note">The northern hill country above the Jezreel Valley, wetter and greener than Judah and crossed by the trade road to Damascus. That traffic is why Judeans considered it mixed and provincial, and why Jesus grew up hearing more than one language. <a class="geo-more" href="https://en.wikipedia.org/wiki/Galilee" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-samaria" data-place="samaria"><span class="geo-name">Samaria</span><span class="geo-where">Sebastia, West Bank</span><span class="geo-note">Omri bought a bare hill and built a capital on it, which gave the northern kingdom a fortress with no prior claim on it, the same calculation David made with Jerusalem. It commands the pass west toward the coastal plain. The name later spread to the whole region between Galilee and Judea. <a class="geo-more" href="https://en.wikipedia.org/wiki/Samaria" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-perea" data-place="perea"><span class="geo-name">Perea</span><span class="geo-where">western Jordan</span><span class="geo-note">The strip east of the Jordan between Pella and the Arnon, Jewish in population and ruled with Galilee under Herod Antipas. Pilgrims used it to bypass Samaria, which is the route behind the phrase beyond Jordan in the Gospels. <a class="geo-more" href="https://en.wikipedia.org/wiki/Perea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -597,5 +608,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

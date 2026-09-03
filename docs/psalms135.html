@@ -650,12 +650,23 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="egypt,bashan,sea_of_galilee,jerusalem"></div>
                 <ul>
-                    <li><a href="https://en.wikipedia.org/wiki/Ancient_Egypt" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Egypt</a> (v.8, v.9): Land to the southwest; place of Israel&#x27;s bondage and exodus.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Bashan" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Bashan</a> (v.11): Fertile region east of the <a href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Sea of Galilee</a>.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> (v.21): Capital of Judah; the holy city where the Temple stood.</li>
-                    <li>Zion (v.21): The hill on which <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a>/the Temple stood; often used poetically for God&#x27;s dwelling.</li>
+                    <li><a class="geo-ref" href="#geo-note-egypt">Egypt</a> (v.8, v.9): Land to the southwest; place of Israel&#x27;s bondage and exodus.</li>
+                    <li><a class="geo-ref" href="#geo-note-bashan">Bashan</a> (v.11): Fertile region east of the <a class="geo-ref" href="#geo-note-sea_of_galilee">Sea of Galilee</a>.</li>
+                    <li><a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> (v.21): Capital of Judah; the holy city where the Temple stood.</li>
+                    <li>Zion (v.21): The hill on which <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a>/the Temple stood; often used poetically for God&#x27;s dwelling.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-egypt" data-place="egypt"><span class="geo-name">Egypt</span><span class="geo-where">Egypt</span><span class="geo-note">A ribbon of irrigated land along the Nile, ending in the Delta where Israel settled in Goshen. Rain-fed Canaan depended on weather; Egypt depended on a river that flooded on schedule, which made it the place everyone went when the harvest failed. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ancient_Egypt" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-bashan" data-place="bashan"><span class="geo-name">Bashan</span><span class="geo-where">Golan and Hauran, Syria</span><span class="geo-note">The volcanic tableland north-east of the Sea of Galilee, deep in basalt soil and famous for cattle and oak. The bulls of Bashan in the Psalms are a compliment to the pasture before they are an insult to anyone. <a class="geo-more" href="https://en.wikipedia.org/wiki/Bashan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-sea_of_galilee" data-place="sea_of_galilee"><span class="geo-name">Sea of Galilee</span><span class="geo-where">Lake Kinneret, Israel</span><span class="geo-note">A freshwater lake 13 miles by 8, sunk 700 feet below sea level in a bowl of hills. Cold air spilling over the rim onto warm water is what produces the sudden violent squalls the Gospels keep describing. <a class="geo-more" href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
             <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -689,5 +700,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

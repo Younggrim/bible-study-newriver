@@ -440,11 +440,22 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="egypt,euphrates,nile,canaan"></div>
                 <ul>
-                    <li>&quot;From the river of <a href="https://en.wikipedia.org/wiki/Ancient_Egypt" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Egypt</a> to the great river, the river <a href="https://en.wikipedia.org/wiki/Euphrates" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Euphrates</a>&quot; (v.18) — the boundaries of the Promised Land defined. The &quot;river of Egypt&quot; is likely the Wadi el-Arish (not the <a href="https://en.wikipedia.org/wiki/Nile" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Nile</a>), marking the southwestern border.</li>
-                    <li>The <a href="https://en.wikipedia.org/wiki/Euphrates" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Euphrates</a> marks the northeastern boundary — an enormous territory that Israel only briefly controlled under Solomon (1 Kings 4:21).</li>
+                    <li>&quot;From the river of <a class="geo-ref" href="#geo-note-egypt">Egypt</a> to the great river, the river <a class="geo-ref" href="#geo-note-euphrates">Euphrates</a>&quot; (v.18) — the boundaries of the Promised Land defined. The &quot;river of Egypt&quot; is likely the Wadi el-Arish (not the <a class="geo-ref" href="#geo-note-nile">Nile</a>), marking the southwestern border.</li>
+                    <li>The <a class="geo-ref" href="#geo-note-euphrates">Euphrates</a> marks the northeastern boundary — an enormous territory that Israel only briefly controlled under Solomon (1 Kings 4:21).</li>
                     <li>Ten nations listed (vv.19-21): Kenites, Kenizzites, Kadmonites, Hittites, Perizzites, Rephaims, Amorites, Canaanites, Girgashites, Jebusites — all occupying the land between these boundaries.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-egypt" data-place="egypt"><span class="geo-name">Egypt</span><span class="geo-where">Egypt</span><span class="geo-note">A ribbon of irrigated land along the Nile, ending in the Delta where Israel settled in Goshen. Rain-fed Canaan depended on weather; Egypt depended on a river that flooded on schedule, which made it the place everyone went when the harvest failed. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ancient_Egypt" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-euphrates" data-place="euphrates"><span class="geo-name">Euphrates</span><span class="geo-where">Turkey, Syria, Iraq</span><span class="geo-note">The longest river in western Asia, running about 1,700 miles from eastern Turkey to the Persian Gulf. It is the northern limit named in the promise to Abraham and the boundary Assyria and Babylon crossed to reach the Levant. <a class="geo-more" href="https://en.wikipedia.org/wiki/Euphrates" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-nile" data-place="nile"><span class="geo-name">Nile</span><span class="geo-where">Egypt</span><span class="geo-note">Egypt's only real water source, flooding every summer and leaving the silt that made the valley farmable. Because the whole country depended on it, turning it to blood was an attack on Egypt's economy and its gods at once. <a class="geo-more" href="https://en.wikipedia.org/wiki/Nile" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-canaan" data-place="canaan"><span class="geo-name">Canaan</span><span class="geo-where">Israel, West Bank, Lebanon</span><span class="geo-note">The land bridge between Egypt and Mesopotamia, which is why armies crossed it for three thousand years. Within about 60 miles it goes from coastal plain to hill country to rift valley to desert plateau, so control of it was always local and piecemeal. <a class="geo-more" href="https://en.wikipedia.org/wiki/Canaan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -480,5 +491,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

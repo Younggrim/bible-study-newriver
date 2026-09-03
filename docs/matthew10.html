@@ -506,11 +506,21 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="galilee,samaria,judea"></div>
                 <ul>
                     <li>The mission is confined to Israel: &quot;Go not into the way of the Gentiles, and into any city of the Samaritans enter ye not&quot; (v.5). The disciples were sent only to &quot;the lost sheep of the house of Israel.&quot;</li>
-                    <li>Cities and villages of <a href="https://en.wikipedia.org/wiki/Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Galilee</a> and Judea: The twelve were sent throughout the towns of Israel, preaching the kingdom.</li>
+                    <li>Cities and villages of <a class="geo-ref" href="#geo-note-galilee">Galilee</a> and Judea: The twelve were sent throughout the towns of Israel, preaching the kingdom.</li>
                     <li>The geographic restriction would later be lifted in the Great Commission (Matt. 28:19) — &quot;all nations.&quot;</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-galilee" data-place="galilee"><span class="geo-name">Galilee</span><span class="geo-where">northern Israel</span><span class="geo-note">The northern hill country above the Jezreel Valley, wetter and greener than Judah and crossed by the trade road to Damascus. That traffic is why Judeans considered it mixed and provincial, and why Jesus grew up hearing more than one language. <a class="geo-more" href="https://en.wikipedia.org/wiki/Galilee" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-samaria" data-place="samaria"><span class="geo-name">Samaria</span><span class="geo-where">Sebastia, West Bank</span><span class="geo-note">Omri bought a bare hill and built a capital on it, which gave the northern kingdom a fortress with no prior claim on it, the same calculation David made with Jerusalem. It commands the pass west toward the coastal plain. The name later spread to the whole region between Galilee and Judea. <a class="geo-more" href="https://en.wikipedia.org/wiki/Samaria" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-judea" data-place="judea"><span class="geo-name">Judea</span><span class="geo-where">southern Israel and the West Bank</span><span class="geo-note">The southern hill country around Jerusalem, high, stony and dry, with the wilderness on one side and the Philistine plain on the other. Poor farming and hard access are what let it stay independent longest. <a class="geo-more" href="https://en.wikipedia.org/wiki/Judea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -547,5 +557,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>
