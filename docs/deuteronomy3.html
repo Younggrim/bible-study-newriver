@@ -452,11 +452,23 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="bashan,mount_hermon,gilead,transjordan,arnon"></div>
                 <ul>
-                    <li><a href="https://en.wikipedia.org/wiki/Bashan" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Bashan</a> (vv.1-11): Og&#x27;s kingdom in the north of Transjordan — from the Arnon to <a href="https://en.wikipedia.org/wiki/Mount_Hermon" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Mount Hermon</a>. Sixty fortified cities.</li>
-                    <li>The Transjordan allotment (vv.12-17): Reuben and Gad receive from Aroer (Arnon) to <a href="https://en.wikipedia.org/wiki/Gilead" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Gilead</a>; half-Manasseh receives <a href="https://en.wikipedia.org/wiki/Bashan" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Bashan</a> to Hermon.</li>
+                    <li><a class="geo-ref" href="#geo-note-bashan">Bashan</a> (vv.1-11): Og&#x27;s kingdom in the north of Transjordan — from the Arnon to <a class="geo-ref" href="#geo-note-mount_hermon">Mount Hermon</a>. Sixty fortified cities.</li>
+                    <li>The Transjordan allotment (vv.12-17): Reuben and Gad receive from Aroer (Arnon) to <a class="geo-ref" href="#geo-note-gilead">Gilead</a>; half-Manasseh receives <a class="geo-ref" href="#geo-note-bashan">Bashan</a> to Hermon.</li>
                     <li>Beth-peor (v.29): Israel camps in the valley opposite Beth-peor — the setting for the Deuteronomy speeches.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-bashan" data-place="bashan"><span class="geo-name">Bashan</span><span class="geo-where">Golan and Hauran, Syria</span><span class="geo-note">The volcanic tableland north-east of the Sea of Galilee, deep in basalt soil and famous for cattle and oak. The bulls of Bashan in the Psalms are a compliment to the pasture before they are an insult to anyone. <a class="geo-more" href="https://en.wikipedia.org/wiki/Bashan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mount_hermon" data-place="mount_hermon"><span class="geo-name">Mount Hermon</span><span class="geo-where">Syria / Lebanon / Golan border</span><span class="geo-note">The 9,200-foot southern end of the Anti-Lebanon range, snow-covered most of the year and visible from much of Galilee. Its snowmelt feeds the springs that become the Jordan, and it marked the northern limit of Israel's conquests. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mount_Hermon" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-gilead" data-place="gilead"><span class="geo-name">Gilead</span><span class="geo-where">northern Jordan</span><span class="geo-note">The wooded highlands east of the Jordan between the Yarmuk and the Arnon, good grazing country and a source of the resin traded as balm. Being across the river left its tribes perpetually worried about being written out of Israel. <a class="geo-more" href="https://en.wikipedia.org/wiki/Gilead" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-transjordan" data-place="transjordan"><span class="geo-name">Transjordan</span><span class="geo-where">western Jordan</span><span class="geo-note">Everything east of the Jordan and the Dead Sea: the plateau taken before the river was crossed and settled by Reuben, Gad and half of Manasseh, who then spent centuries anxious about being counted out. <a class="geo-more" href="https://en.wikipedia.org/wiki/Transjordan_(region)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-arnon" data-place="arnon"><span class="geo-name">Arnon</span><span class="geo-where">Wadi Mujib, Jordan</span><span class="geo-note">A canyon up to 1,700 feet deep cutting west into the Dead Sea, and the border between Moab and the territory north of it. Crossing it meant descending and climbing a mile of switchbacks. <a class="geo-more" href="https://en.wikipedia.org/wiki/Arnon" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -488,5 +500,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

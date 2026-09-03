@@ -357,11 +357,22 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="philistia,ashdod,gath,ekron"></div>
                 <ul>
-                    <li>The ark&#x27;s journey through <a href="https://en.wikipedia.org/wiki/Philistia" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Philistia</a>: Ashdod → Gath → Ekron (three of the five Philistine cities on the coastal plain)</li>
+                    <li>The ark&#x27;s journey through <a class="geo-ref" href="#geo-note-philistia">Philistia</a>: Ashdod → Gath → Ekron (three of the five Philistine cities on the coastal plain)</li>
                     <li>Ashdod: Where the ark is placed in the temple of Dagon — Dagon falls before it</li>
                     <li>Each city suffers plagues; the ark moves progressively through Philistine territory bringing judgment</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-philistia" data-place="philistia"><span class="geo-name">Philistia</span><span class="geo-where">southern coastal Israel and Gaza</span><span class="geo-note">The coastal plain south of Joppa, held by a league of five cities: Gaza, Ashkelon, Ashdod, Gath and Ekron. Flat, fertile and on the trade road, it gave the Philistines chariots and iron while Israel held the hills above them. <a class="geo-more" href="https://en.wikipedia.org/wiki/Philistia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-ashdod" data-place="ashdod"><span class="geo-name">Ashdod</span><span class="geo-where">Tel Ashdod, Israel</span><span class="geo-note">A Philistine city three miles inland from the coast, where the captured ark was set beside Dagon and Dagon fell over. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ashdod" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-gath" data-place="gath"><span class="geo-name">Gath</span><span class="geo-where">Tell es-Safi, Israel</span><span class="geo-note">The Philistine city closest to the Judean foothills, guarding the Elah valley. Goliath came from here, and David later took refuge with its king. <a class="geo-more" href="https://en.wikipedia.org/wiki/Gath_(city)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-ekron" data-place="ekron"><span class="geo-name">Ekron</span><span class="geo-where">Tel Miqne, Israel</span><span class="geo-note">The northernmost of the five Philistine cities, on the boundary with Judah, and the last place the ark was sent before being returned. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ekron" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -393,5 +404,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

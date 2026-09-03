@@ -498,11 +498,24 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="canaan,nineveh,assyria,asia_minor,mesopotamia,babylon"></div>
                 <ul>
-                    <li>The Table of Nations maps the spread of humanity from Noah&#x27;s three sons: Japheth (Indo-European peoples, Anatolia/Europe), Ham (Africa, <a href="https://en.wikipedia.org/wiki/Canaan" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Canaan</a>, Mesopotamia), and Shem (Semitic peoples, the Near East).</li>
-                    <li>Nimrod&#x27;s kingdom includes Babel, Erech (Uruk), Accad, and Calneh in Shinar (Babylonia) and <a href="https://en.wikipedia.org/wiki/Nineveh" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Nineveh</a> in <a href="https://en.wikipedia.org/wiki/Assyria" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Assyria</a> (vv.10-12) — all in modern Iraq.</li>
+                    <li>The Table of Nations maps the spread of humanity from Noah&#x27;s three sons: Japheth (Indo-European peoples, Anatolia/Europe), Ham (Africa, <a class="geo-ref" href="#geo-note-canaan">Canaan</a>, Mesopotamia), and Shem (Semitic peoples, the Near East).</li>
+                    <li>Nimrod&#x27;s kingdom includes Babel, Erech (Uruk), Accad, and Calneh in Shinar (Babylonia) and <a class="geo-ref" href="#geo-note-nineveh">Nineveh</a> in <a class="geo-ref" href="#geo-note-assyria">Assyria</a> (vv.10-12) — all in modern Iraq.</li>
                     <li>This chapter provides the geographical backdrop for the entire Old Testament.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-canaan" data-place="canaan"><span class="geo-name">Canaan</span><span class="geo-where">Israel, West Bank, Lebanon</span><span class="geo-note">The land bridge between Egypt and Mesopotamia, which is why armies crossed it for three thousand years. Within about 60 miles it goes from coastal plain to hill country to rift valley to desert plateau, so control of it was always local and piecemeal. <a class="geo-more" href="https://en.wikipedia.org/wiki/Canaan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-nineveh" data-place="nineveh"><span class="geo-name">Nineveh</span><span class="geo-where">Mosul, Iraq</span><span class="geo-note">Assyria's last capital, on the east bank of the Tigris across from modern Mosul, about 500 miles north-east of Israel. Sennacherib walled in an enormous city here, which is the scale behind Jonah's three days' journey and its 120,000 who cannot tell right from left. <a class="geo-more" href="https://en.wikipedia.org/wiki/Nineveh" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-assyria" data-place="assyria"><span class="geo-name">Assyria</span><span class="geo-where">northern Iraq</span><span class="geo-note">The upper Tigris heartland around Nineveh, Calah and Asshur. Its armies reached Israel by following the Fertile Crescent north-west and then south down the coast, so the threat always arrived from the north even though Assyria lay to the east. <a class="geo-more" href="https://en.wikipedia.org/wiki/Assyria" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-asia_minor" data-place="asia_minor"><span class="geo-name">Asia Minor</span><span class="geo-where">Turkey</span><span class="geo-note">The peninsula between the Black Sea and the Mediterranean, a high dry plateau ringed by mountains with the Greek cities on its western coast. Roman Asia, the province Paul worked from Ephesus, was only its western end. <a class="geo-more" href="https://en.wikipedia.org/wiki/Anatolia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mesopotamia" data-place="mesopotamia"><span class="geo-name">Mesopotamia</span><span class="geo-where">Iraq and eastern Syria</span><span class="geo-note">The land between the Tigris and Euphrates, flat, hot and farmable only by irrigation, which forced early cities into large-scale cooperation. Abraham came from its southern end and Israel's exiles were taken to its middle. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mesopotamia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-babylon" data-place="babylon"><span class="geo-name">Babylon</span><span class="geo-where">near Hillah, Iraq</span><span class="geo-note">On the Euphrates about 55 miles south of modern Baghdad. Judah's exiles were marched roughly 900 miles to get here, the long way round the Arabian desert, which is why the journey took months and the return was a genuine undertaking rather than a short trip home. <a class="geo-more" href="https://en.wikipedia.org/wiki/Babylon" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -534,5 +547,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

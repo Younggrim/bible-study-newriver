@@ -461,10 +461,20 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="perea,galilee,jerusalem"></div>
                 <ul>
-                    <li>A Pharisee&#x27;s house (v.1): Jesus dined at the house of a Pharisee ruler — likely in <a href="https://en.wikipedia.org/wiki/Perea" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Perea</a> or southern <a href="https://en.wikipedia.org/wiki/Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Galilee</a>, on the journey to <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a>.</li>
+                    <li>A Pharisee&#x27;s house (v.1): Jesus dined at the house of a Pharisee ruler — likely in <a class="geo-ref" href="#geo-note-perea">Perea</a> or southern <a class="geo-ref" href="#geo-note-galilee">Galilee</a>, on the journey to <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a>.</li>
                     <li>The highways and hedges (v.23): The parable pictures God&#x27;s invitation extending beyond the city (Israel) to the roads and countryside (Gentiles).</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-perea" data-place="perea"><span class="geo-name">Perea</span><span class="geo-where">western Jordan</span><span class="geo-note">The strip east of the Jordan between Pella and the Arnon, Jewish in population and ruled with Galilee under Herod Antipas. Pilgrims used it to bypass Samaria, which is the route behind the phrase beyond Jordan in the Gospels. <a class="geo-more" href="https://en.wikipedia.org/wiki/Perea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-galilee" data-place="galilee"><span class="geo-name">Galilee</span><span class="geo-where">northern Israel</span><span class="geo-note">The northern hill country above the Jezreel Valley, wetter and greener than Judah and crossed by the trade road to Damascus. That traffic is why Judeans considered it mixed and provincial, and why Jesus grew up hearing more than one language. <a class="geo-more" href="https://en.wikipedia.org/wiki/Galilee" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -500,5 +510,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

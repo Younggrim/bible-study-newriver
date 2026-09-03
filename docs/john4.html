@@ -555,11 +555,24 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="samaria,galilee,capernaum,judea,mount_gerizim,cana"></div>
                 <ul>
-                    <li><a href="https://en.wikipedia.org/wiki/Samaria" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Samaria</a> / Sychar (v.5): Jesus passed through Samaria (the region between Judea and <a href="https://en.wikipedia.org/wiki/Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Galilee</a>) and stopped at Jacob&#x27;s well near the town of Sychar (modern Askar), at the foot of Mount Gerizim.</li>
+                    <li><a class="geo-ref" href="#geo-note-samaria">Samaria</a> / Sychar (v.5): Jesus passed through Samaria (the region between Judea and <a class="geo-ref" href="#geo-note-galilee">Galilee</a>) and stopped at Jacob&#x27;s well near the town of Sychar (modern Askar), at the foot of Mount Gerizim.</li>
                     <li>Mount Gerizim (v.20): The Samaritan holy mountain where they built a rival temple. The woman references this in her question about worship.</li>
-                    <li>Cana of <a href="https://en.wikipedia.org/wiki/Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Galilee</a> (v.46): Jesus returned to Cana where He healed the nobleman&#x27;s son at a distance — the boy was in <a href="https://en.wikipedia.org/wiki/Capernaum" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Capernaum</a>, about 16 miles away.</li>
+                    <li>Cana of <a class="geo-ref" href="#geo-note-galilee">Galilee</a> (v.46): Jesus returned to Cana where He healed the nobleman&#x27;s son at a distance — the boy was in <a class="geo-ref" href="#geo-note-capernaum">Capernaum</a>, about 16 miles away.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-samaria" data-place="samaria"><span class="geo-name">Samaria</span><span class="geo-where">Sebastia, West Bank</span><span class="geo-note">Omri bought a bare hill and built a capital on it, which gave the northern kingdom a fortress with no prior claim on it, the same calculation David made with Jerusalem. It commands the pass west toward the coastal plain. The name later spread to the whole region between Galilee and Judea. <a class="geo-more" href="https://en.wikipedia.org/wiki/Samaria" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-galilee" data-place="galilee"><span class="geo-name">Galilee</span><span class="geo-where">northern Israel</span><span class="geo-note">The northern hill country above the Jezreel Valley, wetter and greener than Judah and crossed by the trade road to Damascus. That traffic is why Judeans considered it mixed and provincial, and why Jesus grew up hearing more than one language. <a class="geo-more" href="https://en.wikipedia.org/wiki/Galilee" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-capernaum" data-place="capernaum"><span class="geo-name">Capernaum</span><span class="geo-where">Kfar Nahum, Israel</span><span class="geo-note">A fishing village on the north-west shore of the Sea of Galilee, on the road running from the coast to Damascus. A customs post and a garrison explain the tax collector and the centurion; the harbour and the synagogue explain why Jesus made it his base. <a class="geo-more" href="https://en.wikipedia.org/wiki/Capernaum" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-judea" data-place="judea"><span class="geo-name">Judea</span><span class="geo-where">southern Israel and the West Bank</span><span class="geo-note">The southern hill country around Jerusalem, high, stony and dry, with the wilderness on one side and the Philistine plain on the other. Poor farming and hard access are what let it stay independent longest. <a class="geo-more" href="https://en.wikipedia.org/wiki/Judea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mount_gerizim" data-place="mount_gerizim"><span class="geo-name">Mount Gerizim</span><span class="geo-where">Nablus, West Bank</span><span class="geo-note">The southern side of the same pass and the mountain of blessing. Samaritans built their temple on it and still worship there, which is the this mountain of the woman at the well. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mount_Gerizim" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-cana" data-place="cana"><span class="geo-name">Cana</span><span class="geo-where">Khirbet Qana, Israel</span><span class="geo-note">A Galilean village a few miles north of Nazareth, site of the first sign. Two candidate locations compete and neither is settled. <a class="geo-more" href="https://en.wikipedia.org/wiki/Cana" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -594,5 +607,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

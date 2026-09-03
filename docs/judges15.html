@@ -381,11 +381,21 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="timnah,philistia,dan"></div>
                 <ul>
                     <li>Timnah: Where Samson returns to find his wife given away — sparking the foxes/torches campaign in Philistine grain fields</li>
                     <li>Lehi (&quot;jawbone&quot;): The site where Samson slays 1,000 Philistines; exact location uncertain but in the Judah/Dan border region</li>
                     <li>Etam: A rock/cliff in Judah where Samson hides; 3,000 men of Judah come to surrender him to the Philistines</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-timnah" data-place="timnah"><span class="geo-name">Timnah</span><span class="geo-where">Tel Batash, Israel</span><span class="geo-note">A border town in the same valley, where Samson found a wife among the Philistines. <a class="geo-more" href="https://en.wikipedia.org/wiki/Timnah" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-philistia" data-place="philistia"><span class="geo-name">Philistia</span><span class="geo-where">southern coastal Israel and Gaza</span><span class="geo-note">The coastal plain south of Joppa, held by a league of five cities: Gaza, Ashkelon, Ashdod, Gath and Ekron. Flat, fertile and on the trade road, it gave the Philistines chariots and iron while Israel held the hills above them. <a class="geo-more" href="https://en.wikipedia.org/wiki/Philistia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-dan" data-place="dan"><span class="geo-name">Dan</span><span class="geo-where">Tel Dan, Israel</span><span class="geo-note">At the largest of the Jordan's headwater springs under Mount Hermon, the northern limit of Israel. Jeroboam set his second golden calf here, as far from Jerusalem as he could get. <a class="geo-more" href="https://en.wikipedia.org/wiki/Tel_Dan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -417,5 +427,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

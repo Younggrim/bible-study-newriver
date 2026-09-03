@@ -527,11 +527,23 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="jericho,jerusalem,mount_of_olives,bethany,bethphage"></div>
                 <ul>
-                    <li><a href="https://en.wikipedia.org/wiki/Jericho" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jericho</a> (v.1): Jesus entered and passed through Jericho — about 15 miles east of <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a>. Zacchaeus climbed a sycamore tree here.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> / the <a href="https://en.wikipedia.org/wiki/Mount_of_Olives" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Mount of Olives</a> (vv.29-44): Jesus approached Jerusalem from the east, via Bethphage and <a href="https://en.wikipedia.org/wiki/Bethany_(biblical_village)" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Bethany</a> on the Mount of Olives. He wept over Jerusalem as it came into view.</li>
+                    <li><a class="geo-ref" href="#geo-note-jericho">Jericho</a> (v.1): Jesus entered and passed through Jericho — about 15 miles east of <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a>. Zacchaeus climbed a sycamore tree here.</li>
+                    <li><a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> / the <a class="geo-ref" href="#geo-note-mount_of_olives">Mount of Olives</a> (vv.29-44): Jesus approached Jerusalem from the east, via Bethphage and <a class="geo-ref" href="#geo-note-bethany">Bethany</a> on the Mount of Olives. He wept over Jerusalem as it came into view.</li>
                     <li>The Temple (v.45): Jesus entered the Temple and drove out those buying and selling.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-jericho" data-place="jericho"><span class="geo-name">Jericho</span><span class="geo-where">Jericho, West Bank</span><span class="geo-note">An oasis at a perennial spring in the Jordan valley, 850 feet below sea level and among the oldest continuously settled sites anywhere. It guarded the ford and the climb up to the central hills, so anyone entering Canaan from the east had to deal with it first. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jericho" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mount_of_olives" data-place="mount_of_olives"><span class="geo-name">Mount of Olives</span><span class="geo-where">Jerusalem</span><span class="geo-note">A limestone ridge just east of Jerusalem, separated from the city by the Kidron Valley and about 250 feet higher, so it looks straight down into the temple courts. The road to Jericho and Bethany crosses it, which is why Jesus is so often on it. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mount_of_Olives" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-bethany" data-place="bethany"><span class="geo-name">Bethany</span><span class="geo-where">al-Eizariya, West Bank</span><span class="geo-note">A village on the east slope of the Mount of Olives, under two miles from Jerusalem but out of sight of it. Close enough for Jesus to lodge here through the last week and walk in each morning. <a class="geo-more" href="https://en.wikipedia.org/wiki/Bethany_(biblical_village)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-bethphage" data-place="bethphage"><span class="geo-name">Bethphage</span><span class="geo-where">Jerusalem</span><span class="geo-note">A village on the Mount of Olives beside Bethany, the last stop on the pilgrim road before Jerusalem comes into view. The donkey was fetched here. <a class="geo-more" href="https://en.wikipedia.org/wiki/Bethphage" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -567,5 +579,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

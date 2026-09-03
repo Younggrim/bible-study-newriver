@@ -428,11 +428,21 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="sinai,midian,canaan"></div>
                 <ul>
-                    <li><a href="https://en.wikipedia.org/wiki/Mount_Sinai" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Horeb</a> / <a href="https://en.wikipedia.org/wiki/Mount_Sinai" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Mount Sinai</a> (v.1): &quot;The mountain of God,&quot; located in the Sinai Peninsula (traditionally Jebel Musa). Moses encounters God here at the burning bush.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Midian" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Midian</a> (v.1): The region where Moses tended Jethro&#x27;s flock; the &quot;backside of the desert&quot; (KJV) / &quot;west side of the wilderness&quot; (ESV).</li>
-                    <li>&quot;A land flowing with milk and honey&quot; (v.8): Description of <a href="https://en.wikipedia.org/wiki/Canaan" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Canaan</a> — the Promised Land, destination of the Exodus.</li>
+                    <li><a class="geo-ref" href="#geo-note-sinai">Horeb</a> / <a class="geo-ref" href="#geo-note-sinai">Mount Sinai</a> (v.1): &quot;The mountain of God,&quot; located in the Sinai Peninsula (traditionally Jebel Musa). Moses encounters God here at the burning bush.</li>
+                    <li><a class="geo-ref" href="#geo-note-midian">Midian</a> (v.1): The region where Moses tended Jethro&#x27;s flock; the &quot;backside of the desert&quot; (KJV) / &quot;west side of the wilderness&quot; (ESV).</li>
+                    <li>&quot;A land flowing with milk and honey&quot; (v.8): Description of <a class="geo-ref" href="#geo-note-canaan">Canaan</a> — the Promised Land, destination of the Exodus.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-sinai" data-place="sinai"><span class="geo-name">Mount Sinai</span><span class="geo-where">Jebel Musa, Sinai Peninsula, Egypt</span><span class="geo-note">Traditionally Jebel Musa in the granite mountains of the southern Sinai peninsula, about 7,500 feet high. The identification dates from Christian monastic tradition rather than from the text, and other candidates have been proposed, but this has been the pilgrimage site since the fourth century. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mount_Sinai" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-midian" data-place="midian"><span class="geo-name">Midian</span><span class="geo-where">north-western Saudi Arabia</span><span class="geo-note">Desert and oasis country east of the Gulf of Aqaba, home to camel caravanning herdsmen rather than to cities. Moses spent forty years here as a shepherd, which is how a man raised in an Egyptian palace learned to cross a wilderness. <a class="geo-more" href="https://en.wikipedia.org/wiki/Midian" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-canaan" data-place="canaan"><span class="geo-name">Canaan</span><span class="geo-where">Israel, West Bank, Lebanon</span><span class="geo-note">The land bridge between Egypt and Mesopotamia, which is why armies crossed it for three thousand years. Within about 60 miles it goes from coastal plain to hill country to rift valley to desert plateau, so control of it was always local and piecemeal. <a class="geo-more" href="https://en.wikipedia.org/wiki/Canaan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -472,5 +482,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

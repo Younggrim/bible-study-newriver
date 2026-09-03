@@ -466,11 +466,23 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="tyre,mediterranean,tarshish,egypt,phoenicia"></div>
                 <ul>
-                    <li><a href="https://en.wikipedia.org/wiki/Tyre,_Lebanon" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Tyre</a> (v.1, v.5, v.8): Phoenician port city on the <a href="https://en.wikipedia.org/wiki/Mediterranean_Sea" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Mediterranean</a> coast.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Tarshish" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Tarshish</a> (v.1, v.6, v.10): Distant port city (possibly Spain); represents the farthest reaches of the known world.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Ancient_Egypt" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Egypt</a> (v.5): Land to the southwest; place of Israel&#x27;s bondage and exodus.</li>
+                    <li><a class="geo-ref" href="#geo-note-tyre">Tyre</a> (v.1, v.5, v.8): Phoenician port city on the <a class="geo-ref" href="#geo-note-mediterranean">Mediterranean</a> coast.</li>
+                    <li><a class="geo-ref" href="#geo-note-tarshish">Tarshish</a> (v.1, v.6, v.10): Distant port city (possibly Spain); represents the farthest reaches of the known world.</li>
+                    <li><a class="geo-ref" href="#geo-note-egypt">Egypt</a> (v.5): Land to the southwest; place of Israel&#x27;s bondage and exodus.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-tyre" data-place="tyre"><span class="geo-name">Tyre</span><span class="geo-where">Sour, Lebanon</span><span class="geo-note">Originally an island fortress a half mile off the Phoenician coast, which is why it held out against Assyria and Babylon and only fell when Alexander built a causeway to it. That causeway silted up, and Tyre has been a peninsula ever since. <a class="geo-more" href="https://en.wikipedia.org/wiki/Tyre,_Lebanon" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mediterranean" data-place="mediterranean"><span class="geo-name">Mediterranean Sea</span><span class="geo-note">Called simply the Great Sea, and treated as the western edge of the world. Israel's coast has almost no natural harbours, so for most of its history the sea was a boundary rather than a road, and seafaring was left to the Phoenicians. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mediterranean_Sea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-tarshish" data-place="tarshish"><span class="geo-name">Tarshish</span><span class="geo-where">probably southern Spain</span><span class="geo-note">Usually identified with Tartessos near the mouth of the Guadalquivir in southern Spain, at the far western end of the Phoenician trade routes, though the identification is not certain. Either way it meant the end of the known world, and it lies almost exactly opposite Nineveh from Joppa. <a class="geo-more" href="https://en.wikipedia.org/wiki/Tarshish" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-egypt" data-place="egypt"><span class="geo-name">Egypt</span><span class="geo-where">Egypt</span><span class="geo-note">A ribbon of irrigated land along the Nile, ending in the Delta where Israel settled in Goshen. Rain-fed Canaan depended on weather; Egypt depended on a river that flooded on schedule, which made it the place everyone went when the harvest failed. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ancient_Egypt" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-phoenicia" data-place="phoenicia"><span class="geo-name">Phoenicia</span><span class="geo-where">coastal Lebanon</span><span class="geo-note">A narrow strip of coast backed hard against the Lebanon range, with too little farmland to feed itself and excellent harbours. That combination made its cities trade by sea, plant colonies as far as Spain, and supply Israel with timber, craftsmen and Jezebel. <a class="geo-more" href="https://en.wikipedia.org/wiki/Phoenicia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -503,5 +515,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

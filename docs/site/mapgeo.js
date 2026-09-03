@@ -35,14 +35,21 @@
     /* key -> [name, lat, lon, kind]. The write-ups are in the page, not here. */
     var PLACES = {"adullam":["Adullam",31.6522,34.9761,"city"],"ai":["Ai",31.9167,35.26,"city"],"ammon":["Ammon",31.9515,35.934,"region"],"antioch":["Antioch",36.2021,36.1613,"city"],"aphek":["Aphek",32.1039,34.9331,"city"],"arad":["Arad",31.2811,35.1261,"city"],"aram":["Aram",34.0,37.0,"region"],"ararat":["Ararat",39.7019,44.2983,"mountain"],"arnon":["Arnon",31.47,35.58,"river"],"ashdod":["Ashdod",31.7522,34.65,"city"],"ashkelon":["Ashkelon",31.6667,34.55,"city"],"asia_minor":["Asia Minor",39.0,32.5,"region"],"assyria":["Assyria",35.9,43.2,"region"],"athens":["Athens",37.9715,23.7257,"city"],"babylon":["Babylon",32.5355,44.4275,"city"],"bashan":["Bashan",32.85,36.1,"region"],"beersheba":["Beersheba",31.245,34.8422,"city"],"berea":["Berea",40.5236,22.2028,"city"],"beth_shan":["Beth-shan",32.5,35.5,"city"],"beth_shemesh":["Beth-shemesh",31.7517,34.9758,"city"],"bethany":["Bethany",31.7714,35.2633,"city"],"bethel":["Bethel",31.9303,35.2217,"city"],"bethlehem":["Bethlehem",31.7054,35.2024,"city"],"bethphage":["Bethphage",31.7772,35.2531,"city"],"bethsaida":["Bethsaida",32.91,35.63,"city"],"caesarea":["Caesarea",32.5,34.8917,"city"],"caesarea_philippi":["Caesarea Philippi",33.2481,35.6944,"city"],"calvary":["Calvary",31.7784,35.2297,"city"],"cana":["Cana",32.8131,35.3122,"city"],"canaan":["Canaan",31.9,35.05,"region"],"capernaum":["Capernaum",32.8808,35.575,"city"],"cenchreae":["Cenchreae",37.8881,22.9872,"city"],"chorazin":["Chorazin",32.9111,35.5644,"city"],"cilicia":["Cilicia",37.0,35.0,"region"],"corinth":["Corinth",37.906,22.879,"city"],"crete":["Crete",35.24,24.81,"island"],"cush":["Cush",19.0,32.5,"region"],"cyprus":["Cyprus",35.0,33.2,"island"],"damascus":["Damascus",33.5131,36.2919,"city"],"dan":["Dan",33.2489,35.6519,"city"],"dead_sea":["Dead Sea",31.5,35.47,"water"],"decapolis":["Decapolis",32.2811,35.8911,"region"],"derbe":["Derbe",37.35,33.28,"city"],"dibon":["Dibon",31.5069,35.7831,"city"],"dothan":["Dothan",32.4117,35.1961,"city"],"edom":["Edom",30.6,35.5,"region"],"egypt":["Egypt",29.6,31.2,"region"],"ekron":["Ekron",31.7772,34.8517,"city"],"elam":["Elam",32.0,48.5,"region"],"en_gedi":["En-gedi",31.4617,35.3922,"city"],"ephesus":["Ephesus",37.9411,27.3419,"city"],"ephraim":["Ephraim",32.05,35.2,"region"],"euphrates":["Euphrates",35.0,40.2,"river"],"gadara":["Gadara",32.655,35.685,"city"],"galatia":["Galatia",39.93,32.86,"region"],"galilee":["Galilee",32.85,35.35,"region"],"gath":["Gath",31.7,34.8472,"city"],"gaza":["Gaza",31.504,34.4667,"city"],"geba":["Geba",31.8583,35.2667,"city"],"gerasa":["Gerasa",32.2811,35.8911,"city"],"gethsemane":["Gethsemane",31.7794,35.2397,"city"],"gezer":["Gezer",31.8619,34.9211,"city"],"gibeah":["Gibeah",31.8239,35.23,"city"],"gibeon":["Gibeon",31.8511,35.1839,"city"],"gilead":["Gilead",32.3,35.75,"region"],"gilgal":["Gilgal",31.87,35.51,"city"],"goshen":["Goshen",30.8,31.85,"region"],"greece":["Achaia",38.5,22.5,"region"],"harran":["Harran",36.8642,39.0311,"city"],"hazor":["Hazor",33.0172,35.5681,"city"],"hebron":["Hebron",31.5326,35.0954,"city"],"heshbon":["Heshbon",31.8,35.8083,"city"],"iconium":["Iconium",37.8742,32.4922,"city"],"idumea":["Idumea",31.35,34.95,"region"],"jabbok":["Jabbok",32.19,35.6,"river"],"jericho":["Jericho",31.8711,35.4443,"city"],"jerusalem":["Jerusalem",31.7683,35.2137,"city"],"jezreel":["Jezreel",32.5558,35.3306,"city"],"jezreel_valley":["Jezreel Valley",32.6,35.3,"region"],"joppa":["Joppa",32.0542,34.7522,"city"],"jordan_river":["Jordan River",32.1,35.57,"river"],"judea":["Judea",31.65,35.15,"region"],"judean_desert":["Judean Wilderness",31.6,35.35,"region"],"kadesh_barnea":["Kadesh-barnea",30.6667,34.4333,"city"],"keilah":["Keilah",31.6167,34.965,"city"],"kidron":["Kidron Valley",31.775,35.2383,"region"],"kishon":["River Kishon",32.79,35.06,"river"],"lachish":["Lachish",31.565,34.8489,"city"],"laodicea":["Laodicea",37.8358,29.1078,"city"],"lebanon":["Lebanon",34.2,36.0,"region"],"lystra":["Lystra",37.5772,32.4531,"city"],"macedonia":["Macedonia",40.9,22.5,"region"],"machaerus":["Machaerus",31.5667,35.625,"city"],"magdala":["Magdala",32.8269,35.5158,"city"],"malta":["Malta",35.9,14.45,"island"],"media":["Media",34.8,48.51,"region"],"mediterranean":["Mediterranean Sea",33.5,32.5,"water"],"megiddo":["Megiddo",32.585,35.1842,"city"],"memphis":["Memphis",29.845,31.25,"city"],"mesopotamia":["Mesopotamia",34.5,43.0,"region"],"michmash":["Michmash",31.8692,35.2811,"city"],"midian":["Midian",28.5,35.5,"region"],"miletus":["Miletus",37.5306,27.2778,"city"],"mizpah":["Mizpah",31.8839,35.2161,"city"],"moab":["Moab",31.45,35.75,"region"],"mount_carmel":["Mount Carmel",32.73,35.05,"mountain"],"mount_ebal":["Mount Ebal",32.2353,35.2733,"mountain"],"mount_gerizim":["Mount Gerizim",32.1992,35.2733,"mountain"],"mount_gilboa":["Mount Gilboa",32.5083,35.4139,"mountain"],"mount_hermon":["Mount Hermon",33.4162,35.8573,"mountain"],"mount_nebo":["Mount Nebo",31.7683,35.7253,"mountain"],"mount_of_olives":["Mount of Olives",31.7784,35.2456,"mountain"],"mount_tabor":["Mount Tabor",32.6869,35.3903,"mountain"],"nain":["Nain",32.6317,35.345,"city"],"nazareth":["Nazareth",32.6996,35.3035,"city"],"negev":["Negev",30.8,34.8,"region"],"nile":["Nile",27.2,31.2,"river"],"nineveh":["Nineveh",36.3594,43.1528,"city"],"paphos":["Paphos",34.775,32.4239,"city"],"patmos":["Patmos",37.3089,26.5483,"island"],"perea":["Perea",31.85,35.7,"region"],"perga":["Perga",36.9611,30.8542,"city"],"persia":["Persia",29.935,52.891,"region"],"philadelphia_asia":["Philadelphia",38.35,28.5181,"city"],"philippi":["Philippi",41.0131,24.2867,"city"],"philistia":["Philistia",31.6,34.65,"region"],"phoenicia":["Phoenicia",33.6,35.4,"region"],"pisidian_antioch":["Antioch in Pisidia",38.305,31.19,"city"],"puteoli":["Puteoli",40.8231,14.1214,"city"],"ramah":["Ramah",31.845,35.2339,"city"],"rameses":["Rameses",30.7981,31.8331,"city"],"red_sea":["Red Sea",27.5,34.2,"water"],"rome":["Rome",41.8911,12.4864,"city"],"salamis_cyprus":["Salamis",35.1833,33.905,"city"],"samaria":["Samaria",32.2804,35.1969,"city"],"sardis":["Sardis",38.4875,28.0406,"city"],"sea_of_galilee":["Sea of Galilee",32.8222,35.59,"water"],"sheba":["Sheba",15.42,45.33,"region"],"shechem":["Shechem",32.2131,35.2831,"city"],"shiloh":["Shiloh",32.0556,35.2894,"city"],"shunem":["Shunem",32.605,35.3361,"city"],"sidon":["Sidon",33.563,35.3689,"city"],"sinai":["Mount Sinai",28.5392,33.975,"mountain"],"smyrna":["Smyrna",38.4192,27.1394,"city"],"succoth":["Succoth",32.1939,35.6222,"city"],"susa":["Susa",32.1892,48.2575,"city"],"syracuse":["Syracuse",37.075,15.2867,"city"],"tanis":["Zoan",30.9758,31.8806,"city"],"tarshish":["Tarshish",36.9,-6.35,"region"],"tarsus":["Tarsus",36.9167,34.895,"city"],"temple_mount":["Temple Mount",31.778,35.2354,"city"],"thessalonica":["Thessalonica",40.6403,22.9444,"city"],"thyatira":["Thyatira",38.9181,27.8422,"city"],"tiberias":["Tiberias",32.7922,35.5311,"city"],"tigris":["Tigris",34.5,44.4,"river"],"timnah":["Timnah",31.7519,34.9181,"city"],"transjordan":["Transjordan",31.9,35.8,"region"],"troas":["Troas",39.8158,26.1589,"city"],"tyre":["Tyre",33.2705,35.196,"city"],"ur":["Ur",30.9617,46.1031,"city"],"valley_of_elah":["Valley of Elah",31.6861,34.9781,"region"],"zarephath":["Zarephath",33.4544,35.295,"city"]};
 
-    var ASPECT = 1.62;      /* map width / height */
+    /* The figure takes its shape from the chapter. Israel is long and narrow, so
+     * a fixed wide map crops the Dead Sea off a Galilee-to-Jerusalem view; the
+     * voyage in Acts 27 needs the opposite. Clamped at both ends so no map is
+     * either a letterbox or a column. */
+    var ASPECT_MIN = 1.15;
+    var ASPECT_MAX = 1.95;
+    var ASPECT_FLAT = 1.5;  /* used when the places sit on top of each other */
     /* Degrees of longitude. Below about three degrees a Levant map loses the
      * coast, the Sea of Galilee or the Dead Sea, and a map of the hill country
      * with no recognisable feature on it tells a reader nothing. Chapters whose
      * places sit inside a single town are zoomed out to this and rely on the
      * cluster label instead. */
     var MIN_SPAN = 3.0;
-    var MAX_H = 460;        /* px, so a wide desktop pane does not get a mural */
+    var MAX_H = 520;        /* px, so a wide desktop pane does not get a mural */
+    var MIN_H = 190;        /* px, below which labels have nowhere to go */
     var PAD = 0.22;         /* share of the span added around the pins */
     var CLUSTER = 30;       /* px; closer pins share one label */
     var LINE = 15;          /* px; minimum vertical gap between two labels */
@@ -290,19 +297,34 @@
         return keys;
     }
 
+    function shapeOf(marks) {
+        var x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity, i, m;
+        for (i = 0; i < marks.length; i++) {
+            m = marks[i];
+            if (m.gx < x0) { x0 = m.gx; }
+            if (m.gx > x1) { x1 = m.gx; }
+            if (m.gy < y0) { y0 = m.gy; }
+            if (m.gy > y1) { y1 = m.gy; }
+        }
+        var sx = x1 - x0, sy = y1 - y0;
+        if (sx < 0.05 && sy < 0.05) { return ASPECT_FLAT; }
+        if (sy < 0.05) { return ASPECT_MAX; }
+        return Math.max(ASPECT_MIN, Math.min(ASPECT_MAX, sx / sy));
+    }
+
     function render(el) {
         var w = Math.round(el.clientWidth);
         if (!w) { return false; }
-        var h = Math.min(MAX_H, Math.round(w / ASPECT));
         var keys = keysOf(el);
         if (!keys.length) { return true; }
 
-        var marks = [], i, p, k;
+        var marks = [], i, p;
         for (i = 0; i < keys.length; i++) {
             p = PLACES[keys[i]];
             marks.push({ key: keys[i], name: p[0], kind: p[3],
                          gx: p[2], gy: projectY(p[1]) });
         }
+        var h = Math.max(MIN_H, Math.min(MAX_H, Math.round(w / shapeOf(marks))));
         var v = view(marks.map(function (m) { return { x: m.gx, y: m.gy }; }), w, h);
         for (i = 0; i < marks.length; i++) {
             marks[i].x = (marks[i].gx - v.left) * v.k;
@@ -332,7 +354,12 @@
         for (i = 0; i < groups.length; i++) {
             var g = groups[i];
             var ids = g.members.map(function (m) { return m.key; }).join(' ');
-            svg += '<g class="gm-pin" data-places="' + ids + '" tabindex="0">';
+            /* Not focusable on purpose. The <svg> is role="img" with an
+             * aria-label naming every place, so its insides are already hidden
+             * from assistive technology; making each pin a tab stop would add a
+             * dozen unlabelled ones per chapter and activate nothing. The
+             * write-up list below the map is the accessible path. */
+            svg += '<g class="gm-pin" data-places="' + ids + '">';
             if (g.leader) {
                 svg += '<path class="gm-leader" d="M' + g.x.toFixed(1) + ',' +
                     g.y.toFixed(1) + 'L' + g.lx.toFixed(1) + ',' + g.ly.toFixed(1) + '"/>';
@@ -399,13 +426,15 @@
             e.preventDefault();
             flash(pane, note, keyOf(ref));
         });
+        /* Tabbing onto a place name in the prose highlights it on the map, the
+         * keyboard equivalent of hovering. */
         pane.addEventListener('focusin', function (e) {
-            var pin = e.target.closest ? e.target.closest('.gm-pin') : null;
-            if (pin) { highlight(pane, pin.getAttribute('data-places').split(' '), true); }
+            var ref = e.target.closest ? e.target.closest('.geo-ref') : null;
+            if (ref) { highlight(pane, [keyOf(ref)], true); }
         });
         pane.addEventListener('focusout', function (e) {
-            var pin = e.target.closest ? e.target.closest('.gm-pin') : null;
-            if (pin) { highlight(pane, pin.getAttribute('data-places').split(' '), false); }
+            var ref = e.target.closest ? e.target.closest('.geo-ref') : null;
+            if (ref) { highlight(pane, [keyOf(ref)], false); }
         });
     }
 
@@ -426,7 +455,7 @@
 
     /* --------------------------------------------------------------- boot */
 
-    var CSS = '.geo-map{margin:2px 0 16px;border:1px solid var(--border-light);border-radius:var(--radius-md);overflow:hidden;background:var(--geo-sea,#dce6ec);line-height:0}.geo-map:empty{border:0;margin:0;height:0;background:none}.gm-svg{display:block;width:100%;height:auto}.gm-sea{fill:var(--geo-sea,#dce6ec)}.gm-land{fill:var(--geo-land,#f4eee3);stroke:var(--geo-coast,#c9bca6);stroke-width:0.9;vector-effect:non-scaling-stroke}.gm-lake{fill:var(--geo-water,#c7dbe5);stroke:var(--geo-water-edge,#a5c0ce);stroke-width:0.8;vector-effect:non-scaling-stroke}.gm-river{fill:none;stroke:var(--geo-water-edge,#a5c0ce);stroke-width:1.1;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}.gm-dot{fill:var(--accent-link);stroke:#ffffff;stroke-width:1.6}.gm-ring{fill:none;stroke:var(--accent-link);stroke-width:1.8;stroke-dasharray:3.2 2.6}.gm-label{font-family:\'Inter\',-apple-system,BlinkMacSystemFont,sans-serif;font-size:12px;font-weight:600;fill:var(--ink-deep);paint-order:stroke;stroke:#ffffff;stroke-width:3px;stroke-linejoin:round}.gm-leader{fill:none;stroke:var(--accent-link);stroke-width:1;opacity:0.45}.gm-scale path{fill:none;stroke:var(--text-muted);stroke-width:1;opacity:0.75}.gm-scale text{font-family:\'Inter\',-apple-system,BlinkMacSystemFont,sans-serif;font-size:10px;font-weight:500;fill:var(--text-muted);text-anchor:middle}.gm-pin{cursor:pointer}.gm-pin:focus{outline:none}.gm-pin:focus-visible .gm-dot,.gm-pin:focus-visible .gm-ring{stroke:var(--accent-gold);stroke-width:2.6}.gm-pin.gm-on .gm-dot{fill:var(--accent-gold)}.gm-pin.gm-on .gm-ring{stroke:var(--accent-gold)}.gm-pin.gm-on .gm-label{fill:var(--accent-gold)}.tab-content a.geo-ref{color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link)}.tab-content a.geo-ref:hover,.tab-content a.geo-ref.gm-on{color:var(--accent-gold);border-bottom-color:var(--accent-gold)}.geo-heading{font-family:\'Poppins\',\'Inter\',sans-serif;font-size:0.82rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-faint);margin:20px 0 8px}.tab-content ul.geo-notes{padding-left:0;margin:0}.tab-content ul.geo-notes li{padding:8px 10px;margin:0 0 2px;border-radius:var(--radius-sm);border-left:2px solid transparent;transition:background-color 0.15s ease,border-color 0.15s ease}.tab-content ul.geo-notes li::before{content:none}.tab-content ul.geo-notes li.gm-on{background:var(--bg-secondary);border-left-color:var(--accent-gold)}.geo-name{font-weight:600;color:var(--ink-deep)}.geo-where{font-size:0.82rem;color:var(--text-faint)}.geo-where::before{content:"· "}.geo-note{display:block;margin-top:2px}.tab-content a.geo-more{font-size:0.78rem;color:var(--text-faint);text-decoration:none;border-bottom:1px dotted var(--border-medium);white-space:nowrap}.tab-content a.geo-more:hover{color:var(--accent-link);border-bottom-color:var(--accent-link)}.geo-credit{font-size:0.7rem;color:var(--text-faint);margin:-10px 0 14px}@media (max-width:600px){.gm-label{font-size:11px}.tab-content ul.geo-notes li{padding:7px 8px}}@media (prefers-reduced-motion:reduce){.tab-content ul.geo-notes li{transition:none}}';
+    var CSS = '.geo-map{margin:2px 0 16px;border:1px solid var(--border-light);border-radius:var(--radius-md);overflow:hidden;background:var(--geo-sea,#dce6ec);line-height:0}.geo-map:empty{border:0;margin:0;height:0;background:none}.gm-svg{display:block;width:100%;height:auto}.gm-sea{fill:var(--geo-sea,#dce6ec)}.gm-land{fill:var(--geo-land,#f4eee3);stroke:var(--geo-coast,#c9bca6);stroke-width:0.9;vector-effect:non-scaling-stroke}.gm-lake{fill:var(--geo-water,#c7dbe5);stroke:var(--geo-water-edge,#a5c0ce);stroke-width:0.8;vector-effect:non-scaling-stroke}.gm-river{fill:none;stroke:var(--geo-water-edge,#a5c0ce);stroke-width:1.1;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}.gm-dot{fill:var(--accent-link);stroke:#ffffff;stroke-width:1.6}.gm-ring{fill:none;stroke:var(--accent-link);stroke-width:1.8;stroke-dasharray:3.2 2.6}.gm-label{font-family:\'Inter\',-apple-system,BlinkMacSystemFont,sans-serif;font-size:12px;font-weight:600;fill:var(--ink-deep);paint-order:stroke;stroke:#ffffff;stroke-width:3px;stroke-linejoin:round}.gm-leader{fill:none;stroke:var(--accent-link);stroke-width:1;opacity:0.45}.gm-scale path{fill:none;stroke:var(--text-muted);stroke-width:1;opacity:0.75}.gm-scale text{font-family:\'Inter\',-apple-system,BlinkMacSystemFont,sans-serif;font-size:10px;font-weight:500;fill:var(--text-muted);text-anchor:middle}.gm-pin.gm-on .gm-dot{fill:var(--accent-gold)}.gm-pin.gm-on .gm-ring{stroke:var(--accent-gold)}.gm-pin.gm-on .gm-label{fill:var(--accent-gold)}.tab-content a.geo-ref{color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link)}.tab-content a.geo-ref:hover,.tab-content a.geo-ref.gm-on{color:var(--accent-gold);border-bottom-color:var(--accent-gold)}.geo-heading{font-family:\'Poppins\',\'Inter\',sans-serif;font-size:0.82rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-faint);margin:20px 0 8px}.tab-content ul.geo-notes{padding-left:0;margin:0}.tab-content ul.geo-notes li{padding:8px 10px;margin:0 0 2px;border-radius:var(--radius-sm);border-left:2px solid transparent;transition:background-color 0.15s ease,border-color 0.15s ease}.tab-content ul.geo-notes li::before{content:none}.tab-content ul.geo-notes li.gm-on{background:var(--bg-secondary);border-left-color:var(--accent-gold)}.geo-name{font-weight:600;color:var(--ink-deep)}.geo-where{font-size:0.82rem;color:var(--text-faint)}.geo-where::before{content:"· "}.geo-note{display:block;margin-top:2px}.tab-content a.geo-more{font-size:0.78rem;color:var(--text-faint);text-decoration:none;border-bottom:1px dotted var(--border-medium);white-space:nowrap}.tab-content a.geo-more:hover{color:var(--accent-link);border-bottom-color:var(--accent-link)}.geo-credit{font-size:0.7rem;color:var(--text-faint);margin:-10px 0 14px}@media (max-width:600px){.gm-label{font-size:11px}.tab-content ul.geo-notes li{padding:7px 8px}}@media (prefers-reduced-motion:reduce){.tab-content ul.geo-notes li{transition:none}}';
 
     function styles() {
         if (document.getElementById('mapgeo-css')) { return; }
@@ -444,9 +473,16 @@
         for (i = 0; i < els.length; i++) {
             var el = els[i];
             var pane = el.closest ? el.closest('.tab-content') || el.parentNode : el.parentNode;
-            wire(pane);
+            if (!pane.hasAttribute('data-geo-wired')) {
+                pane.setAttribute('data-geo-wired', '1');
+                wire(pane);
+            }
             render(el);
-            observe(el);
+            /* One observer per element, however many times start() runs. */
+            if (!el.hasAttribute('data-geo-observed')) {
+                el.setAttribute('data-geo-observed', '1');
+                observe(el);
+            }
         }
     }
 
@@ -472,6 +508,11 @@
             t = window.setTimeout(fn, ms);
         };
     }
+
+    /* Panes are in the HTML, so the load-time pass finds everything. refresh()
+     * exists for anything that adds a .geo-map afterwards, and is what the
+     * stress test in WORKFLOW.md drives 831 real place lists through. */
+    window.MapGeo = { refresh: start };
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', start);

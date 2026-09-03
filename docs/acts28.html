@@ -449,12 +449,23 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="malta,rome,syracuse,puteoli"></div>
                 <ul>
-                    <li><a href="https://en.wikipedia.org/wiki/Malta" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Malta</a> (v.1): The island where Paul was shipwrecked — located between Sicily and North Africa. Paul was bitten by a viper and healed the father of Publius here.</li>
-                    <li>Syracuse, Rhegium, Puteoli (vv.12-13): The route from <a href="https://en.wikipedia.org/wiki/Malta" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Malta</a> to Italy — Syracuse (Sicily), then through the Strait of Messina past Rhegium, to the port of Puteoli (near Naples).</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Ancient_Rome" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Rome</a> (v.16): Paul finally arrived in Rome — the capital of the Empire and the &quot;uttermost part&quot; of Acts 1:8 fulfilled. He lived under house arrest for two years, preaching freely.</li>
-                    <li>The Appii Forum and the Three Taverns (v.15): Stops on the Appian Way, 40-50 miles south of <a href="https://en.wikipedia.org/wiki/Ancient_Rome" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Rome</a>, where Roman Christians came to meet Paul.</li>
+                    <li><a class="geo-ref" href="#geo-note-malta">Malta</a> (v.1): The island where Paul was shipwrecked — located between Sicily and North Africa. Paul was bitten by a viper and healed the father of Publius here.</li>
+                    <li>Syracuse, Rhegium, Puteoli (vv.12-13): The route from <a class="geo-ref" href="#geo-note-malta">Malta</a> to Italy — Syracuse (Sicily), then through the Strait of Messina past Rhegium, to the port of Puteoli (near Naples).</li>
+                    <li><a class="geo-ref" href="#geo-note-rome">Rome</a> (v.16): Paul finally arrived in Rome — the capital of the Empire and the &quot;uttermost part&quot; of Acts 1:8 fulfilled. He lived under house arrest for two years, preaching freely.</li>
+                    <li>The Appii Forum and the Three Taverns (v.15): Stops on the Appian Way, 40-50 miles south of <a class="geo-ref" href="#geo-note-rome">Rome</a>, where Roman Christians came to meet Paul.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-malta" data-place="malta"><span class="geo-name">Malta</span><span class="geo-where">Malta</span><span class="geo-note">A small limestone island 60 miles south of Sicily, in the middle of the Mediterranean narrows. Fourteen days adrift from Crete puts a drifting ship almost exactly here, which is one reason the Acts account reads as a sailor's record. <a class="geo-more" href="https://en.wikipedia.org/wiki/Malta" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-rome" data-place="rome"><span class="geo-name">Rome</span><span class="geo-where">Rome, Italy</span><span class="geo-note">Fifteen miles up the Tiber from its port at Ostia, about 1,400 miles from Jerusalem by sea and road. Reaching it is the destination Acts is aimed at from chapter one, because from Rome the roads ran everywhere else. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ancient_Rome" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-syracuse" data-place="syracuse"><span class="geo-name">Syracuse</span><span class="geo-where">Syracuse, Sicily</span><span class="geo-note">The chief city of Sicily and a three-day stop on the voyage from Malta to Italy. <a class="geo-more" href="https://en.wikipedia.org/wiki/Syracuse,_Sicily" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-puteoli" data-place="puteoli"><span class="geo-name">Puteoli</span><span class="geo-where">Pozzuoli, Italy</span><span class="geo-note">The main grain port for Rome, on the bay of Naples, where Paul landed for the last 130 miles up the Appian Way. <a class="geo-more" href="https://en.wikipedia.org/wiki/Pozzuoli" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -487,5 +498,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

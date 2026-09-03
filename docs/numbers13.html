@@ -475,11 +475,23 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="canaan,hebron,egypt,kadesh_barnea,tanis"></div>
                 <ul>
-                    <li>Wilderness of Paran / Kadesh-barnea (v.26): The spies are sent from here — the southern gateway to <a href="https://en.wikipedia.org/wiki/Canaan" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Canaan</a>.</li>
-                    <li>The land of <a href="https://en.wikipedia.org/wiki/Canaan" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Canaan</a> (vv.21-25): The spies explore from the wilderness of Zin to Rehob near Lebo-hamath (south to north). They reach the Valley of Eshcol (&quot;cluster&quot;) and cut a massive grape cluster.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Hebron" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Hebron</a> (v.22): Built seven years before Zoan in <a href="https://en.wikipedia.org/wiki/Ancient_Egypt" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Egypt</a>; the Anakim (giants) dwell here.</li>
+                    <li>Wilderness of Paran / Kadesh-barnea (v.26): The spies are sent from here — the southern gateway to <a class="geo-ref" href="#geo-note-canaan">Canaan</a>.</li>
+                    <li>The land of <a class="geo-ref" href="#geo-note-canaan">Canaan</a> (vv.21-25): The spies explore from the wilderness of Zin to Rehob near Lebo-hamath (south to north). They reach the Valley of Eshcol (&quot;cluster&quot;) and cut a massive grape cluster.</li>
+                    <li><a class="geo-ref" href="#geo-note-hebron">Hebron</a> (v.22): Built seven years before Zoan in <a class="geo-ref" href="#geo-note-egypt">Egypt</a>; the Anakim (giants) dwell here.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-canaan" data-place="canaan"><span class="geo-name">Canaan</span><span class="geo-where">Israel, West Bank, Lebanon</span><span class="geo-note">The land bridge between Egypt and Mesopotamia, which is why armies crossed it for three thousand years. Within about 60 miles it goes from coastal plain to hill country to rift valley to desert plateau, so control of it was always local and piecemeal. <a class="geo-more" href="https://en.wikipedia.org/wiki/Canaan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-hebron" data-place="hebron"><span class="geo-name">Hebron</span><span class="geo-where">Hebron, West Bank</span><span class="geo-note">The highest town in the Judean hills at about 3,000 feet, 19 miles south of Jerusalem. Abraham bought a burial cave here, and David reigned from it for seven years before moving north, so it carries both the patriarchal and the royal claim to the land. <a class="geo-more" href="https://en.wikipedia.org/wiki/Hebron" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-egypt" data-place="egypt"><span class="geo-name">Egypt</span><span class="geo-where">Egypt</span><span class="geo-note">A ribbon of irrigated land along the Nile, ending in the Delta where Israel settled in Goshen. Rain-fed Canaan depended on weather; Egypt depended on a river that flooded on schedule, which made it the place everyone went when the harvest failed. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ancient_Egypt" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-kadesh_barnea" data-place="kadesh_barnea"><span class="geo-name">Kadesh-barnea</span><span class="geo-where">Ain el-Qudeirat, Egypt/Israel border</span><span class="geo-note">The largest spring in the northern Sinai, about 50 miles south of Beersheba. Israel camped here, sent the spies north from here, and was turned back here to spend a generation in the wilderness. <a class="geo-more" href="https://en.wikipedia.org/wiki/Kadesh-barnea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-tanis" data-place="tanis"><span class="geo-name">Zoan</span><span class="geo-where">San el-Hagar, Egypt</span><span class="geo-note">A Delta capital in later periods, named by the prophets when they mean Egypt's court, and the field of Zoan in Psalm 78. <a class="geo-more" href="https://en.wikipedia.org/wiki/Tanis" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -512,5 +524,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

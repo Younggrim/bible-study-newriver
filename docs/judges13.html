@@ -405,11 +405,20 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="philistia,dan"></div>
                 <ul>
-                    <li>Zorah and Eshtaol: Towns in Dan&#x27;s territory on the border with <a href="https://en.wikipedia.org/wiki/Philistia" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Philistia</a> — Samson&#x27;s homeland (Shephelah/western foothills)</li>
+                    <li>Zorah and Eshtaol: Towns in Dan&#x27;s territory on the border with <a class="geo-ref" href="#geo-note-philistia">Philistia</a> — Samson&#x27;s homeland (Shephelah/western foothills)</li>
                     <li>Mahaneh-dan: &quot;Camp of Dan&quot; between Zorah and Eshtaol — where the Spirit first stirs Samson</li>
                     <li>The Danite region sits on the frontier between Israelite highlands and the Philistine coastal plain</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-philistia" data-place="philistia"><span class="geo-name">Philistia</span><span class="geo-where">southern coastal Israel and Gaza</span><span class="geo-note">The coastal plain south of Joppa, held by a league of five cities: Gaza, Ashkelon, Ashdod, Gath and Ekron. Flat, fertile and on the trade road, it gave the Philistines chariots and iron while Israel held the hills above them. <a class="geo-more" href="https://en.wikipedia.org/wiki/Philistia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-dan" data-place="dan"><span class="geo-name">Dan</span><span class="geo-where">Tel Dan, Israel</span><span class="geo-note">At the largest of the Jordan's headwater springs under Mount Hermon, the northern limit of Israel. Jeroboam set his second golden calf here, as far from Jerusalem as he could get. <a class="geo-more" href="https://en.wikipedia.org/wiki/Tel_Dan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -442,5 +451,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

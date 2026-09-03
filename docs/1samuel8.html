@@ -410,11 +410,24 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="moab,ammon,edom,philistia,ramah,ephraim"></div>
                 <ul>
                     <li>Ramah: Samuel&#x27;s home and seat of judgment — in the hill country of Benjamin/Ephraim</li>
                     <li>The demand for a king occurs at Ramah, where the elders of Israel confront Samuel</li>
-                    <li>&quot;Like all the nations&quot; (v.5): Israel&#x27;s neighbors (<a href="https://en.wikipedia.org/wiki/Moab" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Moab</a>, <a href="https://en.wikipedia.org/wiki/Ammon" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Ammon</a>, <a href="https://en.wikipedia.org/wiki/Edom" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Edom</a>, <a href="https://en.wikipedia.org/wiki/Philistia" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Philistia</a>) all have kings; Israel wants the same</li>
+                    <li>&quot;Like all the nations&quot; (v.5): Israel&#x27;s neighbors (<a class="geo-ref" href="#geo-note-moab">Moab</a>, <a class="geo-ref" href="#geo-note-ammon">Ammon</a>, <a class="geo-ref" href="#geo-note-edom">Edom</a>, <a class="geo-ref" href="#geo-note-philistia">Philistia</a>) all have kings; Israel wants the same</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-moab" data-place="moab"><span class="geo-name">Moab</span><span class="geo-where">west-central Jordan</span><span class="geo-note">The plateau east of the Dead Sea, cut off from Israel by the rift valley and from Ammon by the Arnon gorge. High enough to farm grain, which is why Naomi's family went there in a famine. <a class="geo-more" href="https://en.wikipedia.org/wiki/Moab" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-ammon" data-place="ammon"><span class="geo-name">Ammon</span><span class="geo-where">Amman, Jordan</span><span class="geo-note">The plateau at the desert's edge east of Gilead, with its capital Rabbah at the head of a wadi where modern Amman still preserves the name. Squeezed between the desert and Israel, it spent its history pushing west whenever Israel was weak. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ammon" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-edom" data-place="edom"><span class="geo-name">Edom</span><span class="geo-where">southern Jordan</span><span class="geo-note">The red sandstone highlands south-east of the Dead Sea, holding the King's Highway and later Petra. Settlements sat behind cliffs and narrow gorges, which is the pride Obadiah addresses when he speaks to those who dwell in the clefts of the rock. <a class="geo-more" href="https://en.wikipedia.org/wiki/Edom" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-philistia" data-place="philistia"><span class="geo-name">Philistia</span><span class="geo-where">southern coastal Israel and Gaza</span><span class="geo-note">The coastal plain south of Joppa, held by a league of five cities: Gaza, Ashkelon, Ashdod, Gath and Ekron. Flat, fertile and on the trade road, it gave the Philistines chariots and iron while Israel held the hills above them. <a class="geo-more" href="https://en.wikipedia.org/wiki/Philistia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-ramah" data-place="ramah"><span class="geo-name">Ramah</span><span class="geo-where">er-Ram, West Bank</span><span class="geo-note">A Benjamite town on the ridge road north of Jerusalem, Samuel's home and the staging point from which Judah's captives were marched to Babylon, which is the weeping in Ramah Jeremiah hears. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ramah_(Israel)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-ephraim" data-place="ephraim"><span class="geo-name">Ephraim</span><span class="geo-where">central West Bank</span><span class="geo-note">The central hill country north of Benjamin, the largest and best watered of the northern territories. It dominated the north so thoroughly that the prophets use Ephraim to mean the whole northern kingdom. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ephraim" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -448,5 +461,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

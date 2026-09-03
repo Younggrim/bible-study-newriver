@@ -527,11 +527,22 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="jordan_river,dead_sea,moab,ammon"></div>
                 <ul>
-                    <li>Sodom and Gomorrah — located in the plain of the <a href="https://en.wikipedia.org/wiki/Jordan_River" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jordan</a>, likely near the southern end of the <a href="https://en.wikipedia.org/wiki/Dead_Sea" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Dead Sea</a>. Destroyed by &quot;brimstone and fire&quot; (v.24). The region remains desolate to this day.</li>
+                    <li>Sodom and Gomorrah — located in the plain of the <a class="geo-ref" href="#geo-note-jordan_river">Jordan</a>, likely near the southern end of the <a class="geo-ref" href="#geo-note-dead_sea">Dead Sea</a>. Destroyed by &quot;brimstone and fire&quot; (v.24). The region remains desolate to this day.</li>
                     <li>Zoar (v.22) — a small city at the edge of the plain where Lot initially flees. Its name means &quot;small&quot; (Lot pleads it is a &quot;little one&quot;).</li>
-                    <li>The mountains east of the <a href="https://en.wikipedia.org/wiki/Dead_Sea" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Dead Sea</a> (v.30) — where Lot ultimately settles in a cave. His descendants (<a href="https://en.wikipedia.org/wiki/Moab" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Moab</a>, <a href="https://en.wikipedia.org/wiki/Ammon" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Ammon</a>) inhabit modern <a href="https://en.wikipedia.org/wiki/Jordan_River" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jordan</a>.</li>
+                    <li>The mountains east of the <a class="geo-ref" href="#geo-note-dead_sea">Dead Sea</a> (v.30) — where Lot ultimately settles in a cave. His descendants (<a class="geo-ref" href="#geo-note-moab">Moab</a>, <a class="geo-ref" href="#geo-note-ammon">Ammon</a>) inhabit modern <a class="geo-ref" href="#geo-note-jordan_river">Jordan</a>.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-jordan_river" data-place="jordan_river"><span class="geo-name">Jordan River</span><span class="geo-where">Israel / Jordan border</span><span class="geo-note">Runs about 65 miles as the crow flies from the Sea of Galilee to the Dead Sea, dropping from 700 to 1,400 feet below sea level. Narrow enough to wade at most fords, it was still the boundary that divided wilderness from inheritance. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jordan_River" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-dead_sea" data-place="dead_sea"><span class="geo-name">Dead Sea</span><span class="geo-where">Israel / Jordan</span><span class="geo-note">The lowest exposed ground on earth, about 1,400 feet below sea level, and roughly ten times saltier than the ocean because water leaves only by evaporation. Nothing lives in it, which is the image Ezekiel 47 overturns when he has it filled with fish. <a class="geo-more" href="https://en.wikipedia.org/wiki/Dead_Sea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-moab" data-place="moab"><span class="geo-name">Moab</span><span class="geo-where">west-central Jordan</span><span class="geo-note">The plateau east of the Dead Sea, cut off from Israel by the rift valley and from Ammon by the Arnon gorge. High enough to farm grain, which is why Naomi's family went there in a famine. <a class="geo-more" href="https://en.wikipedia.org/wiki/Moab" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-ammon" data-place="ammon"><span class="geo-name">Ammon</span><span class="geo-where">Amman, Jordan</span><span class="geo-note">The plateau at the desert's edge east of Gilead, with its capital Rabbah at the head of a wadi where modern Amman still preserves the name. Squeezed between the desert and Israel, it spent its history pushing west whenever Israel was weak. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ammon" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -564,5 +575,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

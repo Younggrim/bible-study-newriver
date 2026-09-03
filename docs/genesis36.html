@@ -550,10 +550,20 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="edom,dead_sea,jordan_river"></div>
                 <ul>
-                    <li>Seir / <a href="https://en.wikipedia.org/wiki/Edom" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Edom</a> (vv.6-8) — the mountainous region south and east of the <a href="https://en.wikipedia.org/wiki/Dead_Sea" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Dead Sea</a> (modern southern <a href="https://en.wikipedia.org/wiki/Jordan_River" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jordan</a>). Esau&#x27;s descendants settle here permanently.</li>
-                    <li>The land of <a href="https://en.wikipedia.org/wiki/Edom" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Edom</a> is rugged, reddish sandstone terrain — fitting Esau&#x27;s nickname &quot;Red&quot; (Edom). It later becomes a significant nation bordering Israel to the southeast.</li>
+                    <li>Seir / <a class="geo-ref" href="#geo-note-edom">Edom</a> (vv.6-8) — the mountainous region south and east of the <a class="geo-ref" href="#geo-note-dead_sea">Dead Sea</a> (modern southern <a class="geo-ref" href="#geo-note-jordan_river">Jordan</a>). Esau&#x27;s descendants settle here permanently.</li>
+                    <li>The land of <a class="geo-ref" href="#geo-note-edom">Edom</a> is rugged, reddish sandstone terrain — fitting Esau&#x27;s nickname &quot;Red&quot; (Edom). It later becomes a significant nation bordering Israel to the southeast.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-edom" data-place="edom"><span class="geo-name">Edom</span><span class="geo-where">southern Jordan</span><span class="geo-note">The red sandstone highlands south-east of the Dead Sea, holding the King's Highway and later Petra. Settlements sat behind cliffs and narrow gorges, which is the pride Obadiah addresses when he speaks to those who dwell in the clefts of the rock. <a class="geo-more" href="https://en.wikipedia.org/wiki/Edom" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-dead_sea" data-place="dead_sea"><span class="geo-name">Dead Sea</span><span class="geo-where">Israel / Jordan</span><span class="geo-note">The lowest exposed ground on earth, about 1,400 feet below sea level, and roughly ten times saltier than the ocean because water leaves only by evaporation. Nothing lives in it, which is the image Ezekiel 47 overturns when he has it filled with fish. <a class="geo-more" href="https://en.wikipedia.org/wiki/Dead_Sea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jordan_river" data-place="jordan_river"><span class="geo-name">Jordan River</span><span class="geo-where">Israel / Jordan border</span><span class="geo-note">Runs about 65 miles as the crow flies from the Sea of Galilee to the Dead Sea, dropping from 700 to 1,400 feet below sea level. Narrow enough to wade at most fords, it was still the boundary that divided wilderness from inheritance. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jordan_River" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -584,5 +594,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

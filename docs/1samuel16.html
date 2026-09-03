@@ -415,11 +415,23 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="bethlehem,jerusalem,judea,ramah,gibeah"></div>
                 <ul>
-                    <li><a href="https://en.wikipedia.org/wiki/Bethlehem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Bethlehem</a>: David&#x27;s hometown, about 5 miles south of <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> in the Judean hills — where Samuel anoints him</li>
-                    <li>Ramah to <a href="https://en.wikipedia.org/wiki/Bethlehem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Bethlehem</a>: Samuel travels south from his home to Jesse&#x27;s house — a journey of about 10 miles</li>
-                    <li>Gibeah: Saul&#x27;s court where David is brought to play the harp — in Benjamin, north of <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a></li>
+                    <li><a class="geo-ref" href="#geo-note-bethlehem">Bethlehem</a>: David&#x27;s hometown, about 5 miles south of <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> in the Judean hills — where Samuel anoints him</li>
+                    <li>Ramah to <a class="geo-ref" href="#geo-note-bethlehem">Bethlehem</a>: Samuel travels south from his home to Jesse&#x27;s house — a journey of about 10 miles</li>
+                    <li>Gibeah: Saul&#x27;s court where David is brought to play the harp — in Benjamin, north of <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a></li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-bethlehem" data-place="bethlehem"><span class="geo-name">Bethlehem</span><span class="geo-where">Bethlehem, West Bank</span><span class="geo-note">A small town on the ridge road five miles south of Jerusalem, at the edge of the cultivated land before the Judean wilderness. Its name means house of bread, and its terraced barley fields are where Ruth gleaned and where David kept sheep. <a class="geo-more" href="https://en.wikipedia.org/wiki/Bethlehem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-judea" data-place="judea"><span class="geo-name">Judea</span><span class="geo-where">southern Israel and the West Bank</span><span class="geo-note">The southern hill country around Jerusalem, high, stony and dry, with the wilderness on one side and the Philistine plain on the other. Poor farming and hard access are what let it stay independent longest. <a class="geo-more" href="https://en.wikipedia.org/wiki/Judea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-ramah" data-place="ramah"><span class="geo-name">Ramah</span><span class="geo-where">er-Ram, West Bank</span><span class="geo-note">A Benjamite town on the ridge road north of Jerusalem, Samuel's home and the staging point from which Judah's captives were marched to Babylon, which is the weeping in Ramah Jeremiah hears. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ramah_(Israel)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-gibeah" data-place="gibeah"><span class="geo-name">Gibeah</span><span class="geo-where">Tell el-Ful, West Bank</span><span class="geo-note">A Benjamite hilltop three miles north of Jerusalem, Saul's home and first capital. It is also the scene of the atrocity in Judges 19 that nearly destroyed the tribe. <a class="geo-more" href="https://en.wikipedia.org/wiki/Gibeah" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -454,5 +466,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

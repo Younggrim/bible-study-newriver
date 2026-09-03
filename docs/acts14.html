@@ -434,12 +434,25 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="antioch,iconium,asia_minor,lystra,derbe,aram"></div>
                 <ul>
                     <li>Iconium (v.1): An inland city in south-central Asia Minor (modern Konya, Turkey). Paul and Barnabas ministered here but were driven out.</li>
                     <li>Lystra (v.6): A Roman colony about 20 miles south of Iconium. Paul healed a lame man here and was mistaken for a god, then stoned.</li>
                     <li>Derbe (v.20): A city about 60 miles southeast of Lystra. Paul preached here and made many disciples.</li>
-                    <li>Return journey (v.21): They retraced their steps through Lystra, Iconium, and <a href="https://en.wikipedia.org/wiki/Antioch" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Antioch</a> of Pisidia, strengthening the churches, then returned to Antioch in Syria.</li>
+                    <li>Return journey (v.21): They retraced their steps through Lystra, Iconium, and <a class="geo-ref" href="#geo-note-antioch">Antioch</a> of Pisidia, strengthening the churches, then returned to Antioch in Syria.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-antioch" data-place="antioch"><span class="geo-name">Antioch</span><span class="geo-where">Antakya, Turkey</span><span class="geo-note">On the Orontes about 300 miles north of Jerusalem, with a port at the river mouth, the third city of the Roman empire. Disciples were first called Christians here, and it was the base every one of Paul's journeys started from. <a class="geo-more" href="https://en.wikipedia.org/wiki/Antioch" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-iconium" data-place="iconium"><span class="geo-name">Iconium</span><span class="geo-where">Konya, Turkey</span><span class="geo-note">An oasis city on the central plateau at the junction of several trade roads, about 80 miles south-east of Pisidian Antioch. <a class="geo-more" href="https://en.wikipedia.org/wiki/Konya" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-asia_minor" data-place="asia_minor"><span class="geo-name">Asia Minor</span><span class="geo-where">Turkey</span><span class="geo-note">The peninsula between the Black Sea and the Mediterranean, a high dry plateau ringed by mountains with the Greek cities on its western coast. Roman Asia, the province Paul worked from Ephesus, was only its western end. <a class="geo-more" href="https://en.wikipedia.org/wiki/Anatolia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-lystra" data-place="lystra"><span class="geo-name">Lystra</span><span class="geo-where">Hatunsaray, Turkey</span><span class="geo-note">A small Roman colony on the plateau where Paul was taken for Hermes and then stoned, and where Timothy was from. <a class="geo-more" href="https://en.wikipedia.org/wiki/Lystra" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-derbe" data-place="derbe"><span class="geo-name">Derbe</span><span class="geo-where">Karaman province, Turkey</span><span class="geo-note">The furthest point east on the first journey, near the frontier of the province. The site is identified only approximately. <a class="geo-more" href="https://en.wikipedia.org/wiki/Derbe" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-aram" data-place="aram"><span class="geo-name">Aram</span><span class="geo-where">Syria</span><span class="geo-note">The Syrian interior north-east of Israel, a set of city-states rather than one kingdom, with Damascus the strongest. Aramaic, its language, became the everyday speech of the whole region including Judea. <a class="geo-more" href="https://en.wikipedia.org/wiki/Aram_(region)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -473,5 +486,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

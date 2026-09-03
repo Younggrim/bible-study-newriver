@@ -570,11 +570,22 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="sea_of_galilee,decapolis,capernaum,gadara"></div>
                 <ul>
-                    <li>The <a href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Sea of Galilee</a>: Jesus and the disciples crossed the lake and encountered the storm (vv.22-25). They landed on the eastern shore in Gentile territory.</li>
-                    <li>The country of the Gadarenes (v.26): The eastern shore of the <a href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Sea of Galilee</a>, in the <a href="https://en.wikipedia.org/wiki/Decapolis" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Decapolis</a> — Gentile territory where the demoniac was healed.</li>
-                    <li>Jairus&#x27; house (v.41): Back on the western shore, likely in <a href="https://en.wikipedia.org/wiki/Capernaum" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Capernaum</a>.</li>
+                    <li>The <a class="geo-ref" href="#geo-note-sea_of_galilee">Sea of Galilee</a>: Jesus and the disciples crossed the lake and encountered the storm (vv.22-25). They landed on the eastern shore in Gentile territory.</li>
+                    <li>The country of the Gadarenes (v.26): The eastern shore of the <a class="geo-ref" href="#geo-note-sea_of_galilee">Sea of Galilee</a>, in the <a class="geo-ref" href="#geo-note-decapolis">Decapolis</a> — Gentile territory where the demoniac was healed.</li>
+                    <li>Jairus&#x27; house (v.41): Back on the western shore, likely in <a class="geo-ref" href="#geo-note-capernaum">Capernaum</a>.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-sea_of_galilee" data-place="sea_of_galilee"><span class="geo-name">Sea of Galilee</span><span class="geo-where">Lake Kinneret, Israel</span><span class="geo-note">A freshwater lake 13 miles by 8, sunk 700 feet below sea level in a bowl of hills. Cold air spilling over the rim onto warm water is what produces the sudden violent squalls the Gospels keep describing. <a class="geo-more" href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-decapolis" data-place="decapolis"><span class="geo-name">Decapolis</span><span class="geo-where">northern Jordan and southern Syria</span><span class="geo-note">A cluster of Greek-speaking cities east and south-east of the Sea of Galilee, Gerasa and Gadara among them, self-governing under Rome. Gentile territory a day's walk from Jewish Galilee, which is why there were pigs there to drown. <a class="geo-more" href="https://en.wikipedia.org/wiki/Decapolis" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-capernaum" data-place="capernaum"><span class="geo-name">Capernaum</span><span class="geo-where">Kfar Nahum, Israel</span><span class="geo-note">A fishing village on the north-west shore of the Sea of Galilee, on the road running from the coast to Damascus. A customs post and a garrison explain the tax collector and the centurion; the harbour and the synagogue explain why Jesus made it his base. <a class="geo-more" href="https://en.wikipedia.org/wiki/Capernaum" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-gadara" data-place="gadara"><span class="geo-name">Gadara</span><span class="geo-where">Umm Qais, Jordan</span><span class="geo-note">A Decapolis city on a ridge above the Yarmuk, south-east of the Sea of Galilee, whose territory ran down to the lake shore. <a class="geo-more" href="https://en.wikipedia.org/wiki/Gadara" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -610,5 +621,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

@@ -517,9 +517,18 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="damascus,aram"></div>
                 <ul>
-                    <li><a href="https://en.wikipedia.org/wiki/Damascus" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Damascus</a> (v.1): Ancient Syrian city; site of Paul&#x27;s conversion.</li>
+                    <li><a class="geo-ref" href="#geo-note-damascus">Damascus</a> (v.1): Ancient Syrian city; site of Paul&#x27;s conversion.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-damascus" data-place="damascus"><span class="geo-name">Damascus</span><span class="geo-where">Damascus, Syria</span><span class="geo-note">An oasis city where the Barada river runs out of the Anti-Lebanon into the desert, about 135 miles north-east of Jerusalem. It sat astride the caravan roads to Mesopotamia and Arabia, which made Aram rich and made it Israel's most persistent northern rival. <a class="geo-more" href="https://en.wikipedia.org/wiki/Damascus" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-aram" data-place="aram"><span class="geo-name">Aram</span><span class="geo-where">Syria</span><span class="geo-note">The Syrian interior north-east of Israel, a set of city-states rather than one kingdom, with Damascus the strongest. Aramaic, its language, became the everyday speech of the whole region including Judea. <a class="geo-more" href="https://en.wikipedia.org/wiki/Aram_(region)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -550,5 +559,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

@@ -338,11 +338,24 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="jordan_river,mediterranean,bethel,ephraim,gezer,canaan"></div>
                 <ul>
                     <li>Ephraim&#x27;s territory: Central hill country between Benjamin (south) and Manasseh (north)</li>
-                    <li>Key boundaries: <a href="https://en.wikipedia.org/wiki/Jordan_River" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jordan River</a> (east) to the <a href="https://en.wikipedia.org/wiki/Mediterranean_Sea" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Mediterranean</a> (west); includes <a href="https://en.wikipedia.org/wiki/Bethel" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Bethel</a> area and the ridge route</li>
+                    <li>Key boundaries: <a class="geo-ref" href="#geo-note-jordan_river">Jordan River</a> (east) to the <a class="geo-ref" href="#geo-note-mediterranean">Mediterranean</a> (west); includes <a class="geo-ref" href="#geo-note-bethel">Bethel</a> area and the ridge route</li>
                     <li>Gezer (western lowlands) remains unconquered — Canaanites dwell among Ephraim as forced laborers</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-jordan_river" data-place="jordan_river"><span class="geo-name">Jordan River</span><span class="geo-where">Israel / Jordan border</span><span class="geo-note">Runs about 65 miles as the crow flies from the Sea of Galilee to the Dead Sea, dropping from 700 to 1,400 feet below sea level. Narrow enough to wade at most fords, it was still the boundary that divided wilderness from inheritance. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jordan_River" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mediterranean" data-place="mediterranean"><span class="geo-name">Mediterranean Sea</span><span class="geo-note">Called simply the Great Sea, and treated as the western edge of the world. Israel's coast has almost no natural harbours, so for most of its history the sea was a boundary rather than a road, and seafaring was left to the Phoenicians. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mediterranean_Sea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-bethel" data-place="bethel"><span class="geo-name">Bethel</span><span class="geo-where">Beitin, West Bank</span><span class="geo-note">A ridge-road town about 11 miles north of Jerusalem, where Jacob dreamed of the stairway and named the place house of God. Jeroboam later put one of his two golden calves here precisely because pilgrims already came. <a class="geo-more" href="https://en.wikipedia.org/wiki/Bethel" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-ephraim" data-place="ephraim"><span class="geo-name">Ephraim</span><span class="geo-where">central West Bank</span><span class="geo-note">The central hill country north of Benjamin, the largest and best watered of the northern territories. It dominated the north so thoroughly that the prophets use Ephraim to mean the whole northern kingdom. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ephraim" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-gezer" data-place="gezer"><span class="geo-name">Gezer</span><span class="geo-where">Tel Gezer, Israel</span><span class="geo-note">A mound commanding the junction where the road from Joppa turns up toward Jerusalem. Pharaoh took it and gave it to Solomon as a dowry. <a class="geo-more" href="https://en.wikipedia.org/wiki/Tel_Gezer" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-canaan" data-place="canaan"><span class="geo-name">Canaan</span><span class="geo-where">Israel, West Bank, Lebanon</span><span class="geo-note">The land bridge between Egypt and Mesopotamia, which is why armies crossed it for three thousand years. Within about 60 miles it goes from coastal plain to hill country to rift valley to desert plateau, so control of it was always local and piecemeal. <a class="geo-more" href="https://en.wikipedia.org/wiki/Canaan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -373,5 +386,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

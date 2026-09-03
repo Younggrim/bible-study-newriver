@@ -419,11 +419,20 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="jerusalem,caesarea"></div>
                 <ul>
-                    <li><a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> (v.2): Herod Agrippa I persecuted the church in Jerusalem — killing James (brother of John) and imprisoning Peter.</li>
-                    <li>The prison in <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> (v.5): Peter was held in a Jerusalem prison, guarded by four squads of soldiers. An angel released him at night.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Caesarea_Maritima" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Caesarea</a> (v.19): Herod went from <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> down to Caesarea (the Roman capital) where he was struck dead after accepting worship.</li>
+                    <li><a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> (v.2): Herod Agrippa I persecuted the church in Jerusalem — killing James (brother of John) and imprisoning Peter.</li>
+                    <li>The prison in <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> (v.5): Peter was held in a Jerusalem prison, guarded by four squads of soldiers. An angel released him at night.</li>
+                    <li><a class="geo-ref" href="#geo-note-caesarea">Caesarea</a> (v.19): Herod went from <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> down to Caesarea (the Roman capital) where he was struck dead after accepting worship.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-caesarea" data-place="caesarea"><span class="geo-name">Caesarea</span><span class="geo-where">Caesarea, Israel</span><span class="geo-note">Herod built an artificial deep-water harbour on an open coast that had none, and it became the Roman administrative capital of Judea. Paul was held here two years and sailed for Rome from it; it is also where the gospel first went to a Gentile household. <a class="geo-more" href="https://en.wikipedia.org/wiki/Caesarea_Maritima" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -457,5 +466,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

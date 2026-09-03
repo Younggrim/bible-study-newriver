@@ -562,11 +562,21 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="michmash,geba,philistia"></div>
                 <ul>
                     <li>The pass of Michmash: A narrow, steep-sided wadi between two rocky crags (&quot;Bozez&quot; and &quot;Seneh&quot;) — Jonathan and his armor-bearer climb up</li>
                     <li>Michmash to Geba: The Philistine camp faces Israel across this natural ravine — about 1 mile apart</li>
                     <li>Aijalon: The Philistines flee westward through Beth-horon toward the coastal plain via the Valley of Aijalon</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-michmash" data-place="michmash"><span class="geo-name">Michmash</span><span class="geo-where">Mukhmas, West Bank</span><span class="geo-note">On the north side of a steep gorge seven miles north-east of Jerusalem. Jonathan and his armour-bearer climbed that gorge to surprise the Philistine garrison. <a class="geo-more" href="https://en.wikipedia.org/wiki/Michmash" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-geba" data-place="geba"><span class="geo-name">Geba</span><span class="geo-where">Jaba, West Bank</span><span class="geo-note">Facing Michmash across the same gorge, and the southern marker of the reduced kingdom in the phrase from Geba to Beersheba. <a class="geo-more" href="https://en.wikipedia.org/wiki/Geba,_Benjamin" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-philistia" data-place="philistia"><span class="geo-name">Philistia</span><span class="geo-where">southern coastal Israel and Gaza</span><span class="geo-note">The coastal plain south of Joppa, held by a league of five cities: Gaza, Ashkelon, Ashdod, Gath and Ekron. Flat, fertile and on the trade road, it gave the Philistines chariots and iron while Israel held the hills above them. <a class="geo-more" href="https://en.wikipedia.org/wiki/Philistia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -599,5 +609,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

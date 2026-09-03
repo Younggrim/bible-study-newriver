@@ -502,11 +502,20 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="jericho,jerusalem"></div>
                 <ul>
-                    <li>Near <a href="https://en.wikipedia.org/wiki/Jericho" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jericho</a> (v.35): The blind man was healed as Jesus approached Jericho — the last major city before the ascent to <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a>.</li>
-                    <li>The Temple (v.10): The Pharisee and the tax collector prayed in the Temple in <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> — the parable may reference a recent visit.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> (v.31): Jesus tells the twelve they are going up to Jerusalem, where He will be crucified.</li>
+                    <li>Near <a class="geo-ref" href="#geo-note-jericho">Jericho</a> (v.35): The blind man was healed as Jesus approached Jericho — the last major city before the ascent to <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a>.</li>
+                    <li>The Temple (v.10): The Pharisee and the tax collector prayed in the Temple in <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> — the parable may reference a recent visit.</li>
+                    <li><a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> (v.31): Jesus tells the twelve they are going up to Jerusalem, where He will be crucified.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-jericho" data-place="jericho"><span class="geo-name">Jericho</span><span class="geo-where">Jericho, West Bank</span><span class="geo-note">An oasis at a perennial spring in the Jordan valley, 850 feet below sea level and among the oldest continuously settled sites anywhere. It guarded the ford and the climb up to the central hills, so anyone entering Canaan from the east had to deal with it first. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jericho" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -541,5 +550,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

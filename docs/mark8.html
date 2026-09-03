@@ -463,11 +463,23 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="sea_of_galilee,caesarea_philippi,mount_hermon,jerusalem,bethsaida"></div>
                 <ul>
-                    <li>Dalmanutha/Magadan (v.10): A town on the western shore of the <a href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Sea of Galilee</a>.</li>
-                    <li>Bethsaida (v.22): A fishing village on the northeast shore of the <a href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Sea of Galilee</a>. Jesus healed the blind man here in two stages.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Caesarea_Philippi" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Caesarea Philippi</a> (v.27): A pagan city at the base of <a href="https://en.wikipedia.org/wiki/Mount_Hermon" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Mount Hermon</a>, 25 miles north of the <a href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Sea of Galilee</a>. Peter&#x27;s great confession occurred here — far from <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a>&#x27;s religious establishment.</li>
+                    <li>Dalmanutha/Magadan (v.10): A town on the western shore of the <a class="geo-ref" href="#geo-note-sea_of_galilee">Sea of Galilee</a>.</li>
+                    <li>Bethsaida (v.22): A fishing village on the northeast shore of the <a class="geo-ref" href="#geo-note-sea_of_galilee">Sea of Galilee</a>. Jesus healed the blind man here in two stages.</li>
+                    <li><a class="geo-ref" href="#geo-note-caesarea_philippi">Caesarea Philippi</a> (v.27): A pagan city at the base of <a class="geo-ref" href="#geo-note-mount_hermon">Mount Hermon</a>, 25 miles north of the <a class="geo-ref" href="#geo-note-sea_of_galilee">Sea of Galilee</a>. Peter&#x27;s great confession occurred here — far from <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a>&#x27;s religious establishment.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-sea_of_galilee" data-place="sea_of_galilee"><span class="geo-name">Sea of Galilee</span><span class="geo-where">Lake Kinneret, Israel</span><span class="geo-note">A freshwater lake 13 miles by 8, sunk 700 feet below sea level in a bowl of hills. Cold air spilling over the rim onto warm water is what produces the sudden violent squalls the Gospels keep describing. <a class="geo-more" href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-caesarea_philippi" data-place="caesarea_philippi"><span class="geo-name">Caesarea Philippi</span><span class="geo-where">Banias, Golan Heights</span><span class="geo-note">At the foot of Mount Hermon, where a spring bursts out of a cliff beside a grotto of Pan, about 25 miles north of the Sea of Galilee. Peter's confession is made here, in the most conspicuously pagan place in the region. <a class="geo-more" href="https://en.wikipedia.org/wiki/Caesarea_Philippi" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mount_hermon" data-place="mount_hermon"><span class="geo-name">Mount Hermon</span><span class="geo-where">Syria / Lebanon / Golan border</span><span class="geo-note">The 9,200-foot southern end of the Anti-Lebanon range, snow-covered most of the year and visible from much of Galilee. Its snowmelt feeds the springs that become the Jordan, and it marked the northern limit of Israel's conquests. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mount_Hermon" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-bethsaida" data-place="bethsaida"><span class="geo-name">Bethsaida</span><span class="geo-where">et-Tell, Golan Heights</span><span class="geo-note">Just east of where the Jordan enters the lake, the home town of Peter, Andrew and Philip. The name means house of the fisherman. <a class="geo-more" href="https://en.wikipedia.org/wiki/Bethsaida" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -505,5 +517,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

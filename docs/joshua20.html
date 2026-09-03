@@ -333,11 +333,23 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="shechem,hebron,gilead,bashan,ephraim"></div>
                 <ul>
-                    <li>Six cities of refuge: West — Kedesh (Naphtali/north), <a href="https://en.wikipedia.org/wiki/Shechem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Shechem</a> (Ephraim/central), <a href="https://en.wikipedia.org/wiki/Hebron" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Hebron</a> (Judah/south)</li>
-                    <li>East — Bezer (Reuben/south), Ramoth-<a href="https://en.wikipedia.org/wiki/Gilead" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">gilead</a> (Gad/central), Golan (Manasseh/north, in <a href="https://en.wikipedia.org/wiki/Bashan" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Bashan</a>)</li>
+                    <li>Six cities of refuge: West — Kedesh (Naphtali/north), <a class="geo-ref" href="#geo-note-shechem">Shechem</a> (Ephraim/central), <a class="geo-ref" href="#geo-note-hebron">Hebron</a> (Judah/south)</li>
+                    <li>East — Bezer (Reuben/south), Ramoth-<a class="geo-ref" href="#geo-note-gilead">gilead</a> (Gad/central), Golan (Manasseh/north, in <a class="geo-ref" href="#geo-note-bashan">Bashan</a>)</li>
                     <li>Strategically spaced so no one in Israel was more than a day&#x27;s journey from a city of refuge</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-shechem" data-place="shechem"><span class="geo-name">Shechem</span><span class="geo-where">Tell Balata, Nablus, West Bank</span><span class="geo-note">In the pass between Mount Ebal and Mount Gerizim, the natural east-west crossing of the central hills. Abraham's first altar, Joseph's burial and Joshua's covenant renewal all happen here, which made it the north's answer to Jerusalem. <a class="geo-more" href="https://en.wikipedia.org/wiki/Shechem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-hebron" data-place="hebron"><span class="geo-name">Hebron</span><span class="geo-where">Hebron, West Bank</span><span class="geo-note">The highest town in the Judean hills at about 3,000 feet, 19 miles south of Jerusalem. Abraham bought a burial cave here, and David reigned from it for seven years before moving north, so it carries both the patriarchal and the royal claim to the land. <a class="geo-more" href="https://en.wikipedia.org/wiki/Hebron" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-gilead" data-place="gilead"><span class="geo-name">Gilead</span><span class="geo-where">northern Jordan</span><span class="geo-note">The wooded highlands east of the Jordan between the Yarmuk and the Arnon, good grazing country and a source of the resin traded as balm. Being across the river left its tribes perpetually worried about being written out of Israel. <a class="geo-more" href="https://en.wikipedia.org/wiki/Gilead" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-bashan" data-place="bashan"><span class="geo-name">Bashan</span><span class="geo-where">Golan and Hauran, Syria</span><span class="geo-note">The volcanic tableland north-east of the Sea of Galilee, deep in basalt soil and famous for cattle and oak. The bulls of Bashan in the Psalms are a compliment to the pasture before they are an insult to anyone. <a class="geo-more" href="https://en.wikipedia.org/wiki/Bashan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-ephraim" data-place="ephraim"><span class="geo-name">Ephraim</span><span class="geo-where">central West Bank</span><span class="geo-note">The central hill country north of Benjamin, the largest and best watered of the northern territories. It dominated the north so thoroughly that the prophets use Ephraim to mean the whole northern kingdom. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ephraim" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -370,5 +382,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

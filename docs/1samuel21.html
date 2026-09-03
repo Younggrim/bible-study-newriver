@@ -374,11 +374,22 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="jerusalem,philistia,gath,gibeah"></div>
                 <ul>
-                    <li>Nob: A priestly city near <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> (visible from it) — where Ahimelech gives David the showbread and Goliath&#x27;s sword</li>
+                    <li>Nob: A priestly city near <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> (visible from it) — where Ahimelech gives David the showbread and Goliath&#x27;s sword</li>
                     <li>Gath: A Philistine city where David flees and feigns madness before King Achish — deep in enemy territory</li>
-                    <li>David&#x27;s flight route begins: Gibeah → Nob → Gath — moving from Israelite territory into <a href="https://en.wikipedia.org/wiki/Philistia" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Philistia</a> out of desperation</li>
+                    <li>David&#x27;s flight route begins: Gibeah → Nob → Gath — moving from Israelite territory into <a class="geo-ref" href="#geo-note-philistia">Philistia</a> out of desperation</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-philistia" data-place="philistia"><span class="geo-name">Philistia</span><span class="geo-where">southern coastal Israel and Gaza</span><span class="geo-note">The coastal plain south of Joppa, held by a league of five cities: Gaza, Ashkelon, Ashdod, Gath and Ekron. Flat, fertile and on the trade road, it gave the Philistines chariots and iron while Israel held the hills above them. <a class="geo-more" href="https://en.wikipedia.org/wiki/Philistia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-gath" data-place="gath"><span class="geo-name">Gath</span><span class="geo-where">Tell es-Safi, Israel</span><span class="geo-note">The Philistine city closest to the Judean foothills, guarding the Elah valley. Goliath came from here, and David later took refuge with its king. <a class="geo-more" href="https://en.wikipedia.org/wiki/Gath_(city)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-gibeah" data-place="gibeah"><span class="geo-name">Gibeah</span><span class="geo-where">Tell el-Ful, West Bank</span><span class="geo-note">A Benjamite hilltop three miles north of Jerusalem, Saul's home and first capital. It is also the scene of the atrocity in Judges 19 that nearly destroyed the tribe. <a class="geo-more" href="https://en.wikipedia.org/wiki/Gibeah" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -413,5 +424,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

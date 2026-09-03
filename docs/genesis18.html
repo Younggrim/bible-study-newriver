@@ -501,10 +501,19 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="hebron,dead_sea"></div>
                 <ul>
-                    <li>Mamre/<a href="https://en.wikipedia.org/wiki/Hebron" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Hebron</a> (v.1) — Abraham&#x27;s home base in the southern hill country. The oaks (or terebinths) of Mamre were a well-known landmark.</li>
-                    <li>Sodom (v.16) — visible from the heights near <a href="https://en.wikipedia.org/wiki/Hebron" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Hebron</a>, looking east toward the <a href="https://en.wikipedia.org/wiki/Dead_Sea" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Dead Sea</a> plain. Abraham intercedes for the city from this vantage point.</li>
+                    <li>Mamre/<a class="geo-ref" href="#geo-note-hebron">Hebron</a> (v.1) — Abraham&#x27;s home base in the southern hill country. The oaks (or terebinths) of Mamre were a well-known landmark.</li>
+                    <li>Sodom (v.16) — visible from the heights near <a class="geo-ref" href="#geo-note-hebron">Hebron</a>, looking east toward the <a class="geo-ref" href="#geo-note-dead_sea">Dead Sea</a> plain. Abraham intercedes for the city from this vantage point.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-hebron" data-place="hebron"><span class="geo-name">Hebron</span><span class="geo-where">Hebron, West Bank</span><span class="geo-note">The highest town in the Judean hills at about 3,000 feet, 19 miles south of Jerusalem. Abraham bought a burial cave here, and David reigned from it for seven years before moving north, so it carries both the patriarchal and the royal claim to the land. <a class="geo-more" href="https://en.wikipedia.org/wiki/Hebron" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-dead_sea" data-place="dead_sea"><span class="geo-name">Dead Sea</span><span class="geo-where">Israel / Jordan</span><span class="geo-note">The lowest exposed ground on earth, about 1,400 feet below sea level, and roughly ten times saltier than the ocean because water leaves only by evaporation. Nothing lives in it, which is the image Ezekiel 47 overturns when he has it filled with fish. <a class="geo-more" href="https://en.wikipedia.org/wiki/Dead_Sea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -538,5 +547,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

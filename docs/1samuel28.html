@@ -425,11 +425,22 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="philistia,mount_gilboa,jezreel_valley,shunem"></div>
                 <ul>
                     <li>Endor: A village on the north side of Mount Moreh, behind the Philistine camp — Saul crosses enemy lines to reach it at night</li>
                     <li>Mount Gilboa: Where Saul&#x27;s army camps facing the Philistines in the Jezreel Valley</li>
                     <li>The Philistines camp at Shunem, across the valley from Gilboa — Saul is terrified by their numbers</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-philistia" data-place="philistia"><span class="geo-name">Philistia</span><span class="geo-where">southern coastal Israel and Gaza</span><span class="geo-note">The coastal plain south of Joppa, held by a league of five cities: Gaza, Ashkelon, Ashdod, Gath and Ekron. Flat, fertile and on the trade road, it gave the Philistines chariots and iron while Israel held the hills above them. <a class="geo-more" href="https://en.wikipedia.org/wiki/Philistia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mount_gilboa" data-place="mount_gilboa"><span class="geo-name">Mount Gilboa</span><span class="geo-where">Mount Gilboa, Israel</span><span class="geo-note">The ridge on the south side of the Jezreel Valley, where Saul and Jonathan died and where David's lament asks for no dew to fall. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mount_Gilboa" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jezreel_valley" data-place="jezreel_valley"><span class="geo-name">Jezreel Valley</span><span class="geo-where">northern Israel</span><span class="geo-note">The one flat corridor cutting across the country from the coast to the Jordan, dividing Galilee from the central hills. Good chariot ground, which is why every invading army and most of Israel's decisive battles ended up here. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jezreel_Valley" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-shunem" data-place="shunem"><span class="geo-name">Shunem</span><span class="geo-where">Sulam, Israel</span><span class="geo-note">A village on the southern slope of the hill of Moreh in the Jezreel Valley, where a well-off woman built Elisha a room on the roof. <a class="geo-more" href="https://en.wikipedia.org/wiki/Shunem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -462,5 +473,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

@@ -363,11 +363,26 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="jordan_river,gilead,mount_gilboa,jezreel_valley,beth_shan,canaan,philistia,jezreel"></div>
                 <ul>
                     <li>Mount Gilboa: In the Jezreel Valley — the site of Israel&#x27;s devastating defeat and Saul&#x27;s death</li>
-                    <li>Beth-shan: A Canaanite/Philistine city at the junction of the Jezreel and <a href="https://en.wikipedia.org/wiki/Jordan_River" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jordan</a> valleys — where Saul&#x27;s body is hung on the wall</li>
-                    <li>Jabesh-<a href="https://en.wikipedia.org/wiki/Gilead" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">gilead</a>: Across the <a href="https://en.wikipedia.org/wiki/Jordan_River" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jordan</a> in Gilead — the men of Jabesh retrieve Saul&#x27;s body in gratitude for his rescue (ch.11)</li>
+                    <li>Beth-shan: A Canaanite/Philistine city at the junction of the Jezreel and <a class="geo-ref" href="#geo-note-jordan_river">Jordan</a> valleys — where Saul&#x27;s body is hung on the wall</li>
+                    <li>Jabesh-<a class="geo-ref" href="#geo-note-gilead">gilead</a>: Across the <a class="geo-ref" href="#geo-note-jordan_river">Jordan</a> in Gilead — the men of Jabesh retrieve Saul&#x27;s body in gratitude for his rescue (ch.11)</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-jordan_river" data-place="jordan_river"><span class="geo-name">Jordan River</span><span class="geo-where">Israel / Jordan border</span><span class="geo-note">Runs about 65 miles as the crow flies from the Sea of Galilee to the Dead Sea, dropping from 700 to 1,400 feet below sea level. Narrow enough to wade at most fords, it was still the boundary that divided wilderness from inheritance. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jordan_River" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-gilead" data-place="gilead"><span class="geo-name">Gilead</span><span class="geo-where">northern Jordan</span><span class="geo-note">The wooded highlands east of the Jordan between the Yarmuk and the Arnon, good grazing country and a source of the resin traded as balm. Being across the river left its tribes perpetually worried about being written out of Israel. <a class="geo-more" href="https://en.wikipedia.org/wiki/Gilead" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mount_gilboa" data-place="mount_gilboa"><span class="geo-name">Mount Gilboa</span><span class="geo-where">Mount Gilboa, Israel</span><span class="geo-note">The ridge on the south side of the Jezreel Valley, where Saul and Jonathan died and where David's lament asks for no dew to fall. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mount_Gilboa" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jezreel_valley" data-place="jezreel_valley"><span class="geo-name">Jezreel Valley</span><span class="geo-where">northern Israel</span><span class="geo-note">The one flat corridor cutting across the country from the coast to the Jordan, dividing Galilee from the central hills. Good chariot ground, which is why every invading army and most of Israel's decisive battles ended up here. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jezreel_Valley" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-beth_shan" data-place="beth_shan"><span class="geo-name">Beth-shan</span><span class="geo-where">Beit She'an, Israel</span><span class="geo-note">Where the Jezreel Valley meets the Jordan, controlling both routes. Saul's body was hung on its wall after Gilboa. <a class="geo-more" href="https://en.wikipedia.org/wiki/Beit_She'an" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-canaan" data-place="canaan"><span class="geo-name">Canaan</span><span class="geo-where">Israel, West Bank, Lebanon</span><span class="geo-note">The land bridge between Egypt and Mesopotamia, which is why armies crossed it for three thousand years. Within about 60 miles it goes from coastal plain to hill country to rift valley to desert plateau, so control of it was always local and piecemeal. <a class="geo-more" href="https://en.wikipedia.org/wiki/Canaan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-philistia" data-place="philistia"><span class="geo-name">Philistia</span><span class="geo-where">southern coastal Israel and Gaza</span><span class="geo-note">The coastal plain south of Joppa, held by a league of five cities: Gaza, Ashkelon, Ashdod, Gath and Ekron. Flat, fertile and on the trade road, it gave the Philistines chariots and iron while Israel held the hills above them. <a class="geo-more" href="https://en.wikipedia.org/wiki/Philistia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jezreel" data-place="jezreel"><span class="geo-name">Jezreel</span><span class="geo-where">Tel Yizre'el, Israel</span><span class="geo-note">Ahab's second residence, at the eastern end of the valley that carries its name. Naboth's vineyard was here, and Jezebel died here. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jezreel_(city)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -400,5 +415,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

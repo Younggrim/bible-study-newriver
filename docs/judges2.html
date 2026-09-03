@@ -393,11 +393,22 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="jericho,bethel,gilgal,canaan"></div>
                 <ul>
-                    <li>Gilgal to Bochim: The Angel of the LORD moves from Gilgal (Israel&#x27;s first camp near <a href="https://en.wikipedia.org/wiki/Jericho" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jericho</a>) to Bochim (likely near <a href="https://en.wikipedia.org/wiki/Bethel" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Bethel</a> in the central highlands)</li>
+                    <li>Gilgal to Bochim: The Angel of the LORD moves from Gilgal (Israel&#x27;s first camp near <a class="geo-ref" href="#geo-note-jericho">Jericho</a>) to Bochim (likely near <a class="geo-ref" href="#geo-note-bethel">Bethel</a> in the central highlands)</li>
                     <li>The territories of the unconquered nations surround Israel on all sides — a test of obedience</li>
                     <li>Bochim (&quot;weepers&quot;): Named for Israel&#x27;s weeping when confronted with their failure to drive out the Canaanites</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-jericho" data-place="jericho"><span class="geo-name">Jericho</span><span class="geo-where">Jericho, West Bank</span><span class="geo-note">An oasis at a perennial spring in the Jordan valley, 850 feet below sea level and among the oldest continuously settled sites anywhere. It guarded the ford and the climb up to the central hills, so anyone entering Canaan from the east had to deal with it first. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jericho" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-bethel" data-place="bethel"><span class="geo-name">Bethel</span><span class="geo-where">Beitin, West Bank</span><span class="geo-note">A ridge-road town about 11 miles north of Jerusalem, where Jacob dreamed of the stairway and named the place house of God. Jeroboam later put one of his two golden calves here precisely because pilgrims already came. <a class="geo-more" href="https://en.wikipedia.org/wiki/Bethel" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-gilgal" data-place="gilgal"><span class="geo-name">Gilgal</span><span class="geo-where">Jordan valley, West Bank</span><span class="geo-note">Israel's first camp west of the Jordan, between the river and Jericho, where the twelve stones were set up. The exact site has never been fixed. <a class="geo-more" href="https://en.wikipedia.org/wiki/Gilgal" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-canaan" data-place="canaan"><span class="geo-name">Canaan</span><span class="geo-where">Israel, West Bank, Lebanon</span><span class="geo-note">The land bridge between Egypt and Mesopotamia, which is why armies crossed it for three thousand years. Within about 60 miles it goes from coastal plain to hill country to rift valley to desert plateau, so control of it was always local and piecemeal. <a class="geo-more" href="https://en.wikipedia.org/wiki/Canaan" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -432,5 +443,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

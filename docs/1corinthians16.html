@@ -389,11 +389,22 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="galatia,jerusalem,ephesus,asia_minor"></div>
                 <ul>
-                    <li><a href="https://en.wikipedia.org/wiki/Galatia" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Galatia</a> (v.1): Region in central Asia Minor; Paul wrote to churches there.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> (v.3): Capital of Judah; the holy city where the Temple stood.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Ephesus" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Ephesus</a> (v.8): Major city in Asia Minor (modern Turkey); location of a key early church.</li>
+                    <li><a class="geo-ref" href="#geo-note-galatia">Galatia</a> (v.1): Region in central Asia Minor; Paul wrote to churches there.</li>
+                    <li><a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> (v.3): Capital of Judah; the holy city where the Temple stood.</li>
+                    <li><a class="geo-ref" href="#geo-note-ephesus">Ephesus</a> (v.8): Major city in Asia Minor (modern Turkey); location of a key early church.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-galatia" data-place="galatia"><span class="geo-name">Galatia</span><span class="geo-where">central Turkey</span><span class="geo-note">The high inland plateau of Asia Minor, named for Gallic settlers and organised by Rome as a province stretching south to Antioch, Iconium, Lystra and Derbe. Whether Paul wrote to the northern tribes or the southern cities he planted is a long-running question. <a class="geo-more" href="https://en.wikipedia.org/wiki/Galatia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-ephesus" data-place="ephesus"><span class="geo-name">Ephesus</span><span class="geo-where">near Selcuk, Turkey</span><span class="geo-note">The largest port of Roman Asia, at the mouth of the Cayster on the west coast of Asia Minor, and home to the temple of Artemis. Its harbour silted up and the ruins now sit several miles inland, which is why a great seaport has no sea. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ephesus" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-asia_minor" data-place="asia_minor"><span class="geo-name">Asia Minor</span><span class="geo-where">Turkey</span><span class="geo-note">The peninsula between the Black Sea and the Mediterranean, a high dry plateau ringed by mountains with the Greek cities on its western coast. Roman Asia, the province Paul worked from Ephesus, was only its western end. <a class="geo-more" href="https://en.wikipedia.org/wiki/Anatolia" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -427,5 +438,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

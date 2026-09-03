@@ -399,11 +399,20 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="jerusalem,edom"></div>
                 <ul>
-                    <li>Kiriath-jearim (Baale-judah): Where the ark has rested for 20+ years — in the hills about 9 miles west of <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a></li>
-                    <li>The threshing floor of Nachon/Nacon: Where Uzzah dies and David halts the procession — en route to <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a></li>
-                    <li>The house of Obed-<a href="https://en.wikipedia.org/wiki/Edom" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">edom</a> the Gittite: Where the ark stays for three months — likely near <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a></li>
+                    <li>Kiriath-jearim (Baale-judah): Where the ark has rested for 20+ years — in the hills about 9 miles west of <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a></li>
+                    <li>The threshing floor of Nachon/Nacon: Where Uzzah dies and David halts the procession — en route to <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a></li>
+                    <li>The house of Obed-<a class="geo-ref" href="#geo-note-edom">edom</a> the Gittite: Where the ark stays for three months — likely near <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a></li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-edom" data-place="edom"><span class="geo-name">Edom</span><span class="geo-where">southern Jordan</span><span class="geo-note">The red sandstone highlands south-east of the Dead Sea, holding the King's Highway and later Petra. Settlements sat behind cliffs and narrow gorges, which is the pride Obadiah addresses when he speaks to those who dwell in the clefts of the rock. <a class="geo-more" href="https://en.wikipedia.org/wiki/Edom" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -436,5 +445,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

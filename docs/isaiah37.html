@@ -568,14 +568,27 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="assyria,jerusalem,lebanon,mediterranean,nineveh,mount_carmel"></div>
                 <ul>
-                    <li><a href="https://en.wikipedia.org/wiki/Assyria" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Assyria</a> (v.4, v.6, v.8): Empire to the northeast that conquered the northern kingdom of Israel (722 BC).</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> (v.10, v.22, v.32): Capital of Judah; the holy city where the Temple stood.</li>
-                    <li>Zion (v.22, v.32): The hill on which <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a>/the Temple stood; often used poetically for God&#x27;s dwelling.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Lebanon" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Lebanon</a> (v.24): Region north of Israel known for its cedar forests.</li>
-                    <li>Carmel (v.24): Mountain range along the <a href="https://en.wikipedia.org/wiki/Mediterranean_Sea" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Mediterranean</a> coast; site of Elijah&#x27;s contest with Baal.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Nineveh" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Nineveh</a> (v.37): Capital of the Assyrian Empire; subject of Jonah and Nahum.</li>
+                    <li><a class="geo-ref" href="#geo-note-assyria">Assyria</a> (v.4, v.6, v.8): Empire to the northeast that conquered the northern kingdom of Israel (722 BC).</li>
+                    <li><a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> (v.10, v.22, v.32): Capital of Judah; the holy city where the Temple stood.</li>
+                    <li>Zion (v.22, v.32): The hill on which <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a>/the Temple stood; often used poetically for God&#x27;s dwelling.</li>
+                    <li><a class="geo-ref" href="#geo-note-lebanon">Lebanon</a> (v.24): Region north of Israel known for its cedar forests.</li>
+                    <li>Carmel (v.24): Mountain range along the <a class="geo-ref" href="#geo-note-mediterranean">Mediterranean</a> coast; site of Elijah&#x27;s contest with Baal.</li>
+                    <li><a class="geo-ref" href="#geo-note-nineveh">Nineveh</a> (v.37): Capital of the Assyrian Empire; subject of Jonah and Nahum.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-assyria" data-place="assyria"><span class="geo-name">Assyria</span><span class="geo-where">northern Iraq</span><span class="geo-note">The upper Tigris heartland around Nineveh, Calah and Asshur. Its armies reached Israel by following the Fertile Crescent north-west and then south down the coast, so the threat always arrived from the north even though Assyria lay to the east. <a class="geo-more" href="https://en.wikipedia.org/wiki/Assyria" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-lebanon" data-place="lebanon"><span class="geo-name">Lebanon</span><span class="geo-where">Mount Lebanon range, Lebanon</span><span class="geo-note">In the Bible this is the mountain range, not the modern country: a snow-capped wall rising over 10,000 feet behind the Phoenician coast. Its cedar was the prestige timber of the ancient Near East and both the tabernacle's successors and Solomon's temple were built from it. <a class="geo-more" href="https://en.wikipedia.org/wiki/Lebanon" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mediterranean" data-place="mediterranean"><span class="geo-name">Mediterranean Sea</span><span class="geo-note">Called simply the Great Sea, and treated as the western edge of the world. Israel's coast has almost no natural harbours, so for most of its history the sea was a boundary rather than a road, and seafaring was left to the Phoenicians. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mediterranean_Sea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-nineveh" data-place="nineveh"><span class="geo-name">Nineveh</span><span class="geo-where">Mosul, Iraq</span><span class="geo-note">Assyria's last capital, on the east bank of the Tigris across from modern Mosul, about 500 miles north-east of Israel. Sennacherib walled in an enormous city here, which is the scale behind Jonah's three days' journey and its 120,000 who cannot tell right from left. <a class="geo-more" href="https://en.wikipedia.org/wiki/Nineveh" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mount_carmel" data-place="mount_carmel"><span class="geo-name">Mount Carmel</span><span class="geo-where">Haifa, Israel</span><span class="geo-note">A wooded limestone ridge that runs 15 miles from the coast inland, reaching about 1,700 feet and forcing the main north-south road through the passes at Megiddo. Rain clouds break on it first, which is why Elijah's contest over rain was staged here. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mount_Carmel" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -608,5 +621,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

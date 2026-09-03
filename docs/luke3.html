@@ -476,10 +476,23 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="jordan_river,bethany,jericho,nazareth,galilee,transjordan"></div>
                 <ul>
-                    <li>The <a href="https://en.wikipedia.org/wiki/Jordan_River" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jordan River</a>: John baptized in the region around the Jordan, likely near <a href="https://en.wikipedia.org/wiki/Bethany_(biblical_village)" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Bethany</a> beyond the Jordan (Bethabara), in the lower Jordan Valley near <a href="https://en.wikipedia.org/wiki/Jericho" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jericho</a>.</li>
-                    <li>Luke&#x27;s genealogy traces from <a href="https://en.wikipedia.org/wiki/Nazareth" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Nazareth</a> (where Jesus lived) back to Adam — spanning the entire geography of human history from Eden to <a href="https://en.wikipedia.org/wiki/Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Galilee</a>.</li>
+                    <li>The <a class="geo-ref" href="#geo-note-jordan_river">Jordan River</a>: John baptized in the region around the Jordan, likely near <a class="geo-ref" href="#geo-note-bethany">Bethany</a> beyond the Jordan (Bethabara), in the lower Jordan Valley near <a class="geo-ref" href="#geo-note-jericho">Jericho</a>.</li>
+                    <li>Luke&#x27;s genealogy traces from <a class="geo-ref" href="#geo-note-nazareth">Nazareth</a> (where Jesus lived) back to Adam — spanning the entire geography of human history from Eden to <a class="geo-ref" href="#geo-note-galilee">Galilee</a>.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-jordan_river" data-place="jordan_river"><span class="geo-name">Jordan River</span><span class="geo-where">Israel / Jordan border</span><span class="geo-note">Runs about 65 miles as the crow flies from the Sea of Galilee to the Dead Sea, dropping from 700 to 1,400 feet below sea level. Narrow enough to wade at most fords, it was still the boundary that divided wilderness from inheritance. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jordan_River" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-bethany" data-place="bethany"><span class="geo-name">Bethany</span><span class="geo-where">al-Eizariya, West Bank</span><span class="geo-note">A village on the east slope of the Mount of Olives, under two miles from Jerusalem but out of sight of it. Close enough for Jesus to lodge here through the last week and walk in each morning. <a class="geo-more" href="https://en.wikipedia.org/wiki/Bethany_(biblical_village)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-jericho" data-place="jericho"><span class="geo-name">Jericho</span><span class="geo-where">Jericho, West Bank</span><span class="geo-note">An oasis at a perennial spring in the Jordan valley, 850 feet below sea level and among the oldest continuously settled sites anywhere. It guarded the ford and the climb up to the central hills, so anyone entering Canaan from the east had to deal with it first. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jericho" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-nazareth" data-place="nazareth"><span class="geo-name">Nazareth</span><span class="geo-where">Nazareth, Israel</span><span class="geo-note">A small village in a hollow of the Galilean hills, unmentioned in the Old Testament or by Josephus. The Roman city of Sepphoris was four miles away and the Via Maris ran below, so it was obscure without being isolated. <a class="geo-more" href="https://en.wikipedia.org/wiki/Nazareth" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-galilee" data-place="galilee"><span class="geo-name">Galilee</span><span class="geo-where">northern Israel</span><span class="geo-note">The northern hill country above the Jezreel Valley, wetter and greener than Judah and crossed by the trade road to Damascus. That traffic is why Judeans considered it mixed and provincial, and why Jesus grew up hearing more than one language. <a class="geo-more" href="https://en.wikipedia.org/wiki/Galilee" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-transjordan" data-place="transjordan"><span class="geo-name">Transjordan</span><span class="geo-where">western Jordan</span><span class="geo-note">Everything east of the Jordan and the Dead Sea: the plateau taken before the river was crossed and settled by Reuben, Gad and half of Manasseh, who then spent centuries anxious about being counted out. <a class="geo-more" href="https://en.wikipedia.org/wiki/Transjordan_(region)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -514,5 +527,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

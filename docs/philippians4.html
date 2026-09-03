@@ -361,9 +361,19 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="thessalonica,macedonia,greece"></div>
                 <ul>
-                    <li><a href="https://en.wikipedia.org/wiki/Thessaloniki" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Thessalonica</a> (v.16): City in Macedonia (northern Greece); Paul planted a church there.</li>
+                    <li><a class="geo-ref" href="#geo-note-thessalonica">Thessalonica</a> (v.16): City in Macedonia (northern Greece); Paul planted a church there.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-thessalonica" data-place="thessalonica"><span class="geo-name">Thessalonica</span><span class="geo-where">Thessaloniki, Greece</span><span class="geo-note">The capital of Macedonia, with a natural harbour on the Aegean and the Via Egnatia running through it. A letter left here travelled well, which is part of why Paul could say the word had sounded out from them in every place. <a class="geo-more" href="https://en.wikipedia.org/wiki/Thessaloniki" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-macedonia" data-place="macedonia"><span class="geo-name">Macedonia</span><span class="geo-where">northern Greece</span><span class="geo-note">The Roman province north of Greece proper, crossed by the Via Egnatia. Crossing into it from Troas took the gospel from Asia into Europe. <a class="geo-more" href="https://en.wikipedia.org/wiki/Macedonia_(Roman_province)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-greece" data-place="greece"><span class="geo-name">Achaia</span><span class="geo-where">southern Greece</span><span class="geo-note">The Roman province covering southern Greece, governed from Corinth. Long past political power and still the cultural reference point of the eastern empire. <a class="geo-more" href="https://en.wikipedia.org/wiki/Achaia_(Roman_province)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -399,5 +409,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

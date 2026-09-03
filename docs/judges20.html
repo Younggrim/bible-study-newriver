@@ -521,11 +521,23 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="jerusalem,bethel,mizpah,gibeah,ramah"></div>
                 <ul>
-                    <li>Mizpah: Assembly point for the eleven tribes (likely Mizpah in Benjamin, north of <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a>)</li>
-                    <li>Gibeah (Benjamin): The target city — located on the central ridge road between <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> and Ramah</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Bethel" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Bethel</a>: Where Israel inquires of God (the ark is there); the battle takes place in the narrow passes around Gibeah</li>
+                    <li>Mizpah: Assembly point for the eleven tribes (likely Mizpah in Benjamin, north of <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a>)</li>
+                    <li>Gibeah (Benjamin): The target city — located on the central ridge road between <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> and Ramah</li>
+                    <li><a class="geo-ref" href="#geo-note-bethel">Bethel</a>: Where Israel inquires of God (the ark is there); the battle takes place in the narrow passes around Gibeah</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-bethel" data-place="bethel"><span class="geo-name">Bethel</span><span class="geo-where">Beitin, West Bank</span><span class="geo-note">A ridge-road town about 11 miles north of Jerusalem, where Jacob dreamed of the stairway and named the place house of God. Jeroboam later put one of his two golden calves here precisely because pilgrims already came. <a class="geo-more" href="https://en.wikipedia.org/wiki/Bethel" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mizpah" data-place="mizpah"><span class="geo-name">Mizpah</span><span class="geo-where">Tell en-Nasbeh, West Bank</span><span class="geo-note">A fortified town on the northern approach to Jerusalem, used as a gathering point by Samuel and as Judah's administrative centre after Jerusalem fell. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mizpah_in_Benjamin" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-gibeah" data-place="gibeah"><span class="geo-name">Gibeah</span><span class="geo-where">Tell el-Ful, West Bank</span><span class="geo-note">A Benjamite hilltop three miles north of Jerusalem, Saul's home and first capital. It is also the scene of the atrocity in Judges 19 that nearly destroyed the tribe. <a class="geo-more" href="https://en.wikipedia.org/wiki/Gibeah" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-ramah" data-place="ramah"><span class="geo-name">Ramah</span><span class="geo-where">er-Ram, West Bank</span><span class="geo-note">A Benjamite town on the ridge road north of Jerusalem, Samuel's home and the staging point from which Judah's captives were marched to Babylon, which is the weeping in Ramah Jeremiah hears. <a class="geo-more" href="https://en.wikipedia.org/wiki/Ramah_(Israel)" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -557,5 +569,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

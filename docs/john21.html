@@ -407,10 +407,19 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="sea_of_galilee,galilee"></div>
                 <ul>
-                    <li>The Sea of Tiberias (<a href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Sea of Galilee</a>, v.1): The post-resurrection appearance occurred on the shore of the Sea of Galilee. The disciples had returned to fishing in Galilee.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Galilee" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Galilee</a>: Jesus had told the disciples to meet Him in Galilee (Matt. 28:10). This chapter records that meeting — back where their journey with Jesus first began.</li>
+                    <li>The Sea of Tiberias (<a class="geo-ref" href="#geo-note-sea_of_galilee">Sea of Galilee</a>, v.1): The post-resurrection appearance occurred on the shore of the Sea of Galilee. The disciples had returned to fishing in Galilee.</li>
+                    <li><a class="geo-ref" href="#geo-note-galilee">Galilee</a>: Jesus had told the disciples to meet Him in Galilee (Matt. 28:10). This chapter records that meeting — back where their journey with Jesus first began.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-sea_of_galilee" data-place="sea_of_galilee"><span class="geo-name">Sea of Galilee</span><span class="geo-where">Lake Kinneret, Israel</span><span class="geo-note">A freshwater lake 13 miles by 8, sunk 700 feet below sea level in a bowl of hills. Cold air spilling over the rim onto warm water is what produces the sudden violent squalls the Gospels keep describing. <a class="geo-more" href="https://en.wikipedia.org/wiki/Sea_of_Galilee" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-galilee" data-place="galilee"><span class="geo-name">Galilee</span><span class="geo-where">northern Israel</span><span class="geo-note">The northern hill country above the Jezreel Valley, wetter and greener than Judah and crossed by the trade road to Damascus. That traffic is why Judeans considered it mixed and provincial, and why Jesus grew up hearing more than one language. <a class="geo-more" href="https://en.wikipedia.org/wiki/Galilee" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -451,5 +460,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

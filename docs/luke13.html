@@ -463,11 +463,21 @@
 
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="jerusalem,perea,judea"></div>
                 <ul>
-                    <li>Siloam (v.4): A tower near the Pool of Siloam in southeast <a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> that fell and killed 18 people. Jesus uses this local tragedy as a lesson on repentance.</li>
-                    <li>A synagogue (v.10): Jesus healed the crippled woman in a synagogue — likely on the route through <a href="https://en.wikipedia.org/wiki/Perea" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Perea</a> or Judea.</li>
-                    <li><a href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Jerusalem</a> (v.34): Jesus laments over Jerusalem, the city that kills the prophets — the destination He is heading toward.</li>
+                    <li>Siloam (v.4): A tower near the Pool of Siloam in southeast <a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> that fell and killed 18 people. Jesus uses this local tragedy as a lesson on repentance.</li>
+                    <li>A synagogue (v.10): Jesus healed the crippled woman in a synagogue — likely on the route through <a class="geo-ref" href="#geo-note-perea">Perea</a> or Judea.</li>
+                    <li><a class="geo-ref" href="#geo-note-jerusalem">Jerusalem</a> (v.34): Jesus laments over Jerusalem, the city that kills the prophets — the destination He is heading toward.</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-jerusalem" data-place="jerusalem"><span class="geo-name">Jerusalem</span><span class="geo-where">Jerusalem</span><span class="geo-note">A hill town about 2,500 feet up in the central spine of Judah, roughly 35 miles inland from the Mediterranean and 15 miles west of the Jordan. It sits on no trade route and has no river, which is why it mattered as a fortress and a sanctuary rather than as a market. <a class="geo-more" href="https://en.wikipedia.org/wiki/Jerusalem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-perea" data-place="perea"><span class="geo-name">Perea</span><span class="geo-where">western Jordan</span><span class="geo-note">The strip east of the Jordan between Pella and the Arnon, Jewish in population and ruled with Galilee under Herod Antipas. Pilgrims used it to bypass Samaria, which is the route behind the phrase beyond Jordan in the Gospels. <a class="geo-more" href="https://en.wikipedia.org/wiki/Perea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-judea" data-place="judea"><span class="geo-name">Judea</span><span class="geo-where">southern Israel and the West Bank</span><span class="geo-note">The southern hill country around Jerusalem, high, stony and dry, with the wilderness on one side and the Philistine plain on the other. Poor farming and hard access are what let it stay independent longest. <a class="geo-more" href="https://en.wikipedia.org/wiki/Judea" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -502,5 +512,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>

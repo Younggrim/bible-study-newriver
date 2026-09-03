@@ -566,11 +566,21 @@
             </div>
             <div class="tab-content" id="tab-mapgeo">
                 <h3>Map & Geography</h3>
+                <div class="geo-map" data-places="shechem,mount_ebal,mount_gerizim"></div>
                 <ul>
-                    <li><a href="https://en.wikipedia.org/wiki/Shechem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Shechem</a>: The central city between Mount Ebal and Mount Gerizim — Abimelech&#x27;s power base and the scene of his atrocities</li>
-                    <li>Tower of <a href="https://en.wikipedia.org/wiki/Shechem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Shechem</a> (Beth-millo): A fortified stronghold within the city where 1,000 people die in the fire</li>
-                    <li>Thebez: A city near <a href="https://en.wikipedia.org/wiki/Shechem" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Shechem</a> where Abimelech is killed by a millstone dropped from the tower</li>
+                    <li><a class="geo-ref" href="#geo-note-shechem">Shechem</a>: The central city between Mount Ebal and Mount Gerizim — Abimelech&#x27;s power base and the scene of his atrocities</li>
+                    <li>Tower of <a class="geo-ref" href="#geo-note-shechem">Shechem</a> (Beth-millo): A fortified stronghold within the city where 1,000 people die in the fire</li>
+                    <li>Thebez: A city near <a class="geo-ref" href="#geo-note-shechem">Shechem</a> where Abimelech is killed by a millstone dropped from the tower</li>
                 </ul>
+                <!-- geo-notes -->
+                <h4 class="geo-heading">Places on this map</h4>
+                <ul class="geo-notes">
+                    <li id="geo-note-shechem" data-place="shechem"><span class="geo-name">Shechem</span><span class="geo-where">Tell Balata, Nablus, West Bank</span><span class="geo-note">In the pass between Mount Ebal and Mount Gerizim, the natural east-west crossing of the central hills. Abraham's first altar, Joseph's burial and Joshua's covenant renewal all happen here, which made it the north's answer to Jerusalem. <a class="geo-more" href="https://en.wikipedia.org/wiki/Shechem" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mount_ebal" data-place="mount_ebal"><span class="geo-name">Mount Ebal</span><span class="geo-where">Nablus, West Bank</span><span class="geo-note">The bare northern side of the Shechem pass, 3,080 feet. The curses of the covenant were read from this side, facing Gerizim across the valley, in a natural amphitheatre with remarkable acoustics. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mount_Ebal" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                    <li id="geo-note-mount_gerizim" data-place="mount_gerizim"><span class="geo-name">Mount Gerizim</span><span class="geo-where">Nablus, West Bank</span><span class="geo-note">The southern side of the same pass and the mountain of blessing. Samaritans built their temple on it and still worship there, which is the this mountain of the woman at the well. <a class="geo-more" href="https://en.wikipedia.org/wiki/Mount_Gerizim" target="_blank" rel="noopener">Wikipedia</a></span></li>
+                </ul>
+                <p class="geo-credit">Towns sit on their excavated or traditional site. Regions, rivers and seas are ringed rather than dotted, because for those a single point is only an anchor. Coastlines from Natural Earth.</p>
+                <!-- /geo-notes -->
             </div>
                         <div class="tab-content" id="tab-commentary">
                 <h3>Commentary</h3>
@@ -602,5 +612,6 @@
     </footer>
 
     <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/mapgeo.js?v=d863b404"></script>
 </body>
 </html>
