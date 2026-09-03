@@ -745,9 +745,15 @@ whose `getBBox()` leaves it, and anything on `window.onerror`. The last run:
 - New River sermon overlay: 127 videos across 60 chapters
 - Maps on 831 of the 842 Map & Geography panes, 2811 pins from 162 places
 - Authorship & Background: **1189 of 1189 clean, 66 of 66 books, 0 defects**, and
-  0 panes carrying an `auth-sublist`
-- Tabs: summary 1189, authorship 1189, commentary 1189, videos 1189, articles 1189,
-  reflection 1189, mapgeo 842
+  0 panes carrying an `auth-sublist`, 0 sections ending on a colon, 0 duplicate
+  labels, 0 verse gaps, 0 sections out of order
+- All 1228 HTML files balance `<div>` against `</div>`. Inside the authorship pane
+  the correct delta is exactly **+1**, one unmatched closer, because the captured
+  region includes the pane's own closing tag; all 1189 sit at +1
+- The 21 Psalms fold scripts plus both repair scripts are idempotent: re-running the
+  whole set leaves `docs/` hash-identical and the git tree clean
+- Tab coverage is in the table under "Verifying the invariant" rather than repeated
+  here, because two copies of a number is how the rest of this file went stale
 
 A full audit takes about a minute.
 
