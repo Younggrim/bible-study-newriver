@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "13193f25309513c856f4e36b80a54ae8696c92f7 Map & Geography: draw the map instead of linking to Wikipedia",
+  "upstream_commit": "866f95e3c01b26727a8d1c8f3c69e1da8677e171 Fold 1 Chronicles, 2 Chronicles, Proverbs and Ezekiel",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
