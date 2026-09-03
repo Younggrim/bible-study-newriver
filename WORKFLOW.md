@@ -513,6 +513,12 @@ matched longest-first so "Sea of Galilee" beats "Galilee". Two things to watch:
 
 Run these after any change to confirm the two repos differ only where allowed.
 
+**Run them from the folder that contains both clones, not from inside a repo.** The
+paths below are relative, `bible-study/docs` and `bible-study-newriver/docs`, so
+running them from a repo root fails on a missing directory rather than reporting
+anything useful. This file lives inside `bible-study`, which makes that the easy
+mistake to make.
+
 ```bash
 # Every diff hunk against upstream should be explained by a branding rule or by the
 # video allow list.
