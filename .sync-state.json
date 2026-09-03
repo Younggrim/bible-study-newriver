@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "d4568713375b66b33c0d58cc80363ea9a2032898 Give the Articles list on topical and life pages its bullet back",
+  "upstream_commit": "10073b23e0f7dfd4deeefd3496329c2cc4a5b43d Fold Psalms, and finish the authorship format at 1189 of 1189",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
