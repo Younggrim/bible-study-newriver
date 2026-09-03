@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "10073b23e0f7dfd4deeefd3496329c2cc4a5b43d Fold Psalms, and finish the authorship format at 1189 of 1189",
+  "upstream_commit": "2627011d342f9b99b9c4e51a98cfeddd5f5348fd Correct the stale figures in WORKFLOW.md and fix two broken checks (#58)",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
