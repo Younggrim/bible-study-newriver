@@ -514,13 +514,23 @@ matched longest-first so "Sea of Galilee" beats "Galilee". Two things to watch:
 Run these after any change to confirm the two repos differ only where allowed.
 
 ```bash
-# Every diff hunk against upstream should be explained by a branding rule.
-# Expect: 0 unexplained.
+# Every diff hunk against upstream should be explained by a branding rule or by the
+# video allow list.
+#
+# Expect: 1 unexplained, matthew28.html, and nothing else. Read the next paragraph
+# before treating that 1 as a fault.
+#
+# 'yt-facade' and 'loadYT' are in the list because New River allows fewer video
+# sources than upstream, so the sync drops players this repo may not show. Without
+# those two keys the check reports 267 unexplained hunks that are all dropped
+# players, which is the filter working, not a fault. That is what it reported for a
+# long time while this file claimed 0.
 python3 - <<'PY'
 import os, difflib
 bs, nr = "bible-study/docs", "bible-study-newriver/docs"
 BRAND = ('New River Bible Study','theme-color','favicon','Cinzel',
-         'dove-white.png','nav-brand','style.css?v=','script.js?v=')
+         'dove-white.png','nav-brand','style.css?v=','script.js?v=',
+         'yt-facade','loadYT')
 bad = 0
 for n in sorted(f for f in os.listdir(bs) if f.endswith('.html')):
     a = open(f"{bs}/{n}", encoding='utf-8').read().replace('><','>\n<').splitlines()
@@ -532,6 +542,40 @@ for n in sorted(f for f in os.listdir(bs) if f.endswith('.html')):
             bad += 1
             print("UNEXPLAINED:", n)
 print("unexplained hunks:", bad)
+PY
+```
+
+The one remaining hunk is `matthew28.html`, and it is a second-order effect of the
+same filter. All three of that chapter's players come from sources New River does not
+allow, so the pane emptied and the sync removed the **tab and pane as well** — the
+`1 empty Videos tabs tidied` line in the sync report. It is the only page in either
+repo where that has happened. Compare the two numbers rather than expecting a
+constant: unexplained hunks should equal the sync's tidied-tab count, and any page
+named here that is *not* in that count is a real fault worth chasing.
+
+Allowing video hunks through the check above means it can no longer catch a player
+going missing by accident, so pair it with this. The allow list can only ever make
+New River show **fewer** players than upstream, never more and never a different set,
+so a player present here and absent upstream is a real fault.
+
+```bash
+# The video divergence must run one way only.
+# Expect: dropped matches the sync report's "players removed", extra 0.
+python3 - <<'PY'
+import os, re
+bs, nr = "bible-study/docs", "bible-study-newriver/docs"
+ID = re.compile(r"loadYT\(this,'([\w-]{6,})'\)")
+dropped, extra = 0, {}
+for n in sorted(f for f in os.listdir(bs) if f.endswith('.html')):
+    A = set(ID.findall(open(f"{bs}/{n}", encoding='utf-8').read()))
+    B = set(ID.findall(open(f"{nr}/{n}", encoding='utf-8').read()))
+    dropped += len(A - B)
+    if B - A:
+        extra[n] = sorted(B - A)
+print("players upstream has that New River drops:", dropped)
+print("pages where New River has EXTRA players:", len(extra))
+for n, v in extra.items():
+    print("  EXTRA:", n, v)
 PY
 ```
 
@@ -691,11 +735,26 @@ whose `getBBox()` leaves it, and anything on `window.onerror`. The last run:
 
 - 3617 unique videos referenced, **all 3617 playable**, 0 deleted, 0 private
 - 0 captions containing U+FFFD
-- 0 unexplained diff hunks between the repos
+- 1 unexplained diff hunk between the repos, `matthew28.html`, whose Videos tab New
+  River drops because the allow list empties that pane. This entry read 0 for a long
+  time and was wrong twice over: the check lacked `yt-facade` and `loadYT` in its
+  `BRAND` list, so it was really reporting 267, all dropped players. See the note on
+  that check above
+- 358 players dropped by New River's allow list, 0 pages carrying a player upstream
+  does not have, 1 empty Videos tab tidied
 - New River sermon overlay: 127 videos across 60 chapters
 - Maps on 831 of the 842 Map & Geography panes, 2811 pins from 162 places
+- Authorship & Background: **1189 of 1189 clean, 66 of 66 books, 0 defects**, and
+  0 panes carrying an `auth-sublist`
+- Tabs: summary 1189, authorship 1189, commentary 1189, videos 1189, articles 1189,
+  reflection 1189, mapgeo 842
 
 A full audit takes about a minute.
+
+Two figures in this file are known to drift as work lands, and both have been wrong
+before. The authorship status and the deferred `Key Themes:` count are both derived
+from how much has been folded, so **re-measure rather than quoting them**; each has a
+snippet beside it for that purpose.
 
 ## Authorship & Background: the target format
 
@@ -703,7 +762,13 @@ Every chapter's Authorship & Background pane must end up in this shape. Jonah 1-
 is the reference implementation; read `jonah1.html` beside `ruth1.html` before
 starting a new book.
 
-**Status: 559 of 1189 chapters done. 630 remaining.**
+**Status: 1189 of 1189 chapters done. 0 remaining, all 66 books complete.**
+Psalms was the last book, folded in one pass from 21 scripts, and `leviticus27` was
+the last pane outside it still carrying a sublist. `python3 audit_authorship.py`
+reports `CLEAN 1189 of 1189`, and `--defects` reports 0 pages not clean.
+The format is finished. What remains is the two cleanups recorded further down,
+the `Author:` / `Key themes` audit and the emphatic capitals, plus whatever a fresh
+reading turns up. Neither is a folding job.
 
 ### Field order, exactly
 
@@ -791,22 +856,55 @@ Not to be done piecemeal. `Author:` currently has three shapes across the 1189 p
 
 The 386 embedded theme strings are **book-level** and there are only **13 distinct
 ones** — one is repeated 150 times, on every Psalm. A separate `Key Themes:` field
-is chapter-level, and 151 pages already carry both scopes.
+is chapter-level, and **204** pages already carry both scopes.
 
-Agreed plan, to run as a single audit **after all folding is finished**: `Author:`
-holds authorship only, everywhere; chapter-level `Key Themes:` on every page. That
-gives one uniform shape — Author, Classification, Key Themes, Historical Context,
-sections. Two pieces of work, in this order so no page is ever left without themes:
+Agreed plan, now that the folding is finished: `Author:` holds authorship only,
+everywhere; chapter-level `Key Themes:` on every page. That gives one uniform shape —
+Author, Classification, Key Themes, Historical Context, sections. Two pieces of work,
+in this order so no page is ever left without themes:
 
-1. write chapter-level `Key Themes:` for the **122** already-folded pages that have
-   only the embedded book-level ones (mostly 1-2 Kings, 1-2 Chronicles)
+1. write chapter-level `Key Themes:` for the **661** pages that have only the
+   embedded book-level ones
 2. strip `Key themes:` and everything after it from `Author:` on the 386
+
+**Step 1 is five times the size this document used to claim, and that is the most
+important thing to know before starting it.** The figure read 122 for a long time.
+122 was correct when written, at 559 folded pages, and it grew with every book folded
+afterwards, because a page only entered the count once it was folded. Measured against
+all 1189 it is **661**. Only 528 pages carry a chapter-level `Key Themes:` at all.
+
+Re-measure before planning the work rather than trusting the number above, which is
+the mistake this paragraph exists to prevent:
+
+```python
+# Pages with no chapter-level Key Themes:. Expect 661 until step 1 starts.
+import glob, html as H, re
+import audit_authorship as A
+LABEL = re.compile(r'<span class="auth-label">(.*?)</span>', re.S)
+n = 0
+for p in glob.glob("docs/*.html"):
+    raw = open(p, encoding="utf-8").read()
+    m = A.PANE.search(raw)
+    if not m or 'id="tab-summary"' not in raw:
+        continue
+    if "Key Themes:" not in [H.unescape(x).strip() for x in LABEL.findall(m.group(2))]:
+        n += 1
+print("pages lacking chapter Key Themes:", n)
+```
+
+All 150 Psalms pages already carry a chapter-level `Key Themes:`, so folding Psalms
+did not add to the 661. The bulk of it is elsewhere.
 
 ### Sublists: check before you drop one
 
-455 panes still carry a `<ul class="auth-sublist">`. Most are verse-range
-outlines, and replacing them with sections loses nothing. **13 are not**, and a
-fold that captures only `auth-item` divs will silently delete them:
+**0 panes now carry a `<ul class="auth-sublist">`.** That was 455 when this section
+was written and 148 immediately before Psalms was folded. Keep reading anyway: the
+rule below is what to apply to any sublist that arrives with new content, and the two
+cases at the end are the ones that cost real work to find.
+
+Most sublists were verse-range outlines, and replacing them with sections lost
+nothing. **13 were not**, and a fold that captures only `auth-item` divs will
+silently delete them:
 
 ```
 genesis1   isaiah53   proverbs25   proverbs26   revelation6
@@ -826,6 +924,35 @@ Jericho and Ai, the southern coalition, the central region, the northern coaliti
 Deleting it would have lost every place name in the chapter. Before dropping a
 list, check that the sections actually say the same thing. If they do not, the list
 is content whatever its items look like, and its substance goes into the prose.
+
+`leviticus27` was the last surviving sublist in either repo and a third failure mode
+again, worth knowing because it defeated every automated check for months. Its
+`vv.1-8` section body ended on a colon —
+
+```
+... Since the person cannot literally be sacrificed, a monetary equivalent
+is established:
+```
+
+— and the eight shekel figures lived in the list, with a **headless** `auth-item`
+continuing the same discussion after it. All eight items carried a verse range, so
+the rule above cleared them; the sections covered every verse, so the coverage check
+passed; the label was well formed, so `label_fault` passed. Nothing could see that
+the prose was a sentence cut in half. The tell is a section body whose last character
+is a colon, which is cheap to look for:
+
+```python
+# A section that ends on a colon is handing off to something. Expect 0.
+for label, body in ITEM_PAIR.findall(pane):
+    if H.unescape(re.sub(r"<.*?>", "", body)).strip().endswith(":"):
+        print(page, "section hands off:", H.unescape(label).strip())
+```
+
+Repairing it also turned up two false statements in the surrounding prose, which is
+the general lesson: a pane nobody has re-read since it was generated may be wrong as
+well as malformed. It called thirty shekels "the price of a male between 5-20", which
+v.5 sets at twenty, and "the least valuable category of adult", which it is not, since
+v.7 sets a male over sixty at fifteen and a female over sixty at ten.
 
 ```python
 items = re.findall(r'<li>(.*?)</li>', pane, re.S)
@@ -849,11 +976,41 @@ Target totals, matching what Ruth and Jonah landed at:
 | typical, 20-40 verses | 5-7 | 4,000-5,500 chars |
 | long, over 40 verses | 6-8 | 5,000-6,500 chars |
 
+Where the finished 1189 actually landed, for calibration:
+
+| pane total | pages |
+|---|---|
+| under 3,000 | 284 |
+| 3,000-4,000 | 365 |
+| 4,000-5,500 | 442 |
+| 5,500-6,500 | 68 |
+| over 6,500 | 30 |
+
+The 284 under 3,000 are not failures. Sections are deliberately shorter for the
+poetry and the miscellanies than for narrative, and most of that bucket is Psalms,
+Proverbs and the shorter epistles. A six-verse psalm does not support a Mark-chapter
+exposition, and padding one to hit a character count produces worse prose than
+leaving it short. Treat the table above as the shape narrative chapters should reach,
+not a quota to enforce across the book.
+
 ### Prose style
 
 **No emphatic capitals.** Some existing paragraphs shout — "a NARRATIVE about
-the prophet", "he wants them DESTROYED", "always DOWNWARD". 413 chapters carry
-1,115 such words. Write sentence case and normalize them when folding a book.
+the prophet", "he wants them DESTROYED", "always DOWNWARD". Write sentence case,
+and normalize any you meet.
+
+What is left is **179 pages carrying 282 distinct shouted words**, down from 413
+pages and 1,115 words, the rest having been fixed as each book was folded. The
+survivors are all in `Author:` and `Historical Context:` bodies, which the folds
+preserved verbatim by design rather than rewriting. Commonest are `KING`, `FINAL`,
+`PRIEST`, `FOREVER`, `REJECTED`, `WHERE`, `INTERNAL`, `RESTORATION`.
+
+This is the second of the two deferred cleanups. It needs a pass over the allow list
+before any transformation, because `CAPS_OK` in `audit_authorship.py` is what
+separates a shout from a legitimate capital, and the list has grown as books landed —
+`III` and `IV` went in for the Book III and Book IV doxology labels in Psalms.
+**Never transform in bulk.** Lowercasing by rule will destroy divine names, Roman
+numerals and abbreviations. Extend `CAPS_OK`, then fix the remainder by reading them.
 
 Never lowercase: `LORD`, `GOD` where the source has it for the divine name,
 `YHWH`, translation abbreviations (`ESV`, `KJV`, `ASV`, `NET`, `WEB`, `BSB`),
