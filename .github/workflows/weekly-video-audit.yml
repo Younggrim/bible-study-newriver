@@ -48,14 +48,21 @@ jobs:
             echo "No state change to commit."
           fi
 
+      # --assignee makes this a phone alert: an assigned issue counts as
+      # "participating", which GitHub Mobile pushes by default, and it lands in
+      # github.com/issues/assigned as a working queue. The fallback files the
+      # issue unassigned if assignment ever fails, because `gh issue create`
+      # exits non-zero and creates nothing on a bad assignee, which would
+      # silently swallow the week's report.
       - name: Open an issue listing the new uploads
         if: steps.check.outputs.has_new == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh issue create \
-            --title "New videos on tracked channels ($(date -u +%Y-%m-%d))" \
-            --body-file /tmp/new_videos_issue_body.md
+          TITLE="New videos on tracked channels ($(date -u +%Y-%m-%d))"
+          BODY=/tmp/new_videos_issue_body.md
+          gh issue create --title "$TITLE" --assignee Younggrim --body-file "$BODY" \
+            || gh issue create --title "$TITLE" --body-file "$BODY"
 
   dead-links:
     name: Audit referenced videos for dead links
@@ -75,6 +82,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh issue create \
-            --title "${{ steps.audit.outputs.dead_count }} video(s) no longer play ($(date -u +%Y-%m-%d))" \
-            --body-file /tmp/dead_videos_issue_body.md
+          TITLE="${{ steps.audit.outputs.dead_count }} video(s) no longer play ($(date -u +%Y-%m-%d))"
+          BODY=/tmp/dead_videos_issue_body.md
+          gh issue create --title "$TITLE" --assignee Younggrim --body-file "$BODY" \
+            || gh issue create --title "$TITLE" --body-file "$BODY"
