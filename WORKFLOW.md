@@ -198,6 +198,119 @@ without waiting to be asked. Same for a Daniel 1 video if one shows up. This is
 a pre-approved series; anything else from any channel still needs a human to
 approve it.
 
+## Adding articles
+
+The **Articles** tab is the seventh tab on every chapter page, and an Articles
+section block at the foot of every topical and life page. It carries outbound
+links only. **Nothing is copied from any source** — each entry is a link plus a
+description written in `article_sources.py`, exactly the rule the Commentary tab
+has always followed.
+
+### The four sources
+
+| source | what it gives | how it is polled |
+|---|---|---|
+| gotquestions.org | The backbone. A stable per-book overview URL for all 66 books, plus the `Bible-<topic>` and `Bible-verses-about-<topic>` series | `sitemap.xml`, 10,887 English URLs, lastmod on every one |
+| bibleproject.com | 76 articles, unusually often anchored to a specific chapter or passage | `en/sitemap.xml`, no lastmod, so tracked as a URL set |
+| crossway.org | Freshest week to week. Publishes the ESV this site already carries | `/articles/rss/` plus 51 topic feeds, 15 items each |
+| gotquestions.blog | First-person pastoral voice. **Life pages only** | `sitemap.xml`, 157 URLs |
+
+Two things to know about those sources before changing anything.
+
+**Crossway has no article sitemap.** Its `sitemap.xml` is 11,588 URLs of books,
+authors, bibles and tracts with zero articles in it, and `?page=N` on the archive
+is ignored. The per-tag feeds at `/articles/tag/<slug>/rss/` are the only way to
+see more than the latest 15, which is why 52 feeds get polled. `/search/` is
+`Disallow` in their robots.txt and is not touched.
+
+**bibleproject.com answers a request with no User-Agent with HTTP 202 and an
+empty body.** `automation_http.py` always sends one, so this is handled — but a
+hand-rolled `curl` against it will silently return nothing.
+
+The **gotquestions.blog** is deliberately limited to life pages and to the small
+subset of its posts that are pastoral rather than cultural or denominational
+commentary. It is also largely dormant: 7 pages touched in 2025 against 72 dated
+2019. It contributes little and that is expected.
+
+### Derived versus curated, and why it matters
+
+**Derived** is the per-book gotquestions.org overview. It comes from the
+`GQ_BOOK_PAGE` table, one entry per book, not from any search. That table is what
+guarantees every one of the 1189 chapter pages has at least one real link, and it
+does not depend on the weekly job running at all. 61 books use
+`Book-of-<Name>.html`, the four Gospels use `Gospel-of-<Name>.html`, and Song of
+Solomon has no prefix.
+
+**Curated** is everything else: `CHAPTER_ARTICLES` keyed by `(book, chapter)`,
+`BOOK_ARTICLES` keyed by book, and `TOPIC_ARTICLES` keyed by page filename. Every
+one was checked by hand and returned 200 when it was added.
+
+**Do not try to place articles by matching book names in titles.** It was
+measured and it is unusable. One week of Crossway feeds produced "John Piper on
+Gambling", "Podcast: John Owen's Advice for Killing Your Sin", "3 Marks of True
+Repentance", "Podcast: Answering Tough Questions About the Holy Spirit (Joel
+Beeke)" and "11 Passages to Read When You Lose Your Job" — every one of which a
+book-name matcher scores as a hit. gotquestions.org adds "David Hume", "David
+Livingstone", "Saul of Tarsus" and "Ahab-spirit". Author names collide with two
+thirds of the New Testament. The only reliable signal is a chapter number
+adjacent to the book name.
+
+### Accepting or rejecting an article
+
+Both are edits to `article_sources.py`, then one command.
+
+```bash
+# accept: add to CHAPTER_ARTICLES, BOOK_ARTICLES or TOPIC_ARTICLES
+# reject: add to DROP_ARTICLE_URLS with the reason
+python3 add_articles.py --check     # report, write nothing
+python3 add_articles.py             # write
+```
+
+`DROP_ARTICLE_URLS` exists for the same reason `DROP_VIDEO_IDS` does. Deleting a
+link from the HTML is not enough on its own: the source stays in the allow list,
+so the next weekly poll suggests it again. Record the reason, because "why was
+this left out" is the question anyone will have later.
+
+`add_articles.py` handles both page shapes and is safe to re-run. It writes
+between `<!-- articles -->` and `<!-- /articles -->` fences, so a second run
+reproduces the same bytes. It refuses to write any page whose `<div>` count would
+go unbalanced, and exits non-zero if any page had a problem. To undo a bad run:
+`git checkout -- docs/`.
+
+```bash
+python3 add_articles.py --chapters-only   # the 1189 chapter pages
+python3 add_articles.py --topics-only     # the 34 topical and life pages
+```
+
+### Two decisions worth not undoing
+
+**The tab is anchored on Reflection, not Videos.** `add_commentaries.py` anchors
+against the Videos tab, but `strip_empty_videos_tab()` deletes that tab when a
+chapter has no players left — New River is already down to 1188 Videos tabs
+against 1189 everywhere else. Reflection is on all 1189 and nothing removes it.
+Anchoring there also produces the ordering we want, with Reflection last.
+
+**Topical and life pages get a section block, not a tab.** Those 34 pages have no
+tab strip at all; they are a stack of section blocks all visible at once. Making
+them tabbed would mean redesigning 34 hand-written files, and it would put
+`site/style.css` and `site/script.js` in play — the two files the sync preserves
+rather than mirrors, so any change to them has to be made by hand in both repos.
+The chapter tab as built needs **no CSS and no JavaScript change at all**:
+`switchTab()` works off the `data-tab` / `id="tab-X"` pairing and nothing else,
+and `.study-tabs` is a wrapping flexbox, so a seventh tab reflows on its own.
+
+### Where the article tooling lives
+
+| file | bible-study | New River | why |
+|---|---|---|---|
+| `article_sources.py` | yes | no | all four sources are acceptable on both sites, so unlike `video_sources.py` there is no second allow list and nothing for the sync to filter |
+| `add_articles.py` | yes | no | articles are added upstream, then synced |
+| `check_new_articles.py` | yes | no | there is no New River specific article source |
+
+If a deployment ever needs a narrower set of sources, split `article_sources.py`
+the way `video_sources.py` is split and filter on sync. **Do not** hand-edit
+`bible-study-newriver/docs/*.html`; the next sync discards it.
+
 ## Automation
 
 **GitHub Actions detects. A person or assistant decides.** That split is
@@ -244,20 +357,73 @@ present, so it covers the sermon overlay too.
 timeouts are retried and then listed separately as inconclusive. That asymmetry
 matters: a false positive here would get a working video deleted from the site.
 
+### The weekly article audit
+
+`.github/workflows/weekly-article-audit.yml` runs Mondays at 14:00 UTC, an hour
+after the video audit, plus on demand. It exists **only in bible-study**. It is a
+separate file rather than a third job in the video workflow for two reasons: that
+file is byte-identical in both repos and New River has no article scripts, so
+adding a job would make the copies diverge; and this way the two audits are
+independently dispatchable.
+
+Its one job runs `check_new_articles.py`, which polls **55 feeds** — one sitemap
+each for bibleproject.com, gotquestions.org and gotquestions.blog, plus Crossway's
+main feed and 51 topic feeds. It opens an issue, commits only
+`.automation/articles/`, and never edits `docs/`.
+
+Three behaviours worth knowing:
+
+- **A single feed failing is reported and skipped.** Only a source losing *every*
+  one of its feeds leaves that source's state untouched, so a total outage can
+  never mark a whole catalogue as seen.
+- **Anything filtered out is still recorded as seen**, including URLs already
+  linked from the site and anything in `DROP_ARTICLE_URLS`. Without that, an
+  article deliberately left off the site would come back in next week's issue.
+- **The report is written before the state is saved.** The other order means a
+  failure in between marks articles as seen while nobody ever hears about them,
+  with no way to recover the list. This order risks a duplicate report instead,
+  which is noise rather than loss.
+
+State lives in `.automation/articles/article_feed_state.json`, in a subdirectory
+on purpose: `check_new_videos.py` globs `.automation/*.json` and expects every one
+to describe YouTube channels, so a sibling file there would make it warn every
+week. A subdirectory is invisible to that glob.
+
+It was **seeded once**, at 920 gotquestions.org URLs, 544 Crossway, 136 blog and
+76 BibleProject, so the first scheduled run reports only genuinely new material.
+That is the opposite of the choice made for videos, and deliberately so. With
+videos there was a short list of undecided items worth surfacing. With articles
+the entire back catalogue was unreviewed, and a 1,444-item issue helps nobody —
+the curated tables in `article_sources.py` *are* the deliberate first pass through
+that catalogue. To re-seed after adding a source:
+
+```bash
+python3 check_new_articles.py --seed
+```
+
 ### Running the checks by hand
 
 ```bash
 python3 check_new_videos.py --check      # report, write nothing
 python3 check_video_links.py --limit 40  # quick smoke test
 python3 check_video_links.py --titles    # also flag titles renamed on YouTube
+python3 check_new_articles.py --check    # poll all 55 article feeds, write nothing
 ```
 
-`automation_http.py` is shared by both scripts. It uses urllib normally, and
+`automation_http.py` is shared by all three scripts. It uses urllib normally, and
 falls back to curl the moment urllib hits an SSL error. That exists for one
 concrete reason: behind a TLS-inspecting corporate proxy whose CA has no
 Authority Key Identifier, Python's OpenSSL refuses the connection outright
 while curl is fine. Without the fallback these scripts cannot be run by hand
 from such a machine at all.
+
+Both transports decode as UTF-8 with replacement. The curl path previously used
+`subprocess.run(text=True)` with no encoding, which decodes with the locale's
+encoding — under a C locale that is ASCII, and every feed these scripts read
+carries curly quotes and en-dashes in its titles, so a run in a C locale failed on
+the first one while the urllib path handled the same body fine. Keep both
+transports explicit about encoding; the module docstring promises they behave the
+same way.
 
 ### One-time repair scripts
 
@@ -401,20 +567,90 @@ python3 sync_from_bible_study.py ../bible-study >/dev/null
 find docs -type f | sort | xargs shasum | shasum
 ```
 
-Tab coverage should be identical across both repos. Current expected values:
+Tab coverage, in the order the tabs appear on the page. Current expected values:
 
-| tab | chapters |
-|---|---|
-| summary | 1189 |
-| authorship | 1189 |
-| mapgeo | 842 |
-| commentary | 972 |
-| videos | 1189 |
-| reflection | 1189 |
+| tab | bible-study | New River |
+|---|---|---|
+| summary | 1189 | 1189 |
+| authorship | 1189 | 1189 |
+| mapgeo | 842 | 842 |
+| commentary | 1189 | 1189 |
+| videos | 1189 | **1188** |
+| articles | 1189 | 1189 |
+| reflection | 1189 | 1189 |
+
+Two entries in that table need explaining.
+
+**Commentary was documented as 972 for a while.** That was the count before
+`add_commentaries.py` filled in the 217 chapters that had no Commentary tab at all
+— the Psalms and the twelve Minor Prophets. 972 + 217 = 1189. The old figure was
+stale, not a regression.
+
+**New River is legitimately one Videos tab short.** `strip_empty_videos_tab()`
+removes the tab on any chapter left with no players after New River's tighter
+allow list is applied. This is exactly why the Articles tab anchors on Reflection
+instead: Videos is not guaranteed to exist.
 
 ```bash
 # No caption should contain the Unicode replacement character. Expect 0.
 grep -l $'\ufffd' docs/*.html | wc -l
+```
+
+```bash
+# Articles: structure is sound and identical in both repos.
+# Expect 1223 pages, and 0 for every problem count.
+cd ..
+python3 - <<'PY'
+import os, re
+for repo in ("bible-study", "bible-study-newriver"):
+    d = f"{repo}/docs"
+    n_div = n_pair = n_fence = pages = 0
+    for n in sorted(os.listdir(d)):
+        if not n.endswith('.html'):
+            continue
+        t = open(f"{d}/{n}", encoding='utf-8').read()
+        if '<!-- articles -->' not in t:
+            continue
+        pages += 1
+        if len(re.findall(r'<div\b', t)) != len(re.findall(r'</div>', t)):
+            n_div += 1
+        if set(re.findall(r'data-tab="([a-z]+)"', t)) != \
+           set(re.findall(r'id="tab-([a-z]+)"', t)):
+            n_pair += 1
+        if t.count('<!-- articles -->') != 1 or t.count('<!-- /articles -->') != 1:
+            n_fence += 1
+    print(f"{repo}: pages={pages} div={n_div} tab/pane={n_pair} fence={n_fence}")
+PY
+```
+
+```bash
+# Articles: every URL the site links to still resolves. Expect 0 non-200.
+cd bible-study
+python3 - <<'PY'
+import concurrent.futures as cf, subprocess, sys
+sys.path.insert(0, '.')
+import article_sources as a
+UA = "Mozilla/5.0 (compatible; bible-study-automation)"
+def probe(u):
+    r = subprocess.run(["curl", "-sS", "-o", "/dev/null", "-L", "--max-time", "30",
+                        "-A", UA, "-w", "%{http_code}", u],
+                       capture_output=True, text=True)
+    return u, r.stdout.strip()
+urls = a.all_urls()
+bad = []
+with cf.ThreadPoolExecutor(max_workers=8) as ex:
+    for u, code in ex.map(probe, urls):
+        if code != "200":
+            bad.append((code, u))
+print(f"probed {len(urls)} article urls, non-200: {len(bad)}")
+for c, u in bad:
+    print("  ", c, u)
+PY
+```
+
+```bash
+# add_articles.py must be a no-op on a clean tree. Expect "changed 0" twice.
+python3 add_articles.py --check
 ```
 
 ```bash

@@ -62,8 +62,17 @@ def _get_curl(url, timeout):
         "silent", "show-error", "location",
         'write-out = "\\n%{http_code}"',
     ]) + "\n"
+    # encoding and errors are explicit because text=True otherwise decodes with
+    # the locale's encoding, and under a C locale that is ASCII. Every feed this
+    # module reads carries curly quotes and en-dashes in its titles, so a run in
+    # a C locale failed on the first one with UnicodeDecodeError while the urllib
+    # transport, which has always used .decode("utf-8", "replace"), handled the
+    # same body fine. This makes the two transports behave the way the module
+    # docstring says they do.
     r = subprocess.run(["curl", "-K", "-"], input=conf,
-                       capture_output=True, text=True, timeout=timeout + 15)
+                       capture_output=True, text=True,
+                       encoding="utf-8", errors="replace",
+                       timeout=timeout + 15)
     if r.returncode != 0 and not r.stdout:
         raise OSError(r.stderr.strip() or f"curl exit {r.returncode}")
     body, _, code = r.stdout.rpartition("\n")
