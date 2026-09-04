@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "9b7fd3532fe761973254ac64c2543cf7d4aabaf0 Fix emphatic capitals in Author/Historical Context on 148 pages",
+  "upstream_commit": "3f91bfa185e1324c3ecca5f004b39303ab533496 Americanize hand-reviewed KJV-vocabulary British spellings (item 4b)",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
