@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "761caf6f311946970dee60feb9fc9344e1ee058b Add chapter-level Key Themes: Joshua",
+  "upstream_commit": "f8a2ccf9b1dfc0f8938b3fb84c2cc78a546f56c8 Resolve two of the four undecided videos from the handoff, drop one, leave one open",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
