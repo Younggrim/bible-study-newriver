@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "f8a2ccf9b1dfc0f8938b3fb84c2cc78a546f56c8 Resolve two of the four undecided videos from the handoff, drop one, leave one open",
+  "upstream_commit": "5dc94c43450028ce246755e38ca7682b47fbb946 Update handoff doc: item 4 partially done, and why the rest is harder",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
