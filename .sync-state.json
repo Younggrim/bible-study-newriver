@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "13c39bb0788d679f6224bccd0794eb4d5cee0f73 Add chapter-level Key Themes: Titus, 2 Peter, 2 Thessalonians, 2 Timothy, Colossians, Philippians",
+  "upstream_commit": "5744bb6e50dd13682edd90959c4f6a1e407a2618 Merge remote-tracking branch 'origin/main' into claude/bible-pages-cleanup-progress-9ti147",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
