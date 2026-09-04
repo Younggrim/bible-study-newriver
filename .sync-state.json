@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "03176edc2ccc70d6ac5c512ccc6610ae18d7ca81 Add chapter-level Key Themes: Luke",
+  "upstream_commit": "4bc78f0809a78cce874d0377aade3dd29f1d1f60 Strip embedded Key themes: from Author field on 386 pages",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
