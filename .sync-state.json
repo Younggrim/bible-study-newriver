@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "5744bb6e50dd13682edd90959c4f6a1e407a2618 Merge remote-tracking branch 'origin/main' into claude/bible-pages-cleanup-progress-9ti147",
+  "upstream_commit": "a82389d400f8e5eb754fd9c22557cb0c173c86b2 Add chapter-level Key Themes: Ephesians, 1 Timothy",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
