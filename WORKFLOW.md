@@ -401,6 +401,49 @@ that catalogue. To re-seed after adding a source:
 python3 check_new_articles.py --seed
 ```
 
+### Approving new articles by number, from the issue itself
+
+The article audit's issue is not just a report. After `check_new_articles.py`
+finds new material, `suggest_placements.py` reads every title (Claude Haiku
+4.5, its own `ANTHROPIC_API_KEY` repo secret, never the session bible-study is
+otherwise edited from) and drafts one placement suggestion per item — a
+chapter page, a topic page, or `none` when the title alone doesn't support a
+confident guess. The issue is numbered and carries the `pending-placement`
+label. Reply on it with `approve: 1, 3` (also accepted: `approve all`,
+`approve none`, or a bare `1, 3, 5`) and `apply-approved-placements.yml`
+writes the approved items and pushes straight to `main` — no PR, matching how
+the checkpoint-state commits already work. Only a reply from the repo owner is
+ever acted on; anything else is inert.
+
+The model is instructed the same way article_sources.py's own docstring
+warns a person: prefer `none` over a guess an author name or incidental word
+happens to support (`John Piper on Gambling` is not the Gospel of John), and
+never invent a chapter number a title doesn't name. A wrong guess a person
+rubber-stamps is worse than no guess, so `none` is a correct, expected answer
+for many items, not a failure of the suggestion step.
+
+Approved entries land in `AUTO_CHAPTER_ARTICLES` / `AUTO_TOPIC_ARTICLES`, a
+small fenced block at the end of `article_sources.py` that
+`apply_approved.py` owns and rewrites whole — never hand-edit inside those
+fences, an approval after yours would clobber it. Move an entry up into the
+hand-curated tables above whenever convenient; nothing breaks either way,
+since the merge into `CHAPTER_ARTICLES` / `TOPIC_ARTICLES` runs at import
+time either way. `add_articles.py` then regenerates the affected pages exactly
+as it would for a hand-added entry.
+
+**Scoped to articles only, for now.** Video placement stays a manual step
+from the plain `weekly-video-audit.yml` issue, unchanged. That file is
+byte-identical in both repos, and New River's own channel writes to
+`docs/newriver-videos.json` rather than a chapter page — an auto-push there
+would first need to know which repo it is running in, which nothing here
+solves yet.
+
+If `ANTHROPIC_API_KEY` is unset, or the suggestion call fails for any reason,
+`suggest_placements.py` leaves the issue exactly as `check_new_articles.py`
+wrote it — no numbering, no suggestions, no `pending-placement` label — so a
+suggestion outage never blocks the week's report from being filed. It just
+falls back to the fully manual flow described above.
+
 ### Running the checks by hand
 
 ```bash
