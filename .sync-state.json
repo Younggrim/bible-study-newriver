@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "99f9cc7fe7d57cb1544d52ea798f8aad5bff10e5 Merge remote-tracking branch 'origin/main' into claude/bible-pages-cleanup-progress-9ti147",
+  "upstream_commit": "836414d356b319aed257496767bfec5b2b1c7c54 Revert the GitHub-side approve-by-number pipeline",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
