@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "836414d356b319aed257496767bfec5b2b1c7c54 Revert the GitHub-side approve-by-number pipeline",
+  "upstream_commit": "81fcc5bfe38afe2f09004c243848dfde122da921 Weekly article review: 3 accepted, 8 dropped",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
