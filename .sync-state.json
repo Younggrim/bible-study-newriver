@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "40a939e617b63289f894adeebd7fe3add9fca67d Search and link-preview metadata, sitemap.xml and robots.txt",
+  "upstream_commit": "ab5ded9ffb520a7bb144fcdf890e432e67d1e32c Fix 125 dead outbound links",
   "upstream_fingerprints": {
     "site/style.css": "54238837",
     "site/script.js": "2def58a8"
