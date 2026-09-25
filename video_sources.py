@@ -63,6 +63,8 @@ NEW_RIVER_ALLOW = {
 DROP_VIDEO_IDS = {
     "bk0fGfS9KVw": "BibleProject 'Season 7 Preview: Visual Commentary - Genesis 1' "
                    "-- a series trailer rather than teaching on the chapter",
+    "s6WixiMubHo": "David Guzik 'Can Forgiveness Come Too Easily? Thoughts On the "
+                   "Clancy Case - LIVE Q&A' -- current-events Q&A, no passage",
 }
 
 FACADE_OPEN = '<div class="yt-facade"'
