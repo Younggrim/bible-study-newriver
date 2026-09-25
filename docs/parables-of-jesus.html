@@ -8,35 +8,46 @@
     <link rel="icon" type="image/png" sizes="32x32" href="site/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="site/favicon-16.png"><meta name="theme-color" content="#000000">
     <title>Parables of Jesus — New River Bible Study</title>
+    <!-- seo -->
+    <meta name="description" content="The parables of Jesus explained: the stories He told about the kingdom of God and what they mean today.">
+    <link rel="canonical" href="https://bible.nrc.macdwellings.com/parables-of-jesus.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="New River Bible Study">
+    <meta property="og:title" content="Parables of Jesus — New River Bible Study">
+    <meta property="og:description" content="The parables of Jesus explained: the stories He told about the kingdom of God and what they mean today.">
+    <meta property="og:url" content="https://bible.nrc.macdwellings.com/parables-of-jesus.html">
+    <meta property="og:image" content="https://bible.nrc.macdwellings.com/site/icon-512.png">
+    <meta name="twitter:card" content="summary">
+    <!-- /seo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="site/style.css?v=173ef5ab">
+    <link rel="stylesheet" href="site/style.css?v=bfc452f3">
     <style>
-        body { background: #faf5ed; }
+        body { background: var(--bg-page); }
         .topic-hero { position: relative; height: 240px; overflow: hidden; }
         .topic-hero img { width: 100%; height: 100%; object-fit: cover; }
         .topic-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)); filter: brightness(0.45) sepia(0.75) saturate(1.7); backdrop-filter: none; }
         .topic-hero .hero-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
         .topic-hero h1 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #fff; font-size: 2rem; margin: 0 0 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-        .topic-hero p { color: #f0e8dc; font-size: 0.95rem; max-width: 600px; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+        .topic-hero p { color: var(--text-on-dark); font-size: 0.95rem; max-width: 600px; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
         .page-content { margin: 0 auto; max-width: 1100px; padding: 20px 24px 80px; }
         .back-link { display: inline-flex; align-items: center; gap: 6px; color: #5c3d6e; font-weight: 600; font-size: 0.85rem; text-decoration: none; margin: 16px 0; }
         .back-link:hover { text-decoration: underline; }
         .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
         .jump-card { background: #fff; border: 1px solid var(--border-light); border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #5c3d6e; text-decoration: none; transition: background .15s, transform .15s; }
-        .jump-card:hover { background: #f5ebe0; transform: translateY(-1px); }
+        .jump-card:hover { background: var(--bg-tint); transform: translateY(-1px); }
         .section-block { background: #fff; border: 1px solid var(--border-light); border-radius: 12px; padding: 22px 24px; margin-bottom: 16px; scroll-margin-top: 76px; }
         .section-block .section-kicker { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #9d84a8; }
         .section-block h2 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #5c3d6e; font-size: 1.35rem; margin: 4px 0 12px; }
         .section-block h3 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #6e4a80; font-size: 1.02rem; margin: 18px 0 8px; }
         .section-block h4 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #5c3d6e; font-size: 0.95rem; margin: 18px 0 8px; }
-        .section-block p { line-height: 1.7; color: #3d332b; margin: 0 0 10px; }
+        .section-block p { line-height: 1.7; color: var(--text-body); margin: 0 0 10px; }
         .verse-list { list-style: none; padding: 0; margin: 8px 0 0; }
-        .verse-list li { padding: 8px 0; border-bottom: 1px solid #f0e8dc; font-size: 0.9rem; line-height: 1.6; color: #4a3f35; }
+        .verse-list li { padding: 8px 0; border-bottom: 1px solid var(--rule-soft); font-size: 0.9rem; line-height: 1.6; color: var(--text-list); }
         .verse-list li:last-child { border-bottom: none; }
         .verse-ref { color: #5c3d6e; font-weight: 600; text-decoration: underline dotted; cursor: pointer; }
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
@@ -45,14 +56,14 @@
         .verse-popup-overlay.active { display: flex; }
         .verse-popup { background: #fff; border-radius: 12px; padding: 24px; max-width: 480px; width: 100%; max-height: 70vh; overflow-y: auto; position: relative; }
         .verse-popup h4 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; color: #5c3d6e; margin: 0 0 12px; }
-        .verse-popup p { line-height: 1.7; color: #3d332b; }
+        .verse-popup p { line-height: 1.7; color: var(--text-body); }
         .verse-popup .close-popup { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 1.3rem; color: #9d84a8; cursor: pointer; }
         @media (max-width: 600px) { .topic-hero h1 { font-size: 1.5rem; } }
     </style>
 </head>
 <body>
     <div class="topic-hero">
-        <img src="https://images.unsplash.com/photo-1764410510151-f1c25f81c3ff?w=1400&q=80&auto=format" alt="Golden wheat field at sunset">
+        <img src="https://images.unsplash.com/photo-1764410510151-f1c25f81c3ff?w=1400&q=80&auto=format" srcset="https://images.unsplash.com/photo-1764410510151-f1c25f81c3ff?w=640&q=80&auto=format 640w, https://images.unsplash.com/photo-1764410510151-f1c25f81c3ff?w=1000&q=80&auto=format 1000w, https://images.unsplash.com/photo-1764410510151-f1c25f81c3ff?w=1600&q=80&auto=format 1600w" sizes="100vw" alt="Golden wheat field at sunset">
         <div class="hero-overlay">
             <h1>Parables of Jesus</h1>
             <p>Simple stories carrying eternal truths about the Kingdom of God.</p>
@@ -387,9 +398,9 @@
             <h2>Articles</h2>
             <!-- articles -->
             <ul style="padding-left:20px;list-style:none;margin:0;">
-                <li style="font-size:0.92rem;line-height:1.7;color:var(--text-secondary);margin-bottom:10px;"><span aria-hidden="true" style="color:var(--accent-gold-light);">&#10022;</span> <strong>GotQuestions.org:</strong> <a href="https://www.gotquestions.org/Jesus-parables.html" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">gotquestions.org</a> The parables listed with their references and their point.</li>
-                <li style="font-size:0.92rem;line-height:1.7;color:var(--text-secondary);margin-bottom:10px;"><span aria-hidden="true" style="color:var(--accent-gold-light);">&#10022;</span> <strong>BibleProject:</strong> <a href="https://bibleproject.com/articles/are-the-parables-of-jesus-confusing-on-purpose/" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">bibleproject.com</a> Why Jesus taught in a form that some of his hearers did not understand.</li>
-                <li style="font-size:0.92rem;line-height:1.7;color:var(--text-secondary);margin-bottom:10px;"><span aria-hidden="true" style="color:var(--accent-gold-light);">&#10022;</span> <strong>Crossway:</strong> <a href="https://www.crossway.org/articles/4-things-you-have-in-common-with-the-prodigals-older-brother/" target="_blank" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">crossway.org</a> On the parable of the prodigal son, from the older brother's side of the story.</li>
+                <li style="font-size:0.92rem;line-height:1.7;color:var(--text-secondary);margin-bottom:10px;"><span aria-hidden="true" style="color:var(--accent-gold-light);">&#10022;</span> <strong>GotQuestions.org:</strong> <a href="https://www.gotquestions.org/Jesus-parables.html" target="_blank" rel="noopener" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">gotquestions.org</a> The parables listed with their references and their point.</li>
+                <li style="font-size:0.92rem;line-height:1.7;color:var(--text-secondary);margin-bottom:10px;"><span aria-hidden="true" style="color:var(--accent-gold-light);">&#10022;</span> <strong>BibleProject:</strong> <a href="https://bibleproject.com/articles/are-the-parables-of-jesus-confusing-on-purpose/" target="_blank" rel="noopener" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">bibleproject.com</a> Why Jesus taught in a form that some of his hearers did not understand.</li>
+                <li style="font-size:0.92rem;line-height:1.7;color:var(--text-secondary);margin-bottom:10px;"><span aria-hidden="true" style="color:var(--accent-gold-light);">&#10022;</span> <strong>Crossway:</strong> <a href="https://www.crossway.org/articles/4-things-you-have-in-common-with-the-prodigals-older-brother/" target="_blank" rel="noopener" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">crossway.org</a> On the parable of the prodigal son, from the older brother's side of the story.</li>
             </ul>
             <p style="font-size:0.78rem;color:var(--text-faint);margin-top:14px;line-height:1.7;">Links open on the publisher's own site. Nothing here is reproduced on this page.</p>
             <!-- /articles -->
@@ -404,7 +415,7 @@
         </div>
     </div>
 
-    <script src="site/script.js?v=fa16d0d5"></script>
+    <script src="site/script.js?v=a73b5a28"></script>
     <script>
         function loadYT(el, id) {
             el.innerHTML = '<iframe width="100%" height="100%" style="position:absolute;inset:0;" src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';

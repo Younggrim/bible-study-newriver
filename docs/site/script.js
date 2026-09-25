@@ -233,8 +233,12 @@ function goToChapter() {
 
 /* Lazy YouTube Embed — click thumbnail to load iframe */
 function loadYT(el, id) {
+    var label = (el.getAttribute('aria-label') || '').replace(/^Play video: /, '') || 'YouTube video';
     el.style.position = 'relative';
-    el.innerHTML = '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;" allow="autoplay;encrypted-media" allowfullscreen></iframe>';
+    el.removeAttribute('role');
+    el.removeAttribute('tabindex');
+    el.removeAttribute('aria-label');
+    el.innerHTML = '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1" title="' + label.replace(/"/g, '&quot;') + '" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;" allow="autoplay;encrypted-media" allowfullscreen></iframe>';
 }
 
 /* Collapsible Video Sections */
@@ -509,11 +513,19 @@ document.addEventListener('DOMContentLoaded', function() {
     var path = window.location.pathname.split('/').pop() || '';
     var baseName = path.replace('.html', '');
 
-    // Bible chapter pages: add prev/next arrows
+    // Bible chapter pages: add prev/next arrows. At a book's first or last
+    // chapter they step into the neighbouring book rather than to a page
+    // that does not exist (luke25.html, genesis0.html).
+    var BOOKS = [['genesis',50],['exodus',40],['leviticus',27],['numbers',36],['deuteronomy',34],['joshua',24],['judges',21],['ruth',4],['1samuel',31],['2samuel',24],['1kings',22],['2kings',25],['1chronicles',29],['2chronicles',36],['ezra',10],['nehemiah',13],['esther',10],['job',42],['psalms',150],['proverbs',31],['ecclesiastes',12],['songofsolomon',8],['isaiah',66],['jeremiah',52],['lamentations',5],['ezekiel',48],['daniel',12],['hosea',14],['joel',3],['amos',9],['obadiah',1],['jonah',4],['micah',7],['nahum',3],['habakkuk',3],['zephaniah',3],['haggai',2],['zechariah',14],['malachi',4],['matthew',28],['mark',16],['luke',24],['john',21],['acts',28],['romans',16],['1corinthians',16],['2corinthians',13],['galatians',6],['ephesians',6],['philippians',4],['colossians',4],['1thessalonians',5],['2thessalonians',3],['1timothy',6],['2timothy',4],['titus',3],['philemon',1],['hebrews',13],['james',5],['1peter',5],['2peter',3],['1john',5],['2john',1],['3john',1],['jude',1],['revelation',22]];
     var chapterMatch = baseName.match(/^(\d*[a-z]+?)(\d+)$/i);
+    var bookIdx = -1;
     if (chapterMatch) {
+        for (var bi = 0; bi < BOOKS.length; bi++) { if (BOOKS[bi][0] === chapterMatch[1]) { bookIdx = bi; break; } }
+    }
+    if (bookIdx >= 0) {
         var book = chapterMatch[1];
         var chapter = parseInt(chapterMatch[2]);
+        var last = BOOKS[bookIdx][1];
 
         // Find the study-tabs or tab bar to place arrows after
         var insertAfter = document.querySelector('.study-tabs') || document.querySelector('.tab-bar');
@@ -524,20 +536,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         if (!insertAfter) return;
 
+        function bookLabel(slug) {
+            return slug.replace(/^(\d)/, '$1 ').replace(/^songofsolomon$/, 'song of solomon')
+                .replace(/\b(?!of\b)[a-z]/g, function (m) { return m.toUpperCase(); });
+        }
+        var btnStyle = 'display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--bg-tint);border:1px solid var(--border-light);border-radius:8px;text-decoration:none;color:var(--ink-deep);font-size:0.85rem;font-weight:600;transition:background 0.2s;';
+        var iconStyle = 'font-size:0.75rem;color:var(--accent-link);';
+
         var navDiv = document.createElement('div');
         navDiv.className = 'chapter-nav-arrows';
+        navDiv.setAttribute('role', 'navigation');
+        navDiv.setAttribute('aria-label', 'Chapter');
         navDiv.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:12px 20px;margin:0 0 16px;';
 
-        var prevBtn = '';
-        if (chapter > 1) {
-            prevBtn = '<a href="' + book + (chapter - 1) + '.html" class="chapter-arrow-btn" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#f5ebe0;border:1px solid #e8e0d6;border-radius:8px;text-decoration:none;color:#3d2b1f;font-size:0.85rem;font-weight:600;transition:background 0.2s;"><i class="fas fa-chevron-left" style="font-size:0.75rem;color:#8b3a2a;"></i> Ch ' + (chapter - 1) + '</a>';
-        } else {
-            prevBtn = '<span></span>';
-        }
+        var prevHref = '', prevText = '';
+        if (chapter > 1) { prevHref = book + (chapter - 1); prevText = 'Ch ' + (chapter - 1); }
+        else if (bookIdx > 0) { var pb = BOOKS[bookIdx - 1]; prevHref = pb[0] + pb[1]; prevText = bookLabel(pb[0]) + ' ' + pb[1]; }
+        var nextHref = '', nextText = '';
+        if (chapter < last) { nextHref = book + (chapter + 1); nextText = 'Ch ' + (chapter + 1); }
+        else if (bookIdx < BOOKS.length - 1) { var nb = BOOKS[bookIdx + 1]; nextHref = nb[0] + '1'; nextText = bookLabel(nb[0]) + ' 1'; }
 
-        var nextBtn = '<a href="' + book + (chapter + 1) + '.html" class="chapter-arrow-btn" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#f5ebe0;border:1px solid #e8e0d6;border-radius:8px;text-decoration:none;color:#3d2b1f;font-size:0.85rem;font-weight:600;transition:background 0.2s;">Ch ' + (chapter + 1) + ' <i class="fas fa-chevron-right" style="font-size:0.75rem;color:#8b3a2a;"></i></a>';
+        var prevBtn = prevHref
+            ? '<a href="' + prevHref + '.html" class="chapter-arrow-btn" rel="prev" style="' + btnStyle + '"><i class="fas fa-chevron-left" aria-hidden="true" style="' + iconStyle + '"></i> ' + prevText + '</a>'
+            : '<span></span>';
+        var nextBtn = nextHref
+            ? '<a href="' + nextHref + '.html" class="chapter-arrow-btn" rel="next" style="' + btnStyle + '">' + nextText + ' <i class="fas fa-chevron-right" aria-hidden="true" style="' + iconStyle + '"></i></a>'
+            : '<span></span>';
 
-        navDiv.innerHTML = prevBtn + '<span style="font-size:0.8rem;color:#8a7e74;font-weight:500;">' + book.replace(/^\d/, function(m){return m+' ';}).replace(/([a-z])([A-Z])/g,'$1 $2').replace(/^./, function(m){return m.toUpperCase();}) + ' ' + chapter + '</span>' + nextBtn;
+        navDiv.innerHTML = prevBtn + '<span style="font-size:0.8rem;color:var(--text-faint);font-weight:500;">' + bookLabel(book) + ' ' + chapter + '</span>' + nextBtn;
 
         insertAfter.parentNode.insertBefore(navDiv, insertAfter.nextSibling);
     }
@@ -580,4 +606,94 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         .catch(function() { /* no overlay file on this deployment — expected */ });
+})();
+
+
+/* ===== Accessibility =====
+   Study tabs, video thumbnails and verse references are plain divs and spans
+   in the HTML, so without this a keyboard cannot reach them and a screen
+   reader does not announce them. This gives them the semantics of the
+   controls they behave like. Kept identical in both repositories. */
+(function () {
+    function pressable(el, label) {
+        if (el.getAttribute('data-a11y')) return;
+        el.setAttribute('data-a11y', '1');
+        el.setAttribute('role', 'button');
+        el.tabIndex = 0;
+        if (label) el.setAttribute('aria-label', label);
+        el.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+        });
+    }
+    function facades(root) {
+        (root || document).querySelectorAll('.yt-facade:not([data-a11y])').forEach(function (el) {
+            if (el.querySelector('iframe')) return;
+            var cap = el.querySelector('p'), src = el.querySelector('.yt-src');
+            var text = cap ? (cap.firstChild ? cap.firstChild.textContent : '').replace(/\s+/g, ' ').trim() : '';
+            if (src && src.textContent.trim()) text += ' (' + src.textContent.trim() + ')';
+            pressable(el, 'Play video' + (text ? ': ' + text : ''));
+        });
+    }
+    function init() {
+        // Study tabs as an ARIA tablist, with arrow-key movement
+        var bar = document.querySelector('.study-tabs');
+        if (bar) {
+            var tabs = Array.prototype.slice.call(bar.querySelectorAll('.study-tab'));
+            bar.setAttribute('role', 'tablist');
+            var refresh = function () {
+                tabs.forEach(function (t) {
+                    var on = t.classList.contains('active');
+                    t.setAttribute('aria-selected', on ? 'true' : 'false');
+                    t.tabIndex = on ? 0 : -1;
+                });
+            };
+            tabs.forEach(function (t, i) {
+                var pane = document.getElementById('tab-' + t.dataset.tab);
+                t.setAttribute('role', 'tab');
+                if (!t.id) t.id = 'tabbtn-' + t.dataset.tab;
+                if (pane) {
+                    t.setAttribute('aria-controls', pane.id);
+                    pane.setAttribute('role', 'tabpanel');
+                    pane.setAttribute('aria-labelledby', t.id);
+                }
+                t.addEventListener('keydown', function (e) {
+                    var j = -1;
+                    if (e.key === 'ArrowRight') j = (i + 1) % tabs.length;
+                    else if (e.key === 'ArrowLeft') j = (i - 1 + tabs.length) % tabs.length;
+                    else if (e.key === 'Home') j = 0;
+                    else if (e.key === 'End') j = tabs.length - 1;
+                    else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.click(); return; }
+                    if (j < 0) return;
+                    e.preventDefault();
+                    tabs[j].click();
+                    tabs[j].focus();
+                });
+                new MutationObserver(refresh).observe(t, { attributes: true, attributeFilter: ['class'] });
+            });
+            refresh();
+        }
+        // Video thumbnails, including any the New River overlay adds later
+        facades();
+        new MutationObserver(function () { facades(); })
+            .observe(document.body, { childList: true, subtree: true });
+        // Verse references on topical and life-study pages open a popup
+        document.querySelectorAll('span.verse-ref').forEach(function (el) {
+            pressable(el, 'Show ' + el.textContent.replace(/\s+/g, ' ').trim());
+        });
+        // Unlabelled navigation selects
+        [['.nav-book-select', 'Book'], ['.nav-chapter-select', 'Chapter'], ['.nav-translation', 'Translation']]
+            .forEach(function (p) {
+                document.querySelectorAll(p[0]).forEach(function (el) {
+                    if (!el.getAttribute('aria-label') && !el.labels.length) el.setAttribute('aria-label', p[1]);
+                });
+            });
+        // Escape closes an open verse popup
+        document.addEventListener('keydown', function (e) {
+            if (e.key !== 'Escape') return;
+            document.querySelectorAll('.verse-popup-overlay.active .close-popup, .verse-popup-overlay.active .popup-close')
+                .forEach(function (b) { b.click(); });
+        });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
 })();

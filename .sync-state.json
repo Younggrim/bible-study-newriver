@@ -1,9 +1,9 @@
 {
-  "upstream_commit": "3faedb090b4447abd03ad1795056e3696fedaed6 Weekly review 2026-09-25: 2 articles and 4 videos added, 3 articles and 1 video dropped",
+  "upstream_commit": "df3bfcff8e1a41e976a93bf442a73658ac8911da Spelling audit and site polish: names, palette tokens, accessibility, SEO, dead links (#66)",
   "upstream_fingerprints": {
-    "site/style.css": "d52a9e21",
-    "site/script.js": "2f33b5a3"
+    "site/style.css": "54238837",
+    "site/script.js": "2def58a8"
   },
-  "style_css_v": "173ef5ab",
-  "script_js_v": "fa16d0d5"
+  "style_css_v": "bfc452f3",
+  "script_js_v": "a73b5a28"
 }
