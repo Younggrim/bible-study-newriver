@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "6d5d4c54d99474f128ecd864aa951ec05bd554bc Map & Geography: a blank line before the \"Towns sit on...\" note (#67)",
+  "upstream_commit": "0209ed67b48bd86134950df0bf57f73427360ae0 Map & Geography: set the \"Towns sit on...\" note in small grey type (#68)",
   "upstream_fingerprints": {
     "site/style.css": "54238837",
     "site/script.js": "2def58a8"
