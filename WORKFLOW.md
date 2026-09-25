@@ -313,17 +313,23 @@ the way `video_sources.py` is split and filter on sync. **Do not** hand-edit
 
 ## Automation
 
-**GitHub Actions detects. A person or assistant decides.** That split is
-deliberate. Fetching feeds, probing 3617 videos, and updating state is
-mechanical and belongs on a runner that works whether anyone's laptop is on.
-Deciding whether a new video belongs on Ephesians 4 needs context and judgment,
-so the workflows only ever open an issue. **Nothing automated edits `docs/`.**
+**Detection and decision now both happen in one place: a weekly Claude Routine
+(Tuesdays).** It clones the repo, runs the three check scripts below directly,
+drafts approve/deny reasoning for everything they find, and stops to let a
+person approve the list before writing anything to `docs/` or pushing.
+**Nothing automated edits `docs/` without that sign-off.**
 
-`.github/workflows/weekly-video-audit.yml` is identical in both repos and runs
-Mondays at 13:00 UTC, plus on demand via workflow_dispatch. It has two
-independent jobs.
+There is no `.github/workflows/weekly-article-audit.yml` or
+`weekly-video-audit.yml` any more. An earlier version ran those two as GitHub
+Actions workflows that only detected new content and filed a GitHub issue for
+a separate Claude routine to act on later. That split depended on the routine
+being able to read, comment on, and close issues through the GitHub API --
+access it never actually had in the sessions running it, so every week's issue
+sat open and unprocessed from the very first run. Folding detection into the
+routine itself removes that dependency: the routine only needs `git
+pull`/`git push`, which always worked.
 
-**Job `new-uploads`** runs `check_new_videos.py`, which reads every state file
+**Check 1 -- new video uploads.** `check_new_videos.py` reads every state file
 in `.automation/` and reports uploads not seen before. Which channels get
 watched is decided entirely by those files, so one script serves both repos:
 
@@ -340,9 +346,8 @@ watched is decided entirely by those files, so one script serves both repos:
 - `bible-study-newriver` watches **New River Church only**. Approved videos go
   into `docs/newriver-videos.json` and never go upstream.
 
-**Job `dead-links`** runs `check_video_links.py`, which asks YouTube whether
-each referenced video still plays using the oEmbed endpoint. No API key, no
-quota:
+**Check 2 -- dead links.** `check_video_links.py` asks YouTube whether each
+referenced video still plays using the oEmbed endpoint. No API key, no quota:
 
 | response | meaning |
 |---|---|
@@ -353,23 +358,18 @@ quota:
 It scans `docs/*.html` for inline players and `docs/newriver-videos.json` when
 present, so it covers the sermon overlay too.
 
-**Only a definitive 404 or 401 is reported as broken.** Rate limits and
-timeouts are retried and then listed separately as inconclusive. That asymmetry
-matters: a false positive here would get a working video deleted from the site.
+**Only a definitive 404 or 401 is proposed for removal.** Rate limits and
+timeouts are retried and then listed separately as inconclusive -- a false
+positive here would get a working video deleted from the site -- and a video
+whose title changed on YouTube but still plays is noted only, never acted on.
 
-### The weekly article audit
+### The weekly article check
 
-`.github/workflows/weekly-article-audit.yml` runs Mondays at 14:00 UTC, an hour
-after the video audit, plus on demand. It exists **only in bible-study**. It is a
-separate file rather than a third job in the video workflow for two reasons: that
-file is byte-identical in both repos and New River has no article scripts, so
-adding a job would make the copies diverge; and this way the two audits are
-independently dispatchable.
-
-Its one job runs `check_new_articles.py`, which polls **55 feeds** — one sitemap
+It exists **only in bible-study**; there is no New River-specific article
+source. `check_new_articles.py` polls **55 feeds** — one sitemap
 each for bibleproject.com, gotquestions.org and gotquestions.blog, plus Crossway's
-main feed and 51 topic feeds. It opens an issue, commits only
-`.automation/articles/`, and never edits `docs/`.
+main feed and 51 topic feeds. It commits only `.automation/articles/` and
+never edits `docs/` itself.
 
 Three behaviours worth knowing:
 
@@ -378,7 +378,7 @@ Three behaviours worth knowing:
   never mark a whole catalogue as seen.
 - **Anything filtered out is still recorded as seen**, including URLs already
   linked from the site and anything in `DROP_ARTICLE_URLS`. Without that, an
-  article deliberately left off the site would come back in next week's issue.
+  article deliberately left off the site would come back in next week's report.
 - **The report is written before the state is saved.** The other order means a
   failure in between marks articles as seen while nobody ever hears about them,
   with no way to recover the list. This order risks a duplicate report instead,
@@ -403,19 +403,24 @@ python3 check_new_articles.py --seed
 
 ### Deciding and applying new articles and videos
 
-That judgment call -- and the actual write to `article_sources.py` /
-`add_video.py` / `docs/newriver-videos.json`, plus the push to both repos --
-is made by a weekly Claude Routine (Thursdays), not by anything in this repo's
-own `.github/workflows/`. The two workflows below stay in place only as a
-plain, no-judgment backup: if the routine ever fails to run, the week's
-findings still land in an issue rather than disappearing silently.
+The judgment call -- and the actual write to `article_sources.py` /
+`add_video.py` / `video_sources.py` / `docs/newriver-videos.json`, plus the
+push to both repos -- is made by the same weekly Claude Routine (Tuesdays)
+that runs the checks above, but only after a person approves its proposed
+list. The routine drafts approve/deny reasoning for every item the checks
+find, posts it, and stops; nothing is written to `docs/` or pushed until that
+approval comes back. Its exact rules live in the routine's own prompt, not in
+this repo.
 
-An earlier version of this ran the same decision inside GitHub Actions itself
--- an AI-drafted, numbered suggestion on the issue, applied by a reply of
-`approve: 1, 3`. That was replaced by the routine described above and is not
-currently wired up; `article_sources.py`'s `CHAPTER_ARTICLES` /
-`BOOK_ARTICLES` / `TOPIC_ARTICLES` tables are the hand-curated ones and the
-only ones read at runtime.
+An earlier version of this ran the decision inside GitHub Actions itself --
+an AI-drafted, numbered suggestion on an issue, applied by a reply of
+`approve: 1, 3`. A later version moved the decision into a separate weekly
+Claude routine that read the issue via the GitHub API, decided, and applied
+without asking first -- which turned out to never actually have that API
+access, so nothing it decided ever got applied. Folding detection into the
+same routine that decides removes the dependency on the GitHub API entirely.
+`article_sources.py`'s `CHAPTER_ARTICLES` / `BOOK_ARTICLES` / `TOPIC_ARTICLES`
+tables are the hand-curated ones and the only ones read at runtime.
 
 ### Running the checks by hand
 
