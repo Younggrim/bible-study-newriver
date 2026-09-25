@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="site/style.css?v=bfc452f3">
     <style>
         .topic-hero { position: relative; overflow: hidden; border: none; border-radius: var(--radius-lg); padding: 36px; text-align: center; margin-bottom: 32px; box-shadow: var(--shadow-sm); }
-        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=1200&q=80") center/cover no-repeat; filter: brightness(0.45) sepia(0.75) saturate(1.7); }
+        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=1200&q=80&auto=format") center/cover no-repeat; filter: brightness(0.45) sepia(0.75) saturate(1.7); }
         .topic-hero h1 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
         .topic-hero .key-passage { font-family: 'Merriweather', serif; font-size: 1.05rem; font-style: italic; color: var(--text-on-dark); text-shadow: 1px 1px 6px rgba(0,0,0,0.7); max-width: 700px; margin: 16px auto 8px; line-height: 1.8; }
         .topic-hero .ref { font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; color: #f0c865; }
@@ -53,6 +53,8 @@
         .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:var(--ink-deep); }
         .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:var(--text-faint); }
         .verse-popup .popup-loading { font-size:0.85rem; color:var(--text-faint); font-style:italic; }
+    
+        @media (max-width: 700px) { .topic-hero::before { background-image: url("https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=750&q=80&auto=format"); } }
     </style></head>
 <body>
     <main class="main-content" style="margin-left:auto; margin-right:auto; max-width:1100px; margin-top:0;">

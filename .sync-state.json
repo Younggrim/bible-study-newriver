@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "8b11c43dab86ce29a26768739b2e5e4412049fde Devotionals: LORD where the ESV prints LORD",
+  "upstream_commit": "46d634662fa5ab1026d64d14c953cab714571c6d Serve topical hero photos at phone size",
   "upstream_fingerprints": {
     "site/style.css": "54238837",
     "site/script.js": "2def58a8"

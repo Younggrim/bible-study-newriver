@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="site/style.css?v=bfc452f3">
     <style>
         .topic-hero { position: relative; overflow: hidden; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
-        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1769088508143-7f3f711877ee?w=1200&q=80") center/cover no-repeat; filter: brightness(0.45) sepia(0.75) saturate(1.7); }
+        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1769088508143-7f3f711877ee?w=1200&q=80&auto=format") center/cover no-repeat; filter: brightness(0.45) sepia(0.75) saturate(1.7); }
         .topic-hero h1 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
         .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #a0c4e8; letter-spacing: 0.5px; }
 
@@ -67,6 +67,8 @@
         .verse-popup .popup-loading { font-size:0.85rem; color:var(--text-faint); font-style:italic; }
 
         @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
+    
+        @media (max-width: 700px) { .topic-hero::before { background-image: url("https://images.unsplash.com/photo-1769088508143-7f3f711877ee?w=750&q=80&auto=format"); } }
     </style>
 </head>
 <body>
