@@ -39,6 +39,7 @@ import datetime
 import json
 import os
 import sys
+import time
 import xml.etree.ElementTree as ET
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -120,10 +121,27 @@ def rss_url_for(info):
     return None
 
 
+FEED_ATTEMPTS = 6
+
+
 def fetch_feed(url):
-    status, body = http.get(url, timeout=TIMEOUT)
+    # YouTube's feed endpoint flaps between 200, 404 and 500 for the same channel
+    # when polled from cloud IPs, sometimes several times in a row. A 404 here is
+    # not proof the channel is gone, so retry with a growing pause before giving
+    # up and reporting the channel as unreachable.
+    status, body = None, ""
+    for attempt in range(FEED_ATTEMPTS):
+        if attempt:
+            time.sleep(min(2 * attempt, 8))
+        try:
+            status, body = http.get(url, timeout=TIMEOUT)
+        except (OSError, ValueError):
+            status = None
+            continue
+        if status == 200:
+            break
     if status != 200:
-        raise OSError(f"HTTP {status} from feed")
+        raise OSError(f"HTTP {status} from feed after {FEED_ATTEMPTS} attempts")
     root = ET.fromstring(body)
     entries = []
     for entry in root.findall(f"{ATOM_NS}entry"):
