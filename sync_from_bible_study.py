@@ -275,7 +275,8 @@ def check_theme_neutral(docs_dir):
     """The mirrored HTML should carry no upstream palette literals. Any that
     show up mean upstream hardcoded a color that used to be a CSS variable,
     which would ship bible-study's palette onto New River."""
-    upstream_only = ["#8b3a2a", "#8a7e74", "#e0d6c8", "#e8e0d6", "#3d342e"]
+    upstream_only = ["#8b3a2a", "#8a7e74", "#e0d6c8", "#e8e0d6", "#3d342e",
+                     "#faf5ed", "#f5ebe0", "#faf3e0", "#f0e8dc", "#3d332b", "#4a3f35"]
     found = {}
     for fname in sorted(os.listdir(docs_dir)):
         if not fname.endswith(".html"):

@@ -39,6 +39,20 @@ palette through CSS custom properties in `docs/site/style.css`:
 | `--ink-deep` | `#3d2b1f` | `#000000` |
 | `--border-light` | `#e8e0d6` | `#e2e2e2` |
 | `--text-secondary` | `#3d342e` | `#1a1a1a` |
+| `--bg-page` | `#faf5ed` | `#fafafa` |
+| `--bg-tint` | `#f5ebe0` | `#f0f0f0` |
+| `--bg-tint-2` | `#faf3e0` | `#f7f7f7` |
+| `--rule-soft` | `#f0e8dc` | `#ececec` |
+| `--text-body` | `#3d332b` | `#1a1a1a` |
+| `--text-list` | `#4a3f35` | `#333333` |
+| `--text-on-dark` | `#f5ebe0` | `#f2f2f2` |
+| `--prayer-gradient` | brown ramp | grey ramp |
+
+The last eight are the neutrals of the topical, life-study, home and 404 pages,
+which carry their own `<style>` blocks. Until 25 Sep they were literals, so New
+River showed cream backgrounds, brown text and a brown prayer band on those
+pages. `tokenize_neutral_colors.py` moved them onto these tokens; each page's
+topic accent (teal, green, purple, brown card colors, gold labels) stays literal.
 
 Write `style="color:var(--accent-link)"`, never `style="color:#8b3a2a"`. This is
 what makes the mirror safe. If you reintroduce a hex literal, the sync will warn

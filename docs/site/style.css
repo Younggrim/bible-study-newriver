@@ -27,6 +27,16 @@
     --text-faint: #707070;   /* footer text, captions, muted labels */
     --rule-warm: #e2e2e2;   /* footer hairline and card borders */
     --ink-deep: #000000;   /* darkest body text */
+
+    /* neutrals used by the topical, life-study, home and 404 pages */
+    --bg-page: #fafafa;       /* page background behind cards */
+    --bg-tint: #f0f0f0;       /* hover fills, soft panels */
+    --bg-tint-2: #f7f7f7;     /* second stop of soft panel gradients */
+    --rule-soft: #ececec;     /* hairlines between list items */
+    --text-body: #1a1a1a;     /* paragraph text on topical pages */
+    --text-list: #333333;     /* verse-list text */
+    --text-on-dark: #f2f2f2;  /* light text over dark hero images */
+    --prayer-gradient: linear-gradient(180deg, #0d0d0d 0%, #1a1a1a 15%, var(--ink-deep) 40%, #262626 60%, #404040 72%, #7a7a7a 82%, #c4c4c4 90%, #f0f0f0 96%, #fafafa 100%);
 }
 
 body {

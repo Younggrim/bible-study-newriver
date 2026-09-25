@@ -1,9 +1,9 @@
 {
-  "upstream_commit": "148e2e7d45be6b434a8deec36ea379c2125832ca Spelling and wording audit: modern name forms, American spelling, devotional references",
+  "upstream_commit": "720fd7568cefe49fb720b437d2eeb57d8652ca68 Move topical-page neutrals onto CSS custom properties",
   "upstream_fingerprints": {
-    "site/style.css": "d52a9e21",
+    "site/style.css": "54238837",
     "site/script.js": "2f33b5a3"
   },
-  "style_css_v": "173ef5ab",
+  "style_css_v": "bfc452f3",
   "script_js_v": "fa16d0d5"
 }
