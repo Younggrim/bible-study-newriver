@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "0209ed67b48bd86134950df0bf57f73427360ae0 Map & Geography: set the \"Towns sit on...\" note in small grey type (#68)",
+  "upstream_commit": "3ae06df5e80253f7bca6a58378f53bbb8afcb51b Carry over James 3 and Isaiah 46 article placements from the unmerged review PR #64",
   "upstream_fingerprints": {
     "site/style.css": "54238837",
     "site/script.js": "2def58a8"
