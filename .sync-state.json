@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "df3bfcff8e1a41e976a93bf442a73658ac8911da Spelling audit and site polish: names, palette tokens, accessibility, SEO, dead links (#66)",
+  "upstream_commit": "087f872d6118a1a3f5f5b495a63413fbba606c63 Map & Geography: a blank line before the 'Towns sit on...' note",
   "upstream_fingerprints": {
     "site/style.css": "54238837",
     "site/script.js": "2def58a8"
