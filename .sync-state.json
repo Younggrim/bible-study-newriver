@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "ab5ded9ffb520a7bb144fcdf890e432e67d1e32c Fix 125 dead outbound links",
+  "upstream_commit": "3059913b4a3480988d42b5944055a96a696be70f Lowercase shouted capitals in the site's own prose",
   "upstream_fingerprints": {
     "site/style.css": "54238837",
     "site/script.js": "2def58a8"
