@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "836414d356b319aed257496767bfec5b2b1c7c54 Revert the GitHub-side approve-by-number pipeline",
+  "upstream_commit": "88aebc2d5a90990f8c7271650b354a9976fa6f77 Process backlog: 9 new articles approved, 13 denied; 4 Ezekiel videos added",
   "upstream_fingerprints": {
     "site/style.css": "d52a9e21",
     "site/script.js": "2f33b5a3"
