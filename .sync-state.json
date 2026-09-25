@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "46d634662fa5ab1026d64d14c953cab714571c6d Serve topical hero photos at phone size",
+  "upstream_commit": "df3bfcff8e1a41e976a93bf442a73658ac8911da Spelling audit and site polish: names, palette tokens, accessibility, SEO, dead links (#66)",
   "upstream_fingerprints": {
     "site/style.css": "54238837",
     "site/script.js": "2def58a8"
