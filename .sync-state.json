@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "3059913b4a3480988d42b5944055a96a696be70f Lowercase shouted capitals in the site's own prose",
+  "upstream_commit": "8b11c43dab86ce29a26768739b2e5e4412049fde Devotionals: LORD where the ESV prints LORD",
   "upstream_fingerprints": {
     "site/style.css": "54238837",
     "site/script.js": "2def58a8"
