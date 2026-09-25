@@ -436,6 +436,34 @@ same routine that decides removes the dependency on the GitHub API entirely.
 `article_sources.py`'s `CHAPTER_ARTICLES` / `BOOK_ARTICLES` / `TOPIC_ARTICLES`
 tables are the hand-curated ones and the only ones read at runtime.
 
+### What the routine's environment needs
+
+The routine runs in a Claude cloud environment, and two things about that
+environment broke the first run. Both are worth checking before assuming a
+script is at fault.
+
+- **The article sources must be reachable.** The default "Trusted" network
+  level blocks all four article hosts, so `check_new_articles.py` reports
+  "all N feed(s) failed, state left untouched" for every source. The
+  environment's network access has to allow `www.crossway.org`,
+  `www.gotquestions.org`, `www.gotquestions.blog` and `www.bibleproject.com`.
+  The easy way is "Full" access; the narrower way is "Custom" with those four
+  hosts added. YouTube is reachable either way.
+- **YouTube's channel feeds are flaky from cloud IPs.** The same
+  `feeds/videos.xml` URL alternates between 200, 404 and 500 from one request
+  to the next. A 404 there does not mean the channel is gone.
+  `check_new_videos.py` retries each feed six times with a growing pause, and
+  the routine runs the script a second time when any channel is still
+  unreachable. The script records only channels it actually reached, so the
+  second pass just retries the failures. On the first run this took the
+  reachable channels from 2 of 13 to 12 of 13. A channel that still can't be
+  reached is listed as "not checked this week" and picked up the next week.
+  That is not a failure.
+
+The approval list and your reply both live in one standing Claude
+conversation, which the routine is bound to, so the whole history of weekly
+decisions stays in one place. Reply in that conversation, not a new one.
+
 ### Running the checks by hand
 
 ```bash

@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "3ae06df5e80253f7bca6a58378f53bbb8afcb51b Carry over James 3 and Isaiah 46 article placements from the unmerged review PR #64",
+  "upstream_commit": "e45c5a137e9cbf753600bffb14bac57af764ca03 WORKFLOW.md: document what the weekly routine's environment needs",
   "upstream_fingerprints": {
     "site/style.css": "54238837",
     "site/script.js": "2def58a8"
