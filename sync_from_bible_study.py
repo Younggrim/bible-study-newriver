@@ -95,6 +95,10 @@ SHARED_ROOT = {
 WATCH_UPSTREAM = ["site/style.css", "site/script.js"]
 
 THEME_COLOR = "#000000"
+UPSTREAM_DOMAIN = "bible.macdwellings.com"
+SITE_DOMAIN = "bible.nrc.macdwellings.com"
+# Non-HTML files that carry the site's own domain and are regenerated here
+DOMAIN_FILES = ["sitemap.xml", "robots.txt"]
 BRAND_SUFFIX = "New River Bible Study"
 FAVICON_LINKS = (
     '\n    <link rel="icon" href="favicon.ico" sizes="any">'
@@ -169,6 +173,13 @@ def build_rules():
         Rule("favicon links", _plain(MANIFEST_LINK, MANIFEST_LINK + FAVICON_LINKS)),
         Rule("Cinzel font", add_cinzel),
         Rule("nav brand", _plain(UPSTREAM_NAV_BRAND, NAV_BRAND)),
+        # add_seo_meta.py upstream writes canonical/og URLs on its own domain
+        # and "Bible Study" as the site name; both belong to this deployment.
+        Rule("site domain", _plain(f"https://{UPSTREAM_DOMAIN}/", f"https://{SITE_DOMAIN}/")),
+        Rule("og site name", _plain('property="og:site_name" content="Bible Study"',
+                                    f'property="og:site_name" content="{BRAND_SUFFIX}"')),
+        Rule("og title", _sub(r'(property="og:title" content="[^"]*)Bible Study"',
+                              rf'\g<1>{BRAND_SUFFIX}"')),
     ]
 
 
@@ -353,6 +364,13 @@ def main():
     if "newriver-videos.json" not in kept:
         with open(os.path.join(DOCS_DIR, "newriver-videos.json"), "w") as f:
             f.write("{}\n")
+
+    for rel in DOMAIN_FILES:
+        fp = os.path.join(DOCS_DIR, rel)
+        if os.path.isfile(fp):
+            txt = open(fp, encoding="utf-8").read()
+            open(fp, "w", encoding="utf-8").write(
+                txt.replace(f"https://{UPSTREAM_DOMAIN}/", f"https://{SITE_DOMAIN}/"))
 
     css_v = short_hash(os.path.join(DOCS_DIR, "site", "style.css"))
     js_v = short_hash(os.path.join(DOCS_DIR, "site", "script.js"))

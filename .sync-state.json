@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "4346dc042434ca873f233a6a439ecd9d4dbd9cc2 Keyboard and screen-reader access; chapter arrows cross book boundaries",
+  "upstream_commit": "40a939e617b63289f894adeebd7fe3add9fca67d Search and link-preview metadata, sitemap.xml and robots.txt",
   "upstream_fingerprints": {
     "site/style.css": "54238837",
     "site/script.js": "2def58a8"
