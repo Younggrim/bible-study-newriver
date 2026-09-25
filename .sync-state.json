@@ -1,9 +1,9 @@
 {
-  "upstream_commit": "720fd7568cefe49fb720b437d2eeb57d8652ca68 Move topical-page neutrals onto CSS custom properties",
+  "upstream_commit": "4346dc042434ca873f233a6a439ecd9d4dbd9cc2 Keyboard and screen-reader access; chapter arrows cross book boundaries",
   "upstream_fingerprints": {
     "site/style.css": "54238837",
-    "site/script.js": "2f33b5a3"
+    "site/script.js": "2def58a8"
   },
   "style_css_v": "bfc452f3",
-  "script_js_v": "fa16d0d5"
+  "script_js_v": "a73b5a28"
 }
