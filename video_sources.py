@@ -65,6 +65,12 @@ DROP_VIDEO_IDS = {
                    "-- a series trailer rather than teaching on the chapter",
     "s6WixiMubHo": "David Guzik 'Can Forgiveness Come Too Easily? Thoughts On the "
                    "Clancy Case - LIVE Q&A' -- current-events Q&A, no passage",
+    "gEWbQn408Sk": "GotQuestions 'What is the marriage supper of the Lamb?' -- "
+                   "title cites no passage (skipped in the 2026-09-29 review)",
+    "4IiK3HpQUMM": "GotQuestions 'Is Donald Trump the Antichrist?' -- "
+                   "current-events speculation",
+    "RcnxRa4qClw": "2BeLikeChrist 'We Need Your Help!' -- a channel appeal, not teaching",
+    "nm8nKMRQXgY": "The Chosen 'I Love The One' lyric video -- a music video, not teaching",
 }
 
 FACADE_OPEN = '<div class="yt-facade"'
