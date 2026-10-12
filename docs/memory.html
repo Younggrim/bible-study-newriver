@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="site/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="site/favicon-16.png"><meta name="theme-color" content="#000000">
+    <title>Scripture Memory — New River Bible Study</title>
+    <!-- seo -->
+    <meta name="description" content="Memorize Scripture: fade a verse out word by word, then review it on a spaced schedule so it stays with you.">
+    <link rel="canonical" href="https://bible.nrc.macdwellings.com/memory.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="New River Bible Study">
+    <meta property="og:title" content="Scripture Memory — New River Bible Study">
+    <meta property="og:description" content="Memorize Scripture: fade a verse out word by word, then review it on a spaced schedule so it stays with you.">
+    <meta property="og:url" content="https://bible.nrc.macdwellings.com/memory.html">
+    <meta property="og:image" content="https://bible.nrc.macdwellings.com/site/icon-512.png">
+    <meta name="twitter:card" content="summary">
+    <!-- /seo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="site/style.css?v=bfc452f3">
+    <style>
+        /* Theme colors come from the tokens in site/style.css so the New River
+           mirror picks up its own palette. The four grade colors and the white
+           card ground are deliberate literals, the same on both sites. */
+        body { background: var(--bg-page); }
+        .page-content { margin: 0 auto; max-width: 720px; padding: 24px 20px 100px; }
+        .mem-hero { background: var(--ink-deep); border-radius: 16px; padding: 30px 24px; text-align: center; margin-bottom: 18px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+        .mem-hero h1 { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 1.5rem; color: #fff; margin: 0 0 6px; }
+        .mem-hero p { font-family: 'Merriweather', serif; font-style: italic; font-size: 0.85rem; color: var(--text-on-dark); margin: 0; opacity: 0.9; }
+        .mem-tabs { display: flex; gap: 4px; background: #fff; border: 1px solid var(--border-light); border-radius: 999px; padding: 4px; margin-bottom: 24px; }
+        .mem-tab { flex: 1; border: 0; background: transparent; padding: 8px 10px; border-radius: 999px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--text-faint); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .mem-tab[aria-current="page"] { background: var(--accent-link); color: #fff; }
+        .mem-badge { min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--accent-link); color: #fff; font-size: 0.68rem; font-weight: 700; display: inline-grid; place-items: center; }
+        .mem-tab[aria-current="page"] .mem-badge { background: #fff; color: var(--accent-link); }
+        #memMain { display: flex; flex-direction: column; gap: 26px; }
+        .mem-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-faint); margin: 0 0 10px; }
+        .mem-h2 { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 1.3rem; color: var(--ink-deep); margin: 0; line-height: 1.3; }
+        .mem-lede { color: var(--text-secondary); font-size: 0.92rem; margin: 6px 0 0; }
+        .mem-note { font-size: 0.8rem; color: var(--text-faint); margin: 0; line-height: 1.5; }
+        .mem-note a { color: var(--accent-link); }
+        .mem-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .mem-between { justify-content: space-between; }
+        .mem-count { font-family: 'Poppins', 'Inter', sans-serif; font-size: 2.6rem; font-weight: 700; line-height: 1; color: var(--ink-deep); }
+        .mem-btn { font-family: 'Inter', sans-serif; border: 1px solid var(--border-medium); background: #fff; color: var(--ink-deep); padding: 10px 16px; border-radius: 8px; font-weight: 600; font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+        .mem-btn.primary { background: var(--accent-link); border-color: var(--accent-link); color: #fff; }
+        .mem-btn.quiet { background: transparent; border-color: transparent; color: var(--accent-link); padding-left: 6px; padding-right: 6px; }
+        .mem-btn.danger { color: #b5473f; border-color: #b5473f; }
+        .mem-btn:disabled { opacity: 0.45; cursor: default; }
+        .mem-btn[hidden] { display: none; }
+        .mem-btn:focus-visible, .mem-tab:focus-visible, .mem-item:focus-visible, .mem-grade:focus-visible, .mem-blank:focus-visible { outline: 2px solid var(--accent-link); outline-offset: 2px; }
+        .mem-list { display: flex; flex-direction: column; border-top: 1px solid var(--border-light); }
+        .mem-item { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 14px 2px; border: 0; border-bottom: 1px solid var(--border-light); background: transparent; text-align: left; width: 100%; font-family: 'Inter', sans-serif; color: var(--ink-deep); }
+        button.mem-item { cursor: pointer; }
+        .mem-ref { font-family: 'Merriweather', serif; font-weight: 700; font-size: 0.98rem; color: var(--ink-deep); }
+        .mem-snip { grid-column: 1 / -1; color: var(--text-secondary); font-family: 'Merriweather', serif; font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .mem-chip { font-size: 0.7rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; white-space: nowrap; align-self: center; }
+        .mem-chip.due { background: var(--accent-link); color: #fff; }
+        .mem-chip.later { background: var(--bg-tint); color: var(--ink-deep); }
+        .mem-chip.known { background: #ddefe6; color: #2f7456; }
+        .mem-steps { display: flex; gap: 3px; align-self: center; }
+        .mem-steps i { width: 14px; height: 5px; border-radius: 3px; background: var(--border-medium); }
+        .mem-steps i.on { background: var(--accent-link); }
+        .mem-empty { padding: 20px 0; color: var(--text-secondary); font-size: 0.92rem; margin: 0; }
+
+        /* The verse card, ruled like an index card */
+        .mem-card { background: #fff; border: 1px solid var(--border-light); border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); overflow: hidden; }
+        .mem-card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 16px 22px 10px; border-bottom: 2px solid var(--accent-link); }
+        .mem-card-head .mem-ref { font-size: 1.1rem; }
+        .mem-card-meta { font-size: 0.72rem; color: var(--text-faint); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+        .mem-card-body { padding: 4px 22px 20px; font-family: 'Merriweather', serif; font-size: 1.08rem; line-height: 2.2rem; color: var(--ink-deep); min-height: calc(2.2rem * 4 + 24px);
+            background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(2.2rem - 1px), var(--rule-soft) calc(2.2rem - 1px), var(--rule-soft) 2.2rem);
+            background-origin: content-box; background-clip: content-box; }
+        .mem-card-body.prompt { display: grid; place-items: center; text-align: center; color: var(--text-faint); font-style: italic; font-size: 0.98rem; }
+        .mem-w { white-space: nowrap; }
+        .mem-blank { display: inline-block; height: 1.2em; vertical-align: -0.2em; border: 0; border-bottom: 2px solid var(--accent-link); border-radius: 1px; background: transparent; padding: 0; margin: 0 1px; cursor: pointer; }
+        .mem-first { color: var(--accent-link); font-weight: 700; }
+        .mem-peek { background: var(--bg-tint); border-radius: 3px; }
+        .mem-hint { color: var(--accent-link); letter-spacing: 0.12em; word-spacing: 0.2em; }
+        .mem-stepper { display: flex; gap: 6px; flex-wrap: wrap; }
+        .mem-stepper button { font-family: 'Inter', sans-serif; border: 1px solid var(--border-medium); background: #fff; border-radius: 999px; padding: 5px 11px; font-size: 0.76rem; font-weight: 600; color: var(--text-muted); cursor: pointer; }
+        .mem-stepper button[aria-pressed="true"] { background: var(--ink-deep); border-color: var(--ink-deep); color: #fff; }
+        .mem-stepper button.done { border-color: var(--accent-link); color: var(--accent-link); }
+        .mem-grades { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        .mem-grade { font-family: 'Inter', sans-serif; border: 0; border-radius: 10px; padding: 10px 6px; display: flex; flex-direction: column; align-items: center; gap: 2px; font-weight: 700; font-size: 0.9rem; cursor: pointer; }
+        .mem-grade small { font-weight: 500; font-size: 0.72rem; }
+        .mem-g0 { background: #f6e3e1; color: #b5473f; }
+        .mem-g1 { background: #f5ebd6; color: #8a5e0e; }
+        .mem-g2 { background: #e1e9f4; color: #2c4c78; }
+        .mem-g3 { background: #ddefe6; color: #2f7456; }
+        .mem-grade.suggested { box-shadow: 0 0 0 2px var(--ink-deep); }
+        .mem-modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--border-medium); border-radius: 10px; overflow: hidden; background: #fff; }
+        .mem-modes button { font-family: 'Inter', sans-serif; border: 0; border-right: 1px solid var(--border-medium); background: transparent; padding: 9px 6px; font-size: 0.84rem; font-weight: 600; color: var(--ink-deep); cursor: pointer; }
+        .mem-modes button:last-child { border-right: 0; }
+        .mem-modes button[aria-pressed="true"] { background: var(--ink-deep); color: #fff; }
+        .mem-modes button:focus-visible, .mem-chip:focus-visible { outline: 2px solid var(--accent-link); outline-offset: -2px; }
+        .mem-card-body.mem-built { min-height: calc(2.2rem * 2 + 24px); }
+        .mem-built .mem-slot { display: inline-block; width: 2.4em; height: 1.2em; vertical-align: -0.2em; border: 0; border-bottom: 2px solid var(--accent-link); border-radius: 0; background: none; }
+        .mem-pool { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 22px 20px; }
+        .mem-chip { font-family: 'Merriweather', serif; font-size: 1rem; border: 1px solid var(--border-medium); background: #fff; color: var(--ink-deep); border-radius: 8px; padding: 8px 12px; cursor: pointer; min-height: 44px; }
+        .mem-chip.wrong { border-color: #b5473f; background: #f6e3e1; color: #b5473f; animation: mem-shake 0.3s; }
+        @keyframes mem-shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+        .mem-type { width: 100%; box-sizing: border-box; font-family: 'Merriweather', serif; font-size: 1rem; line-height: 1.7; color: var(--ink-deep); background: #fff; border: 1px solid var(--border-medium); border-radius: 8px; padding: 12px 14px; min-height: 150px; resize: vertical; }
+        .mem-type:focus { outline: 2px solid var(--accent-link); outline-offset: 1px; }
+        .mem-ok { }
+        .mem-typo { text-decoration: underline dotted #8a5e0e; text-underline-offset: 4px; }
+        .mem-miss { background: #f6e3e1; color: #b5473f; border-radius: 3px; padding: 0 2px; }
+        .mem-extra { color: var(--text-faint); text-decoration: line-through; }
+        .mem-score { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--ink-deep); }
+        .mem-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.8rem; color: var(--text-faint); }
+        .mem-tab { padding-left: 6px; padding-right: 6px; }
+        .mem-cols { display: grid; gap: 12px; }
+        .mem-col { display: flex; flex-direction: column; gap: 6px; text-align: left; background: #fff; border: 1px solid var(--border-light); border-radius: 12px; padding: 16px 18px; cursor: pointer; font-family: 'Inter', sans-serif; color: var(--ink-deep); }
+        .mem-col:hover { border-color: var(--border-medium); }
+        .mem-col:focus-visible { outline: 2px solid var(--accent-link); outline-offset: 2px; }
+        .mem-col-name { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 1.05rem; }
+        .mem-col-desc { font-size: 0.85rem; color: var(--text-secondary); }
+        .mem-col-count { font-size: 0.75rem; color: var(--text-faint); font-weight: 600; }
+        .mem-cbar { display: flex; gap: 2px; height: 8px; border-radius: 4px; overflow: hidden; background: var(--rule-soft); margin-top: 4px; }
+        .mem-cbar i { display: block; height: 100%; }
+        .mem-cbar .known { background: #2f7456; } .mem-cbar .review { background: var(--accent-link); } .mem-cbar .learning { background: #d6a64a; } .mem-cbar .none { background: var(--rule-soft); }
+        .mem-check { grid-template-columns: auto 1fr auto; align-items: center; }
+        .mem-dot { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--border-medium); flex: none; position: relative; }
+        .mem-check.learning .mem-dot { border-color: #d6a64a; background: linear-gradient(90deg, #d6a64a 50%, transparent 50%); }
+        .mem-check.review .mem-dot { border-color: var(--accent-link); box-shadow: inset 0 0 0 3px #fff; background: var(--accent-link); }
+        .mem-check.known .mem-dot { border-color: #2f7456; background: #2f7456; }
+        .mem-check.known .mem-dot::after { content: ''; position: absolute; left: 4px; top: 1px; width: 5px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+        .mem-state { display: block; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.74rem; color: var(--text-faint); }
+        .mem-next { background: #fff; border: 1px solid var(--border-light); border-left: 4px solid var(--accent-link); border-radius: 12px; padding: 14px 16px; }
+        .mem-next .mem-eyebrow { margin-bottom: 6px; }
+        .mem-progress { height: 4px; background: var(--border-light); border-radius: 2px; overflow: hidden; }
+        .mem-progress i { display: block; height: 100%; background: var(--accent-link); transition: width 0.25s; }
+        .mem-form { display: flex; flex-direction: column; gap: 16px; }
+        .mem-form label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); display: flex; flex-direction: column; gap: 6px; }
+        .mem-form input, .mem-form textarea, .mem-form select { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--ink-deep); background: #fff; border: 1px solid var(--border-medium); border-radius: 8px; padding: 10px 12px; width: 100%; }
+        .mem-form textarea { font-family: 'Merriweather', serif; line-height: 1.7; min-height: 140px; resize: vertical; }
+        .mem-two { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
+        .mem-item .mem-btn { align-self: center; }
+        .mem-three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .mem-form select:disabled { opacity: 0.55; }
+        .mem-detail { padding: 4px 2px 18px; border-bottom: 1px solid var(--border-light); display: flex; flex-direction: column; gap: 14px; }
+        .mem-detail p.mem-text { margin: 0; font-family: 'Merriweather', serif; font-size: 0.98rem; line-height: 1.8; color: var(--ink-deep); }
+        .mem-facts { display: flex; gap: 18px; flex-wrap: wrap; font-size: 0.78rem; color: var(--text-faint); }
+        .mem-facts b { color: var(--ink-deep); }
+        .mem-banner { font-size: 0.82rem; color: #8a5e0e; background: #f5ebd6; padding: 10px 12px; border-radius: 8px; }
+        .mem-copy { font-size: 0.7rem; color: var(--text-faint); margin: 28px 0 0; line-height: 1.5; }
+        @media (max-width: 480px) { .mem-two { grid-template-columns: 1fr; } .mem-grades { grid-template-columns: repeat(2, 1fr); } .mem-card-body { font-size: 1rem; } }
+        @media (prefers-reduced-motion: reduce) { .mem-progress i { transition: none; } .mem-chip.wrong { animation: none; } }
+    </style>
+</head>
+<body>
+    <main class="page-content" style="margin-top:20px;">
+        <div class="mem-hero">
+            <h1>Scripture Memory</h1>
+            <p>Hide a verse in your heart, a few words at a time.</p>
+        </div>
+        <nav class="mem-tabs" id="memTabs" aria-label="Scripture Memory"></nav>
+        <div id="memMain"><p class="mem-note">Loading your verses…</p></div>
+        <p class="mem-copy">Scripture quotations marked ESV are from the ESV® Bible (The Holy Bible, English Standard Version®), © 2001 by Crossway. Used by permission. All rights reserved.</p>
+        <input type="file" id="memFile" accept="application/json,.json" hidden>
+    </main>
+    <script src="site/script.js?v=a73b5a28"></script>
+    <script src="site/account.js"></script>
+    <script>
+    (function() {
+        // Verses and their review schedule live in this browser's localStorage,
+        // so the page works with no account and offline. Signed in (see
+        // site/account.js), the same list is also kept in the memory_verses
+        // table and synced between devices; localStorage stays the working copy.
+        var STORE_KEY = 'memory-verses-v1';
+        var ESV_PROXY = (typeof ESV_PROXY_URL !== 'undefined' && ESV_PROXY_URL) || 'https://esv-proxy.cloudflare-dust598.workers.dev';
+        var STEPS = [
+            { name: 'Read it', frac: 0 },
+            { name: 'A few gone', frac: 0.25 },
+            { name: 'Half gone', frac: 0.5 },
+            { name: 'Most gone', frac: 0.75 },
+            { name: 'First letters', frac: 1, letters: true },
+            { name: 'From memory', frac: 1 }
+        ];
+        var GRADES = ['Again', 'Hard', 'Good', 'Easy'];
+        // [slug, name, verses in each chapter]. Counts come from the chapter pages; Old Testament is the first 39.
+        var BIBLE = [["genesis","Genesis",[31,25,24,26,32,22,24,22,29,32,32,20,18,24,21,16,27,33,38,18,34,24,20,67,34,35,46,22,35,43,55,32,20,31,29,43,36,30,23,23,57,38,34,34,28,34,31,22,33,26]],["exodus","Exodus",[22,25,22,31,23,30,25,32,35,29,10,51,22,31,27,36,16,27,25,26,36,31,33,18,40,37,21,43,46,38,18,35,23,35,35,38,29,31,43,38]],["leviticus","Leviticus",[17,16,17,35,19,30,38,36,24,20,47,8,59,57,33,34,16,30,37,27,24,33,44,23,55,46,34]],["numbers","Numbers",[54,34,51,49,31,27,89,26,23,36,35,16,33,45,41,50,13,32,22,29,35,41,30,25,18,65,23,31,40,16,54,42,56,29,34,13]],["deuteronomy","Deuteronomy",[46,37,29,49,33,25,26,20,29,22,32,32,18,29,23,22,20,22,21,20,23,30,25,22,19,19,26,68,29,20,30,52,29,12]],["joshua","Joshua",[18,24,17,24,15,27,26,35,27,43,23,24,33,15,63,10,18,28,51,9,45,34,16,33]],["judges","Judges",[36,23,31,24,31,40,25,35,57,18,40,15,25,20,20,31,13,31,30,48,25]],["ruth","Ruth",[22,23,18,22]],["1samuel","1 Samuel",[28,36,21,22,12,21,17,22,27,27,15,25,23,52,35,23,58,30,24,42,15,23,29,22,44,25,12,25,11,31,13]],["2samuel","2 Samuel",[27,32,39,12,25,23,29,18,13,19,27,31,39,33,37,23,29,33,43,26,22,51,39,25]],["1kings","1 Kings",[53,46,28,34,18,38,51,66,28,29,43,33,34,31,34,34,24,46,21,43,29,53]],["2kings","2 Kings",[18,25,27,44,27,33,20,29,37,36,21,21,25,29,38,20,41,37,37,21,26,20,37,20,30]],["1chronicles","1 Chronicles",[54,55,24,43,26,81,40,40,44,14,47,40,14,17,29,43,27,17,19,8,30,19,32,31,31,32,34,21,30]],["2chronicles","2 Chronicles",[17,18,17,22,14,42,22,18,31,19,23,16,22,15,19,14,19,34,11,37,20,12,21,27,28,23,9,27,36,27,21,33,25,33,27,23]],["ezra","Ezra",[11,70,13,24,17,22,28,36,15,44]],["nehemiah","Nehemiah",[11,20,32,23,19,19,73,18,38,39,36,47,31]],["esther","Esther",[22,23,15,17,14,14,10,17,32,3]],["job","Job",[22,13,26,21,27,30,21,22,35,22,20,25,28,22,35,22,16,21,29,29,34,30,17,25,6,14,23,28,25,31,40,22,33,37,16,33,24,41,30,24,34,17]],["psalms","Psalms",[6,12,8,8,12,10,17,9,20,18,7,8,6,7,5,11,15,50,14,9,13,31,6,10,22,12,14,9,11,12,24,11,22,22,28,12,40,22,13,17,13,11,5,26,17,11,9,14,20,23,19,9,6,7,23,13,11,11,17,12,8,12,11,10,13,20,7,35,36,5,24,20,28,23,10,12,20,72,13,19,16,8,18,12,13,17,7,18,52,17,16,15,5,23,11,13,12,9,9,5,8,28,22,35,45,48,43,13,31,7,10,10,9,8,18,19,2,29,176,7,8,9,4,8,5,6,5,6,8,8,3,18,3,3,21,26,9,8,24,13,10,7,12,15,21,10,20,14,9,6]],["proverbs","Proverbs",[33,22,35,27,23,35,27,36,18,32,31,28,25,35,33,33,28,24,29,30,31,29,35,34,28,28,27,28,27,33,31]],["ecclesiastes","Ecclesiastes",[18,26,22,16,20,12,29,17,18,20,10,14]],["songofsolomon","Song of Solomon",[17,17,11,16,16,13,13,14]],["isaiah","Isaiah",[31,22,26,6,30,13,25,22,21,34,16,6,22,32,9,14,14,7,25,6,17,25,18,23,12,21,13,29,24,33,9,20,24,17,10,22,38,22,8,31,29,25,28,28,25,13,15,22,26,11,23,15,12,17,13,12,21,14,21,22,11,12,19,12,25,24]],["jeremiah","Jeremiah",[19,37,25,31,31,30,34,22,26,25,23,17,27,22,21,21,27,23,15,18,14,30,40,10,38,24,22,17,32,24,40,44,26,22,19,32,21,28,18,16,18,22,13,30,5,28,7,47,39,46,64,34]],["lamentations","Lamentations",[22,22,66,22,22]],["ezekiel","Ezekiel",[28,10,27,17,17,14,27,18,11,22,25,28,23,23,8,63,24,32,14,49,32,31,49,27,17,21,36,26,21,26,18,32,33,31,15,38,28,23,29,49,26,20,27,31,25,24,23,35]],["daniel","Daniel",[21,49,30,37,31,28,28,27,27,21,45,13]],["hosea","Hosea",[11,23,5,19,15,11,16,14,17,15,12,14,16,9]],["joel","Joel",[20,32,21]],["amos","Amos",[15,16,15,13,27,14,17,14,15]],["obadiah","Obadiah",[21]],["jonah","Jonah",[17,10,10,11]],["micah","Micah",[16,13,12,13,15,16,20]],["nahum","Nahum",[15,13,19]],["habakkuk","Habakkuk",[17,20,19]],["zephaniah","Zephaniah",[18,15,20]],["haggai","Haggai",[15,23]],["zechariah","Zechariah",[21,13,10,14,11,15,14,23,17,12,17,14,9,21]],["malachi","Malachi",[14,17,18,6]],["matthew","Matthew",[25,23,17,25,48,34,29,34,38,42,30,50,58,36,39,28,27,35,30,34,46,46,39,51,46,75,66,20]],["mark","Mark",[45,28,35,41,43,56,37,38,50,52,33,44,37,72,47,20]],["luke","Luke",[80,52,38,44,39,49,50,56,62,42,54,59,35,35,32,31,37,43,48,47,38,71,56,53]],["john","John",[51,25,36,54,47,71,53,59,41,42,57,50,38,31,27,33,26,40,42,31,25]],["acts","Acts",[26,47,26,37,42,15,60,40,43,48,30,25,52,28,41,40,34,28,41,38,40,30,35,27,27,32,44,31]],["romans","Romans",[32,29,31,25,21,23,25,39,33,21,36,21,14,23,33,27]],["1corinthians","1 Corinthians",[31,16,23,21,13,20,40,13,27,33,34,31,13,40,58,24]],["2corinthians","2 Corinthians",[24,17,18,18,21,18,16,24,15,18,33,21,14]],["galatians","Galatians",[24,21,29,31,26,18]],["ephesians","Ephesians",[23,22,21,32,33,24]],["philippians","Philippians",[30,30,21,23]],["colossians","Colossians",[29,23,25,18]],["1thessalonians","1 Thessalonians",[10,20,13,18,28]],["2thessalonians","2 Thessalonians",[12,17,18]],["1timothy","1 Timothy",[20,15,16,16,25,21]],["2timothy","2 Timothy",[18,26,17,22]],["titus","Titus",[16,15,15]],["philemon","Philemon",[25]],["hebrews","Hebrews",[14,18,19,16,14,20,28,13,28,39,40,29,25]],["james","James",[27,26,18,17,20]],["1peter","1 Peter",[25,25,22,19,14]],["2peter","2 Peter",[21,22,18]],["1john","1 John",[10,29,24,21,21]],["2john","2 John",[13]],["3john","3 John",[15]],["jude","Jude",[25]],["revelation","Revelation",[20,29,22,11,14,17,17,13,21,11,19,17,18,20,8,21,18,24,21,15,27,21]]];
+        var TRANSLATIONS = ['ESV', 'BSB', 'KJV', 'ASV', 'NET', 'WEB'];
+        // Suggested verses by topic: [book index, chapter, verse, through verse]. page is the matching study, if the site has one.
+        var TOPICS = [{"name":"Anxiety and fear","page":"anxiety-and-fear.html","refs":[[49,4,6,7],[59,5,7],[22,41,10],[39,6,34],[18,56,3],[54,1,7],[18,94,19]]},{"name":"Peace","page":"","refs":[[42,14,27],[22,26,3],[50,3,15],[44,5,1],[42,16,33],[18,4,8]]},{"name":"Strength and courage","page":"","refs":[[5,1,9],[22,40,31],[49,4,13],[18,46,1],[18,27,1],[46,12,9],[48,6,10]]},{"name":"Anger","page":"anger.html","refs":[[58,1,19,20],[19,15,1],[48,4,26,27],[19,29,11],[18,37,8],[50,3,8]]},{"name":"Grief and loss","page":"grief-and-loss.html","refs":[[18,34,18],[39,5,4],[65,21,4],[18,147,3],[46,1,3,4],[42,11,25,26]]},{"name":"Depression and hope","page":"depression-and-hopelessness.html","refs":[[18,42,11],[24,3,22,23],[44,15,13],[18,40,1,2],[23,29,11],[18,30,5]]},{"name":"Doubt and faith","page":"doubt-and-unbelief.html","refs":[[57,11,1],[19,3,5,6],[40,9,24],[46,5,7],[44,10,17],[57,11,6]]},{"name":"Loneliness","page":"loneliness.html","refs":[[4,31,6],[18,23,4],[57,13,5],[39,28,20],[18,139,7,10],[22,43,2]]},{"name":"Identity and worth","page":"identity-and-self-worth.html","refs":[[18,139,14],[48,2,10],[46,5,17],[47,2,20],[59,2,9],[42,1,12],[0,1,27]]},{"name":"Temptation","page":"temptation.html","refs":[[45,10,13],[58,1,12],[57,4,15,16],[39,26,41],[58,4,7],[18,119,11]]},{"name":"Purity","page":"lust-and-sexual-sin.html","refs":[[45,6,18,20],[18,119,9],[39,5,8],[51,4,3,4],[18,51,10],[54,2,22]]},{"name":"Freedom from addiction","page":"addiction.html","refs":[[42,8,36],[47,5,1],[44,6,14],[45,6,12],[55,2,11,12],[47,5,16]]},{"name":"Pride and humility","page":"pride.html","refs":[[19,16,18],[58,4,6],[49,2,3,4],[32,6,8],[59,5,5,6],[19,11,2]]},{"name":"Forgiveness","page":"unforgiveness-and-bitterness.html","refs":[[48,4,32],[50,3,13],[61,1,9],[39,6,14,15],[18,103,12],[40,11,25]]},{"name":"Contentment and money","page":"greed-and-materialism.html","refs":[[53,6,6,8],[39,6,19,21],[49,4,11,13],[41,12,15],[39,6,24],[57,13,5]]},{"name":"Suffering","page":"suffering.html","refs":[[44,8,28],[44,5,3,5],[46,4,17],[58,1,2,4],[44,8,18],[59,5,10]]},{"name":"The gospel","page":"the-gospel.html","refs":[[42,3,16],[44,3,23],[44,6,23],[44,5,8],[48,2,8,9],[44,10,9],[42,14,6],[43,4,12]]},{"name":"Prayer","page":"prayers-in-the-bible.html","refs":[[51,5,16,18],[39,7,7],[58,5,16],[23,33,3],[61,5,14],[39,6,9,13]]},{"name":"God's Word","page":"","refs":[[18,119,105],[54,3,16,17],[57,4,12],[5,1,8],[39,4,4],[22,40,8]]},{"name":"Wisdom and guidance","page":"","refs":[[58,1,5],[18,32,8],[19,9,10],[22,30,21],[44,12,2],[19,16,9]]},{"name":"Love","page":"","refs":[[45,13,4,7],[42,13,34,35],[61,4,19],[44,8,38,39],[61,4,7,8],[42,15,13]]},{"name":"Marriage and family","page":"marriage-and-family.html","refs":[[48,5,25],[0,2,24],[19,22,6],[48,6,1,4],[5,24,15],[4,6,6,7],[18,127,3]]}];
+        // Collections: verses grouped under headings, worked through in order. [book index, chapter, verse, through verse].
+        var COLLECTIONS = [{"name":"The Gospel","desc":"What God has done for us in Christ, and how we receive it.","sections":[{"name":"Our need","refs":[[44,3,23],[22,53,6],[44,6,23]]},{"name":"God's love","refs":[[42,3,16],[44,5,8],[61,4,10]]},{"name":"Christ's work","refs":[[59,3,18],[46,5,21],[45,15,3,4]]},{"name":"Grace through faith","refs":[[48,2,8,9],[55,3,5],[44,10,9,10]]},{"name":"Assurance","refs":[[42,5,24],[61,5,11,12],[42,10,28]]}]},{"name":"Walking with God","desc":"Daily habits that keep you close to the Lord.","sections":[{"name":"His Word","refs":[[18,119,105],[54,3,16,17],[5,1,8],[58,1,22]]},{"name":"Prayer","refs":[[49,4,6,7],[51,5,16,18],[39,6,6],[61,5,14,15]]},{"name":"Obedience","refs":[[42,14,21],[44,12,1,2],[41,9,23]]},{"name":"Fellowship","refs":[[57,10,24,25],[61,1,7],[20,4,9,10]]}]},{"name":"Trusting God in Hard Times","desc":"Promises to hold onto when life is heavy.","sections":[{"name":"Fear and worry","refs":[[22,41,10],[59,5,7],[18,56,3],[39,6,34]]},{"name":"Strength","refs":[[22,40,31],[46,12,9],[49,4,13]]},{"name":"Suffering","refs":[[44,8,28],[58,1,2,3],[46,4,17,18]]},{"name":"Grief and comfort","refs":[[18,34,18],[65,21,4],[46,1,3,4]]},{"name":"God's faithfulness","refs":[[24,3,22,23],[4,31,8],[57,13,5,6]]}]},{"name":"Fighting Sin","desc":"Truth to stand on in the moment of temptation.","sections":[{"name":"Temptation","refs":[[45,10,13],[58,4,7],[57,4,15,16]]},{"name":"Purity","refs":[[18,119,9,11],[45,6,18,20],[47,5,16]]},{"name":"Pride and humility","refs":[[58,4,6],[49,2,3,4],[19,16,18]]},{"name":"Anger and the tongue","refs":[[58,1,19,20],[48,4,29],[19,15,1]]},{"name":"Confession","refs":[[61,1,9],[18,51,10],[19,28,13]]}]},{"name":"Who I Am in Christ","desc":"What God says is true about you.","sections":[{"name":"A new creation","refs":[[46,5,17],[47,2,20],[48,2,10]]},{"name":"Loved and chosen","refs":[[44,8,38,39],[59,2,9],[35,3,17]]},{"name":"Forgiven and free","refs":[[44,8,1],[18,103,12],[42,8,36]]},{"name":"Made by God","refs":[[18,139,13,14],[0,1,27],[23,29,11]]}]},{"name":"Loving Others","desc":"How Christ's love shapes the way you treat people.","sections":[{"name":"Love","refs":[[42,13,34,35],[45,13,4,7],[61,4,19]]},{"name":"Forgiveness","refs":[[48,4,32],[50,3,13],[39,6,14,15]]},{"name":"Family","refs":[[48,5,25],[48,6,4],[4,6,6,7],[5,24,15]]},{"name":"Serving","refs":[[40,10,45],[47,6,2],[47,5,13]]},{"name":"Sharing your faith","refs":[[39,28,19,20],[59,3,15],[44,1,16]]}]}];
+        var KNOWN_DAYS = 21;   // a verse counts as memorized once its review interval reaches three weeks
+        var S = { verses: {}, deleted: {}, owner: null, user: null, sync: 'idle', collection: null, colBusy: null, view: 'today', session: null, practice: null, detail: null, confirmDel: false, editing: false, notice: '', canSave: true };
+        var main = document.getElementById('memMain'), tabs = document.getElementById('memTabs'), fileInput = document.getElementById('memFile');
+
+        /* ---------- dates ---------- */
+        function pad(n) { return String(n).padStart(2, '0'); }
+        function ds(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+        function today() { return ds(new Date()); }
+        function parseDay(s) { var p = s.split('-').map(Number); return new Date(p[0], p[1] - 1, p[2]); }
+        function addDays(s, n) { var d = parseDay(s); d.setDate(d.getDate() + n); return ds(d); }
+        function daysBetween(a, b) { return Math.round((parseDay(b) - parseDay(a)) / 864e5); }
+        function fmtDue(d) {
+            if (!d) return '';
+            var n = daysBetween(today(), d);
+            if (n <= 0) return 'Due now';
+            if (n === 1) return 'Tomorrow';
+            var dt = parseDay(d);
+            if (n < 7) return dt.toLocaleDateString(undefined, { weekday: 'long' });
+            return dt.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+        }
+        function fmtIv(n) { return n < 1 ? 'today' : n === 1 ? '1 day' : n < 30 ? n + ' days' : n < 365 ? Math.round(n / 30) + ' mo' : (n / 365).toFixed(1) + ' yr'; }
+
+        /* ---------- scheduling ---------- */
+        // Again: back tomorrow. Hard: slightly longer. Good: interval x ease.
+        // Easy: longer still. Ease drifts with how the reviews go.
+        function nextFor(v, g) {
+            var ease = v.ease || 2.5, i = v.interval || 0, reps = v.reps || 0, ni;
+            if (g === 0) { ni = 1; ease = Math.max(1.3, ease - 0.2); }
+            else if (g === 1) { ni = Math.max(1, Math.round(i * 1.2)); ease = Math.max(1.3, ease - 0.15); }
+            else if (g === 2) { ni = reps === 0 ? 3 : Math.max(i + 1, Math.round(i * ease)); }
+            else { ni = reps === 0 ? 5 : Math.max(i + 2, Math.round(i * ease * 1.3)); ease = ease + 0.15; }
+            ni = Math.min(ni, 180);
+            return { interval: ni, ease: Math.round(ease * 100) / 100, reps: g === 0 ? 0 : reps + 1, lapses: (v.lapses || 0) + (g === 0 ? 1 : 0), due: addDays(today(), ni), lastReviewed: today() };
+        }
+        function isDue(v) { return v.stage === 'review' && v.due && v.due <= today(); }
+        function all() { return Object.keys(S.verses).map(function(k) { return S.verses[k]; }).sort(function(a, b) { return (a.addedAt || '').localeCompare(b.addedAt || ''); }); }
+        function dueList() { return all().filter(isDue).sort(function(a, b) { return a.due.localeCompare(b.due); }); }
+        function learning() { return all().filter(function(v) { return v.stage === 'learning'; }); }
+
+        /* ---------- storage ---------- */
+        function load() {
+            try {
+                var raw = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+                S.verses = (raw && raw.verses) || {};
+                S.deleted = (raw && raw.deleted) || {};
+                S.owner = (raw && raw.owner) || null;
+            } catch (e) { S.verses = {}; S.deleted = {}; S.owner = null; S.canSave = false; }
+            try { localStorage.setItem('memory-probe', '1'); localStorage.removeItem('memory-probe'); } catch (e) { S.canSave = false; }
+        }
+        function save() {
+            try { localStorage.setItem(STORE_KEY, JSON.stringify({ version: 1, verses: S.verses, deleted: S.deleted, owner: S.owner })); }
+            catch (e) { S.canSave = false; }
+        }
+        // dirty = changed here since the last sync; rev lets a sync in flight
+        // notice that a verse changed again before the server answered.
+        function touch(v) { v.dirty = true; v.rev = (v.rev || 0) + 1; }
+        function create(v) { touch(v); S.verses[v.id] = v; save(); render(); scheduleSync(); }
+        function patch(id, p) { var v = S.verses[id]; if (!v) return; for (var k in p) v[k] = p[k]; touch(v); save(); render(); scheduleSync(); }
+        function remove(id) {
+            var v = S.verses[id];
+            if (v && v.syncedAt) S.deleted[id] = 1;   // tell the server, so other devices drop it too
+            delete S.verses[id]; save(); render(); scheduleSync();
+        }
+        function newId() { return 'v' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+        function cleanVerse(o) {
+            if (!o || typeof o.ref !== 'string' || typeof o.text !== 'string' || !o.ref.trim() || !o.text.trim()) return null;
+            var learning = o.stage !== 'review';
+            return {
+                id: newId(), ref: o.ref.trim().slice(0, 120), text: o.text.trim().replace(/\s+/g, ' ').slice(0, 6000),
+                translation: String(o.translation || 'ESV').slice(0, 12), stage: learning ? 'learning' : 'review',
+                fadeStep: Math.max(0, Math.min(STEPS.length - 1, parseInt(o.fadeStep, 10) || 0)),
+                interval: Math.max(0, Math.min(180, parseInt(o.interval, 10) || 0)), ease: Math.max(1.3, Math.min(4, Number(o.ease) || 2.5)),
+                reps: Math.max(0, parseInt(o.reps, 10) || 0), lapses: Math.max(0, parseInt(o.lapses, 10) || 0),
+                due: !learning && /^\d{4}-\d{2}-\d{2}$/.test(o.due || '') ? o.due : (learning ? null : today()),
+                lastReviewed: /^\d{4}-\d{2}-\d{2}$/.test(o.lastReviewed || '') ? o.lastReviewed : null,
+                addedAt: typeof o.addedAt === 'string' ? o.addedAt : new Date().toISOString()
+            };
+        }
+
+        /* ---------- account sync ---------- */
+        // Rules: a verse changed on this device since the last sync wins and is
+        // pushed; otherwise the server's copy replaces the local one. Deleting
+        // wins over editing. The server stamps updated_at, so device clocks
+        // never matter.
+        var account = window.BibleAccount || null, syncTimer = null, syncing = false, syncAgain = false;
+        function toRow(v, uid) {
+            return { user_id: uid, id: v.id, ref: v.ref, text: v.text, translation: v.translation || 'ESV', stage: v.stage === 'review' ? 'review' : 'learning',
+                fade_step: v.fadeStep || 0, interval_days: v.interval || 0, ease: v.ease || 2.5, reps: v.reps || 0, lapses: v.lapses || 0,
+                due: v.due || null, last_reviewed: v.lastReviewed || null, added_at: v.addedAt || new Date().toISOString(), deleted_at: null };
+        }
+        function fromRow(r) {
+            return { id: r.id, ref: r.ref, text: r.text, translation: r.translation, stage: r.stage, fadeStep: r.fade_step, interval: r.interval_days,
+                ease: Number(r.ease), reps: r.reps, lapses: r.lapses, due: r.due, lastReviewed: r.last_reviewed, addedAt: r.added_at, syncedAt: r.updated_at, dirty: false, rev: 0 };
+        }
+        function scheduleSync() {
+            if (!S.user) return;
+            clearTimeout(syncTimer);
+            syncTimer = setTimeout(sync, 1200);
+        }
+        function setSync(state) { if (S.sync !== state) { S.sync = state; render(); } }
+        function sync() {
+            if (!account || !S.user) return Promise.resolve();
+            if (syncing) { syncAgain = true; return Promise.resolve(); }
+            syncing = true; clearTimeout(syncTimer);
+            var uid = S.user.id, sb;
+            setSync('syncing');
+            return account.ready().then(function(c) {
+                sb = c;
+                return sb.from('memory_verses').select('*');
+            }).then(function(res) {
+                if (res.error) throw res.error;
+                if (!S.user || S.user.id !== uid) return;
+                var remote = {}, byKey = {};
+                res.data.forEach(function(r) { remote[r.id] = r; if (!r.deleted_at) byKey[(r.ref + '|' + r.translation).toLowerCase()] = r.id; });
+                // 1. take the server's changes
+                res.data.forEach(function(r) {
+                    var local = S.verses[r.id];
+                    if (r.deleted_at) { if (local) delete S.verses[r.id]; delete S.deleted[r.id]; return; }
+                    if (S.deleted[r.id]) return;
+                    if (!local || (!local.dirty && local.syncedAt !== r.updated_at)) S.verses[r.id] = fromRow(r);
+                });
+                // 2. a verse added here that the account already has under another id: keep the account's
+                Object.keys(S.verses).forEach(function(id) {
+                    var v = S.verses[id], other = byKey[(v.ref + '|' + (v.translation || 'ESV')).toLowerCase()];
+                    if (!v.syncedAt && other && other !== id) delete S.verses[id];
+                });
+                // 3. a synced verse the server no longer has at all: treat as new again
+                Object.keys(S.verses).forEach(function(id) { var v = S.verses[id]; if (v.syncedAt && !remote[id]) { v.syncedAt = null; v.dirty = true; } });
+                save();
+                // 4. push local changes
+                var out = all().filter(function(v) { return v.dirty || !v.syncedAt; });
+                var revs = {}; out.forEach(function(v) { revs[v.id] = v.rev || 0; });
+                var push = out.length ? sb.from('memory_verses').upsert(out.map(function(v) { return toRow(v, uid); }), { onConflict: 'user_id,id' }).select('id,updated_at') : Promise.resolve({ data: [] });
+                return Promise.resolve(push).then(function(up) {
+                    if (up.error) throw up.error;
+                    (up.data || []).forEach(function(r) {
+                        var v = S.verses[r.id]; if (!v) return;
+                        v.syncedAt = r.updated_at;
+                        if ((v.rev || 0) === revs[r.id]) v.dirty = false;
+                    });
+                    // 5. push deletions
+                    var gone = Object.keys(S.deleted);
+                    if (!gone.length) return;
+                    return sb.from('memory_verses').update({ deleted_at: new Date().toISOString() }).in('id', gone).then(function(del) {
+                        if (del.error) throw del.error;
+                        gone.forEach(function(id) { delete S.deleted[id]; });
+                    });
+                });
+            }).then(function() {
+                save(); syncing = false; S.sync = 'synced'; render();
+                if (syncAgain || all().some(function(v) { return v.dirty; }) || Object.keys(S.deleted).length) { syncAgain = false; scheduleSync(); }
+            }).catch(function(err) {
+                syncing = false; syncAgain = false;
+                setSync(navigator.onLine === false || (err && (err.message === 'offline' || /Failed to fetch|NetworkError|Load failed/i.test(err.message || ''))) ? 'offline' : 'error');
+            });
+        }
+        function onAccount(user) {
+            var was = S.user;
+            S.user = user;
+            if (user) {
+                // A different person signing in on this device must not inherit the last person's synced verses.
+                if (S.owner && S.owner !== user.id) {
+                    Object.keys(S.verses).forEach(function(id) { if (S.verses[id].syncedAt) delete S.verses[id]; });
+                    S.deleted = {};
+                }
+                S.owner = user.id; save(); render(); sync();
+            } else if (was) {
+                // Signed out: synced verses stay safe in the account and leave this device.
+                Object.keys(S.verses).forEach(function(id) { if (S.verses[id].syncedAt && !S.verses[id].dirty) delete S.verses[id]; });
+                S.deleted = {}; S.owner = null; S.sync = 'idle'; S.session = null; S.practice = null; save(); render();
+            } else render();
+        }
+        function accountHTML() {
+            if (!account) return '';
+            if (!S.user) {
+                if (account.hasSession()) return '<section><p class="mem-eyebrow">Your account</p><p class="mem-note">Checking your sign-in…</p></section>';
+                return '<section class="mem-acct"><p class="mem-eyebrow">Keep them on every device</p>'
+                    + '<p class="mem-note" style="margin-bottom:12px">Right now your verses are saved on this device only. Sign in and they are saved to your account and follow you to any phone or computer.</p>'
+                    + '<div class="mem-row"><button class="mem-btn primary" data-a="signin">Sign in</button></div></section>';
+            }
+            var status = S.sync === 'syncing' ? 'Saving to your account…' : S.sync === 'offline' ? 'You are offline. Changes are kept here and saved to your account when you are back online.'
+                : S.sync === 'error' ? 'Could not reach your account just now. Your changes are kept on this device.' : 'Saved to your account.';
+            return '<section class="mem-acct"><p class="mem-eyebrow">Your account</p>'
+                + '<p class="mem-note" style="margin-bottom:12px">Signed in as <b>' + esc(S.user.email || 'your account') + '</b>. ' + status + '</p>'
+                + '<div class="mem-row">' + (S.sync === 'offline' || S.sync === 'error' ? '<button class="mem-btn" data-a="sync">Try again</button>' : '')
+                + (S.confirmOut ? '<button class="mem-btn danger" data-a="signout">Sign out and clear this device</button><button class="mem-btn quiet" data-a="keep-in">Stay signed in</button>'
+                    : '<button class="mem-btn quiet" data-a="ask-signout">Sign out</button>') + '</div>'
+                + (S.confirmOut ? '<p class="mem-note" style="margin-top:10px">Your verses stay in your account. They are removed from this device until you sign in again.</p>' : '') + '</section>';
+        }
+
+        /* ---------- text ---------- */
+        function tokens(text) {
+            return text.trim().split(/\s+/).map(function(t) {
+                var m = t.match(/^([^\p{L}\p{N}]*)(.*?)([^\p{L}\p{N}]*)$/u) || ['', '', t, ''];
+                return { pre: m[1], core: m[2], post: m[3] };
+            });
+        }
+        function hash(s) { var h = 2166136261; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+        function order(n, seed) {
+            var a = [], x = seed || 1, i, j, t;
+            for (i = 0; i < n; i++) a.push(i);
+            function rnd() { x ^= x << 13; x >>>= 0; x ^= x >> 17; x ^= x << 5; x >>>= 0; return x / 4294967296; }
+            for (i = n - 1; i > 0; i--) { j = Math.floor(rnd() * (i + 1)); t = a[i]; a[i] = a[j]; a[j] = t; }
+            return a;
+        }
+        function esc(s) { return String(s).replace(/[&<>"']/g, function(c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+        // The words hidden at each step are a growing prefix of one shuffled
+        // order, so a word that disappears stays gone as the steps advance.
+        function fadedHTML(v, step, seed, peeked) {
+            var tk = tokens(v.text), st = STEPS[step], words = [];
+            tk.forEach(function(t, i) { if (t.core) words.push(i); });
+            var ord = order(words.length, hash(v.id + ':' + seed)).map(function(k) { return words[k]; });
+            var hide = {};
+            ord.slice(0, Math.ceil(words.length * st.frac)).forEach(function(i) { hide[i] = true; });
+            return tk.map(function(t, i) {
+                if (!hide[i] || peeked[i]) return '<span class="mem-w">' + esc(t.pre) + (peeked[i] ? '<span class="mem-peek">' + esc(t.core) + '</span>' : esc(t.core)) + esc(t.post) + '</span>';
+                if (st.letters) {
+                    var rest = t.core.length > 1 ? '<button class="mem-blank" data-a="peek" data-i="' + i + '" style="width:' + Math.max(0.9, (t.core.length - 1) * 0.6) + 'em" aria-label="Show word"></button>' : '';
+                    return '<span class="mem-w">' + esc(t.pre) + '<span class="mem-first">' + esc(t.core[0]) + '</span>' + rest + esc(t.post) + '</span>';
+                }
+                return '<span class="mem-w">' + esc(t.pre) + '<button class="mem-blank" data-a="peek" data-i="' + i + '" style="width:' + Math.max(1.6, t.core.length * 0.6) + 'em" aria-label="Show word"></button>' + esc(t.post) + '</span>';
+            }).join(' ');
+        }
+        /* ---------- word order and typing ---------- */
+        var CHUNK = 8;   // word order shows this many words at a time, so long passages stay tappable on a phone
+        function normWord(w) { return w.toLowerCase().replace(/[\u2018\u2019\u02bc]/g, "'").replace(/[^\p{L}\p{N}']/gu, '').replace(/^'+|'+$/g, ''); }
+        function verseWords(v) {
+            return tokens(v.text).filter(function(t) { return t.core; }).map(function(t) { return { show: t.pre + t.core + t.post, n: normWord(t.core) }; });
+        }
+        function newOrder() { return { pos: 0, used: {}, mistakes: 0, wrong: null, helps: 0, seed: 1 }; }
+        function orderPick(v, O, i) {
+            var w = verseWords(v);
+            if (O.pos >= w.length || O.used[i]) return;
+            if (w[i].n === w[O.pos].n) {
+                // A repeated word counts wherever it sits, so swap it into place.
+                O.used[i] = true; O.pos++; O.wrong = null;
+            } else { O.mistakes++; O.wrong = i; }
+        }
+        function orderHelp(v, O) {
+            var w = verseWords(v), i, end = Math.min(w.length, Math.floor(O.pos / CHUNK) * CHUNK + CHUNK);
+            for (i = O.pos; i < end; i++) if (!O.used[i] && w[i].n === w[O.pos].n) break;
+            O.helps++; O.mistakes++; O.used[i] = true; O.pos++; O.wrong = null;
+        }
+        function orderHTML(v, O) {
+            var w = verseWords(v), done = O.pos >= w.length;
+            var h = '<div class="mem-card-body mem-built">' + w.slice(0, O.pos).map(function(x) { return esc(x.show); }).join(' ') + (done ? '' : ' <span class="mem-slot" aria-hidden="true"></span>') + '</div>';
+            if (done) return h;
+            var cs = Math.floor(O.pos / CHUNK) * CHUNK, ce = Math.min(w.length, cs + CHUNK), idx = [];
+            for (var i = cs; i < ce; i++) if (!O.used[i]) idx.push(i);
+            var ord = order(idx.length, hash(v.id + ':' + cs + ':' + O.seed));
+            h += '<div class="mem-pool" role="group" aria-label="Words to place">' + ord.map(function(k) { var j = idx[k]; return '<button class="mem-chip' + (O.wrong === j ? ' wrong' : '') + '" data-a="ord-pick" data-i="' + j + '">' + esc(w[j].show) + '</button>'; }).join('') + '</div>';
+            return h;
+        }
+        function orderNote(v, O) {
+            var w = verseWords(v), cs = Math.floor(O.pos / CHUNK) * CHUNK;
+            return 'Tap the words in order.' + (w.length > CHUNK ? ' Words ' + (cs + 1) + '–' + Math.min(w.length, cs + CHUNK) + ' of ' + w.length + '.' : '') + (O.mistakes ? ' Misses: ' + O.mistakes + '.' : '');
+        }
+        function orderGrade(v, O) { var n = verseWords(v).length; return O.mistakes === 0 ? 2 : O.mistakes <= Math.max(1, Math.round(n / 10)) ? 1 : 0; }
+        function close(a, b) {
+            if (a === b) return true;
+            if (a.length < 5 || Math.abs(a.length - b.length) > 1) return false;
+            // One letter added, dropped or changed counts as a typo, not a miss.
+            var i = 0, j = 0, edits = 0;
+            while (i < a.length && j < b.length) {
+                if (a[i] === b[j]) { i++; j++; continue; }
+                if (++edits > 1) return false;
+                if (a.length > b.length) i++; else if (b.length > a.length) j++; else { i++; j++; }
+            }
+            return edits + (a.length - i) + (b.length - j) <= 1;
+        }
+        // Line up what was typed against the verse (longest common run of words)
+        // and mark each verse word as right, a typo, or missed, and each extra typed word.
+        function checkTyped(v, typed) {
+            var w = verseWords(v), t = typed.split(/\s+/).map(normWord).filter(Boolean), n = w.length, m = t.length, i, j;
+            var L = []; for (i = 0; i <= n; i++) { L.push(new Array(m + 1).fill(0)); }
+            for (i = n - 1; i >= 0; i--) for (j = m - 1; j >= 0; j--) L[i][j] = close(w[i].n, t[j]) ? L[i + 1][j + 1] + 1 : Math.max(L[i + 1][j], L[i][j + 1]);
+            var out = [], ok = 0, typos = 0, extra = 0; i = 0; j = 0;
+            while (i < n || j < m) {
+                if (i < n && j < m && close(w[i].n, t[j]) && L[i][j] === L[i + 1][j + 1] + 1) {
+                    var exact = w[i].n === t[j]; out.push({ k: exact ? 'ok' : 'typo', s: w[i].show }); ok++; if (!exact) typos++; i++; j++;
+                } else if (j < m && (i >= n || L[i][j + 1] >= L[i + 1][j])) { out.push({ k: 'extra', s: t[j] }); extra++; j++; }
+                else { out.push({ k: 'miss', s: w[i].show }); i++; }
+            }
+            var pct = n ? Math.round(ok / (n + extra) * 100) : 0;
+            return { parts: out, ok: ok, typos: typos, extra: extra, missed: n - ok, total: n, pct: pct, grade: pct === 100 && !typos ? 3 : pct >= 90 ? 2 : pct >= 70 ? 1 : 0 };
+        }
+        function resultHTML(r) {
+            return '<div class="mem-card-body">' + r.parts.map(function(p) { return '<span class="mem-' + p.k + '">' + esc(p.s) + '</span>'; }).join(' ') + '</div>';
+        }
+        function resultLine(r) {
+            var bits = [r.ok + ' of ' + r.total + ' words'];
+            if (r.missed) bits.push(r.missed + ' missed');
+            if (r.typos) bits.push(r.typos + (r.typos === 1 ? ' typo' : ' typos'));
+            if (r.extra) bits.push(r.extra + ' extra');
+            return '<p class="mem-note"><span class="mem-score">' + r.pct + '%</span> · ' + bits.join(' · ') + '</p>'
+                + (r.missed || r.typos || r.extra ? '<p class="mem-legend"><span><span class="mem-miss">missed</span></span><span><span class="mem-typo">typo</span></span><span><span class="mem-extra">extra</span></span></p>' : '');
+        }
+        function typeBox(val) {
+            return '<textarea id="memType" class="mem-type" autocomplete="off" autocorrect="off" autocapitalize="sentences" spellcheck="false" aria-label="Type the verse from memory" placeholder="Type the verse from memory. Punctuation and capitals do not matter.">' + esc(val || '') + '</textarea>';
+        }
+        function modesHTML(cur, act) {
+            return '<div class="mem-modes" role="group" aria-label="Practice style">' + [['say', act === 'pmode' ? 'Fade' : 'Say it'], ['order', 'Word order'], ['type', 'Type it']].map(function(m) { return '<button data-a="' + act + '" data-m="' + m[0] + '" aria-pressed="' + (cur === m[0]) + '">' + m[1] + '</button>'; }).join('') + '</div>';
+        }
+        function reviewMode() { try { var m = localStorage.getItem('memory-review-mode'); return m === 'type' || m === 'order' ? m : 'say'; } catch (e) { return 'say'; } }
+        function hintLine(v) { return tokens(v.text).map(function(t) { return t.pre + (t.core ? t.core[0] : '') + t.post; }).join(' '); }
+
+        // The proxy returns the ESV API's passage HTML. Strip headings, verse
+        // and chapter numbers, footnote marks and the copyright line, leaving
+        // the words alone.
+        function passageText(html) {
+            var doc = new DOMParser().parseFromString('<div>' + html + '</div>', 'text/html');
+            var root = doc.body.firstChild;
+            Array.prototype.forEach.call(root.querySelectorAll('h1,h2,h3,h4,h5,h6,.verse-num,.chapter-num,sup,.footnote,.footnotes,.extra_text'), function(n) { n.remove(); });
+            Array.prototype.forEach.call(root.querySelectorAll('a.copyright'), function(a) { (a.closest('p') || a).remove(); });
+            Array.prototype.forEach.call(root.querySelectorAll('br'), function(b) { b.replaceWith(doc.createTextNode(' ')); });
+            Array.prototype.forEach.call(root.querySelectorAll('p'), function(p) { p.appendChild(doc.createTextNode(' ')); });
+            return (root.textContent || '').replace(/[\s ]+/g, ' ').trim();
+        }
+
+        /* ---------- status ---------- */
+        function chipFor(v) {
+            if (v.stage === 'learning') return '<span class="mem-steps" aria-label="Learning, step ' + ((v.fadeStep || 0) + 1) + ' of ' + STEPS.length + '">' + STEPS.map(function(_, i) { return '<i class="' + (i <= (v.fadeStep || 0) ? 'on' : '') + '"></i>'; }).join('') + '</span>';
+            if (isDue(v)) return '<span class="mem-chip due">Due now</span>';
+            if ((v.interval || 0) >= KNOWN_DAYS) return '<span class="mem-chip known">Known · ' + fmtDue(v.due) + '</span>';
+            return '<span class="mem-chip later">' + fmtDue(v.due) + '</span>';
+        }
+
+        /* ---------- views ---------- */
+        function renderTabs() {
+            var d = dueList().length;
+            var from = S.practice && S.practice.from;
+            var cur = S.session ? 'today' : S.practice ? (from === 'library' || from === 'collections' ? from : 'today') : S.view;
+            tabs.innerHTML = [['today', 'Today', d], ['library', 'Verses', 0], ['collections', 'Collections', 0], ['add', 'Add', 0]].map(function(t) {
+                return '<button class="mem-tab" data-a="nav" data-v="' + t[0] + '"' + (cur === t[0] ? ' aria-current="page"' : '') + '>' + t[1] + (t[2] ? '<span class="mem-badge">' + t[2] + '</span>' : '') + '</button>';
+            }).join('');
+        }
+        function banner() {
+            var h = '';
+            if (S.notice) h += '<div class="mem-banner" role="status">' + esc(S.notice) + ' <button class="mem-btn quiet" data-a="dismiss">Dismiss</button></div>';
+            if (!S.canSave) h += '<div class="mem-banner">This browser is blocking saved data (private browsing does this), so verses you add here will be gone when you close the page.</div>';
+            return h;
+        }
+        function viewToday() {
+            var due = dueList(), lrn = learning(), t = today(), total = all().length;
+            var doneToday = all().filter(function(v) { return v.lastReviewed === t; }).length;
+            var upcoming = all().filter(function(v) { return v.stage === 'review' && !isDue(v); }).sort(function(a, b) { return a.due.localeCompare(b.due); }).slice(0, 4);
+            var h = banner();
+            if (!total) {
+                return h + '<section><h2 class="mem-h2">Start with one verse</h2><p class="mem-lede">Add a verse and read it aloud. Each step hides more of the words until you can say it from a blank card. After that it comes back for review tomorrow, then a few days later, then further and further apart.</p></section>'
+                    + '<div class="mem-row"><button class="mem-btn primary" data-a="nav" data-v="add">Add your first verse</button><button class="mem-btn" data-a="nav" data-v="collections">Browse collections</button></div>';
+            }
+            h += '<section><div class="mem-row mem-between" style="align-items:flex-end"><div><p class="mem-eyebrow">' + new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' }) + '</p>'
+                + '<div class="mem-row" style="align-items:baseline;gap:12px"><span class="mem-count">' + due.length + '</span><h2 class="mem-h2">' + (due.length === 1 ? 'verse to review' : 'verses to review') + '</h2></div>'
+                + '<p class="mem-lede">' + (due.length ? 'Say each one from memory, then check yourself.' : doneToday ? 'You reviewed ' + doneToday + ' today. Nothing else is due.' : 'Nothing is due right now.') + '</p></div>'
+                + (due.length ? '<button class="mem-btn primary" data-a="start">Start review</button>' : '') + '</div></section>';
+            h += nextUpHTML();
+            h += '<section><p class="mem-eyebrow">Learning · ' + lrn.length + '</p>';
+            if (lrn.length) {
+                h += '<div class="mem-list">' + lrn.map(function(v) { return '<button class="mem-item" data-a="practice" data-id="' + v.id + '"><span class="mem-ref">' + esc(v.ref) + '</span>' + chipFor(v) + '<span class="mem-snip">' + esc(v.text) + '</span></button>'; }).join('') + '</div>'
+                    + '<p class="mem-note" style="margin-top:10px">Tap a verse to keep fading it out. When you can say it from a blank card, it moves into reviews.</p>';
+            } else h += '<p class="mem-empty">No verses in progress. <button class="mem-btn quiet" data-a="nav" data-v="add">Add a verse</button></p>';
+            h += '</section>';
+            if (account && !S.user && !account.hasSession()) h += '<p class="mem-note">Saved on this device only. <button class="mem-btn quiet" data-a="signin" style="padding:0 2px;font-size:inherit">Sign in</button> to keep your verses on every device.</p>';
+            if (upcoming.length) h += '<section><p class="mem-eyebrow">Coming up</p><div class="mem-list">' + upcoming.map(function(v) { return '<div class="mem-item"><span class="mem-ref">' + esc(v.ref) + '</span>' + chipFor(v) + '</div>'; }).join('') + '</div></section>';
+            return h;
+        }
+        function viewLibrary() {
+            var vs = all();
+            var h = banner() + '<section><div class="mem-row mem-between"><div><p class="mem-eyebrow">' + vs.length + (vs.length === 1 ? ' verse' : ' verses') + '</p><h2 class="mem-h2">Your verses</h2></div><button class="mem-btn" data-a="nav" data-v="add">Add a verse</button></div></section>';
+            if (!vs.length) h += '<p class="mem-empty">No verses yet.</p>';
+            else {
+                h += '<div class="mem-list">';
+                vs.forEach(function(v) {
+                    h += '<button class="mem-item" data-a="detail" data-id="' + v.id + '" aria-expanded="' + (S.detail === v.id) + '"><span class="mem-ref">' + esc(v.ref) + '</span>' + chipFor(v) + (S.detail === v.id ? '' : '<span class="mem-snip">' + esc(v.text) + '</span>') + '</button>';
+                    if (S.detail === v.id) h += detailHTML(v);
+                });
+                h += '</div>';
+            }
+            h += accountHTML();
+            h += '<section><p class="mem-eyebrow">Backup</p><p class="mem-note" style="margin-bottom:12px">' + (S.user ? 'You can also keep a copy of your verses in a file.' : 'Or back them up to a file to keep a copy or to move them to another device.') + '</p>'
+                + '<div class="mem-row"><button class="mem-btn" data-a="backup"' + (vs.length ? '' : ' disabled') + '>Back up to a file</button><button class="mem-btn" data-a="restore">Restore from a file</button></div></section>';
+            return h;
+        }
+        function detailHTML(v) {
+            if (S.editing) return '<div class="mem-detail"><form class="mem-form" data-f="edit" data-id="' + v.id + '">'
+                + '<div class="mem-two"><label>Reference<input id="memEditRef" value="' + esc(v.ref) + '" required></label><label>Translation<input id="memEditTr" value="' + esc(v.translation || 'ESV') + '"></label></div>'
+                + '<label>Verse text<textarea id="memEditText" required>' + esc(v.text) + '</textarea></label>'
+                + '<div class="mem-row"><button class="mem-btn primary" type="submit">Save changes</button><button class="mem-btn" type="button" data-a="cancel-edit">Cancel</button></div></form></div>';
+            var facts = v.stage === 'learning'
+                ? '<span>Stage <b>Learning</b></span><span>Step <b>' + ((v.fadeStep || 0) + 1) + ' of ' + STEPS.length + '</b></span>'
+                : '<span>Next review <b>' + fmtDue(v.due) + '</b></span><span>Interval <b>' + fmtIv(v.interval || 0) + '</b></span><span>Reviews <b>' + (v.reps || 0) + '</b></span><span>Misses <b>' + (v.lapses || 0) + '</b></span>';
+            return '<div class="mem-detail"><p class="mem-text">' + esc(v.text) + '</p><div class="mem-facts"><span><b>' + esc(v.translation || 'ESV') + '</b></span>' + facts + '</div>'
+                + '<div class="mem-row"><button class="mem-btn primary" data-a="practice" data-id="' + v.id + '" data-from="library">Practice</button>'
+                + (isDue(v) ? '<button class="mem-btn" data-a="review-one" data-id="' + v.id + '">Review now</button>' : '')
+                + '<button class="mem-btn" data-a="edit">Edit</button>'
+                + (v.stage === 'review' ? '<button class="mem-btn" data-a="relearn" data-id="' + v.id + '">Start over</button>' : '')
+                + (S.confirmDel ? '<button class="mem-btn danger" data-a="delete" data-id="' + v.id + '">Delete for good</button><button class="mem-btn quiet" data-a="keep">Keep it</button>' : '<button class="mem-btn quiet" data-a="ask-delete" style="color:#b5473f">Delete</button>')
+                + '</div></div>';
+        }
+        function viewAdd() {
+            function opts(from, to) { var o = ''; for (var i = from; i < to; i++) o += '<option value="' + i + '">' + esc(BIBLE[i][1]) + '</option>'; return o; }
+            return banner() + '<section><p class="mem-eyebrow">New verse</p><h2 class="mem-h2">Add a verse to memorize</h2>'
+                + '<p class="mem-lede">Pick a passage and its text is filled in for you, or choose one from a topic below.</p></section>'
+                + '<form class="mem-form" data-f="add" novalidate>'
+                + '<label>Book<select id="memBook"><option value="">Choose a book</option><optgroup label="Old Testament">' + opts(0, 39) + '</optgroup><optgroup label="New Testament">' + opts(39, 66) + '</optgroup></select></label>'
+                + '<div class="mem-three"><label>Chapter<select id="memChapter" disabled><option value="">–</option></select></label>'
+                + '<label>Verse<select id="memVerse" disabled><option value="">–</option></select></label>'
+                + '<label>Through<select id="memVerseTo" disabled><option value="">–</option></select></label></div>'
+                + '<label>Translation<select id="memAddTr">' + TRANSLATIONS.map(function(t) { return '<option' + (t === preferredTranslation() ? ' selected' : '') + '>' + t + '</option>'; }).join('') + '</select></label>'
+                + '<label>Verse text<textarea id="memAddText" placeholder="Pick a passage above and the text appears here. You can edit it, or paste your own." required></textarea></label>'
+                + '<p class="mem-note" id="memLookupNote" aria-live="polite"></p>'
+                + '<div class="mem-row"><button class="mem-btn primary" type="submit">Add and start learning</button></div></form>'
+                + '<section><p class="mem-eyebrow">Verses by topic</p>'
+                + '<div class="mem-form"><label>Topic<select id="memTopic"><option value="">Choose a topic</option>' + TOPICS.map(function(t, i) { return '<option value="' + i + '">' + esc(t.name) + '</option>'; }).join('') + '</select></label></div>'
+                + '<div id="memTopicList"></div></section>';
+        }
+        function viewPractice() {
+            var P = S.practice, v = S.verses[P.id];
+            if (!v) { S.practice = null; return S.session ? viewSession() : viewToday(); }
+            var last = P.step === STEPS.length - 1;
+            var h = '<section class="mem-row mem-between"><button class="mem-btn quiet" data-a="exit-practice">← Back</button><span class="mem-note">' + (v.stage === 'learning' ? 'Learning' : 'Practice only. Your review schedule stays the same.') + '</span></section>';
+            h += modesHTML(P.mode, 'pmode');
+            if (P.mode !== 'say') return h + practiceTest(P, v);
+            h += '<div class="mem-stepper" role="group" aria-label="Fade steps">' + STEPS.map(function(s, i) { return '<button data-a="step" data-s="' + i + '" aria-pressed="' + (i === P.step) + '" class="' + (v.stage === 'learning' && i < (v.fadeStep || 0) && i !== P.step ? 'done' : '') + '">' + s.name + '</button>'; }).join('') + '</div>';
+            h += '<article class="mem-card"><div class="mem-card-head"><span class="mem-ref">' + esc(v.ref) + '</span><span class="mem-card-meta">' + esc(v.translation || 'ESV') + ' · step ' + (P.step + 1) + '/' + STEPS.length + '</span></div>'
+                + '<div class="mem-card-body">' + fadedHTML(v, P.step, P.seed, P.peeked) + '</div></article>';
+            h += '<p class="mem-note">' + (P.step === 0 ? 'Read it out loud two or three times, reference included.' : last ? 'Say the whole verse and its reference out loud. Tap a line only if you are stuck.' : 'Say it out loud, filling in the blanks. Tap a blank to peek.') + '</p>';
+            h += '<div class="mem-row">' + (P.step > 0 ? '<button class="mem-btn" data-a="prev">Back a step</button><button class="mem-btn" data-a="shuffle">Hide different words</button>' : '')
+                + (!last ? '<button class="mem-btn primary" data-a="next">Fade more</button>'
+                    : v.stage === 'learning' ? '<button class="mem-btn primary" data-a="graduate">I can say it. Start reviews</button>' : '<button class="mem-btn primary" data-a="exit-practice">Done</button>') + '</div>';
+            return h;
+        }
+        function practiceTest(P, v) {
+            var head = '<article class="mem-card"><div class="mem-card-head"><span class="mem-ref">' + esc(v.ref) + '</span><span class="mem-card-meta">' + esc(v.translation || 'ESV') + '</span></div>';
+            var grad = v.stage === 'learning' ? '<button class="mem-btn primary" data-a="graduate">I can say it. Start reviews</button>' : '<button class="mem-btn primary" data-a="exit-practice">Done</button>';
+            if (P.mode === 'order') {
+                var O = P.order, finished = O.pos >= verseWords(v).length;
+                var h = head + orderHTML(v, O) + '</article>';
+                if (!finished) return h + '<p class="mem-note">' + orderNote(v, O) + '</p><div class="mem-row"><button class="mem-btn" data-a="ord-help">Show next word</button></div>';
+                return h + '<p class="mem-note"><span class="mem-score">' + (O.mistakes ? O.mistakes + (O.mistakes === 1 ? ' miss' : ' misses') : 'No misses') + '</span>' + (O.mistakes ? '. Go again until it comes clean.' : '. Try typing it next.') + '</p>'
+                    + '<div class="mem-row"><button class="mem-btn" data-a="ord-again">Go again</button>' + (O.mistakes ? '' : grad) + '</div>';
+            }
+            if (!P.result) return head + '<div class="mem-card-body" style="min-height:0;padding-bottom:16px">' + typeBox(P.typed) + '</div></article>'
+                + '<div class="mem-row"><button class="mem-btn primary" data-a="type-check">Check</button></div>';
+            return head + resultHTML(P.result) + '</article>' + resultLine(P.result)
+                + '<div class="mem-row"><button class="mem-btn" data-a="type-again">Try again</button>' + (P.result.pct >= 90 ? grad : '') + '</div>';
+        }
+        function viewSession() {
+            var Q = S.session;
+            while (Q.i < Q.queue.length && !S.verses[Q.queue[Q.i]]) Q.i++;
+            if (Q.i >= Q.queue.length) {
+                var nxt = all().filter(function(v) { return v.stage === 'review' && !isDue(v); }).sort(function(a, b) { return a.due.localeCompare(b.due); })[0];
+                return '<section><p class="mem-eyebrow">Review complete</p><h2 class="mem-h2">' + Q.done + (Q.done === 1 ? ' verse' : ' verses') + ' reviewed</h2>'
+                    + '<p class="mem-lede">' + (Q.missed ? Q.missed + (Q.missed === 1 ? ' verse' : ' verses') + ' came back around after a miss and will return tomorrow.' : 'Every verse came to mind.') + (nxt ? ' Next review: ' + fmtDue(nxt.due) + ' (' + esc(nxt.ref) + ').' : '') + '</p></section>'
+                    + '<div class="mem-row"><button class="mem-btn primary" data-a="end">Back to today</button></div>';
+            }
+            var v = S.verses[Q.queue[Q.i]];
+            var h = '<section style="display:flex;flex-direction:column;gap:10px"><div class="mem-row mem-between"><button class="mem-btn quiet" data-a="end">← End review</button><span class="mem-note">' + (Q.i + 1) + ' of ' + Q.queue.length + '</span></div>'
+                + '<div class="mem-progress"><i style="width:' + Math.round(Q.i / Q.queue.length * 100) + '%"></i></div></section>';
+            h += '<article class="mem-card"><div class="mem-card-head"><span class="mem-ref">' + esc(v.ref) + '</span><span class="mem-card-meta">' + esc(v.translation || 'ESV') + (v.lapses ? ' · missed ' + v.lapses + '×' : '') + '</span></div>';
+            var sug = null;
+            if (Q.revealed && Q.result) { h += resultHTML(Q.result); sug = Q.result.grade; }
+            else if (Q.revealed && Q.mode === 'order' && Q.order.pos >= verseWords(v).length) { h += '<div class="mem-card-body">' + esc(v.text) + '</div>'; sug = orderGrade(v, Q.order); }
+            else if (Q.revealed) h += '<div class="mem-card-body">' + esc(v.text) + '</div>';
+            else if (Q.mode === 'order') h += orderHTML(v, Q.order);
+            else if (Q.mode === 'type') h += '<div class="mem-card-body" style="min-height:0;padding-bottom:16px">' + (Q.hint ? '<p class="mem-hint" style="margin:0 0 8px">' + esc(hintLine(v)) + '</p>' : '') + typeBox(Q.typed) + '</div>';
+            else if (Q.hint) h += '<div class="mem-card-body"><span class="mem-hint">' + esc(hintLine(v)) + '</span></div>';
+            else h += '<div class="mem-card-body prompt">Say it from memory.</div>';
+            h += '</article>';
+            if (Q.result && Q.hint && sug > 1) sug = 1;
+            if (!Q.revealed) {
+                h = h.replace('<article class="mem-card">', modesHTML(Q.mode, 'qmode') + '<article class="mem-card">');
+                if (Q.mode === 'order') h += '<p class="mem-note">' + orderNote(v, Q.order) + '</p><div class="mem-row"><button class="mem-btn" data-a="ord-help">Show next word</button><button class="mem-btn quiet" data-a="reveal">Show verse</button></div>';
+                else if (Q.mode === 'type') h += '<div class="mem-row">' + (Q.hint ? '' : '<button class="mem-btn" data-a="hint">First letters</button>') + '<button class="mem-btn primary" data-a="type-check">Check</button><button class="mem-btn quiet" data-a="reveal">Show verse</button></div>';
+                else h += '<div class="mem-row">' + (Q.hint ? '' : '<button class="mem-btn" data-a="hint">First letters</button>') + '<button class="mem-btn primary" data-a="reveal">Show verse</button></div>';
+            } else {
+                if (Q.result) h += resultLine(Q.result);
+                else if (Q.mode === 'order' && Q.order && Q.order.pos >= verseWords(v).length) h += '<p class="mem-note"><span class="mem-score">' + (Q.order.mistakes ? Q.order.mistakes + (Q.order.mistakes === 1 ? ' miss' : ' misses') : 'No misses') + '</span> putting the words in order.</p>';
+                h += '<div><p class="mem-eyebrow">How did it go' + (Q.hint ? ' (with first letters)' : '') + '?' + (sug != null ? ' Suggested: ' + GRADES[sug] : '') + '</p><div class="mem-grades">' + GRADES.map(function(g, i) { var n = nextFor(v, i); return '<button class="mem-grade mem-g' + i + (sug === i ? ' suggested' : '') + '" data-a="grade" data-g="' + i + '">' + g + '<small>' + (i === 0 ? 'again today' : fmtIv(n.interval)) + '</small></button>'; }).join('') + '</div>'
+                    + '<p class="mem-note" style="margin-top:10px">Again: could not recall it. Hard: took real effort or the hint. Good: got it with small slips. Easy: word-perfect.</p></div>'
+                    + '<div class="mem-row"><button class="mem-btn quiet" data-a="practice" data-id="' + v.id + '" data-from="session">Practice this one with fading</button></div>';
+            }
+            return h;
+        }
+        function render() {
+            renderTabs();
+            // Leave an open form alone so typing is never wiped by a re-render.
+            if (S.view === 'add' && !S.session && !S.practice && main.querySelector('form[data-f="add"]')) return;
+            if (S.editing && main.querySelector('form[data-f="edit"]')) return;
+            var h;
+            if (S.practice) h = viewPractice();
+            else if (S.session) h = viewSession();
+            else if (S.view === 'library') h = viewLibrary();
+            else if (S.view === 'collections') h = S.collection != null ? viewCollection(S.collection) : viewCollections();
+            else if (S.view === 'add') h = viewAdd();
+            else h = viewToday();
+            var box = document.getElementById('memType'), hadFocus = box && document.activeElement === box, sel = box ? [box.selectionStart, box.selectionEnd] : null;
+            main.innerHTML = h;
+            if (hadFocus && (box = document.getElementById('memType'))) { box.focus(); try { box.setSelectionRange(sel[0], sel[1]); } catch (e) {} }
+            if (S.view === 'add' && !S.practice && !S.session) wireAdd();
+        }
+
+        /* ---------- collections ---------- */
+        // A collection verse is matched to the person's list by book, chapter and
+        // verses, whatever the translation, so a verse added any other way counts too.
+        var NAME_INDEX = {};
+        BIBLE.forEach(function(b, i) { NAME_INDEX[b[1].toLowerCase()] = i; });
+        NAME_INDEX['psalm'] = NAME_INDEX['psalms'];
+        function keyOf(b, c, v1, v2) { return b + ':' + c + ':' + v1 + (v2 && v2 > v1 ? '-' + v2 : ''); }
+        function refKey(ref) {
+            var m = String(ref || '').trim().match(/^(.+?)\s+(\d+)(?::(\d+)(?:\s*[-–]\s*(\d+))?)?$/);
+            if (!m) return null;
+            var b = NAME_INDEX[m[1].toLowerCase()];
+            if (b == null) return null;
+            if (!m[3]) return BIBLE[b][2].length === 1 ? keyOf(b, 1, +m[2], 0) : null;   // "Jude 24"
+            return keyOf(b, +m[2], +m[3], m[4] ? +m[4] : 0);
+        }
+        function verseByKey() {
+            var map = {};
+            all().forEach(function(v) { var k = refKey(v.ref); if (k && !map[k]) map[k] = v; });
+            return map;
+        }
+        function stateOf(v) {
+            if (!v) return 'none';
+            if (v.stage === 'learning') return 'learning';
+            return (v.interval || 0) >= KNOWN_DAYS ? 'known' : 'review';
+        }
+        function colItems(ci, map) {
+            map = map || verseByKey();
+            var out = [];
+            COLLECTIONS[ci].sections.forEach(function(sec, si) {
+                sec.refs.forEach(function(r, ri) {
+                    var k = keyOf(r[0], r[1], r[2], r[3]), v = map[k];
+                    out.push({ si: si, ri: ri, r: r, key: k, label: refLabel(r[0], r[1], r[2], r[3]), v: v, state: stateOf(v) });
+                });
+            });
+            return out;
+        }
+        function tally(items) {
+            var t = { none: 0, learning: 0, review: 0, known: 0, total: items.length };
+            items.forEach(function(it) { t[it.state]++; });
+            return t;
+        }
+        function barHTML(t) {
+            function seg(n, cls) { return n ? '<i class="' + cls + '" style="flex:' + n + '"></i>' : ''; }
+            return '<div class="mem-cbar" role="img" aria-label="' + t.known + ' of ' + t.total + ' memorized">' + seg(t.known, 'known') + seg(t.review, 'review') + seg(t.learning, 'learning') + seg(t.none, 'none') + '</div>';
+        }
+        function tallyText(t) {
+            var parts = [t.known + ' of ' + t.total + ' memorized'];
+            if (t.review + t.learning) parts.push((t.review + t.learning) + ' in progress');
+            return parts.join(' · ');
+        }
+        function lastCollection() { try { var n = localStorage.getItem('memory-collection'); return n === null ? null : +n; } catch (e) { return null; } }
+        function preferredTranslation() { try { return localStorage.getItem('memory-translation') || 'ESV'; } catch (e) { return 'ESV'; } }
+        function nextUpHTML() {
+            var ci = lastCollection();
+            if (ci == null || !COLLECTIONS[ci]) return '';
+            var next = colItems(ci).filter(function(it) { return it.state === 'none'; })[0];
+            if (!next) return '';
+            return '<section class="mem-next"><p class="mem-eyebrow">Next in ' + esc(COLLECTIONS[ci].name) + '</p>'
+                + '<div class="mem-row mem-between"><span class="mem-ref">' + esc(next.label) + '</span>'
+                + '<button class="mem-btn primary" data-a="col-next" data-i="' + ci + '"' + (S.colBusy ? ' disabled' : '') + '>' + (S.colBusy === next.key ? 'Adding…' : 'Start it') + '</button></div></section>';
+        }
+        function viewCollections() {
+            var map = verseByKey();
+            var h = banner() + '<section><p class="mem-eyebrow">Collections</p><h2 class="mem-h2">Work through a collection</h2>'
+                + '<p class="mem-lede">Verses grouped by theme. Start the next one whenever you are ready, and watch the list fill in as you memorize them.</p></section>';
+            h += '<div class="mem-cols">' + COLLECTIONS.map(function(c, i) {
+                var t = tally(colItems(i, map));
+                return '<button class="mem-col" data-a="open-col" data-i="' + i + '"><span class="mem-col-name">' + esc(c.name) + '</span>'
+                    + '<span class="mem-col-desc">' + esc(c.desc) + '</span>' + barHTML(t) + '<span class="mem-col-count">' + tallyText(t) + '</span></button>';
+            }).join('') + '</div>';
+            return h + '<p class="mem-note">A verse counts as memorized once you can recall it with three weeks between reviews.</p>';
+        }
+        var STATE_LABEL = { none: 'Not started', learning: 'Learning', review: 'Reviewing', known: 'Memorized' };
+        function viewCollection(ci) {
+            var c = COLLECTIONS[ci]; if (!c) { S.collection = null; return viewCollections(); }
+            var items = colItems(ci), t = tally(items), next = items.filter(function(it) { return it.state === 'none'; })[0];
+            var h = banner() + '<section class="mem-row mem-between"><button class="mem-btn quiet" data-a="col-back">← Collections</button></section>'
+                + '<section><h2 class="mem-h2">' + esc(c.name) + '</h2><p class="mem-lede">' + esc(c.desc) + '</p>'
+                + '<div style="margin-top:14px">' + barHTML(t) + '<p class="mem-note" style="margin-top:8px">' + tallyText(t) + '</p></div>';
+            if (next) h += '<div class="mem-row" style="margin-top:14px"><button class="mem-btn primary" data-a="col-next" data-i="' + ci + '"' + (S.colBusy ? ' disabled' : '') + '>'
+                + (S.colBusy === next.key ? 'Adding ' + esc(next.label) + '…' : 'Start next: ' + esc(next.label)) + '</button></div>';
+            else if (t.known === t.total) h += '<p class="mem-banner" style="margin-top:14px;color:#2f7456;background:#ddefe6">Every verse in this collection is memorized. Keep reviewing them so they stay.</p>';
+            else h += '<p class="mem-note" style="margin-top:14px">Every verse here is started. Keep practicing and reviewing to finish the collection.</p>';
+            h += '</section>';
+            c.sections.forEach(function(sec, si) {
+                h += '<section><p class="mem-eyebrow">' + esc(sec.name) + '</p><div class="mem-list">';
+                items.filter(function(it) { return it.si === si; }).forEach(function(it) {
+                    var action = it.state === 'none'
+                        ? '<button class="mem-btn" data-a="col-add" data-i="' + ci + '" data-k="' + it.key + '" style="padding:6px 14px"' + (S.colBusy ? ' disabled' : '') + '>' + (S.colBusy === it.key ? 'Adding…' : 'Add') + '</button>'
+                        : '<button class="mem-btn quiet" data-a="practice" data-id="' + it.v.id + '" data-from="collections" style="padding:6px 8px">Practice</button>';
+                    h += '<div class="mem-item mem-check ' + it.state + '"><span class="mem-dot" aria-hidden="true"></span>'
+                        + '<span class="mem-ref">' + esc(it.label) + '<span class="mem-state">' + STATE_LABEL[it.state] + (it.state === 'learning' ? ', step ' + ((it.v.fadeStep || 0) + 1) + ' of ' + STEPS.length : '') + '</span></span>' + action + '</div>';
+                });
+                h += '</div></section>';
+            });
+            return h;
+        }
+        function addFromCollection(ci, key) {
+            var items = colItems(ci), it = items.filter(function(x) { return key ? x.key === key : x.state === 'none'; })[0];
+            if (!it || it.state !== 'none' || S.colBusy) return;
+            var r = it.r, sel = { b: r[0], c: r[1], v1: r[2], v2: r[3] || 0 }, tr = preferredTranslation();
+            try { localStorage.setItem('memory-collection', String(ci)); } catch (e) {}
+            S.colBusy = it.key; S.notice = ''; render();
+            (tr === 'ESV' ? fetchEsv(sel) : fetchSite(sel, tr)).then(function(res) {
+                if (!res.text) throw new Error('empty');
+                var id = newId();
+                S.colBusy = null;
+                create({ id: id, ref: it.label, text: res.text, translation: tr, stage: 'learning', fadeStep: 0, interval: 0, ease: 2.5, reps: 0, lapses: 0, due: null, lastReviewed: null, addedAt: new Date().toISOString() });
+                openPractice(id, S.view === 'collections' ? 'collections' : 'today');
+            }).catch(function() {
+                S.colBusy = null;
+                S.notice = navigator.onLine === false ? 'You are offline, so ' + it.label + ' could not be loaded. Try again when you are back online.' : it.label + ' could not be loaded just now. Try again in a moment.';
+                render();
+            });
+        }
+
+        /* ---------- add form: passage pickers, lookup, topics ---------- */
+        var lookupSeq = 0, lookupTimer = null, pageCache = {}, addRef = '';
+        function $id(id) { return document.getElementById(id); }
+        function refName(b) { return BIBLE[b][0] === 'psalms' ? 'Psalm' : BIBLE[b][1]; }
+        function refLabel(b, c, v1, v2) { return refName(b) + ' ' + c + ':' + v1 + (v2 ? '–' + v2 : ''); }
+        function fill(sel, from, to, first) {
+            var o = first === null ? '' : '<option value="">' + first + '</option>';
+            for (var i = from; i <= to; i++) o += '<option value="' + i + '">' + i + '</option>';
+            sel.innerHTML = o; sel.disabled = to < from;
+        }
+        function picked() {
+            var b = $id('memBook').value, c = +$id('memChapter').value, v1 = +$id('memVerse').value, v2 = +$id('memVerseTo').value;
+            if (b === '' || !c || !v1) return null;
+            return { b: +b, c: c, v1: v1, v2: v2 > v1 ? v2 : 0 };
+        }
+        function setChapters() {
+            var b = $id('memBook').value;
+            if (b === '') { fill($id('memChapter'), 1, 0, '–'); fill($id('memVerse'), 1, 0, '–'); fill($id('memVerseTo'), 1, 0, '–'); return; }
+            fill($id('memChapter'), 1, BIBLE[+b][2].length, 'Chapter');
+            fill($id('memVerse'), 1, 0, '–'); fill($id('memVerseTo'), 1, 0, '–');
+        }
+        function setVerses() {
+            var b = +$id('memBook').value, c = +$id('memChapter').value;
+            if (!c) { fill($id('memVerse'), 1, 0, '–'); fill($id('memVerseTo'), 1, 0, '–'); return; }
+            fill($id('memVerse'), 1, BIBLE[b][2][c - 1], 'Verse');
+            fill($id('memVerseTo'), 1, 0, '–');
+        }
+        function setThrough() {
+            var b = +$id('memBook').value, c = +$id('memChapter').value, v1 = +$id('memVerse').value;
+            if (!v1) { fill($id('memVerseTo'), 1, 0, '–'); return; }
+            fill($id('memVerseTo'), v1 + 1, BIBLE[b][2][c - 1], '–');
+            $id('memVerseTo').disabled = false;
+        }
+        function wireAdd() {
+            $id('memBook').addEventListener('change', function() { setChapters(); loadPassage(); });
+            $id('memChapter').addEventListener('change', function() { setVerses(); loadPassage(); });
+            $id('memVerse').addEventListener('change', function() { setThrough(); loadPassage(); });
+            $id('memVerseTo').addEventListener('change', loadPassage);
+            $id('memAddTr').addEventListener('change', loadPassage);
+            $id('memTopic').addEventListener('change', showTopic);
+            addRef = '';
+        }
+        // ESV comes from the proxy (its licence does not allow storing the text).
+        // The other five are already in the chapter pages, so they are read from there.
+        function fetchEsv(sel) {
+            var q = refName(sel.b) + ' ' + sel.c + ':' + sel.v1 + (sel.v2 ? '-' + sel.v2 : '');
+            return fetch(ESV_PROXY + '/?q=' + encodeURIComponent(q))
+                .then(function(res) { if (!res.ok) throw new Error('http ' + res.status); return res.json(); })
+                .then(function(data) { return { text: data && data.passages && data.passages.length ? passageText(data.passages.join(' ')) : '', ref: data && data.canonical }; });
+        }
+        function fetchSite(sel, tr) {
+            var url = BIBLE[sel.b][0] + sel.c + '.html';
+            var page = pageCache[url] || (pageCache[url] = fetch(url).then(function(res) { if (!res.ok) throw new Error('http ' + res.status); return res.text(); })
+                .then(function(html) { return new DOMParser().parseFromString(html, 'text/html'); })
+                .catch(function(err) { delete pageCache[url]; throw err; }));
+            return page.then(function(doc) {
+                var block = doc.querySelector('.translation-block[data-translation="' + tr + '"]'), out = [];
+                if (block) Array.prototype.forEach.call(block.querySelectorAll('p.verse'), function(p) {
+                    var num = p.querySelector('.verse-num'), n = num ? parseInt(num.textContent, 10) : 0;
+                    if (n < sel.v1 || n > (sel.v2 || sel.v1)) return;
+                    var c = p.cloneNode(true);
+                    Array.prototype.forEach.call(c.querySelectorAll('.verse-num,sup'), function(x) { x.remove(); });
+                    out.push(c.textContent);
+                });
+                return { text: out.join(' ').replace(/[\s ]+/g, ' ').trim() };
+            });
+        }
+        function loadPassage() {
+            clearTimeout(lookupTimer);
+            if (!picked()) return;
+            $id('memLookupNote').textContent = 'Loading…';
+            lookupTimer = setTimeout(loadNow, 700);
+        }
+        function loadNow() {
+            clearTimeout(lookupTimer);
+            var sel = picked(), txt = $id('memAddText'), note = $id('memLookupNote');
+            if (!sel || !txt) return;
+            var tr = $id('memAddTr').value, label = refLabel(sel.b, sel.c, sel.v1, sel.v2), seq = ++lookupSeq;
+            addRef = label; txt.value = ''; note.textContent = 'Loading ' + label + '…';
+            (tr === 'ESV' ? fetchEsv(sel) : fetchSite(sel, tr)).then(function(r) {
+                if (seq !== lookupSeq || !txt.isConnected) return;
+                if (!r.text) { note.textContent = label + ' is not in the ' + tr + ' text here. Pick another verse or translation, or paste the text.'; return; }
+                txt.value = r.text; if (r.ref) addRef = r.ref;
+                note.textContent = addRef + ' (' + tr + '). Check it, then add it.';
+            }).catch(function() {
+                if (seq !== lookupSeq || !note.isConnected) return;
+                note.textContent = navigator.onLine === false ? 'You are offline. Paste the text, or try again when you are back online.' : 'The text could not be loaded just now. Try again in a moment, or paste it.';
+            });
+        }
+        function showTopic() {
+            var box = $id('memTopicList'), t = TOPICS[$id('memTopic').value];
+            if (!t) { box.innerHTML = ''; return; }
+            var have = {};
+            all().forEach(function(v) { have[v.ref.replace(/[–-]/g, '-').toLowerCase()] = true; });
+            box.innerHTML = '<div class="mem-list" style="margin-top:14px">' + t.refs.map(function(r, i) {
+                var label = refLabel(r[0], r[1], r[2], r[3]), got = have[label.replace(/–/g, '-').toLowerCase()];
+                return '<div class="mem-item"><span class="mem-ref">' + esc(label) + '</span>' + (got ? '<span class="mem-chip later">In your list</span>'
+                    : '<button type="button" class="mem-btn" data-a="suggest" data-i="' + i + '" style="padding:6px 14px">Use</button>') + '</div>';
+            }).join('') + '</div>' + (t.page ? '<p class="mem-note" style="margin-top:12px">From the study <a href="' + t.page + '">' + esc(t.name) + '</a>.</p>' : '');
+        }
+        function useSuggestion(i) {
+            var t = TOPICS[$id('memTopic').value], r = t && t.refs[i]; if (!r) return;
+            $id('memBook').value = r[0]; setChapters();
+            $id('memChapter').value = r[1]; setVerses();
+            $id('memVerse').value = r[2]; setThrough();
+            $id('memVerseTo').value = r[3] || '';
+            loadNow();
+            try { main.querySelector('form[data-f="add"]').scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {}
+        }
+
+        /* ---------- backup ---------- */
+        function backup() {
+            var blob = new Blob([JSON.stringify({ app: 'bible-study-memory', version: 1, exportedAt: new Date().toISOString(), verses: all() }, null, 2)], { type: 'application/json' });
+            var a = document.createElement('a');
+            a.href = URL.createObjectURL(blob); a.download = 'memory-verses-' + today() + '.json';
+            document.body.appendChild(a); a.click(); a.remove();
+            setTimeout(function() { URL.revokeObjectURL(a.href); }, 4000);
+        }
+        function restoreFrom(file) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var added = 0, skipped = 0;
+                try {
+                    var data = JSON.parse(reader.result);
+                    var list = Array.isArray(data) ? data : Array.isArray(data.verses) ? data.verses : Object.keys(data.verses || {}).map(function(k) { return data.verses[k]; });
+                    var have = {};
+                    all().forEach(function(v) { have[(v.ref + '|' + (v.translation || 'ESV')).toLowerCase()] = true; });
+                    list.forEach(function(o) {
+                        var v = cleanVerse(o); if (!v) return;
+                        var key = (v.ref + '|' + v.translation).toLowerCase();
+                        if (have[key]) { skipped++; return; }
+                        have[key] = true; touch(v); S.verses[v.id] = v; added++;
+                    });
+                    save(); scheduleSync();
+                    S.notice = added ? 'Restored ' + added + (added === 1 ? ' verse.' : ' verses.') + (skipped ? ' Skipped ' + skipped + ' already in your list.' : '') : skipped ? 'Nothing new to restore. All ' + skipped + ' were already in your list.' : 'That file has no verses in it.';
+                } catch (e) { S.notice = 'That file could not be read. Choose a backup file made by this page.'; }
+                render();
+            };
+            reader.readAsText(file);
+        }
+
+        /* ---------- actions ---------- */
+        function top() { try { window.scrollTo(0, 0); } catch (e) {} }
+        function startSession(ids) { S.session = { queue: ids, i: 0, revealed: false, hint: false, done: 0, missed: 0, requeued: {}, mode: reviewMode(), order: newOrder(), typed: '', result: null }; S.practice = null; S.view = 'today'; render(); top(); }
+        function openPractice(id, from) { var v = S.verses[id]; if (!v) return; if (from === 'collections') S.view = 'collections'; S.practice = { id: id, from: from || S.view, step: v.stage === 'learning' ? (v.fadeStep || 0) : 0, seed: 1, peeked: {}, mode: 'say', order: newOrder(), typed: '', result: null }; render(); top(); }
+        function setStep(n) {
+            var P = S.practice, v = S.verses[P.id];
+            P.step = Math.max(0, Math.min(STEPS.length - 1, n)); P.peeked = {};
+            if (v.stage === 'learning' && P.step > (v.fadeStep || 0)) patch(v.id, { fadeStep: P.step }); else render();
+        }
+        function focusType() { var t = document.getElementById('memType'); if (t) t.focus(); }
+        function testPick(i) {
+            var X = S.practice || S.session, v = S.verses[S.practice ? S.practice.id : S.session.queue[S.session.i]];
+            if (!v) return;
+            if (i === null) orderHelp(v, X.order); else orderPick(v, X.order, i);
+            // Finishing the order in a review shows the verse and the grades.
+            if (!S.practice && X.order.pos >= verseWords(v).length) X.revealed = true;
+            render();
+        }
+        function typeCheck() {
+            var X = S.practice || S.session, v = S.verses[S.practice ? S.practice.id : S.session.queue[S.session.i]], t = document.getElementById('memType');
+            if (!v) return;
+            X.typed = t ? t.value : X.typed;
+            if (!X.typed.trim()) { focusType(); return; }
+            X.result = checkTyped(v, X.typed);
+            if (!S.practice) X.revealed = true;
+            render(); top();
+        }
+        function grade(g) {
+            var Q = S.session, id = Q.queue[Q.i], v = S.verses[id];
+            if (!Q.requeued[id]) Q.done++;
+            if (g === 0 && !Q.requeued[id]) { Q.queue.push(id); Q.requeued[id] = true; Q.missed++; }
+            Q.i++; Q.revealed = false; Q.hint = false; Q.order = newOrder(); Q.typed = ''; Q.result = null;
+            patch(id, nextFor(v, g));
+        }
+        document.querySelector('.page-content').addEventListener('click', function(e) {
+            var b = e.target.closest('[data-a]'); if (!b) return;
+            var a = b.dataset.a, id = b.dataset.id;
+            switch (a) {
+                case 'nav': S.session = null; S.practice = null; S.detail = null; S.editing = false; S.confirmDel = false; S.confirmOut = false; S.collection = null; S.view = b.dataset.v; main.innerHTML = ''; render(); break;
+                case 'dismiss': S.notice = ''; render(); break;
+                case 'suggest': useSuggestion(+b.dataset.i); break;
+                case 'open-col': S.collection = +b.dataset.i; try { localStorage.setItem('memory-collection', b.dataset.i); } catch (e) {} render(); top(); break;
+                case 'col-back': S.collection = null; render(); top(); break;
+                case 'col-next': addFromCollection(+b.dataset.i, null); break;
+                case 'col-add': addFromCollection(+b.dataset.i, b.dataset.k); break;
+                case 'start': startSession(dueList().map(function(v) { return v.id; })); break;
+                case 'review-one': startSession([id]); break;
+                case 'practice': openPractice(id, b.dataset.from); break;
+                case 'exit-practice': S.practice = null; render(); break;
+                case 'step': setStep(+b.dataset.s); break;
+                case 'next': setStep(S.practice.step + 1); break;
+                case 'prev': setStep(S.practice.step - 1); break;
+                case 'shuffle': S.practice.seed++; S.practice.peeked = {}; render(); break;
+                case 'peek': S.practice.peeked[+b.dataset.i] = true; render(); break;
+                case 'graduate': var pid = S.practice.id; S.practice = null; patch(pid, { stage: 'review', fadeStep: STEPS.length - 1, interval: 1, reps: 0, ease: 2.5, due: addDays(today(), 1) }); break;
+                case 'hint': S.session.hint = true; render(); break;
+                case 'pmode': S.practice.mode = b.dataset.m; S.practice.order = newOrder(); S.practice.result = null; render(); if (b.dataset.m === 'type') focusType(); break;
+                case 'qmode': S.session.mode = b.dataset.m; S.session.order = newOrder(); try { localStorage.setItem('memory-review-mode', b.dataset.m); } catch (e) {} render(); if (b.dataset.m === 'type') focusType(); break;
+                case 'ord-pick': testPick(+b.dataset.i); break;
+                case 'ord-help': testPick(null); break;
+                case 'ord-again': S.practice.order = newOrder(); S.practice.order.seed = Date.now() % 997 + 2; render(); break;
+                case 'type-check': typeCheck(); break;
+                case 'type-again': S.practice.result = null; S.practice.typed = ''; render(); focusType(); break;
+                case 'reveal': S.session.revealed = true; render(); break;
+                case 'grade': grade(+b.dataset.g); break;
+                case 'end': S.session = null; render(); break;
+                case 'detail': S.detail = S.detail === id ? null : id; S.confirmDel = false; S.editing = false; render(); break;
+                case 'edit': S.editing = true; main.innerHTML = ''; render(); break;
+                case 'cancel-edit': S.editing = false; main.innerHTML = ''; render(); break;
+                case 'relearn': patch(id, { stage: 'learning', fadeStep: 0, interval: 0, reps: 0, ease: 2.5, due: null }); break;
+                case 'ask-delete': S.confirmDel = true; render(); break;
+                case 'keep': S.confirmDel = false; render(); break;
+                case 'delete': S.confirmDel = false; S.detail = null; remove(id); break;
+                case 'backup': backup(); break;
+                case 'signin': account.openSignIn({ reason: 'Your memory verses and review schedule are saved to your account, so they follow you to any device.' }); break;
+                case 'ask-signout': S.confirmOut = true; render(); break;
+                case 'keep-in': S.confirmOut = false; render(); break;
+                case 'signout': S.confirmOut = false; b.disabled = true; sync().then(function() { return account.signOut(); }); break;
+                case 'sync': sync(); break;
+                case 'restore': fileInput.value = ''; fileInput.click(); break;
+            }
+        });
+        document.querySelector('.page-content').addEventListener('input', function(e) {
+            if (e.target.id !== 'memType') return;
+            var X = S.practice || S.session; if (X) X.typed = e.target.value;
+        });
+        fileInput.addEventListener('change', function() { if (fileInput.files && fileInput.files[0]) restoreFrom(fileInput.files[0]); });
+        document.querySelector('.page-content').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var f = e.target;
+            if (f.dataset.f === 'add') {
+                var sel = picked(), text = document.getElementById('memAddText').value.trim().replace(/\s+/g, ' ');
+                if (!sel) { document.getElementById('memLookupNote').textContent = 'Choose a book, chapter and verse first.'; return; }
+                if (!text) { document.getElementById('memLookupNote').textContent = 'Add the verse text first.'; return; }
+                var ref = addRef || refLabel(sel.b, sel.c, sel.v1, sel.v2);
+                var id = newId(), tr = document.getElementById('memAddTr').value;
+                try { localStorage.setItem('memory-translation', tr); } catch (e) {}
+                main.innerHTML = ''; S.view = 'today';
+                create({ id: id, ref: ref, text: text, translation: tr, stage: 'learning', fadeStep: 0, interval: 0, ease: 2.5, reps: 0, lapses: 0, due: null, lastReviewed: null, addedAt: new Date().toISOString() });
+                openPractice(id, 'today');
+            } else if (f.dataset.f === 'edit') {
+                var eid = f.dataset.id, nref = document.getElementById('memEditRef').value.trim(), ntext = document.getElementById('memEditText').value.trim().replace(/\s+/g, ' ');
+                if (!nref || !ntext) return;
+                S.editing = false; main.innerHTML = '';
+                patch(eid, { ref: nref, translation: document.getElementById('memEditTr').value.trim() || 'ESV', text: ntext });
+            }
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.target.id === 'memType' && e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); typeCheck(); return; }
+            if (e.target.matches('input,textarea,select') || e.metaKey || e.ctrlKey || e.altKey) return;
+            if (S.practice) {
+                if (S.practice.mode !== 'say') return;
+                if (e.key === 'ArrowRight') setStep(S.practice.step + 1);
+                else if (e.key === 'ArrowLeft') setStep(S.practice.step - 1);
+            } else if (S.session && S.session.i < S.session.queue.length) {
+                if (!S.session.revealed && S.session.mode !== 'say') return;
+                if (!S.session.revealed) {
+                    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); S.session.revealed = true; render(); }
+                    else if (e.key.toLowerCase() === 'h') { S.session.hint = true; render(); }
+                } else if (/^[1-4]$/.test(e.key)) grade(+e.key - 1);
+            }
+        });
+        // Pick up changes made in another tab of the same site.
+        window.addEventListener('storage', function(e) { if (e.key === STORE_KEY && !S.session && !S.practice) { load(); render(); } });
+
+        load();
+        render();
+        if (account) {
+            account.onChange(onAccount);
+            // Catch up when the app comes back to the front or the connection returns.
+            document.addEventListener('visibilitychange', function() { if (!document.hidden && S.user && !S.session && !S.practice) sync(); });
+            window.addEventListener('online', function() { if (S.user) sync(); else if (account.hasSession()) account.ready().catch(function() {}); });
+        }
+    })();
+    </script>
+</body>
+</html>

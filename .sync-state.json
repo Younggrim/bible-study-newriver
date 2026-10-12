@@ -1,8 +1,8 @@
 {
-  "upstream_commit": "1d60d44ee1b6a08a12af2c9369d094185af28f4b Weekly review 2026-09-29: 2 articles and 4 videos added, 7 articles and 4 videos dropped",
+  "upstream_commit": "1bfe09fdfd3e289e53e514a9e307b32662e1bdbe Memory: add Word order and Type it practice modes",
   "upstream_fingerprints": {
     "site/style.css": "54238837",
-    "site/script.js": "2def58a8"
+    "site/script.js": "d71fe306"
   },
   "style_css_v": "bfc452f3",
   "script_js_v": "a73b5a28"

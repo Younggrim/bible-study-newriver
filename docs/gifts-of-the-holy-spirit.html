@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="site/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="site/favicon-16.png"><meta name="theme-color" content="#000000">
+    <title>Gifts of the Holy Spirit — New River Bible Study</title>
+    <!-- seo -->
+    <meta name="description" content="A study of the gifts of the Holy Spirit in 1 Corinthians 12, Romans 12 and Ephesians 4 — what each gift is, and how it builds up the church.">
+    <link rel="canonical" href="https://bible.nrc.macdwellings.com/gifts-of-the-holy-spirit.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="New River Bible Study">
+    <meta property="og:title" content="Gifts of the Holy Spirit — New River Bible Study">
+    <meta property="og:description" content="A study of the gifts of the Holy Spirit in 1 Corinthians 12, Romans 12 and Ephesians 4 — what each gift is, and how it builds up the church.">
+    <meta property="og:url" content="https://bible.nrc.macdwellings.com/gifts-of-the-holy-spirit.html">
+    <meta property="og:image" content="https://bible.nrc.macdwellings.com/site/icon-512.png">
+    <meta name="twitter:card" content="summary">
+    <!-- /seo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="site/style.css?v=bfc452f3">
+    <style>
+        .topic-hero { position: relative; overflow: hidden; border: none; border-radius: var(--radius-lg); padding: 48px 36px; text-align: center; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+        .topic-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("https://images.unsplash.com/photo-1765176355090-06148decf2a3?w=1200&q=80&auto=format") center/cover no-repeat; filter: brightness(0.45) sepia(0.75) saturate(1.7); }
+        .topic-hero h1 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; font-size: 2.2rem; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 8px; }
+        .topic-hero .subtitle { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #f6b885; letter-spacing: 0.5px; }
+
+        .back-link { display: inline-block; margin-bottom: 20px; font-size: 0.88rem; color: #b5541f; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .back-link:hover { color: #7c3a14; }
+        .back-link i { margin-right: 6px; }
+
+        .jump-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-bottom: 24px; }
+        .jump-card { background: #fff; border: 1px solid var(--border-light); border-radius: 8px; padding: 8px 10px; text-align: center; font-size: 0.76rem; font-weight: 600; color: #b5541f; text-decoration: none; transition: background 0.15s, transform 0.15s; }
+        .jump-card:hover { background: var(--bg-tint); transform: translateY(-1px); }
+
+        .section-block { background: var(--bg-card, #fff); border: 1px solid var(--border-light, var(--border-light)); border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 24px; scroll-margin-top: 76px; }
+        .section-block h2 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; font-size: 1.35rem; color: #b5541f; margin-bottom: 4px; }
+        .section-block .section-kicker { display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; }
+        .section-block h3 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; font-size: 0.95rem; color: #b5541f; margin: 20px 0 12px; }
+        .section-block h4 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; font-size: 0.88rem; color: #b5541f; margin: 18px 0 10px; }
+        .section-block p { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 14px; }
+        .section-block p:last-child { margin-bottom: 0; }
+
+        .verse-list { list-style: none; padding: 0; margin: 0; }
+        .verse-list li { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border-light); }
+        .verse-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .video-grid:last-child { margin-bottom: 0; }
+
+        .verse-ref { color: #b5541f; cursor: pointer; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .verse-ref:hover { color: #7c3a14; }
+        .verse-popup-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:9998; }
+        .verse-popup-overlay.show { display:block; }
+        .verse-popup { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:12px; padding:24px 28px; max-width:500px; width:90%; max-height:70vh; overflow-y:auto; box-shadow:0 16px 48px rgba(0,0,0,0.2); z-index:9999; }
+        .verse-popup.show { display:block; }
+        .verse-popup .popup-ref { font-family:'Poppins','Inter',sans-serif; font-size:1rem; color:#b5541f; margin-bottom:12px; font-weight:700; }
+        .verse-popup .popup-text { font-family:'Merriweather',serif; font-size:0.92rem; line-height:1.9; color:var(--ink-deep); }
+        .verse-popup .popup-close { position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:var(--text-faint); }
+        .verse-popup .popup-loading { font-size:0.85rem; color:var(--text-faint); font-style:italic; }
+
+        @media (max-width: 768px) { .topic-hero h1 { font-size: 1.6rem; } .topic-hero { padding: 28px 16px; } .section-block { padding: 20px 16px; } .video-grid { grid-template-columns: 1fr; } }
+
+        @media (max-width: 700px) { .topic-hero::before { background-image: url("https://images.unsplash.com/photo-1765176355090-06148decf2a3?w=750&q=80&auto=format"); } }
+    </style>
+</head>
+<body>
+    <main class="main-content" style="margin-left:auto; margin-right:auto; max-width:1100px; margin-top:0;">
+
+        <div class="topic-hero">
+            <p class="subtitle">Topical Study</p>
+            <h1>Gifts of the Holy Spirit</h1>
+        </div>
+
+        <a href="topical-studies.html" class="back-link"><i class="fas fa-arrow-left"></i>All Subjects</a>
+
+        <nav class="jump-grid">
+            <a href="#overview" class="jump-card">Overview</a>
+            <a href="#word-of-wisdom" class="jump-card">Word of Wisdom</a>
+            <a href="#word-of-knowledge" class="jump-card">Word of Knowledge</a>
+            <a href="#gift-of-faith" class="jump-card">Gift of Faith</a>
+            <a href="#gifts-of-healing" class="jump-card">Gifts of Healing</a>
+            <a href="#working-of-miracles" class="jump-card">Miracles</a>
+            <a href="#prophecy" class="jump-card">Prophecy</a>
+            <a href="#discernment-of-spirits" class="jump-card">Discernment</a>
+            <a href="#tongues" class="jump-card">Tongues</a>
+            <a href="#interpretation-of-tongues" class="jump-card">Interpretation</a>
+            <a href="#teaching" class="jump-card">Teaching</a>
+            <a href="#exhortation" class="jump-card">Exhortation</a>
+            <a href="#giving" class="jump-card">Giving</a>
+            <a href="#leadership" class="jump-card">Leadership</a>
+            <a href="#mercy" class="jump-card">Mercy</a>
+            <a href="#evangelism" class="jump-card">Evangelism</a>
+            <a href="#videos" class="jump-card">Videos</a>
+        </nav>
+
+        <div class="section-block" id="overview">
+            <span class="section-kicker">The Foundation</span>
+            <h2>Gifted to Serve the Body</h2>
+            <p>Scripture does not define spiritual gifts in the abstract so much as describe them in action. Paul tells the church at Corinth that "to each is given the manifestation of the Spirit for the common good" (1 Corinthians 12:7) — every believer who has the Holy Spirit has been given some capacity, some Spirit-empowered ability, meant not for personal display but for the good of the whole church. A spiritual gift is a grace (the Greek <em>charisma</em>, from <em>charis</em>, "grace") — an undeserved capacity handed out according to the Spirit's own choice (1 Corinthians 12:11), not earned by maturity, requested by ambition, or inherited by birth. It is given so that one believer's strength can supply what another believer lacks, binding the church together in mutual dependence rather than self-sufficiency.</p>
+            <p>The New Testament names these gifts in three main places, and comparing them is instructive. 1 Corinthians 12:8-10 lists nine gifts — word of wisdom, word of knowledge, faith, gifts of healing, working of miracles, prophecy, discernment of spirits, tongues, and interpretation of tongues — with a further list of gifted roles in 12:28 (apostles, prophets, teachers, miracles, healing, helps, administration, tongues). Romans 12:6-8 names seven: prophecy, serving, teaching, exhortation, giving, leadership, and mercy. Ephesians 4:11 names gifted people rather than gifts exactly — apostles, prophets, evangelists, and pastor-teachers — given to the church to equip the saints for ministry. None of the three lists repeats exactly, and none claims to be exhaustive. Together they function less like a complete catalog and more like representative samples of the many ways the Spirit equips His people — an invitation to recognize the pattern rather than a final count to check off.</p>
+            <p>The dominant image Paul uses to explain how these gifts fit together is the human body: "the body does not consist of one member but of many" (1 Corinthians 12:14). An eye cannot say to the hand, "I have no need of you" — every gift matters, no gift is self-sufficient, and no believer is gift-less or unnecessary to the whole. This unity-in-diversity is precisely why Paul interrupts his discussion of gifts with a chapter on love (1 Corinthians 13): gifts exercised without love are "a noisy gong or a clanging cymbal" — impressive in sound, empty of substance. Spiritual gifts are tools for building up the church in love, not trophies for the individual who holds them. A gift used without love misses the entire point of why it was given.</p>
+            <p>One more distinction is worth making clear from the outset: gifts are not the same thing as fruit. This site's companion study on the <a href="fruits-of-the-spirit.html" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">Fruit of the Spirit</a> covers character that the Spirit forms in every believer alike — love, joy, peace, and the rest are meant to grow in all Christians without exception. Spiritual gifts are different: they are differing abilities, distributed by the Spirit's own choice, and Paul is explicit that not everyone has the same one — "Are all apostles? Are all prophets?... Do all possess gifts of healing? Do all speak with tongues?" (1 Corinthians 12:29-30). The expected answer to each question is no. Finally, sincere, Bible-believing Christians disagree in good faith over whether the more dramatic gifts in these lists — tongues, prophecy, healing, and miracles in particular — continue in the same form today or were tied in a special way to the church's apostolic founding era. That question deserves careful, humble study of its own rather than a quick verdict here; what follows describes what each gift is and how Scripture presents it functioning in the church, leaving continuationist and cessationist readers alike room to apply it within their own convictions.</p>
+        </div>
+
+        <div class="section-block" id="word-of-wisdom">
+            <span class="section-kicker">1 Corinthians 12 — A Revelation Gift</span>
+            <h2>Word of Wisdom</h2>
+            <h3>What It Is</h3>
+            <p>Paul lists this first: "to one is given through the Spirit the utterance of wisdom" (1 Corinthians 12:8). This is not the general wisdom any believer can ask God for (James 1:5), nor mere cleverness or good advice. It is a Spirit-prompted insight that applies God's truth with unusual precision to a specific, often difficult situation — seeing exactly what a moment calls for and speaking it with clarity. Solomon's famous judgment between the two women claiming the same child (1 Kings 3:16-28) is the Old Testament's picture of wisdom applied at the point of real need, even though it predates the Spirit's New Testament gifting of the church.</p>
+            <h3>How It's Used</h3>
+            <p>This gift surfaces most often in pastoral counsel and church leadership — an elder who sees the wise path through a conflict that has everyone else stuck, a counselor whose word lands with unusual clarity, a friend whose single sentence reframes a crisis. It is wisdom given for the moment, not a permanent reservoir of superior judgment, and like every gift it is meant to serve others rather than elevate the one who has it.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 12:8')">1 Corinthians 12:8</span> — "To one is given through the Spirit the utterance of wisdom." The first gift named in Paul's list, a Spirit-given word fitted to the moment.</li>
+                <li><span class="verse-ref" onclick="showVerse('James 1:5')">James 1:5</span> — "If any of you lacks wisdom, let him ask God." General wisdom is available to every believer who asks; this gift is a more specific, situational grace.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Kings 3:9-12')">1 Kings 3:9-12</span> — Solomon asks for "an understanding mind" to govern well, and God grants him wisdom beyond any before or after him.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 6:3')">Acts 6:3</span> — The apostles ask the church to choose men "full of the Spirit and of wisdom" to oversee a practical, urgent need.</li>
+                <li><span class="verse-ref" onclick="showVerse('Colossians 3:16')">Colossians 3:16</span> — "Let the word of Christ dwell in you richly, teaching and admonishing one another in all wisdom." Wisdom is meant to flow outward to the body.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="word-of-knowledge">
+            <span class="section-kicker">1 Corinthians 12 — A Revelation Gift</span>
+            <h2>Word of Knowledge</h2>
+            <h3>What It Is</h3>
+            <p>Paired closely with the previous gift, Paul writes "to another the utterance of knowledge according to the same Spirit" (1 Corinthians 12:8). Where the word of wisdom applies truth to a situation, the word of knowledge is insight into facts or truth that a person could not have arrived at through ordinary means — understanding given directly by the Spirit rather than acquired by study or observation. Peter's knowledge of Ananias and Sapphira's hidden deception (Acts 5:1-4) is the New Testament's clearest narrative example of this kind of Spirit-given insight exposing what was otherwise concealed.</p>
+            <h3>How It's Used</h3>
+            <p>In the life of the church this gift most often shows up quietly — in pastoral care, prayer, or counsel, when someone senses an unspoken burden or hidden truth that, brought into the light with gentleness, leads another person toward confession, healing, or clarity. Like every revelatory gift, it is tested against Scripture and exercised in love rather than used to put others on display (1 Corinthians 13:2 warns that even prophetic knowledge is worthless without love).</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 12:8')">1 Corinthians 12:8</span> — "To another the utterance of knowledge according to the same Spirit." Insight given by the Spirit rather than discovered by natural means.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 5:1-4')">Acts 5:1-4</span> — Peter knows that Ananias has lied about the price of his land — knowledge he could only have received from the Spirit.</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Kings 6:12')">2 Kings 6:12</span> — Elisha knows the words the king of Syria speaks even in his private bedroom — an Old Testament picture of Spirit-given knowledge.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 13:2')">1 Corinthians 13:2</span> — "If I... understand all mysteries and all knowledge... but have not love, I am nothing." Knowledge without love accomplishes nothing.</li>
+                <li><span class="verse-ref" onclick="showVerse('Colossians 1:9')">Colossians 1:9</span> — Paul prays that believers would be filled with "the knowledge of his will in all spiritual wisdom and understanding."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="gift-of-faith">
+            <span class="section-kicker">1 Corinthians 12 — A Power Gift</span>
+            <h2>Gift of Faith</h2>
+            <h3>What It Is</h3>
+            <p>"To another faith by the same Spirit" (1 Corinthians 12:9) names a gift that is easy to confuse with something every Christian already has, so the distinction matters. Saving faith — simple trust in Christ for salvation — is given to every believer (Ephesians 2:8-9). The gift of faith is different: a Spirit-given surge of extraordinary, situation-specific confidence that enables a believer to trust God for something beyond ordinary expectation, and to act or pray accordingly when others might hesitate or doubt.</p>
+            <h3>How It's Used</h3>
+            <p>This gift often appears alongside prayer for the sick, in pioneering ministry that requires stepping out before the way is clear, or in steadying a congregation through crisis when fear would otherwise take hold. The writer of Hebrews catalogs believers whose faith moved them to extraordinary action (Hebrews 11) — not a description of ordinary saving faith, but of faith operating at unusual strength for a particular task God had set before them.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 12:9')">1 Corinthians 12:9</span> — "To another faith by the same Spirit." A Spirit-given confidence distinct from the faith that saves.</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 12:3')">Romans 12:3</span> — God has assigned "a measure of faith" to each person — the baseline from which this gift's extraordinary measure stands out.</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 11:32-34')">Hebrews 11:32-34</span> — Believers whose faith "conquered kingdoms... stopped the mouths of lions" — faith exercised at an extraordinary level.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 17:20')">Matthew 17:20</span> — Jesus describes faith "like a grain of mustard seed" as sufficient to move mountains — small in size, great in effect.</li>
+                <li><span class="verse-ref" onclick="showVerse('James 5:15')">James 5:15</span> — "The prayer of faith will save the one who is sick." Faith prayed with confidence accompanies the gifts of healing.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="gifts-of-healing">
+            <span class="section-kicker">1 Corinthians 12 — A Power Gift</span>
+            <h2>Gifts of Healing</h2>
+            <h3>What It Is</h3>
+            <p>Paul's Greek is plural on both words — "gifts of healings" (1 Corinthians 12:9), repeated again in the list of 12:28. Many interpreters take the double plural to mean that this gift is given and received case by case rather than as a single, permanent healing ministry: God restores health through a believer in one instance without that necessarily making healing a standing ability they can call on at will. It is a Spirit-empowered means of restoring physical wellbeing, distinct from (though not opposed to) the ordinary means of medicine and the body's own God-given capacity to recover.</p>
+            <h3>How It's Used</h3>
+            <p>James instructs the elders of a local church to pray over the sick and anoint them with oil, "and the prayer of faith will save the one who is sick" (James 5:14-15) — placing this gift squarely within the ordinary, communal life of the church rather than reserving it for platform ministry. It is exercised through prayer, in hospital and chaplaincy settings, and on the mission field, always pointing past the healer to the God who heals.</p>
+            <h3>Videos</h3>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'s-NJNVWT1TM')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/s-NJNVWT1TM/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the spiritual gift of healing? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 12:9')">1 Corinthians 12:9</span> — "To another gifts of healing by the one Spirit." The plural suggests healing given case by case, not a standing power.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 12:28')">1 Corinthians 12:28</span> — Healing is listed again among the gifted roles God has appointed in the church.</li>
+                <li><span class="verse-ref" onclick="showVerse('James 5:14-15')">James 5:14-15</span> — The elders of the church are to pray over the sick and anoint them with oil in the Lord's name.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 3:6-8')">Acts 3:6-8</span> — Peter heals a man lame from birth at the temple gate, "in the name of Jesus Christ of Nazareth."</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 28:8')">Acts 28:8</span> — Paul prays for and heals the father of the chief man of Malta during a shipwreck stopover.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="working-of-miracles">
+            <span class="section-kicker">1 Corinthians 12 — A Power Gift</span>
+            <h2>Working of Miracles</h2>
+            <h3>What It Is</h3>
+            <p>"To another the working of miracles" (1 Corinthians 12:10) names a gift broader than healing — acts of divine power that interrupt the ordinary course of nature in ways no natural explanation can account for. In Acts, this looks like Paul's word striking the sorcerer Elymas blind (Acts 13:9-11) or Peter raising Tabitha from the dead (Acts 9:36-41): displays of God's power, worked through a person, that functioned as signs confirming the truth of the gospel message being preached.</p>
+            <h3>How It's Used</h3>
+            <p>Throughout church history this gift has often clustered around frontier and missionary contexts — places where the gospel is being proclaimed for the first time and a visible demonstration of God's power opens hearts that words alone might not reach. As with every gift, the miracle is never the point in itself; Scripture consistently ties it back to confirming the message about Christ rather than exalting the person through whom it came (Hebrews 2:4).</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 12:10')">1 Corinthians 12:10</span> — "To another the working of miracles." Distinct from healing, a broader category of divine power displayed through a believer.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 19:11-12')">Acts 19:11-12</span> — God does "extraordinary miracles" through Paul, so that even cloths that touched him carried healing to the sick.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 9:36-41')">Acts 9:36-41</span> — Peter raises Tabitha (Dorcas) from the dead at Joppa, and many believe as a result.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 13:9-11')">Acts 13:9-11</span> — Paul, filled with the Spirit, pronounces temporary blindness on the sorcerer Elymas who opposed the gospel.</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 2:4')">Hebrews 2:4</span> — God bore witness to the gospel message "by signs and wonders and various miracles and gifts of the Holy Spirit."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="prophecy">
+            <span class="section-kicker">1 Corinthians 12 &amp; Romans 12 — A Revelation Gift</span>
+            <h2>Prophecy</h2>
+            <h3>What It Is</h3>
+            <p>Prophecy appears in both major lists (1 Corinthians 12:10, Romans 12:6), and it is worth being precise about what the New Testament means by it. This is not identical to the Old Testament office of the prophet whose words became canonical Scripture. Paul defines New Testament congregational prophecy functionally: "the one who prophesies speaks to people for their upbuilding and encouragement and consolation" (1 Corinthians 14:3) — Spirit-prompted speech, in the gathered church, that strengthens, encourages, and comforts believers by applying God's truth to the present moment.</p>
+            <p>Because this gift involves a human speaker relaying what they believe the Spirit has impressed on them, Scripture builds in safeguards that set it apart from the fixed, inerrant words of Scripture itself. Paul instructs the Corinthian church that prophetic words are to be weighed by others present (1 Corinthians 14:29), and Paul tells the Thessalonians, "do not despise prophecies, but test everything; hold fast what is good" (1 Thessalonians 5:20-21). Prophecy is never presented as a second source of Scripture-level authority; it is tested speech, always subordinate to the apostolic writings that form the New Testament canon.</p>
+            <h3>How It's Used</h3>
+            <p>In gathered worship, this gift functions to build up the body — naming a truth, a warning, or an encouragement the congregation needs to hear in that moment — always offered for the church to test rather than accept uncritically, and always exercised "in order" alongside the church's other gifts (1 Corinthians 14:40).</p>
+            <h3>Videos</h3>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'9I9-eChUC2Q')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/9I9-eChUC2Q/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">1 Corinthians 14: Understanding Spiritual Gifts<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Spoken Gospel</span></p></div>
+            </div>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 12:10')">1 Corinthians 12:10</span> — Prophecy is listed among the gifts the Spirit distributes "to each one individually as he wills."</li>
+                <li><span class="verse-ref" onclick="showVerse('Romans 12:6')">Romans 12:6</span> — "If prophecy, in proportion to our faith" — prophecy is to be exercised in step with the measure of faith given.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 14:3')">1 Corinthians 14:3</span> — "The one who prophesies speaks to people for their upbuilding and encouragement and consolation." The gift's defined purpose.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 14:29')">1 Corinthians 14:29</span> — "Let two or three prophets speak, and let the others weigh what is said." Prophecy is always tested by the gathered church.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Thessalonians 5:19-21')">1 Thessalonians 5:19-21</span> — "Do not quench the Spirit. Do not despise prophecies, but test everything; hold fast what is good."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="discernment-of-spirits">
+            <span class="section-kicker">1 Corinthians 12 — A Revelation Gift</span>
+            <h2>Discernment of Spirits</h2>
+            <h3>What It Is</h3>
+            <p>"To another the ability to distinguish between spirits" (1 Corinthians 12:10) describes a Spirit-given capacity to perceive whether a message, a manifestation, or a spirit at work in a situation is genuinely from God, merely human, or actively deceptive. John's first letter assumes every believer bears some responsibility here — "do not believe every spirit, but test the spirits to see whether they are from God" (1 John 4:1) — but this gift marks out those with an unusual, Spirit-sharpened sensitivity to spot counterfeits that others miss.</p>
+            <h3>How It's Used</h3>
+            <p>This gift functions as a kind of spiritual immune system for the local church — testing prophetic words (1 Corinthians 14:29), identifying teaching that sounds biblical but is subtly off, and recognizing spiritual opposition for what it is. Paul exercises it in Philippi when he discerns that a slave girl's accurate-sounding announcements about Paul and Silas were coming from "a spirit of divination" rather than from God (Acts 16:16-18).</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 12:10')">1 Corinthians 12:10</span> — "To another the ability to distinguish between spirits." A Spirit-given sensitivity to what is genuinely of God.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 John 4:1')">1 John 4:1</span> — "Do not believe every spirit, but test the spirits to see whether they are from God."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 14:29')">1 Corinthians 14:29</span> — Prophetic words are to be weighed by others present — discernment exercised in community.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 16:16-18')">Acts 16:16-18</span> — Paul discerns and casts out a "spirit of divination" speaking through a slave girl in Philippi.</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 5:14')">Hebrews 5:14</span> — Solid food belongs to the mature, "who have their powers of discernment trained by constant practice."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="tongues">
+            <span class="section-kicker">1 Corinthians 12 &amp; Acts 2 — A Sign / Speaking Gift</span>
+            <h2>Tongues</h2>
+            <h3>What It Is</h3>
+            <p>Scripture presents tongues in two related but distinct settings. At Pentecost, the gathered believers spoke "in other tongues as the Spirit gave them utterance" (Acts 2:4), and the crowd — pilgrims from across the Roman world — each heard "the mighty works of God" declared "in our own tongues" (Acts 2:8-11): real, known human languages the speakers had never learned, given so the gospel could be understood by every nation present. In 1 Corinthians 12-14, Paul addresses tongues as an ongoing gift in the Corinthian church's worship — a Spirit-given utterance, which he describes as speaking "not to men but to God," since "no one understands him" without interpretation (1 Corinthians 14:2).</p>
+            <h3>How It's Used</h3>
+            <p>Used privately, Paul says tongues "builds up" the individual believer in prayer (1 Corinthians 14:4). Used publicly, he regulates it carefully: no more than two or three speakers, each followed by an interpretation, "or else let him keep silent in church and speak to himself and to God" (1 Corinthians 14:27-28) — since unintelligible speech without interpretation cannot build up a gathered congregation. Paul's own conclusion holds both halves of the New Testament's teaching together: "do not forbid speaking in tongues," yet "all things should be done decently and in order" (1 Corinthians 14:39-40).</p>
+            <h3>Videos</h3>
+            <div class="video-grid">
+                
+                <div class="yt-facade" onclick="loadYT(this,'YaEEe9zFA0w')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/YaEEe9zFA0w/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the spiritual gift of speaking in tongues? | GotQuestions.org Podcast<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Acts 2:4')">Acts 2:4</span> — The disciples at Pentecost are "filled with the Holy Spirit and began to speak in other tongues as the Spirit gave them utterance."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 12:10')">1 Corinthians 12:10</span> — Tongues listed among the gifts the Spirit distributes to the church at Corinth.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 14:2')">1 Corinthians 14:2</span> — "The one who speaks in a tongue speaks not to men but to God... he utters mysteries in the Spirit."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 14:27-28')">1 Corinthians 14:27-28</span> — Paul's order for public tongues: at most two or three speakers, each needing an interpreter.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 14:39-40')">1 Corinthians 14:39-40</span> — "Do not forbid speaking in tongues. But all things should be done decently and in order."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="interpretation-of-tongues">
+            <span class="section-kicker">1 Corinthians 12 — A Speaking Gift</span>
+            <h2>Interpretation of Tongues</h2>
+            <h3>What It Is</h3>
+            <p>"To another the interpretation of tongues" (1 Corinthians 12:10) names the gift that makes a tongues-message intelligible to the gathered church — not necessarily a formal, word-for-word translation, but the Spirit-given ability to understand and communicate the sense of what was spoken so the congregation can be built up by it rather than left confused. Paul treats the two gifts as a pair: "one who speaks in a tongue should pray that he may interpret" (1 Corinthians 14:13), and without interpretation a tongues-message is incomplete for public use.</p>
+            <h3>How It's Used</h3>
+            <p>This gift partners directly with tongues in corporate worship, turning a private, Spirit-prompted utterance into something the whole church can understand and be edified by. Paul is blunt about why this matters: an outsider who walks into a service full of untranslated tongues will conclude the church is "out of your minds" (1 Corinthians 14:23) — interpretation is what allows the gift of tongues to serve, rather than confuse, the gathered body.</p>
+            <h3>Videos</h3>
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'sqDA0ciVLj4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/sqDA0ciVLj4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">What is the spiritual gift of interpreting tongues? | GotQuestions.org<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 12:10')">1 Corinthians 12:10</span> — "To another various kinds of tongues, to another the interpretation of tongues." The gifts are named as a pair.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 14:13')">1 Corinthians 14:13</span> — "One who speaks in a tongue should pray that he may interpret." The two gifts work together.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 14:5')">1 Corinthians 14:5</span> — Paul says prophecy is greater than uninterpreted tongues "unless someone interprets, so that the church may be built up."</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 14:27-28')">1 Corinthians 14:27-28</span> — Public tongues require an interpreter present, or the speaker is to remain silent in the assembly.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 14:23')">1 Corinthians 14:23</span> — Untranslated tongues before outsiders risk making the church look as though it has "lost its mind."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="teaching">
+            <span class="section-kicker">Romans 12 &amp; Ephesians 4 — A Serving Gift</span>
+            <h2>Teaching</h2>
+            <h3>What It Is</h3>
+            <p>"The one who teaches, in his teaching" (Romans 12:7) is listed again in Ephesians 4:11, where Christ gives "pastors and teachers" to His church. This gift is the Spirit-given ability to understand Scripture accurately and communicate it so that others grasp it, retain it, and apply it rightly — more than simply knowing facts about the Bible, and distinct from natural charisma or public-speaking skill, though it often makes use of both.</p>
+            <h3>How It's Used</h3>
+            <p>Ephesians 4:12 states the purpose plainly: teachers are given "to equip the saints for the work of ministry, for building up the body of Christ." This gift operates in pulpits and classrooms, but just as often in small groups, one-on-one discipleship, and written resources — anywhere a believer's grasp of God's Word is deepened by someone able to open it up clearly.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Romans 12:7')">Romans 12:7</span> — "The one who teaches, in his teaching" — one of the gifts listed for serving the body according to the grace given.</li>
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 4:11-12')">Ephesians 4:11-12</span> — Christ gives pastors and teachers "to equip the saints for the work of ministry, for building up the body of Christ."</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Timothy 2:2')">2 Timothy 2:2</span> — Paul tells Timothy to entrust what he has learned "to faithful men who will be able to teach others also."</li>
+                <li><span class="verse-ref" onclick="showVerse('James 3:1')">James 3:1</span> — "Not many of you should become teachers... for you know that we who teach will be judged with greater strictness."</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 18:24-26')">Acts 18:24-26</span> — Apollos, "competent in the Scriptures," teaches accurately about Jesus and is further instructed by Priscilla and Aquila.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="exhortation">
+            <span class="section-kicker">Romans 12 — A Serving Gift</span>
+            <h2>Exhortation (Encouragement)</h2>
+            <h3>What It Is</h3>
+            <p>"The one who exhorts, in his exhortation" (Romans 12:8) translates a Greek word, <em>parakaleo</em>, that means "to call alongside." This gift is the Spirit-given ability to come near a discouraged, wavering, or hurting person and strengthen them — not with empty cheerfulness, but with truth spoken in a way that steadies and spurs them forward in faith.</p>
+            <h3>How It's Used</h3>
+            <p>Barnabas, whose given name the apostles changed to mean "son of encouragement" (Acts 4:36), models this gift throughout Acts — vouching for the newly converted Saul when the church was still afraid of him (Acts 9:27), and later going to strengthen the fledgling believers at Antioch (Acts 11:23). Today it looks like the note written at the right moment, the visit to someone in the hospital, the word spoken to a believer ready to give up, and the steady presence that helps a new Christian keep going.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Romans 12:8')">Romans 12:8</span> — "The one who exhorts, in his exhortation" — strengthening and encouraging others as a Spirit-given grace.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 4:36')">Acts 4:36</span> — Joseph is renamed Barnabas by the apostles, "which means son of encouragement."</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 10:24-25')">Hebrews 10:24-25</span> — Believers are told to meet together, "stirring up one another to love and good works" and encouraging one another.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Thessalonians 5:11')">1 Thessalonians 5:11</span> — "Encourage one another and build one another up, just as you are doing."</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 3:13')">Hebrews 3:13</span> — "Exhort one another every day... that none of you may be hardened by the deceitfulness of sin."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="giving">
+            <span class="section-kicker">Romans 12 — A Serving Gift</span>
+            <h2>Giving</h2>
+            <h3>What It Is</h3>
+            <p>"The one who contributes, in generosity" (Romans 12:8) describes a Spirit-given capacity for material generosity that goes beyond the giving expected of every believer. All Christians are called to be generous, but some are given an unusual capacity to give — joyfully, wisely, and often sacrificially — recognizing needs and resourcing them in ways that strengthen the whole church.</p>
+            <h3>How It's Used</h3>
+            <p>This gift funds ministry, cares for the poor and needy within and beyond the congregation, and supports those called to vocational ministry and missions. Paul holds up the churches of Macedonia as an example: giving that flowed "according to their means, and beyond their means," prompted not by pressure but by overflowing joy (2 Corinthians 8:1-5) — the pattern this gift is meant to embody.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Romans 12:8')">Romans 12:8</span> — "The one who contributes, in generosity" — giving marked by cheerful, Spirit-prompted liberality.</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 9:6-7')">2 Corinthians 9:6-7</span> — "God loves a cheerful giver" — generosity given not reluctantly or under compulsion, but gladly.</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Corinthians 8:1-5')">2 Corinthians 8:1-5</span> — The Macedonian churches give generously out of their own poverty, beyond what Paul expected.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 4:34-37')">Acts 4:34-37</span> — Early believers sell property so that "there was not a needy person among them," meeting one another's needs.</li>
+                <li><span class="verse-ref" onclick="showVerse('Mark 12:41-44')">Mark 12:41-44</span> — Jesus commends a poor widow's two small coins as greater giving than the large gifts of the wealthy, because she gave all she had.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="leadership">
+            <span class="section-kicker">Romans 12 &amp; 1 Corinthians 12 — A Serving Gift</span>
+            <h2>Leadership</h2>
+            <h3>What It Is</h3>
+            <p>"The one who leads, with zeal" (Romans 12:8) is matched in 1 Corinthians 12:28 by "administrating" — a Spirit-given capacity to organize people and resources, cast vision, and guide a group of believers toward a God-honoring goal. Paul's choice of "zeal" is notable: this is not a gift for the reluctant or the merely efficient, but for those who lead with genuine care and energy for the people they are leading.</p>
+            <h3>How It's Used</h3>
+            <p>This gift shows up in eldership and church oversight, in leading ministry teams and outreach efforts, and in the behind-the-scenes organizing that lets a church function smoothly rather than in confusion (1 Corinthians 14:40). The apostles model it in Acts 6:1-3, directing the church to choose seven qualified men to oversee the daily distribution to widows so that both that practical need and the apostles' own calling could be rightly served.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Romans 12:8')">Romans 12:8</span> — "The one who leads, with zeal" — leadership exercised with genuine care, not grudging duty.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Corinthians 12:28')">1 Corinthians 12:28</span> — "Administrating" is listed among the gifts God has appointed in the church.</li>
+                <li><span class="verse-ref" onclick="showVerse('1 Timothy 3:1-5')">1 Timothy 3:1-5</span> — An overseer must "manage his own household well," since this is the pattern for caring for God's church.</li>
+                <li><span class="verse-ref" onclick="showVerse('Hebrews 13:17')">Hebrews 13:17</span> — Believers are told to obey and submit to their leaders, "for they are keeping watch over your souls."</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 6:1-3')">Acts 6:1-3</span> — The apostles direct the church to choose seven men "full of the Spirit and of wisdom" to administrate daily care for widows.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="mercy">
+            <span class="section-kicker">Romans 12 — A Serving Gift</span>
+            <h2>Mercy</h2>
+            <h3>What It Is</h3>
+            <p>"The one who does acts of mercy, with cheerfulness" (Romans 12:8) names a Spirit-given capacity for deep compassion toward those who suffer — grief, illness, poverty, disability, loneliness — that moves beyond feeling sympathy into sustained, practical, cheerful action on another's behalf. The qualifier matters: this gift is marked not by grim duty but by genuine gladness in caring for people the world often overlooks.</p>
+            <h3>How It's Used</h3>
+            <p>This gift shows up in hospital and nursing-home visitation, care for the grieving, ministry to the disabled and the elderly, and crisis response — anywhere a congregation needs people willing to sit with pain rather than hurry past it. Jesus' parable of the Good Samaritan (Luke 10:30-37) is the model Scripture itself holds up: mercy that sees need, is moved by compassion, and acts.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Romans 12:8')">Romans 12:8</span> — "The one who does acts of mercy, with cheerfulness" — compassion that acts, and acts gladly.</li>
+                <li><span class="verse-ref" onclick="showVerse('Luke 10:33-37')">Luke 10:33-37</span> — The Samaritan, "moved with compassion," cares practically for the wounded man others passed by.</li>
+                <li><span class="verse-ref" onclick="showVerse('Matthew 5:7')">Matthew 5:7</span> — "Blessed are the merciful, for they shall receive mercy." Mercy shown is mercy that reflects God's own character.</li>
+                <li><span class="verse-ref" onclick="showVerse('James 2:13')">James 2:13</span> — "Mercy triumphs over judgment" — a reminder of mercy's place at the center of genuine faith.</li>
+                <li><span class="verse-ref" onclick="showVerse('Colossians 3:12')">Colossians 3:12</span> — God's chosen people are told to "put on compassionate hearts, kindness, humility, meekness, and patience."</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="evangelism">
+            <span class="section-kicker">Ephesians 4 — An Equipping Gift</span>
+            <h2>Evangelism</h2>
+            <h3>What It Is</h3>
+            <p>Ephesians 4:11 lists "evangelists" among the gifted people Christ gives His church — believers with a Spirit-given ability to communicate the gospel with particular clarity, urgency, and effectiveness, so that those who hear come to saving faith in Christ. Philip, one of the seven chosen in Acts 6 and later explicitly called "the evangelist" (Acts 21:8), models the gift in action: he "proclaimed to them the Christ" in Samaria, with crowds paying attention "with one accord" as they saw and heard what he did (Acts 8:5-6).</p>
+            <h3>How It's Used</h3>
+            <p>This gift operates in personal evangelism, outreach events, and missions — but Ephesians 4:11-12 is careful to frame evangelists as equippers, not substitutes: Christ gives evangelists in part "to equip the saints for the work of ministry," since every believer is called to witness to Christ (Acts 1:8) whether or not they carry this specific gift. Philip's encounter with the Ethiopian official (Acts 8:26-35), explaining Isaiah's prophecy and leading him to baptism on the spot, shows the gift's responsiveness to wherever the Spirit opens a door.</p>
+            <h3>Key Verses</h3>
+            <ul class="verse-list">
+                <li><span class="verse-ref" onclick="showVerse('Ephesians 4:11-12')">Ephesians 4:11-12</span> — Christ gives "evangelists" to the church, in part to equip every saint for the work of ministry.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 8:5-6')">Acts 8:5-6</span> — Philip goes to Samaria, proclaims Christ, and the crowds pay attention to what he says and does.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 8:26-35')">Acts 8:26-35</span> — Philip explains the gospel from Isaiah 53 to an Ethiopian official and baptizes him on the road.</li>
+                <li><span class="verse-ref" onclick="showVerse('Acts 21:8')">Acts 21:8</span> — Philip is explicitly named "the evangelist," one of the seven chosen to serve the early church.</li>
+                <li><span class="verse-ref" onclick="showVerse('2 Timothy 4:5')">2 Timothy 4:5</span> — Paul charges Timothy to "do the work of an evangelist," regardless of whether it is his primary gift.</li>
+            </ul>
+        </div>
+
+        <div class="section-block" id="videos">
+            <span class="section-kicker">Watch &amp; Learn</span>
+            <h2>Videos</h2>
+            <p style="font-size:0.85rem;color:var(--text-secondary,#6b6259);margin-bottom:16px;">General videos covering the gifts of the Holy Spirit as a whole — see each gift's own section above for videos specific to it.</p>
+
+            <div class="video-grid">
+                <div class="yt-facade" onclick="loadYT(this,'XCfeIswRphg')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/XCfeIswRphg/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">1 Corinthians 12:1-11 – The Holy Spirit &amp; the Gifts He Gives<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'dEJYv5w5Rl4')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/dEJYv5w5Rl4/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">1 Corinthians 12:12-31 – Diversity and Unity in the Gifts of the Spirit<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'3J8CSphFTLQ')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/3J8CSphFTLQ/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Romans 12:3-21 – God Likes it When We Get Along<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">David Guzik</span></p></div>
+                <div class="yt-facade" onclick="loadYT(this,'LWF7eQ4GeTs')" style="position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/LWF7eQ4GeTs/hqdefault.jpg') center/cover;"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">Is there a biblical spiritual gifts list?<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">Got Questions Ministries</span></p></div>
+            </div>
+        </div>
+
+        <div class="section-block">
+            <h2>Articles</h2>
+            <!-- articles -->
+            <ul style="padding-left:20px;list-style:none;margin:0;">
+                <li style="font-size:0.92rem;line-height:1.7;color:var(--text-secondary);margin-bottom:10px;"><span aria-hidden="true" style="color:var(--accent-gold-light);">&#10022;</span> <strong>GotQuestions.org:</strong> <a href="https://www.gotquestions.org/spiritual-gifts-list.html" target="_blank" rel="noopener" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">gotquestions.org</a> The three New Testament gift lists compared, with a description of each gift.</li>
+                <li style="font-size:0.92rem;line-height:1.7;color:var(--text-secondary);margin-bottom:10px;"><span aria-hidden="true" style="color:var(--accent-gold-light);">&#10022;</span> <strong>GotQuestions.org:</strong> <a href="https://www.gotquestions.org/spiritual-gifts.html" target="_blank" rel="noopener" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">gotquestions.org</a> How God distributes spiritual gifts, and why no believer is left without one.</li>
+                <li style="font-size:0.92rem;line-height:1.7;color:var(--text-secondary);margin-bottom:10px;"><span aria-hidden="true" style="color:var(--accent-gold-light);">&#10022;</span> <strong>GotQuestions.org:</strong> <a href="https://www.gotquestions.org/spiritual-gifts-survey.html" target="_blank" rel="noopener" style="color:var(--accent-link);text-decoration:none;border-bottom:1px dotted var(--accent-link);">gotquestions.org</a> A walk through each gift the Bible names, gift by gift.</li>
+            </ul>
+            <p style="font-size:0.78rem;color:var(--text-faint);margin-top:14px;line-height:1.7;">Links open on the publisher's own site. Nothing here is reproduced on this page.</p>
+            <!-- /articles -->
+        </div>
+    </main>
+    <script src="site/script.js?v=a73b5a28"></script>
+    <script>
+        function loadYT(el,id){el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:10px;"></iframe>';el.style.position='relative';}
+    </script>
+    <div class="verse-popup-overlay" id="verseOverlay" onclick="closeVerse()"></div>
+    <div class="verse-popup" id="versePopup">
+        <button class="popup-close" onclick="closeVerse()">&times;</button>
+        <div class="popup-ref" id="popupRef"></div>
+        <div class="popup-text" id="popupText"></div>
+    </div>
+    <script>
+    function showVerse(passage) {
+        var overlay = document.getElementById('verseOverlay');
+        var popup = document.getElementById('versePopup');
+        var refEl = document.getElementById('popupRef');
+        var textEl = document.getElementById('popupText');
+        refEl.textContent = passage;
+        textEl.innerHTML = '<span class="popup-loading">Loading verse...</span>';
+        overlay.classList.add('show');
+        popup.classList.add('show');
+        fetch('https://esv-proxy.cloudflare-dust598.workers.dev/?q=' + encodeURIComponent(passage))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.passages && data.passages[0]) {
+                textEl.innerHTML = data.passages[0];
+            } else {
+                textEl.innerHTML = '<em>Could not load this passage.</em>';
+            }
+        })
+        .catch(function() {
+            textEl.innerHTML = '<em>Unable to fetch verse. Try again later.</em>';
+        });
+    }
+    function closeVerse() {
+        document.getElementById('verseOverlay').classList.remove('show');
+        document.getElementById('versePopup').classList.remove('show');
+    }
+    </script>
+</body>
+</html>
