@@ -1,9 +1,9 @@
 {
-  "upstream_commit": "1bfe09fdfd3e289e53e514a9e307b32662e1bdbe Memory: add Word order and Type it practice modes",
+  "upstream_commit": "a60674d9e8c86218e5cd8b1a852ecb089bb69dfe Weekly review 2026-10-13: 2 articles and 5 videos added, 7 articles and 13 videos dropped",
   "upstream_fingerprints": {
     "site/style.css": "54238837",
     "site/script.js": "d71fe306"
   },
   "style_css_v": "bfc452f3",
-  "script_js_v": "a73b5a28"
+  "script_js_v": "7dca3584"
 }

@@ -71,6 +71,19 @@ DROP_VIDEO_IDS = {
                    "current-events speculation",
     "RcnxRa4qClw": "2BeLikeChrist 'We Need Your Help!' -- a channel appeal, not teaching",
     "nm8nKMRQXgY": "The Chosen 'I Love The One' lyric video -- a music video, not teaching",
+    "1_JMZNIWybs": "BibleProject 'Spirit of God' -- theme video, no passage in the title (skipped 2026-10-13; could go on the-trinity or gifts-of-the-holy-spirit)",
+    "jMtE5l5YNn4": "David Guzik 'Bet Shemesh: The Ark of the Covenant Comes Home' -- Israel travel episode, no passage in the title",
+    "z9BVccSFJBE": "David Guzik 'What Does The Parable of the 10 Virgins Mean? LIVE Q&A' -- live Q&A stream",
+    "XB9gcC1cJGM": "Give Me an Answer 'Is Being Morally Good, Good Enough?' -- no passage",
+    "xYA3RxK-p5M": "GotQuestions 'When will the Resurrection take place?' -- no passage",
+    "0V-0NWObrLw": "GotQuestions 'Is the Euphrates River Drying Up a Sign of the End Times?' -- current-events speculation",
+    "BvmX6D8mvB0": "GotQuestions 'Who are the Amish...' -- podcast episode",
+    "BBxSYQq8eeY": "Mike Winger 'Does the Bible support me calling people names? 10 Qs' -- Q&A episode, no passage",
+    "h_5xr7jrZPw": "The BEAT 'Frank Turek Answers the Charlie Kirk Conspiracy Theories' -- politics and current events",
+    "0Cx1SQGZTVo": "The Chosen 'Last Watch Party Before Season 6' -- not teaching",
+    "20SieZXyaa0": "The Chosen 'Season 4 Full Recap' -- not teaching",
+    "uTzkFqKWEEw": "The Chosen 'My Everything' lyric video -- a music video",
+    "cEpT4Yj22GA": "The Chosen 'Lady A + Boyz II Men: How Did This Song Happen?' -- behind-the-song, not teaching",
 }
 
 FACADE_OPEN = '<div class="yt-facade"'
