@@ -84,6 +84,19 @@ DROP_VIDEO_IDS = {
     "20SieZXyaa0": "The Chosen 'Season 4 Full Recap' -- not teaching",
     "uTzkFqKWEEw": "The Chosen 'My Everything' lyric video -- a music video",
     "cEpT4Yj22GA": "The Chosen 'Lady A + Boyz II Men: How Did This Song Happen?' -- behind-the-song, not teaching",
+    "XcjD8A1NsV4": "GotQuestions 'A Summary of the Book of Mark' re-upload -- duplicate of COOBtFhtVZs already on mark1 (added in error 2026-10-13)",
+    "Vhlo7vpzH8k": "GotQuestions 'A Summary of the Book of Luke' re-upload -- duplicate of cGBVcGPqSpI already on luke1",
+    "9kJkB2ALAg0": "David Guzik 'Elah Valley: David, Goliath, & the Power of Faith' -- Israel travel episode, no passage in the title",
+    "zezQ7jXxEXo": "David Guzik 'How To Lead Like Jesus' -- no passage",
+    "mrEszqtYogg": "David Guzik 'Was Muhammad Prophesied In the Bible? LIVE Q&A' -- live Q&A stream, no passage",
+    "dNGSFpfyfhA": "Give Me an Answer 'Do Agnostics Just Want To Have Control?' -- no passage",
+    "W9rKbdgfpx0": "GotQuestions 'Is Elon Musk the Antichrist?' -- current-events speculation",
+    "MUjjX5PG3N8": "GotQuestions 'Ghosts, Demons & Guardian Angels' -- no passage",
+    "V1-ng3VkvKY": "GotQuestions 'Noah's Ark' -- podcast episode",
+    "orCDwvy6KGw": "Mike Winger on a televised execution -- current events, no passage",
+    "6S2lM461igY": "Mike Winger 'I Went To A Mosque...: 10 Qs' -- Q&A episode, no passage",
+    "ZiIHadIR0qo": "The BEAT 'Heaven Is NOT What Most Christians Think' -- no passage",
+    "VVqrE7azRqw": "The Chosen 'Season 6 Official Trailer' -- a trailer, not teaching",
 }
 
 FACADE_OPEN = '<div class="yt-facade"'
