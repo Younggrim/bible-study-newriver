@@ -822,6 +822,8 @@ body.pwa-standalone .pwa-bible-nav { display: block; }
 .pwa-bible-nav .nav-go-btn:hover { background: #333333; }
 
 /* Six tabs in the app's bottom bar (Notes added): share the width evenly so all six fit a phone. */
-.pwa-bottom-nav.pwa-six { padding: 0 2px; padding-bottom: env(safe-area-inset-bottom, 0px); }
-.pwa-bottom-nav.pwa-six .pwa-nav-item { flex: 1 1 0; min-width: 0; padding: 6px 2px; }
-.pwa-bottom-nav.pwa-six .pwa-nav-item span { font-size: 0.62rem; white-space: nowrap; }
+/* Labels scale with the screen width (and ignore iOS text enlargement) so "Devotional" and "Memory" never run off the edge. */
+.pwa-bottom-nav.pwa-six { padding: 0 max(4px, env(safe-area-inset-right, 0px)) env(safe-area-inset-bottom, 0px) max(4px, env(safe-area-inset-left, 0px)); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; box-sizing: border-box; }
+.pwa-bottom-nav.pwa-six .pwa-nav-item { flex: 1 1 0; min-width: 0; padding: 6px 1px; overflow: hidden; }
+.pwa-bottom-nav.pwa-six .pwa-nav-item i { font-size: 1.1rem; }
+.pwa-bottom-nav.pwa-six .pwa-nav-item span { font-size: clamp(8.5px, 2.5vw, 10px); letter-spacing: -0.01em; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
