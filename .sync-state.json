@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "0265fd144216451b1d297c529c9db76c207227e7 Bibles in six more languages: Spanish, Hausa, Yoruba, Igbo, Urdu, Hindi (#72)",
+  "upstream_commit": "d83cad1ad5b29bcdc624ed62803463522a90ea5c 23 more Bible languages: India, Africa and world (29 in all) (#73)",
   "upstream_fingerprints": {
     "site/style.css": "54238837",
     "site/script.js": "d71fe306"
