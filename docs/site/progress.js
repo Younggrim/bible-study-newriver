@@ -286,6 +286,7 @@
         publish: function () { lastPublished = null; publish(); },
         studiedOn: function (p) { return chapters[p] && !chapters[p].r ? chapters[p].d : null; },
         today: today,
+        mark: function (p, on) { mark(p, on !== false); },
         reset: function () { chapters = {}; days = {}; changed(); },
         onChange: function (fn) { listeners.push(fn); },
         render: render
