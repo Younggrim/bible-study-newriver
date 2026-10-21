@@ -554,16 +554,17 @@ Supabase when signed in (tables and privacy tests in `supabase/`).
 | `docs/site/plans.js` + `plans-data.js` | reading plans (`build_plans.py` writes the data and checks it) |
 | `docs/site/translations.js` | other-language Bibles |
 | `docs/site/i18n.js` + `site/i18n/*.json` | buttons and labels in the reader's language (`i18n_strings.py`) |
-| `docs/notes.html`, `docs/friends.html`, `docs/privacy.html` | pages |
+| `docs/plans.html`, `docs/notes.html`, `docs/friends.html`, `docs/privacy.html` | pages (`plans.html` is the app's Plans tab; on the website the plan card stays on the home page) |
 | `push-worker/worker.js` | devotional reminders, the 7 PM streak reminder (`/studied`, `/message`, `/preferences`), and friend alerts: `/link` and `/unlink` tie a device to a signed-in account, `/notify` (called with the sender's Supabase token) queues a "friend request" or "shared a verse/note" push to their friends' devices, recipients found through `friends_list()` |
 
 `python3 add_study_scripts.py` puts the right script tags on every page and
 stamps them; run it after changing any of these files.
 
-**The Notes tab is the one change in the two per-site files.** `site/script.js`
-and `site/style.css` are preserved by the sync, so the sixth bottom-bar tab was
-added by hand in both repos (the `pwa-six` class and the `notes` section). Keep
-the two copies' bottom-bar code identical.
+**The bottom bar is hand-edited in the two per-site files.** `site/script.js`
+and `site/style.css` are preserved by the sync, so the six-tab bar (Bible,
+Topical, Life, Plans, Devotional, Memory; the `pwa-six` class and the `plans`
+section) was changed by hand in both repos. Notes moved off the bar to the
+account menu ("My notes"). Keep the two copies' bottom-bar code identical.
 
 **The push worker is deployed by hand** (`cd push-worker && wrangler deploy`),
 not by GitHub Pages. Until it is, the site still works: the streak report and

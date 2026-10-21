@@ -98,9 +98,8 @@
 
     var STYLE = ''
         + '.bs-plan{max-width:640px;margin:16px auto 0;padding:0 16px;font-family:"Inter",-apple-system,sans-serif;color:var(--ink-deep)}'
-        + 'body.pwa-standalone .pwa-bible-nav .bs-plan{margin:0 0 16px;padding:0;text-align:left}'
+        + '#planMount .bs-plan{margin:0 auto;padding:0}'
         + '.bs-plan-card{background:#fff;border:1px solid var(--border-light);border-radius:14px;padding:16px 18px;box-shadow:0 4px 16px rgba(0,0,0,.05)}'
-        + 'body.pwa-standalone .pwa-bible-nav .bs-plan-card{background:var(--bg-tint-2);box-shadow:none}'
         + '.bs-plan-eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint);margin:0 0 4px}'
         + '.bs-plan-name{font-family:"Poppins","Inter",sans-serif;font-weight:700;font-size:1.05rem;margin:0 0 2px}'
         + '.bs-plan-day{font-size:.85rem;color:var(--text-secondary);margin:0 0 10px}'
@@ -123,16 +122,23 @@
     function style() { if (!document.getElementById('bs-plan-style')) { var s = el('style', { id: 'bs-plan-style', text: STYLE }); document.head.appendChild(s); } }
 
     var homeEl = null, choosing = false;
-    function isHome() { return /^(|index(\.html)?)$/.test(location.pathname.split('/').pop() || ''); }
+    function pageName() { return location.pathname.split('/').pop() || ''; }
+    function isHome() { return /^(|index(\.html)?)$/.test(pageName()); }
+    function isPlansPage() { return /^plans(\.html)?$/.test(pageName()); }
+    // In the installed app, plans live on their own Plans tab (plans.html), not the home page.
+    function isApp() {
+        return document.body.classList.contains('pwa-standalone')
+            || (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+    }
 
-    function chooser(cancel) {
-        var list = el('ul', { class: 'bs-plan-choose' }, PLANS.map(function (p) {
+    function chooser(cancel, skip) {
+        var list = el('ul', { class: 'bs-plan-choose' }, PLANS.filter(function (p) { return p.id !== skip; }).map(function (p) {
             var chs = p.days.reduce(function (a, d) { return a + d.length; }, 0);
             var b = el('button', { type: 'button', class: 'bs-plan-start', text: T('plan.start', 'Start') });
             b.addEventListener('click', function () { choosing = false; setPlan(p.id); });
             return el('li', {}, [el('span', {}, [p.name, el('small', { text: p.days.length + ' days · ' + chs + ' chapters' })]), b]);
         }));
-        var kids = [el('p', { class: 'bs-plan-eyebrow', text: T('plan.choose', 'Start a reading plan') }), list];
+        var kids = [el('p', { class: 'bs-plan-eyebrow', text: skip ? T('plan.others', 'Other plans') : T('plan.choose', 'Start a reading plan') }), list];
         if (cancel) {
             var c = el('button', { type: 'button', class: 'bs-plan-link', text: T('plan.cancel', 'Keep my current plan') });
             c.addEventListener('click', function () { choosing = false; render(); });
@@ -142,18 +148,25 @@
     }
 
     function renderHome() {
-        if (!isHome() || !PLANS.length) return;
+        var onPlans = isPlansPage();
+        if (!PLANS.length || !(onPlans || (isHome() && !isApp()))) {
+            if (homeEl && !onPlans) { homeEl.remove(); homeEl = null; }
+            return;
+        }
         style();
         if (!homeEl) {
             homeEl = el('div', { class: 'bs-plan' });
-            var standalone = document.body.classList.contains('pwa-standalone');
-            var pwaNav = document.querySelector('.pwa-bible-nav'), hero = document.querySelector('.hero-section');
-            if (standalone && pwaNav) pwaNav.insertBefore(homeEl, pwaNav.firstChild);
-            else if (hero) hero.parentNode.insertBefore(homeEl, hero.nextSibling);
-            else return;
+            var mountAt = document.getElementById('planMount');
+            var hero = document.querySelector('.hero-section');
+            if (onPlans && mountAt) mountAt.appendChild(homeEl);
+            else if (!onPlans && hero) hero.parentNode.insertBefore(homeEl, hero.nextSibling);
+            else { homeEl = null; return; }
         }
         var st = status();
         if (!st || choosing) { homeEl.replaceChildren(chooser(!!st)); return; }
+        // The plans page also lists every plan under the one being followed.
+        var others = onPlans ? chooser(false, st.def.id) : null;
+        if (others) others.style.marginTop = '16px';
 
         var change = el('button', { type: 'button', class: 'bs-plan-link', text: T('plan.change', 'Change plan') });
         change.addEventListener('click', function () { choosing = true; render(); });
@@ -166,7 +179,7 @@
             homeEl.replaceChildren(el('div', { class: 'bs-plan-card' }, [
                 el('p', { class: 'bs-plan-eyebrow', text: T('plan.title', 'Reading plan') }),
                 el('p', { class: 'bs-plan-name', text: st.def.name }),
-                el('p', { class: 'bs-plan-day', text: '🎉 ' + T('plan.finished', 'Finished! Well done.') }), bar, again]));
+                el('p', { class: 'bs-plan-day', text: '🎉 ' + T('plan.finished', 'Finished! Well done.') }), bar, again]), others || '');
             return;
         }
         var today = st.def.days[st.day];
@@ -181,7 +194,7 @@
             el('p', { class: 'bs-plan-day', text: T('plan.day', 'Day {n} of {total}').replace('{n}', st.day + 1).replace('{total}', st.total) }),
             bar, chips,
             el('div', { class: 'bs-plan-row' }, [el('a', { class: 'bs-plan-go', href: next + '.html' }, [T('plan.read', 'Read') + ' ' + label(next) + ' ', el('i', { class: 'fas fa-arrow-right', 'aria-hidden': 'true' })]), change])
-        ]));
+        ]), others || '');
     }
 
     /* ---------- chapter page: where this chapter sits in today's reading ---------- */

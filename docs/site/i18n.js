@@ -31,7 +31,7 @@
         'tab.summary': 'Summary', 'tab.authorship': 'Authorship & Background', 'tab.mapgeo': 'Map & Geography',
         'tab.commentary': 'Commentary', 'tab.videos': 'Videos', 'tab.articles': 'Articles', 'tab.reflection': 'Reflection',
         'nav.go': 'Go', 'nav.ch': 'Ch {n}', 'nav.chapter': '{book} — Chapter {n}', 'home.choose': 'Choose a Passage', 'home.goto': 'Go to Chapter',
-        'bn.bible': 'Bible', 'bn.topical': 'Topical', 'bn.life': 'Life', 'bn.devotional': 'Devotional', 'bn.memory': 'Memory', 'bn.notes': 'Notes'
+        'bn.bible': 'Bible', 'bn.topical': 'Topical', 'bn.life': 'Life', 'bn.devotional': 'Devotional', 'bn.memory': 'Memory', 'bn.notes': 'Notes', 'bn.plans': 'Plans'
     };
 
     function load(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }
@@ -88,7 +88,8 @@
         if (!node.hasAttribute('data-en')) node.setAttribute('data-en', tn.nodeValue.trim());
         tn.nodeValue = text != null ? text : node.getAttribute('data-en');
     }
-    function L(key) { return lang === 'en' ? null : t(key); }
+    // Labels with no translation keep their English text (null), never show the raw key.
+    function L(key) { return lang === 'en' || !(key in dict || key in EN) ? null : t(key); }
 
     function chapterOf(href) { var m = /([1-3]?[a-z]+?)(\d+)\.html/.exec(href || ''); return m ? { b: m[1], c: m[2] } : null; }
 

@@ -322,6 +322,8 @@ document.addEventListener('DOMContentLoaded', function() {
         section = 'memory';
     } else if (baseName === 'notes') {
         section = 'notes';
+    } else if (baseName === 'plans') {
+        section = 'plans';
     } else if (topicPages.indexOf(baseName) !== -1) {
         section = 'topical';
     } else if (strugglePages.indexOf(baseName) !== -1) {
@@ -471,7 +473,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 2200);
     }
 
-    // Inject bottom nav (6 tabs: Bible, Topical, Life, Devotional, Memory, Notes)
+    // Inject bottom nav (6 tabs: Bible, Topical, Life, Plans, Devotional, Memory). Notes is in the account menu.
     var nav = document.createElement('nav');
     nav.className = 'pwa-bottom-nav pwa-six';
     nav.innerHTML = ''
@@ -481,12 +483,12 @@ document.addEventListener('DOMContentLoaded', function() {
         + '<i class="fas fa-lightbulb"></i><span>Topical</span></a>'
         + '<a class="pwa-nav-item' + (section==='life'?' active':'') + '" data-section="life" href="#">'
         + '<i class="fas fa-heart"></i><span>Life</span></a>'
+        + '<a class="pwa-nav-item' + (section==='plans'?' active':'') + '" data-section="plans" href="#">'
+        + '<i class="fas fa-calendar-check"></i><span>Plans</span></a>'
         + '<a class="pwa-nav-item' + (section==='devotional'?' active':'') + '" data-section="devotional" id="pwa-devotional-btn" href="#">'
         + '<i class="fas fa-hands-praying"></i><span>Devotional</span></a>'
         + '<a class="pwa-nav-item' + (section==='memory'?' active':'') + '" data-section="memory" href="#">'
-        + '<i class="fas fa-brain"></i><span>Memory</span></a>'
-        + '<a class="pwa-nav-item' + (section==='notes'?' active':'') + '" data-section="notes" href="#">'
-        + '<i class="fas fa-pen-to-square"></i><span>Notes</span></a>';
+        + '<i class="fas fa-brain"></i><span>Memory</span></a>';
     document.body.appendChild(nav);
 
     // Tab click handling
@@ -502,8 +504,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.location.href = 'memory.html';
                 return;
             }
-            if (sec === 'notes') {
-                window.location.href = 'notes.html';
+            if (sec === 'plans') {
+                window.location.href = 'plans.html';
                 return;
             }
             if (sec === 'topical') {
