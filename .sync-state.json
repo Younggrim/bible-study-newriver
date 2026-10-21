@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "2cc5df375c27132dc132017d906fe5c2d4088a64 Streaks, Notes, plans, friends, labels in every language (+ privacy page) (#75)",
+  "upstream_commit": "b27cbebc598485f29aecc7ae1a205c9de6deac4c Friend activity: home-page friends strip and push alerts for requests and shares (#76)",
   "upstream_fingerprints": {
     "site/style.css": "20c1069c",
     "site/script.js": "e9884175"

@@ -119,6 +119,12 @@ self.addEventListener('push', event => {
         data: { url: '/index.html' }
       });
     }
+    if (kind && kind.type === 'friend' && kind.title) {
+      return self.registration.showNotification(kind.title, {
+        body: kind.body || '', icon: '/site/icon-192.png', badge: '/site/icon-192.png', tag: 'friend-activity',
+        data: { url: kind.url || '/friends.html' }
+      });
+    }
     let title = 'Your Daily Devotional Is Ready';
     let body = "Tap to read today's verse, reflection, and prayer.";
     let icon = '/site/icon-192.png';

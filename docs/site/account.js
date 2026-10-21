@@ -219,14 +219,63 @@
         }
     }
 
+    /* ---------- friend alerts through the reminder service ---------- */
+
+    var PUSH_WORKER = 'https://devotional-push.cloudflare-dust598.workers.dev';
+    function pushSub() {
+        if (!('serviceWorker' in navigator) || !('PushManager' in window)) return Promise.resolve(null);
+        return navigator.serviceWorker.ready.then(function (reg) { return reg.pushManager.getSubscription(); }).catch(function () { return null; });
+    }
+    function token() {
+        return ready().then(function (c) { return c.auth.getSession(); }).then(function (r) {
+            return r && r.data && r.data.session ? r.data.session.access_token : null;
+        });
+    }
+    function post(path, payload) {
+        return fetch(PUSH_WORKER + path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    }
+    // Lets this device receive friend alerts for the signed-in account. Only
+    // devices that turned on reminders have a push subscription to link.
+    function linkPush(force) {
+        if (!currentUser) return Promise.resolve();
+        var stamp = currentUser.id + '|' + new Date().toDateString();
+        try { if (!force && localStorage.getItem('bs-push-linked') === stamp) return Promise.resolve(); } catch (e) {}
+        return pushSub().then(function (sub) {
+            if (!sub) return;
+            return token().then(function (jwt) {
+                if (!jwt) return;
+                return post('/link', { endpoint: sub.endpoint, jwt: jwt }).then(function (r) {
+                    if (r.ok) try { localStorage.setItem('bs-push-linked', stamp); } catch (e) {}
+                });
+            });
+        }).catch(function () {});
+    }
+    function unlinkPush() {
+        try { localStorage.removeItem('bs-push-linked'); } catch (e) {}
+        return pushSub().then(function (sub) { if (sub) return post('/unlink', { endpoint: sub.endpoint }); }).catch(function () {});
+    }
+    // Tell friends about a request or a share. The service works out who they
+    // are from the account, so this only ever reaches the sender's own friends.
+    function notifyFriends(type, extra) {
+        return token().then(function (jwt) {
+            if (!jwt) return;
+            var payload = { type: type, jwt: jwt };
+            Object.keys(extra || {}).forEach(function (k) { payload[k] = extra[k]; });
+            return post('/notify', payload);
+        }).catch(function () {});
+    }
+
     window.BibleAccount = {
         hasSession: hasSession,
         ready: ready,
         user: function () { return currentUser; },
         onChange: onChange,
         openSignIn: openSignIn,
-        signOut: signOut
+        signOut: function () { return unlinkPush().then(signOut); },
+        linkPush: linkPush,
+        notifyFriends: notifyFriends
     };
+    onChange(function (u) { if (u) setTimeout(function () { linkPush(false); }, 2000); });
 
     // A device that was signed in last time picks its session back up.
     if (hasSession()) ready().catch(function () { /* offline: pages keep working from local data */ });
