@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="site/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="site/favicon-16.png"><meta name="theme-color" content="#000000">
+    <title>Reading Plans — New River Bible Study</title>
+    <!-- seo -->
+    <meta name="description" content="Follow a Bible reading plan one day at a time: the Gospels, Psalms and Proverbs, the whole Bible in a year, and more. Your place is kept on every device.">
+    <link rel="canonical" href="https://bible.nrc.macdwellings.com/plans.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="New River Bible Study">
+    <meta property="og:title" content="Reading Plans — New River Bible Study">
+    <meta property="og:description" content="Follow a Bible reading plan one day at a time: the Gospels, Psalms and Proverbs, the whole Bible in a year, and more. Your place is kept on every device.">
+    <meta property="og:url" content="https://bible.nrc.macdwellings.com/plans.html">
+    <meta property="og:image" content="https://bible.nrc.macdwellings.com/site/icon-512.png">
+    <meta name="twitter:card" content="summary">
+    <!-- /seo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="site/style.css?v=9d4ecef5">
+    <style>
+        /* Theme colors come from the tokens in site/style.css so the New River
+           mirror picks up its own palette. */
+        body { background: var(--bg-page); }
+        .pl-wrap { max-width: 640px; margin: 0 auto; padding: 0 16px 120px; font-family: 'Inter', -apple-system, sans-serif; }
+        .pl-home { display: inline-flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 600; color: var(--accent-link); text-decoration: none; margin: 0 0 14px; }
+        body.pwa-standalone .pl-home { display: none; }
+        .pl-hero { background: var(--ink-deep); border-radius: 16px; padding: 26px 22px; text-align: center; margin-bottom: 18px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+        .pl-hero h1 { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 1.5rem; color: #fff; margin: 0 0 6px; }
+        .pl-hero p { font-family: 'Merriweather', serif; font-style: italic; font-size: 0.85rem; color: var(--text-on-dark); margin: 0; opacity: 0.9; }
+        .pl-note { font-size: 0.82rem; color: var(--text-faint); margin: 16px 2px 0; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <main class="page-content pl-wrap" style="margin-top:20px;">
+        <a class="pl-home" href="index.html"><span aria-hidden="true">&larr;</span> <span data-i18n="nav.home">Back to Bible Study</span></a>
+        <div class="pl-hero">
+            <h1 data-i18n="plans.title">Reading Plans</h1>
+            <p>A little each day. Mark a chapter studied and your plan moves along.</p>
+        </div>
+        <div id="planMount"><noscript><p class="pl-note">Reading plans need JavaScript turned on.</p></noscript></div>
+        <p class="pl-note">Any chapter of your plan you mark studied counts, wherever you read it. Sign in and your plan follows you to every device.</p>
+    </main>
+    <script src="site/script.js?v=f35c451d"></script>
+    <script src="site/account.js?v=436abb8e"></script>
+    <script src="site/progress.js?v=0c33b072"></script>
+    <script src="site/plans-data.js?v=58cf5984"></script>
+    <script src="site/plans.js?v=f277910a"></script>
+    <script src="site/i18n.js?v=bfb4cfa8"></script>
+</body>
+</html>

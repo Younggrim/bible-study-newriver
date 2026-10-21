@@ -1,9 +1,9 @@
 {
-  "upstream_commit": "b27cbebc598485f29aecc7ae1a205c9de6deac4c Friend activity: home-page friends strip and push alerts for requests and shares (#76)",
+  "upstream_commit": "daad5c3899082bb6296b4f8829c8dcb20b2b13ac App: Plans tab replaces Notes in the bottom bar (#77)",
   "upstream_fingerprints": {
     "site/style.css": "20c1069c",
-    "site/script.js": "e9884175"
+    "site/script.js": "b5ea48a8"
   },
   "style_css_v": "9d4ecef5",
-  "script_js_v": "e5c9400e"
+  "script_js_v": "f35c451d"
 }
