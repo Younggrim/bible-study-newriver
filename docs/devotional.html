@@ -104,6 +104,9 @@
                     <label class="devo-streak-opt" id="devoFriendOpt" style="display:none;font-size:0.8rem;margin-top:6px;align-items:center;gap:8px;cursor:pointer;">
                         <input type="checkbox" id="devoFriendToggle" checked> Tell me when a friend sends a request or shares something
                     </label>
+                    <label class="devo-streak-opt" id="devoPlanOpt" style="display:none;font-size:0.8rem;margin-top:6px;align-items:center;gap:8px;cursor:pointer;">
+                        <input type="checkbox" id="devoPlanToggle" checked> Include the next reading from my reading plan
+                    </label>
                 </div>
                 <button class="devo-reminder-btn" id="devoReminderEnable">Enable</button>
                 <button class="devo-reminder-dismiss" id="devoReminderDismiss" aria-label="Dismiss">&times;</button>
@@ -211,6 +214,8 @@
         var streakToggle = document.getElementById('devoStreakToggle');
         var friendOpt = document.getElementById('devoFriendOpt');
         var friendToggle = document.getElementById('devoFriendToggle');
+        var planOpt = document.getElementById('devoPlanOpt');
+        var planToggle = document.getElementById('devoPlanToggle');
 
         function urlBase64ToUint8Array(base64String) {
             var base64 = base64String.replace(/-/g, '+').replace(/_/g, '/');
@@ -266,6 +271,9 @@
                     streakOpt.style.display = subscribed ? 'flex' : 'none';
                     friendOpt.style.display = subscribed ? 'flex' : 'none';
                     friendToggle.checked = localStorage.getItem('bs-friend-alerts') !== 'off';
+                    planOpt.style.display = subscribed ? 'flex' : 'none';
+                    planToggle.checked = localStorage.getItem('bs-plan-alerts') !== 'off';
+                    if (subscribed) try { localStorage.removeItem('bs-plan-reported'); } catch (e) {}   // a new subscription hears about the plan on the next page
                     streakToggle.checked = localStorage.getItem('bs-streak-reminders') !== 'off';
                     titleEl.textContent = subscribed ? 'Change Reminder Time' : 'Enable Daily Reminders';
                     enableBtn.textContent = subscribed ? 'Save' : 'Enable';
@@ -311,6 +319,16 @@
                 return reg.pushManager.getSubscription();
             }).then(function(sub) {
                 if (sub) return postSubscription('/preferences', { endpoint: sub.endpoint, streakReminders: on });
+            }).catch(function() {});
+        });
+
+        planToggle.addEventListener('change', function() {
+            var on = planToggle.checked;
+            try { localStorage.setItem('bs-plan-alerts', on ? 'on' : 'off'); } catch (e) {}
+            navigator.serviceWorker.ready.then(function(reg) {
+                return reg.pushManager.getSubscription();
+            }).then(function(sub) {
+                if (sub) return postSubscription('/preferences', { endpoint: sub.endpoint, planReminders: on });
             }).catch(function() {});
         });
 

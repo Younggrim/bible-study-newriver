@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bible-study-v9';
+const CACHE_NAME = 'bible-study-v10';
 const VAPID_PUBLIC_KEY = 'BBXso6T-C1Ft59FLWrdRfANGYtKm21CHUktfb0rsmfDZOEJSFyn5Y62f2ZaFMr0PxiPCIyN9Wm6_8MxXMQ6AGuY';
 const PUSH_WORKER = 'https://devotional-push.cloudflare-dust598.workers.dev';
 
@@ -141,10 +141,17 @@ self.addEventListener('push', event => {
       const entry = devos[idx];
       if (entry) { title = entry.verse; body = entry.reflection; }
     } catch (e) { /* fall through to generic strings above */ }
-    return self.registration.showNotification(title, {
+    await self.registration.showNotification(title, {
       body, icon, badge: icon, tag: 'daily-devotional',
       data: { url: '/devotional.html' }
     });
+    // The day's reading-plan reading, when the worker sent one along.
+    if (kind && kind.plan && kind.plan.title) {
+      await self.registration.showNotification(kind.plan.title, {
+        body: kind.plan.body || '', icon, badge: icon, tag: 'reading-plan',
+        data: { url: kind.plan.url || '/plans.html' }
+      });
+    }
   })());
 });
 

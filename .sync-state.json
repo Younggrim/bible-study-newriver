@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "daad5c3899082bb6296b4f8829c8dcb20b2b13ac App: Plans tab replaces Notes in the bottom bar (#77)",
+  "upstream_commit": "9c862e2549593d06db9edf48c85ba4146a291c9f Reading plans: stop a plan, 'completed for today', next reading with the daily reminder (#78)",
   "upstream_fingerprints": {
     "site/style.css": "20c1069c",
     "site/script.js": "b5ea48a8"

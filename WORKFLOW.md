@@ -555,7 +555,7 @@ Supabase when signed in (tables and privacy tests in `supabase/`).
 | `docs/site/translations.js` | other-language Bibles |
 | `docs/site/i18n.js` + `site/i18n/*.json` | buttons and labels in the reader's language (`i18n_strings.py`) |
 | `docs/plans.html`, `docs/notes.html`, `docs/friends.html`, `docs/privacy.html` | pages (`plans.html` is the app's Plans tab; on the website the plan card stays on the home page) |
-| `push-worker/worker.js` | devotional reminders, the 7 PM streak reminder (`/studied`, `/message`, `/preferences`), and friend alerts: `/link` and `/unlink` tie a device to a signed-in account, `/notify` (called with the sender's Supabase token) queues a "friend request" or "shared a verse/note" push to their friends' devices, recipients found through `friends_list()` |
+| `push-worker/worker.js` | devotional reminders, the 7 PM streak reminder (`/studied`, `/message`, `/preferences`), and friend alerts: `/link` and `/unlink` tie a device to a signed-in account, `/notify` (called with the sender's Supabase token) queues a "friend request" or "shared a verse/note" push to their friends' devices, recipients found through `friends_list()`; `/plan` stores the next reading-plan reading, which `/message` adds to the daily devotional push once a day (not before its `readyOn` date) |
 
 `python3 add_study_scripts.py` puts the right script tags on every page and
 stamps them; run it after changing any of these files.

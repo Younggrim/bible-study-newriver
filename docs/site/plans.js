@@ -52,7 +52,45 @@
         for (var i = 0; i < def.days.length; i++) {
             if (!def.days[i].every(done)) { idx = i; break; }
         }
-        return { def: def, day: idx, finished: idx < 0, total: def.days.length, doneDays: idx < 0 ? def.days.length : idx };
+        var doneDays = idx < 0 ? def.days.length : idx;
+        // "Done for today": the last finished day had its final chapter marked today.
+        var todayStr = P ? P.today() : '', last = doneDays > 0 ? def.days[doneDays - 1] : null;
+        var doneToday = !!(last && todayStr && last.reduce(function (m, p) { var d = P.studiedOn(p) || ''; return d > m ? d : m; }, '') === todayStr);
+        return { def: def, day: idx, finished: idx < 0, total: def.days.length, doneDays: doneDays, doneToday: doneToday };
+    }
+    function addDays(ymd, n) {
+        var d = new Date(ymd + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10);
+    }
+
+    /* ---------- daily reminder ----------
+       If this device gets the daily devotional reminder, the push worker adds
+       a second notification with the plan's next reading. It is told what that
+       reading is, and the first day it is due: tomorrow when today's reading
+       is already done, so a finished day is never nagged about.            */
+    var PUSH_WORKER = 'https://devotional-push.cloudflare-dust598.workers.dev';
+    function reportPlan() {
+        try {
+            if (!('serviceWorker' in navigator) || !('PushManager' in window) || !P) return;
+            var st = status(), body = null;
+            if (st && !st.finished) {
+                var todo = st.def.days[st.day].filter(function (p) { return !done(p); });
+                body = {
+                    title: '\u{1F4D6} ' + T('plan.day', 'Day {n} of {total}').replace('{n}', st.day + 1).replace('{total}', st.total) + ' · ' + st.def.name,
+                    body: todo.map(label).join(', '),
+                    url: '/' + todo[0] + '.html',
+                    readyOn: st.doneToday ? addDays(P.today(), 1) : P.today()
+                };
+            }
+            var stamp = JSON.stringify(body);
+            if (localStorage.getItem('bs-plan-reported') === stamp) return;
+            navigator.serviceWorker.getRegistration().then(function (reg) { return reg && reg.pushManager.getSubscription(); }).then(function (sub) {
+                if (!sub) return;
+                return fetch(PUSH_WORKER + '/plan', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ endpoint: sub.endpoint, plan: body })
+                }).then(function (r) { if (r.ok) localStorage.setItem('bs-plan-reported', stamp); });
+            }).catch(function () {});
+        } catch (e) {}
     }
 
     function setPlan(id) {
@@ -111,6 +149,10 @@
         + '.bs-plan-list a.done i{color:#2e7d4f}'
         + '.bs-plan-go{display:inline-block;background:var(--accent-link);color:#fff;border-radius:8px;padding:10px 16px;font-weight:600;font-size:.9rem;text-decoration:none}'
         + '.bs-plan-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}'
+        + '.bs-plan-done{font-size:.95rem;font-weight:700;color:var(--accent-link);margin:2px 0 10px}'
+        + '.bs-plan-ahead{font-size:.88rem;font-weight:600;color:var(--accent-link);text-decoration:none}'
+        + '.bs-plan-links{display:inline-flex;gap:16px;margin-left:auto}'
+        + '.bs-plan-stop.armed{color:var(--accent-link);font-weight:600}'
         + '.bs-plan-link{background:none;border:0;padding:0;font:inherit;font-size:.82rem;color:var(--text-faint);text-decoration:underline;cursor:pointer}'
         + '.bs-plan-choose{list-style:none;margin:8px 0 0;padding:0}'
         + '.bs-plan-choose li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--rule-soft)}'
@@ -170,6 +212,15 @@
 
         var change = el('button', { type: 'button', class: 'bs-plan-link', text: T('plan.change', 'Change plan') });
         change.addEventListener('click', function () { choosing = true; render(); });
+        // Stopping takes two taps, so it cannot happen by accident.
+        var stop = el('button', { type: 'button', class: 'bs-plan-link bs-plan-stop', text: T('plan.stop', 'Stop plan') }), armed = null;
+        stop.addEventListener('click', function () {
+            if (armed) { clearTimeout(armed); armed = null; setPlan(null); return; }
+            stop.textContent = T('plan.stopconfirm', 'Tap again to stop');
+            stop.classList.add('armed');
+            armed = setTimeout(function () { armed = null; stop.textContent = T('plan.stop', 'Stop plan'); stop.classList.remove('armed'); }, 4000);
+        });
+        var links = el('span', { class: 'bs-plan-links' }, [change, stop]);
         var pct = Math.round(100 * st.doneDays / st.total);
         var bar = el('div', { class: 'bs-plan-bar', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': String(st.total), 'aria-valuenow': String(st.doneDays) }, [el('i', { style: 'width:' + pct + '%' })]);
 
@@ -179,11 +230,24 @@
             homeEl.replaceChildren(el('div', { class: 'bs-plan-card' }, [
                 el('p', { class: 'bs-plan-eyebrow', text: T('plan.title', 'Reading plan') }),
                 el('p', { class: 'bs-plan-name', text: st.def.name }),
-                el('p', { class: 'bs-plan-day', text: '🎉 ' + T('plan.finished', 'Finished! Well done.') }), bar, again]), others || '');
+                el('p', { class: 'bs-plan-day', text: '🎉 ' + T('plan.finished', 'Finished! Well done.') }), bar,
+                el('div', { class: 'bs-plan-row' }, [again, stop])]), others || '');
             return;
         }
         var today = st.def.days[st.day];
         var next = today.filter(function (p) { return !done(p); })[0];
+        if (st.doneToday) {
+            // Today's reading is done: say so, and show what tomorrow holds.
+            homeEl.replaceChildren(el('div', { class: 'bs-plan-card' }, [
+                el('p', { class: 'bs-plan-eyebrow', text: T('plan.title', 'Reading plan') }),
+                el('p', { class: 'bs-plan-name', text: st.def.name }),
+                el('p', { class: 'bs-plan-done', text: '\u2713 ' + T('plan.donetoday', 'Day {n} completed').replace('{n}', st.doneDays) }),
+                bar,
+                el('p', { class: 'bs-plan-day', text: T('plan.tomorrow', 'Tomorrow, Day {n}:').replace('{n}', st.day + 1) + ' ' + today.map(label).join(', ') }),
+                el('div', { class: 'bs-plan-row' }, [el('a', { class: 'bs-plan-ahead', href: next + '.html', text: T('plan.ahead', 'Read ahead') + ' \u2192' }), links])
+            ]), others || '');
+            return;
+        }
         var chips = el('ul', { class: 'bs-plan-list' }, today.map(function (p) {
             var ok = done(p);
             return el('li', {}, [el('a', { href: p + '.html', class: ok ? 'done' : '' }, [ok ? el('i', { class: 'fas fa-check', 'aria-hidden': 'true' }) : null, label(p)])]);
@@ -193,7 +257,7 @@
             el('p', { class: 'bs-plan-name', text: st.def.name }),
             el('p', { class: 'bs-plan-day', text: T('plan.day', 'Day {n} of {total}').replace('{n}', st.day + 1).replace('{total}', st.total) }),
             bar, chips,
-            el('div', { class: 'bs-plan-row' }, [el('a', { class: 'bs-plan-go', href: next + '.html' }, [T('plan.read', 'Read') + ' ' + label(next) + ' ', el('i', { class: 'fas fa-arrow-right', 'aria-hidden': 'true' })]), change])
+            el('div', { class: 'bs-plan-row' }, [el('a', { class: 'bs-plan-go', href: next + '.html' }, [T('plan.read', 'Read') + ' ' + label(next) + ' ', el('i', { class: 'fas fa-arrow-right', 'aria-hidden': 'true' })]), links])
         ]), others || '');
     }
 
@@ -225,7 +289,7 @@
         lineEl.replaceChildren.apply(lineEl, kids);
     }
 
-    function render() { renderHome(); renderChapter(); }
+    function render() { renderHome(); renderChapter(); reportPlan(); }
 
     function start() {
         render();
