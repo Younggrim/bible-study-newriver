@@ -201,6 +201,7 @@
         + '.bs-plan-choose small{display:block;font-weight:400;color:var(--text-faint);font-size:.78rem}'
         + '.bs-plan-start{font-family:inherit;font-size:.82rem;font-weight:600;padding:7px 12px;border-radius:8px;border:1px solid var(--accent-link);background:transparent;color:var(--accent-link);cursor:pointer;white-space:nowrap}'
         + '.bs-plan-today{margin:10px 0 0;font-size:.85rem;color:var(--text-secondary);font-family:"Inter",-apple-system,sans-serif}'
+        + '.bs-plan-marknext{margin-top:8px;font-family:inherit;font-size:.88rem;font-weight:600;padding:9px 14px;border-radius:8px;border:1px solid var(--accent-link);background:transparent;color:var(--accent-link);cursor:pointer;text-align:left}'
         + '.bs-plan-today a{color:var(--accent-link);font-weight:600;text-decoration:none}';
     function style() { if (!document.getElementById('bs-plan-style')) { var s = el('style', { id: 'bs-plan-style', text: STYLE }); document.head.appendChild(s); } }
 
@@ -337,13 +338,31 @@
         var dayText = function (i) { return T('plan.title', 'Reading plan') + ' · ' + T('plan.day', 'Day {n} of {total}').replace('{n}', i + 1).replace('{total}', st.total) + '. '; };
         var kids;
         if (today.indexOf(page) >= 0) {
-            // This chapter is part of the day being read now.
-            var next = today.filter(function (p) { return !done(p) && p !== page; })[0];
-            kids = [dayText(st.day)];
-            if (next) kids.push(T('plan.next', 'Next:') + ' ', el('a', { href: next + '.html', text: label(next) + ' →' }));
+            // This chapter is part of the day being read now. "Next" is the
+            // next unfinished chapter after this one (then any skipped before it),
+            // and while this one is unmarked, one tap marks it and moves on.
+            var at = today.indexOf(page);
+            var order = today.slice(at + 1).concat(today.slice(0, at));
+            var next = order.filter(function (p) { return !done(p); })[0];
+            var count = today.filter(done).length;
+            kids = [dayText(st.day) + T('plan.countdone', '{n} of {total} done.').replace('{n}', count).replace('{total}', today.length) + ' '];
+            if (!done(page)) {
+                var go = el('button', { type: 'button', class: 'bs-plan-marknext' },
+                    ['\u2713 ' + (next ? T('plan.marknext', 'Mark studied & next: {ch}').replace('{ch}', label(next)) + ' \u2192' : T('plan.markfinish', 'Mark studied & finish the day'))]);
+                go.addEventListener('click', function () {
+                    if (P && P.mark) P.mark(page, true);
+                    if (next) setTimeout(function () { location.href = next + '.html'; }, 150);
+                });
+                kids.push(el('br'), go);
+            } else if (next) {
+                kids.push(T('plan.next', 'Next:') + ' ', el('a', { href: next + '.html', text: label(next) + ' →' }));
+            }
         } else if (st.day > 0 && st.def.days[st.day - 1].indexOf(page) >= 0 && done(page)) {
             // Marking this chapter just finished a day: point straight at the next one.
-            kids = ['✓ ' + dayText(st.day - 1) + T('plan.next', 'Next:') + ' ', el('a', { href: today[0] + '.html', text: label(today[0]) + ' →' })];
+            kids = st.doneToday
+                ? ['✓ ' + T('plan.donetoday', 'Day {n} completed').replace('{n}', st.day) + '. ' + T('plan.tomorrow', 'Tomorrow, Day {n}:').replace('{n}', st.day + 1) + ' ' + label(today[0]) + '. ',
+                   el('a', { href: today[0] + '.html', text: T('plan.ahead', 'Read ahead') + ' →' })]
+                : ['✓ ' + dayText(st.day - 1) + T('plan.next', 'Next:') + ' ', el('a', { href: today[0] + '.html', text: label(today[0]) + ' →' })];
         } else {
             if (lineEl) { lineEl.remove(); lineEl = null; }
             return;
