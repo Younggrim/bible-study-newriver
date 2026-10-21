@@ -127,7 +127,16 @@
         + '.bs-list a{display:flex;align-items:center;gap:10px;padding:9px 2px;color:var(--ink-deep);text-decoration:none;font-size:.92rem}'
         + '.bs-list .sw{width:12px;height:12px;border-radius:50%;flex-shrink:0}'
         + '.bs-list .sw.yellow{background:#ffd60a}.bs-list .sw.green{background:#6ec878}.bs-list .sw.blue{background:#64aaf0}.bs-list .sw.pink{background:#f078aa}'
-        + '.bs-empty{font-size:.85rem;color:var(--text-faint);margin:6px 0}';
+        + '.bs-empty{font-size:.85rem;color:var(--text-faint);margin:6px 0}'
+        + '.bs-acct-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;min-width:32px;padding:0 10px;border-radius:16px;border:1px solid var(--border-light);background:var(--bg-tint);color:var(--ink-deep);font-family:inherit;font-size:.8rem;font-weight:600;cursor:pointer;white-space:nowrap}'
+        + '.bs-acct-btn i{color:var(--accent-link)}'
+        + '.bs-acct-btn.in{padding:0;width:32px}'
+        + '@media (max-width:600px){.top-nav .bs-acct-btn{padding:0;width:28px;min-width:28px;height:28px}.top-nav .bs-acct-btn .bs-acct-label{display:none}}'
+        + '.bs-acct-btn:focus-visible{outline:2px solid var(--accent-link);outline-offset:2px}'
+        + '.bs-acct-pop{position:fixed;z-index:9500;background:#fff;color:var(--ink-deep);border:1px solid var(--border-light);border-radius:10px;box-shadow:0 8px 28px rgba(0,0,0,.16);padding:14px 16px;width:260px;font-family:"Inter",-apple-system,sans-serif}'
+        + '.bs-acct-pop p{margin:0 0 10px;font-size:.85rem;line-height:1.45;color:var(--text-secondary);word-break:break-word}'
+        + '.bs-acct-row{margin-top:16px;padding-top:14px;border-top:1px solid var(--rule-soft);font-size:.85rem;color:var(--text-secondary);font-family:"Inter",-apple-system,sans-serif;text-align:center;line-height:1.5}'
+        + '.bs-acct-row .bs-act{display:block;width:100%;margin-top:8px}';
 
     function injectStyle() {
         if (!document.getElementById('bs-study-style')) document.head.appendChild(el('style', { id: 'bs-study-style', text: STYLE }));
@@ -520,7 +529,8 @@
             parts.push(ul);
             if (items.length > 12) parts.push(el('p', { class: 'bs-empty', text: '…and ' + (items.length - 12) + ' more, newest shown first.' }));
         }
-        if (account && !user && !account.hasSession()) {
+        // In the app the sign-in sits right under the passage picker, so the card does not repeat it.
+        if (account && !user && !account.hasSession() && !document.querySelector('.pwa-standalone .pwa-bible-nav')) {
             var signin = el('button', { type: 'button', class: 'bs-link', text: 'Sign in' });
             signin.addEventListener('click', function () { account.openSignIn({ reason: 'Your reading place, highlights and bookmarks are saved to your account, so they follow you to any device.' }); });
             parts.push(el('p', { class: 'bs-note' }, ['Saved on this device. ', signin, ' to keep your place on every device.']));
@@ -539,13 +549,89 @@
         homeEl.replaceChildren(card);
     }
 
+    /* ---------- account button: beside the book, chapter and translation pickers ---------- */
+
+    var acctBtn = null, acctRow = null, acctPop = null;
+    var SIGNIN_REASON = 'Your reading place, highlights, bookmarks and memory verses are saved to your account, so they follow you to any device.';
+
+    function closePop() {
+        if (!acctPop) return;
+        acctPop.remove(); acctPop = null;
+        document.removeEventListener('click', outside, true);
+    }
+    function outside(e) { if (acctPop && !acctPop.contains(e.target) && !(acctBtn && acctBtn.contains(e.target))) closePop(); }
+
+    function doSignOut() {
+        closePop();
+        // Save anything not yet sent before this device lets go of the account.
+        Promise.resolve(user ? syncNow() : null).then(function () { return account.signOut(); });
+    }
+
+    function openPop() {
+        if (acctPop) { closePop(); return; }
+        var out = el('button', { type: 'button', class: 'bs-act', text: 'Sign out on this device' });
+        out.addEventListener('click', doSignOut);
+        acctPop = el('div', { class: 'bs-acct-pop', role: 'dialog', 'aria-label': 'Your account' }, [
+            el('p', {}, ['Signed in as ', el('strong', { text: (user && user.email) || 'your account' }), '. Your place, highlights, bookmarks and memory verses are saved to your account.']),
+            out
+        ]);
+        document.body.appendChild(acctPop);
+        var r = acctBtn.getBoundingClientRect();
+        acctPop.style.top = (r.bottom + 8) + 'px';
+        acctPop.style.left = Math.max(8, Math.min(window.innerWidth - 268, r.right - 260)) + 'px';
+        setTimeout(function () { document.addEventListener('click', outside, true); }, 0);
+    }
+
+    function renderAccountUI() {
+        if (!account) return;
+        injectStyle();
+        var checking = !user && account.hasSession();
+
+        var bar = document.querySelector('.top-nav .nav-center');
+        if (bar) {
+            if (!acctBtn) {
+                acctBtn = el('button', { type: 'button', class: 'bs-acct-btn' });
+                acctBtn.addEventListener('click', function () {
+                    if (user) openPop();
+                    else if (!account.hasSession()) account.openSignIn({ reason: SIGNIN_REASON });
+                });
+                bar.appendChild(acctBtn);
+            }
+            acctBtn.className = 'bs-acct-btn' + (user || checking ? ' in' : '');
+            acctBtn.setAttribute('aria-label', user ? 'Your account: signed in as ' + (user.email || '') : checking ? 'Checking sign-in' : 'Sign in to save your study');
+            acctBtn.replaceChildren.apply(acctBtn, user ? [el('i', { class: 'fas fa-user-check', 'aria-hidden': 'true' })]
+                : checking ? [el('i', { class: 'fas fa-user', 'aria-hidden': 'true' })]
+                : [el('i', { class: 'far fa-user', 'aria-hidden': 'true' }), el('span', { class: 'bs-acct-label', text: 'Sign in' })]);
+        }
+
+        // The app's Bible tab: under "Choose a Passage".
+        var picker = document.querySelector('.pwa-bible-nav');
+        var go = picker && picker.querySelector('.nav-go-btn');
+        if (go) {
+            if (!acctRow) { acctRow = el('div', { class: 'bs-acct-row' }); go.parentNode.insertBefore(acctRow, go.nextSibling); }
+            if (user) {
+                var out = el('button', { type: 'button', class: 'bs-link', text: 'Sign out' });
+                out.addEventListener('click', doSignOut);
+                acctRow.replaceChildren(el('i', { class: 'fas fa-user-check', 'aria-hidden': 'true', style: 'color:var(--accent-link);margin-right:6px' }),
+                    'Signed in as ', el('strong', { text: user.email || 'your account' }), '. ', out);
+            } else if (checking) {
+                acctRow.replaceChildren('Checking your sign-in…');
+            } else {
+                var b = el('button', { type: 'button', class: 'bs-act' }, [el('i', { class: 'far fa-user', 'aria-hidden': 'true' }), 'Sign in to save your study']);
+                b.addEventListener('click', function () { account.openSignIn({ reason: SIGNIN_REASON }); });
+                acctRow.replaceChildren('Keep your place, highlights and memory verses on every device.', b);
+            }
+        }
+    }
+
     /* ---------- start ---------- */
 
     function start() {
         if (here) initChapter();
         renderHome();
         if (account) {
-            account.onChange(onAccount);
+            renderAccountUI();
+            account.onChange(function (u) { onAccount(u); closePop(); renderAccountUI(); renderHome(); });
             window.addEventListener('online', function () { if (user) scheduleSync(0); else if (account.hasSession()) account.ready().catch(function () {}); });
         }
         // Another tab on this device changed something.
