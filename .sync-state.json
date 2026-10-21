@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "e25b68c8920efeaee57182ffc1143ef431fa228c Weekly review 2026-10-20: 4 articles and 1 video added, duplicate Mark summary removed",
+  "upstream_commit": "29a48245dadbf259366822703093281ff13ffe1b Highlights, bookmarks and pick-up-where-you-left-off (#70)",
   "upstream_fingerprints": {
     "site/style.css": "54238837",
     "site/script.js": "d71fe306"
