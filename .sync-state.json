@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "17b2d171c6d70d5c675c3a7102161baf93f681c8 App bottom bar: labels scale with screen width so Memory is not cut off (#79)",
+  "upstream_commit": "1fbe584083ab058dcf225418debbd8eab61eb1f6 Chapter pages: Notes study tab replaces the 'Add a note' link (#80)",
   "upstream_fingerprints": {
     "site/style.css": "7a8bacda",
     "site/script.js": "b5ea48a8"

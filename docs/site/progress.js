@@ -238,18 +238,8 @@
         } else {
             info.textContent = english() ? 'Mark chapters as you finish them to build a streak.' : '';
         }
-        // Notes for this chapter: a count that opens them, or a quick way to start one.
-        var mine = 0;
-        try {
-            var all = JSON.parse(localStorage.getItem('bs-notes') || '{}');
-            Object.keys(all).forEach(function (k) { var n = all[k]; if (!n.deleted && n.ref && n.ref.split(':')[0] === page) mine++; });
-        } catch (e) {}
-        var nl = document.createElement('a');
-        nl.className = 'bs-studied-note';
-        nl.href = mine ? 'notes.html?ref=' + page : 'notes.html?new=1&ref=' + page;
-        var ni = document.createElement('i'); ni.className = 'fas fa-pen-to-square'; ni.setAttribute('aria-hidden', 'true');
-        nl.append(ni, ' ' + (mine ? t('notes.count', 'Notes ({n})').replace('{n}', mine) : t('notes.add', 'Add a note')));
-        box.replaceChildren(btn, info, nl);
+        // Notes for this chapter live in the Notes study tab (chapter-notes.js).
+        box.replaceChildren(btn, info);
     }
 
     var homeBox = null;
