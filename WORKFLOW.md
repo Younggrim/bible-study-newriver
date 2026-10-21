@@ -499,29 +499,43 @@ a non-UTF-8 tool.
 
 ## Bibles in other languages
 
-Six translations beyond the English five, chosen under "Other languages" in the
-translation picker: Spanish (Reina-Valera 1909, public domain), Hausa, Yoruba and
-Igbo (Biblica Open, CC BY-SA 4.0), Urdu (Urdu Geo Version, CC BY-NC-ND 4.0) and
-Hindi (Indian Revised Version, CC BY-SA 4.0). All six are full Bibles.
+29 translations beyond the English five, in the translation picker under three
+groups. All are full Bibles, all from eBible.org, all licensed for this site:
+
+| group | translations | licence |
+|---|---|---|
+| Africa | Hausa, Yoruba, Igbo, Kiswahili, Twi (Akuapem), Twi (Asante): Biblica Open | CC BY-SA 4.0 |
+| South Asia | Urdu (Urdu Geo Version) | CC BY-NC-ND 4.0 |
+| South Asia | Hindi, Bengali, Tamil, Telugu, Malayalam, Marathi, Gujarati, Kannada, Odia, Assamese, Punjabi: Indian Revised Version | CC BY-SA 4.0 |
+| South Asia | Nepali (Unlocked Literal Bible) | CC BY-SA 4.0 |
+| World | Spanish (Reina-Valera 1909), French (Louis Segond 1910), Arabic (Van Dyck), Persian (Old Persian Version), Chinese simplified and traditional (Union Version), Vietnamese (1934), Haitian Creole (Bib La) | public domain |
+| World | Portuguese (Bíblia Livre) | CC BY 4.0 Brasil |
+| World | Tagalog (Unlocked Literal Bible) | CC BY-SA 4.0 |
 
 They are **not** baked into the chapter HTML. `docs/bible/<CODE>/<page>.json`
-holds one chapter each, and `docs/site/translations.js` fetches it only when a
-reader picks that language. Each pane ends with the translation's credit line;
-the licences require it, so never remove it. Urdu is "no derivatives": its words
-are displayed exactly as published and never edited.
+holds one chapter each (about 270 MB in all), and `docs/site/translations.js`
+fetches a chapter only when a reader picks that language. Each pane ends with
+the translation's credit line; the licences require it, so never remove it.
+Urdu is "no derivatives": its words are displayed exactly as published and
+never edited. The only text changes anywhere are two spacing fixups
+(`FIXUPS` in `build_bibles.py`) for French and Spanish word-by-word markup.
 
 ```bash
-# download https://ebible.org/Scriptures/<id>_usfm.zip for spaRV1909 hausa yor ibo urdgvu hin2017
+# download https://ebible.org/Scriptures/<id>_usfm.zip for every id in SOURCES
 python3 build_bibles.py /path/to/zips --check   # verse counts against the BSB text
 python3 build_bibles.py /path/to/zips           # writes docs/bible/
 python3 add_study_scripts.py                     # restamps translations.js on every page
 ```
 
-Expected `--check` differences are the translations' own numbering, not damage:
-Hausa and Yoruba leave out the verses modern Greek texts omit (Matthew 17:21 and
-similar, 16 chapters), Urdu combines some verses (shown as "18–23"), and Spanish
-follows Hebrew numbering in a few Old Testament chapters. A *missing* chapter
-stops the build for that translation.
+Expected `--check` differences are each translation's own numbering, not damage:
+several leave out the verses modern Greek texts omit (Matthew 17:21 and similar),
+Urdu combines some verses (shown as "18–23"), and Spanish, French and Persian
+count a psalm's title as verse 1 or follow Hebrew numbering in places. A
+*missing* chapter stops the build for that translation.
+
+Two were looked at and left out: Russian Synodal numbers the Psalms the Greek
+way (its Psalm 23 is our 24), which would put the wrong psalm on the page, and
+the Indonesian edition on eBible is not a full Bible.
 
 Do not use the BibleNLP verse-per-line corpus as a source. It is aligned to a
 versification that drops 136 verses (all of Malachi 4, Joel 2:28-32) from Bibles
