@@ -29,7 +29,7 @@
 
     var EN = {
         'tab.summary': 'Summary', 'tab.authorship': 'Authorship & Background', 'tab.mapgeo': 'Map & Geography',
-        'tab.commentary': 'Commentary', 'tab.videos': 'Videos', 'tab.articles': 'Articles', 'tab.reflection': 'Reflection',
+        'tab.commentary': 'Commentary', 'tab.videos': 'Videos', 'tab.articles': 'Articles', 'tab.reflection': 'Reflection', 'tab.notes': 'Notes',
         'nav.go': 'Go', 'nav.ch': 'Ch {n}', 'nav.chapter': '{book} — Chapter {n}', 'home.choose': 'Choose a Passage', 'home.goto': 'Go to Chapter',
         'bn.bible': 'Bible', 'bn.topical': 'Topical', 'bn.life': 'Life', 'bn.devotional': 'Devotional', 'bn.memory': 'Memory', 'bn.notes': 'Notes', 'bn.plans': 'Plans'
     };

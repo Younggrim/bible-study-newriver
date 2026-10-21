@@ -385,6 +385,13 @@
         bm.addEventListener('click', function () { applyToSelection({ b: !allBookmarked }); closeSheet(); });
         var noteBtn = el('a', { class: 'bs-act', href: 'notes.html?new=1&ref=' + here.book + here.chapter + ':' + Math.min.apply(null, selected) }, [el('i', { class: 'fas fa-pen-to-square', 'aria-hidden': 'true' }), T('sheet.note', 'Note')]);
         noteBtn.style.textDecoration = 'none';
+        noteBtn.addEventListener('click', function (e) {
+            if (!window.BibleChapterNotes) return;          // falls back to the Notes page
+            e.preventDefault();
+            var v = Math.min.apply(null, selected);
+            closeSheet();
+            window.BibleChapterNotes.open(here.book + here.chapter + ':' + v);
+        });
         // Share a verse with friends (only offered once Friends is set up on this account).
         var shareBtn = null;
         var friendsOn = null;

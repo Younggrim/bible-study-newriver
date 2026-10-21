@@ -552,6 +552,7 @@ Supabase when signed in (tables and privacy tests in `supabase/`).
 | `docs/site/study.js` | highlights, bookmarks, "pick up where you left off", account button, delete account |
 | `docs/site/progress.js` | chapters studied, streaks, streak report to the reminder worker, friend stats |
 | `docs/site/plans.js` + `plans-data.js` | reading plans (`build_plans.py` writes the data and checks it) |
+| `docs/site/chapter-notes.js` | the Notes study tab on chapter pages (write, edit, delete notes on the chapter or a verse; same notes as `notes.html`) |
 | `docs/site/translations.js` | other-language Bibles |
 | `docs/site/i18n.js` + `site/i18n/*.json` | buttons and labels in the reader's language (`i18n_strings.py`) |
 | `docs/plans.html`, `docs/notes.html`, `docs/friends.html`, `docs/privacy.html` | pages (`plans.html` is the app's Plans tab; on the website the plan card stays on the home page) |
