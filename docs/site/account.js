@@ -106,7 +106,8 @@
         + '.acct-btn.quiet{background:transparent;border-color:transparent;color:var(--accent-link);margin-top:4px}'
         + '.acct-btn:disabled{opacity:0.5;cursor:default}'
         + '.acct-error{color:#b5473f;font-size:0.85rem;margin:10px 0 0;min-height:1.2em}'
-        + '.acct-small{font-size:0.78rem;color:var(--text-faint);margin:14px 0 0}';
+        + '.acct-small{font-size:0.78rem;color:var(--text-faint);margin:14px 0 0}'
+        + '.acct-small a{color:inherit}';
 
     var overlay = null, lastFocus = null;
 
@@ -183,7 +184,8 @@
                 el('h2', { id: 'acct-title', text: 'Sign in to save your study' }),
                 el('p', { text: opts.reason || 'Your study is saved to your account, so it follows you to any device.' }),
                 form, cancel,
-                el('p', { class: 'acct-small', text: 'We will email you a 6-digit code. No password needed. Your email is used only to sign you in.' }));
+                el('p', { class: 'acct-small' }, [document.createTextNode('We will email you a 6-digit code. No password needed. Your email is used only to sign you in. '),
+                    el('a', { href: 'privacy.html', text: 'Privacy' })]));
             input.focus();
         }
 

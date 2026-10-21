@@ -541,6 +541,39 @@ Do not use the BibleNLP verse-per-line corpus as a source. It is aligned to a
 versification that drops 136 verses (all of Malachi 4, Joel 2:28-32) from Bibles
 numbered the English way.
 
+## Study features: accounts, streaks, notes, plans, friends, labels
+
+All optional; everything works on the device with no account, and syncs to
+Supabase when signed in (tables and privacy tests in `supabase/`).
+
+| file | what |
+|---|---|
+| `docs/site/account.js` | sign-in (email + 6-digit code) |
+| `docs/site/study.js` | highlights, bookmarks, "pick up where you left off", account button, delete account |
+| `docs/site/progress.js` | chapters studied, streaks, streak report to the reminder worker, friend stats |
+| `docs/site/plans.js` + `plans-data.js` | reading plans (`build_plans.py` writes the data and checks it) |
+| `docs/site/translations.js` | other-language Bibles |
+| `docs/site/i18n.js` + `site/i18n/*.json` | buttons and labels in the reader's language (`i18n_strings.py`) |
+| `docs/notes.html`, `docs/friends.html`, `docs/privacy.html` | pages |
+| `push-worker/worker.js` | devotional reminders, plus the 7 PM streak reminder (`/studied`, `/message`, `/preferences`) |
+
+`python3 add_study_scripts.py` puts the right script tags on every page and
+stamps them; run it after changing any of these files.
+
+**The Notes tab is the one change in the two per-site files.** `site/script.js`
+and `site/style.css` are preserved by the sync, so the sixth bottom-bar tab was
+added by hand in both repos (the `pwa-six` class and the `notes` section). Keep
+the two copies' bottom-bar code identical.
+
+**The push worker is deployed by hand** (`cd push-worker && wrangler deploy`),
+not by GitHub Pages. Until it is, the site still works: the streak report and
+`/message` calls get a 404 and every push is shown as the devotional.
+
+Friends: every friend's data reaches a reader only through the
+`friends_list()` and `friends_feed()` database functions, which check for an
+accepted friendship. Never add a table policy that lets one user select another
+user's rows.
+
 ## Map & Geography: the maps
 
 Every Map & Geography pane that names a place we can locate opens with a small

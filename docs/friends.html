@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="site/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="site/favicon-16.png"><meta name="theme-color" content="#000000">
+    <title>Friends — New River Bible Study</title>
+    <!-- seo -->
+    <meta name="description" content="Study the Bible with friends: connect with a private friend code, encourage each other's reading streaks, and share a verse or a note.">
+    <link rel="canonical" href="https://bible.nrc.macdwellings.com/friends.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="New River Bible Study">
+    <meta property="og:title" content="Friends — New River Bible Study">
+    <meta property="og:description" content="Study the Bible with friends: connect with a private friend code, encourage each other's reading streaks, and share a verse or a note.">
+    <meta property="og:url" content="https://bible.nrc.macdwellings.com/friends.html">
+    <meta property="og:image" content="https://bible.nrc.macdwellings.com/site/icon-512.png">
+    <meta name="twitter:card" content="summary">
+    <!-- /seo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:ital,wght@0,400;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="site/style.css?v=9d4ecef5">
+    <style>
+        /* Theme colors come from the tokens in site/style.css so the New River mirror picks up its palette. */
+        body { background: var(--bg-page); }
+        .page-content { margin: 0 auto; max-width: 720px; padding: 18px 18px 110px; font-family: 'Inter', -apple-system, sans-serif; color: var(--ink-deep); }
+        .fr-home { display: inline-flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 600; color: var(--accent-link); text-decoration: none; margin: 0 0 14px; }
+        body.pwa-standalone .fr-home { display: none; }
+        .fr-hero { background: var(--ink-deep); border-radius: 16px; padding: 26px 22px; text-align: center; margin-bottom: 18px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+        .fr-hero h1 { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 1.5rem; color: #fff; margin: 0 0 6px; }
+        .fr-hero p { font-family: 'Merriweather', serif; font-style: italic; font-size: 0.85rem; color: var(--text-on-dark); margin: 0; opacity: 0.9; }
+        .fr-card { background: #fff; border: 1px solid var(--border-light); border-radius: 14px; padding: 16px 18px; margin: 0 0 14px; }
+        .fr-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); margin: 0 0 8px; }
+        .fr-note { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 10px; }
+        .fr-code { font-family: 'Poppins', 'Inter', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: 0.08em; margin: 0 0 10px; }
+        .fr-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+        .fr-input { flex: 1; min-width: 0; font-family: inherit; font-size: 1rem; color: var(--ink-deep); background: #fff; border: 1px solid var(--border-medium); border-radius: 8px; padding: 10px 12px; }
+        .fr-btn { font-family: inherit; border: 1px solid var(--border-medium); background: #fff; color: var(--ink-deep); padding: 10px 14px; border-radius: 8px; font-weight: 600; font-size: 0.88rem; cursor: pointer; white-space: nowrap; }
+        .fr-btn.primary { background: var(--accent-link); border-color: var(--accent-link); color: #fff; }
+        .fr-btn.quiet { background: transparent; border-color: transparent; color: var(--accent-link); padding: 6px 4px; }
+        .fr-btn.small { padding: 6px 10px; font-size: 0.8rem; }
+        .fr-btn:disabled { opacity: 0.5; cursor: default; }
+        .fr-btn:focus-visible, .fr-input:focus-visible { outline: 2px solid var(--accent-link); outline-offset: 2px; }
+        .fr-msg { font-size: 0.85rem; min-height: 1.2em; margin: 8px 0 0; color: var(--text-secondary); }
+        .fr-list { list-style: none; margin: 0; padding: 0; }
+        .fr-list li { padding: 12px 0; border-top: 1px solid var(--rule-soft); display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+        .fr-list li:first-child { border-top: 0; }
+        .fr-name { font-weight: 700; }
+        .fr-sub { display: block; font-size: 0.8rem; color: var(--text-faint); margin-top: 2px; }
+        .fr-sub a { color: var(--accent-link); text-decoration: none; font-weight: 600; }
+        .fr-flame { color: #d9622b; }
+        .fr-feed li { display: block; }
+        .fr-feed .fr-what { font-size: 0.82rem; color: var(--text-faint); }
+        .fr-feed .fr-title { font-weight: 700; margin: 4px 0 2px; }
+        .fr-feed .fr-body { font-family: 'Merriweather', serif; font-size: 0.9rem; color: var(--text-secondary); white-space: pre-wrap; margin: 4px 0 0; }
+        .fr-toggle { display: flex; gap: 10px; align-items: flex-start; font-size: 0.88rem; cursor: pointer; }
+        .fr-toggle input { margin-top: 3px; }
+        .fr-empty { font-size: 0.88rem; color: var(--text-faint); margin: 0; }
+    </style>
+</head>
+<body>
+    <main class="page-content" style="margin-top:20px;">
+        <a class="fr-home" href="index.html"><span aria-hidden="true">&larr;</span> <span data-i18n="nav.home">Back to Bible Study</span></a>
+        <div class="fr-hero">
+            <h1>Friends</h1>
+            <p>“As iron sharpens iron, so one person sharpens another.” — Proverbs 27:17</p>
+        </div>
+        <div id="frMain"><p class="fr-empty">Loading…</p></div>
+    </main>
+    <script src="site/script.js?v=e5c9400e"></script>
+    <script src="site/account.js"></script>
+    <script src="site/i18n.js?v=9938dd68"></script>
+    <script>
+    /* Friends. Needs an account: friend codes, requests and sharing live in the
+       friend_profiles, friendships, friend_stats and shared_items tables. A
+       friend's name, streak and shares come only through the friends_list()
+       and friends_feed() database functions, which return nothing until both
+       people have accepted. */
+    (function () {
+        'use strict';
+        var ALPHA = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        var main = document.getElementById('frMain');
+        var account = window.BibleAccount || null, user = null, sb = null, profile = null;
+        var params = new URLSearchParams(location.search);
+        var prefill = (params.get('add') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 8);
+
+        function el(tag, attrs, kids) {
+            var n = document.createElement(tag), k;
+            for (k in attrs || {}) {
+                if (k === 'text') n.textContent = attrs[k];
+                else if (k === 'class') n.className = attrs[k];
+                else n.setAttribute(k, attrs[k]);
+            }
+            (kids || []).forEach(function (c) { if (c != null) n.append(c); });
+            return n;
+        }
+        function bookName(slug) {
+            if (window.BibleI18n && window.BibleI18n.bookName) return window.BibleI18n.bookName(slug);
+            return slug.replace(/^(\d)/, '$1 ').replace(/^songofsolomon$/, 'song of solomon').replace(/\b(?!of\b)[a-z]/g, function (m) { return m.toUpperCase(); });
+        }
+        function refLabel(ref) {
+            var m = /^(\d?[a-z]+?)(\d+)(?::(\d+))?$/.exec(ref || '');
+            return m ? bookName(m[1]) + ' ' + m[2] + (m[3] ? ':' + m[3] : '') : '';
+        }
+        function refHref(ref) {
+            var m = /^(\d?[a-z]+?\d+)(?::(\d+))?$/.exec(ref || '');
+            return m ? m[1] + '.html' + (m[2] ? '#v' + m[2] : '') : null;
+        }
+        function pretty(code) { return code ? code.slice(0, 4) + '-' + code.slice(4) : ''; }
+        function newCode() {
+            var a = new Uint32Array(8); crypto.getRandomValues(a);
+            return Array.prototype.map.call(a, function (x) { return ALPHA[x % ALPHA.length]; }).join('');
+        }
+        function must(res) { if (res && res.error) throw res.error; return res ? res.data : null; }
+        function failText(e) {
+            var m = (e && e.message) || '';
+            return /fetch|network|offline|Load failed/i.test(m) ? 'You seem to be offline. Try again when you are back online.' : 'Something went wrong. Please try again.';
+        }
+
+        /* ---------- not signed in ---------- */
+        function renderSignedOut() {
+            var b = el('button', { type: 'button', class: 'fr-btn primary', text: 'Sign in' });
+            b.addEventListener('click', function () { account.openSignIn({ reason: 'Friends need an account, so you can find each other and see each other’s progress.' }); });
+            main.replaceChildren(el('div', { class: 'fr-card' }, [
+                el('p', { class: 'fr-eyebrow', text: 'Study together' }),
+                el('p', { class: 'fr-note', text: 'Connect with a friend using a private friend code. Once you both accept, you can see each other’s reading streak and progress, and share a verse or a note to encourage each other.' }),
+                el('p', { class: 'fr-note', text: 'Nobody can find you without your code, and nothing is shared until you both accept.' }),
+                b]));
+        }
+
+        /* ---------- first time: choose a name ---------- */
+        function renderSetup() {
+            var input = el('input', { class: 'fr-input', type: 'text', maxlength: '40', placeholder: 'e.g. Jeremy M.', 'aria-label': 'Your name for friends' });
+            var go = el('button', { type: 'button', class: 'fr-btn primary', text: 'Get my friend code' });
+            var msg = el('p', { class: 'fr-msg', role: 'alert' });
+            go.addEventListener('click', function () {
+                var name = input.value.trim();
+                if (!name) { msg.textContent = 'Enter the name your friends will see.'; return; }
+                go.disabled = true; msg.textContent = '';
+                (function attempt(tries) {
+                    return sb.from('friend_profiles').insert({ user_id: user.id, code: newCode(), display_name: name }).select().single().then(function (res) {
+                        if (res.error && res.error.code === '23505' && tries > 0) return attempt(tries - 1);   // code already taken: draw another
+                        profile = must(res);
+                        try { localStorage.setItem('bs-friends', user.id); } catch (e) {}
+                        if (window.BibleProgress && window.BibleProgress.publish) window.BibleProgress.publish();
+                        renderMain();
+                    });
+                })(3).catch(function (e) { msg.textContent = failText(e); go.disabled = false; });
+            });
+            main.replaceChildren(el('div', { class: 'fr-card' }, [
+                el('p', { class: 'fr-eyebrow', text: 'Set up friends' }),
+                el('p', { class: 'fr-note', text: 'Choose the name your friends will see. It is only shown to people you accept as friends.' }),
+                el('div', { class: 'fr-row' }, [input, go]), msg]));
+            input.focus();
+        }
+
+        /* ---------- main ---------- */
+        function renderMain() {
+            var codeCard = el('div', { class: 'fr-card' });
+            var share = el('button', { type: 'button', class: 'fr-btn primary' }, [el('i', { class: 'fas fa-share-nodes', 'aria-hidden': 'true', style: 'margin-right:6px' }), 'Share my code']);
+            var shareMsg = el('p', { class: 'fr-msg', role: 'status' });
+            share.addEventListener('click', function () {
+                var link = location.origin + location.pathname + '?add=' + profile.code;
+                var text = 'Join me on Bible Study! My friend code is ' + pretty(profile.code) + '. ' + link;
+                if (navigator.share) navigator.share({ title: 'Bible Study friend code', text: text }).catch(function () {});
+                else if (navigator.clipboard) navigator.clipboard.writeText(text).then(function () { shareMsg.textContent = 'Copied. Paste it into a message to your friend.'; });
+                else shareMsg.textContent = text;
+            });
+            codeCard.append(el('p', { class: 'fr-eyebrow', text: 'Your friend code' }), el('p', { class: 'fr-code', text: pretty(profile.code) }),
+                el('p', { class: 'fr-note', text: 'Your friends see you as “' + profile.display_name + '”. Share this code with a friend; they type it in below on their own device.' }),
+                el('div', { class: 'fr-row' }, [share]), shareMsg);
+
+            var addInput = el('input', { class: 'fr-input', type: 'text', maxlength: '9', placeholder: 'ABCD-2345', autocapitalize: 'characters', 'aria-label': 'Friend code' });
+            addInput.value = prefill ? pretty(prefill) : '';
+            var addBtn = el('button', { type: 'button', class: 'fr-btn primary', text: 'Add friend' });
+            var addMsg = el('p', { class: 'fr-msg', role: 'status' });
+            addBtn.addEventListener('click', function () {
+                var code = addInput.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+                if (code.length !== 8) { addMsg.textContent = 'A friend code has 8 letters and numbers.'; return; }
+                addBtn.disabled = true; addMsg.textContent = '';
+                sb.rpc('friend_request', { friend_code: code }).then(must).then(function (r) {
+                    addMsg.textContent = { sent: 'Request sent. You will be friends once they accept.', accepted: 'You are now friends!', already: 'You are already connected (or a request is waiting).', self: 'That is your own code.', not_found: 'No one has that code. Check it and try again.' }[r] || '';
+                    if (r === 'sent' || r === 'accepted') { addInput.value = ''; prefill = ''; try { history.replaceState(null, '', 'friends.html'); } catch (e) {} }
+                    loadLists();
+                }).catch(function (e) { addMsg.textContent = failText(e); }).then(function () { addBtn.disabled = false; });
+            });
+            var addCard = el('div', { class: 'fr-card' }, [el('p', { class: 'fr-eyebrow', text: 'Add a friend' }), el('div', { class: 'fr-row' }, [addInput, addBtn]), addMsg]);
+
+            var toggle = el('input', { type: 'checkbox' });
+            toggle.checked = profile.share_progress !== false;
+            toggle.addEventListener('change', function () {
+                sb.from('friend_profiles').update({ share_progress: toggle.checked }).eq('user_id', user.id).then(must)
+                    .catch(function () { toggle.checked = !toggle.checked; });
+            });
+            var settings = el('div', { class: 'fr-card' }, [el('label', { class: 'fr-toggle' }, [toggle,
+                el('span', {}, ['Share my streak, chapters studied and current chapter with my friends', el('span', { class: 'fr-sub', text: 'Your name is always shown to friends. Shared verses and notes are separate, one at a time.' })])])]);
+
+            listsBox = el('div');
+            main.replaceChildren(codeCard, addCard, listsBox, settings);
+            if (prefill) addInput.focus();
+            loadLists();
+        }
+
+        var listsBox = null;
+        function loadLists() {
+            if (!listsBox) return;
+            Promise.all([sb.rpc('friends_list').then(must), sb.rpc('friends_feed', { max_items: 50 }).then(must),
+                         sb.from('shared_items').select('id,kind,ref,title,created_at').eq('removed', false).order('created_at', { ascending: false }).limit(20).then(must)])
+                .then(function (res) { renderLists(res[0] || [], res[1] || [], res[2] || []); })
+                .catch(function (e) { listsBox.replaceChildren(el('div', { class: 'fr-card' }, [el('p', { class: 'fr-empty', text: failText(e) })])); });
+        }
+
+        function act(btn, fn) {
+            btn.addEventListener('click', function () {
+                btn.disabled = true;
+                fn().then(loadLists).catch(function () { btn.disabled = false; });
+            });
+        }
+
+        function renderLists(people, feed, mine) {
+            var cards = [];
+            var incoming = people.filter(function (p) { return p.status === 'pending' && p.incoming; });
+            var outgoing = people.filter(function (p) { return p.status === 'pending' && !p.incoming; });
+            var friends = people.filter(function (p) { return p.status === 'accepted'; });
+
+            if (incoming.length) cards.push(el('div', { class: 'fr-card' }, [el('p', { class: 'fr-eyebrow', text: 'Friend requests' }),
+                el('ul', { class: 'fr-list' }, incoming.map(function (p) {
+                    var yes = el('button', { type: 'button', class: 'fr-btn primary small', text: 'Accept' });
+                    var no = el('button', { type: 'button', class: 'fr-btn small', text: 'Decline' });
+                    act(yes, function () { return sb.rpc('friend_respond', { other: p.friend, accept: true }).then(must); });
+                    act(no, function () { return sb.rpc('friend_respond', { other: p.friend, accept: false }).then(must); });
+                    return el('li', {}, [el('span', { class: 'fr-name', text: p.display_name }), el('span', { class: 'fr-row' }, [yes, no])]);
+                }))]));
+
+            var fl = friends.length ? el('ul', { class: 'fr-list' }, friends.map(function (p) {
+                var sub = el('span', { class: 'fr-sub' });
+                if (p.streak != null) {
+                    sub.append(el('i', { class: 'fas fa-fire fr-flame', 'aria-hidden': 'true' }), ' ' + p.streak + '-day streak · ' + p.chapters + ' chapters');
+                    if (p.current_page) sub.append(' · reading ', el('a', { href: p.current_page + '.html', text: refLabel(p.current_page) }));
+                } else sub.textContent = 'Not sharing progress';
+                var rm = el('button', { type: 'button', class: 'fr-btn quiet small', text: 'Remove' });
+                rm.addEventListener('click', function () {
+                    if (!confirm('Remove ' + p.display_name + ' as a friend? You will both stop seeing each other’s progress and shares.')) return;
+                    rm.disabled = true;
+                    sb.rpc('friend_remove', { other: p.friend }).then(must).then(loadLists).catch(function () { rm.disabled = false; });
+                });
+                return el('li', {}, [el('span', {}, [el('span', { class: 'fr-name', text: p.display_name }), sub]), rm]);
+            })) : el('p', { class: 'fr-empty', text: 'No friends yet. Share your code, or add a friend’s code above.' });
+            cards.push(el('div', { class: 'fr-card' }, [el('p', { class: 'fr-eyebrow', text: 'Friends' + (friends.length ? ' (' + friends.length + ')' : '') }), fl]));
+
+            if (outgoing.length) cards.push(el('div', { class: 'fr-card' }, [el('p', { class: 'fr-eyebrow', text: 'Waiting for them to accept' }),
+                el('ul', { class: 'fr-list' }, outgoing.map(function (p) {
+                    var cancel = el('button', { type: 'button', class: 'fr-btn quiet small', text: 'Cancel' });
+                    act(cancel, function () { return sb.rpc('friend_remove', { other: p.friend }).then(must); });
+                    return el('li', {}, [el('span', { class: 'fr-name', text: p.display_name }), cancel]);
+                }))]));
+
+            if (friends.length) cards.push(el('div', { class: 'fr-card' }, [el('p', { class: 'fr-eyebrow', text: 'Shared by friends' }),
+                feed.length ? el('ul', { class: 'fr-list fr-feed' }, feed.map(function (it) {
+                    var h = refHref(it.ref);
+                    return el('li', {}, [
+                        el('span', { class: 'fr-what' }, [it.display_name + ' shared ' + (it.kind === 'note' ? 'a note' : 'a verse') + (it.ref ? ' · ' : ''), it.ref && h ? el('a', { href: h, text: refLabel(it.ref), style: 'color:var(--accent-link);font-weight:600;text-decoration:none' }) : null]),
+                        it.title ? el('p', { class: 'fr-title', text: it.title }) : null,
+                        it.body ? el('p', { class: 'fr-body', text: it.body }) : null]);
+                })) : el('p', { class: 'fr-empty', text: 'Nothing shared yet. Tap a verse while reading, or open a note, and choose Share.' })]));
+
+            if (mine.length) cards.push(el('div', { class: 'fr-card' }, [el('p', { class: 'fr-eyebrow', text: 'You shared' }),
+                el('ul', { class: 'fr-list' }, mine.map(function (it) {
+                    var un = el('button', { type: 'button', class: 'fr-btn quiet small', text: 'Unshare' });
+                    act(un, function () { return sb.from('shared_items').update({ removed: true }).eq('id', it.id).then(must); });
+                    return el('li', {}, [el('span', {}, [el('span', { class: 'fr-name', text: it.title || refLabel(it.ref) || (it.kind === 'note' ? 'Note' : 'Verse') }),
+                        el('span', { class: 'fr-sub', text: (it.kind === 'note' ? 'Note' : 'Verse') + (it.ref ? ' · ' + refLabel(it.ref) : '') })]), un]);
+                }))]));
+            listsBox.replaceChildren.apply(listsBox, cards);
+        }
+
+        function onAccount(u) {
+            user = u;
+            if (!u) { profile = null; renderSignedOut(); return; }
+            account.ready().then(function (client) {
+                sb = client;
+                return sb.from('friend_profiles').select('code,display_name,share_progress').eq('user_id', u.id).maybeSingle().then(must);
+            }).then(function (p) {
+                profile = p;
+                if (p) { try { localStorage.setItem('bs-friends', u.id); } catch (e) {} renderMain(); }
+                else renderSetup();
+            }).catch(function (e) { main.replaceChildren(el('div', { class: 'fr-card' }, [el('p', { class: 'fr-empty', text: failText(e) })])); });
+        }
+
+        if (!account) { main.replaceChildren(el('p', { class: 'fr-empty', text: 'Friends are not available right now.' })); return; }
+        if (account.hasSession()) account.onChange(onAccount);
+        else { renderSignedOut(); account.onChange(onAccount); }
+    })();
+    </script>
+</body>
+</html>

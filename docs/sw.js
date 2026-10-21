@@ -89,8 +89,36 @@ self.addEventListener('fetch', event => {
 // current, with a generic fallback if the fetch is slow or fails (a push
 // event that never results in a shown notification can get permission
 // revoked by the browser, so this must never silently no-op).
+// A push can also be the evening streak reminder. The worker queued which one
+// it was, so ask it first (quickly; on any failure this is the devotional).
+async function pushKind() {
+  try {
+    const sub = await self.registration.pushManager.getSubscription();
+    if (!sub) return null;
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 4000);
+    const res = await fetch(PUSH_WORKER + '/message', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ endpoint: sub.endpoint }), signal: ctrl.signal
+    });
+    clearTimeout(timer);
+    return res.ok ? await res.json() : null;
+  } catch (e) {
+    return null;
+  }
+}
+
 self.addEventListener('push', event => {
   event.waitUntil((async () => {
+    const kind = await pushKind();
+    if (kind && kind.type === 'streak') {
+      const n = kind.streak || 0;
+      const text = (kind.text || 'Your {n}-day streak ends tonight. Study a chapter today to keep it going.').split('{n}').join(n);
+      return self.registration.showNotification('\u{1F525} ' + n, {
+        body: text, icon: '/site/icon-192.png', badge: '/site/icon-192.png', tag: 'study-streak',
+        data: { url: '/index.html' }
+      });
+    }
     let title = 'Your Daily Devotional Is Ready';
     let body = "Tap to read today's verse, reflection, and prayer.";
     let icon = '/site/icon-192.png';

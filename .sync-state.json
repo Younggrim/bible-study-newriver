@@ -1,9 +1,9 @@
 {
-  "upstream_commit": "d83cad1ad5b29bcdc624ed62803463522a90ea5c 23 more Bible languages: India, Africa and world (29 in all) (#73)",
+  "upstream_commit": "2cc5df375c27132dc132017d906fe5c2d4088a64 Streaks, Notes, plans, friends, labels in every language (+ privacy page) (#75)",
   "upstream_fingerprints": {
-    "site/style.css": "54238837",
-    "site/script.js": "d71fe306"
+    "site/style.css": "20c1069c",
+    "site/script.js": "e9884175"
   },
-  "style_css_v": "bfc452f3",
-  "script_js_v": "7dca3584"
+  "style_css_v": "9d4ecef5",
+  "script_js_v": "e5c9400e"
 }
