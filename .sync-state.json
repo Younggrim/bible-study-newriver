@@ -1,9 +1,9 @@
 {
-  "upstream_commit": "9c862e2549593d06db9edf48c85ba4146a291c9f Reading plans: stop a plan, 'completed for today', next reading with the daily reminder (#78)",
+  "upstream_commit": "17b2d171c6d70d5c675c3a7102161baf93f681c8 App bottom bar: labels scale with screen width so Memory is not cut off (#79)",
   "upstream_fingerprints": {
-    "site/style.css": "20c1069c",
+    "site/style.css": "7a8bacda",
     "site/script.js": "b5ea48a8"
   },
-  "style_css_v": "9d4ecef5",
+  "style_css_v": "cf787d44",
   "script_js_v": "f35c451d"
 }
