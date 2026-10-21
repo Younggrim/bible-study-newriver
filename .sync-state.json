@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "29a48245dadbf259366822703093281ff13ffe1b Highlights, bookmarks and pick-up-where-you-left-off (#70)",
+  "upstream_commit": "4ea5efcf6d9020cec55bf90e714775c444fc7f7e Sign-in button beside the book, chapter and translation pickers (#71)",
   "upstream_fingerprints": {
     "site/style.css": "54238837",
     "site/script.js": "d71fe306"
