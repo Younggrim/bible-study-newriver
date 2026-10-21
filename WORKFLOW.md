@@ -565,7 +565,9 @@ stamps them; run it after changing any of these files.
 and `site/style.css` are preserved by the sync, so the six-tab bar (Bible,
 Topical, Life, Plans, Devotional, Memory; the `pwa-six` class and the `plans`
 section) was changed by hand in both repos. Notes moved off the bar to the
-account menu ("My notes"). Keep the two copies' bottom-bar code identical.
+account menu ("My notes"). The chapter arrows ("Ch 2 >") are also placed by
+`site/script.js`, after the last study-tab pane, so they sit below the tab
+content. Keep the two copies of this code identical.
 
 **The push worker is deployed by hand** (`cd push-worker && wrangler deploy`),
 not by GitHub Pages. Until it is, the site still works: the streak report and

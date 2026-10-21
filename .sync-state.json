@@ -1,9 +1,9 @@
 {
-  "upstream_commit": "1fbe584083ab058dcf225418debbd8eab61eb1f6 Chapter pages: Notes study tab replaces the 'Add a note' link (#80)",
+  "upstream_commit": "db6157a239886d7402cec6f6aa2dcb01e73c50c0 Chapter pages: arrows below the study-tab content (#81)",
   "upstream_fingerprints": {
     "site/style.css": "7a8bacda",
-    "site/script.js": "b5ea48a8"
+    "site/script.js": "63dab9cc"
   },
   "style_css_v": "cf787d44",
-  "script_js_v": "f35c451d"
+  "script_js_v": "2d30b4d8"
 }

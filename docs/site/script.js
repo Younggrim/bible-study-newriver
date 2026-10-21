@@ -546,8 +546,11 @@ document.addEventListener('DOMContentLoaded', function() {
         var chapter = parseInt(chapterMatch[2]);
         var last = BOOKS[bookIdx][1];
 
-        // Find the study-tabs or tab bar to place arrows after
-        var insertAfter = document.querySelector('.study-tabs') || document.querySelector('.tab-bar');
+        // Place the arrows below the study tabs' content (after the last pane),
+        // so the tab buttons sit right above what they show.
+        var panes = document.querySelectorAll('.study-tabs ~ .tab-content');
+        var insertAfter = panes.length ? panes[panes.length - 1]
+            : (document.querySelector('.study-tabs') || document.querySelector('.tab-bar'));
         if (!insertAfter) {
             // Fallback: insert before main content
             var mainContent = document.querySelector('.main-content') || document.querySelector('main');
@@ -566,7 +569,7 @@ document.addEventListener('DOMContentLoaded', function() {
         navDiv.className = 'chapter-nav-arrows';
         navDiv.setAttribute('role', 'navigation');
         navDiv.setAttribute('aria-label', 'Chapter');
-        navDiv.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:12px 20px;margin:0 0 16px;';
+        navDiv.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:12px 20px;margin:16px 0;';
 
         var prevHref = '', prevText = '';
         if (chapter > 1) { prevHref = book + (chapter - 1); prevText = 'Ch ' + (chapter - 1); }
