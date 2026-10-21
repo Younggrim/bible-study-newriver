@@ -320,6 +320,8 @@ document.addEventListener('DOMContentLoaded', function() {
         section = 'devotional';
     } else if (baseName === 'memory') {
         section = 'memory';
+    } else if (baseName === 'notes') {
+        section = 'notes';
     } else if (topicPages.indexOf(baseName) !== -1) {
         section = 'topical';
     } else if (strugglePages.indexOf(baseName) !== -1) {
@@ -469,9 +471,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 2200);
     }
 
-    // Inject bottom nav (5 tabs: Bible, Topical, Life, Devotional, Memory)
+    // Inject bottom nav (6 tabs: Bible, Topical, Life, Devotional, Memory, Notes)
     var nav = document.createElement('nav');
-    nav.className = 'pwa-bottom-nav';
+    nav.className = 'pwa-bottom-nav pwa-six';
     nav.innerHTML = ''
         + '<a class="pwa-nav-item' + (section==='bible'?' active':'') + '" data-section="bible" href="#">'
         + '<i class="fas fa-book-bible"></i><span>Bible</span></a>'
@@ -482,7 +484,9 @@ document.addEventListener('DOMContentLoaded', function() {
         + '<a class="pwa-nav-item' + (section==='devotional'?' active':'') + '" data-section="devotional" id="pwa-devotional-btn" href="#">'
         + '<i class="fas fa-hands-praying"></i><span>Devotional</span></a>'
         + '<a class="pwa-nav-item' + (section==='memory'?' active':'') + '" data-section="memory" href="#">'
-        + '<i class="fas fa-brain"></i><span>Memory</span></a>';
+        + '<i class="fas fa-brain"></i><span>Memory</span></a>'
+        + '<a class="pwa-nav-item' + (section==='notes'?' active':'') + '" data-section="notes" href="#">'
+        + '<i class="fas fa-pen-to-square"></i><span>Notes</span></a>';
     document.body.appendChild(nav);
 
     // Tab click handling
@@ -496,6 +500,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             if (sec === 'memory') {
                 window.location.href = 'memory.html';
+                return;
+            }
+            if (sec === 'notes') {
+                window.location.href = 'notes.html';
                 return;
             }
             if (sec === 'topical') {

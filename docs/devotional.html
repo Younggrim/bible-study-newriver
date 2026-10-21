@@ -25,7 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="site/style.css?v=bfc452f3">
+    <link rel="stylesheet" href="site/style.css?v=9d4ecef5">
     <style>
         body { background: var(--bg-page); }
         .page-content { margin: 0 auto; max-width: 900px; padding: 24px 20px 100px; }
@@ -98,6 +98,9 @@
                         <select id="devoReminderTime"></select>
                         <button class="devo-reminder-turnoff" id="devoReminderTurnoff" type="button" style="display:none;">Turn off reminders</button>
                     </div>
+                    <label class="devo-streak-opt" id="devoStreakOpt" style="display:none;font-size:0.8rem;margin-top:8px;align-items:center;gap:8px;cursor:pointer;">
+                        <input type="checkbox" id="devoStreakToggle" checked> Also remind me at 7 PM if my study streak is about to end
+                    </label>
                 </div>
                 <button class="devo-reminder-btn" id="devoReminderEnable">Enable</button>
                 <button class="devo-reminder-dismiss" id="devoReminderDismiss" aria-label="Dismiss">&times;</button>
@@ -107,7 +110,8 @@
             </div>
         </div>
     </main>
-    <script src="site/script.js?v=7dca3584"></script>
+    <script src="site/script.js?v=e5c9400e"></script>
+    <script src="site/i18n.js?v=9938dd68"></script>
     <script>
     (function() {
         var devotionals = [];
@@ -200,6 +204,8 @@
         var dismissBtn = document.getElementById('devoReminderDismiss');
         var turnoffBtn = document.getElementById('devoReminderTurnoff');
         var timeSelect = document.getElementById('devoReminderTime');
+        var streakOpt = document.getElementById('devoStreakOpt');
+        var streakToggle = document.getElementById('devoStreakToggle');
 
         function urlBase64ToUint8Array(base64String) {
             var base64 = base64String.replace(/-/g, '+').replace(/_/g, '/');
@@ -252,6 +258,8 @@
                     var subscribed = !!sub && Notification.permission === 'granted';
                     populateTimeOptions(savedHour);
                     turnoffBtn.style.display = subscribed ? 'inline' : 'none';
+                    streakOpt.style.display = subscribed ? 'flex' : 'none';
+                    streakToggle.checked = localStorage.getItem('bs-streak-reminders') !== 'off';
                     titleEl.textContent = subscribed ? 'Change Reminder Time' : 'Enable Daily Reminders';
                     enableBtn.textContent = subscribed ? 'Save' : 'Enable';
                     if (subscribed) {
@@ -286,6 +294,17 @@
                     }).catch(function() { refreshUI(); });
                 });
             });
+        });
+
+        // Evening streak reminder: on by default for anyone with reminders on.
+        streakToggle.addEventListener('change', function() {
+            var on = streakToggle.checked;
+            try { localStorage.setItem('bs-streak-reminders', on ? 'on' : 'off'); } catch (e) {}
+            navigator.serviceWorker.ready.then(function(reg) {
+                return reg.pushManager.getSubscription();
+            }).then(function(sub) {
+                if (sub) return postSubscription('/preferences', { endpoint: sub.endpoint, streakReminders: on });
+            }).catch(function() {});
         });
 
         dismissBtn.addEventListener('click', function() {

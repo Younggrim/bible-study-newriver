@@ -37,7 +37,9 @@
     function save(key, value) {
         try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
     }
+    function T(key, fallback) { return window.BibleI18n ? window.BibleI18n.t(key, fallback) : fallback; }
     function bookLabel(slug) {
+        if (window.BibleI18n && window.BibleI18n.book(slug)) return window.BibleI18n.book(slug);
         return slug.replace(/^(\d)/, '$1 ').replace(/^songofsolomon$/, 'song of solomon')
             .replace(/\b(?!of\b)[a-z]/g, function (m) { return m.toUpperCase(); });
     }
@@ -73,6 +75,7 @@
         return n;
     }
     function ago(ms) {
+        if (window.BibleI18n && window.BibleI18n.lang() !== 'en') { var r = window.BibleI18n.relTime(ms); if (r) return r; }
         var m = Math.round((Date.now() - ms) / 60000);
         if (m < 2) return 'just now';
         if (m < 60) return m + ' minutes ago';
@@ -136,7 +139,18 @@
         + '.bs-acct-pop{position:fixed;z-index:9500;background:#fff;color:var(--ink-deep);border:1px solid var(--border-light);border-radius:10px;box-shadow:0 8px 28px rgba(0,0,0,.16);padding:14px 16px;width:260px;font-family:"Inter",-apple-system,sans-serif}'
         + '.bs-acct-pop p{margin:0 0 10px;font-size:.85rem;line-height:1.45;color:var(--text-secondary);word-break:break-word}'
         + '.bs-acct-row{margin-top:16px;padding-top:14px;border-top:1px solid var(--rule-soft);font-size:.85rem;color:var(--text-secondary);font-family:"Inter",-apple-system,sans-serif;text-align:center;line-height:1.5}'
-        + '.bs-acct-row .bs-act{display:block;width:100%;margin-top:8px}';
+        + '.bs-acct-row .bs-act{display:block;width:100%;margin-top:8px}'
+        + '.bs-acct-links{margin:12px 0 0;font-size:.8rem;display:flex;gap:14px;flex-wrap:wrap}'
+        + '.bs-acct-row .bs-acct-links{justify-content:center}'
+        + '.bs-acct-links a,.bs-acct-links button{color:var(--text-faint);font:inherit;font-size:.8rem;background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}'
+        + '.bs-modal{position:fixed;inset:0;z-index:100001;background:rgba(20,14,10,.55);display:flex;align-items:center;justify-content:center;padding:16px}'
+        + '.bs-modal-in{background:#fff;color:var(--ink-deep);max-width:400px;width:100%;border-radius:14px;padding:22px 20px;font-family:"Inter",-apple-system,sans-serif;box-shadow:0 10px 40px rgba(0,0,0,.25)}'
+        + '.bs-modal-in h2{font-family:"Poppins","Inter",sans-serif;font-size:1.15rem;margin:0 0 8px}'
+        + '.bs-modal-in p{font-size:.9rem;line-height:1.55;color:var(--text-secondary);margin:0 0 12px}'
+        + '.bs-danger{display:block;width:100%;margin-top:6px;font-family:inherit;font-weight:600;font-size:.95rem;padding:12px;border-radius:8px;border:1px solid #a33a2f;background:#a33a2f;color:#fff;cursor:pointer}'
+        + '.bs-danger:disabled{opacity:.6;cursor:default}'
+        + '.bs-modal-in .bs-act{display:block;width:100%;margin-top:8px;text-align:center}'
+        + '.bs-modal-err{color:#a33a2f;font-size:.85rem;min-height:1.2em;margin:8px 0 0}';
 
     function injectStyle() {
         if (!document.getElementById('bs-study-style')) document.head.appendChild(el('style', { id: 'bs-study-style', text: STYLE }));
@@ -367,16 +381,37 @@
             b.addEventListener('click', function () { applyToSelection({ c: shared === c ? null : c }); closeSheet(); });
             return b;
         });
-        var bm = el('button', { type: 'button', class: 'bs-act' }, [el('i', { class: allBookmarked ? 'fas fa-bookmark' : 'far fa-bookmark', 'aria-hidden': 'true' }), allBookmarked ? 'Bookmarked' : 'Bookmark']);
+        var bm = el('button', { type: 'button', class: 'bs-act' }, [el('i', { class: allBookmarked ? 'fas fa-bookmark' : 'far fa-bookmark', 'aria-hidden': 'true' }), allBookmarked ? T('sheet.bookmarked', 'Bookmarked') : T('sheet.bookmark', 'Bookmark')]);
         bm.addEventListener('click', function () { applyToSelection({ b: !allBookmarked }); closeSheet(); });
-        var clear = anyMark ? el('button', { type: 'button', class: 'bs-act' }, [el('i', { class: 'fas fa-eraser', 'aria-hidden': 'true' }), 'Clear']) : null;
+        var noteBtn = el('a', { class: 'bs-act', href: 'notes.html?new=1&ref=' + here.book + here.chapter + ':' + Math.min.apply(null, selected) }, [el('i', { class: 'fas fa-pen-to-square', 'aria-hidden': 'true' }), T('sheet.note', 'Note')]);
+        noteBtn.style.textDecoration = 'none';
+        // Share a verse with friends (only offered once Friends is set up on this account).
+        var shareBtn = null;
+        var friendsOn = null;
+        try { friendsOn = localStorage.getItem('bs-friends'); } catch (e) {}
+        if (user && friendsOn === user.id) {
+            shareBtn = el('button', { type: 'button', class: 'bs-act' }, [el('i', { class: 'fas fa-share-nodes', 'aria-hidden': 'true' }), T('sheet.share', 'Share')]);
+            shareBtn.addEventListener('click', function () {
+                var v = Math.min.apply(null, selected), ref = here.book + here.chapter + ':' + v;
+                var comment = window.prompt(T('sheet.sharewhy', 'Add a note for your friends (optional)'), '');
+                if (comment === null) return;
+                shareBtn.disabled = true;
+                account.ready().then(function (sb) {
+                    return sb.from('shared_items').insert({ owner: user.id, kind: 'verse', ref: ref, title: refText(here.book, here.chapter, selected.slice().sort(function (a, b) { return a - b; })), body: comment.slice(0, 2000) });
+                }).then(function (res) {
+                    if (res && res.error) throw res.error;
+                    closeSheet();
+                }).catch(function () { shareBtn.disabled = false; alert(T('sheet.sharefail', 'Could not share right now. Try again in a moment.')); });
+            });
+        }
+        var clear = anyMark ? el('button', { type: 'button', class: 'bs-act' }, [el('i', { class: 'fas fa-eraser', 'aria-hidden': 'true' }), T('sheet.clear', 'Clear')]) : null;
         if (clear) clear.addEventListener('click', function () { applyToSelection({ c: null, b: false }); closeSheet(); });
         var x = el('button', { type: 'button', class: 'bs-x', 'aria-label': 'Close' }, ['×']);
         x.addEventListener('click', closeSheet);
 
         var note = null;
         if (account && !user && !account.hasSession()) {
-            var signin = el('button', { type: 'button', class: 'bs-link', text: 'Sign in' });
+            var signin = el('button', { type: 'button', class: 'bs-link', text: T('acct.signin', 'Sign in') });
             signin.addEventListener('click', function () {
                 account.openSignIn({ reason: 'Your highlights, bookmarks and reading place are saved to your account, so they follow you to any device.' });
             });
@@ -385,7 +420,7 @@
 
         var inner = el('div', { class: 'bs-sheet-in', role: 'dialog', 'aria-label': 'Highlight ' + refText(here.book, here.chapter, selected) }, [
             el('div', { class: 'bs-sheet-top' }, [el('span', { class: 'bs-sheet-ref', text: refText(here.book, here.chapter, selected) }), x]),
-            el('div', { class: 'bs-row' }, dots.concat([bm, clear])),
+            el('div', { class: 'bs-row' }, dots.concat([bm, noteBtn, shareBtn, clear])),
             note
         ]);
         if (!sheet) { sheet = el('div', { class: 'bs-sheet' }); document.body.appendChild(sheet); }
@@ -506,15 +541,15 @@
         var parts = [];
         if (pos) {
             var p = parsePage(pos.page);
-            parts.push(el('p', { class: 'bs-eyebrow', text: 'Pick up where you left off' }));
+            parts.push(el('p', { class: 'bs-eyebrow', text: T('home.resume', 'Pick up where you left off') }));
             parts.push(el('a', { class: 'bs-resume', href: pos.page + '.html' + (pos.verse ? '#v' + pos.verse : '') }, [
-                el('span', {}, [el('strong', { text: refText(p.book, p.chapter, pos.verse ? [pos.verse] : null) }), el('small', { text: 'Last read ' + ago(pos.t) })]),
-                el('span', { class: 'bs-go' }, ['Continue ', el('i', { class: 'fas fa-arrow-right', 'aria-hidden': 'true' })])
+                el('span', {}, [el('strong', { text: refText(p.book, p.chapter, pos.verse ? [pos.verse] : null) }), el('small', { text: T('home.lastread', 'Last read') + ' ' + ago(pos.t) })]),
+                el('span', { class: 'bs-go' }, [T('home.continue', 'Continue') + ' ', el('i', { class: 'fas fa-arrow-right', 'aria-hidden': 'true' })])
             ]));
         }
         if (bms.length || hls.length) {
             if (!bms.length) homeTab = 'highlights';
-            var tabs = [['bookmarks', 'Bookmarks (' + bms.length + ')'], ['highlights', 'Highlights (' + hls.length + ')']].map(function (t) {
+            var tabs = [['bookmarks', T('home.bookmarks', 'Bookmarks') + ' (' + bms.length + ')'], ['highlights', T('home.highlights', 'Highlights') + ' (' + hls.length + ')']].map(function (t) {
                 var b = el('button', { type: 'button', class: 'bs-tab', role: 'tab', 'aria-selected': homeTab === t[0] ? 'true' : 'false', text: t[1] });
                 b.addEventListener('click', function () { homeTab = t[0]; renderHome(); });
                 return b;
@@ -533,7 +568,7 @@
         }
         // In the app the sign-in sits right under the passage picker, so the card does not repeat it.
         if (account && !user && !account.hasSession() && !document.querySelector('.pwa-standalone .pwa-bible-nav')) {
-            var signin = el('button', { type: 'button', class: 'bs-link', text: 'Sign in' });
+            var signin = el('button', { type: 'button', class: 'bs-link', text: T('acct.signin', 'Sign in') });
             signin.addEventListener('click', function () { account.openSignIn({ reason: 'Your reading place, highlights and bookmarks are saved to your account, so they follow you to any device.' }); });
             parts.push(el('p', { class: 'bs-note' }, ['Saved on this device. ', signin, ' to keep your place on every device.']));
         }
@@ -569,13 +604,73 @@
         Promise.resolve(user ? syncNow() : null).then(function () { return account.signOut(); });
     }
 
+    var PRIVACY_URL = 'privacy.html';
+    var LOCAL_KEYS = [K_MARKS, K_POS, K_CURSOR, K_OWNER, 'memory-verses-v1', 'bs-studied', 'bs-days', 'bs-progress-cursor',
+        'bs-progress-owner', 'bs-notes', 'bs-notes-cursor', 'bs-notes-owner', 'bs-plan', 'bs-plan-owner'];
+
+    function accountLinks() {
+        var notesLink = el('a', { href: 'notes.html', text: T('acct.mynotes', 'My notes') });
+        var friendsLink = el('a', { href: 'friends.html', text: T('acct.friends', 'Friends') });
+        var priv = el('a', { href: PRIVACY_URL, text: T('acct.privacy', 'Privacy') });
+        var del = el('button', { type: 'button', text: T('acct.delete', 'Delete my account') });
+        del.addEventListener('click', function () { closePop(); confirmDelete(); });
+        return el('p', { class: 'bs-acct-links' }, [notesLink, friendsLink, priv, del]);
+    }
+
+    // Permanently deletes the account and everything saved with it (the database
+    // function delete_my_account() cascades to every table), then clears this device.
+    function confirmDelete() {
+        if (!user || document.querySelector('.bs-modal')) return;
+        injectStyle();
+        var err = el('p', { class: 'bs-modal-err', role: 'alert' });
+        var go = el('button', { type: 'button', class: 'bs-danger', text: 'Delete my account and data' });
+        var cancel = el('button', { type: 'button', class: 'bs-act', text: 'Cancel' });
+        var last = document.activeElement;
+        var modal = el('div', { class: 'bs-modal' }, [el('div', { class: 'bs-modal-in', role: 'alertdialog', 'aria-modal': 'true', 'aria-labelledby': 'bs-del-title' }, [
+            el('h2', { id: 'bs-del-title', text: 'Delete your account?' }),
+            el('p', {}, ['This permanently deletes the account for ', el('strong', { text: user.email || 'this email' }),
+                ' and everything saved with it: highlights, bookmarks, your reading place and memory verses, on every device. It cannot be undone.']),
+            el('p', { text: 'You can keep using the site without an account, and sign up again any time.' }),
+            go, cancel, err
+        ])]);
+        function close() { modal.remove(); document.removeEventListener('keydown', onKey); if (last && last.focus) try { last.focus(); } catch (e) {} }
+        function onKey(e) { if (e.key === 'Escape' && !go.disabled) close(); }
+        cancel.addEventListener('click', close);
+        modal.addEventListener('click', function (e) { if (e.target === modal && !go.disabled) close(); });
+        document.addEventListener('keydown', onKey);
+        go.addEventListener('click', function () {
+            go.disabled = true; cancel.disabled = true; go.textContent = 'Deleting…'; err.textContent = '';
+            account.ready().then(function (sb) { return sb.rpc('delete_my_account'); }).then(function (res) {
+                if (res && res.error) throw res.error;
+                LOCAL_KEYS.forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
+                marks = {}; position = null;
+                if (window.BibleProgress && window.BibleProgress.reset) window.BibleProgress.reset();
+                return account.signOut().catch(function () {});
+            }).then(function () {
+                paintMarks(); renderHome();
+                modal.querySelector('.bs-modal-in').replaceChildren(
+                    el('h2', { text: 'Your account is deleted' }),
+                    el('p', { text: 'Your account and everything saved with it have been removed. Thank you for studying with us.' }),
+                    (function () { var b = el('button', { type: 'button', class: 'bs-act', text: 'Close' }); b.addEventListener('click', close); return b; })());
+            }).catch(function (e) {
+                var offline = e && /fetch|network|offline|Load failed/i.test(e.message || '');
+                err.textContent = offline ? 'You seem to be offline. Nothing was deleted. Try again when you are back online.'
+                    : 'Your account could not be deleted just now. Nothing was removed. Please try again later.';
+                go.disabled = false; cancel.disabled = false; go.textContent = 'Delete my account and data';
+            });
+        });
+        document.body.appendChild(modal);
+        cancel.focus();
+    }
+
     function openPop() {
         if (acctPop) { closePop(); return; }
         var out = el('button', { type: 'button', class: 'bs-act', text: 'Sign out on this device' });
         out.addEventListener('click', doSignOut);
         acctPop = el('div', { class: 'bs-acct-pop', role: 'dialog', 'aria-label': 'Your account' }, [
             el('p', {}, ['Signed in as ', el('strong', { text: (user && user.email) || 'your account' }), '. Your place, highlights, bookmarks and memory verses are saved to your account.']),
-            out
+            out,
+            accountLinks()
         ]);
         document.body.appendChild(acctPop);
         var r = acctBtn.getBoundingClientRect();
@@ -603,7 +698,7 @@
             acctBtn.setAttribute('aria-label', user ? 'Your account: signed in as ' + (user.email || '') : checking ? 'Checking sign-in' : 'Sign in to save your study');
             acctBtn.replaceChildren.apply(acctBtn, user ? [el('i', { class: 'fas fa-user-check', 'aria-hidden': 'true' })]
                 : checking ? [el('i', { class: 'fas fa-user', 'aria-hidden': 'true' })]
-                : [el('i', { class: 'far fa-user', 'aria-hidden': 'true' }), el('span', { class: 'bs-acct-label', text: 'Sign in' })]);
+                : [el('i', { class: 'far fa-user', 'aria-hidden': 'true' }), el('span', { class: 'bs-acct-label', text: T('acct.signin', 'Sign in') })]);
         }
 
         // The app's Bible tab: under "Choose a Passage".
@@ -612,16 +707,17 @@
         if (go) {
             if (!acctRow) { acctRow = el('div', { class: 'bs-acct-row' }); go.parentNode.insertBefore(acctRow, go.nextSibling); }
             if (user) {
-                var out = el('button', { type: 'button', class: 'bs-link', text: 'Sign out' });
+                var out = el('button', { type: 'button', class: 'bs-link', text: T('acct.signout', 'Sign out') });
                 out.addEventListener('click', doSignOut);
                 acctRow.replaceChildren(el('i', { class: 'fas fa-user-check', 'aria-hidden': 'true', style: 'color:var(--accent-link);margin-right:6px' }),
-                    'Signed in as ', el('strong', { text: user.email || 'your account' }), '. ', out);
+                    'Signed in as ', el('strong', { text: user.email || 'your account' }), '. ', out, accountLinks());
             } else if (checking) {
                 acctRow.replaceChildren('Checking your sign-in…');
             } else {
-                var b = el('button', { type: 'button', class: 'bs-act' }, [el('i', { class: 'far fa-user', 'aria-hidden': 'true' }), 'Sign in to save your study']);
+                var b = el('button', { type: 'button', class: 'bs-act' }, [el('i', { class: 'far fa-user', 'aria-hidden': 'true' }), T('acct.signinbtn', 'Sign in to save your study')]);
                 b.addEventListener('click', function () { account.openSignIn({ reason: SIGNIN_REASON }); });
-                acctRow.replaceChildren('Keep your place, highlights and memory verses on every device.', b);
+                acctRow.replaceChildren(window.BibleI18n && window.BibleI18n.lang() !== 'en' ? '' : 'Keep your place, highlights and memory verses on every device.', b,
+                    el('p', { class: 'bs-acct-links' }, [el('a', { href: PRIVACY_URL, text: T('acct.privacy', 'Privacy') })]));
             }
         }
     }
@@ -634,8 +730,10 @@
         if (account) {
             renderAccountUI();
             account.onChange(function (u) { onAccount(u); closePop(); renderAccountUI(); renderHome(); });
+            window.addEventListener('bible-lang', function () { renderAccountUI(); });
             window.addEventListener('online', function () { if (user) scheduleSync(0); else if (account.hasSession()) account.ready().catch(function () {}); });
         }
+        window.addEventListener('bible-lang', function () { renderHome(); if (sheet) renderSheet(); });
         // Another tab on this device changed something.
         window.addEventListener('storage', function (e) {
             if (e.key === K_MARKS) { marks = load(K_MARKS, {}); paintMarks(); renderHome(); }
