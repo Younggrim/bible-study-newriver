@@ -497,6 +497,36 @@ It fixed 173 captions across 132 pages. Run it in **bible-study**, then sync.
 Keep it around; the same corruption can recur if titles are ever pasted through
 a non-UTF-8 tool.
 
+## Bibles in other languages
+
+Six translations beyond the English five, chosen under "Other languages" in the
+translation picker: Spanish (Reina-Valera 1909, public domain), Hausa, Yoruba and
+Igbo (Biblica Open, CC BY-SA 4.0), Urdu (Urdu Geo Version, CC BY-NC-ND 4.0) and
+Hindi (Indian Revised Version, CC BY-SA 4.0). All six are full Bibles.
+
+They are **not** baked into the chapter HTML. `docs/bible/<CODE>/<page>.json`
+holds one chapter each, and `docs/site/translations.js` fetches it only when a
+reader picks that language. Each pane ends with the translation's credit line;
+the licences require it, so never remove it. Urdu is "no derivatives": its words
+are displayed exactly as published and never edited.
+
+```bash
+# download https://ebible.org/Scriptures/<id>_usfm.zip for spaRV1909 hausa yor ibo urdgvu hin2017
+python3 build_bibles.py /path/to/zips --check   # verse counts against the BSB text
+python3 build_bibles.py /path/to/zips           # writes docs/bible/
+python3 add_study_scripts.py                     # restamps translations.js on every page
+```
+
+Expected `--check` differences are the translations' own numbering, not damage:
+Hausa and Yoruba leave out the verses modern Greek texts omit (Matthew 17:21 and
+similar, 16 chapters), Urdu combines some verses (shown as "18–23"), and Spanish
+follows Hebrew numbering in a few Old Testament chapters. A *missing* chapter
+stops the build for that translation.
+
+Do not use the BibleNLP verse-per-line corpus as a source. It is aligned to a
+versification that drops 136 verses (all of Malachi 4, Joel 2:28-32) from Bibles
+numbered the English way.
+
 ## Map & Geography: the maps
 
 Every Map & Geography pane that names a place we can locate opens with a small

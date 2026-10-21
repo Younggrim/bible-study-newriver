@@ -131,7 +131,7 @@
         + '.bs-acct-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;min-width:32px;padding:0 10px;border-radius:16px;border:1px solid var(--border-light);background:var(--bg-tint);color:var(--ink-deep);font-family:inherit;font-size:.8rem;font-weight:600;cursor:pointer;white-space:nowrap}'
         + '.bs-acct-btn i{color:var(--accent-link)}'
         + '.bs-acct-btn.in{padding:0;width:32px}'
-        + '@media (max-width:600px){.top-nav .bs-acct-btn{padding:0;width:28px;min-width:28px;height:28px}.top-nav .bs-acct-btn .bs-acct-label{display:none}}'
+        + '@media (max-width:600px){.top-nav .bs-acct-btn{padding:0;width:28px;min-width:28px;height:28px}.top-nav .bs-acct-btn .bs-acct-label{display:none}.top-nav .nav-chapter-select{max-width:66px}}'
         + '.bs-acct-btn:focus-visible{outline:2px solid var(--accent-link);outline-offset:2px}'
         + '.bs-acct-pop{position:fixed;z-index:9500;background:#fff;color:var(--ink-deep);border:1px solid var(--border-light);border-radius:10px;box-shadow:0 8px 28px rgba(0,0,0,.16);padding:14px 16px;width:260px;font-family:"Inter",-apple-system,sans-serif}'
         + '.bs-acct-pop p{margin:0 0 10px;font-size:.85rem;line-height:1.45;color:var(--text-secondary);word-break:break-word}'
@@ -459,11 +459,13 @@
             });
             paintMarks(); markSelection();
             if (!jumped) jumped = goToHashVerse();
-            if (observer) container.querySelectorAll('.translation-block[data-translation="ESV"]').forEach(function (b) {
-                observer.observe(b, { childList: true });
-            });
+            if (observer) {
+                // A new translation block can be added (other languages), and its text arrives later.
+                observer.observe(container, { childList: true });
+                container.querySelectorAll('.translation-block').forEach(function (b) { observer.observe(b, { childList: true }); });
+            }
         }
-        // The ESV arrives later from the proxy and replaces its block's contents.
+        // The ESV and the other-language Bibles arrive later and fill in their block's contents.
         observer = new MutationObserver(retag);
         retag();
         setTimeout(function () { jumped = true; }, 8000);   // never jump once the reader has had time to start scrolling
