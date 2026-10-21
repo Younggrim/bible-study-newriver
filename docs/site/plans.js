@@ -52,11 +52,12 @@
         for (var i = 0; i < def.days.length; i++) {
             if (!def.days[i].every(done)) { idx = i; break; }
         }
+        if (P && c.start > P.today()) return { def: def, day: 0, finished: false, total: def.days.length, doneDays: 0, doneToday: false, upcoming: true, start: c.start };
         var doneDays = idx < 0 ? def.days.length : idx;
         // "Done for today": the last finished day had its final chapter marked today.
         var todayStr = P ? P.today() : '', last = doneDays > 0 ? def.days[doneDays - 1] : null;
         var doneToday = !!(last && todayStr && last.reduce(function (m, p) { var d = P.studiedOn(p) || ''; return d > m ? d : m; }, '') === todayStr);
-        return { def: def, day: idx, finished: idx < 0, total: def.days.length, doneDays: doneDays, doneToday: doneToday };
+        return { def: def, day: idx, finished: idx < 0, total: def.days.length, doneDays: doneDays, doneToday: doneToday, start: c.start };
     }
     function addDays(ymd, n) {
         var d = new Date(ymd + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10);
@@ -78,7 +79,7 @@
                     title: '\u{1F4D6} ' + T('plan.day', 'Day {n} of {total}').replace('{n}', st.day + 1).replace('{total}', st.total) + ' · ' + st.def.name,
                     body: todo.map(label).join(', '),
                     url: '/' + todo[0] + '.html',
-                    readyOn: st.doneToday ? addDays(P.today(), 1) : P.today()
+                    readyOn: st.upcoming ? st.start : st.doneToday ? addDays(P.today(), 1) : P.today()
                 };
             }
             var stamp = JSON.stringify(body);
@@ -93,12 +94,46 @@
         } catch (e) {}
     }
 
-    function setPlan(id) {
-        plan = id ? { id: id, start: P ? P.today() : new Date().toISOString().slice(0, 10), active: true, t: Date.now(), dirty: true }
+    function setPlan(id, start) {
+        plan = id ? { id: id, start: start || (P ? P.today() : new Date().toISOString().slice(0, 10)), active: true, t: Date.now(), dirty: true }
                   : { id: plan ? plan.id : 'john-21', start: plan ? plan.start : '1970-01-01', active: false, t: Date.now(), dirty: true };
         save(K, plan);
         render();
         scheduleSync();
+    }
+
+    function changeStart(start) {
+        if (!current()) return;
+        plan.start = start; plan.t = Date.now(); plan.dirty = true;
+        save(K, plan); render(); scheduleSync();
+    }
+
+    /* ---------- start dates ---------- */
+    // A plan can start today, on a later day (it waits, and reminders begin
+    // that day), or on an earlier day (chapters studied since then count).
+    function todayStr() { return P ? P.today() : new Date().toISOString().slice(0, 10); }
+    function niceDate(ymd) {
+        try { return new Date(ymd + 'T12:00:00').toLocaleDateString(window.BibleI18n ? window.BibleI18n.lang() : undefined, { weekday: 'short', month: 'short', day: 'numeric' }); }
+        catch (e) { return ymd; }
+    }
+    function dateInput(value) {
+        var t = todayStr();
+        return el('input', { type: 'date', class: 'bs-plan-date', value: value || t, min: addDays(t, -365), max: addDays(t, 365),
+            'aria-label': T('plan.startdate', 'Start date') });
+    }
+    function validDate(v) { var t = todayStr(); return /^\d{4}-\d{2}-\d{2}$/.test(v) && v >= addDays(t, -365) && v <= addDays(t, 365); }
+    // The date picker row: [Start on <date>] [button]
+    function dateRow(value, buttonText, onPick, onCancel) {
+        var input = dateInput(value);
+        var go = el('button', { type: 'button', class: 'bs-plan-start', text: buttonText });
+        go.addEventListener('click', function () { if (validDate(input.value)) onPick(input.value); else input.focus(); });
+        var kids = [el('label', { class: 'bs-plan-datelabel' }, [T('plan.starton', 'Start on'), input]), go];
+        if (onCancel) {
+            var c = el('button', { type: 'button', class: 'bs-plan-link', text: T('notes.cancel', 'Cancel') });
+            c.addEventListener('click', onCancel);
+            kids.push(c);
+        }
+        return el('div', { class: 'bs-plan-daterow' }, kids);
     }
 
     /* ---------- account sync ---------- */
@@ -149,6 +184,12 @@
         + '.bs-plan-list a.done i{color:#2e7d4f}'
         + '.bs-plan-go{display:inline-block;background:var(--accent-link);color:#fff;border-radius:8px;padding:10px 16px;font-weight:600;font-size:.9rem;text-decoration:none}'
         + '.bs-plan-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}'
+        + '.bs-plan-since{font-size:.78rem;color:var(--text-faint);margin:0 0 8px}'
+        + '.bs-plan-since .bs-plan-link{font-size:.78rem}'
+        + '.bs-plan-daterow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:6px 0 10px;width:100%}'
+        + '.bs-plan-datelabel{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600;color:var(--text-secondary)}'
+        + '.bs-plan-date{font:inherit;font-weight:500;padding:7px 10px;border-radius:8px;border:1px solid var(--border-light);background:var(--bg-tint);color:var(--ink-deep)}'
+        + '.bs-plan-choose li.picking{flex-wrap:wrap}'
         + '.bs-plan-done{font-size:.95rem;font-weight:700;color:var(--accent-link);margin:2px 0 10px}'
         + '.bs-plan-ahead{font-size:.88rem;font-weight:600;color:var(--accent-link);text-decoration:none}'
         + '.bs-plan-links{display:inline-flex;gap:16px;margin-left:auto}'
@@ -163,7 +204,7 @@
         + '.bs-plan-today a{color:var(--accent-link);font-weight:600;text-decoration:none}';
     function style() { if (!document.getElementById('bs-plan-style')) { var s = el('style', { id: 'bs-plan-style', text: STYLE }); document.head.appendChild(s); } }
 
-    var homeEl = null, choosing = false;
+    var homeEl = null, choosing = false, picking = null, redating = false;
     function pageName() { return location.pathname.split('/').pop() || ''; }
     function isHome() { return /^(|index(\.html)?)$/.test(pageName()); }
     function isPlansPage() { return /^plans(\.html)?$/.test(pageName()); }
@@ -177,8 +218,12 @@
         var list = el('ul', { class: 'bs-plan-choose' }, PLANS.filter(function (p) { return p.id !== skip; }).map(function (p) {
             var chs = p.days.reduce(function (a, d) { return a + d.length; }, 0);
             var b = el('button', { type: 'button', class: 'bs-plan-start', text: T('plan.start', 'Start') });
-            b.addEventListener('click', function () { choosing = false; setPlan(p.id); });
-            return el('li', {}, [el('span', {}, [p.name, el('small', { text: p.days.length + ' days · ' + chs + ' chapters' })]), b]);
+            b.addEventListener('click', function () { picking = p.id; render(); });
+            var row = [el('span', {}, [p.name, el('small', { text: p.days.length + ' days · ' + chs + ' chapters' })]), picking === p.id ? null : b];
+            if (picking === p.id) row.push(dateRow(todayStr(), T('plan.begin', 'Start plan'),
+                function (d) { picking = null; choosing = false; setPlan(p.id, d); },
+                function () { picking = null; render(); }));
+            return el('li', { class: picking === p.id ? 'picking' : '' }, row);
         }));
         var kids = [el('p', { class: 'bs-plan-eyebrow', text: skip ? T('plan.others', 'Other plans') : T('plan.choose', 'Start a reading plan') }), list];
         if (cancel) {
@@ -221,6 +266,11 @@
             armed = setTimeout(function () { armed = null; stop.textContent = T('plan.stop', 'Stop plan'); stop.classList.remove('armed'); }, 4000);
         });
         var links = el('span', { class: 'bs-plan-links' }, [change, stop]);
+        var redate = el('button', { type: 'button', class: 'bs-plan-link', text: T('plan.changedate', 'Change') });
+        redate.addEventListener('click', function () { redating = true; render(); });
+        var startLine = redating
+            ? dateRow(st.start, T('notes.savebtn', 'Save'), function (d) { redating = false; changeStart(d); }, function () { redating = false; render(); })
+            : el('p', { class: 'bs-plan-since' }, [(st.upcoming ? T('plan.startson', 'Starts {date}') : T('plan.started', 'Started {date}')).replace('{date}', niceDate(st.start)) + ' · ', redate]);
         var pct = Math.round(100 * st.doneDays / st.total);
         var bar = el('div', { class: 'bs-plan-bar', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': String(st.total), 'aria-valuenow': String(st.doneDays) }, [el('i', { style: 'width:' + pct + '%' })]);
 
@@ -236,11 +286,24 @@
         }
         var today = st.def.days[st.day];
         var next = today.filter(function (p) { return !done(p); })[0];
+        if (st.upcoming) {
+            homeEl.replaceChildren(el('div', { class: 'bs-plan-card' }, [
+                el('p', { class: 'bs-plan-eyebrow', text: T('plan.title', 'Reading plan') }),
+                el('p', { class: 'bs-plan-name', text: st.def.name }),
+                el('p', { class: 'bs-plan-done', text: '\u{1F4C5} ' + T('plan.startson', 'Starts {date}').replace('{date}', niceDate(st.start)) }),
+                el('p', { class: 'bs-plan-day', text: T('plan.firstday', 'Day 1:') + ' ' + today.map(label).join(', ') }),
+                redating ? startLine : null,
+                el('div', { class: 'bs-plan-row' }, [redating ? null : redate, links])
+            ]), others || '');
+            redate.textContent = T('plan.changedate2', 'Change start date');
+            return;
+        }
         if (st.doneToday) {
             // Today's reading is done: say so, and show what tomorrow holds.
             homeEl.replaceChildren(el('div', { class: 'bs-plan-card' }, [
                 el('p', { class: 'bs-plan-eyebrow', text: T('plan.title', 'Reading plan') }),
                 el('p', { class: 'bs-plan-name', text: st.def.name }),
+                startLine,
                 el('p', { class: 'bs-plan-done', text: '\u2713 ' + T('plan.donetoday', 'Day {n} completed').replace('{n}', st.doneDays) }),
                 bar,
                 el('p', { class: 'bs-plan-day', text: T('plan.tomorrow', 'Tomorrow, Day {n}:').replace('{n}', st.day + 1) + ' ' + today.map(label).join(', ') }),
@@ -255,6 +318,7 @@
         homeEl.replaceChildren(el('div', { class: 'bs-plan-card' }, [
             el('p', { class: 'bs-plan-eyebrow', text: T('plan.title', 'Reading plan') }),
             el('p', { class: 'bs-plan-name', text: st.def.name }),
+            startLine,
             el('p', { class: 'bs-plan-day', text: T('plan.day', 'Day {n} of {total}').replace('{n}', st.day + 1).replace('{total}', st.total) }),
             bar, chips,
             el('div', { class: 'bs-plan-row' }, [el('a', { class: 'bs-plan-go', href: next + '.html' }, [T('plan.read', 'Read') + ' ' + label(next) + ' ', el('i', { class: 'fas fa-arrow-right', 'aria-hidden': 'true' })]), links])
@@ -268,7 +332,7 @@
         var page = (location.pathname.split('/').pop() || '').replace(/\.html$/, '');
         var box = document.querySelector('.bs-studied');
         var st = status();
-        if (!box || !st || st.finished) { if (lineEl) { lineEl.remove(); lineEl = null; } return; }
+        if (!box || !st || st.finished || st.upcoming) { if (lineEl) { lineEl.remove(); lineEl = null; } return; }
         var today = st.def.days[st.day];
         var dayText = function (i) { return T('plan.title', 'Reading plan') + ' · ' + T('plan.day', 'Day {n} of {total}').replace('{n}', i + 1).replace('{total}', st.total) + '. '; };
         var kids;
