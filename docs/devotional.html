@@ -101,6 +101,9 @@
                     <label class="devo-streak-opt" id="devoStreakOpt" style="display:none;font-size:0.8rem;margin-top:8px;align-items:center;gap:8px;cursor:pointer;">
                         <input type="checkbox" id="devoStreakToggle" checked> Also remind me at 7 PM if my study streak is about to end
                     </label>
+                    <label class="devo-streak-opt" id="devoFriendOpt" style="display:none;font-size:0.8rem;margin-top:6px;align-items:center;gap:8px;cursor:pointer;">
+                        <input type="checkbox" id="devoFriendToggle" checked> Tell me when a friend sends a request or shares something
+                    </label>
                 </div>
                 <button class="devo-reminder-btn" id="devoReminderEnable">Enable</button>
                 <button class="devo-reminder-dismiss" id="devoReminderDismiss" aria-label="Dismiss">&times;</button>
@@ -206,6 +209,8 @@
         var timeSelect = document.getElementById('devoReminderTime');
         var streakOpt = document.getElementById('devoStreakOpt');
         var streakToggle = document.getElementById('devoStreakToggle');
+        var friendOpt = document.getElementById('devoFriendOpt');
+        var friendToggle = document.getElementById('devoFriendToggle');
 
         function urlBase64ToUint8Array(base64String) {
             var base64 = base64String.replace(/-/g, '+').replace(/_/g, '/');
@@ -259,6 +264,8 @@
                     populateTimeOptions(savedHour);
                     turnoffBtn.style.display = subscribed ? 'inline' : 'none';
                     streakOpt.style.display = subscribed ? 'flex' : 'none';
+                    friendOpt.style.display = subscribed ? 'flex' : 'none';
+                    friendToggle.checked = localStorage.getItem('bs-friend-alerts') !== 'off';
                     streakToggle.checked = localStorage.getItem('bs-streak-reminders') !== 'off';
                     titleEl.textContent = subscribed ? 'Change Reminder Time' : 'Enable Daily Reminders';
                     enableBtn.textContent = subscribed ? 'Save' : 'Enable';
@@ -304,6 +311,16 @@
                 return reg.pushManager.getSubscription();
             }).then(function(sub) {
                 if (sub) return postSubscription('/preferences', { endpoint: sub.endpoint, streakReminders: on });
+            }).catch(function() {});
+        });
+
+        friendToggle.addEventListener('change', function() {
+            var on = friendToggle.checked;
+            try { localStorage.setItem('bs-friend-alerts', on ? 'on' : 'off'); } catch (e) {}
+            navigator.serviceWorker.ready.then(function(reg) {
+                return reg.pushManager.getSubscription();
+            }).then(function(sub) {
+                if (sub) return postSubscription('/preferences', { endpoint: sub.endpoint, friendAlerts: on });
             }).catch(function() {});
         });
 

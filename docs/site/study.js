@@ -400,6 +400,7 @@
                     return sb.from('shared_items').insert({ owner: user.id, kind: 'verse', ref: ref, title: refText(here.book, here.chapter, selected.slice().sort(function (a, b) { return a - b; })), body: comment.slice(0, 2000) });
                 }).then(function (res) {
                     if (res && res.error) throw res.error;
+                    if (account.notifyFriends) account.notifyFriends('share', { kind: 'verse', title: refText(here.book, here.chapter, selected.slice().sort(function (a, b) { return a - b; })) + (comment ? ': ' + comment.slice(0, 60) : '') });
                     closeSheet();
                 }).catch(function () { shareBtn.disabled = false; alert(T('sheet.sharefail', 'Could not share right now. Try again in a moment.')); });
             });
