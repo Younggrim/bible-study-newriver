@@ -116,6 +116,28 @@
         try { return new Date(ymd + 'T12:00:00').toLocaleDateString(window.BibleI18n ? window.BibleI18n.lang() : undefined, { weekday: 'short', month: 'short', day: 'numeric' }); }
         catch (e) { return ymd; }
     }
+    function daysBetween(a, b) { return Math.round((Date.parse(b + 'T12:00:00Z') - Date.parse(a + 'T12:00:00Z')) / 86400000); }
+    function niceDateYear(ymd) {
+        if (ymd.slice(0, 4) === todayStr().slice(0, 4)) return niceDate(ymd);
+        try { return new Date(ymd + 'T12:00:00').toLocaleDateString(window.BibleI18n ? window.BibleI18n.lang() : undefined, { month: 'short', day: 'numeric', year: 'numeric' }); }
+        catch (e) { return ymd; }
+    }
+    // The last day any of this plan's chapters was marked, or the start date.
+    function lastActive(st) {
+        var last = st.start;
+        st.def.days.forEach(function (d) { d.forEach(function (p) { if (done(p)) { var on = P.studiedOn(p); if (on > last) last = on; } }); });
+        return last;
+    }
+    // One reading a day from here: the day the last one would be read.
+    function finishOn(st) {
+        var t = todayStr();
+        if (st.upcoming) return addDays(st.start, st.total - 1);
+        var left = st.total - st.doneDays;
+        return addDays(t, st.doneToday ? left : left - 1);
+    }
+    function finishLine(st) {
+        return el('p', { class: 'bs-plan-finish' }, ['\u{1F3C1} ' + T('plan.finishby', 'Reading a day at a time, you\'ll finish around {date}').replace('{date}', niceDateYear(finishOn(st)))]);
+    }
     function dateInput(value) {
         var t = todayStr();
         return el('input', { type: 'date', class: 'bs-plan-date', value: value || t, min: addDays(t, -365), max: addDays(t, 365),
@@ -190,6 +212,9 @@
         + '.bs-plan-datelabel{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600;color:var(--text-secondary)}'
         + '.bs-plan-date{font:inherit;font-weight:500;padding:7px 10px;border-radius:8px;border:1px solid var(--border-light);background:var(--bg-tint);color:var(--ink-deep)}'
         + '.bs-plan-choose li.picking{flex-wrap:wrap}'
+        + '.bs-plan-welcome{font-size:.9rem;color:var(--ink-deep);margin:2px 0 10px;padding:8px 12px;border-radius:10px;background:var(--bg-tint)}'
+        + '.bs-plan-welcome strong{color:var(--accent-link)}'
+        + '.bs-plan-finish{font-size:.8rem;color:var(--text-faint);margin:0 0 12px}'
         + '.bs-plan-done{font-size:.95rem;font-weight:700;color:var(--accent-link);margin:2px 0 10px}'
         + '.bs-plan-ahead{font-size:.88rem;font-weight:600;color:var(--accent-link);text-decoration:none}'
         + '.bs-plan-links{display:inline-flex;gap:16px;margin-left:auto}'
@@ -293,6 +318,7 @@
                 el('p', { class: 'bs-plan-name', text: st.def.name }),
                 el('p', { class: 'bs-plan-done', text: '\u{1F4C5} ' + T('plan.startson', 'Starts {date}').replace('{date}', niceDate(st.start)) }),
                 el('p', { class: 'bs-plan-day', text: T('plan.firstday', 'Day 1:') + ' ' + today.map(label).join(', ') }),
+                finishLine(st),
                 redating ? startLine : null,
                 el('div', { class: 'bs-plan-row' }, [redating ? null : redate, links])
             ]), others || '');
@@ -308,10 +334,13 @@
                 el('p', { class: 'bs-plan-done', text: '\u2713 ' + T('plan.donetoday', 'Day {n} completed').replace('{n}', st.doneDays) }),
                 bar,
                 el('p', { class: 'bs-plan-day', text: T('plan.tomorrow', 'Tomorrow, Day {n}:').replace('{n}', st.day + 1) + ' ' + today.map(label).join(', ') }),
+                finishLine(st),
                 el('div', { class: 'bs-plan-row' }, [el('a', { class: 'bs-plan-ahead', href: next + '.html', text: T('plan.ahead', 'Read ahead') + ' \u2192' }), links])
             ]), others || '');
             return;
         }
+        // Two or more days since the plan was last read (or started): a warm welcome, never "behind".
+        var away = daysBetween(lastActive(st), todayStr());
         var chips = el('ul', { class: 'bs-plan-list' }, today.map(function (p) {
             var ok = done(p);
             return el('li', {}, [el('a', { href: p + '.html', class: ok ? 'done' : '' }, [ok ? el('i', { class: 'fas fa-check', 'aria-hidden': 'true' }) : null, label(p)])]);
@@ -320,8 +349,10 @@
             el('p', { class: 'bs-plan-eyebrow', text: T('plan.title', 'Reading plan') }),
             el('p', { class: 'bs-plan-name', text: st.def.name }),
             startLine,
-            el('p', { class: 'bs-plan-day', text: T('plan.day', 'Day {n} of {total}').replace('{n}', st.day + 1).replace('{total}', st.total) }),
-            bar, chips,
+            away >= 2
+                ? el('p', { class: 'bs-plan-welcome' }, [el('strong', { text: T('plan.welcome', 'Welcome back!') }), ' ' + T('plan.pickup', 'Pick up with Day {n} of {total}.').replace('{n}', st.day + 1).replace('{total}', st.total)])
+                : el('p', { class: 'bs-plan-day', text: T('plan.day', 'Day {n} of {total}').replace('{n}', st.day + 1).replace('{total}', st.total) }),
+            bar, chips, finishLine(st),
             el('div', { class: 'bs-plan-row' }, [el('a', { class: 'bs-plan-go', href: next + '.html' }, [T('plan.read', 'Read') + ' ' + label(next) + ' ', el('i', { class: 'fas fa-arrow-right', 'aria-hidden': 'true' })]), links])
         ]), others || '');
     }
