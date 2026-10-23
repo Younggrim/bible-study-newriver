@@ -67,7 +67,12 @@
         .prayer-text { font-family: "Cormorant Garamond", serif; font-size: 1.3rem; line-height: 2.1; color: var(--text-on-dark); font-style: italic; max-width: 720px; margin: 0 auto; font-weight: 500; }
         .prayer-label { font-family: "Poppins", "Inter", sans-serif; font-weight:700; font-size: 0.9rem; color: #c9a96e; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; }
         /* Daily Devotional Preview */
-        .devo-preview-section { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+        .devo-preview-section { max-width: 672px; margin: 0 auto 48px; padding: 0 16px; }
+        /* Your study, under the hero: one 640px column, the same width as the devotional below it */
+        .home-study { display: flex; flex-direction: column; gap: 14px; margin: 28px 0 22px; }
+        .home-study > div:empty { display: none; }
+        .home-study .bs-home, .home-study .bs-plan, .home-study .bs-progress, .home-study .bs-fr { margin-top: 0; }
+        body.pwa-standalone .home-study { display: none; }
         .devo-preview-card { background: linear-gradient(135deg, var(--ink-deep) 0%, #5c3d6e 50%, #2c6b4f 100%); border-radius: 16px; padding: 44px 40px; text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
         .devo-preview-date { font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 600; color: #d8c9a8; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
         .devo-preview-card h2 { font-family: 'Poppins', 'Inter', sans-serif; font-weight:700; font-size: 1.5rem; color: #fff; margin-bottom: 6px; text-shadow: 1px 1px 4px rgba(0,0,0,0.4); }
@@ -128,7 +133,6 @@
             .section-hero-overlay h2 { font-size: 1.6rem; }
             .cards-container { padding: 24px 16px 0; }
             .book-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
-            .devo-preview-section { padding: 0 16px; }
             .devo-preview-card { padding: 32px 24px; }
             .devo-preview-card h2 { font-size: 1.25rem; }
         }
@@ -152,10 +156,14 @@
             </div>
         </div>
 
-        <!-- Prayer Section -->
-        <div class="prayer-section">
-            <p class="prayer-label">A Prayer for You</p>
-            <p class="prayer-text">Lord, we pray that this resource brings glory to Your name. Use it as a tool to draw hearts closer to You and to reveal Your plan and purpose for each person who visits these pages. May Your Word not return void, but accomplish everything You desire. Open eyes, soften hearts, and let the truth of Scripture transform lives for Your kingdom. In Jesus' name, Amen.</p>
+        <!-- The reader's own study, website only: each card is drawn into its spot by
+             study.js, plans.js, progress.js and friends-strip.js, so the order is fixed.
+             In the installed app these cards go into the Bible tab instead and this stays empty. -->
+        <div class="home-study">
+            <div id="homeResume"></div>
+            <div id="homePlan"></div>
+            <div id="homeProgress"></div>
+            <div id="homeFriends"></div>
         </div>
 
         <!-- Daily Devotional Preview -->
@@ -167,6 +175,12 @@
                 <p class="devo-preview-snippet" id="homeDevoSnippet">Loading today's devotional&hellip;</p>
                 <a href="devotional.html" class="devo-preview-btn">Read Today's Devotional <i class="fas fa-arrow-right"></i></a>
             </div>
+        </div>
+
+        <!-- Prayer Section -->
+        <div class="prayer-section">
+            <p class="prayer-label">A Prayer for You</p>
+            <p class="prayer-text">Lord, we pray that this resource brings glory to Your name. Use it as a tool to draw hearts closer to You and to reveal Your plan and purpose for each person who visits these pages. May Your Word not return void, but accomplish everything You desire. Open eyes, soften hearts, and let the truth of Scripture transform lives for Your kingdom. In Jesus' name, Amen.</p>
         </div>
 
         <!-- Translation Guide Block -->
@@ -517,12 +531,12 @@
          site/script.js so every page gets them, not just the homepage. -->
     <script src="site/script.js?v=2d30b4d8"></script>
     <script src="site/account.js?v=436abb8e"></script>
-    <script src="site/study.js?v=7f199574"></script>
-    <script src="site/progress.js?v=f306b1ec"></script>
+    <script src="site/study.js?v=844181c9"></script>
+    <script src="site/progress.js?v=3748b041"></script>
     <script src="site/plans-data.js?v=08d773ec"></script>
-    <script src="site/plans.js?v=cea447e5"></script>
+    <script src="site/plans.js?v=d60f8b54"></script>
     <script src="site/translations.js?v=72636189"></script>
-    <script src="site/friends-strip.js?v=dd3b1776"></script>
+    <script src="site/friends-strip.js?v=8ac67d79"></script>
     <script src="site/chapter-notes.js?v=c824a08f"></script>
     <script src="site/i18n.js?v=4c7339c4"></script>
     <script>

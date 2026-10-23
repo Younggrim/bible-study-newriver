@@ -19,17 +19,29 @@
    tap, and the lookup takes a moment, so the tap itself starts a silent clip
    and a silent utterance; whichever the answer needs is then allowed to play.
 
-   Playback speed is remembered: in the account (user_metadata.audio_rate)
-   when signed in, in localStorage otherwise.
+   Continuous play (on by default) carries on into the next chapter when one
+   ends: an ordinary visit to the next chapter's page, which then starts
+   playing in the same translation and speed. Next and previous follow the
+   page's own chapter arrows (script.js), so book boundaries use the site's
+   book order, and it stops after Revelation 22. Halfway through a chapter
+   the next page and its recording are fetched, so the next one starts
+   quickly. A browser that will not start sound on a page nobody has tapped
+   yet (iPhone, always; and while the phone is locked nothing can start)
+   gets a "Keep listening" button instead.
 
-   Kept identical in both repositories. Does not modify site/script.js; it
-   wraps switchTranslation() from outside, the way translations.js does.     */
+   Speed and continuous play are remembered: in the account
+   (user_metadata.audio_rate, user_metadata.audio_continuous) when signed in,
+   in localStorage otherwise. Lock screen, Control Center and headphone
+   controls come from the Media Session API.
+
+   Kept identical in both repositories. It wraps switchTranslation() from
+   outside, the way translations.js does.                                    */
 (function () {
     'use strict';
 
     var FUNCTION_URL = 'https://vqgumrfjxlhkzzzfgejl.supabase.co/functions/v1/bible-audio';
     var RATES = [0.75, 0.9, 1, 1.1, 1.25, 1.5];
-    var RATE_KEY = 'bs-audio-rate';
+    var RATE_KEY = 'bs-audio-rate', CONT_KEY = 'bs-audio-continuous';
     var ENGLISH = { ESV: 1, BSB: 1, KJV: 1, ASV: 1, NET: 1, WEB: 1 };
 
     var page = (location.pathname.split('/').pop() || '').replace(/\.html$/, '');
@@ -61,6 +73,10 @@
         + '.bs-audio-src{color:var(--text-muted)}'
         + '.bs-audio-src b{font-weight:600;color:var(--ink-deep)}'
         + '.bs-audio-rate{margin-left:auto;font:inherit;color:var(--ink-deep);background:#fff;border:1px solid var(--border-medium);border-radius:6px;padding:6px 8px;min-height:36px}'
+        + '.bs-audio-cont{display:inline-flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap}'
+        + '.bs-audio-cont input{width:16px;height:16px;margin:0;accent-color:var(--accent-link)}'
+        + '.bs-audio-keep{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border-radius:20px;border:none;background:var(--accent-link);color:#fff;font:inherit;font-weight:600;cursor:pointer}'
+        + '.bs-audio-keep[hidden]{display:none}'
         + '.bs-audio-credit{flex-basis:100%;margin:0;font-size:.72rem;line-height:1.5;color:var(--text-faint)}'
         + '.bs-audio-credit:empty{display:none}'
         + '.bs-audio-credit a{color:inherit}'
@@ -87,8 +103,20 @@
         o.value = String(r);
         rateSel.appendChild(o);
     });
+    var contBox = el('input');
+    contBox.type = 'checkbox';
+    var contLabel = el('label', 'bs-audio-cont');
+    contLabel.append(contBox, t('audio.continuous', 'Continuous play'));
+    contLabel.title = t('audio.continuous.note', 'When a chapter ends, go on to the next one');
+    // Shown when this chapter was reached by continuous play but the browser wants a tap to start it.
+    var keepBtn = el('button', 'bs-audio-keep');
+    keepBtn.type = 'button';
+    keepBtn.hidden = true;
+    var keepIcon = el('i', 'fas fa-play');
+    keepIcon.setAttribute('aria-hidden', 'true');
+    keepBtn.append(keepIcon, t('audio.keep', 'Keep listening'));
     var credit = el('p', 'bs-audio-credit');
-    bar.append(srcLabel, rateSel, credit);
+    bar.append(keepBtn, srcLabel, contLabel, rateSel, credit);
     container.parentNode.insertBefore(bar, container);
     var picker = document.querySelector('.top-nav select.nav-translation');
     var inNav = !!picker;
@@ -98,43 +126,58 @@
     // Hidden until there is something to say: playing, paused, or a message.
     function syncBar() { bar.hidden = inNav && state === 'idle' && !srcLabel.textContent; }
 
-    /* ---------- playback speed, remembered ---------- */
+    /* ---------- settings: speed and continuous play, remembered ---------- */
 
     function validRate(r) { r = Number(r); return RATES.indexOf(r) >= 0 ? r : null; }
-    var rate = 1;
+    var rate = 1, continuous = true;
     try { rate = validRate(localStorage.getItem(RATE_KEY)) || 1; } catch (e) {}
+    try { continuous = localStorage.getItem(CONT_KEY) !== '0'; } catch (e) {}
     rateSel.value = String(rate);
+    contBox.checked = continuous;
 
     var account = window.BibleAccount, signedIn = null, saveTimer = null;
-    if (account) {
-        account.onChange(function (user) {
-            signedIn = user;
-            var saved = user && user.user_metadata && validRate(user.user_metadata.audio_rate);
-            if (saved && saved !== rate) applyRate(saved, false);
-        });
+    // Settings saved in the account win over this device's, since they may come from another device.
+    function adopt(user) {
+        var meta = user && user.user_metadata;
+        if (!meta) return;
+        var saved = validRate(meta.audio_rate);
+        if (saved && saved !== rate) applyRate(saved, false);
+        if (typeof meta.audio_continuous === 'boolean' && meta.audio_continuous !== continuous) applyContinuous(meta.audio_continuous, false);
+    }
+    if (account) account.onChange(function (user) { signedIn = user; adopt(user); });
+
+    function persist() {
+        if (!account || !signedIn) return;
+        clearTimeout(saveTimer);
+        saveTimer = setTimeout(function () {
+            account.ready().then(function (c) { return c.auth.updateUser({ data: { audio_rate: rate, audio_continuous: continuous } }); }).catch(function () {});
+        }, 800);
     }
 
-    function applyRate(r, persist) {
+    function applyRate(r, save) {
         rate = r;
         rateSel.value = String(r);
         try { localStorage.setItem(RATE_KEY, String(r)); } catch (e) {}
         if (audio) { audio.defaultPlaybackRate = r; audio.playbackRate = r; }
         if (engine === 'speech' && state === 'playing') speakFrom(verseIndex);   // takes effect from this verse
-        if (persist && account && signedIn) {
-            clearTimeout(saveTimer);
-            saveTimer = setTimeout(function () {
-                account.ready().then(function (c) { return c.auth.updateUser({ data: { audio_rate: rate } }); }).catch(function () {});
-            }, 800);
-        }
+        if (save) persist();
     }
     rateSel.addEventListener('change', function () { applyRate(validRate(rateSel.value) || 1, true); });
+
+    function applyContinuous(on, save) {
+        continuous = !!on;
+        contBox.checked = continuous;
+        try { localStorage.setItem(CONT_KEY, continuous ? '1' : '0'); } catch (e) {}
+        if (save) persist();
+    }
+    contBox.addEventListener('change', function () { applyContinuous(contBox.checked, true); });
 
     /* ---------- state ---------- */
 
     var state = 'idle';          // idle | loading | playing | paused
     var engine = null;           // 'media' | 'speech'
     var gen = 0;                 // bumped by stop(); late answers for an older generation are dropped
-    var found = {};              // translation -> lookup answer, for this page view
+    var found = {};              // "translation|chapter" -> lookup answer, for this page view
     var audio = null, timings = [], verses = [], verseIndex = 0, utterance = null;
 
     function currentTranslation() {
@@ -144,6 +187,7 @@
 
     function setState(s) {
         state = s;
+        if (s !== 'paused') keepBtn.hidden = true;
         icon.className = s === 'playing' ? 'fas fa-pause' : s === 'loading' ? 'fas fa-spinner fa-spin' : 'fas fa-play';
         playText.textContent = s === 'playing' ? t('audio.pause', 'Pause') : s === 'paused' ? t('audio.resume', 'Resume')
             : s === 'loading' ? t('audio.loading', 'Loading…') : t('audio.listen', 'Listen');
@@ -165,7 +209,8 @@
     function fillSource(answer) {
         if (answer.source === 'esv' || answer.source === 'fcbh') {
             srcLabel.append(el('b', null, answer.source === 'esv' ? t('audio.esv', 'ESV audio') : t('audio.recording', 'Audio recording')),
-                answer.source === 'fcbh' ? ' · Faith Comes By Hearing' + (answer.drama ? ' · ' + t('audio.drama', 'dramatized') : '') : '');
+                answer.source === 'fcbh' ? ' · Faith Comes By Hearing' + (answer.drama ? ' · ' + t('audio.drama', 'dramatized') : '') : '',
+                answer.source === 'esv' ? ' · ' + t('audio.approx', 'verse shading is approximate') : '');
             if (answer.credit) {
                 credit.append(answer.credit.text + ' ');
                 if (answer.credit.link) {
@@ -214,7 +259,7 @@
             try { audio.load(); } catch (e) {}
         }
         if (window.speechSynthesis) { utterance = null; window.speechSynthesis.cancel(); }
-        engine = null; timings = []; verses = []; verseIndex = 0; shownVerse = 0;
+        engine = null; timings = []; verses = []; verseIndex = 0; shownVerse = 0; readied = null; estimating = false;
         clearHighlight();
         setState('idle');
     }
@@ -240,16 +285,19 @@
         audio = new Audio();
         audio.preload = 'none';
         audio.addEventListener('timeupdate', function () {
-            if (engine !== 'media' || !timings.length) return;
-            var now = audio.currentTime, v = 0;
+            if (engine !== 'media') return;
+            var now = audio.currentTime, d = audio.duration;
+            // Halfway through, or under 45 seconds left: get the next chapter ready.
+            if (d && (now > d / 2 || d - now < 45)) prefetchNext();
+            if (!timings.length) return;
+            var v = 0;
             for (var i = 0; i < timings.length && timings[i][1] <= now + 0.15; i++) v = timings[i][0];
             highlight(v);
         });
-        audio.addEventListener('ended', function () { if (engine === 'media') stop(); });
+        audio.addEventListener('ended', function () { if (engine === 'media') finished(); });
         audio.addEventListener('error', function () {
             if (engine !== 'media') return;
-            var code = currentTranslation().code;
-            delete found[code];   // a signed URL may have expired; look it up afresh next time
+            delete found[currentTranslation().code + '|' + page];   // a signed URL may have expired; look it up afresh next time
             stop();
             showSource({ source: 'unavailable', message: t('audio.failed', 'The recording could not be played. Tap Listen to try again.') });
         });
@@ -268,16 +316,17 @@
         }
     }
 
-    function lookup(code) {
-        if (found[code]) return Promise.resolve(found[code]);
+    function lookup(code, pg) {
+        var key = code + '|' + pg;
+        if (found[key]) return Promise.resolve(found[key]);
         var ctrl = 'AbortController' in window ? new AbortController() : null;
         var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 8000);
-        return fetch(FUNCTION_URL + '?t=' + encodeURIComponent(code) + '&page=' + encodeURIComponent(page), ctrl ? { signal: ctrl.signal } : {})
+        return fetch(FUNCTION_URL + '?t=' + encodeURIComponent(code) + '&page=' + encodeURIComponent(pg), ctrl ? { signal: ctrl.signal } : {})
             .then(function (r) { return r.ok ? r.json() : { source: 'none' }; })
             .catch(function () { return { source: 'none', transient: true }; })
             .then(function (answer) {
                 clearTimeout(timer);
-                if (!answer.transient) found[code] = answer;
+                if (!answer.transient) found[key] = answer;
                 return answer;
             });
     }
@@ -289,36 +338,52 @@
 
         var my = ++gen, tr = currentTranslation();
         unlock();
-        if (found[tr.code]) { begin(found[tr.code], tr); return; }
+        if (found[tr.code + '|' + page]) { begin(found[tr.code + '|' + page], tr); return; }
         setState('loading');
         if (account && signedIn) {
-            // Another device may have changed the speed since this session was stored.
+            // Another device may have changed the settings since this session was stored.
             account.ready().then(function (c) { return c.auth.getUser(); }).then(function (res) {
-                var u = res && res.data && res.data.user, saved = u && u.user_metadata && validRate(u.user_metadata.audio_rate);
-                if (saved && saved !== rate) applyRate(saved, false);
+                adopt(res && res.data && res.data.user);
             }).catch(function () {});
         }
-        lookup(tr.code).then(function (answer) {
+        lookup(tr.code, page).then(function (answer) {
             if (my !== gen) return;   // stopped, or the translation changed, while looking
             begin(answer, currentTranslation());
         });
     });
 
-    function begin(answer, tr) {
-        if (answer.url && (answer.source === 'esv' || answer.source === 'fcbh')) {
-            var a = ensureAudio();
-            engine = 'media';
-            timings = answer.timings || [];
-            a.src = answer.url;
-            a.defaultPlaybackRate = rate;
+    function isRecording(answer) { return !!(answer && answer.url && (answer.source === 'esv' || answer.source === 'fcbh')); }
+
+    // Starts a recording on the one <audio> element: a new src, never a new element,
+    // which is what lets iOS carry on from one chapter to the next without a tap.
+    function playRecording(answer) {
+        var a = ensureAudio();
+        if (window.speechSynthesis) { utterance = null; window.speechSynthesis.cancel(); }
+        engine = 'media';
+        timings = answer.timings || [];
+        // The ESV's recordings come with no verse timings; estimate them (see estimateTimings).
+        estimating = !timings.length && answer.source === 'esv';
+        shownVerse = 0;
+        a.src = answer.url;
+        a.defaultPlaybackRate = rate;
+        a.playbackRate = rate;
+        setState('playing');
+        var p = a.play();
+        if (p && p.then) p.then(function () { autostart = false; });
+        if (p && p.catch) p.catch(function (e) { if (engine !== 'media') return; if (e && e.name === 'NotAllowedError' && autostart) askForTap(); else setState('paused'); });
+        // Some browsers reset the speed when a new source loads.
+        a.addEventListener('loadedmetadata', function once() {
+            a.removeEventListener('loadedmetadata', once);
             a.playbackRate = rate;
+            if (estimating) estimate(a);
+        });
+    }
+
+    function begin(answer, tr) {
+        if (isRecording(answer)) {
+            playRecording(answer);
             showSource(answer);
-            setMediaSession(tr.code);
-            setState('playing');
-            var p = a.play();
-            if (p && p.catch) p.catch(function () { if (engine === 'media') setState('paused'); });
-            // Some browsers reset the speed when a new source loads.
-            a.addEventListener('loadedmetadata', function once() { a.removeEventListener('loadedmetadata', once); a.playbackRate = rate; });
+            setMediaSession(tr.code, answer);
             return;
         }
         speak(tr);
@@ -382,6 +447,76 @@
     }
 
     var SKIP = '.verse-num,.chapter-num,.bs-bm,.copyright,.extra_text,.footnote,.footnotes,sup,.bs-credit,.bs-msg';
+    var TITLES = 'h4.psalm-title,h4.psalm-acrostic-title';
+
+    /* ---------- estimated shading for the ESV's recordings ----------
+       Crossway's MP3s carry no verse timings, and its server does not allow
+       the page to analyse the sound (no CORS), so where each verse starts is
+       estimated from the text: the recording's length is shared out in
+       proportion to each verse's syllables, plus the pauses a reader makes
+       at the end of each line of poetry and after a psalm's title. The
+       recordings start straight into verse 1, do not read section headings,
+       do read a psalm's title ("A Psalm of David."), and end about 0.4
+       seconds after the last word.
+
+       Measured against word timings transcribed from ESV recordings (John
+       3, Genesis 2, Romans 8, Mark 1, Psalms 1, 23 and 121), each chapter
+       checked with weights fitted on the others: syllables beat characters
+       and words, punctuation weights did not hold up on chapters they were
+       not fitted to, and a line of poetry pauses for about 3 syllables' time,
+       a psalm title for about 9. The shading is typically about a second
+       from the reader and on the right verse 80-90% of the time. The label
+       says it is approximate.                                               */
+    var EST_TAIL = 0.4, EST_LINE = 3, EST_TITLE = 9;
+    var estimating = false;
+
+    function syllables(text) {
+        return (text.match(/[A-Za-z\u2019']+/g) || []).reduce(function (n, w) {
+            return n + Math.max(1, (w.toLowerCase().replace(/e$/, '').match(/[aeiouy]+/g) || []).length);
+        }, 0);
+    }
+
+    function estimateTimings(block, duration) {
+        var byVerse = {}, order = [], lead = '', last = null;
+        block.querySelectorAll('[data-v],.line,' + TITLES).forEach(function (n) {
+            if (n.matches(TITLES)) { lead += ' ' + n.textContent; return; }
+            // A new line of poetry: the reader paused at the end of the line before,
+            // which belongs to the verse being read then.
+            if (n.matches('.line')) { if (last) byVerse[last].lines++; return; }
+            if (n.closest(SKIP)) return;
+            var c = n.cloneNode(true);
+            c.querySelectorAll(SKIP).forEach(function (x) { x.remove(); });
+            var text = c.textContent.replace(/\s+/g, ' ');
+            if (!/[^\s()]/.test(text)) return;
+            var v = n.getAttribute('data-v');
+            if (!(v in byVerse)) { byVerse[v] = { lead: lead, text: '', lines: 0 }; order.push(v); lead = ''; }
+            byVerse[v].text += text;
+            last = v;
+        });
+        if (!order.length || !(duration > 0)) return [];
+        var parts = order.map(function (v) {
+            var d = byVerse[v], title = syllables(d.lead);
+            return { v: parseInt(v, 10), before: title ? title + EST_TITLE : 0, own: syllables(d.text) + EST_LINE * d.lines };
+        });
+        var total = parts.reduce(function (a, p) { return a + p.before + p.own; }, 0);
+        if (!total) return [];
+        var span = Math.max(duration - EST_TAIL, 1), at = 0;
+        return parts.map(function (p) {
+            at += p.before;
+            var start = span * at / total;
+            at += p.own;
+            return [p.v, start];
+        });
+    }
+
+    // Once the recording's length is known, and the ESV text has arrived.
+    function estimate(a) {
+        var my = gen, block = currentTranslation().block;
+        textOf(block).then(function () {
+            if (my !== gen || !estimating || engine !== 'media') return;
+            timings = estimateTimings(block, a.duration);
+        });
+    }
     function readVerses(block) {
         var byVerse = {}, order = [];
         block.querySelectorAll('[data-v]').forEach(function (n) {
@@ -405,28 +540,48 @@
             showSource({ source: 'unavailable', message: t('audio.none', 'No audio is available for this translation on this device.') });
             return;
         }
-        var list = block ? readVerses(block) : [];
-        if (!list.length) {
-            setState('idle');
-            showSource({ source: 'unavailable', message: t('audio.wait', 'The text is still loading. Try again in a moment.') });
-            return;
-        }
-        voices().then(function () {
-            if (my !== gen) return;
+        textOf(block).then(function (list) {
+            if (my !== gen) return null;
+            if (!list.length) {
+                setState('idle');
+                showSource({ source: 'unavailable', message: t('audio.wait', 'The text is still loading. Try again in a moment.') });
+                return null;
+            }
+            return voices().then(function () { return list; });
+        }).then(function (list) {
+            if (!list || my !== gen) return;
             var lang = langOf(tr.code, block), voice = voiceFor(lang);
             if (!voice) {
                 setState('idle');
                 showSource({ source: 'unavailable', message: t('audio.novoice', 'No recording of this translation, and this device has no voice for its language.') });
                 return;
             }
+            if (audio) audio.pause();
             engine = 'speech';
             verses = list;
             speakVoice = voice;
             speakLang = voice.lang || lang;
             showSource({ source: 'speech' });
-            setMediaSession(tr.code);
+            setMediaSession(tr.code, { source: 'speech' });
             setState('playing');
             speakFrom(0);
+        });
+    }
+
+    // The verses of a block. A chapter just opened by continuous play may still
+    // be fetching its ESV or other-language text, so wait for it (up to 10 seconds).
+    function textOf(block) {
+        var list = block ? readVerses(block) : [];
+        if (list.length || !block) return Promise.resolve(list);
+        return new Promise(function (resolve) {
+            var done = false, obs = null, timer = null;
+            function check() {
+                var l = readVerses(block);
+                if (l.length && !done) { done = true; obs.disconnect(); clearTimeout(timer); resolve(l); }
+            }
+            obs = new MutationObserver(check);
+            obs.observe(block, { childList: true, subtree: true, characterData: true });
+            timer = setTimeout(function () { if (!done) { done = true; obs.disconnect(); resolve(readVerses(block)); } }, 10000);
         });
     }
 
@@ -438,30 +593,126 @@
         utterance = null;
         synth.cancel();
         verseIndex = i;
-        if (i >= verses.length) { stop(); return; }
+        if (i >= verses.length) { finished(); return; }
+        if (i >= verses.length / 2) prefetchNext();
         var u = new SpeechSynthesisUtterance(verses[i].text);
         u.voice = speakVoice; u.lang = speakLang; u.rate = rate;
         u.onstart = function () { if (utterance === u) highlight(verses[i].v); };
         u.onend = function () { if (utterance === u && state === 'playing') speakFrom(i + 1); };
         u.onerror = function (e) {
             if (utterance !== u || e.error === 'interrupted' || e.error === 'canceled') return;
+            if (e.error === 'not-allowed' && autostart) { askForTap(); return; }
             stop();
         };
+        // iPhone neither speaks nor says why when no one has tapped the page yet.
+        if (autostart && i === 0) setTimeout(function () { if (utterance === u && !u.__started && state === 'playing') askForTap(); }, 2500);
+        var started = u.onstart;
+        u.onstart = function (e) { u.__started = true; autostart = false; if (started) started(e); };
         utterance = u;   // keep a reference: Chrome drops events for utterances it has garbage-collected
         highlight(verses[i].v);
         synth.speak(u);
     }
 
-    /* ---------- lock screen and headphone controls ---------- */
+    /* ---------- continuous play: on to the next chapter's page ---------- */
 
-    function setMediaSession(code) {
-        if (!('mediaSession' in navigator) || !window.MediaMetadata) return;
-        var h1 = document.querySelector('.book-header h1');
-        try {
-            navigator.mediaSession.metadata = new MediaMetadata({ title: (h1 ? h1.textContent.trim() : page) + ' · ' + code, artist: document.title });
-            navigator.mediaSession.setActionHandler('play', function () { if (state === 'paused') resume(); });
-            navigator.mediaSession.setActionHandler('pause', function () { if (state === 'playing') pause(); });
-        } catch (e) {}
+    // The chapter the page's own arrows point to (script.js builds them in the
+    // site's book order: Malachi 4 -> Matthew 1, nothing after Revelation 22).
+    function neighbour(rel) {
+        var a = document.querySelector('.chapter-nav-arrows a[rel="' + rel + '"]');
+        var m = a && /^(\d?[a-z]+\d+)\.html$/.exec(a.getAttribute('href') || '');
+        return m ? m[1] : null;
+    }
+
+    // Halfway through, fetch the next page and look up its recording, so both
+    // come from the browser's cache when it opens.
+    var readied = null;
+    function prefetchNext() {
+        var pg = neighbour('next'), code = currentTranslation().code;
+        if (!continuous || !pg || readied === code + '|' + pg) return;
+        readied = code + '|' + pg;
+        var link = document.createElement('link');
+        link.rel = 'prefetch'; link.href = pg + '.html';
+        document.head.appendChild(link);
+        lookup(code, pg);
+    }
+
+    var END_MESSAGE = 'End of Revelation. You have listened through to the end of the Bible.';
+    function finished() {
+        var pg = continuous && neighbour('next');
+        if (pg) { goChapter(pg); return; }
+        var last = !neighbour('next');
+        stop();
+        if (continuous && last) showSource({ source: 'unavailable', message: t('audio.end', END_MESSAGE) });
+    }
+
+    // On to chapter pg: note that it should carry on playing, then an ordinary visit.
+    var HANDOFF = 'bs-audio-handoff';
+    function goChapter(pg) {
+        try { sessionStorage.setItem(HANDOFF, JSON.stringify({ page: pg, t: currentTranslation().code, at: Date.now() })); } catch (e) {}
+        location.href = pg + '.html';
+    }
+
+    // Arrived here by continuous play: start, in the translation that was playing.
+    var autostart = false;
+    function carryOn() {
+        var h = null;
+        try { h = JSON.parse(sessionStorage.getItem(HANDOFF)); sessionStorage.removeItem(HANDOFF); } catch (e) {}
+        if (!h || h.page !== page || Date.now() - h.at > 120000) return;
+        var tr = currentTranslation();
+        if (tr.code !== h.t) return;
+        autostart = true;
+        var my = ++gen;
+        setState('loading');
+        lookup(tr.code, page).then(function (answer) {
+            if (my === gen) begin(answer, currentTranslation());
+        });
+    }
+    // After script.js has put back the saved translation.
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', carryOn);
+    else setTimeout(carryOn, 0);
+
+    // This browser wants a tap before it will play here.
+    function askForTap() {
+        if (engine === 'speech' && window.speechSynthesis) { utterance = null; window.speechSynthesis.cancel(); }
+        setState('paused');
+        keepBtn.hidden = false;
+        srcLabel.textContent = t('audio.tap', 'Tap Keep listening to carry on.');
+        credit.replaceChildren();
+        syncBar();
+        autostart = false;
+    }
+    keepBtn.addEventListener('click', function () { if (state === 'paused') resume(); });
+
+    /* ---------- lock screen, Control Center and headphone controls ---------- */
+
+    function translationName(code) {
+        var o = document.querySelector('select.nav-translation option[value="' + code + '"]');
+        return (o && (o.title || o.textContent) || code).trim();
+    }
+
+    var handlersSet = false;
+    function setMediaSession(code, answer) {
+        if (!('mediaSession' in navigator)) return;
+        var ms = navigator.mediaSession;
+        if (window.MediaMetadata) {
+            var title = (document.title.split(' — ')[0] || page).trim();
+            var kind = answer && answer.source === 'speech' ? t('audio.device', 'Device voice') : '';
+            try {
+                ms.metadata = new MediaMetadata({
+                    title: title,
+                    artist: translationName(code) + (kind ? ' · ' + kind : ''),
+                    album: (document.title.split(' — ')[1] || '').trim(),
+                    artwork: [{ src: 'site/icon-512.png', sizes: '512x512', type: 'image/png' }]
+                });
+            } catch (e) {}
+        }
+        if (handlersSet) return;
+        handlersSet = true;
+        var on = function (action, fn) { try { ms.setActionHandler(action, fn); } catch (e) {} };
+        on('play', function () { if (state === 'paused') resume(); });
+        on('pause', function () { if (state === 'playing') pause(); });
+        on('nexttrack', function () { var pg = neighbour('next'); if (pg && state !== 'idle') goChapter(pg); });
+        on('previoustrack', function () { var pg = neighbour('prev'); if (pg && state !== 'idle') goChapter(pg); });
     }
 
     /* ---------- stop cleanly when the text changes ---------- */
@@ -474,7 +725,7 @@
             if (code !== before || state !== 'idle') { stop(); showSource(null); }
         };
     }
-    // A chapter change is a page load. Safari can keep speaking across one, so cancel it.
+    // Leaving the page. Safari can keep speaking across a page load, so cancel it.
     window.addEventListener('pagehide', function () { stop(); });
     window.addEventListener('pageshow', function (e) { if (e.persisted) { stop(); showSource(null); } });
 

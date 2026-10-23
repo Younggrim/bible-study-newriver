@@ -587,7 +587,9 @@
             var standalone = document.body.classList.contains('pwa-standalone');
             var pwaNav = document.querySelector('.pwa-bible-nav');
             var hero = document.querySelector('.hero-section');
+            var spot = document.getElementById('homeResume');   // index.html's fixed place for it
             if (standalone && pwaNav) pwaNav.insertBefore(homeEl, pwaNav.firstChild);
+            else if (spot) spot.appendChild(homeEl);
             else if (hero) hero.parentNode.insertBefore(homeEl, hero.nextSibling);
             else return;
         }

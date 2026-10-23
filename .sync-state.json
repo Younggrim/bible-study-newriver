@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "a269ad8e7aff158f1639863eb9392f8f1e52a4d1 Listen: play the chapter aloud in the selected translation (#86)",
+  "upstream_commit": "ed6c4d2e99db6dda8c02eea70f4e888ef2208ed2 Listen: estimated verse shading for ESV recordings (#88)",
   "upstream_fingerprints": {
     "site/style.css": "cbe82332",
     "site/script.js": "63dab9cc"

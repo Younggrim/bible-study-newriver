@@ -219,6 +219,7 @@
         + '.bs-plan-ahead{font-size:.88rem;font-weight:600;color:var(--accent-link);text-decoration:none}'
         + '.bs-plan-links{display:inline-flex;gap:16px;margin-left:auto}'
         + '.bs-plan-stop.armed{color:var(--accent-link);font-weight:600}'
+        + '.bs-plan-all{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.85rem;font-weight:600;color:var(--accent-link);text-decoration:none}.bs-plan-all:hover{text-decoration:underline}'
         + '.bs-plan-link{background:none;border:0;padding:0;font:inherit;font-size:.82rem;color:var(--text-faint);text-decoration:underline;cursor:pointer}'
         + '.bs-plan-choose{list-style:none;margin:8px 0 0;padding:0}'
         + '.bs-plan-choose li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--rule-soft)}'
@@ -240,8 +241,12 @@
             || (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
     }
 
-    function chooser(cancel, skip) {
-        var list = el('ul', { class: 'bs-plan-choose' }, PLANS.filter(function (p) { return p.id !== skip; }).map(function (p) {
+    // `limit` shortens the list to its first few plans, with a link to the rest on the Plans page.
+    function chooser(cancel, skip, limit) {
+        var shown = PLANS.filter(function (p) { return p.id !== skip; });
+        var more = limit && shown.length > limit ? shown.length : 0;
+        if (more) shown = shown.slice(0, limit);
+        var list = el('ul', { class: 'bs-plan-choose' }, shown.map(function (p) {
             var chs = p.days.reduce(function (a, d) { return a + d.length; }, 0);
             var b = el('button', { type: 'button', class: 'bs-plan-start', text: T('plan.start', 'Start') });
             b.addEventListener('click', function () { picking = p.id; render(); });
@@ -252,6 +257,7 @@
             return el('li', { class: picking === p.id ? 'picking' : '' }, row);
         }));
         var kids = [el('p', { class: 'bs-plan-eyebrow', text: skip ? T('plan.others', 'Other plans') : T('plan.choose', 'Start a reading plan') }), list];
+        if (more) kids.push(el('a', { class: 'bs-plan-all', href: 'plans.html' }, [T('plan.all', 'See all {n} plans').replace('{n}', more) + ' ', el('i', { class: 'fas fa-arrow-right', 'aria-hidden': 'true' })]));
         if (cancel) {
             var c = el('button', { type: 'button', class: 'bs-plan-link', text: T('plan.cancel', 'Keep my current plan') });
             c.addEventListener('click', function () { choosing = false; render(); });
@@ -271,12 +277,15 @@
             homeEl = el('div', { class: 'bs-plan' });
             var mountAt = document.getElementById('planMount');
             var hero = document.querySelector('.hero-section');
+            var spot = document.getElementById('homePlan');   // index.html's fixed place for it
             if (onPlans && mountAt) mountAt.appendChild(homeEl);
+            else if (!onPlans && spot) spot.appendChild(homeEl);
             else if (!onPlans && hero) hero.parentNode.insertBefore(homeEl, hero.nextSibling);
             else { homeEl = null; return; }
         }
         var st = status();
-        if (!st || choosing) { homeEl.replaceChildren(chooser(!!st)); return; }
+        // Starting out on the home page, offer the first few; "Change plan" still lists them all.
+        if (!st || choosing) { homeEl.replaceChildren(chooser(!!st, null, !onPlans && !st ? 3 : 0)); return; }
         // The plans page also lists every plan under the one being followed.
         var others = onPlans ? chooser(false, st.def.id) : null;
         if (others) others.style.marginTop = '16px';
