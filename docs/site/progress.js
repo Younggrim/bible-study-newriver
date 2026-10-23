@@ -254,7 +254,9 @@
             homeBox.className = 'bs-progress';
             var standalone = document.body.classList.contains('pwa-standalone');
             var pwaNav = document.querySelector('.pwa-bible-nav'), hero = document.querySelector('.hero-section');
+            var spot = document.getElementById('homeProgress');   // index.html's fixed place for it
             if (standalone && pwaNav) pwaNav.insertBefore(homeBox, pwaNav.firstChild);
+            else if (spot) spot.appendChild(homeBox);
             else if (hero) hero.parentNode.insertBefore(homeBox, hero.nextSibling);
             else return;
         }

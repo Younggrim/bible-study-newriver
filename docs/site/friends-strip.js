@@ -50,8 +50,9 @@
         box = el('div', { class: 'bs-fr' });
         var standalone = document.body.classList.contains('pwa-standalone');
         var pwaNav = document.querySelector('.pwa-bible-nav'), hero = document.querySelector('.hero-section');
-        var plan = document.querySelector('.bs-plan');
-        if (plan && plan.parentNode) plan.parentNode.insertBefore(box, plan.nextSibling);   // just after the reading plan
+        var plan = document.querySelector('.bs-plan'), spot = document.getElementById('homeFriends');
+        if (spot && !standalone) spot.appendChild(box);   // index.html's fixed place for it
+        else if (plan && plan.parentNode) plan.parentNode.insertBefore(box, plan.nextSibling);   // just after the reading plan
         else if (standalone && pwaNav) pwaNav.insertBefore(box, pwaNav.firstChild);
         else if (hero) hero.parentNode.insertBefore(box, hero.nextSibling);
         else { box = null; return false; }
