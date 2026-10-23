@@ -488,12 +488,12 @@
         return true;
     }
 
-    function initChapter() {
-        injectStyle();
-        var container = document.querySelector('.scripture-container');
-        if (!container) return;
-
-        var jumped = false, observer = null;
+    // Highlights and the verse sheet follow one chapter's text. watch() binds them to it,
+    // and runs again when continuous listening swaps the next chapter in (audio.js).
+    var observer = null, jumped = false;
+    function watch(container) {
+        if (observer) observer.disconnect();
+        observer = null;
         function retag() {
             // Painting changes the DOM, so stop watching while doing it or it would trigger itself.
             if (observer) observer.disconnect();
@@ -511,9 +511,17 @@
         // The ESV and the other-language Bibles arrive later and fill in their block's contents.
         observer = new MutationObserver(retag);
         retag();
+        container.addEventListener('click', onScriptureClick);
+    }
+
+    function initChapter() {
+        injectStyle();
+        var container = document.querySelector('.scripture-container');
+        if (!container) return;
+
+        watch(container);
         setTimeout(function () { jumped = true; }, 8000);   // never jump once the reader has had time to start scrolling
 
-        container.addEventListener('click', onScriptureClick);
         document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && sheet) closeSheet(); });
 
         var scrollTimer = null;
@@ -525,6 +533,18 @@
         setTimeout(rememberPlace, 1500);
         window.addEventListener('pagehide', function () { rememberPlace(); });
         document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') { rememberPlace(); scheduleSync(0); } });
+
+        // The next chapter swapped in while listening: this is now that chapter,
+        // and the saved place moves with the audio.
+        window.addEventListener('bible-chapter', function (e) {
+            var next = parsePage(e.detail && e.detail.page), box = document.querySelector('.scripture-container');
+            if (!next || !box) return;
+            if (sheet) closeSheet();
+            selected = [];
+            here = next; lastSeen = null; jumped = true;
+            watch(box);
+            rememberPlace();
+        });
     }
 
     /* ---------- home page card ---------- */

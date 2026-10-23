@@ -302,6 +302,12 @@
             window.addEventListener('online', function () { if (user) scheduleSync(0); });
         }
         window.addEventListener('bible-lang', render);
+        // The next chapter swapped in while listening (audio.js): its own "Mark chapter studied".
+        window.addEventListener('bible-chapter', function (e) {
+            if (!e.detail || !e.detail.page) return;
+            page = e.detail.page; box = null;
+            render();
+        });
         window.addEventListener('storage', function (e) {
             if (e.key === K_CH || e.key === K_DAYS) { chapters = load(K_CH, {}); days = load(K_DAYS, {}); render(); }
         });

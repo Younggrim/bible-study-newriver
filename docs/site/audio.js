@@ -20,14 +20,25 @@
    and a silent utterance; whichever the answer needs is then allowed to play.
 
    Continuous play (on by default) carries on into the next chapter when one
-   ends: an ordinary visit to the next chapter's page, which then starts
-   playing in the same translation and speed. Next and previous follow the
+   ends, in the same translation and speed. Next and previous follow the
    page's own chapter arrows (script.js), so book boundaries use the site's
-   book order, and it stops after Revelation 22. Halfway through a chapter
-   the next page and its recording are fetched, so the next one starts
-   quickly. A browser that will not start sound on a page nobody has tapped
-   yet (iPhone, always; and while the phone is locked nothing can start)
-   gets a "Keep listening" button instead.
+   book order, and it stops after Revelation 22.
+
+   The next chapter is brought into this page rather than loaded as a new
+   one. Browsers will not start sound on a page that has not been tapped
+   (iPhone for everything, Android for the device voice), and a locked phone
+   cannot start anything; this page has been tapped and keeps its <audio>
+   element, which just changes src. Halfway through a chapter the next
+   chapter's HTML and recording are fetched. When this one ends, <main>, the
+   sidebar, title and pickers are replaced from that HTML, the address
+   changes with pushState, and a "bible-chapter" event tells the other
+   chapter scripts (study.js, translations.js, progress.js, plans.js,
+   chapter-notes.js, i18n.js, mapgeo.js, script.js) to set themselves up for
+   it. Back or forward afterwards reloads properly.
+
+   If that fails (offline, say), it falls back to an ordinary visit to the
+   next chapter, which starts playing by itself where the browser allows
+   and otherwise shows a "Keep listening" button.
 
    Speed and continuous play are remembered: in the account
    (user_metadata.audio_rate, user_metadata.audio_continuous) when signed in,
@@ -178,6 +189,7 @@
     var engine = null;           // 'media' | 'speech'
     var gen = 0;                 // bumped by stop(); late answers for an older generation are dropped
     var found = {};              // "translation|chapter" -> lookup answer, for this page view
+    var swapping = false;        // true while a chapter is being brought in, so switchTranslation() does not stop playback
     var audio = null, timings = [], verses = [], verseIndex = 0, utterance = null;
 
     function currentTranslation() {
@@ -511,9 +523,9 @@
 
     // Once the recording's length is known, and the ESV text has arrived.
     function estimate(a) {
-        var my = gen, block = currentTranslation().block;
+        var my = gen, pg = page, block = currentTranslation().block;
         textOf(block).then(function () {
-            if (my !== gen || !estimating || engine !== 'media') return;
+            if (my !== gen || pg !== page || !estimating || engine !== 'media') return;
             timings = estimateTimings(block, a.duration);
         });
     }
@@ -630,10 +642,20 @@
         var pg = neighbour('next'), code = currentTranslation().code;
         if (!continuous || !pg || readied === code + '|' + pg) return;
         readied = code + '|' + pg;
-        var link = document.createElement('link');
-        link.rel = 'prefetch'; link.href = pg + '.html';
-        document.head.appendChild(link);
+        fetchPage(pg).catch(function () {});
         lookup(code, pg);
+    }
+
+    var pages = {};   // chapter -> Promise of its HTML
+    function fetchPage(pg) {
+        if (!pages[pg]) {
+            pages[pg] = fetch(pg + '.html').then(function (r) {
+                if (!r.ok) throw new Error(r.status);
+                return r.text();
+            });
+            pages[pg].catch(function () { delete pages[pg]; });
+        }
+        return pages[pg];
     }
 
     var END_MESSAGE = 'End of Revelation. You have listened through to the end of the Bible.';
@@ -646,9 +668,79 @@
     }
 
     // On to chapter pg: note that it should carry on playing, then an ordinary visit.
-    var HANDOFF = 'bs-audio-handoff';
+    // Carry on into chapter pg: same translation, same speed, same <audio> element.
     function goChapter(pg) {
-        try { sessionStorage.setItem(HANDOFF, JSON.stringify({ page: pg, t: currentTranslation().code, at: Date.now() })); } catch (e) {}
+        var code = currentTranslation().code, ready = found[code + '|' + pg];
+        var my = ++gen;
+        // When the recording is already known, start it now, inside the 'ended'
+        // event or the lock-screen button press, before anything waits.
+        var early = isRecording(ready);
+        if (early) playRecording(ready);
+        else {
+            if (audio) audio.pause();
+            if (window.speechSynthesis) { utterance = null; window.speechSynthesis.cancel(); }
+            setState('loading');
+        }
+        clearHighlight();
+        fetchPage(pg).then(function (html) {
+            if (my !== gen) return;
+            if (!swapTo(pg, html, code)) throw new Error('swap');
+            if (early) {
+                showSource(ready); setMediaSession(code, ready);
+                if (estimating && audio.duration) estimate(audio);
+                return;
+            }
+            return lookup(code, pg).then(function (answer) {
+                if (my === gen) begin(answer, currentTranslation());
+            });
+        }).catch(function () {
+            if (my === gen) handOff(pg, code);
+        });
+    }
+
+    var swapped = false;
+    function swapTo(pg, html, code) {
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var main = document.querySelector('main.main-content'), next = doc.querySelector('main.main-content');
+        if (!main || !next || !next.querySelector('.scripture-container')) return false;
+
+        bar.remove();
+        main.replaceWith(document.adoptNode(next));
+        var side = document.querySelector('aside.left-sidebar'), nextSide = doc.querySelector('aside.left-sidebar');
+        if (side && nextSide) { nextSide.className = side.className; side.replaceWith(document.adoptNode(nextSide)); }
+        ['bookSelect', 'chapterSelect'].forEach(function (id) {
+            var mine = document.getElementById(id), theirs = doc.getElementById(id);
+            if (mine && theirs) { mine.innerHTML = theirs.innerHTML; mine.value = theirs.value; }
+        });
+        document.title = doc.title;
+        var desc = document.querySelector('meta[name="description"]'), nextDesc = doc.querySelector('meta[name="description"]');
+        if (desc && nextDesc) desc.setAttribute('content', nextDesc.getAttribute('content'));
+
+        page = pg;
+        container = document.querySelector('.scripture-container');
+        container.parentNode.insertBefore(bar, container);
+        history.pushState({ bsChapter: pg }, '', pg + '.html');
+        swapped = true;
+        window.scrollTo(0, 0);
+        shownVerse = 0;
+
+        // Everything else on the page sets itself up for the new chapter, then
+        // this translation is shown (and its text fetched, for the ESV and other languages).
+        swapping = true;
+        try {
+            window.dispatchEvent(new CustomEvent('bible-chapter', { detail: { page: pg } }));
+            if (typeof window.switchTranslation === 'function') window.switchTranslation(code);
+        } finally { swapping = false; }
+        return true;
+    }
+
+    // Back or forward after a swap: load that address properly.
+    window.addEventListener('popstate', function () { if (swapped) location.reload(); });
+
+    // The fallback: an ordinary visit to chapter pg, noted so that it carries on there.
+    var HANDOFF = 'bs-audio-handoff';
+    function handOff(pg, code) {
+        try { sessionStorage.setItem(HANDOFF, JSON.stringify({ page: pg, t: code, at: Date.now() })); } catch (e) {}
         location.href = pg + '.html';
     }
 
@@ -722,6 +814,7 @@
         window.switchTranslation = function (code) {
             var before = currentTranslation().code;
             original(code);
+            if (swapping) return;
             if (code !== before || state !== 'idle') { stop(); showSource(null); }
         };
     }

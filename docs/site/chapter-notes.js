@@ -5,8 +5,8 @@
    the notes already written on it. Notes are the same ones as the Notes page
    (localStorage 'bs-notes', same shape); signed in, each save goes straight
    to the notes table, and the chapter's notes are fetched from it, so they
-   follow the reader to every device. Must load before DOMContentLoaded so
-   script.js wires the new tab like the others. Kept identical in both
+   follow the reader to every device. script.js's page-wide tab listener
+   handles the new tab like the others. Kept identical in both
    repositories.                                                          */
 (function () {
     'use strict';
@@ -65,11 +65,15 @@
         + '.cn-empty{font-family:"Inter",sans-serif;font-size:.85rem;color:var(--text-faint);margin:18px 0 0}';
     document.head.appendChild(el('style', { text: STYLE }));
 
-    // The tab and its pane, placed now so script.js binds the tab with the rest.
-    var tab = el('div', { class: 'study-tab', 'data-tab': 'notes', text: T('tab.notes', 'Notes') });
-    bar.appendChild(tab);
-    var pane = el('div', { class: 'tab-content', id: 'tab-notes' });
-    after.parentNode.insertBefore(pane, after.nextSibling);
+    // The tab and its pane, after Reflection.
+    var tab = null, pane = null;
+    function mount() {
+        tab = el('div', { class: 'study-tab', 'data-tab': 'notes', text: T('tab.notes', 'Notes') });
+        bar.appendChild(tab);
+        pane = el('div', { class: 'tab-content', id: 'tab-notes' });
+        after.parentNode.insertBefore(pane, after.nextSibling);
+    }
+    mount();
 
     /* ---------- writing ---------- */
 
@@ -245,4 +249,18 @@
     window.addEventListener('bible-lang', function () { if (editing == null) render(); });
     window.addEventListener('storage', function (e) { if (e.key === STORE && editing == null) render(); });
     if (account) account.onChange(function (u) { user = u || null; if (user) pull(); });
+
+    // Continuous listening (audio.js) swapped the next chapter into this page: its own Notes tab.
+    window.addEventListener('bible-chapter', function (e) {
+        var next = /^([1-3]?[a-z]+?)(\d+)$/.exec((e.detail && e.detail.page) || '');
+        var nextBar = document.querySelector('.study-tabs');
+        var nextAfter = document.getElementById('tab-reflection') || document.querySelector('.tab-content:last-of-type');
+        if (!next || !nextBar || !nextAfter) return;
+        m = next; bar = nextBar; after = nextAfter;
+        PAGE = m[1] + m[2]; BOOK = m[1]; CH = m[2];
+        draftRef = PAGE; editing = null;
+        mount();
+        render();
+        if (user) pull();
+    });
 })();

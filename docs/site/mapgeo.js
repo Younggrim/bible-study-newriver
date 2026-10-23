@@ -513,6 +513,8 @@
      * exists for anything that adds a .geo-map afterwards, and is what the
      * stress test in WORKFLOW.md drives 831 real place lists through. */
     window.MapGeo = { refresh: start };
+    // The next chapter swapped in while listening (audio.js) brings its own map pane.
+    window.addEventListener('bible-chapter', function () { start(); });
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', start);
