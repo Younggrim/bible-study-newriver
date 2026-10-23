@@ -80,13 +80,19 @@
         node.textContent = text != null ? text : node.getAttribute('data-en');
     }
     // Only the element's own leading text, keeping any icon or count inside it.
+    // A trailing " (N)" in that text, e.g. script.js's "Videos (4) ", is kept as is.
+    var COUNT = /\s*\(\d+\)\s*$/;
+    function leadNode(node) {
+        for (var i = 0; i < node.childNodes.length; i++) { if (node.childNodes[i].nodeType === 3 && node.childNodes[i].nodeValue.trim()) return node.childNodes[i]; }
+        return null;
+    }
     function setLead(node, text) {
         if (!node) return;
-        var tn = null;
-        for (var i = 0; i < node.childNodes.length; i++) { if (node.childNodes[i].nodeType === 3 && node.childNodes[i].nodeValue.trim()) { tn = node.childNodes[i]; break; } }
+        var tn = leadNode(node);
         if (!tn) return;
-        if (!node.hasAttribute('data-en')) node.setAttribute('data-en', tn.nodeValue.trim());
-        tn.nodeValue = text != null ? text : node.getAttribute('data-en');
+        var count = COUNT.exec(tn.nodeValue);
+        if (!node.hasAttribute('data-en')) node.setAttribute('data-en', tn.nodeValue.replace(COUNT, '').trim());
+        tn.nodeValue = (text != null ? text : node.getAttribute('data-en')) + (count ? count[0] : '');
     }
     // Labels with no translation keep their English text (null), never show the raw key.
     function L(key) { return lang === 'en' || !(key in dict || key in EN) ? null : t(key); }
@@ -101,7 +107,8 @@
             setLead(tab, L(k));
             var pane = document.getElementById('tab-' + tab.getAttribute('data-tab'));
             var h = pane && pane.querySelector('h3');
-            if (h && (h.hasAttribute('data-en') || h.textContent.trim() === EN[k])) setLead(h, L(k));
+            var lead = h && leadNode(h);
+            if (h && (h.hasAttribute('data-en') || h.textContent.trim() === EN[k] || (lead && COUNT.test(lead.nodeValue) && lead.nodeValue.replace(COUNT, '').trim() === EN[k]))) setLead(h, L(k));
         });
         // Go buttons and the app's passage picker.
         document.querySelectorAll('.top-nav button[onclick^="goToChapter"]').forEach(function (b) { setText(b, L('nav.go')); });
