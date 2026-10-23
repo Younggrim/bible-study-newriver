@@ -1,9 +1,9 @@
 {
-  "upstream_commit": "ed6c4d2e99db6dda8c02eea70f4e888ef2208ed2 Listen: estimated verse shading for ESV recordings (#88)",
+  "upstream_commit": "f8456077e265068fbf9b73e9a11db32f77d61ecb Listen: continuous play carries on in the page, no tap needed (#89)",
   "upstream_fingerprints": {
     "site/style.css": "cbe82332",
-    "site/script.js": "63dab9cc"
+    "site/script.js": "03788421"
   },
   "style_css_v": "564667b7",
-  "script_js_v": "2d30b4d8"
+  "script_js_v": "71b15079"
 }

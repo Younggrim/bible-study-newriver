@@ -98,18 +98,21 @@
     style.textContent = STYLE;
     document.head.appendChild(style);
 
-    var blocks = container.querySelectorAll('.translation-block');
-    var after = blocks[blocks.length - 1];
-    LANGS.forEach(function (l) {
-        var b = document.createElement('div');
-        b.className = 'translation-block';
-        b.setAttribute('data-translation', l.code);
-        b.lang = l.lang;
-        if (l.dir) b.dir = l.dir;
-        if (l.font) b.style.fontFamily = '"' + l.font + '", serif';
-        after.parentNode.insertBefore(b, after.nextSibling);
-        after = b;
-    });
+    function addBlocks() {
+        var blocks = container.querySelectorAll('.translation-block');
+        var after = blocks[blocks.length - 1];
+        LANGS.forEach(function (l) {
+            var b = document.createElement('div');
+            b.className = 'translation-block';
+            b.setAttribute('data-translation', l.code);
+            b.lang = l.lang;
+            if (l.dir) b.dir = l.dir;
+            if (l.font) b.style.fontFamily = '"' + l.font + '", serif';
+            after.parentNode.insertBefore(b, after.nextSibling);
+            after = b;
+        });
+    }
+    addBlocks();
 
     function el(tag, cls, text) {
         var n = document.createElement(tag);
@@ -170,4 +173,14 @@
             if (BY_CODE[code]) load(code);
         };
     }
+
+    // 5. Continuous listening (audio.js) swapped the next chapter into this page:
+    //    give it its own empty panes. audio.js then calls switchTranslation(),
+    //    which fills the one being read.
+    window.addEventListener('bible-chapter', function (e) {
+        var next = e.detail && e.detail.page, box = document.querySelector('.scripture-container');
+        if (!next || !box) return;
+        page = next; container = box; loading = {};
+        addBlocks();
+    });
 })();

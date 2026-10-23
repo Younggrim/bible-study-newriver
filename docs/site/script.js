@@ -165,21 +165,31 @@ function navigateTo(book, chapter) {
     window.location.href = `${slug}${chapter}.html`;
 }
 
-// Initialize tab clicks
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.study-tab').forEach(tab => {
-        tab.addEventListener('click', function() {
-            switchTab(this.dataset.tab);
-        });
-    });
+/* Continuous listening (audio.js) swaps the next chapter into the page
+   instead of loading it, then fires "bible-chapter". Everything here that is
+   set up per chapter runs again on it. */
+function onChapterChange(fn) { window.addEventListener('bible-chapter', fn); }
 
-    // Prevent touch-drag on the tab bar (mobile fix)
+// Tab clicks: one listener for the page, so it also covers a swapped-in chapter's tabs
+document.addEventListener('click', function(e) {
+    var tab = e.target.closest && e.target.closest('.study-tab');
+    if (tab && tab.dataset.tab) switchTab(tab.dataset.tab);
+});
+
+// Prevent touch-drag on the tab bar (mobile fix)
+function bindTabBar() {
     var tabBar = document.querySelector('.study-tabs');
-    if (tabBar) {
+    if (tabBar && !tabBar.hasAttribute('data-touch-bound')) {
+        tabBar.setAttribute('data-touch-bound', '1');
         tabBar.addEventListener('touchmove', function(e) {
             e.preventDefault();
         }, { passive: false });
     }
+}
+onChapterChange(bindTabBar);
+
+document.addEventListener('DOMContentLoaded', function() {
+    bindTabBar();
 
     // Book select navigation
     const bookSelect = document.querySelector('.nav-book-select');
@@ -261,7 +271,7 @@ function extractVerseNum(title) {
     return 5000;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+function sortVideos() {
     // Find video tab content in chapter pages
     var videoTab = document.getElementById('tab-videos');
     if (videoTab) {
@@ -284,7 +294,9 @@ document.addEventListener('DOMContentLoaded', function() {
             videoArray.forEach(function(v) { parent.appendChild(v); });
         }
     }
-});
+}
+document.addEventListener('DOMContentLoaded', sortVideos);
+onChapterChange(sortVideos);
 
 
 /* ===== PWA Bottom Navigation — Only in standalone (app) mode ===== */
@@ -529,6 +541,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* ===== Chapter Navigation Arrows ===== */
 (function() {
+  function chapterArrows() {
     var path = window.location.pathname.split('/').pop() || '';
     var baseName = path.replace('.html', '');
 
@@ -589,6 +602,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         insertAfter.parentNode.insertBefore(navDiv, insertAfter.nextSibling);
     }
+  }
+  chapterArrows();
+  onChapterChange(chapterArrows);
 })();
 
 
@@ -599,6 +615,7 @@ document.addEventListener('DOMContentLoaded', function() {
    no-op — that's what keeps New River's channel videos from ever appearing
    on bible.macdwellings.com without needing a separate copy of this file. */
 (function() {
+  function sermonOverlay() {
     var tabVideos = document.getElementById('tab-videos');
     if (!tabVideos) return;
     var page = window.location.pathname.split('/').pop() || 'index.html';
@@ -628,6 +645,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         .catch(function() { /* no overlay file on this deployment — expected */ });
+  }
+  sermonOverlay();
+  onChapterChange(sermonOverlay);
 })();
 
 
@@ -656,10 +676,11 @@ document.addEventListener('DOMContentLoaded', function() {
             pressable(el, 'Play video' + (text ? ': ' + text : ''));
         });
     }
-    function init() {
+    function tablist() {
         // Study tabs as an ARIA tablist, with arrow-key movement
         var bar = document.querySelector('.study-tabs');
-        if (bar) {
+        if (bar && !bar.hasAttribute('data-a11y')) {
+            bar.setAttribute('data-a11y', '1');
             var tabs = Array.prototype.slice.call(bar.querySelectorAll('.study-tab'));
             bar.setAttribute('role', 'tablist');
             var refresh = function () {
@@ -694,6 +715,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             refresh();
         }
+    }
+    // After the other listeners, so tabs they add (Notes) are included.
+    onChapterChange(function () { setTimeout(tablist, 0); });
+    function init() {
+        tablist();
         // Video thumbnails, including any the New River overlay adds later
         facades();
         new MutationObserver(function () { facades(); })

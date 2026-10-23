@@ -418,6 +418,9 @@
         render();
         if (P && P.onChange) P.onChange(render);
         window.addEventListener('bible-lang', render);
+        // The next chapter swapped in while listening (audio.js). After progress.js
+        // has drawn that chapter's "Mark chapter studied", which this line sits under.
+        window.addEventListener('bible-chapter', function () { lineEl = null; setTimeout(render, 0); });
         if (account) account.onChange(onAccount);
         window.addEventListener('storage', function (e) { if (e.key === K) { plan = load(K, null); render(); } });
     }

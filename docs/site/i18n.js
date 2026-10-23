@@ -199,4 +199,6 @@
     window.addEventListener('storage', function (e) { if (e.key === 'preferredTranslation') use(current(), true); });
     // script.js adds the chapter arrows and bottom bar as the page loads.
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply);
+    // A chapter swapped in while listening (audio.js): label it once the others have built it.
+    window.addEventListener('bible-chapter', function () { setTimeout(apply, 0); });
 })();
