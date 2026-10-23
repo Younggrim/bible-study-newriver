@@ -1,9 +1,9 @@
 {
-  "upstream_commit": "0118aea99fa2bd777baada97c9e7ec96c7f8a3da Seven new reading plans (#85)",
+  "upstream_commit": "a269ad8e7aff158f1639863eb9392f8f1e52a4d1 Listen: play the chapter aloud in the selected translation (#86)",
   "upstream_fingerprints": {
-    "site/style.css": "7a8bacda",
+    "site/style.css": "cbe82332",
     "site/script.js": "63dab9cc"
   },
-  "style_css_v": "cf787d44",
+  "style_css_v": "564667b7",
   "script_js_v": "2d30b4d8"
 }

@@ -42,6 +42,12 @@ const ESV_PROXY = 'https://esv-proxy.cloudflare-dust598.workers.dev';
 self.addEventListener('fetch', event => {
   const req = event.request;
 
+  // Leave audio to the browser. Recordings stream in byte ranges, a cached
+  // partial (206) response cannot be stored, and a whole chapter MP3 is too
+  // big to keep for offline use. The bible-audio lookup is not cached either:
+  // the URLs it returns are signed and expire.
+  if (req.headers.has('range') || req.destination === 'audio' || req.url.includes('/functions/v1/bible-audio')) return;
+
   // Passages already fetched are served from cache immediately and refreshed in
   // the background. Scripture text does not change, so there is nothing to be
   // gained by waiting on the network, and this makes repeat visits instant and
