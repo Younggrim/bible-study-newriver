@@ -453,7 +453,7 @@ body {
     .nav-home-btn { display: block; }
     .nav-brand { display: none; }
     .top-nav { padding: 0 10px; height: auto; min-height: 56px; flex-wrap: wrap; padding-top: 6px; padding-bottom: 6px; }
-    .nav-center { gap: 4px; justify-content: flex-start; flex-wrap: wrap; }
+    .nav-center { gap: 4px; justify-content: center; flex-wrap: wrap; }   /* each wrapped line centred: book/chapter/Go, then translation, Listen, account */
     .nav-book-select, .nav-chapter-select { font-size: 0.8rem; padding: 5px 6px; max-width: 110px; }
     .nav-translation { font-size: 0.75rem; padding: 5px 8px; }
     .scripture-container { padding: 20px 18px; }
