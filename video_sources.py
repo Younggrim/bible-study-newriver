@@ -97,6 +97,22 @@ DROP_VIDEO_IDS = {
     "6S2lM461igY": "Mike Winger 'I Went To A Mosque...: 10 Qs' -- Q&A episode, no passage",
     "ZiIHadIR0qo": "The BEAT 'Heaven Is NOT What Most Christians Think' -- no passage",
     "VVqrE7azRqw": "The Chosen 'Season 6 Official Trailer' -- a trailer, not teaching",
+    "7gRdqZAAwU4": "Brandon Robbins 'The Complete Guide to the Book of Acts - Day 1' -- chapters covered not stated",
+    "_fP83GCQQYg": "Brandon Robbins 'The Complete Guide to the Book of Acts - Day 2' -- chapters covered not stated",
+    "LTpjRBmFf8A": "Brandon Robbins 'The Complete Guide to the Book of Acts - Day 3' -- chapters covered not stated",
+    "f204uLDfTPg": "2BeLikeChrist 'We Made it to Japan' -- travel update, not teaching",
+    "OaSCVyt1vNM": "David Guzik 'Shiloh: The Tabernacle, Eli, and the Boy Samuel' -- Israel travel episode, no passage in the title",
+    "_YkaMYubiZk": "Give Me an Answer 'Atheist Tries To Stump Us On Biblical Slavery' -- no passage",
+    "wRsMdW-xMiA": "GotQuestions 'What are the 1st & 2nd resurrections?' -- no passage in the title",
+    "qLDAHgaXV0g": "GotQuestions 'A Summary of the Book of John' re-upload -- john1 already has the original",
+    "NqTYSG35LdA": "GotQuestions death penalty -- podcast episode",
+    "ULwHwVxMZzw": "Mike Winger 'The Truth About Mormonism: 10 Qs' -- Q&A episode, no passage",
+    "2zQ44zX-HGg": "Mike Winger ministry-investigation update -- current events, no passage",
+    "bOTfDkLbmIg": "Mike Winger 'This is for the men' -- no passage",
+    "YnHFoJr8Sog": "The BEAT 'This Bible Story Will Make You Rethink Your Next Decision' -- passage not named",
+    "K3fAFvIwGpw": "The Chosen 'We're Taking You Home' -- promo, not teaching",
+    "g4QGA1QFqmw": "The Chosen 'Jesus Prays in the Garden of Gethsemane' scene -- drama clip, not teaching",
+    "PCT1WPvRFaE": "Wes Huff tribute to Dr. Parker -- personal, not teaching",
 }
 
 FACADE_OPEN = '<div class="yt-facade"'

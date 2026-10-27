@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "703281cddb0be71999fee929b03303f56fdb27d4 Videos tab heading: keep the video count when the label is set (#90)",
+  "upstream_commit": "e2c98098ed44c3ec39d044ef2ceb7d3614709b53 Weekly review 2026-10-27: 2 articles and 5 videos added, 7 articles and 16 videos dropped",
   "upstream_fingerprints": {
     "site/style.css": "cbe82332",
     "site/script.js": "03788421"
