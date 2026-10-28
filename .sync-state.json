@@ -1,9 +1,9 @@
 {
-  "upstream_commit": "e2c98098ed44c3ec39d044ef2ceb7d3614709b53 Weekly review 2026-10-27: 2 articles and 5 videos added, 7 articles and 16 videos dropped",
+  "upstream_commit": "e18f3fec39fe79cda7b236324a6b7d8f85f84107 Merge pull request #91 from Younggrim/original-languages",
   "upstream_fingerprints": {
     "site/style.css": "cbe82332",
-    "site/script.js": "03788421"
+    "site/script.js": "dc18a571"
   },
   "style_css_v": "564667b7",
-  "script_js_v": "71b15079"
+  "script_js_v": "7d10e7d1"
 }
