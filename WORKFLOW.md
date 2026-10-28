@@ -592,6 +592,28 @@ python3 build_original.py STEPBible-Data HebrewLexicon           # writes docs/b
 python3 add_study_scripts.py                                      # restamps original.js on every page
 ```
 
+### Key words
+
+A strip above the Scripture on each chapter page shows up to five Hebrew or
+Greek words worth noticing there, in every translation. Tapping one opens a
+one-line note on why it matters, then its lexicon entry and word list.
+
+- `keywords_data.py` is the hand-picked list (about 165 words): Strong's tag,
+  a short gloss, the note, and "pins", the chapters where a word must appear
+  (its classic passage). The notes are written for this site; keep them
+  plain, accurate and free of denominational positions.
+- `build_keywords.py` picks each chapter's words: hand-picked words scored by
+  how often they occur in the chapter against how many chapters of that
+  Testament use them, pins always shown, plus one New Testament word used in
+  only that verse when there is room. It writes `docs/bible/ORIG/keys/<book>.json`
+  and reports any pin that does not occur in its chapter (fix the tag or the pin).
+- About 80 chapters (genealogies, lists) get no strip; that is expected.
+
+```bash
+python3 build_keywords.py --check   # samples and problems, writes nothing
+python3 build_keywords.py           # after build_original.py
+```
+
 Both texts are numbered the English way (NRSV) in the source, so Malachi 4,
 the psalm titles and other Hebrew numbering differences need no mapping. Three
 places follow the KJV numbering instead, because the site's BSB text does:

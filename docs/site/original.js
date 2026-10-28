@@ -6,6 +6,8 @@
    2. Tapping a word opens its lexicon entry and every other verse that uses it.
    3. "Hebrew" / "Greek" is also in the translation picker, under "Original languages",
       to read the whole chapter in the original.
+   4. Key words: a strip above the Scripture with a few words worth noticing in the
+      chapter (build_keywords.py); tapping one opens why it matters and its lexicon entry.
 
    Data: docs/bible/ORIG/, built by build_original.py from STEPBible.org (Tyndale House,
    CC BY 4.0) and Strong's Hebrew Dictionary (OpenScriptures.org, CC BY 4.0). A chapter,
@@ -291,6 +293,19 @@
         + '.og-credit{font-size:.72rem;line-height:1.5;color:var(--text-faint);margin:18px 0 0}'
         + '.og-credit a{color:inherit}'
         + '.og-msg{font-style:italic;color:var(--text-muted)}'
+        + '.og-why{font-size:.88rem;line-height:1.5;color:var(--ink-deep)}'
+        + '.og-keys{max-width:900px;margin:0 auto 14px;padding:0 4px;font-family:"Inter",-apple-system,sans-serif}'
+        + '.og-keys-head{display:flex;align-items:baseline;gap:8px;margin:0 0 6px}'
+        + '.og-keys-head b{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint)}'
+        + '.og-keys-head span{font-size:.75rem;color:var(--text-faint)}'
+        + '.og-keys-row{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:2px 2px 6px;scrollbar-width:thin}'
+        + '.og-key{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-start;gap:1px;text-align:left;font:inherit;cursor:pointer;background:var(--bg-card,#fff);border:1px solid var(--border-light);border-radius:10px;padding:7px 11px;color:var(--ink-deep);max-width:220px}'
+        + '.og-key:hover{background:var(--bg-tint)}'
+        + '.og-key .og-w{font-size:1.15rem;line-height:1.25}'
+        + '.og-key .og-he.og-w{font-size:1.25rem}'
+        + '.og-key small{font-size:.78rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:196px}'
+        + '.og-key small i{font-style:normal;color:var(--text-faint)}'
+        + '.og-key:focus-visible{outline:2px solid var(--accent-link);outline-offset:2px}'
         + '.og-btn:focus-visible,.og-word button:focus-visible,.og-refs a:focus-visible,.og-more:focus-visible{outline:2px solid var(--accent-link);outline-offset:2px}'
         + '.translation-block[data-translation="ORIG"] .verse{line-height:2}'
         + '.translation-block[data-translation="ORIG"][dir="rtl"] .verse{font-size:1.3em;line-height:2.1}'
@@ -512,9 +527,9 @@
     }
 
     // 2. A word's lexicon entry and every verse it appears in.
-    function openLexicon(strong, greek, from, fallbackLemma) {
+    function openLexicon(strong, greek, from, fallbackLemma, note) {
         var view = {
-            title: T('orig.lexicon', 'Lexicon') + ' · ' + shortStrong(strong),
+            title: (note ? T('orig.keyword', 'Key word') : T('orig.lexicon', 'Lexicon')) + ' · ' + shortStrong(strong),
             sub: from ? T('orig.from', 'from') + ' ' + bookLabel(from.slug) + ' ' + from.chapter + ':' + from.verse : '',
             limit: 60,
             fill: function (body) {
@@ -527,6 +542,7 @@
                     var lemma = el('span', fontCls + ' og-w', e ? e[0] : (fallbackLemma || ''));
                     if (!greek) lemma.dir = 'rtl';
                     lemma.lang = greek ? 'grc' : 'he';
+                    if (note) body.appendChild(el('p', 'og-flag og-why', [el('strong', null, T('orig.whynote', 'Worth noticing') + ': '), note]));
                     body.appendChild(el('div', 'og-lex-top', [lemma, e ? translitNode(e[1], greek) : null]));
                     if (e) {
                         body.appendChild(el('p', 'og-lex-gloss', e[3].replace(/^:\s*/, '').replace(/^first:\s*/, '')));
@@ -667,6 +683,43 @@
     injectStyle();
     addBlock();
 
+    /* ---------- Key words above the Scripture ---------- */
+
+    function keyStrip() {
+        var old = document.querySelector('.og-keys');
+        if (old) old.remove();
+        var info = here, chapterNow = page;
+        getJSON('keys/' + info.book + '.json').then(function (d) {
+            var keys = d[String(info.chapter)];
+            if (!keys || !keys.length || chapterNow !== page) return;
+            addFonts();
+            var greek = info.greek, fontCls = greek ? 'og-grc' : 'og-he';
+            var row = el('div', 'og-keys-row');
+            row.setAttribute('role', 'list');
+            keys.forEach(function (k) {
+                // k: [strong, lemma, translit, gloss, verse, note]
+                var w = el('span', fontCls + ' og-w', k[1]);
+                w.lang = greek ? 'grc' : 'he';
+                if (!greek) w.dir = 'rtl';
+                var b = el('button', 'og-key', [w, el('small', null, [k[3] + ' ', el('i', null, '· v' + k[4])])]);
+                b.type = 'button'; b.setAttribute('role', 'listitem');
+                b.setAttribute('aria-label', k[3] + ', verse ' + k[4] + '. ' + T('orig.openkey', 'Open key word'));
+                b.addEventListener('click', function () {
+                    openLexicon(k[0], greek, { slug: info.book, chapter: info.chapter, verse: k[4] }, k[1], k[5]);
+                });
+                row.appendChild(b);
+            });
+            var strip = el('section', 'og-keys', [
+                el('div', 'og-keys-head', [el('b', null, T('orig.keywords', 'Key words')), el('span', null, greek ? T('orig.ingreek', 'in the Greek') : T('orig.inhebrew', 'in the Hebrew'))]),
+                row
+            ]);
+            strip.setAttribute('aria-label', T('orig.keywords', 'Key words'));
+            var box = document.querySelector('.scripture-container');
+            if (box) box.parentNode.insertBefore(strip, box);
+        }).catch(function () {});
+    }
+    keyStrip();
+
     var loading = false;
     function loadReading() {
         var b = container.querySelector('.translation-block[data-translation="' + CODE + '"]');
@@ -722,5 +775,6 @@
         if (!info || !box) return;
         page = next; here = info; container = box; loading = false;
         addBlock();
+        keyStrip();
     });
 })();
