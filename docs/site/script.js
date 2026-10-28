@@ -444,6 +444,7 @@ onChapterChange(sortVideos);
                 + '<div class="pwa-info-item"><strong style="color:#7a5c2e;">ASV</strong> — American Standard Version (1901). Extremely literal, great for word studies.</div>'
                 + '<div class="pwa-info-item"><strong style="color:#5c3d6e;">NET</strong> — New English Translation (2005). 60,000+ translator notes.</div>'
                 + '<div class="pwa-info-item"><strong style="color:#2c6b4f;">WEB</strong> — World English Bible (2000). Modern, public domain.</div>'
+                + '<div class="pwa-info-item"><strong>HEB / GRK</strong> — The original Hebrew (Old Testament) and Greek (New Testament). Tap a verse, then Hebrew or Greek, to go word by word.</div>'
                 + '<h3 style="margin-top:18px;">Commentaries</h3>'
                 + '<div class="pwa-info-item"><strong>David Guzik</strong> — Enduring Word. Verse-by-verse commentary, freely available online.</div>'
                 + '<div class="pwa-info-item"><strong>Jamieson-Fausset-Brown</strong> — Commentary Critical and Explanatory (1871). Concise, close to the original languages, public domain.</div>'

@@ -541,6 +541,63 @@ Do not use the BibleNLP verse-per-line corpus as a source. It is aligned to a
 versification that drops 136 verses (all of Malachi 4, Joel 2:28-32) from Bibles
 numbered the English way.
 
+## Original languages: Hebrew and Greek
+
+`docs/site/original.js` adds three things to chapter pages:
+
+1. **Word by word.** The verse sheet (tap a verse) gets a *Hebrew* or *Greek*
+   button. It opens a panel with the verse in the original and a card per word:
+   the word, its gloss, transliteration (stressed syllable in bold), grammar in
+   plain English and its Strong's number. Hebrew prefixes and suffixes are
+   broken out ("in" + "beginning"). The button comes through
+   `window.BibleSheetExtras`, a hook in `study.js`'s `renderSheet()`: any script
+   can push a function that returns a button for the selected verses.
+2. **Lexicon.** Tapping a word card opens its lexicon entry and every verse the
+   word appears in, grouped by book, linking to each chapter.
+3. **Reading pane.** *Original languages* in the translation picker (`ORIG`):
+   the whole chapter in Hebrew (right to left) or Greek. One code for both, so
+   a saved choice shows Hebrew on Old Testament pages and Greek on New.
+
+Data in `docs/bible/ORIG/` (about 46 MB), fetched only when opened, built by
+`build_original.py`:
+
+| file | what |
+|---|---|
+| `<page>.json` | the chapter, word by word (`"t"` is a psalm title, shown with verse 1; `"k"` lists verses only in later Greek manuscripts) |
+| `lex/H<n>.json`, `lex/G<n>.json` | lexicon entries for Strong's numbers n×100 to n×100+99 |
+| `occ/H<n>.json`, `occ/G<n>.json` | every verse each word appears in |
+
+| source | used for | licence |
+|---|---|---|
+| STEPBible TAHOT (Leningrad Codex, following the Qere) | Hebrew text, glosses, grammar | CC BY 4.0 |
+| STEPBible TAGNT (Nestle-Aland text) | Greek text, glosses, grammar | CC BY 4.0 |
+| STEPBible TBESH | Hebrew headword, transliteration, gloss | CC BY 4.0 |
+| STEPBible TBESG (Abbott-Smith) | Greek definitions | CC BY 4.0 |
+| OpenScriptures HebrewStrong.xml (Strong's Hebrew Dictionary) | Hebrew definitions | CC BY 4.0 |
+
+**Do not use the TBESH "Meaning" column.** It is the Abridged BDB from Online
+Bible, which needs separate permission; that is why Hebrew definitions come
+from Strong's. STEPBible asks that their files are reformatted for an
+application rather than redistributed, so only the built JSON is committed,
+never the source files. The credit line on every panel and pane is required by
+the licence and also notes the two changes made: cantillation marks are
+removed (vowel points kept), and Greek verses the oldest manuscripts omit
+(Matthew 17:21 and similar) are given from the KJV's Greek and marked.
+
+```bash
+git clone --depth 1 https://github.com/STEPBible/STEPBible-Data.git
+git clone --depth 1 https://github.com/openscriptures/HebrewLexicon.git
+python3 build_original.py STEPBible-Data HebrewLexicon --check   # verse numbers against the BSB text
+python3 build_original.py STEPBible-Data HebrewLexicon           # writes docs/bible/ORIG/
+python3 add_study_scripts.py                                      # restamps original.js on every page
+```
+
+Both texts are numbered the English way (NRSV) in the source, so Malachi 4,
+the psalm titles and other Hebrew numbering differences need no mapping. Three
+places follow the KJV numbering instead, because the site's BSB text does:
+2 Corinthians 13:12–14, 3 John 14, and Revelation 12:18, which BSB prints as
+the start of 13:1 (`KJV_NUMBERING`). `--check` should report 0 differences.
+
 ## Study features: accounts, streaks, notes, plans, friends, labels
 
 All optional; everything works on the device with no account, and syncs to
@@ -554,6 +611,7 @@ Supabase when signed in (tables and privacy tests in `supabase/`).
 | `docs/site/plans.js` + `plans-data.js` | reading plans (`build_plans.py` writes the data and checks it) |
 | `docs/site/chapter-notes.js` | the Notes study tab on chapter pages (write, edit, delete notes on the chapter or a verse; same notes as `notes.html`) |
 | `docs/site/translations.js` | other-language Bibles |
+| `docs/site/original.js` | Hebrew and Greek: word by word, lexicon, reading pane (see Original languages above) |
 | `docs/site/i18n.js` + `site/i18n/*.json` | buttons and labels in the reader's language (`i18n_strings.py`) |
 | `docs/plans.html`, `docs/notes.html`, `docs/friends.html`, `docs/privacy.html` | pages (`plans.html` is the app's Plans tab; on the website the plan card stays on the home page) |
 | `push-worker/worker.js` | devotional reminders, the 7 PM streak reminder (`/studied`, `/message`, `/preferences`), and friend alerts: `/link` and `/unlink` tie a device to a signed-in account, `/notify` (called with the sender's Supabase token) queues a "friend request" or "shared a verse/note" push to their friends' devices, recipients found through `friends_list()`; `/plan` stores the next reading-plan reading, which `/message` adds to the daily devotional push once a day (not before its `readyOn` date) |

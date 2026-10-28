@@ -412,6 +412,10 @@
                 }).catch(function () { shareBtn.disabled = false; alert(T('sheet.sharefail', 'Could not share right now. Try again in a moment.')); });
             });
         }
+        // Buttons other scripts add to the sheet (original.js: Hebrew / Greek word by word).
+        var extras = (window.BibleSheetExtras || []).map(function (make) {
+            try { return make({ book: here.book, chapter: here.chapter, verses: selected.slice(), close: closeSheet }); } catch (e) { return null; }
+        });
         var clear = anyMark ? el('button', { type: 'button', class: 'bs-act' }, [el('i', { class: 'fas fa-eraser', 'aria-hidden': 'true' }), T('sheet.clear', 'Clear')]) : null;
         if (clear) clear.addEventListener('click', function () { applyToSelection({ c: null, b: false }); closeSheet(); });
         var x = el('button', { type: 'button', class: 'bs-x', 'aria-label': 'Close' }, ['×']);
@@ -428,7 +432,7 @@
 
         var inner = el('div', { class: 'bs-sheet-in', role: 'dialog', 'aria-label': 'Highlight ' + refText(here.book, here.chapter, selected) }, [
             el('div', { class: 'bs-sheet-top' }, [el('span', { class: 'bs-sheet-ref', text: refText(here.book, here.chapter, selected) }), x]),
-            el('div', { class: 'bs-row' }, dots.concat([bm, noteBtn, shareBtn, clear])),
+            el('div', { class: 'bs-row' }, dots.concat([bm, noteBtn, shareBtn]).concat(extras).concat([clear])),
             note
         ]);
         if (!sheet) { sheet = el('div', { class: 'bs-sheet' }); document.body.appendChild(sheet); }
