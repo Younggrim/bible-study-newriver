@@ -113,6 +113,14 @@ DROP_VIDEO_IDS = {
     "K3fAFvIwGpw": "The Chosen 'We're Taking You Home' -- promo, not teaching",
     "g4QGA1QFqmw": "The Chosen 'Jesus Prays in the Garden of Gethsemane' scene -- drama clip, not teaching",
     "PCT1WPvRFaE": "Wes Huff tribute to Dr. Parker -- personal, not teaching",
+    "2SV0ua-tf9Y": "David Guzik 'Mount Gerizim: The Mountain of Blessing' -- Israel travel episode, no passage in the title",
+    "INrY9NPe4Hs": "David Guzik 'What Makes a Great Leader? Lead Like Jesus Ep. 2' -- no passage",
+    "LSEvFe5eTt0": "GotQuestions 'Should Christians celebrate Halloween?' -- no passage",
+    "jG5oEt4FBMM": "GotQuestions 'Rethinking Christianity' -- podcast episode",
+    "7oBj_y4jCjE": "Mike Winger theology quiz, 10 Qs Ep 83 -- not teaching",
+    "hsF9ibAxJAk": "The Chosen 'Open the Well' lyric video -- a music video",
+    "GQ8aIUOUsn4": "The Chosen 'Exile' lyric video -- a music video",
+    "mJMkFkjcH_w": "The Chosen 'Follow Me' lyric video -- a music video",
 }
 
 FACADE_OPEN = '<div class="yt-facade"'
