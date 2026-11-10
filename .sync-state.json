@@ -1,9 +1,9 @@
 {
   "upstream_commit": "85be1f17f55ad727f0da58931059835c43cbba9b Weekly review 2026-11-03: 2 articles and 2 videos added, 7 articles and 8 videos dropped",
   "upstream_fingerprints": {
-    "site/style.css": "cbe82332",
-    "site/script.js": "dc18a571"
+    "site/style.css": "537aeb03",
+    "site/script.js": "ec2e9c7d"
   },
-  "style_css_v": "564667b7",
-  "script_js_v": "7d10e7d1"
+  "style_css_v": "f6d2b659",
+  "script_js_v": "5ff568b3"
 }

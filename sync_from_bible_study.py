@@ -79,6 +79,26 @@ PRESERVE = {
     "site/icon-512.png",
 }
 
+# Directories whose files are New River's own, kept file by file. The share cards
+# in site/share carry the same names as upstream's (the mirrored HTML points at
+# them) but use this site's palette, name and domain, so upstream's brown ones
+# must never overwrite them. Regenerate with make_cards.py (see WORKFLOW.md).
+PRESERVE_DIRS = ["site/share"]
+
+# Upstream-only files that carry bible-study's branding and that this site's own
+# manifest does not reference; dropped after the copy so they are not published.
+UPSTREAM_ONLY = ["site/icon-maskable-512.png"]
+
+
+def preserved_paths():
+    """PRESERVE plus every file currently in a PRESERVE_DIRS directory."""
+    found = set(PRESERVE)
+    for d in PRESERVE_DIRS:
+        base = os.path.join(DOCS_DIR, d)
+        if os.path.isdir(base):
+            found |= {f"{d}/{n}" for n in os.listdir(base)}
+    return found
+
 # Root-level files, outside docs/, that must match upstream exactly. These are
 # shared tooling and documentation rather than deployment-specific, and keeping
 # them in step by hand does not work: WORKFLOW.md drifted once because an edit
@@ -267,7 +287,7 @@ def mirror_shared_root(repo_root):
 def snapshot_preserved():
     """Read the New River files that must survive the mirror."""
     kept = {}
-    for rel in PRESERVE:
+    for rel in preserved_paths():
         p = os.path.join(DOCS_DIR, rel)
         if os.path.isfile(p):
             kept[rel] = open(p, "rb").read()
@@ -327,6 +347,17 @@ def main():
                 f"upstream {rel} changed since the last sync ({was} -> {h}); "
                 f"review whether New River's copy needs the same edit")
 
+    for d in PRESERVE_DIRS:
+        up = os.path.join(src_docs, d)
+        here = os.path.join(DOCS_DIR, d)
+        have = set(os.listdir(here)) if os.path.isdir(here) else set()
+        lacking = sorted(set(os.listdir(up)) - have) if os.path.isdir(up) else []
+        if lacking:
+            warnings.append(
+                f"upstream has {len(lacking)} file(s) in {d}/ that New River lacks "
+                f"({', '.join(lacking[:3])}{'...' if len(lacking) > 3 else ''}); "
+                f"upstream's will be used until they are generated here (make_cards.py nr)")
+
     neutral_problems = check_theme_neutral(src_docs)
 
     if check:
@@ -358,6 +389,10 @@ def main():
         shutil.rmtree(DOCS_DIR)
     shutil.copytree(src_docs, DOCS_DIR)
     restore_preserved(kept)
+    for rel in UPSTREAM_ONLY:
+        fp = os.path.join(DOCS_DIR, rel)
+        if os.path.isfile(fp):
+            os.remove(fp)
 
     shared = mirror_shared_root(src_root)
 

@@ -47,6 +47,10 @@ palette through CSS custom properties in `docs/site/style.css`:
 | `--text-list` | `#4a3f35` | `#333333` |
 | `--text-on-dark` | `#f5ebe0` | `#f2f2f2` |
 | `--prayer-gradient` | brown ramp | grey ramp |
+| `--banner-bg` | `#33241a` | `#171717` |
+| `--banner-gold` | `#e9c46f` | `#c9a96e` |
+| `--banner-line` | `rgba(233,196,111,0.34)` | `rgba(201,169,110,0.40)` |
+| `--banner-ring` | `rgba(233,196,111,0.55)` | `rgba(201,169,110,0.60)` |
 
 The last eight are the neutrals of the topical, life-study, home and 404 pages,
 which carry their own `<style>` blocks. Until 25 Sep they were literals, so New
@@ -134,6 +138,38 @@ cannot be expressed in CSS: page `<title>` suffix, `theme-color` meta, favicon
 `<link>` tags, the Cinzel font in the Google Fonts URL, and the nav brand with
 the dove logo.
 
+## Banners, icons and share cards
+
+**Study-page banners** are a dark panel (`--banner-bg`) with a gold line emblem
+in a ring, not a photo. The emblem is inline SVG, drawn in `emblems.py` and keyed
+by page filename; stroke width, colour and size come from `.hero-emblem` in
+`site/style.css`, so the same markup is gold-on-brown here and gold-on-black on
+New River. To add a study page: draw its emblem in `emblems.py`, put
+`<div class="hero-emblem">` (see any study page) first inside `.topic-hero`, then
+regenerate the cards. The home page and the Topical and Life indexes still show
+a photo, with the same dark panel and an emblem behind it as the fallback when
+the photo cannot load.
+
+**Share cards** are 1200x630 PNGs in `docs/site/share/`, one per study page plus
+`default.png`, which every other page uses. `add_seo_meta.py` points each page's
+`og:image` at its own card if one exists. They are palette- and brand-specific,
+so New River keeps its own set (`site/share/` is a preserved directory in
+`sync_from_bible_study.py`; the files have the same names so the mirrored HTML
+needs no rewrite). Regenerate both sets after adding or retitling a page:
+
+```bash
+python3 make_cards.py bs docs docs/site/share
+python3 make_cards.py nr docs ../bible-study-newriver/docs/site/share ../bible-study-newriver/docs
+```
+
+**App icon** (`site/icon-*.png`, `favicon.ico`) is drawn once in `make_icons.py`
+and is bible-study only. New River's icons and favicons are its church's white
+dove and stay as they are.
+
+**Tab-bar icons** are inline SVG in `site/script.js`, so the installed app's
+navigation does not depend on the icon-font CDN. That file is per-site: edit it
+in both repos.
+
 ## Changing content
 
 All content changes go to **bible-study** first. Then mirror.
@@ -160,7 +196,7 @@ it twice produces byte-identical trees.
 
 **Never edit `bible-study-newriver/docs/*.html` directly.** The next sync
 discards it. The only New River files you edit by hand are the 12 preserved
-ones listed above.
+ones listed above, plus the share cards in `docs/site/share/` (see below).
 
 ## Adding videos
 

@@ -491,17 +491,17 @@ onChapterChange(sortVideos);
     nav.className = 'pwa-bottom-nav pwa-six';
     nav.innerHTML = ''
         + '<a class="pwa-nav-item' + (section==='bible'?' active':'') + '" data-section="bible" href="#">'
-        + '<i class="fas fa-book-bible"></i><span>Bible</span></a>'
+        + '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M5 5A2 2 0 0 1 7 3H19V21H7A2 2 0 0 1 5 19Z"/><path d="M12 7V14.5"/><path d="M9.2 9.7H14.8"/></svg><span>Bible</span></a>'
         + '<a class="pwa-nav-item' + (section==='topical'?' active':'') + '" data-section="topical" href="#">'
-        + '<i class="fas fa-lightbulb"></i><span>Topical</span></a>'
+        + '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M12 3A6 6 0 0 0 8.4 13.8C9.1 14.4 9.5 15.2 9.5 16H14.5C14.5 15.2 14.9 14.4 15.6 13.8A6 6 0 0 0 12 3Z"/><path d="M9.5 18.5H14.5"/><path d="M10.5 21H13.5"/></svg><span>Topical</span></a>'
         + '<a class="pwa-nav-item' + (section==='life'?' active':'') + '" data-section="life" href="#">'
-        + '<i class="fas fa-heart"></i><span>Life</span></a>'
+        + '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M12 20C5.5 15.4 3 12 3 8.6A4.6 4.6 0 0 1 12 6.6A4.6 4.6 0 0 1 21 8.6C21 12 18.5 15.4 12 20Z"/></svg><span>Life</span></a>'
         + '<a class="pwa-nav-item' + (section==='plans'?' active':'') + '" data-section="plans" href="#">'
-        + '<i class="fas fa-calendar-check"></i><span>Plans</span></a>'
+        + '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10H20"/><path d="M8 3V7"/><path d="M16 3V7"/><path d="M9 15.5L11.2 17.7L15.2 13.3"/></svg><span>Plans</span></a>'
         + '<a class="pwa-nav-item' + (section==='devotional'?' active':'') + '" data-section="devotional" id="pwa-devotional-btn" href="#">'
-        + '<i class="fas fa-hands-praying"></i><span>Devotional</span></a>'
+        + '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M3 18H21"/><path d="M7 18A5 5 0 0 1 17 18"/><path d="M12 6V9"/><path d="M5 10.5L7 12.5"/><path d="M19 10.5L17 12.5"/><path d="M8 21.5H16"/></svg><span>Devotional</span></a>'
         + '<a class="pwa-nav-item' + (section==='memory'?' active':'') + '" data-section="memory" href="#">'
-        + '<i class="fas fa-brain"></i><span>Memory</span></a>';
+        + '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 15V6A2 2 0 0 1 6 4H15"/><path d="M11.5 13H16.5"/><path d="M11.5 16H14.5"/></svg><span>Memory</span></a>';
     document.body.appendChild(nav);
 
     // Tab click handling

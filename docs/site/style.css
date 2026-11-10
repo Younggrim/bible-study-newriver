@@ -37,6 +37,11 @@
     --text-list: #333333;     /* verse-list text */
     --text-on-dark: #f2f2f2;  /* light text over dark hero images */
     --prayer-gradient: linear-gradient(180deg, #0d0d0d 0%, #1a1a1a 15%, var(--ink-deep) 40%, #262626 60%, #404040 72%, #7a7a7a 82%, #c4c4c4 90%, #f0f0f0 96%, #fafafa 100%);
+    /* banners: a dark panel with gold line work (study pages, home, share cards) */
+    --banner-bg: #171717;
+    --banner-gold: #c9a96e;
+    --banner-line: rgba(201,169,110,0.40);
+    --banner-ring: rgba(201,169,110,0.60);
 }
 
 body {
@@ -827,3 +832,25 @@ body.pwa-standalone .pwa-bible-nav { display: block; }
 .pwa-bottom-nav.pwa-six .pwa-nav-item { flex: 1 1 0; min-width: 0; padding: 6px 1px; overflow: hidden; }
 .pwa-bottom-nav.pwa-six .pwa-nav-item i { font-size: 1.1rem; }
 .pwa-bottom-nav.pwa-six .pwa-nav-item span { font-size: clamp(8.5px, 2.5vw, 10px); letter-spacing: -0.01em; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+
+/* ===== Banners: gold emblem on a dark panel =====
+   The panel colour is also the fallback when a photo does not load. */
+.topic-hero, .hero-section, .section-hero { background: var(--banner-bg); }
+.topic-hero::before { content: ""; position: absolute; inset: 10px; border: 1px solid var(--banner-line); border-radius: 8px; pointer-events: none; }
+.hero-emblem { width: 76px; height: 76px; margin: 0 auto 14px; border: 1.5px solid var(--banner-ring); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--banner-gold); position: relative; z-index: 1; }
+.hero-emblem svg { width: 46px; height: 46px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.hero-section .hero-emblem { width: 84px; height: 84px; }
+.hero-section .hero-emblem svg { width: 52px; height: 52px; }
+.topic-hero .hero-desc { color: var(--text-on-dark); font-size: 0.95rem; max-width: 600px; margin: 8px auto 0; line-height: 1.7; }
+@media (max-width: 768px) {
+    .hero-emblem { width: 64px; height: 64px; }
+    .hero-emblem svg { width: 38px; height: 38px; }
+    .hero-section .hero-emblem { width: 72px; height: 72px; }
+    .hero-section .hero-emblem svg { width: 44px; height: 44px; }
+}
+
+/* ===== Bottom tab bar: inline svg icons (no icon-font download needed) ===== */
+.pwa-nav-item svg { width: 22px; height: 22px; flex: none; margin-bottom: 3px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; color: #707070; transition: color 0.15s; }
+.pwa-nav-item.active svg { color: #c0392b; }
+.pwa-nav-item:hover svg { color: #000000; }
+.pwa-bottom-nav.pwa-six .pwa-nav-item svg { width: 21px; height: 21px; }
