@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "fa06edc843c33e649fdad7f05448b66adeb4535e Replace Font Awesome with self-hosted icons",
+  "upstream_commit": "ac1a6827932e4d40d53ee1f1e6752631aaf8b512 Weekly review 2026-11-10: 2 articles and 5 videos added, 8 articles and 22 videos dropped",
   "upstream_fingerprints": {
     "site/style.css": "78f10acd",
     "site/script.js": "ec2e9c7d"
