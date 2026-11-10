@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "ac1a6827932e4d40d53ee1f1e6752631aaf8b512 Weekly review 2026-11-10: 2 articles and 5 videos added, 8 articles and 22 videos dropped",
+  "upstream_commit": "05834e8bd45feb7ee69b42a41f9472a580a36577 Skip non-teaching uploads in the weekly video check; update and lengthen the Pages deploy",
   "upstream_fingerprints": {
     "site/style.css": "78f10acd",
     "site/script.js": "ec2e9c7d"

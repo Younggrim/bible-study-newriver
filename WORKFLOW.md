@@ -404,6 +404,15 @@ watched is decided entirely by those files, so one script serves both repos:
 - `bible-study-newriver` watches **New River Church only**. Approved videos go
   into `docs/newriver-videos.json` and never go upstream.
 
+In `bible-study`, some uploads are skipped before the weekly list and recorded
+as seen, the same way Shorts are: lyric videos, podcast episodes, live Q&As and
+live streams, trailers and recaps, travel updates ("Israel 2025 - Part N", "Japan
+Trip Update"), "10 Qs" episodes and Chosen drama scenes. None of these was ever
+approved in a weekly review. A title that also names a passage ("…John 3? LIVE
+Q&A") is still listed. The patterns are `NOISE_TITLE` in `check_new_videos.py`,
+and the run's stderr lists every video skipped this way. New River's copy of
+the script has no such filter, so "The Overflow Podcast" sermons are unaffected.
+
 **Check 2 -- dead links.** `check_video_links.py` asks YouTube whether each
 referenced video still plays using the oEmbed endpoint. No API key, no quota:
 
