@@ -1,9 +1,9 @@
 {
-  "upstream_commit": "85be1f17f55ad727f0da58931059835c43cbba9b Weekly review 2026-11-03: 2 articles and 2 videos added, 7 articles and 8 videos dropped",
+  "upstream_commit": "0386217724ac18412116db6fb6ef4ad7815c0de3 Banners, app icons and share cards redesign",
   "upstream_fingerprints": {
-    "site/style.css": "537aeb03",
+    "site/style.css": "78f10acd",
     "site/script.js": "ec2e9c7d"
   },
-  "style_css_v": "f6d2b659",
+  "style_css_v": "327e4ed7",
   "script_js_v": "5ff568b3"
 }
