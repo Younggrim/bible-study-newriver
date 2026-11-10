@@ -166,6 +166,14 @@ python3 make_cards.py nr docs ../bible-study-newriver/docs/site/share ../bible-s
 and is bible-study only. New River's icons and favicons are its church's white
 dove and stay as they are.
 
+**Small icons** (`<i class="fas fa-book">` and friends) no longer come from Font
+Awesome. `make_icon_css.py` draws the ~35 icons in use and writes them into
+`site/style.css` as CSS masks under the same class names, so markup and scripts
+are unchanged and nothing loads from a CDN. To use a new icon, add its drawing to
+`ICONS` in that script and run it on both sites' `style.css`:
+`python3 make_icon_css.py docs/site/style.css ../bible-study-newriver/docs/site/style.css`.
+An `fa-` class with no drawing shows nothing, so check new pages for blank icons.
+
 **Tab-bar icons** are inline SVG in `site/script.js`, so the installed app's
 navigation does not depend on the icon-font CDN. That file is per-site: edit it
 in both repos.
