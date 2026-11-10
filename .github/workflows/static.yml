@@ -32,3 +32,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          # GitHub's default is 10 minutes. On 2026-11-10 this site's publish
+          # step ran past that four times in a row while bible-study's deploy
+          # of the same size finished in time, so allow it 30.
+          timeout: 1800000
