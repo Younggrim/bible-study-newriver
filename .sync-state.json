@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "05834e8bd45feb7ee69b42a41f9472a580a36577 Skip non-teaching uploads in the weekly video check; update and lengthen the Pages deploy",
+  "upstream_commit": "66a6da6027771f7c4c027f17500b67b098291f16 Home-screen icon, book share cards, offline page, contrast fixes, site checker",
   "upstream_fingerprints": {
     "site/style.css": "5b82df12",
     "site/script.js": "43c93b9f"
