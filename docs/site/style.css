@@ -11,7 +11,7 @@
     --text-muted: #6e6e6e;
     --accent-gold: #b8860b;
     --accent-gold-light: #c9a96e;
-    --accent-brown: #b8860b;
+    --accent-brown: #85600a;
     --border-light: #e2e2e2;
     --border-medium: #cccccc;
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
@@ -622,7 +622,7 @@ body.pwa-standalone .pwa-bottom-nav {
     font-family: 'Inter', sans-serif;
     font-size: 0.65rem;
     font-weight: 600;
-    color: #707070;
+    color: #8a8a8a;
     transition: color 0.15s;
 }
 
@@ -850,7 +850,7 @@ body.pwa-standalone .pwa-bible-nav { display: block; }
 }
 
 /* ===== Bottom tab bar: inline svg icons (no icon-font download needed) ===== */
-.pwa-nav-item svg { width: 22px; height: 22px; flex: none; margin-bottom: 3px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; color: #707070; transition: color 0.15s; }
+.pwa-nav-item svg { width: 22px; height: 22px; flex: none; margin-bottom: 3px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; color: #8a8a8a; transition: color 0.15s; }
 .pwa-nav-item.active svg { color: #c0392b; }
 .pwa-nav-item:hover svg { color: #000000; }
 .pwa-bottom-nav.pwa-six .pwa-nav-item svg { width: 21px; height: 21px; }
@@ -902,3 +902,6 @@ body.pwa-standalone .pwa-bible-nav { display: block; }
 
 /* the menu button sat black on the black header */
 .top-nav .hamburger { color: var(--text-on-dark); }
+
+/* faint text that sits directly on the black page needs a lighter grey than the same token on white cards */
+body footer p, body footer a, body footer small, body .og-keys-head b, body .og-keys-head span, body .chapter-nav-arrows > span { color: #8a8a8a !important; }

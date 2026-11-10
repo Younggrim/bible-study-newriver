@@ -162,6 +162,24 @@ python3 make_cards.py bs docs docs/site/share
 python3 make_cards.py nr docs ../bible-study-newriver/docs/site/share ../bible-study-newriver/docs
 ```
 
+Chapter pages share one card per book (`book-<name>.png`, 66 of them, made by
+the same script), and `add_seo_meta.py` picks the right one by filename.
+
+**Home-screen icon on iPhone** is `site/apple-touch-icon.png` (180px), linked from
+every page. Redo it from `icon-512.png` if the app icon changes (New River keeps
+its own, preserved in the sync).
+
+**Offline.** `sw.js` stores the app shell when it installs and serves
+`offline.html` for a page that was never opened and cannot be fetched. Pages that
+were opened before keep working. ESV text is cached passage by passage as before.
+
+**Checks.** `python3 check_site.py docs` (and the New River `docs`) lists icons
+used but not drawn, missing preview images, banners without an emblem, missing
+linked files and service-worker entries that do not exist. Run it before pushing.
+Colour contrast on the main pages was checked with axe-core (WCAG AA); keep text
+colours on the tokens in `site/style.css` rather than new literals so they stay
+that way.
+
 **App icon** (`site/icon-*.png`, `favicon.ico`) is drawn once in `make_icons.py`
 and is bible-study only. New River's icons and favicons are its church's white
 dove and stay as they are.

@@ -1,9 +1,9 @@
 {
   "upstream_commit": "05834e8bd45feb7ee69b42a41f9472a580a36577 Skip non-teaching uploads in the weekly video check; update and lengthen the Pages deploy",
   "upstream_fingerprints": {
-    "site/style.css": "78f10acd",
-    "site/script.js": "ec2e9c7d"
+    "site/style.css": "5b82df12",
+    "site/script.js": "43c93b9f"
   },
-  "style_css_v": "327e4ed7",
-  "script_js_v": "5ff568b3"
+  "style_css_v": "5e53edc4",
+  "script_js_v": "9f95ac62"
 }

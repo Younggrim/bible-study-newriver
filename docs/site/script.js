@@ -278,7 +278,7 @@ function sortVideos() {
         var videos = videoTab.querySelectorAll('.yt-facade');
         if (videos.length > 0) {
             var h3 = videoTab.querySelector('h3');
-            if (h3) h3.innerHTML = 'Videos (' + videos.length + ') <span style="font-size:0.75rem;color:#8a7e74;font-weight:400;"> — tap thumbnails to play</span>';
+            if (h3) h3.innerHTML = 'Videos (' + videos.length + ') <span style="font-size:0.75rem;color:#6f645b;font-weight:400;"> — tap thumbnails to play</span>';
 
             // Sort videos by verse reference in title
             var videoArray = Array.from(videos);
@@ -642,7 +642,7 @@ onChapterChange(sortVideos);
             var h3 = tabVideos.querySelector('h3');
             if (h3) {
                 var count = tabVideos.querySelectorAll('.yt-facade').length;
-                h3.innerHTML = 'Videos (' + count + ') <span style="font-size:0.75rem;color:#8a7e74;font-weight:400;"> — tap thumbnails to play</span>';
+                h3.innerHTML = 'Videos (' + count + ') <span style="font-size:0.75rem;color:#6f645b;font-weight:400;"> — tap thumbnails to play</span>';
             }
         })
         .catch(function() { /* no overlay file on this deployment — expected */ });

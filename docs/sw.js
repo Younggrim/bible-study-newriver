@@ -8,12 +8,16 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME).then(cache => {
       return cache.addAll([
         '/index.html',
+        // Shown instead of the browser's own error page when a page that was
+        // never opened before is requested with no connection.
+        '/offline.html',
         '/site/style.css',
         '/site/script.js',
         // The Map & Geography basemap. Precached so the maps survive going
         // offline, which is the reason it is self-hosted vector data rather
         // than tiles from a service.
-        '/site/mapgeo.js'
+        '/site/mapgeo.js',
+        '/site/icon-192.png'
       ]);
     })
   );
@@ -86,7 +90,14 @@ self.addEventListener('fetch', event => {
         }
         return response;
       })
-      .catch(() => caches.match(req))
+      .catch(async () => {
+        // Offline. Pages ask for style.css?v=NN while the install step stored the
+        // plain name, so ignore the query when looking for a saved copy.
+        const hit = (await caches.match(req)) || (await caches.match(req, { ignoreSearch: true }));
+        if (hit) return hit;
+        if (req.mode === 'navigate') return caches.match('/offline.html');
+        return Response.error();
+      })
   );
 });
 

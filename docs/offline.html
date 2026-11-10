@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="site/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="site/favicon-16.png">
+    <link rel="apple-touch-icon" href="site/apple-touch-icon.png"><meta name="theme-color" content="#000000">
+    <title>Offline — New River Bible Study</title>
+    <link rel="stylesheet" href="site/style.css?v=5e53edc4">
+    <style>
+        body { background: var(--bg-page); margin: 0; }
+        .off { padding: 0 0 48px; }
+        .topic-hero { position: relative; overflow: hidden; padding: 48px 36px; text-align: center; }
+        .topic-hero h1 { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 2rem; color: #fff; margin: 0 0 8px; }
+        .off-card { max-width: 560px; box-sizing: border-box; margin: 24px auto 0; padding: 22px 20px; background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; font-family: 'Inter', -apple-system, sans-serif; color: var(--text-body); line-height: 1.6; }
+        .off-card p { margin: 0 0 14px; }
+        .off-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+        .off-btn { font: inherit; font-weight: 600; padding: 10px 18px; border-radius: 8px; border: 0; background: var(--accent-link); color: #fff; cursor: pointer; text-decoration: none; }
+        .off-btn.alt { background: transparent; color: var(--accent-link); border: 1.5px solid var(--accent-link); }
+            @media (max-width: 600px) { .off-card { margin: 20px 16px 0; } .topic-hero { padding: 32px 16px; } }
+    </style>
+</head>
+<body>
+<main class="off">
+    <div class="topic-hero">
+        <div class="hero-emblem" aria-hidden="true"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 24c14-8 38-8 48 0"/><path d="M15 33c9-5 25-5 34 0"/><path d="M23 42c5-3 13-3 18 0"/><circle cx="32" cy="51" r="2.4"/></svg></div>
+        <h1>You're offline</h1>
+        <p class="hero-desc">This page needs a connection.</p>
+    </div>
+    <div class="off-card">
+        <p>Chapters you have already opened are saved on this device, so they can still be read. Anything new needs the internet.</p>
+        <div class="off-actions">
+            <button class="off-btn" type="button" onclick="location.reload()">Try again</button>
+            <a class="off-btn alt" href="index.html">Go to the home page</a>
+        </div>
+    </div>
+</main>
+</body>
+</html>

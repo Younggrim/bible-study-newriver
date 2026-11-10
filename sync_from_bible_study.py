@@ -77,6 +77,7 @@ PRESERVE = {
     "site/favicon-32.png",
     "site/icon-192.png",
     "site/icon-512.png",
+    "site/apple-touch-icon.png",
 }
 
 # Directories whose files are New River's own, kept file by file. The share cards
