@@ -150,6 +150,12 @@ regenerate the cards. The home page and the Topical and Life indexes still show
 a photo, with the same dark panel and an emblem behind it as the fallback when
 the photo cannot load.
 
+**Home and index photos** are self-hosted in `docs/site/img/` (three widths each,
+reading-bible, library, sunset-figure, sunset-sea) and are no longer loaded from
+Unsplash. How dark or tinted they are comes from `--photo-filter` in each site's
+`style.css` (brown-tinted here, grey on New River), plus a light scrim, so no page
+carries its own filter.
+
 **Share cards** are 1200x630 PNGs in `docs/site/share/`, one per study page plus
 `default.png`, which every other page uses. `add_seo_meta.py` points each page's
 `og:image` at its own card if one exists. They are palette- and brand-specific,

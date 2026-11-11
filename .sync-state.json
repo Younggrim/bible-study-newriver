@@ -1,9 +1,9 @@
 {
   "upstream_commit": "66a6da6027771f7c4c027f17500b67b098291f16 Home-screen icon, book share cards, offline page, contrast fixes, site checker",
   "upstream_fingerprints": {
-    "site/style.css": "5b82df12",
+    "site/style.css": "5b47d4c2",
     "site/script.js": "43c93b9f"
   },
-  "style_css_v": "5e53edc4",
+  "style_css_v": "d27d8a95",
   "script_js_v": "9f95ac62"
 }
