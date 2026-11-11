@@ -1,9 +1,9 @@
 {
-  "upstream_commit": "66a6da6027771f7c4c027f17500b67b098291f16 Home-screen icon, book share cards, offline page, contrast fixes, site checker",
+  "upstream_commit": "d3958f4ca423c9d0adbc93d40e424cbb00723050 Deep dive: Revelation 1",
   "upstream_fingerprints": {
-    "site/style.css": "5b47d4c2",
-    "site/script.js": "43c93b9f"
+    "site/style.css": "255556be",
+    "site/script.js": "3bfc97b6"
   },
-  "style_css_v": "d27d8a95",
-  "script_js_v": "9f95ac62"
+  "style_css_v": "813580c9",
+  "script_js_v": "92c3ab25"
 }

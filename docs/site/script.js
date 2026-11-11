@@ -84,7 +84,91 @@ if ('serviceWorker' in navigator) {
   }
 })();
 
+/* Study / Reflect (Nov 2026). The chapter pages keep their seven panes in the
+   HTML, so every build and sync script still finds tab-summary, tab-videos and
+   the rest. Here the bar is folded into two buttons: Study shows the Summary,
+   Authorship & Background, Map, Deep Dive and Commentary panes stacked, and
+   Reflect shows Reflection, Videos, Articles and Notes. The original buttons
+   stay in the bar, hidden by style.css, so i18n.js and anything that calls
+   switchTab('videos') keep working. Keep this identical in both repos. */
+var TAB_GROUPS = {
+    study: ['summary', 'authorship', 'mapgeo', 'deepdive', 'commentary'],
+    reflect: ['reflection', 'videos', 'articles', 'notes']
+};
+var currentTabGroup = 'study';
+function tabGroupOf(id) {
+    if (TAB_GROUPS[id]) return id;
+    for (var g in TAB_GROUPS) if (TAB_GROUPS[g].indexOf(id) >= 0) return g;
+    return null;
+}
+function paneGroupOf(pane) { return tabGroupOf((pane.id || '').replace(/^tab-/, '')); }
+function orderTabPanes() {
+    // Reflect panes in their order, right after the last Study pane, then the chapter arrows.
+    var bar = document.querySelector('.study-tabs[data-grouped]');
+    if (!bar) return;
+    var anchor = null;
+    TAB_GROUPS.study.forEach(function (id) { var p = document.getElementById('tab-' + id); if (p) anchor = p; });
+    if (!anchor) return;
+    TAB_GROUPS.reflect.forEach(function (id) {
+        var p = document.getElementById('tab-' + id);
+        if (!p) return;
+        if (anchor.nextElementSibling !== p) anchor.parentNode.insertBefore(p, anchor.nextElementSibling);
+        anchor = p;
+    });
+    var arrows = document.querySelector('.chapter-nav-arrows');
+    if (arrows && arrows.parentNode === anchor.parentNode && anchor.nextElementSibling !== arrows)
+        anchor.parentNode.insertBefore(arrows, anchor.nextElementSibling);
+}
+function showTabGroup(g) {
+    currentTabGroup = g;
+    document.querySelectorAll('.study-tab').forEach(function (t) {
+        t.classList.toggle('active', t.classList.contains('study-group') && t.dataset.tab === g);
+    });
+    document.querySelectorAll('.tab-content').forEach(function (p) {
+        p.classList.toggle('active', paneGroupOf(p) === g);
+    });
+}
+function groupStudyTabs() {
+    var bar = document.querySelector('.study-tabs');
+    if (!bar || bar.hasAttribute('data-grouped') || !document.getElementById('tab-summary')) return;
+    bar.setAttribute('data-grouped', '1');
+    bar.parentNode.classList.add('tabs-grouped');
+    [['reflect', 'Reflect'], ['study', 'Study']].forEach(function (b) {
+        var btn = document.createElement('div');
+        btn.className = 'study-tab study-group';
+        btn.setAttribute('data-tab', b[0]);
+        btn.textContent = b[1];
+        bar.insertBefore(btn, bar.firstChild);
+    });
+    orderTabPanes();
+    showTabGroup('study');
+    // Notes (chapter-notes.js) adds its pane after this runs: keep the order and the active group.
+    var busy = false;
+    new MutationObserver(function () {
+        if (busy) return;
+        busy = true;
+        orderTabPanes();
+        document.querySelectorAll('.tab-content').forEach(function (p) {
+            var on = paneGroupOf(p) === currentTabGroup;
+            if (p.classList.contains('active') !== on) p.classList.toggle('active', on);
+        });
+        busy = false;
+    }).observe(bar.parentNode, { childList: true });
+}
+
 function switchTab(tabId) {
+    if (document.querySelector('.study-tabs[data-grouped]')) {
+        var g = tabGroupOf(tabId);
+        if (g) {
+            showTabGroup(g);
+            // Asked for one pane (e.g. Notes): bring it into view inside its group.
+            if (!TAB_GROUPS[tabId]) {
+                var pane = document.getElementById('tab-' + tabId);
+                if (pane && pane.scrollIntoView) pane.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            return;
+        }
+    }
     document.querySelectorAll('.study-tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     const tab = document.querySelector(`.study-tab[data-tab="${tabId}"]`);
@@ -92,6 +176,8 @@ function switchTab(tabId) {
     const content = document.getElementById('tab-' + tabId);
     if (content) content.classList.add('active');
 }
+groupStudyTabs();
+window.addEventListener('bible-chapter', groupStudyTabs);
 
 function toggleSidebar() {
     document.querySelector('.left-sidebar').classList.toggle('open');

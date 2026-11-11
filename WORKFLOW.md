@@ -1390,6 +1390,32 @@ book introductions carrying the same substance under more specific headings:
 makes the page worse. They still need verse-range sections like any other
 chapter.
 
+## Study / Reflect and the Deep Dive
+
+Chapter pages show **two** study buttons, Study and Reflect (Nov 2026). The HTML is
+unchanged apart from a new pane: every page still carries its `tab-summary`,
+`tab-authorship`, `tab-mapgeo`, `tab-commentary`, `tab-videos`, `tab-articles` and
+`tab-reflection` panes and their buttons, so every script above still finds them.
+`groupStudyTabs()` in `site/script.js` adds the two group buttons, hides the originals
+(`style.css`, `.tabs-grouped`), and shows each group's panes stacked:
+
+| button | panes, in order |
+|---|---|
+| Study | summary, authorship, mapgeo, deepdive, commentary |
+| Reflect | reflection, videos, articles, notes |
+
+Reflection is moved ahead of Videos at run time, and Notes (added by `chapter-notes.js`) is
+kept last. `switchTab('videos')` and the like still work; they open the pane's group and
+scroll to it. `site/script.js` and `site/style.css` are preserved by the sync, so **this code
+must be copied by hand into bible-study-newriver**. Keep the two copies identical.
+
+**The Deep Dive pane** (`tab-deepdive`) is a section-by-section study of the chapter, written
+from `deepdives/<slug>.md` by `add_deep_dives.py`. It sits before `tab-commentary`, and the
+Commentary pane's links serve as its sources. Format, sources and copyright rules are in
+`deepdives/README.md`, and the order to write them in is `deepdives/QUEUE.txt`.
+`python3 add_deep_dives.py --check` reports coverage. Labels `tab.study`, `tab.reflect` and
+`tab.deepdive` are in `i18n_strings.py`.
+
 ## Deploys
 
 Both repos deploy to GitHub Pages via `static.yml`, triggered only by a push to

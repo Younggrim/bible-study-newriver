@@ -386,6 +386,21 @@ body {
 
 .tab-content.active { display: block; }
 
+/* Study / Reflect (script.js groupStudyTabs): two buttons, panes stacked */
+.study-section.tabs-grouped .study-tab:not(.study-group) { display: none; }
+.study-section.tabs-grouped .tab-content.active ~ .tab-content.active { margin-top: 16px; }
+.tab-content#tab-deepdive h4 {
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--ink-deep);
+    margin: 22px 0 10px;
+}
+.tab-content#tab-deepdive h4:first-of-type { margin-top: 4px; }
+.tab-content#tab-deepdive .dd-setting { font-style: italic; }
+.tab-content#tab-deepdive .dd-commentators { border-left: 3px solid var(--rule-warm); padding-left: 12px; }
+.tab-content#tab-deepdive .dd-commentators::before { content: none; }
+
 .tab-content h3 {
     font-family: 'Poppins', 'Inter', sans-serif;
     font-weight: 700;

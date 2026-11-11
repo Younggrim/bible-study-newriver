@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:ital,wght@0,400;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="site/style.css?v=d27d8a95">
+    <link rel="stylesheet" href="site/style.css?v=813580c9">
     <style>
         /* Theme colors come from the tokens in site/style.css so the New River mirror picks up its palette. */
         body { background: var(--bg-page); }
@@ -73,7 +73,7 @@
         </div>
         <div id="frMain"><p class="fr-empty">Loading…</p></div>
     </main>
-    <script src="site/script.js?v=9f95ac62"></script>
+    <script src="site/script.js?v=92c3ab25"></script>
     <script src="site/account.js?v=436abb8e"></script>
     <script src="site/i18n.js?v=550ae1e3"></script>
     <script>
@@ -185,7 +185,7 @@
                 if (code.length !== 8) { addMsg.textContent = 'A friend code has 8 letters and numbers.'; return; }
                 addBtn.disabled = true; addMsg.textContent = '';
                 sb.rpc('friend_request', { friend_code: code }).then(must).then(function (r) {
-                    addMsg.textContent = { sent: 'Request sent. You will be friends once they accept.', accepted: 'You are now friends!', already: 'You are already connected (or a request is waiting).', self: 'That is your own code.', not_found: 'No one has that code. Check it and try again.' }[r] || '';
+                    addMsg.textContent = { sent: 'Request sent. You will be friends once they accept.', accepted: 'You are now friends!', already: 'You are already connected (or a request is waiting).', self: 'That is your own code.', not_found: 'No one has that code. Check it and try again.', blocked: 'You blocked this person. Unblock them at the bottom of this page first.' }[r] || '';
                     if (r === 'sent' || r === 'accepted') { addInput.value = ''; prefill = ''; try { history.replaceState(null, '', 'friends.html'); } catch (e) {} }
                     if (r === 'sent' && account.notifyFriends) account.notifyFriends('request');
                     loadLists();
@@ -212,9 +212,11 @@
         function loadLists() {
             if (!listsBox) return;
             Promise.all([sb.rpc('friends_list').then(must), sb.rpc('friends_feed', { max_items: 50 }).then(must),
-                         sb.from('shared_items').select('id,kind,ref,title,created_at').eq('removed', false).order('created_at', { ascending: false }).limit(20).then(must)])
+                         sb.from('shared_items').select('id,kind,ref,title,created_at').eq('removed', false).order('created_at', { ascending: false }).limit(20).then(must),
+                         // The blocked list is an extra: if it cannot be read, the rest of the page still shows.
+                         sb.rpc('friends_blocked').then(must).catch(function () { return []; })])
                 .then(function (res) {
-                    renderLists(res[0] || [], res[1] || [], res[2] || []);
+                    renderLists(res[0] || [], res[1] || [], res[2] || [], res[3] || []);
                     try { localStorage.setItem('bs-friends-seen', String(Date.now())); } catch (e) {}   // the home page counts shares newer than this
                 })
                 .catch(function (e) { listsBox.replaceChildren(el('div', { class: 'fr-card' }, [el('p', { class: 'fr-empty', text: failText(e) })])); });
@@ -227,7 +229,19 @@
             });
         }
 
-        function renderLists(people, feed, mine) {
+        // Blocking ends any friendship or request with that person and stops
+        // their future requests. They are not told.
+        function blockButton(p) {
+            var b = el('button', { type: 'button', class: 'fr-btn quiet small', text: 'Block' });
+            b.addEventListener('click', function () {
+                if (!confirm('Block ' + p.display_name + '? They will not be able to send you friend requests, and they are not told. You can unblock them at the bottom of this page.')) return;
+                b.disabled = true;
+                sb.rpc('friend_block', { other: p.friend }).then(must).then(loadLists).catch(function () { b.disabled = false; });
+            });
+            return b;
+        }
+
+        function renderLists(people, feed, mine, blocked) {
             var cards = [];
             var incoming = people.filter(function (p) { return p.status === 'pending' && p.incoming; });
             var outgoing = people.filter(function (p) { return p.status === 'pending' && !p.incoming; });
@@ -239,7 +253,7 @@
                     var no = el('button', { type: 'button', class: 'fr-btn small', text: 'Decline' });
                     act(yes, function () { return sb.rpc('friend_respond', { other: p.friend, accept: true }).then(must); });
                     act(no, function () { return sb.rpc('friend_respond', { other: p.friend, accept: false }).then(must); });
-                    return el('li', {}, [el('span', { class: 'fr-name', text: p.display_name }), el('span', { class: 'fr-row' }, [yes, no])]);
+                    return el('li', {}, [el('span', { class: 'fr-name', text: p.display_name }), el('span', { class: 'fr-row' }, [yes, no, blockButton(p)])]);
                 }))]));
 
             var fl = friends.length ? el('ul', { class: 'fr-list' }, friends.map(function (p) {
@@ -254,7 +268,7 @@
                     rm.disabled = true;
                     sb.rpc('friend_remove', { other: p.friend }).then(must).then(loadLists).catch(function () { rm.disabled = false; });
                 });
-                return el('li', {}, [el('span', {}, [el('span', { class: 'fr-name', text: p.display_name }), sub]), rm]);
+                return el('li', {}, [el('span', {}, [el('span', { class: 'fr-name', text: p.display_name }), sub]), el('span', { class: 'fr-row', style: 'flex-wrap:nowrap;flex-shrink:0' }, [rm, blockButton(p)])]);
             })) : el('p', { class: 'fr-empty', text: 'No friends yet. Share your code, or add a friend’s code above.' });
             cards.push(el('div', { class: 'fr-card' }, [el('p', { class: 'fr-eyebrow', text: 'Friends' + (friends.length ? ' (' + friends.length + ')' : '') }), fl]));
 
@@ -280,6 +294,12 @@
                     act(un, function () { return sb.from('shared_items').update({ removed: true }).eq('id', it.id).then(must); });
                     return el('li', {}, [el('span', {}, [el('span', { class: 'fr-name', text: it.title || refLabel(it.ref) || (it.kind === 'note' ? 'Note' : 'Verse') }),
                         el('span', { class: 'fr-sub', text: (it.kind === 'note' ? 'Note' : 'Verse') + (it.ref ? ' · ' + refLabel(it.ref) : '') })]), un]);
+                }))]));
+            if (blocked && blocked.length) cards.push(el('div', { class: 'fr-card' }, [el('p', { class: 'fr-eyebrow', text: 'Blocked' }),
+                el('ul', { class: 'fr-list' }, blocked.map(function (p) {
+                    var un = el('button', { type: 'button', class: 'fr-btn quiet small', text: 'Unblock' });
+                    act(un, function () { return sb.rpc('friend_unblock', { other: p.friend }).then(must); });
+                    return el('li', {}, [el('span', { class: 'fr-name', text: p.display_name || 'Someone you blocked' }), un]);
                 }))]));
             listsBox.replaceChildren.apply(listsBox, cards);
         }
