@@ -84,42 +84,50 @@ if ('serviceWorker' in navigator) {
   }
 })();
 
-/* Study / Reflect (Nov 2026). The chapter pages keep their seven panes in the
-   HTML, so every build and sync script still finds tab-summary, tab-videos and
-   the rest. Here the bar is folded into two group buttons, Study and Reflect,
-   with a second row of tabs for the cards in the open group: Study holds
-   Summary, Authorship & Background, Map, Deep Dive and Commentary, and Reflect
-   holds Reflection, Videos, Articles and Notes. One card shows at a time, and
-   each group remembers its last card. The original buttons stay in the bar
-   (they are the second row), so i18n.js and anything that calls
-   switchTab('videos') keep working. Keep this identical in both repos. */
-var TAB_GROUPS = {
-    study: ['summary', 'authorship', 'mapgeo', 'deepdive', 'commentary'],
-    reflect: ['reflection', 'videos', 'articles', 'notes']
-};
-var currentTabGroup = 'study';
-var currentTabInGroup = {};
-function tabGroupOf(id) {
-    if (TAB_GROUPS[id]) return id;
-    for (var g in TAB_GROUPS) if (TAB_GROUPS[g].indexOf(id) >= 0) return g;
-    return null;
+/* Chapter tabs (Nov 2026). One row of individual tabs, in this order:
+   Summary, Authorship & Background, Map & Geography, Deep Dive, Commentary,
+   Videos, Articles, Reflection, Notes. The panes stay in the HTML as built, so
+   every build and sync script still finds tab-summary, tab-videos and the rest;
+   the order is fixed here at run time. Chapters whose Deep Dive is not written
+   yet get a "Coming soon" Deep Dive tab; add_deep_dives.py replaces it with the
+   real pane when one is published. Map (mapgeo.js) and Notes (chapter-notes.js)
+   add their tabs after this runs, so an observer keeps the order.
+   Keep this identical in both repos. */
+var TAB_ORDER = ['summary', 'authorship', 'mapgeo', 'deepdive', 'commentary',
+                 'videos', 'articles', 'reflection', 'notes'];
+function ensureDeepDiveTab() {
+    var bar = document.querySelector('.study-tabs');
+    var summary = document.getElementById('tab-summary');
+    if (!bar || !summary || document.getElementById('tab-deepdive')) return;
+    var btn = document.createElement('div');
+    btn.className = 'study-tab';
+    btn.setAttribute('data-tab', 'deepdive');
+    btn.textContent = 'Deep Dive';
+    bar.appendChild(btn);
+    var pane = document.createElement('div');
+    pane.className = 'tab-content dd-coming-soon';
+    pane.id = 'tab-deepdive';
+    pane.innerHTML = '<h3>Deep Dive</h3>'
+        + '<p class="dd-soon"><strong>Coming soon.</strong> A section-by-section deep dive on this chapter, '
+        + 'with the setting, key words and what trusted commentators say, is being written and will appear here.</p>'
+        + '<p class="dd-soon">In the meantime, the Commentary tab has links to full commentaries on this chapter.</p>';
+    summary.parentNode.insertBefore(pane, summary.nextElementSibling);
 }
-function paneGroupOf(pane) { return tabGroupOf((pane.id || '').replace(/^tab-/, '')); }
-function orderTabPanes() {
-    // Panes and their buttons in group order: Study, then Reflect, then the chapter arrows.
-    var bar = document.querySelector('.study-tabs[data-grouped]');
+function orderChapterTabs() {
+    var bar = document.querySelector('.study-tabs');
     if (!bar) return;
-    var brk = bar.querySelector('.study-tabs-break');
-    var anchor = null, btnAnchor = brk;
-    TAB_GROUPS.study.concat(TAB_GROUPS.reflect).forEach(function (id) {
+    var btnAnchor = null, anchor = null;
+    TAB_ORDER.forEach(function (id) {
         var b = bar.querySelector('.study-tab[data-tab="' + id + '"]');
-        if (b && btnAnchor) {
-            if (btnAnchor.nextElementSibling !== b) bar.insertBefore(b, btnAnchor.nextElementSibling);
+        if (b) {
+            var want = btnAnchor ? btnAnchor.nextElementSibling : bar.firstElementChild;
+            if (want !== b) bar.insertBefore(b, want);
             btnAnchor = b;
         }
         var p = document.getElementById('tab-' + id);
         if (!p) return;
-        if (anchor && anchor.nextElementSibling !== p) anchor.parentNode.insertBefore(p, anchor.nextElementSibling);
+        if (anchor && anchor.parentNode === p.parentNode && anchor.nextElementSibling !== p)
+            anchor.parentNode.insertBefore(p, anchor.nextElementSibling);
         anchor = p;
     });
     if (!anchor) return;
@@ -127,55 +135,17 @@ function orderTabPanes() {
     if (arrows && arrows.parentNode === anchor.parentNode && anchor.nextElementSibling !== arrows)
         anchor.parentNode.insertBefore(arrows, anchor.nextElementSibling);
 }
-function tabInGroup(g) {
-    // The group's remembered card if it is on this page, else its first card that is.
-    var want = currentTabInGroup[g];
-    if (want && document.getElementById('tab-' + want)) return want;
-    for (var i = 0; i < TAB_GROUPS[g].length; i++)
-        if (document.getElementById('tab-' + TAB_GROUPS[g][i])) return TAB_GROUPS[g][i];
-    return null;
-}
-function showTabGroup(g, id) {
-    currentTabGroup = g;
-    if (id) currentTabInGroup[g] = id;
-    var open = tabInGroup(g);
-    document.querySelectorAll('.study-tab').forEach(function (t) {
-        var isGroup = t.classList.contains('study-group');
-        var mine = isGroup ? t.dataset.tab === g : tabGroupOf(t.dataset.tab) === g;
-        if (!isGroup) t.classList.toggle('tab-hidden', !mine);
-        var on = isGroup ? mine : t.dataset.tab === open;
-        if (t.classList.contains('active') !== on) t.classList.toggle('active', on);
-    });
-    document.querySelectorAll('.tab-content').forEach(function (p) {
-        var on = p.id === 'tab-' + open;
-        if (p.classList.contains('active') !== on) p.classList.toggle('active', on);
-    });
-}
-function groupStudyTabs() {
+function setupChapterTabs() {
     var bar = document.querySelector('.study-tabs');
-    if (!bar || bar.hasAttribute('data-grouped') || !document.getElementById('tab-summary')) return;
-    bar.setAttribute('data-grouped', '1');
-    bar.parentNode.classList.add('tabs-grouped');
-    var brk = document.createElement('div');
-    brk.className = 'study-tabs-break';
-    bar.insertBefore(brk, bar.firstChild);
-    [['reflect', 'Reflect'], ['study', 'Study']].forEach(function (b) {
-        var btn = document.createElement('div');
-        btn.className = 'study-tab study-group';
-        btn.setAttribute('data-tab', b[0]);
-        btn.textContent = b[1];
-        bar.insertBefore(btn, bar.firstChild);
-    });
-    orderTabPanes();
-    showTabGroup('study');
-    // Map (mapgeo.js) and Notes (chapter-notes.js) add their tabs after this runs:
-    // keep the order and show only the open card.
+    if (!bar || bar.hasAttribute('data-ordered') || !document.getElementById('tab-summary')) return;
+    bar.setAttribute('data-ordered', '1');
+    ensureDeepDiveTab();
+    orderChapterTabs();
     var busy = false;
     var obs = new MutationObserver(function () {
         if (busy) return;
         busy = true;
-        orderTabPanes();
-        showTabGroup(currentTabGroup);
+        orderChapterTabs();
         busy = false;
     });
     obs.observe(bar.parentNode, { childList: true });
@@ -183,13 +153,6 @@ function groupStudyTabs() {
 }
 
 function switchTab(tabId) {
-    if (document.querySelector('.study-tabs[data-grouped]')) {
-        var g = tabGroupOf(tabId);
-        if (g) {
-            showTabGroup(g, TAB_GROUPS[tabId] ? null : tabId);
-            return;
-        }
-    }
     document.querySelectorAll('.study-tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     const tab = document.querySelector(`.study-tab[data-tab="${tabId}"]`);
@@ -197,8 +160,8 @@ function switchTab(tabId) {
     const content = document.getElementById('tab-' + tabId);
     if (content) content.classList.add('active');
 }
-groupStudyTabs();
-window.addEventListener('bible-chapter', groupStudyTabs);
+setupChapterTabs();
+window.addEventListener('bible-chapter', setupChapterTabs);
 
 function toggleSidebar() {
     document.querySelector('.left-sidebar').classList.toggle('open');

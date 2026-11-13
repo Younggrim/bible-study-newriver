@@ -1390,33 +1390,29 @@ book introductions carrying the same substance under more specific headings:
 makes the page worse. They still need verse-range sections like any other
 chapter.
 
-## Study / Reflect and the Deep Dive
+## Chapter tabs and the Deep Dive
 
-Chapter pages show **two** study buttons, Study and Reflect (Nov 2026). The HTML is
-unchanged apart from a new pane: every page still carries its `tab-summary`,
+Chapter pages show **one row of individual tabs** (Nov 2026; a short-lived Study / Reflect
+grouping was removed). The HTML is unchanged: every page still carries its `tab-summary`,
 `tab-authorship`, `tab-mapgeo`, `tab-commentary`, `tab-videos`, `tab-articles` and
 `tab-reflection` panes and their buttons, so every script above still finds them.
-`groupStudyTabs()` in `site/script.js` adds the two group buttons on their own row. The
-original buttons become a second row of smaller tabs (`style.css`, `.tabs-grouped`), showing
-only the open group's cards, and **one card shows at a time** (Nov 2026; the cards were
-stacked before). Each group remembers its last card, and opens on its first card otherwise:
+`setupChapterTabs()` in `site/script.js` orders buttons and panes at run time:
 
-| button | panes, in order |
-|---|---|
-| Study | summary, authorship, mapgeo, deepdive, commentary |
-| Reflect | reflection, videos, articles, notes |
+Summary, Authorship & Background, Map & Geography, Deep Dive, Commentary, Videos, Articles,
+Reflection, Notes
 
-Reflection is moved ahead of Videos at run time, and Notes (added by `chapter-notes.js`) is
-kept last. `switchTab('videos')` and the like still work; they open the pane's group with that card
-showing. `site/script.js` and `site/style.css` are preserved by the sync, so **this code
-must be copied by hand into bible-study-newriver**. Keep the two copies identical.
+Summary opens by default. Map (`mapgeo.js`) and Notes (`chapter-notes.js`) add their tabs
+later, and an observer keeps the order. **Every chapter shows a Deep Dive tab**: where no
+`tab-deepdive` pane was built, `ensureDeepDiveTab()` adds one that says "Coming soon".
+`site/script.js` and `site/style.css` are preserved by the sync, so **this code must be
+copied by hand into bible-study-newriver**. Keep the two copies identical.
 
 **The Deep Dive pane** (`tab-deepdive`) is a section-by-section study of the chapter, written
 from `deepdives/<slug>.md` by `add_deep_dives.py`. It sits before `tab-commentary`, and the
 Commentary pane's links serve as its sources. Format, sources and copyright rules are in
 `deepdives/README.md`, and the order to write them in is `deepdives/QUEUE.txt`.
-`python3 add_deep_dives.py --check` reports coverage. Labels `tab.study`, `tab.reflect` and
-`tab.deepdive` are in `i18n_strings.py`.
+`python3 add_deep_dives.py --check` reports coverage. The `tab.deepdive` label is in `i18n_strings.py`
+(`tab.study` and `tab.reflect` are left over from the grouping and unused).
 
 ## Deploys
 

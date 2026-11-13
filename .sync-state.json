@@ -1,9 +1,9 @@
 {
-  "upstream_commit": "7bd8da08f4f35bb8ad0dd374e3759a2182cd7f29 Deep dive: Job 26",
+  "upstream_commit": "a942880058ebb8ad01e160f4d6242bc036736796 Split chapter pages back into separate tabs, Deep Dive as its own tab",
   "upstream_fingerprints": {
-    "site/style.css": "66aaac71",
-    "site/script.js": "67fe821a"
+    "site/style.css": "79bf5762",
+    "site/script.js": "834bdbe8"
   },
-  "style_css_v": "44aa0699",
-  "script_js_v": "d5475183"
+  "style_css_v": "db40e25a",
+  "script_js_v": "815d2c2d"
 }
