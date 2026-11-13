@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "a942880058ebb8ad01e160f4d6242bc036736796 Split chapter pages back into separate tabs, Deep Dive as its own tab",
+  "upstream_commit": "af15243526e559269fa1c79b5d911382b8eec460 Deep dive: 1 Thessalonians 3",
   "upstream_fingerprints": {
     "site/style.css": "79bf5762",
     "site/script.js": "834bdbe8"
