@@ -1396,8 +1396,10 @@ Chapter pages show **two** study buttons, Study and Reflect (Nov 2026). The HTML
 unchanged apart from a new pane: every page still carries its `tab-summary`,
 `tab-authorship`, `tab-mapgeo`, `tab-commentary`, `tab-videos`, `tab-articles` and
 `tab-reflection` panes and their buttons, so every script above still finds them.
-`groupStudyTabs()` in `site/script.js` adds the two group buttons, hides the originals
-(`style.css`, `.tabs-grouped`), and shows each group's panes stacked:
+`groupStudyTabs()` in `site/script.js` adds the two group buttons on their own row. The
+original buttons become a second row of smaller tabs (`style.css`, `.tabs-grouped`), showing
+only the open group's cards, and **one card shows at a time** (Nov 2026; the cards were
+stacked before). Each group remembers its last card, and opens on its first card otherwise:
 
 | button | panes, in order |
 |---|---|
@@ -1405,8 +1407,8 @@ unchanged apart from a new pane: every page still carries its `tab-summary`,
 | Reflect | reflection, videos, articles, notes |
 
 Reflection is moved ahead of Videos at run time, and Notes (added by `chapter-notes.js`) is
-kept last. `switchTab('videos')` and the like still work; they open the pane's group and
-scroll to it. `site/script.js` and `site/style.css` are preserved by the sync, so **this code
+kept last. `switchTab('videos')` and the like still work; they open the pane's group with that card
+showing. `site/script.js` and `site/style.css` are preserved by the sync, so **this code
 must be copied by hand into bible-study-newriver**. Keep the two copies identical.
 
 **The Deep Dive pane** (`tab-deepdive`) is a section-by-section study of the chapter, written

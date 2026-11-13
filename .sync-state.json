@@ -1,9 +1,9 @@
 {
-  "upstream_commit": "d3958f4ca423c9d0adbc93d40e424cbb00723050 Deep dive: Revelation 1",
+  "upstream_commit": "7bd8da08f4f35bb8ad0dd374e3759a2182cd7f29 Deep dive: Job 26",
   "upstream_fingerprints": {
-    "site/style.css": "255556be",
-    "site/script.js": "3bfc97b6"
+    "site/style.css": "66aaac71",
+    "site/script.js": "67fe821a"
   },
-  "style_css_v": "813580c9",
-  "script_js_v": "92c3ab25"
+  "style_css_v": "44aa0699",
+  "script_js_v": "d5475183"
 }

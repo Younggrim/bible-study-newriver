@@ -86,16 +86,19 @@ if ('serviceWorker' in navigator) {
 
 /* Study / Reflect (Nov 2026). The chapter pages keep their seven panes in the
    HTML, so every build and sync script still finds tab-summary, tab-videos and
-   the rest. Here the bar is folded into two buttons: Study shows the Summary,
-   Authorship & Background, Map, Deep Dive and Commentary panes stacked, and
-   Reflect shows Reflection, Videos, Articles and Notes. The original buttons
-   stay in the bar, hidden by style.css, so i18n.js and anything that calls
+   the rest. Here the bar is folded into two group buttons, Study and Reflect,
+   with a second row of tabs for the cards in the open group: Study holds
+   Summary, Authorship & Background, Map, Deep Dive and Commentary, and Reflect
+   holds Reflection, Videos, Articles and Notes. One card shows at a time, and
+   each group remembers its last card. The original buttons stay in the bar
+   (they are the second row), so i18n.js and anything that calls
    switchTab('videos') keep working. Keep this identical in both repos. */
 var TAB_GROUPS = {
     study: ['summary', 'authorship', 'mapgeo', 'deepdive', 'commentary'],
     reflect: ['reflection', 'videos', 'articles', 'notes']
 };
 var currentTabGroup = 'study';
+var currentTabInGroup = {};
 function tabGroupOf(id) {
     if (TAB_GROUPS[id]) return id;
     for (var g in TAB_GROUPS) if (TAB_GROUPS[g].indexOf(id) >= 0) return g;
@@ -103,29 +106,49 @@ function tabGroupOf(id) {
 }
 function paneGroupOf(pane) { return tabGroupOf((pane.id || '').replace(/^tab-/, '')); }
 function orderTabPanes() {
-    // Reflect panes in their order, right after the last Study pane, then the chapter arrows.
+    // Panes and their buttons in group order: Study, then Reflect, then the chapter arrows.
     var bar = document.querySelector('.study-tabs[data-grouped]');
     if (!bar) return;
-    var anchor = null;
-    TAB_GROUPS.study.forEach(function (id) { var p = document.getElementById('tab-' + id); if (p) anchor = p; });
-    if (!anchor) return;
-    TAB_GROUPS.reflect.forEach(function (id) {
+    var brk = bar.querySelector('.study-tabs-break');
+    var anchor = null, btnAnchor = brk;
+    TAB_GROUPS.study.concat(TAB_GROUPS.reflect).forEach(function (id) {
+        var b = bar.querySelector('.study-tab[data-tab="' + id + '"]');
+        if (b && btnAnchor) {
+            if (btnAnchor.nextElementSibling !== b) bar.insertBefore(b, btnAnchor.nextElementSibling);
+            btnAnchor = b;
+        }
         var p = document.getElementById('tab-' + id);
         if (!p) return;
-        if (anchor.nextElementSibling !== p) anchor.parentNode.insertBefore(p, anchor.nextElementSibling);
+        if (anchor && anchor.nextElementSibling !== p) anchor.parentNode.insertBefore(p, anchor.nextElementSibling);
         anchor = p;
     });
+    if (!anchor) return;
     var arrows = document.querySelector('.chapter-nav-arrows');
     if (arrows && arrows.parentNode === anchor.parentNode && anchor.nextElementSibling !== arrows)
         anchor.parentNode.insertBefore(arrows, anchor.nextElementSibling);
 }
-function showTabGroup(g) {
+function tabInGroup(g) {
+    // The group's remembered card if it is on this page, else its first card that is.
+    var want = currentTabInGroup[g];
+    if (want && document.getElementById('tab-' + want)) return want;
+    for (var i = 0; i < TAB_GROUPS[g].length; i++)
+        if (document.getElementById('tab-' + TAB_GROUPS[g][i])) return TAB_GROUPS[g][i];
+    return null;
+}
+function showTabGroup(g, id) {
     currentTabGroup = g;
+    if (id) currentTabInGroup[g] = id;
+    var open = tabInGroup(g);
     document.querySelectorAll('.study-tab').forEach(function (t) {
-        t.classList.toggle('active', t.classList.contains('study-group') && t.dataset.tab === g);
+        var isGroup = t.classList.contains('study-group');
+        var mine = isGroup ? t.dataset.tab === g : tabGroupOf(t.dataset.tab) === g;
+        if (!isGroup) t.classList.toggle('tab-hidden', !mine);
+        var on = isGroup ? mine : t.dataset.tab === open;
+        if (t.classList.contains('active') !== on) t.classList.toggle('active', on);
     });
     document.querySelectorAll('.tab-content').forEach(function (p) {
-        p.classList.toggle('active', paneGroupOf(p) === g);
+        var on = p.id === 'tab-' + open;
+        if (p.classList.contains('active') !== on) p.classList.toggle('active', on);
     });
 }
 function groupStudyTabs() {
@@ -133,6 +156,9 @@ function groupStudyTabs() {
     if (!bar || bar.hasAttribute('data-grouped') || !document.getElementById('tab-summary')) return;
     bar.setAttribute('data-grouped', '1');
     bar.parentNode.classList.add('tabs-grouped');
+    var brk = document.createElement('div');
+    brk.className = 'study-tabs-break';
+    bar.insertBefore(brk, bar.firstChild);
     [['reflect', 'Reflect'], ['study', 'Study']].forEach(function (b) {
         var btn = document.createElement('div');
         btn.className = 'study-tab study-group';
@@ -142,30 +168,25 @@ function groupStudyTabs() {
     });
     orderTabPanes();
     showTabGroup('study');
-    // Notes (chapter-notes.js) adds its pane after this runs: keep the order and the active group.
+    // Map (mapgeo.js) and Notes (chapter-notes.js) add their tabs after this runs:
+    // keep the order and show only the open card.
     var busy = false;
-    new MutationObserver(function () {
+    var obs = new MutationObserver(function () {
         if (busy) return;
         busy = true;
         orderTabPanes();
-        document.querySelectorAll('.tab-content').forEach(function (p) {
-            var on = paneGroupOf(p) === currentTabGroup;
-            if (p.classList.contains('active') !== on) p.classList.toggle('active', on);
-        });
+        showTabGroup(currentTabGroup);
         busy = false;
-    }).observe(bar.parentNode, { childList: true });
+    });
+    obs.observe(bar.parentNode, { childList: true });
+    obs.observe(bar, { childList: true });
 }
 
 function switchTab(tabId) {
     if (document.querySelector('.study-tabs[data-grouped]')) {
         var g = tabGroupOf(tabId);
         if (g) {
-            showTabGroup(g);
-            // Asked for one pane (e.g. Notes): bring it into view inside its group.
-            if (!TAB_GROUPS[tabId]) {
-                var pane = document.getElementById('tab-' + tabId);
-                if (pane && pane.scrollIntoView) pane.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            showTabGroup(g, TAB_GROUPS[tabId] ? null : tabId);
             return;
         }
     }
