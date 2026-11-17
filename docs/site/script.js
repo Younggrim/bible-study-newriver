@@ -318,7 +318,7 @@ function loadYT(el, id) {
     el.removeAttribute('role');
     el.removeAttribute('tabindex');
     el.removeAttribute('aria-label');
-    el.innerHTML = '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1" title="' + label.replace(/"/g, '&quot;') + '" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;" allow="autoplay;encrypted-media" allowfullscreen></iframe>';
+    el.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1" title="' + label.replace(/"/g, '&quot;') + '" style="width:100%;height:100%;position:absolute;top:0;left:0;border:none;" allow="autoplay;encrypted-media" allowfullscreen></iframe>';
 }
 
 /* Collapsible Video Sections */
@@ -703,7 +703,7 @@ onChapterChange(sortVideos);
             entries.forEach(function(v) {
                 var card = document.createElement('div');
                 card.className = 'yt-facade';
-                card.style.cssText = "position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://img.youtube.com/vi/" + v.id + "/hqdefault.jpg') center/cover;";
+                card.style.cssText = "position:relative;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--border-light);aspect-ratio:16/9;background:#000 url('https://i.ytimg.com/vi/" + v.id + "/hqdefault.jpg') center/cover;";
                 card.setAttribute('onclick', "loadYT(this,'" + v.id + "')");
                 card.innerHTML = '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);"><div style="width:60px;height:42px;background:#c0392b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;"></div></div></div><p style="position:absolute;bottom:0;left:0;right:0;padding:8px 12px;margin:0;background:rgba(0,0,0,0.7);color:#fff;font-size:0.78rem;font-weight:600;">'
                     + escapeHtml(v.title) + '<br><span class="yt-src" style="font-size:0.64rem;font-weight:400;opacity:0.75;">' + escapeHtml(v.source || 'New River Church') + '</span></p>';

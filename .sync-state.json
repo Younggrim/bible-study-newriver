@@ -1,9 +1,9 @@
 {
-  "upstream_commit": "4aba1008ca94bd4a91d0e9b8c3f798ac355237b9 Add contact form that frames emails as an issue or a suggestion",
+  "upstream_commit": "4cd889336c6480db2a7e80fcb0990f51cbb10f8f Load videos from youtube-nocookie.com and thumbnails from i.ytimg.com",
   "upstream_fingerprints": {
     "site/style.css": "79bf5762",
-    "site/script.js": "834bdbe8"
+    "site/script.js": "72f059fa"
   },
   "style_css_v": "db40e25a",
-  "script_js_v": "815d2c2d"
+  "script_js_v": "fa35d76a"
 }
