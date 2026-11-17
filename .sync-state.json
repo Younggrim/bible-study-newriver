@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "4cd889336c6480db2a7e80fcb0990f51cbb10f8f Load videos from youtube-nocookie.com and thumbnails from i.ytimg.com",
+  "upstream_commit": "e6217e8b401e6810c066a12e4fedf6799d506dcd Add How this site is made / Privacy / Contact footer to life studies, topical studies and app tab pages",
   "upstream_fingerprints": {
     "site/style.css": "79bf5762",
     "site/script.js": "72f059fa"
