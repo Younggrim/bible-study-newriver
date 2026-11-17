@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "ee8d83cd95a5af5193111c5e57fdeae4a66055cf Add support@macdwellings.com contact: Deep Dive note, About page section, footer link",
+  "upstream_commit": "9aab90e98caf2bf9b69077dc3353d56840437e1e Use bible.support@macdwellings.com as the site contact address",
   "upstream_fingerprints": {
     "site/style.css": "79bf5762",
     "site/script.js": "834bdbe8"
