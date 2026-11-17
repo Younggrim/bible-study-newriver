@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "9aab90e98caf2bf9b69077dc3353d56840437e1e Use bible.support@macdwellings.com as the site contact address",
+  "upstream_commit": "4aba1008ca94bd4a91d0e9b8c3f798ac355237b9 Add contact form that frames emails as an issue or a suggestion",
   "upstream_fingerprints": {
     "site/style.css": "79bf5762",
     "site/script.js": "834bdbe8"

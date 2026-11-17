@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="site/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="site/favicon-16.png">
+    <link rel="apple-touch-icon" href="site/apple-touch-icon.png"><meta name="theme-color" content="#000000">
+    <title>Contact — New River Bible Study</title>
+    <!-- seo -->
+    <meta name="description" content="Report an issue or suggest a feature for the Bible Study site.">
+    <link rel="canonical" href="https://bible.nrc.macdwellings.com/contact.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="New River Bible Study">
+    <meta property="og:title" content="Contact — New River Bible Study">
+    <meta property="og:description" content="Report an issue or suggest a feature for the Bible Study site.">
+    <meta property="og:url" content="https://bible.nrc.macdwellings.com/contact.html">
+    <meta property="og:image" content="https://bible.nrc.macdwellings.com/site/share/default.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- /seo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="site/style.css?v=db40e25a">
+    <style>
+        body { background: var(--bg-page); }
+        .privacy-wrap { max-width: 720px; margin: 0 auto; padding: 28px 18px 64px; font-family: 'Inter', -apple-system, sans-serif; color: var(--text-body); line-height: 1.65; }
+        .privacy-home { display: inline-flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 600; color: var(--accent-link); text-decoration: none; margin-bottom: 22px; }
+        .privacy-wrap h1 { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 1.9rem; color: var(--ink-deep); margin: 0 0 6px; }
+        .privacy-updated { font-size: 0.82rem; color: var(--text-faint); margin: 0 0 22px; }
+        .privacy-lead { font-size: 1.02rem; color: var(--text-secondary); background: var(--bg-tint-2); border: 1px solid var(--border-light); border-radius: 12px; padding: 16px 18px; margin: 0 0 8px; }
+        .privacy-wrap h2 { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 1.18rem; color: var(--ink-deep); margin: 30px 0 8px; padding-top: 18px; border-top: 1px solid var(--rule-soft); }
+        .privacy-wrap p { margin: 0 0 12px; }
+        .privacy-wrap ul { margin: 0 0 12px; padding-left: 22px; }
+        .privacy-wrap li { margin: 0 0 6px; color: var(--text-list); }
+        .privacy-wrap a { color: var(--accent-link); }
+        .privacy-wrap strong { color: var(--ink-deep); }
+        .cf-group { margin: 0 0 18px; border: 0; padding: 0; }
+        .cf-label { display: block; font-weight: 600; font-size: 0.92rem; color: var(--ink-deep); margin: 0 0 6px; }
+        .cf-hint { font-weight: 400; color: var(--text-faint); }
+        .cf-types { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .cf-type input { position: absolute; opacity: 0; pointer-events: none; }
+        .cf-type span { display: block; text-align: center; padding: 12px 10px; border: 1px solid var(--border-light); border-radius: 12px; background: var(--bg-tint-2); color: var(--text-secondary); font-weight: 600; cursor: pointer; }
+        .cf-type input:checked + span { border-color: var(--accent-link); color: var(--accent-link); box-shadow: 0 0 0 1px var(--accent-link) inset; }
+        .cf-type input:focus-visible + span { outline: 2px solid var(--accent-link); outline-offset: 2px; }
+        .privacy-wrap select, .privacy-wrap input[type=text], .privacy-wrap textarea { width: 100%; box-sizing: border-box; font: inherit; font-size: 1rem; color: var(--text-body); background: var(--bg-page); border: 1px solid var(--border-light); border-radius: 10px; padding: 10px 12px; }
+        .privacy-wrap textarea { min-height: 150px; resize: vertical; }
+        .cf-send { display: block; width: 100%; font: inherit; font-weight: 700; font-size: 1rem; padding: 13px; border: 0; border-radius: 12px; background: var(--accent-link); color: var(--bg-page); cursor: pointer; }
+        .cf-error { color: var(--accent-link); font-size: 0.9rem; min-height: 1.2em; margin: 8px 0 0; }
+        .privacy-wrap .cf-small { font-size: 0.86rem; color: var(--text-faint); margin-top: 18px; }
+    </style>
+</head>
+<body>
+    <main class="privacy-wrap">
+        <a class="privacy-home" id="cf-back" href="index.html"><span aria-hidden="true">&larr;</span> Back to Bible Study</a>
+        <h1>Contact</h1>
+        <p class="privacy-updated">Report a problem or share an idea</p>
+
+        <p class="privacy-lead">Fill this in and tap <strong>Open email</strong>. Your email app opens with the message already written, so you just hit send.</p>
+
+        <form id="cf" novalidate>
+            <fieldset class="cf-group">
+                <legend class="cf-label">What&rsquo;s this about?</legend>
+                <div class="cf-types">
+                    <label class="cf-type"><input type="radio" name="type" value="issue" checked><span>Report an issue</span></label>
+                    <label class="cf-type"><input type="radio" name="type" value="suggestion"><span>Suggest a feature</span></label>
+                </div>
+            </fieldset>
+
+            <div class="cf-group" id="cf-kind-wrap">
+                <label class="cf-label" for="cf-kind">What kind of issue?</label>
+                <select id="cf-kind">
+                    <option>A mistake in a note or Deep Dive</option>
+                    <option>Broken link or video</option>
+                    <option>Something in the app isn&rsquo;t working</option>
+                    <option>Scripture text or audio problem</option>
+                    <option>Something else</option>
+                </select>
+            </div>
+
+            <div class="cf-group">
+                <label class="cf-label" for="cf-page">Which page? <span class="cf-hint">(optional)</span></label>
+                <input type="text" id="cf-page" placeholder="e.g. John 3 Deep Dive">
+            </div>
+
+            <div class="cf-group">
+                <label class="cf-label" for="cf-msg" id="cf-msg-label">What happened?</label>
+                <textarea id="cf-msg" placeholder="Tell me what you saw, and what you expected instead."></textarea>
+                <p class="cf-error" id="cf-error" role="alert"></p>
+            </div>
+
+            <div class="cf-group">
+                <label class="cf-label" for="cf-name">Your name <span class="cf-hint">(optional)</span></label>
+                <input type="text" id="cf-name" autocomplete="name">
+            </div>
+
+            <button type="submit" class="cf-send">Open email</button>
+        </form>
+
+        <p class="cf-small">Email app didn&rsquo;t open? Write to <a href="mailto:bible.support@macdwellings.com">bible.support@macdwellings.com</a>. I read every message, though I may not be able to reply to each one right away.</p>
+    </main>
+    <script>
+    (function () {
+        var ADDR = 'bible.support@macdwellings.com';
+        var form = document.getElementById('cf');
+        var kindWrap = document.getElementById('cf-kind-wrap');
+        var pageIn = document.getElementById('cf-page');
+        var msg = document.getElementById('cf-msg');
+        var msgLabel = document.getElementById('cf-msg-label');
+        var err = document.getElementById('cf-error');
+        var params = new URLSearchParams(location.search);
+        var slug = (params.get('page') || '').toLowerCase();
+        var from = params.get('from') || '';
+        var pageUrl = '';
+
+        function setType(t) {
+            var issue = t !== 'suggestion';
+            kindWrap.hidden = !issue;
+            msgLabel.textContent = issue ? 'What happened?' : 'What would you like to see?';
+            msg.placeholder = issue ? 'Tell me what you saw, and what you expected instead.'
+                                    : 'Describe the idea and how it would help your study.';
+        }
+        form.addEventListener('change', function (e) { if (e.target.name === 'type') setType(e.target.value); });
+        if (params.get('type') === 'suggestion') form.querySelector('input[value=suggestion]').checked = true;
+        setType(form.querySelector('input[name=type]:checked').value);
+
+        if (/^[a-z0-9-]+$/.test(slug)) {
+            pageUrl = location.origin + '/' + slug + '.html';
+            document.getElementById('cf-back').href = slug + '.html';
+            var suffix = from === 'deepdive' ? ' (Deep Dive)' : '';
+            pageIn.value = slug + suffix;
+            if (from === 'deepdive') document.getElementById('cf-kind').selectedIndex = 0;
+            fetch(slug + '.html').then(function (r) { return r.ok ? r.text() : ''; }).then(function (t) {
+                var m = /<title>([^<]*)<\/title>/i.exec(t);
+                if (m && pageIn.value === slug + suffix) {
+                    var d = document.createElement('textarea'); d.innerHTML = m[1];
+                    pageIn.value = d.value.split(' \u2014 ')[0].trim() + suffix;
+                }
+            }).catch(function () {});
+        }
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var text = msg.value.trim();
+            if (!text) { err.textContent = 'Please add a short message first.'; msg.focus(); return; }
+            err.textContent = '';
+            var issue = form.querySelector('input[name=type]:checked').value !== 'suggestion';
+            var kind = document.getElementById('cf-kind').value;
+            var page = pageIn.value.trim();
+            var name = document.getElementById('cf-name').value.trim();
+            var subject = (issue ? '[Issue] ' + kind : '[Suggestion]') + (page ? ' \u2014 ' + page : '');
+            var lines = ['Type: ' + (issue ? 'Report an issue (' + kind + ')' : 'Feature suggestion')];
+            if (page) lines.push('Page: ' + page + (pageUrl ? ' (' + pageUrl + ')' : ''));
+            if (name) lines.push('From: ' + name);
+            lines.push('', text, '');
+            if (issue) lines.push('---', 'Device: ' + navigator.userAgent);
+            location.href = 'mailto:' + ADDR + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+        });
+    })();
+    </script>
+</body>
+</html>
