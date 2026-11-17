@@ -143,6 +143,7 @@ DROP_VIDEO_IDS = {
     "r6gq-GBbWCE": "The Chosen 'Season 6, Episode 1: Global Livestream' -- not teaching",
     "aEEdQK-8HJQ": "The Chosen 'Season 5 Full Recap' -- not teaching",
     "RdrHr819rzU": "Wes Huff 'Addressing the accusations' -- personal, not teaching",
+    "6eAnSMZ7sYI": "SpokenGospel 'The Son of David' (30 Pictures of Jesus) -- no passage in the title (skipped 2026-11-17; could go on types-of-christ)",
 }
 
 FACADE_OPEN = '<div class="yt-facade"'
