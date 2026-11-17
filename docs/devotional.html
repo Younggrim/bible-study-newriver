@@ -120,7 +120,8 @@
         </footer>
     </main>
     <script src="site/script.js?v=fa35d76a"></script>
-    <script src="site/i18n.js?v=550ae1e3"></script>
+    <script src="site/i18n.js?v=644dc605"></script>
+    <script src="site/search.js?v=b7a644e3"></script>
     <script>
     (function() {
         var devotionals = [];
@@ -175,6 +176,9 @@
             .then(function(data) {
                 devotionals = data;
                 var todayIndex = getDayIndex();
+                // ?d=N opens one devotional by number (site search links here).
+                var asked = /[?&]d=(\d+)/.exec(location.search);
+                if (asked && +asked[1] < devotionals.length) todayIndex = +asked[1];
                 if (todayIndex >= devotionals.length) todayIndex = devotionals.length - 1;
                 render(todayIndex);
             })

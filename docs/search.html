@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="site/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="site/favicon-16.png">
+    <link rel="apple-touch-icon" href="site/apple-touch-icon.png"><meta name="theme-color" content="#000000">
+    <title>Search — New River Bible Study</title>
+    <!-- seo -->
+    <meta name="description" content="Search the Bible by story, parable, topic, word or reference, along with every chapter study, topical and life study and devotional on this site.">
+    <link rel="canonical" href="https://bible.nrc.macdwellings.com/search.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="New River Bible Study">
+    <meta property="og:title" content="Search — New River Bible Study">
+    <meta property="og:description" content="Search the Bible by story, parable, topic, word or reference, along with every chapter study, topical and life study and devotional on this site.">
+    <meta property="og:url" content="https://bible.nrc.macdwellings.com/search.html">
+    <meta property="og:image" content="https://bible.nrc.macdwellings.com/site/share/default.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- /seo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="site/style.css?v=db40e25a">
+    <style>
+        body { background: var(--bg-page); }
+        .bs-wrap { max-width: 760px; margin: 0 auto; padding: 22px 16px 120px; font-family: 'Inter', -apple-system, sans-serif; color: var(--text-body); line-height: 1.55; }
+        .bs-back { display: inline-flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 600; color: var(--accent-link); text-decoration: none; margin-bottom: 14px; }
+        .bs-wrap h1 { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 1.8rem; color: var(--ink-deep); margin: 0 0 12px; }
+        .bs-form { position: sticky; top: 0; z-index: 5; background: var(--bg-page); padding: 8px 0 10px; margin: 0 -2px; }
+        .bs-field { display: flex; align-items: center; gap: 10px; border: 1.5px solid var(--border-light); border-radius: 14px; background: var(--bg-tint-2); padding: 4px 6px 4px 14px; color: var(--accent-link); }
+        .bs-field:focus-within { border-color: var(--accent-link); }
+        .bs-field input { flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; font-size: 1.05rem; color: var(--text-body); padding: 10px 0; outline: none; }
+        .bs-field input::-webkit-search-cancel-button { cursor: pointer; }
+        .bs-field button { border: 0; border-radius: 10px; background: var(--accent-link); color: var(--bg-page); font: inherit; font-weight: 600; font-size: 0.92rem; padding: 9px 14px; cursor: pointer; }
+        .bs-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+        .bs-chip { border: 1px solid var(--border-light); background: var(--bg-page); color: var(--text-secondary); border-radius: 999px; padding: 6px 13px; font: inherit; font-size: 0.86rem; font-weight: 600; cursor: pointer; }
+        .bs-chip[aria-pressed="true"] { border-color: var(--accent-link); color: var(--accent-link); box-shadow: 0 0 0 1px var(--accent-link) inset; }
+        .bs-chip-n:not(:empty) { margin-left: 5px; font-weight: 500; color: var(--text-faint); }
+        .bs-chip-n:not(:empty)::before { content: "· "; }
+        .bs-status { font-size: 0.84rem; color: var(--text-faint); margin: 8px 0 0; min-height: 1.2em; }
+        .bs-intro { margin-top: 18px; }
+        #bs-search-app.bs-has .bs-intro { display: none; }
+        .bs-intro p { color: var(--text-secondary); margin: 0 0 10px; }
+        .bs-try { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0 0 22px; list-style: none; }
+        .bs-try a { display: inline-block; padding: 7px 12px; border-radius: 10px; background: var(--bg-tint); color: var(--ink-deep); text-decoration: none; font-size: 0.9rem; }
+        .bs-intro h2, .bs-group h2 { font-family: 'Poppins', 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--ink-deep); margin: 26px 0 10px; }
+        .bs-count { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.85rem; color: var(--text-faint); margin-left: 4px; }
+        .bs-cards { display: grid; gap: 10px; }
+        .bs-card { display: block; background: #fff; border: 1px solid var(--border-light); border-radius: 12px; padding: 12px 14px; }
+        .bs-card h3 { font-family: 'Inter', sans-serif; font-size: 1.02rem; font-weight: 700; margin: 2px 0 4px; }
+        .bs-card h3 a { color: var(--ink-deep); text-decoration: none; }
+        .bs-card a { color: var(--accent-link); }
+        .bs-kind { margin: 0; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-faint); }
+        .bs-refs, .bs-aka, .bs-study, .bs-snip { margin: 4px 0 0; font-size: 0.9rem; color: var(--text-secondary); }
+        .bs-ref { font-weight: 700; text-decoration: none; }
+        .bs-also { color: var(--text-faint); }
+        .bs-aka { color: var(--text-faint); font-style: italic; }
+        .bs-study a { font-weight: 600; text-decoration: none; }
+        .bs-heads { margin: 4px 0 0; padding-left: 18px; font-size: 0.9rem; color: var(--text-secondary); }
+        .bs-heads li { margin: 2px 0; }
+        .bs-go { display: flex; align-items: center; gap: 10px; text-decoration: none; border-color: var(--accent-link); margin-top: 14px; }
+        .bs-go strong { color: var(--ink-deep); font-size: 1.05rem; }
+        .bs-go .bs-arrow { margin-left: auto; color: var(--accent-link); font-size: 1.2rem; }
+        .bs-verses { list-style: none; margin: 0; padding: 0; background: #fff; border: 1px solid var(--border-light); border-radius: 12px; }
+        .bs-verses li + li { border-top: 1px solid var(--rule-soft); }
+        .bs-verses a { display: block; padding: 10px 14px; color: var(--text-body); text-decoration: none; font-family: 'Merriweather', Georgia, serif; font-size: 0.93rem; line-height: 1.6; }
+        .bs-vref { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.86rem; color: var(--accent-link); margin-right: 4px; white-space: nowrap; }
+        mark { background: var(--bg-tint); color: inherit; font-weight: 700; padding: 0 1px; border-radius: 3px; box-shadow: inset 0 -2px 0 var(--rule-warm); }
+        .bs-more { display: block; width: 100%; margin-top: 10px; padding: 11px; border-radius: 12px; border: 1px solid var(--border-light); background: var(--bg-tint-2); color: var(--accent-link); font: inherit; font-weight: 600; cursor: pointer; }
+        .bs-note { font-size: 0.8rem; color: var(--text-faint); margin: 8px 2px 0; }
+        .bs-empty { margin-top: 24px; padding: 18px; border-radius: 12px; background: var(--bg-tint-2); border: 1px solid var(--border-light); color: var(--text-secondary); }
+        .bs-empty p { margin: 0 0 6px; }
+    </style>
+</head>
+<body>
+    <main class="bs-wrap" id="bs-search-app" data-v="15087820">
+        <a class="bs-back" id="bs-back" href="index.html"><span aria-hidden="true">&larr;</span> Back to Bible Study</a>
+        <h1>Search</h1>
+        <form class="bs-form" id="bs-form" role="search" action="search.html">
+            <label class="bs-field">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
+                <input type="search" id="bs-q" name="q" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" placeholder="Story, topic, word or verse" aria-label="Search the Bible and studies">
+                <button type="submit">Search</button>
+            </label>
+            <div class="bs-chips" role="group" aria-label="Show">
+                <button type="button" class="bs-chip" data-f="all" aria-pressed="true">All</button>
+                <button type="button" class="bs-chip" data-f="topics" aria-pressed="false">Stories &amp; Topics<span class="bs-chip-n"></span></button>
+                <button type="button" class="bs-chip" data-f="studies" aria-pressed="false">Studies<span class="bs-chip-n"></span></button>
+                <button type="button" class="bs-chip" data-f="verses" aria-pressed="false">Verses<span class="bs-chip-n"></span></button>
+            </div>
+            <p class="bs-status" id="bs-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="bs-intro">
+            <p>Search by what a passage is about, even if you don&rsquo;t know where it is.</p>
+            <h2>Stories &amp; parables</h2>
+            <ul class="bs-try"><li><a href="#">prodigal son</a></li><li><a href="#">David and Goliath</a></li><li><a href="#">woman at the well</a></li><li><a href="#">fiery furnace</a></li><li><a href="#">parables</a></li><li><a href="#">miracles</a></li></ul>
+            <h2>Topics</h2>
+            <ul class="bs-try"><li><a href="#">forgiveness</a></li><li><a href="#">worry</a></li><li><a href="#">armor of God</a></li><li><a href="#">grief</a></li><li><a href="#">Holy Spirit</a></li></ul>
+            <h2>Words &amp; verses</h2>
+            <ul class="bs-try"><li><a href="#">&quot;be still&quot;</a></li><li><a href="#">shepherd</a></li><li><a href="#">John 3:16</a></li><li><a href="#">Ps 23</a></li><li><a href="#">1 Cor 13</a></li></ul>
+            <p style="font-size:0.86rem;color:var(--text-faint);">Tip: put words in quotes to find an exact phrase.</p>
+        </div>
+
+        <div id="bs-results"></div>
+    </main>
+    <script src="site/script.js?v=fa35d76a"></script>
+    <script src="site/i18n.js?v=644dc605"></script>
+    <script src="site/search.js?v=b7a644e3"></script>
+</body>
+</html>

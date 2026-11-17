@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "e6217e8b401e6810c066a12e4fedf6799d506dcd Add How this site is made / Privacy / Contact footer to life studies, topical studies and app tab pages",
+  "upstream_commit": "cc98ae40c6335893732137c4bd42783c3f5e222a Add site search: stories & topics, studies, and verses",
   "upstream_fingerprints": {
     "site/style.css": "79bf5762",
     "site/script.js": "72f059fa"
