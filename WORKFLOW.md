@@ -735,6 +735,39 @@ Friends: every friend's data reaches a reader only through the
 accepted friendship. Never add a table policy that lets one user select another
 user's rows.
 
+## Search
+
+`search.html` searches three ways at once, all on the device with no API or key:
+
+| group | what | data file |
+|---|---|---|
+| Stories & Topics | parables, miracles, Bible stories and well-known teachings by the names people know them by ("prodigal son", "fiery furnace", "armor of God"), each pointing at its passage and, where one exists, its study section | `site/search/topics.json`, from the hand-kept table in `search_topics.py` |
+| Studies | every topical and life study section, every chapter's summary, section titles, key themes and Deep Dive headings, and the devotionals | `site/search/site.json` |
+| Verses | word and "exact phrase" search over the BSB, read out of the BSB block baked into every chapter page | `site/search/bible.json` |
+
+A reference ("John 3:16", "ps 23", "1 cor 13:4-7", "Gen 6:9-9:17") shows the passage
+itself plus the stories, chapter study and devotionals that sit on it, and Enter goes
+straight to the chapter. Verse links use `#v<N>`, which `study.js` already scrolls to.
+Devotional results open `devotional.html?d=<index>`.
+
+`site/search.js` is also the way in on every page: a button in the top bar on chapter
+pages, a search box in the home page hero (and at the top of the app's Bible tab) and
+on the Topical and Life indexes, and a small round button on every other page. Its
+styles are injected with the tokens, so nothing changed in either `style.css` or
+`script.js`. `add_study_scripts.py` puts the tag on every page.
+
+**Rebuild the data whenever content changes** (new Deep Dives, chapters, study
+sections or devotionals), then sync New River as usual:
+
+```bash
+python3 build_search.py --check   # report only
+python3 build_search.py           # write; also stamps search.html's data-v so browsers refetch
+```
+
+To add a story or topic, add a line to `search_topics.py`. The build checks that
+every reference resolves to a real chapter and verse and every study link to a real
+page and section id, and writes nothing if one does not.
+
 ## Map & Geography: the maps
 
 Every Map & Geography pane that names a place we can locate opens with a small
