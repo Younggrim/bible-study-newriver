@@ -37,7 +37,7 @@
             + '.bs-search-bar{display:flex;align-items:center;gap:8px;max-width:520px;margin:18px auto 0;background:var(--bg-page);border:1px solid var(--border-light);border-radius:24px;padding:4px 6px 4px 14px;box-shadow:0 2px 12px rgba(0,0,0,.18);color:var(--accent-link)}'
             + '.bs-search-bar input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-family:"Inter",-apple-system,sans-serif;font-size:1rem;color:var(--text-body);padding:8px 0;outline:none}'
             + '.bs-search-bar button{border:0;border-radius:18px;background:var(--accent-link);color:var(--bg-page);font:inherit;font-family:"Inter",-apple-system,sans-serif;font-weight:600;font-size:.9rem;padding:8px 14px;cursor:pointer}'
-            + '.pwa-bible-nav .bs-search-bar{margin:0 auto 14px;box-shadow:none}';
+            + '';
         document.head.appendChild(s);
     }
 
@@ -64,10 +64,12 @@
         };
         var hint = 'Search stories, topics, verses';
         if (page === 'index.html' || page === '' || page === 'index') {
-            var hero = document.querySelector('.hero-overlay');
+            // Website: in the welcome banner. App: the welcome banner is hidden, so it goes in
+            // the Bible tab's banner, at the top of the screen and above the reading cards
+            // (study.js, progress.js and friends-strip.js put those at the top of the passage
+            // picker, which would push a box there out of sight).
+            var hero = document.querySelector(standalone ? '.section-hero .section-hero-overlay' : '.hero-overlay');
             if (hero) hero.appendChild(bar(hint));
-            var pwa = document.querySelector('.pwa-bible-nav');
-            if (pwa) pwa.insertBefore(bar(hint), pwa.firstChild);
             return;
         }
         if (page === 'topical-studies.html' || page === 'life-studies.html') {

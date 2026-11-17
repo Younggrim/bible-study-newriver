@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "cc98ae40c6335893732137c4bd42783c3f5e222a Add site search: stories & topics, studies, and verses",
+  "upstream_commit": "cfb1eeea7eeb6055414b2a6e998ec2d4c3e7059e Search: put the app's search box in the Bible tab banner",
   "upstream_fingerprints": {
     "site/style.css": "79bf5762",
     "site/script.js": "72f059fa"
