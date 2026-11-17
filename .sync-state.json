@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "220d9642a662c28c20a73e7e541a0927a188e3de Weekly review 2026-11-17: 4 articles added, 5 articles and 1 video dropped",
+  "upstream_commit": "ee8d83cd95a5af5193111c5e57fdeae4a66055cf Add support@macdwellings.com contact: Deep Dive note, About page section, footer link",
   "upstream_fingerprints": {
     "site/style.css": "79bf5762",
     "site/script.js": "834bdbe8"
