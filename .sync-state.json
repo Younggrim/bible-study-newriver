@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "cfb1eeea7eeb6055414b2a6e998ec2d4c3e7059e Search: put the app's search box in the Bible tab banner",
+  "upstream_commit": "4c4f01ff2dd9f09be12d97370756f6e983d71f26 Deep dive: Job 31",
   "upstream_fingerprints": {
     "site/style.css": "79bf5762",
     "site/script.js": "72f059fa"
