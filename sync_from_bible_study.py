@@ -2,9 +2,11 @@
 """
 Mirrors docs/ from the bible-study repo into this one.
 
-bible-study is the single source of truth for content: chapter text, summaries,
-authorship notes, Map & Geography, commentary, reflections, and the general
-video set. This repo is that content wearing New River's clothes.
+bible-study is the single source of truth for content AND look. Since Nov 2026
+this site uses bible-study's exact palette, fonts, nav, splash and favicon; it is
+Jeremy's personal copy. What still differs: the tighter video allow list, the
+New River Church sermon overlay, black-and-white app icons (so the two home
+screen icons can be told apart), and the domain.
 
 Everything that makes this deployment New River rather than the main site is
 either preserved verbatim or re-applied after the mirror, so running this is
@@ -12,22 +14,15 @@ safe and repeatable:
 
   preserved, never overwritten by upstream
     CNAME                     this site's custom domain
-    favicon.ico               New River's favicon
-    manifest.json             New River's PWA name, description, colors
     newriver-videos.json      New River Church sermon overlay, applied at
                               runtime by site/script.js
-    site/style.css            New River's palette
-    site/script.js            dove splash screen and its timing
-    site/dove-*.png           brand marks
-    site/favicon-*.png        favicons
-    site/icon-*.png           New River PWA icons
+    favicon.ico, site/icon-*.png, site/apple-touch-icon.png
+                              bible-study's icons in black and white
+                              (regenerate with make_bw_icons.py)
+    site/share/               share cards
 
   re-applied to every mirrored HTML file
-    page <title> suffix
-    theme-color <meta>, which cannot use a CSS variable
-    favicon <link> tags
-    the Cinzel font, used by New River's headings
-    the nav brand, dove logo plus "New River"
+    canonical/og URLs on this site's domain
 
   mirrored from upstream, outside docs/
     WORKFLOW.md               shared documentation
@@ -66,17 +61,11 @@ SOURCE_REPO = "https://github.com/younggrim/bible-study"
 # ignored; if upstream adds a file not listed here it comes through as normal.
 PRESERVE = {
     "CNAME",
-    "favicon.ico",
-    "manifest.json",
     "newriver-videos.json",
-    "site/style.css",
-    "site/script.js",
-    "site/dove-black.png",
-    "site/dove-white.png",
-    "site/favicon-16.png",
-    "site/favicon-32.png",
+    "favicon.ico",
     "site/icon-192.png",
     "site/icon-512.png",
+    "site/icon-maskable-512.png",
     "site/apple-touch-icon.png",
 }
 
@@ -88,7 +77,7 @@ PRESERVE_DIRS = ["site/share"]
 
 # Upstream-only files that carry bible-study's branding and that this site's own
 # manifest does not reference; dropped after the copy so they are not published.
-UPSTREAM_ONLY = ["site/icon-maskable-512.png"]
+UPSTREAM_ONLY = []
 
 
 def preserved_paths():
@@ -113,28 +102,14 @@ SHARED_ROOT = {
 # Upstream files whose content feeds New River's own theme layer. If any of
 # these change upstream, the New River counterpart may need a matching edit,
 # so the sync reports it instead of silently diverging.
-WATCH_UPSTREAM = ["site/style.css", "site/script.js"]
+WATCH_UPSTREAM = []
 
-THEME_COLOR = "#000000"
 UPSTREAM_DOMAIN = "bible.macdwellings.com"
 SITE_DOMAIN = "bible.nrc.macdwellings.com"
 # Non-HTML files that carry the site's own domain and are regenerated here
 DOMAIN_FILES = ["sitemap.xml", "robots.txt"]
-BRAND_SUFFIX = "New River Bible Study"
-FAVICON_LINKS = (
-    '\n    <link rel="icon" href="favicon.ico" sizes="any">'
-    '\n    <link rel="icon" type="image/png" sizes="32x32" href="site/favicon-32.png">'
-    '\n    <link rel="icon" type="image/png" sizes="16x16" href="site/favicon-16.png">'
-)
-NAV_BRAND = (
-    '<a href="index.html" class="nav-brand">'
-    '<img class="nav-brand-logo" src="site/dove-white.png" alt="">New River</a>'
-)
-CINZEL_FAMILY = "Cinzel:wght@400;600;700"
-GOOGLE_FONTS_CSS2 = "https://fonts.googleapis.com/css2?family="
 
 MANIFEST_LINK = '<link rel="manifest" href="manifest.json">'
-UPSTREAM_NAV_BRAND = '<a href="index.html" class="nav-brand">Bible Study</a>'
 
 
 class Rule:
@@ -165,42 +140,10 @@ def _plain(needle, repl):
     return apply
 
 
-def add_cinzel(text):
-    """Put Cinzel first in the Google Fonts request. Inserting at ?family=
-    rather than before a particular family means it works no matter which font
-    upstream happens to list first, and it is a no-op if Cinzel is there."""
-    count = 0
-
-    def insert(m):
-        nonlocal count
-        url = m.group(0)
-        if CINZEL_FAMILY.split(":")[0] in url:
-            return url
-        count += 1
-        return url.replace(GOOGLE_FONTS_CSS2, f"{GOOGLE_FONTS_CSS2}{CINZEL_FAMILY}&family=", 1)
-
-    text = re.sub(re.escape(GOOGLE_FONTS_CSS2) + r'[^"\']*', insert, text)
-    return text, count
-
-
 def build_rules():
     return [
-        # "<title>Genesis 1 — Bible Study</title>" and the bare
-        # "<title>Bible Study</title>" on index.html both land correctly.
-        Rule("page title", _plain("Bible Study</title>", f"{BRAND_SUFFIX}</title>")),
-        Rule("theme-color meta", _sub(
-            r'(name="theme-color"\s+content=")#[0-9a-fA-F]{6}(")',
-            rf"\g<1>{THEME_COLOR}\g<2>")),
-        Rule("favicon links", _plain(MANIFEST_LINK, MANIFEST_LINK + FAVICON_LINKS)),
-        Rule("Cinzel font", add_cinzel),
-        Rule("nav brand", _plain(UPSTREAM_NAV_BRAND, NAV_BRAND)),
-        # add_seo_meta.py upstream writes canonical/og URLs on its own domain
-        # and "Bible Study" as the site name; both belong to this deployment.
+        # add_seo_meta.py upstream writes canonical/og URLs on its own domain.
         Rule("site domain", _plain(f"https://{UPSTREAM_DOMAIN}/", f"https://{SITE_DOMAIN}/")),
-        Rule("og site name", _plain('property="og:site_name" content="Bible Study"',
-                                    f'property="og:site_name" content="{BRAND_SUFFIX}"')),
-        Rule("og title", _sub(r'(property="og:title" content="[^"]*)Bible Study"',
-                              rf'\g<1>{BRAND_SUFFIX}"')),
     ]
 
 
@@ -359,7 +302,7 @@ def main():
                 f"({', '.join(lacking[:3])}{'...' if len(lacking) > 3 else ''}); "
                 f"upstream's will be used until they are generated here (make_cards.py nr)")
 
-    neutral_problems = check_theme_neutral(src_docs)
+    neutral_problems = {}  # palette now matches upstream on purpose
 
     if check:
         html = len([f for f in os.listdir(src_docs) if f.endswith(".html")])

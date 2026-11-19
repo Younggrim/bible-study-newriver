@@ -168,8 +168,7 @@ function toggleSidebar() {
     document.querySelector('.sidebar-overlay').classList.toggle('show');
 }
 
-/* A splash of color per translation — the one deliberate spot of color on
-   an otherwise black/white chapter page, kept from the original palette */
+/* Translation colors — match homepage Translation Guide */
 var TRANSLATION_COLORS = {
     'ESV': '#8b3a2a',
     'BSB': '#1f6b73',
@@ -187,7 +186,7 @@ function switchTranslation(trans) {
     // Apply translation color to the active block
     var container = document.querySelector('.scripture-container');
     if (container) {
-        container.style.color = TRANSLATION_COLORS[trans] || '#000000';
+        container.style.color = TRANSLATION_COLORS[trans] || '#3d2b1f';
     }
 
     // Save preference to localStorage
@@ -541,7 +540,10 @@ onChapterChange(sortVideos);
         var splash = document.createElement('div');
         splash.className = 'pwa-splash';
         splash.innerHTML = ''
-            + '<div class="splash-icon"><img src="site/dove-black.png" alt="New River" style="width:120px;height:auto;"></div>';
+            + '<div class="splash-icon"><i class="fas fa-cross"></i></div>'
+            + '<p class="splash-label">A Prayer for You</p>'
+            + '<p class="splash-prayer">Lord, we pray that this resource brings glory to Your name. Use it as a tool to draw hearts closer to You and to reveal Your plan and purpose for each person who visits these pages. May Your Word not return void, but accomplish everything You desire. Open eyes, soften hearts, and let the truth of Scripture transform lives for Your kingdom. In Jesus\' name, Amen.</p>'
+            + '<p class="splash-tap">Tap anywhere to continue</p>';
         document.body.appendChild(splash);
         try { sessionStorage.setItem('pwa-splash-done', '1'); } catch(e) {}
         splash.addEventListener('click', function() {
@@ -553,7 +555,7 @@ onChapterChange(sortVideos);
                 splash.classList.add('fade-out');
                 setTimeout(function() { splash.remove(); }, 700);
             }
-        }, 2200);
+        }, 8000);
     }
 
     // Inject bottom nav (6 tabs: Bible, Topical, Life, Plans, Devotional, Memory). Notes is in the account menu.

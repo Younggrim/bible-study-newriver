@@ -1,9 +1,6 @@
 {
   "upstream_commit": "5c920976c08e1b27acc8fcd0f6d927e16a8b9e02 Deep dive: 1 Samuel 1",
-  "upstream_fingerprints": {
-    "site/style.css": "79bf5762",
-    "site/script.js": "72f059fa"
-  },
-  "style_css_v": "db40e25a",
-  "script_js_v": "fa35d76a"
+  "upstream_fingerprints": {},
+  "style_css_v": "79bf5762",
+  "script_js_v": "72f059fa"
 }

@@ -1,56 +1,53 @@
-/* New River Bible Study — Shared Styles (forked from bible-study, no longer synced) */
+/* Bible Study Site — Shared Styles */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-    --bg-primary: #fafafa;
-    --bg-secondary: #f0f0f0;
-    --bg-sidebar: #f0f0f0;
+    --bg-primary: #faf8f5;
+    --bg-secondary: #f5f0e8;
+    --bg-sidebar: #ece5da;
     --bg-card: #ffffff;
-    --text-primary: #000000;
-    --text-secondary: #1a1a1a;
-    --text-muted: #6e6e6e;
-    --accent-gold: #b8860b;
-    --accent-gold-light: #c9a96e;
-    --accent-brown: #85600a;
-    --border-light: #e2e2e2;
-    --border-medium: #cccccc;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-    --shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
+    --text-primary: #2c2420;
+    --text-secondary: #3d342e;
+    --text-muted: #5c5248;
+    --accent-gold: #8b6914;
+    --accent-gold-light: #c49a2a;
+    --accent-brown: #6b4c3b;
+    --border-light: #e8e0d6;
+    --border-medium: #d4c9bc;
+    --shadow-sm: 0 1px 3px rgba(44,36,32,0.06);
+    --shadow-md: 0 4px 12px rgba(44,36,32,0.08);
+    --shadow-lg: 0 8px 24px rgba(44,36,32,0.1);
     --radius-sm: 6px;
     --radius-md: 10px;
     --radius-lg: 14px;
     --sidebar-width: 260px;
     --right-panel-width: 280px;
 
-    --accent-link: #000000;   /* links, accent rules, primary button fill */
-    --text-faint: #707070;   /* footer text, captions, muted labels */
-    --rule-warm: #e2e2e2;   /* footer hairline and card borders */
-    --ink-deep: #000000;   /* darkest body text */
+    --accent-link: #8b3a2a;   /* links, accent rules, primary button fill */
+    --text-faint: #6f645b;   /* footer text, captions, muted labels */
+    --rule-warm: #e0d6c8;   /* footer hairline and card borders */
+    --ink-deep: #3d2b1f;   /* darkest body text */
 
     /* neutrals used by the topical, life-study, home and 404 pages */
-    --bg-page: #fafafa;       /* page background behind cards */
-    --bg-tint: #f0f0f0;       /* hover fills, soft panels */
-    --bg-tint-2: #f7f7f7;     /* second stop of soft panel gradients */
-    --rule-soft: #ececec;     /* hairlines between list items */
-    --text-body: #1a1a1a;     /* paragraph text on topical pages */
-    --text-list: #333333;     /* verse-list text */
-    --text-on-dark: #f2f2f2;  /* light text over dark hero images */
-    --prayer-gradient: linear-gradient(180deg, #0d0d0d 0%, #1a1a1a 15%, var(--ink-deep) 40%, #262626 60%, #404040 72%, #7a7a7a 82%, #c4c4c4 90%, #f0f0f0 96%, #fafafa 100%);
+    --bg-page: #faf5ed;       /* page background behind cards */
+    --bg-tint: #f5ebe0;       /* hover fills, soft panels */
+    --bg-tint-2: #faf3e0;     /* second stop of soft panel gradients */
+    --rule-soft: #f0e8dc;     /* hairlines between list items */
+    --text-body: #3d332b;     /* paragraph text on topical pages */
+    --text-list: #4a3f35;     /* verse-list text */
+    --text-on-dark: #f5ebe0;  /* light text over dark hero images */
+    --prayer-gradient: linear-gradient(180deg, #1a1410 0%, #2a1f14 15%, var(--ink-deep) 40%, #4a3828 60%, #6b5040 72%, #a08060 82%, #d4bea0 90%, #f5ebe0 96%, #faf5ed 100%);
     /* banners: a dark panel with gold line work (study pages, home, share cards) */
-    --banner-bg: #171717;
-    --banner-gold: #c9a96e;
-    --banner-line: rgba(201,169,110,0.40);
-    --photo-filter: grayscale(1) contrast(1.1) brightness(0.6);
-    --banner-ring: rgba(201,169,110,0.60);
+    --banner-bg: #33241a;
+    --banner-gold: #e9c46f;
+    --banner-line: rgba(233,196,111,0.34);
+    --photo-filter: brightness(0.6) sepia(0.4) saturate(1.3);
+    --banner-ring: rgba(233,196,111,0.55);
 }
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    /* True black outside the content cards themselves — --bg-primary stays
-       its light value for nav/tab/dropdown backgrounds, which sit on their
-       own white/off-white surfaces and shouldn't go black along with this. */
-    background: #000000;
+    background: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
     min-height: 100vh;
@@ -61,8 +58,8 @@ body {
     position: fixed;
     top: 0; left: 0; right: 0;
     height: 56px;
-    background: #000000;
-    border-bottom: 1px solid #2a2a2a;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-light);
     display: flex;
     align-items: center;
     padding: 0 20px;
@@ -72,20 +69,10 @@ body {
 
 .nav-brand {
     font-family: 'Poppins', 'Inter', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent-brown);
     text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.nav-brand-logo {
-    height: 26px;
-    width: auto;
-    display: block;
 }
 
 .nav-center {
@@ -110,9 +97,9 @@ body {
 .nav-translation {
     font-size: 0.85rem;
     padding: 7px 14px;
-    border: 2px solid #000000;
+    border: 2px solid #8b3a2a;
     border-radius: var(--radius-sm);
-    background: #000000;
+    background: #8b3a2a;
     color: #fff;
     cursor: pointer;
     font-weight: 600;
@@ -155,8 +142,8 @@ body {
     top: 56px; left: 0;
     width: var(--sidebar-width);
     height: calc(100vh - 56px);
-    background: #000000;
-    border-right: 1px solid #2a2a2a;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border-light);
     overflow-y: auto;
     padding: 16px 0;
     z-index: 900;
@@ -170,7 +157,7 @@ body {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #9a9a9a;
+    color: var(--text-muted);
     padding: 8px 20px 4px;
 }
 
@@ -180,7 +167,7 @@ body {
     gap: 10px;
     padding: 8px 20px;
     font-size: 0.88rem;
-    color: #e0e0e0;
+    color: var(--text-secondary);
     text-decoration: none;
     cursor: pointer;
     transition: background 0.15s, color 0.15s;
@@ -192,10 +179,10 @@ body {
 }
 
 .sidebar-item.active {
-    background: #ececec;
+    background: #efe8dc;
     color: var(--accent-brown);
     font-weight: 500;
-    border-right: 3px solid #000000;
+    border-right: 3px solid var(--accent-gold);
 }
 
 .sidebar-item i {
@@ -218,9 +205,9 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 0.8rem;
-    border: 1px solid #d0d0d0;
+    border: 1px solid #d4c4a8;
     border-radius: var(--radius-sm);
-    background: #fafafa;
+    background: #faf5ed;
     color: var(--accent-brown);
     cursor: pointer;
     transition: all 0.15s;
@@ -228,11 +215,11 @@ body {
     font-weight: 500;
 }
 
-.chapter-btn:hover { background: #ececec; color: var(--text-primary); border-color: #b0b0b0; }
+.chapter-btn:hover { background: #f0e4d4; color: var(--text-primary); border-color: #c9a96e; }
 .chapter-btn.active {
-    background: #000000;
-    color: #fafafa;
-    border-color: #000000;
+    background: #8b3a2a;
+    color: #faf5ed;
+    border-color: #8b3a2a;
     font-weight: 700;
 }
 
@@ -304,8 +291,8 @@ body {
 
 .book-header h1 {
     font-family: 'Poppins', 'Inter', sans-serif;
-    font-size: 1.9rem;
-    font-weight: 700;
+    font-size: 2rem;
+    font-weight: 600;
     color: var(--accent-brown);
     margin-bottom: 4px;
 }
@@ -324,7 +311,7 @@ body {
     padding: 32px 36px;
     box-shadow: var(--shadow-sm);
     margin-bottom: 32px;
-    color: #000000;
+    color: #8b3a2a;
 }
 
 .verse {
@@ -358,7 +345,7 @@ body {
     padding: 10px 16px;
     font-size: 0.85rem;
     font-weight: 600;
-    color: #555555;
+    color: #7a6b5f;
     cursor: pointer;
     border: 1px solid var(--border-light);
     background: var(--bg-primary);
@@ -368,11 +355,11 @@ body {
     text-align: center;
 }
 
-.study-tab:hover { color: #000000; background: var(--bg-secondary); border-color: var(--border-medium); }
+.study-tab:hover { color: #3d2b1f; background: var(--bg-secondary); border-color: var(--border-medium); }
 .study-tab.active {
     color: #fff;
-    background: #c0392b;
-    border-color: #c0392b;
+    background: #8b3a2a;
+    border-color: #8b3a2a;
 }
 
 .tab-content {
@@ -403,7 +390,7 @@ body {
 .tab-content h3 {
     font-family: 'Poppins', 'Inter', sans-serif;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: var(--accent-brown);
     margin-bottom: 16px;
 }
@@ -416,7 +403,7 @@ body {
 }
 
 .tab-content ul { padding-left: 20px; list-style: none; }
-.tab-content li::before { content: "— "; color: var(--accent-gold-light); }
+.tab-content li::before { content: "✦ "; color: var(--accent-gold-light); }
 .tab-content a { color: var(--accent-brown); text-decoration: underline; text-decoration-color: var(--border-medium); }
 .tab-content a:hover { color: var(--accent-gold); }
 
@@ -434,7 +421,7 @@ body {
 
 .video-card-icon {
     width: 44px; height: 44px;
-    background: #f0f0f0;
+    background: #fee;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -442,21 +429,21 @@ body {
     flex-shrink: 0;
 }
 
-.video-card-icon i { color: #000000; font-size: 1.1rem; }
+.video-card-icon i { color: #c0392b; font-size: 1.1rem; }
 
 .video-card-info h4 { font-size: 0.88rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
 .video-card-info p { font-size: 0.78rem; color: var(--text-muted); margin: 0; }
 
 /* KEY VERSE HIGHLIGHT */
 .key-verse {
-    background: #faf6ec;
+    background: linear-gradient(135deg, #fdf8ee, #faf3e0);
     border-left: 3px solid var(--accent-gold);
     padding: 12px 16px;
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     margin-bottom: 12px;
 }
 
-.key-verse .ref { font-weight: 600; color: var(--accent-gold); font-size: 0.82rem; }
+.key-verse .ref { font-weight: 600; color: var(--accent-brown); font-size: 0.82rem; }
 .key-verse .text { font-family: 'Merriweather', serif; font-size: 0.9rem; font-style: italic; color: var(--text-primary); margin-top: 4px; }
 
 /* MOBILE RESPONSIVE */
@@ -531,7 +518,7 @@ body {
     line-height: 1.6;
 }
 .trans-popup.show { display: block; }
-.trans-popup h4 { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--accent-brown); margin-bottom: 12px; }
+.trans-popup h4 { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 1rem; color: var(--accent-brown); margin-bottom: 12px; }
 .trans-popup .trans-item { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--border-light); }
 .trans-popup .trans-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 .trans-popup .trans-name { font-weight: 700; color: var(--text-primary); }
@@ -551,7 +538,7 @@ body {
 
 .auth-label {
     font-weight: 700;
-    color: #000000;
+    color: #8b3a2a;
     font-size: 0.95rem;
 }
 
@@ -601,7 +588,7 @@ body.pwa-standalone .hamburger { display: none !important; }
     right: 0;
     height: 64px;
     background: #fff;
-    border-top: 1px solid #e2e2e2;
+    border-top: 1px solid #e0d6c8;
     box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
     z-index: 9999;
     align-items: center;
@@ -628,7 +615,7 @@ body.pwa-standalone .pwa-bottom-nav {
 
 .pwa-nav-item i {
     font-size: 1.2rem;
-    color: #707070;
+    color: #6f645b;
     margin-bottom: 3px;
     transition: color 0.15s;
 }
@@ -637,18 +624,18 @@ body.pwa-standalone .pwa-bottom-nav {
     font-family: 'Inter', sans-serif;
     font-size: 0.65rem;
     font-weight: 600;
-    color: #8a8a8a;
+    color: #6f645b;
     transition: color 0.15s;
 }
 
 .pwa-nav-item.active i,
 .pwa-nav-item.active span {
-    color: #c0392b;
+    color: #8b3a2a;
 }
 
 .pwa-nav-item:hover i,
 .pwa-nav-item:hover span {
-    color: #000000;
+    color: #6b4c3b;
 }
 
 
@@ -657,7 +644,7 @@ body.pwa-standalone .pwa-bottom-nav {
     display: none;
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(circle at 50% 42%, #ffffff 0%, #f0f0f0 10%, #9a9a9a 30%, #2a2a2a 62%, #000000 100%);
+    background: linear-gradient(180deg, #1a1410 0%, #2a1f14 20%, #3d2b1f 50%, #6b5040 75%, #d4bea0 92%, #faf5ed 100%);
     z-index: 99999;
     align-items: center;
     justify-content: center;
@@ -675,36 +662,34 @@ body.pwa-standalone .pwa-splash {
     pointer-events: none;
 }
 .pwa-splash .splash-icon {
-    margin-bottom: 24px;
-    filter: drop-shadow(0 2px 10px rgba(0,0,0,0.35));
+    font-size: 2.4rem;
+    color: #f0c865;
+    margin-bottom: 20px;
 }
 .pwa-splash .splash-label {
     font-family: 'Poppins', 'Inter', sans-serif;
     font-weight: 700;
-    font-size: 0.85rem;
-    color: #ffffff;
+    font-size: 0.9rem;
+    color: #c9a96e;
     letter-spacing: 3px;
     text-transform: uppercase;
     margin-bottom: 16px;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.9), 0 0 18px rgba(0,0,0,0.5);
 }
 .pwa-splash .splash-prayer {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.15rem;
     line-height: 2;
-    color: #ffffff;
+    color: #f0e4d4;
     font-style: italic;
     max-width: 600px;
     font-weight: 500;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.9), 0 0 18px rgba(0,0,0,0.5);
 }
 .pwa-splash .splash-tap {
     margin-top: 32px;
     font-family: 'Inter', sans-serif;
     font-size: 0.7rem;
-    color: #ffffff;
+    color: #6f645b;
     letter-spacing: 1px;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.9), 0 0 14px rgba(0,0,0,0.5);
 }
 
 /* ===== PWA Info Button & Popup ===== */
@@ -715,16 +700,16 @@ body.pwa-standalone .pwa-splash {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.2);
     border: 1px solid rgba(255,255,255,0.4);
-    color: #ffffff;
+    color: #f0c865;
     font-size: 1.1rem;
     cursor: pointer;
     margin-top: 12px;
     transition: background 0.2s;
 }
 .pwa-info-btn:hover {
-    background: rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.3);
 }
 
 .pwa-info-popup {
@@ -749,17 +734,17 @@ body.pwa-standalone .pwa-splash {
 .pwa-info-popup h3 {
     font-family: 'Poppins', 'Inter', sans-serif;
     font-weight: 700;
-    font-size: 0.95rem;
-    color: #000000;
+    font-size: 1rem;
+    color: #6b4c3b;
     margin-bottom: 12px;
 }
 .pwa-info-item {
     font-size: 0.82rem;
     line-height: 1.6;
-    color: #1a1a1a;
+    color: #3d342e;
     margin-bottom: 10px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid #f0e8e0;
 }
 .pwa-info-item:last-child {
     border-bottom: none;
@@ -773,7 +758,7 @@ body.pwa-standalone .pwa-splash {
     background: none;
     border: none;
     font-size: 1.4rem;
-    color: #707070;
+    color: #6f645b;
     cursor: pointer;
 }
 
@@ -786,26 +771,26 @@ body.pwa-standalone .pwa-splash {
     width: 100%;
     margin-top: 14px;
     padding: 10px 14px;
-    background: #fafafa;
-    border: 1px solid #e2e2e2;
+    background: #faf5ed;
+    border: 1px solid #e0d6c8;
     border-radius: 8px;
     font-family: 'Inter', sans-serif;
     font-size: 0.82rem;
     font-weight: 600;
-    color: #000000;
+    color: #6b4c3b;
     cursor: pointer;
     transition: background 0.15s, color 0.15s;
 }
 .video-toggle-btn:hover {
-    background: #ececec;
+    background: #f0e4d4;
 }
 .video-toggle-btn i {
-    color: #000000;
+    color: #c0392b;
     font-size: 1rem;
 }
 .video-toggle-btn.open {
-    background: #ececec;
-    border-color: #cccccc;
+    background: #f0e4d4;
+    border-color: #c9a96e;
 }
 
 /* ===== Shared full-bleed section hero (used on index.html and standalone
@@ -814,9 +799,9 @@ body.pwa-standalone .pwa-splash {
 .section-hero { position: relative; width: 100%; min-height: 280px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-top: 0; }
 .section-hero img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: var(--photo-filter); }
 .section-hero-overlay { position: relative; z-index: 1; text-align: center; padding: 40px 28px; max-width: 800px; }
-.section-hero-overlay h2 { font-family: "Poppins", "Inter", sans-serif; font-weight: 700; font-size: 2.2rem; color: #d4a017; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); margin-bottom: 12px; letter-spacing: 0; }
-.section-hero-overlay .section-subtitle { font-family: "Merriweather", serif; font-size: 1rem; color: #e8d9b8; font-style: italic; text-shadow: 1px 1px 4px rgba(0,0,0,0.6); margin-bottom: 16px; }
-.section-hero-overlay .section-desc { font-family: "Cormorant Garamond", serif; font-size: 1.1rem; line-height: 1.9; color: #f0e6cc; font-style: italic; text-shadow: 1px 1px 6px rgba(0,0,0,0.7); }
+.section-hero-overlay h2 { font-family: "Poppins", "Inter", sans-serif; font-weight: 700; font-size: 2.4rem; color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); margin-bottom: 12px; letter-spacing: 2px; }
+.section-hero-overlay .section-subtitle { font-family: "Merriweather", serif; font-size: 1rem; color: #f0c865; font-style: italic; text-shadow: 1px 1px 4px rgba(0,0,0,0.6); margin-bottom: 16px; }
+.section-hero-overlay .section-desc { font-family: "Cormorant Garamond", serif; font-size: 1.1rem; line-height: 1.9; color: #f5ebe0; font-style: italic; text-shadow: 1px 1px 6px rgba(0,0,0,0.7); }
 @media (max-width: 768px) {
     .section-hero { min-height: 220px; }
     .section-hero-overlay h2 { font-size: 1.6rem; }
@@ -833,13 +818,13 @@ body.pwa-standalone .section-hero { margin-top: 0; }
 
 /* ===== PWA Bible tab: compact passage navigator (replaces the full
    66-book grid in the installed app) ===== */
-.pwa-bible-nav { display: none; max-width: 480px; margin: 32px auto 0; padding: 28px 24px 32px; background: #fff; border: 1px solid #e2e2e2; border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); text-align: center; }
+.pwa-bible-nav { display: none; max-width: 480px; margin: 32px auto 0; padding: 28px 24px 32px; background: #fff; border: 1px solid #e8e0d6; border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); text-align: center; }
 body.pwa-standalone .pwa-bible-nav { display: block; }
-.pwa-bible-nav h3 { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 1rem; color: #000000; margin: 0 0 18px; }
+.pwa-bible-nav h3 { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 1.1rem; color: #3d2b1f; margin: 0 0 18px; }
 .pwa-bible-nav .bible-nav-row { display: flex; gap: 10px; margin-bottom: 12px; }
-.pwa-bible-nav select { flex: 1; min-width: 0; max-width: none; width: 100%; padding: 10px 12px; border: 1px solid #cccccc; border-radius: 8px; font-size: 0.9rem; font-family: 'Inter', sans-serif; color: #000000; background: #fafafa; }
-.pwa-bible-nav .nav-go-btn { width: 100%; padding: 12px; background: #000000; color: #fff; border: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; cursor: pointer; margin-top: 6px; transition: background 0.15s; }
-.pwa-bible-nav .nav-go-btn:hover { background: #333333; }
+.pwa-bible-nav select { flex: 1; min-width: 0; max-width: none; width: 100%; padding: 10px 12px; border: 1px solid #d4c9bc; border-radius: 8px; font-size: 0.9rem; font-family: 'Inter', sans-serif; color: #3d2b1f; background: #faf8f5; }
+.pwa-bible-nav .nav-go-btn { width: 100%; padding: 12px; background: #8b3a2a; color: #fff; border: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; cursor: pointer; margin-top: 6px; transition: background 0.15s; }
+.pwa-bible-nav .nav-go-btn:hover { background: #6b2c1f; }
 
 /* Six tabs in the app's bottom bar (Notes added): share the width evenly so all six fit a phone. */
 /* Labels scale with the screen width (and ignore iOS text enlargement) so "Devotional" and "Memory" never run off the edge. */
@@ -865,9 +850,9 @@ body.pwa-standalone .pwa-bible-nav { display: block; }
 }
 
 /* ===== Bottom tab bar: inline svg icons (no icon-font download needed) ===== */
-.pwa-nav-item svg { width: 22px; height: 22px; flex: none; margin-bottom: 3px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; color: #8a8a8a; transition: color 0.15s; }
-.pwa-nav-item.active svg { color: #c0392b; }
-.pwa-nav-item:hover svg { color: #000000; }
+.pwa-nav-item svg { width: 22px; height: 22px; flex: none; margin-bottom: 3px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; color: #6f645b; transition: color 0.15s; }
+.pwa-nav-item.active svg { color: #8b3a2a; }
+.pwa-nav-item:hover svg { color: #6b4c3b; }
 .pwa-bottom-nav.pwa-six .pwa-nav-item svg { width: 21px; height: 21px; }
 
 /* ===== Icons (self-hosted; replaces Font Awesome) =====
@@ -914,12 +899,6 @@ body.pwa-standalone .pwa-bible-nav { display: block; }
 @keyframes fa-spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .fa-spin { animation-duration: 3s; } }
 /* ===== end icons ===== */
-
-/* the menu button sat black on the black header */
-.top-nav .hamburger { color: var(--text-on-dark); }
-
-/* faint text that sits directly on the black page needs a lighter grey than the same token on white cards */
-body footer p, body footer a, body footer small, body .og-keys-head b, body .og-keys-head span, body .chapter-nav-arrows > span { color: #8a8a8a !important; }
 
 /* a light scrim so text stays readable over the brighter photos */
 .hero-section::after, .section-hero::after { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.22); pointer-events: none; }
