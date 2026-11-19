@@ -63,6 +63,7 @@
         + '.bx-vnote textarea{width:100%;min-height:110px;font:inherit;font-size:.92rem;line-height:1.6;color:var(--text-primary);background:var(--bg-card);border:1px solid var(--border-medium);border-radius:8px;padding:10px;margin:6px 0}'
         + '.bx-card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:12px;padding:14px 16px;margin:18px 0}'
         + '.bx-card h4{font:700 .95rem Poppins,Inter,sans-serif;color:var(--ink-deep);margin:0 0 4px}'
+        + '.bx-theme-fab{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);z-index:900;display:flex;align-items:center;justify-content:center;width:40px;height:40px;margin:0;padding:0;border-radius:20px;background:var(--bg-page);color:var(--accent-link);border:1px solid var(--border-light);box-shadow:0 2px 10px rgba(0,0,0,.18)}'
         + '.bx-bar{height:6px;background:var(--bg-secondary);border-radius:3px;overflow:hidden;margin:8px 0}'
         + '.bx-bar i{display:block;height:100%;width:0;background:var(--accent-link);transition:width .2s}';
     document.head.appendChild(el('style', { text: css }));
@@ -113,9 +114,17 @@
         light: SVG + '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>'
     };
     (function themeButton() {
+        if (document.querySelector('.nav-theme-btn')) return;
         var nav = document.querySelector('.top-nav');
-        if (!nav || nav.querySelector('.nav-theme-btn')) return;
+        var navShown = nav && getComputedStyle(nav).display !== 'none' && nav.getBoundingClientRect().height > 0;
         var b = el('button', { class: 'nav-theme-btn', type: 'button' });
+        if (!navShown) {
+            // Home, Notes, Memory, Devotional and the other app pages have no top
+            // bar: float the button beside the round search button instead.
+            b.classList.add('bx-theme-fab');
+            b.style.right = document.querySelector('.bs-search-fab') ? '60px' : '12px';
+            nav = document.body;
+        }
         b.addEventListener('click', function () {
             var next = { auto: 'dark', dark: 'light', light: 'auto' }[themePref()];
             try { localStorage.setItem(THEME_KEY, next); } catch (e) {}

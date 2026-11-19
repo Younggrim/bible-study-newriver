@@ -1,6 +1,6 @@
 {
-  "upstream_commit": "933051a2391ac973a51dc5972de2eb9a68597904 Reader extras: dark mode, video resume, video notes, offline books, export, memory-verse reminder",
+  "upstream_commit": "e1c8742f6793bc0162e13f5259bb638cbc434d95 Theme button on pages without the top bar (home, Notes, Memory, Devotional in the app)",
   "upstream_fingerprints": {},
   "style_css_v": "fc3e77da",
-  "script_js_v": "13a20276"
+  "script_js_v": "1af6061b"
 }

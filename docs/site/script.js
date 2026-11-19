@@ -830,7 +830,7 @@ onChapterChange(sortVideos);
         if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
     } catch (e) {}
     var s = document.createElement('script');
-    s.src = 'site/extras.js?v=1';
+    s.src = 'site/extras.js?v=2';
     s.defer = true;
     document.body.appendChild(s);
 })();
