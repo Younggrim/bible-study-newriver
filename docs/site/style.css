@@ -682,7 +682,7 @@ body.pwa-standalone .pwa-splash {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.15rem;
     line-height: 2;
-    color: var(--bg-hover);
+    color: #e9c46f;   /* gold, readable on the dark splash in light and dark mode */
     font-style: italic;
     max-width: 600px;
     font-weight: 500;
@@ -691,7 +691,7 @@ body.pwa-standalone .pwa-splash {
     margin-top: 32px;
     font-family: 'Inter', sans-serif;
     font-size: 0.7rem;
-    color: #6f645b;
+    color: #c9a96e;
     letter-spacing: 1px;
 }
 
@@ -948,3 +948,6 @@ body.pwa-standalone .pwa-bible-nav { display: block; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) img:not([src*="icon"]) { filter: brightness(0.9); } }
 .nav-theme-btn { background: none; border: 0; color: var(--text-muted); font-size: 1.05rem; padding: 8px; margin-left: 4px; cursor: pointer; border-radius: 8px; line-height: 1; }
 .nav-theme-btn:hover { background: var(--bg-secondary); color: var(--text-primary); }
+/* Splash at night: no bright beige band at the bottom */
+:root[data-theme="dark"] .pwa-splash { background: linear-gradient(180deg, #1a1410 0%, #2a1f14 30%, #3d2b1f 60%, #2a1f14 85%, #16120e 100%); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pwa-splash { background: linear-gradient(180deg, #1a1410 0%, #2a1f14 30%, #3d2b1f 60%, #2a1f14 85%, #16120e 100%); } }

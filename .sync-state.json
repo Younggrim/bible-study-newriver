@@ -1,6 +1,6 @@
 {
-  "upstream_commit": "e1c8742f6793bc0162e13f5259bb638cbc434d95 Theme button on pages without the top bar (home, Notes, Memory, Devotional in the app)",
+  "upstream_commit": "dce69d95df0698daa4944953218cade7c8ec0afa Splash prayer in gold; dark splash without the beige band",
   "upstream_fingerprints": {},
-  "style_css_v": "fc3e77da",
+  "style_css_v": "1545ebd9",
   "script_js_v": "1af6061b"
 }
