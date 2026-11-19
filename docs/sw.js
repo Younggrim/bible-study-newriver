@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bible-study-v13';
+const CACHE_NAME = 'bible-study-v14';
 // Caches the page writes itself and that must survive a CACHE_NAME bump:
 // books saved for offline (site/extras.js), the memory-verse due dates for
 // reminders, and the notification-tap intent.

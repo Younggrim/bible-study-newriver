@@ -360,7 +360,9 @@ function sortVideos() {
             });
             // Re-append in sorted order
             var parent = videos[0].parentNode;
-            videoArray.forEach(function(v) { parent.appendChild(v); });
+            // Each video's "Notes on this video" box (site/extras.js) travels with it.
+            var notes = videoArray.map(function(v) { var n = v.nextElementSibling; return n && n.classList.contains('bx-vnote') ? n : null; });
+            videoArray.forEach(function(v, i) { parent.appendChild(v); if (notes[i]) parent.appendChild(notes[i]); });
         }
     }
 }
@@ -830,7 +832,7 @@ onChapterChange(sortVideos);
         if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
     } catch (e) {}
     var s = document.createElement('script');
-    s.src = 'site/extras.js?v=2';
+    s.src = 'site/extras.js?v=3';
     s.defer = true;
     document.body.appendChild(s);
 })();

@@ -1,6 +1,6 @@
 {
-  "upstream_commit": "dce69d95df0698daa4944953218cade7c8ec0afa Splash prayer in gold; dark splash without the beige band",
+  "upstream_commit": "3bbe803b66fe29829a53191d308e38fceaad9ce8 Keep video note boxes with their videos when sorting; bust script/style cache",
   "upstream_fingerprints": {},
   "style_css_v": "1545ebd9",
-  "script_js_v": "1af6061b"
+  "script_js_v": "d55ed570"
 }
