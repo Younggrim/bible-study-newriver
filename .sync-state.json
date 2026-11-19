@@ -1,5 +1,5 @@
 {
-  "upstream_commit": "aa9ed81d673fcbf27bb3a3405bfeca8dbdd0a3a5 Deep dive: Exodus 18",
+  "upstream_commit": "92c7ed6479b46e1c31f2388461a40e67a9998335 Deep dive: Exodus 28 (wording fix)",
   "upstream_fingerprints": {
     "site/style.css": "79bf5762",
     "site/script.js": "72f059fa"
