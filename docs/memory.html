@@ -22,21 +22,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="site/style.css?v=79bf5762">
+    <link rel="stylesheet" href="site/style.css?v=fc3e77da">
     <style>
         /* Theme colors come from the tokens in site/style.css so the New River
            mirror picks up its own palette. The four grade colors and the white
            card ground are deliberate literals, the same on both sites. */
         body { background: var(--bg-page); }
         .page-content { margin: 0 auto; max-width: 720px; padding: 24px 20px 100px; }
-        .mem-hero { background: var(--ink-deep); border-radius: 16px; padding: 30px 24px; text-align: center; margin-bottom: 18px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+        .mem-hero { background: var(--panel-dark); border-radius: 16px; padding: 30px 24px; text-align: center; margin-bottom: 18px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
         .mem-hero h1 { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 1.5rem; color: #fff; margin: 0 0 6px; }
         .mem-hero p { font-family: 'Merriweather', serif; font-style: italic; font-size: 0.85rem; color: var(--text-on-dark); margin: 0; opacity: 0.9; }
-        .mem-tabs { display: flex; gap: 4px; background: #fff; border: 1px solid var(--border-light); border-radius: 999px; padding: 4px; margin-bottom: 24px; }
+        .mem-tabs { display: flex; gap: 4px; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 999px; padding: 4px; margin-bottom: 24px; }
         .mem-tab { flex: 1; border: 0; background: transparent; padding: 8px 10px; border-radius: 999px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--text-faint); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
         .mem-tab[aria-current="page"] { background: var(--accent-link); color: #fff; }
         .mem-badge { min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--accent-link); color: #fff; font-size: 0.68rem; font-weight: 700; display: inline-grid; place-items: center; }
-        .mem-tab[aria-current="page"] .mem-badge { background: #fff; color: var(--accent-link); }
+        .mem-tab[aria-current="page"] .mem-badge { background: var(--bg-card); color: var(--accent-link); }
         #memMain { display: flex; flex-direction: column; gap: 26px; }
         .mem-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-faint); margin: 0 0 10px; }
         .mem-h2 { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 1.3rem; color: var(--ink-deep); margin: 0; line-height: 1.3; }
@@ -46,7 +46,7 @@
         .mem-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
         .mem-between { justify-content: space-between; }
         .mem-count { font-family: 'Poppins', 'Inter', sans-serif; font-size: 2.6rem; font-weight: 700; line-height: 1; color: var(--ink-deep); }
-        .mem-btn { font-family: 'Inter', sans-serif; border: 1px solid var(--border-medium); background: #fff; color: var(--ink-deep); padding: 10px 16px; border-radius: 8px; font-weight: 600; font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+        .mem-btn { font-family: 'Inter', sans-serif; border: 1px solid var(--border-medium); background: var(--bg-card); color: var(--ink-deep); padding: 10px 16px; border-radius: 8px; font-weight: 600; font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
         .mem-btn.primary { background: var(--accent-link); border-color: var(--accent-link); color: #fff; }
         .mem-btn.quiet { background: transparent; border-color: transparent; color: var(--accent-link); padding-left: 6px; padding-right: 6px; }
         .mem-btn.danger { color: #b5473f; border-color: #b5473f; }
@@ -68,7 +68,7 @@
         .mem-empty { padding: 20px 0; color: var(--text-secondary); font-size: 0.92rem; margin: 0; }
 
         /* The verse card, ruled like an index card */
-        .mem-card { background: #fff; border: 1px solid var(--border-light); border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); overflow: hidden; }
+        .mem-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); overflow: hidden; }
         .mem-card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 16px 22px 10px; border-bottom: 2px solid var(--accent-link); }
         .mem-card-head .mem-ref { font-size: 1.1rem; }
         .mem-card-meta { font-size: 0.72rem; color: var(--text-faint); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
@@ -82,8 +82,8 @@
         .mem-peek { background: var(--bg-tint); border-radius: 3px; }
         .mem-hint { color: var(--accent-link); letter-spacing: 0.12em; word-spacing: 0.2em; }
         .mem-stepper { display: flex; gap: 6px; flex-wrap: wrap; }
-        .mem-stepper button { font-family: 'Inter', sans-serif; border: 1px solid var(--border-medium); background: #fff; border-radius: 999px; padding: 5px 11px; font-size: 0.76rem; font-weight: 600; color: var(--text-muted); cursor: pointer; }
-        .mem-stepper button[aria-pressed="true"] { background: var(--ink-deep); border-color: var(--ink-deep); color: #fff; }
+        .mem-stepper button { font-family: 'Inter', sans-serif; border: 1px solid var(--border-medium); background: var(--bg-card); border-radius: 999px; padding: 5px 11px; font-size: 0.76rem; font-weight: 600; color: var(--text-muted); cursor: pointer; }
+        .mem-stepper button[aria-pressed="true"] { background: var(--panel-dark); border-color: var(--ink-deep); color: #fff; }
         .mem-stepper button.done { border-color: var(--accent-link); color: var(--accent-link); }
         .mem-grades { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
         .mem-grade { font-family: 'Inter', sans-serif; border: 0; border-radius: 10px; padding: 10px 6px; display: flex; flex-direction: column; align-items: center; gap: 2px; font-weight: 700; font-size: 0.9rem; cursor: pointer; }
@@ -93,18 +93,18 @@
         .mem-g2 { background: #e1e9f4; color: #2c4c78; }
         .mem-g3 { background: #ddefe6; color: #2f7456; }
         .mem-grade.suggested { box-shadow: 0 0 0 2px var(--ink-deep); }
-        .mem-modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--border-medium); border-radius: 10px; overflow: hidden; background: #fff; }
+        .mem-modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--border-medium); border-radius: 10px; overflow: hidden; background: var(--bg-card); }
         .mem-modes button { font-family: 'Inter', sans-serif; border: 0; border-right: 1px solid var(--border-medium); background: transparent; padding: 9px 6px; font-size: 0.84rem; font-weight: 600; color: var(--ink-deep); cursor: pointer; }
         .mem-modes button:last-child { border-right: 0; }
-        .mem-modes button[aria-pressed="true"] { background: var(--ink-deep); color: #fff; }
+        .mem-modes button[aria-pressed="true"] { background: var(--panel-dark); color: #fff; }
         .mem-modes button:focus-visible, .mem-chip:focus-visible { outline: 2px solid var(--accent-link); outline-offset: -2px; }
         .mem-card-body.mem-built { min-height: calc(2.2rem * 2 + 24px); }
         .mem-built .mem-slot { display: inline-block; width: 2.4em; height: 1.2em; vertical-align: -0.2em; border: 0; border-bottom: 2px solid var(--accent-link); border-radius: 0; background: none; }
         .mem-pool { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 22px 20px; }
-        .mem-chip { font-family: 'Merriweather', serif; font-size: 1rem; border: 1px solid var(--border-medium); background: #fff; color: var(--ink-deep); border-radius: 8px; padding: 8px 12px; cursor: pointer; min-height: 44px; }
+        .mem-chip { font-family: 'Merriweather', serif; font-size: 1rem; border: 1px solid var(--border-medium); background: var(--bg-card); color: var(--ink-deep); border-radius: 8px; padding: 8px 12px; cursor: pointer; min-height: 44px; }
         .mem-chip.wrong { border-color: #b5473f; background: #f6e3e1; color: #b5473f; animation: mem-shake 0.3s; }
         @keyframes mem-shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
-        .mem-type { width: 100%; box-sizing: border-box; font-family: 'Merriweather', serif; font-size: 1rem; line-height: 1.7; color: var(--ink-deep); background: #fff; border: 1px solid var(--border-medium); border-radius: 8px; padding: 12px 14px; min-height: 150px; resize: vertical; }
+        .mem-type { width: 100%; box-sizing: border-box; font-family: 'Merriweather', serif; font-size: 1rem; line-height: 1.7; color: var(--ink-deep); background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: 8px; padding: 12px 14px; min-height: 150px; resize: vertical; }
         .mem-type:focus { outline: 2px solid var(--accent-link); outline-offset: 1px; }
         .mem-ok { }
         .mem-typo { text-decoration: underline dotted #8a5e0e; text-underline-offset: 4px; }
@@ -114,7 +114,7 @@
         .mem-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.8rem; color: var(--text-faint); }
         .mem-tab { padding-left: 6px; padding-right: 6px; }
         .mem-cols { display: grid; gap: 12px; }
-        .mem-col { display: flex; flex-direction: column; gap: 6px; text-align: left; background: #fff; border: 1px solid var(--border-light); border-radius: 12px; padding: 16px 18px; cursor: pointer; font-family: 'Inter', sans-serif; color: var(--ink-deep); }
+        .mem-col { display: flex; flex-direction: column; gap: 6px; text-align: left; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 12px; padding: 16px 18px; cursor: pointer; font-family: 'Inter', sans-serif; color: var(--ink-deep); }
         .mem-col:hover { border-color: var(--border-medium); }
         .mem-col:focus-visible { outline: 2px solid var(--accent-link); outline-offset: 2px; }
         .mem-col-name { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 1.05rem; }
@@ -130,13 +130,13 @@
         .mem-check.known .mem-dot { border-color: #2f7456; background: #2f7456; }
         .mem-check.known .mem-dot::after { content: ''; position: absolute; left: 4px; top: 1px; width: 5px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .mem-state { display: block; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.74rem; color: var(--text-faint); }
-        .mem-next { background: #fff; border: 1px solid var(--border-light); border-left: 4px solid var(--accent-link); border-radius: 12px; padding: 14px 16px; }
+        .mem-next { background: var(--bg-card); border: 1px solid var(--border-light); border-left: 4px solid var(--accent-link); border-radius: 12px; padding: 14px 16px; }
         .mem-next .mem-eyebrow { margin-bottom: 6px; }
         .mem-progress { height: 4px; background: var(--border-light); border-radius: 2px; overflow: hidden; }
         .mem-progress i { display: block; height: 100%; background: var(--accent-link); transition: width 0.25s; }
         .mem-form { display: flex; flex-direction: column; gap: 16px; }
         .mem-form label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); display: flex; flex-direction: column; gap: 6px; }
-        .mem-form input, .mem-form textarea, .mem-form select { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--ink-deep); background: #fff; border: 1px solid var(--border-medium); border-radius: 8px; padding: 10px 12px; width: 100%; }
+        .mem-form input, .mem-form textarea, .mem-form select { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--ink-deep); background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: 8px; padding: 10px 12px; width: 100%; }
         .mem-form textarea { font-family: 'Merriweather', serif; line-height: 1.7; min-height: 140px; resize: vertical; }
         .mem-two { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
         .mem-item .mem-btn { align-self: center; }
@@ -166,7 +166,7 @@
             <p><a href="about.html" style="color:var(--text-faint);">How this site is made</a> &middot; <a href="privacy.html" style="color:var(--text-faint);">Privacy</a> &middot; <a href="contact.html?page=memory" style="color:var(--text-faint);">Contact</a></p>
         </footer>
     </main>
-    <script src="site/script.js?v=72f059fa"></script>
+    <script src="site/script.js?v=13a20276"></script>
     <script src="site/account.js?v=436abb8e"></script>
     <script src="site/i18n.js?v=644dc605"></script>
     <script src="site/search.js?v=f2726bdb"></script>

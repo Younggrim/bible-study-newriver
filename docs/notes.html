@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="site/style.css?v=79bf5762">
+    <link rel="stylesheet" href="site/style.css?v=fc3e77da">
     <style>
         /* Theme colors come from the tokens in site/style.css so the New River
            mirror picks up its own palette. */
@@ -30,15 +30,15 @@
         .page-content { margin: 0 auto; max-width: 720px; padding: 18px 18px 110px; font-family: 'Inter', -apple-system, sans-serif; }
         .nt-home { display: inline-flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 600; color: var(--accent-link); text-decoration: none; margin: 0 0 14px; }
         body.pwa-standalone .nt-home { display: none; }
-        .nt-hero { background: var(--ink-deep); border-radius: 16px; padding: 26px 22px; text-align: center; margin-bottom: 18px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+        .nt-hero { background: var(--panel-dark); border-radius: 16px; padding: 26px 22px; text-align: center; margin-bottom: 18px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
         .nt-hero h1 { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 1.5rem; color: #fff; margin: 0 0 6px; }
         .nt-hero p { font-family: 'Merriweather', serif; font-style: italic; font-size: 0.85rem; color: var(--text-on-dark); margin: 0; opacity: 0.9; }
         .nt-bar { display: flex; gap: 10px; align-items: center; margin: 0 0 14px; }
-        .nt-search { flex: 1; min-width: 0; font-family: inherit; font-size: 0.95rem; color: var(--ink-deep); background: #fff; border: 1px solid var(--border-medium); border-radius: 8px; padding: 10px 12px; }
-        .nt-btn { font-family: inherit; border: 1px solid var(--border-medium); background: #fff; color: var(--ink-deep); padding: 10px 14px; border-radius: 8px; font-weight: 600; font-size: 0.88rem; cursor: pointer; white-space: nowrap; }
+        .nt-search { flex: 1; min-width: 0; font-family: inherit; font-size: 0.95rem; color: var(--ink-deep); background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: 8px; padding: 10px 12px; }
+        .nt-btn { font-family: inherit; border: 1px solid var(--border-medium); background: var(--bg-card); color: var(--ink-deep); padding: 10px 14px; border-radius: 8px; font-weight: 600; font-size: 0.88rem; cursor: pointer; white-space: nowrap; }
         .nt-btn.primary { background: var(--accent-link); border-color: var(--accent-link); color: #fff; }
         .nt-btn.quiet { background: transparent; border-color: transparent; color: var(--accent-link); padding-left: 6px; padding-right: 6px; }
-        .nt-btn.danger { color: #b5473f; border-color: #b5473f; background: #fff; }
+        .nt-btn.danger { color: #b5473f; border-color: #b5473f; background: var(--bg-card); }
         .nt-btn i { margin-right: 6px; }
         .nt-btn:focus-visible, .nt-item:focus-visible, .nt-tool:focus-visible, .nt-search:focus-visible { outline: 2px solid var(--accent-link); outline-offset: 2px; }
         .nt-list { display: flex; flex-direction: column; border-top: 1px solid var(--border-light); }
@@ -53,17 +53,17 @@
         .nt-title { font-family: 'Poppins', 'Inter', sans-serif; font-weight: 700; font-size: 1.25rem; color: var(--ink-deep); background: transparent; border: 0; border-bottom: 1px solid var(--border-light); padding: 8px 2px; width: 100%; }
         .nt-title:focus { outline: none; border-bottom-color: var(--accent-link); }
         .nt-ref-row { display: flex; gap: 8px; align-items: center; font-size: 0.85rem; color: var(--text-faint); }
-        .nt-ref { flex: 1; min-width: 0; font-family: inherit; font-size: 0.9rem; color: var(--ink-deep); background: #fff; border: 1px solid var(--border-medium); border-radius: 8px; padding: 8px 10px; }
+        .nt-ref { flex: 1; min-width: 0; font-family: inherit; font-size: 0.9rem; color: var(--ink-deep); background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: 8px; padding: 8px 10px; }
         .nt-ref-link { font-weight: 600; color: var(--accent-link); text-decoration: none; white-space: nowrap; }
         .nt-tools { display: flex; gap: 6px; flex-wrap: wrap; }
         .nt-tool { font-family: inherit; font-size: 0.85rem; font-weight: 600; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--border-light); background: var(--bg-tint); color: var(--ink-deep); cursor: pointer; }
         .nt-tool i { color: var(--accent-link); margin-right: 5px; }
         /* Lined paper: the rules are drawn at the same pitch as the text, and scroll with it. */
-        .nt-body { --nt-line: 1.9em; width: 100%; min-height: 52vh; resize: vertical; font-family: 'Merriweather', serif; font-size: 1rem; color: var(--ink-deep); line-height: var(--nt-line); padding: 0 12px calc(var(--nt-line) * 2); border: 1px solid var(--border-light); border-radius: 12px; background-color: #fff; background-image: linear-gradient(to bottom, transparent calc(var(--nt-line) - 1px), var(--rule-warm) calc(var(--nt-line) - 1px), var(--rule-warm) var(--nt-line)); background-size: 100% var(--nt-line); background-attachment: local; background-position: 0 0; box-sizing: border-box; }
+        .nt-body { --nt-line: 1.9em; width: 100%; min-height: 52vh; resize: vertical; font-family: 'Merriweather', serif; font-size: 1rem; color: var(--ink-deep); line-height: var(--nt-line); padding: 0 12px calc(var(--nt-line) * 2); border: 1px solid var(--border-light); border-radius: 12px; background-color: var(--bg-card); background-image: linear-gradient(to bottom, transparent calc(var(--nt-line) - 1px), var(--rule-warm) calc(var(--nt-line) - 1px), var(--rule-warm) var(--nt-line)); background-size: 100% var(--nt-line); background-attachment: local; background-position: 0 0; box-sizing: border-box; }
         .nt-body:focus { outline: 2px solid var(--accent-link); outline-offset: 1px; }
         .nt-status { font-size: 0.78rem; color: var(--text-faint); min-height: 1.2em; }
         .nt-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
-        .nt-acct { margin-top: 26px; padding: 16px; border: 1px solid var(--border-light); border-radius: 12px; background: #fff; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+        .nt-acct { margin-top: 26px; padding: 16px; border: 1px solid var(--border-light); border-radius: 12px; background: var(--bg-card); font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
         .nt-acct a { color: var(--accent-link); }
         .nt-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
     </style>
@@ -81,7 +81,7 @@
             <p><a href="about.html" style="color:var(--text-faint);">How this site is made</a> &middot; <a href="privacy.html" style="color:var(--text-faint);">Privacy</a> &middot; <a href="contact.html?page=notes" style="color:var(--text-faint);">Contact</a></p>
         </footer>
     </main>
-    <script src="site/script.js?v=72f059fa"></script>
+    <script src="site/script.js?v=13a20276"></script>
     <script src="site/account.js?v=436abb8e"></script>
     <script src="site/i18n.js?v=644dc605"></script>
     <script src="site/search.js?v=f2726bdb"></script>

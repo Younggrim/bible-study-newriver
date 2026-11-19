@@ -1,4 +1,8 @@
-const CACHE_NAME = 'bible-study-v10';
+const CACHE_NAME = 'bible-study-v11';
+// Caches the page writes itself and that must survive a CACHE_NAME bump:
+// books saved for offline (site/extras.js), the memory-verse due dates for
+// reminders, and the notification-tap intent.
+const KEEP_CACHES = ['bs-offline', 'bs-reminders', 'nav-intent'];
 const VAPID_PUBLIC_KEY = 'BBXso6T-C1Ft59FLWrdRfANGYtKm21CHUktfb0rsmfDZOEJSFyn5Y62f2ZaFMr0PxiPCIyN9Wm6_8MxXMQ6AGuY';
 const PUSH_WORKER = 'https://devotional-push.cloudflare-dust598.workers.dev';
 
@@ -13,6 +17,7 @@ self.addEventListener('install', event => {
         '/offline.html',
         '/site/style.css',
         '/site/script.js',
+        '/site/extras.js',
         // The Map & Geography basemap. Precached so the maps survive going
         // offline, which is the reason it is self-hosted vector data rather
         // than tiles from a service.
@@ -28,7 +33,7 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
+      Promise.all(keys.filter(k => k !== CACHE_NAME && !KEEP_CACHES.includes(k)).map(k => caches.delete(k)))
     )
   );
   self.clients.claim();
@@ -162,6 +167,24 @@ self.addEventListener('push', event => {
       body, icon, badge: icon, tag: 'daily-devotional',
       data: { url: '/devotional.html' }
     });
+    // Memory verses due for review, when the reader turned that reminder on
+    // (site/extras.js copies their due dates into the bs-reminders cache).
+    try {
+      const memCache = await caches.open('bs-reminders');
+      const hit = await memCache.match('/__memory-due');
+      const mem = hit ? await hit.json() : null;
+      if (mem && mem.on && Array.isArray(mem.verses)) {
+        const d = new Date();
+        const today = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+        const due = mem.verses.filter(v => v.due && v.due <= today);
+        if (due.length) {
+          await self.registration.showNotification(due.length === 1 ? 'A memory verse is due' : due.length + ' memory verses are due', {
+            body: 'Review ' + due.slice(0, 3).map(v => v.ref).join(', ') + (due.length > 3 ? ' and more' : '') + ' to keep them fresh.',
+            icon, badge: icon, tag: 'memory-due', data: { url: '/memory.html' }
+          });
+        }
+      }
+    } catch (e) { /* the devotional above already satisfied the push */ }
     // The day's reading-plan reading, when the worker sent one along.
     if (kind && kind.plan && kind.plan.title) {
       await self.registration.showNotification(kind.plan.title, {

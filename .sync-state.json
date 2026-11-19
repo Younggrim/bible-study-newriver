@@ -1,6 +1,6 @@
 {
-  "upstream_commit": "f261d838b1d051dc0d792dcd6cd9971d11f3637c Deep dive: 1 Samuel 11",
+  "upstream_commit": "933051a2391ac973a51dc5972de2eb9a68597904 Reader extras: dark mode, video resume, video notes, offline books, export, memory-verse reminder",
   "upstream_fingerprints": {},
-  "style_css_v": "79bf5762",
-  "script_js_v": "72f059fa"
+  "style_css_v": "fc3e77da",
+  "script_js_v": "13a20276"
 }

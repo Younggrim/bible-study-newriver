@@ -818,3 +818,19 @@ onChapterChange(sortVideos);
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
 })();
+
+
+/* ===== Reader extras (dark mode, video resume, video notes, offline books,
+   export, memory-verse reminder) live in site/extras.js. Loaded from here so
+   every page gets them without touching 1,200 HTML files. Kept identical in
+   both repositories. */
+(function () {
+    try {   // apply a forced theme as early as possible to avoid a light flash
+        var t = localStorage.getItem('bs-theme');
+        if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+    var s = document.createElement('script');
+    s.src = 'site/extras.js?v=1';
+    s.defer = true;
+    document.body.appendChild(s);
+})();
