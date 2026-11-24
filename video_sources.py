@@ -144,6 +144,22 @@ DROP_VIDEO_IDS = {
     "aEEdQK-8HJQ": "The Chosen 'Season 5 Full Recap' -- not teaching",
     "RdrHr819rzU": "Wes Huff 'Addressing the accusations' -- personal, not teaching",
     "6eAnSMZ7sYI": "SpokenGospel 'The Son of David' (30 Pictures of Jesus) -- no passage in the title (skipped 2026-11-17; could go on types-of-christ)",
+    "fqyYIFXJjP0": "GotQuestions 'What is the Feast of Tabernacles?' -- no passage in the title (skipped 2026-11-24; could go on leviticus23)",
+    "bnYcPUZ1WrM": "GotQuestions 'What does the Bible say about false prophets?' -- no passage",
+    "rtGCY7SjX0k": "Brandon Robbins 'What Most People MISSED in The Chosen Season 6 Episode 1' -- about the show",
+    "fZ71nJJVcLs": "David Guzik 'Lead Like Jesus Ep. 5' -- no passage",
+    "0XqUYrmj1qA": "Give Me an Answer 'Do We Really Have A Soul?' -- no passage",
+    "z-gYxoyQNBI": "SpokenGospel 'Our Priest' (30 Pictures of Jesus) -- no passage in the title (skipped 2026-11-24; could go on types-of-christ)",
+    "TXx-m9FfwTo": "SpokenGospel 'The Passover Lamb' (30 Pictures of Jesus) -- no passage in the title (skipped 2026-11-24; could go on types-of-christ)",
+    "2nR_PY3RBuQ": "SpokenGospel 'The Resurrection and the Life' (30 Pictures of Jesus) -- no passage in the title (skipped 2026-11-24; could go on types-of-christ)",
+    "lkA5h2SzMS0": "SpokenGospel 'The Temple' (30 Pictures of Jesus) -- no passage in the title (skipped 2026-11-24; could go on types-of-christ)",
+    "eMe7jK21bBY": "SpokenGospel 'The New Adam' (30 Pictures of Jesus) -- no passage in the title (skipped 2026-11-24; could go on types-of-christ)",
+    "mY8yXcHleag": "SpokenGospel 'The True Israel' (30 Pictures of Jesus) -- no passage in the title (skipped 2026-11-24; could go on types-of-christ)",
+    "R-dWbTs_sbs": "SpokenGospel 'The True Prophet' (30 Pictures of Jesus) -- no passage in the title (skipped 2026-11-24; could go on types-of-christ)",
+    "BBzbhq-VaSM": "The BEAT 'What Mike Todd Just Did Should Concern EVERY Christian' -- current events",
+    "Dub6b8BhM0w": "The Chosen 'Am I Too Nice to Judas?' -- behind the scenes, not teaching",
+    "d7TzSZmMJ6w": "The Chosen 'Making the Crucifixion' -- behind the scenes, not teaching",
+    "Ea5m4qqg-wI": "The Chosen 'TEAL TUESDAY LIVE' -- live show, not teaching",
 }
 
 FACADE_OPEN = '<div class="yt-facade"'
